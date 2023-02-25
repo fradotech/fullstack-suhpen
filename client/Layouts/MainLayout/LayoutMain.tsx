@@ -20,8 +20,6 @@ type IProps = {
   headerRightMenu?: React.FC
 }
 
-const { Header, Sider, Content } = Layout
-
 const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
   const { user } = useUser()
   const [isCollapsed, setIsCollapsed] = React.useState(
@@ -45,7 +43,7 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
 
   return (
     <Layout style={{ height: '100vh' }}>
-      <Sider
+      <Layout.Sider
         trigger={null}
         collapsible
         collapsed={isCollapsed}
@@ -64,9 +62,9 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
           <LayoutCompanyLogo />
           <LayoutSidebar />
         </div>
-      </Sider>
+      </Layout.Sider>
       <Layout>
-        <Header style={{ background: '#ffffff' }}>
+        <Layout.Header style={{ background: '#ffffff' }}>
           <a onClick={handleSidebarCollapse}>
             {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           </a>
@@ -74,15 +72,15 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
           <Link to="#" onClick={handleLogout}>
             <LogoutOutlined style={{ color: 'red', marginLeft: '1%' }} />
           </Link>
-        </Header>
-        <Content
+        </Layout.Header>
+        <Layout.Content
           style={{
             padding: '20px 20px',
             overflow: 'auto',
           }}
         >
           <Section>{children}</Section>
-        </Content>
+        </Layout.Content>
       </Layout>
     </Layout>
   )

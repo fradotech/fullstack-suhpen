@@ -11,8 +11,6 @@ type IProps = {
   user: IUser
 }
 
-const { Text } = Typography
-
 const LayoutProfile: React.FC<IProps> = (props: IProps) => {
   return (
     <Link to={Route.Profile} style={{ width: '100%', marginLeft: '80%' }}>
@@ -20,7 +18,7 @@ const LayoutProfile: React.FC<IProps> = (props: IProps) => {
         <Avatar icon={<UserOutlined />} src={props?.user.avatar} />
 
         <Space.Compact direction="vertical" size="small">
-          <Text>{props?.user?.name}</Text>
+          <Typography.Text>{props?.user?.name}</Typography.Text>
         </Space.Compact>
       </Space>
     </Link>
