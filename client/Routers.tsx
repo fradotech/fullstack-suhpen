@@ -23,7 +23,7 @@ const Routers: React.FC = () => (
         {!user && <Route path="*" element={<Unauthorized />} />}
       </Routes>
 
-      {user && (
+      {user && location.pathname != HttpRoute.Home && (
         <LayoutMain>
           <Routes>
             {DashboardRoute}
