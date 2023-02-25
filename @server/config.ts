@@ -24,9 +24,7 @@ export const config = {
     port: process.env.DB_PORT || 3306,
     username: process.env.DB_USERNAME || 'root',
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE || 'template_next',
-    sslCa:
-      process.env.DB_CERTIFICATE_PATH || '/etc/ssl/certs/ca-certificates.crt',
+    database: process.env.DB_DATABASE || 'fradotech',
   },
 
   auth: {

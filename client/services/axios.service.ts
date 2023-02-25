@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-export const host = 'https://nest.fradotech.up.railway.app/api/v1'
-// export const host = 'http://localhost:3000/api/v1'
+// export const host = 'https://nest.fradotech.up.railway.app/api/v1'
+export const host = 'http://localhost:3000/api/v1'
 
 export const axiosService = {
   get: async (endpoint: string, params?: any): Promise<any> => {
