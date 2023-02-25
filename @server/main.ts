@@ -9,7 +9,6 @@ import {
 } from 'typeorm-transactional-cls-hooked'
 import { AppModule } from './app.module'
 import { config } from './config'
-import { seeders } from './database/seeds/seed.module'
 import { swaggerConfig } from './infrastructure/swagger/swagger.config'
 
 async function bootstrap() {
@@ -29,7 +28,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerConfig)
   SwaggerModule.setup(`${config.app.prefix}/${docsUrl}`, app, document)
 
-  await seeders()
   await app.listen(config.server.port)
 
   Logger.log(`Application running at ${host}`, 'NestApplication')

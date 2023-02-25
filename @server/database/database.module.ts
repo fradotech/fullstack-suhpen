@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { config } from '@server/config'
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
 import { DataSourceConfig } from './config.db'
+import { seeders } from './seeds/seed.module'
 
 @Module({
   imports: [
@@ -22,4 +23,8 @@ import { DataSourceConfig } from './config.db'
   controllers: [],
   providers: [],
 })
-export class DatabaseModule {}
+export class DatabaseModule {
+  constructor() {
+    seeders()
+  }
+}

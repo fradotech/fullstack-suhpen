@@ -7,5 +7,5 @@ export const seeders = async () => {
     .then(async () => Logger.log('Success connect seeder', 'Automatic Seeder'))
     .catch((error) => Logger.error(error))
 
-  await userCreateSeeder()
+  await Promise.all([userCreateSeeder()])
 }
