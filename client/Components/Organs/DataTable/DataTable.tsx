@@ -14,7 +14,6 @@ const stylePaginantion: React.CSSProperties = {
   display: 'flex',
   justifyContent: 'end',
   padding: '8px',
-  backgroundColor: 'white',
 }
 
 const tableLayout: React.CSSProperties = { width: '100%' }

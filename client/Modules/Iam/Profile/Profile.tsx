@@ -30,7 +30,6 @@ const Profile: React.FC = () => {
           src={props?.data.avatar}
         />
         <DescriptionContainer>
-          <Descriptions.Item label="ID">{props?.data?.id}</Descriptions.Item>
           <Descriptions.Item label="Name">
             {props?.data?.name}
           </Descriptions.Item>

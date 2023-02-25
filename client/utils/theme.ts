@@ -1,4 +1,4 @@
-import { RowProps, SpaceProps } from 'antd'
+import { theme } from 'antd'
 import type { ThemeConfig } from 'antd/es/config-provider/context'
 import type { CSSProperties } from 'react'
 
@@ -29,11 +29,8 @@ export const sidebarThemeConfig: ThemeConfig = {
   },
 }
 
-export const defaultGutter: RowProps['gutter'] = [16, 16]
-
-export const defaultSizeSpace: SpaceProps['size'] = 'middle'
-
 export const globalThemeConfig: ThemeConfig = {
+  algorithm: theme.defaultAlgorithm,
   components: {
     Button: {
       colorPrimary: themeColors.primary,
