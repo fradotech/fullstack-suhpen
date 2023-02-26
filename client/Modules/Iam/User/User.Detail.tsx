@@ -21,7 +21,7 @@ const UserDetail: React.FC = () => {
 
   return (
     <>
-      <PageHeader title="Profile" />
+      <PageHeader title="User Detail" />
       <Row>
         <Avatar
           size={250}
