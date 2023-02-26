@@ -2,6 +2,7 @@ import { ApiProperty, OmitType } from '@nestjs/swagger'
 import { IndexRequest } from '@server/infrastructure/index/index.request'
 import { ERole } from '@server/modules/iam/role/infrastructure/role.enum'
 import {
+  IsDate,
   IsEmail,
   IsEnum,
   IsNotEmpty,
@@ -12,6 +13,7 @@ import {
   Matches,
   MinLength,
 } from 'class-validator'
+import dayjs from 'dayjs'
 import { REGEX_PASSWORD } from '../common/character.constant'
 import { IUser } from '../infrastructure/user.interface'
 
@@ -84,6 +86,21 @@ export class UserRequest implements IUser {
   @ApiProperty()
   token: string
 
+  @IsOptional()
+  @ApiProperty()
+  birthDate?: Date | dayjs.Dayjs
+
+  @IsOptional()
+  @IsDate()
+  @ApiProperty()
+  startAt?: Date
+
+  @IsOptional()
+  @IsDate()
+  @ApiProperty()
+  endAt?: Date
+
+  dateRange?: [dayjs.Dayjs, dayjs.Dayjs]
   role: ERole
   isVerified: boolean
 }

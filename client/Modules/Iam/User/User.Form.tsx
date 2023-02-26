@@ -1,10 +1,11 @@
+import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { UserCreateRequest } from '@server/modules/iam/user/infrastructure/user.request'
-import { Button, Divider, Form, Input } from 'antd'
+import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
+import { Button, DatePicker, Divider, Form, Input } from 'antd'
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import Attachment from '../../../Components/Organs/Attachment/Attachment'
-import { getAttachment } from '../../../Components/Organs/Attachment/attachment.util'
 import FormContainer from '../../../Components/Organs/Form/FormContainer'
 import { Route } from '../../../Enums/Route'
 import { formRule } from '../../../utils/form.rules'
@@ -28,13 +29,13 @@ const UserForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    data.avatar = getAttachment(data.avatar) as string
 
     try {
-      !id && (await userAction.create(data)) && alert('Success create data')
-      id && (await userAction.update(id, data)) && alert('Success update data')
+      let res: IApiRes<UserResponse>
+      if (!id) res = await userAction.create(data)
+      if (id) res = await userAction.update(id, data)
       setIsLoading(false)
-      navigate(Route.Users)
+      res.data && navigate(Route.Users)
     } catch (e) {
       setIsLoading(false)
     }
@@ -55,11 +56,7 @@ const UserForm: React.FC = () => {
         ]}
       >
         <Form.Item label="Avatar">
-          <Attachment
-            total={1}
-            name="avatar"
-            defaultValues={[form.getFieldsValue().avatar]}
-          />
+          <Attachment total={1} name="avatar" />
         </Form.Item>
 
         <Form.Item label="Name" name="name" rules={[formRule.required]}>
@@ -100,6 +97,14 @@ const UserForm: React.FC = () => {
 
         <Form.Item label="Address" name="address">
           <Input />
+        </Form.Item>
+
+        <Form.Item label="Birth Date" name="birthDate">
+          <DatePicker />
+        </Form.Item>
+
+        <Form.Item label="Date Range" name="dateRange">
+          <DatePicker.RangePicker showTime format="YYYY-MM-DD HH:mm" />
         </Form.Item>
       </FormContainer>
     </>

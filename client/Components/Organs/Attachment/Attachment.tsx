@@ -15,10 +15,11 @@ interface IProps {
 
 const Attachment: React.FC<IProps> = (props: IProps) => {
   const defaultValues = () =>
-    props.defaultValues?.length > 0 &&
-    props.defaultValues?.map((data) => {
-      return { uid: data, name: data, url: data }
-    })
+    props.defaultValues?.length > 0
+      ? props.defaultValues?.map((data) => {
+          return { uid: data, name: data, url: data }
+        })
+      : []
 
   const [previewOpen, setPreviewOpen] = React.useState(false)
   const [previewImage, setPreviewImage] = React.useState('')

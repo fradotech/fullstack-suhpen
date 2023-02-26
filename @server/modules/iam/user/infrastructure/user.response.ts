@@ -1,9 +1,11 @@
+import dayjs from 'dayjs'
 import { IUser } from '../infrastructure/user.interface'
 import { EttUser } from './user.entity'
 
 export class UserResponse extends EttUser {
   otpExpiredAt?: Date
   _accessToken?: string
+  dateRange?: [dayjs.Dayjs, dayjs.Dayjs]
 
   static fromEntity(data: IUser): UserResponse {
     const res = new UserResponse()
@@ -24,6 +26,7 @@ export class UserResponse extends EttUser {
 
 export class UserStrictResponse extends UserResponse {
   otpExpiredAt?: Date
+  dateRange?: [dayjs.Dayjs, dayjs.Dayjs]
 
   static fromEntity(data: IUser): UserStrictResponse {
     const res = new UserStrictResponse()

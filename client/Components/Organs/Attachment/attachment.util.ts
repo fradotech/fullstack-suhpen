@@ -9,6 +9,8 @@ export const getBase64 = (file: RcFile): Promise<string> =>
   })
 
 export const getAttachment = (attachments: any): string | string[] => {
+  if (!attachments) return undefined
+  if (attachments instanceof String) return attachments.toString()
   const fileUrls: string[] = attachments.fileList.map(
     (data: any) => data.response.data.fileUrl,
   )
