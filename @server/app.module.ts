@@ -9,20 +9,11 @@ import {
 import { ValidationPipe } from './common/pipes/validation.pipe'
 import { DatabaseModule } from './database/database.module'
 import { FeatureModule } from './modules/feature/feature.module'
-import { AuthModule } from './modules/iam/auth/auth.module'
-import { RoleModule } from './modules/iam/role/role.module'
-import { UserModule } from './modules/iam/user/user.module'
+import { IamModule } from './modules/iam/iam.module'
 import { SupportModule } from './modules/support/support.module'
 
 @Module({
-  imports: [
-    DatabaseModule,
-    AuthModule,
-    SupportModule,
-    UserModule,
-    RoleModule,
-    FeatureModule,
-  ],
+  imports: [DatabaseModule, SupportModule, IamModule, FeatureModule],
   controllers: [],
   providers: [
     {

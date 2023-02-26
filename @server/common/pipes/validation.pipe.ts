@@ -9,11 +9,7 @@ import { validate, ValidationError } from 'class-validator'
 
 @Injectable()
 export class ValidationPipe implements PipeTransform {
-  async transform(
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    value: any,
-    { metatype }: ArgumentMetadata,
-  ): Promise<any[]> {
+  async transform(value: any, { metatype }: ArgumentMetadata): Promise<any[]> {
     if (!metatype || !this.toValidate(metatype)) {
       return value
     }
@@ -34,7 +30,6 @@ export class ValidationPipe implements PipeTransform {
               property: data.parentName
                 ? data.parentName.substring(1)
                 : data.property,
-              // TODO implement i18n
               message: Object.values(data.constraints).map(
                 (constraint) => constraint,
               ),
