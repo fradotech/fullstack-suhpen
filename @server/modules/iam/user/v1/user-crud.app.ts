@@ -41,6 +41,7 @@ export class UserCrudApp {
     const data = await this.userService.findOneOrFail(id)
 
     data.name = req.name
+    data.gender = req.gender
     data.phoneNumber = req.phoneNumber
     data.avatar = req.avatar
     data.address = req.address

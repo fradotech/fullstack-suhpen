@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import { BeforeInsert, Column, Entity } from 'typeorm'
 import { ERole } from '../../role/infrastructure/role.enum'
 import { IUser } from '../infrastructure/user.interface'
+import { EUserGender } from './user.enum'
 
 @Entity()
 export class EttUser extends BaseEntity implements IUser {
@@ -16,8 +17,11 @@ export class EttUser extends BaseEntity implements IUser {
   @Column()
   password: string
 
-  @Column({ type: 'enum', enum: ERole, default: ERole.User })
+  @Column({ default: ERole.User, type: 'enum', enum: ERole })
   role: ERole
+
+  @Column({ default: null, type: 'enum', enum: EUserGender })
+  gender?: EUserGender
 
   @Column({ default: null })
   address?: string

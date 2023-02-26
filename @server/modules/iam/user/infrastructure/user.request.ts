@@ -16,6 +16,7 @@ import {
 import dayjs from 'dayjs'
 import { REGEX_PASSWORD } from '../common/character.constant'
 import { IUser } from '../infrastructure/user.interface'
+import { EUserGender } from './user.enum'
 
 export class UserIndexRequest extends IndexRequest {
   @IsOptional()
@@ -61,6 +62,16 @@ export class UserRequest implements IUser {
   passwordConfirmation: string
 
   @IsOptional()
+  @IsEnum(ERole)
+  @ApiProperty({ example: ERole.User })
+  role: ERole
+
+  @IsOptional()
+  @IsEnum(EUserGender)
+  @ApiProperty({ example: EUserGender.Man })
+  gender?: EUserGender
+
+  @IsOptional()
   @IsString()
   @IsPhoneNumber('ID')
   @ApiProperty({ example: '085123456789' })
@@ -101,7 +112,6 @@ export class UserRequest implements IUser {
   endAt?: Date
 
   dateRange?: [dayjs.Dayjs, dayjs.Dayjs]
-  role: ERole
   isVerified: boolean
 }
 

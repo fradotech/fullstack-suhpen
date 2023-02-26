@@ -1,7 +1,7 @@
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { UserCreateRequest } from '@server/modules/iam/user/infrastructure/user.request'
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
-import { Button, DatePicker, Divider, Form, Input } from 'antd'
+import { Button, DatePicker, Divider, Form, Input, Select } from 'antd'
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
@@ -10,6 +10,7 @@ import FormContainer from '../../../Components/Organs/Form/FormContainer'
 import { Route } from '../../../Enums/Route'
 import { formRule } from '../../../utils/form.rules'
 import { userAction } from './user.action'
+import { EUserGender } from './User.enum'
 
 const UserForm: React.FC = () => {
   const navigate = useNavigate()
@@ -90,6 +91,14 @@ const UserForm: React.FC = () => {
         )}
 
         <Divider />
+
+        <Form.Item label="Gender" name="gender">
+          <Select
+            options={Object.values(EUserGender).map((data) => {
+              return { label: data, value: data }
+            })}
+          />
+        </Form.Item>
 
         <Form.Item label="Phone Number" name="phoneNumber">
           <Input />

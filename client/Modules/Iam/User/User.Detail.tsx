@@ -6,6 +6,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import DescriptionContainer from '../../../Components/Molecules/DescriptionContainer/DescriptionContainer'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
+import { Utils } from '../../../utils/utils'
 import { ERole } from '../Role/Role.enum'
 import { userAction } from './user.action'
 
@@ -41,6 +42,12 @@ const UserDetail: React.FC = () => {
           </Descriptions.Item>
           <Descriptions.Item label="Email">
             {props?.data?.email}
+          </Descriptions.Item>
+          <Descriptions.Item label="Gender">
+            {props?.data?.gender}
+          </Descriptions.Item>
+          <Descriptions.Item label="Birth Date">
+            {props?.data?.birthDate && Utils.dateFormat(props?.data?.birthDate)}
           </Descriptions.Item>
           <Descriptions.Item label="Phone Number">
             {props?.data?.phoneNumber}
