@@ -27,9 +27,9 @@ const ProfileForm: React.FC = () => {
     const data = form.getFieldsValue()
 
     try {
-      ;(await profileAction.update(data)) && alert('Success update data')
+      const res = await profileAction.update(data)
       setIsLoading(false)
-      navigate(Route.Profile)
+      res.data && navigate(Route.Profile)
     } catch (e) {
       setIsLoading(false)
     }
