@@ -10,7 +10,7 @@ import { useDataTable } from '../../../Components/Organs/DataTable/useDataTable'
 import { Route } from '../../../Enums/Route'
 import { ERole } from '../Role/Role.enum'
 import { userAction } from './user.action'
-import { usersColumns } from './user.column'
+import { usersColumns } from './User.column'
 
 const UserS: React.FC = () => {
   const [props, setProps] = React.useState<IPaginateResponse<UserResponse>>()
