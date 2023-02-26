@@ -32,7 +32,7 @@ const UserForm: React.FC = () => {
 
     try {
       !id && (await userAction.create(data)) && alert('Success create data')
-      id && (await userAction.update(data)) && alert('Success update data')
+      id && (await userAction.update(id, data)) && alert('Success update data')
       setIsLoading(false)
       navigate(Route.Users)
     } catch (e) {

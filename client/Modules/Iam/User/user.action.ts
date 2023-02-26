@@ -25,8 +25,11 @@ export const userAction = {
     return await axiosService.get(`${Route.Users}/${id}`)
   },
 
-  update: async (data: UserUpdateRequest): Promise<IApiRes<UserResponse>> => {
-    return await axiosService.put(Route.Profile, data)
+  update: async (
+    id: string,
+    data: UserUpdateRequest,
+  ): Promise<IApiRes<UserResponse>> => {
+    return await axiosService.put(`${Route.Users}/${id}`, data)
   },
 
   remove: async (id: string): Promise<IApiRes<UserResponse>> => {
