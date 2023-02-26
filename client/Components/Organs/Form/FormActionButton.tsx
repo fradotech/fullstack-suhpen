@@ -1,13 +1,13 @@
 import { Row, Space } from 'antd'
 import React, { CSSProperties } from 'react'
 
-export interface IButtonFormActionProps {
+export interface IFormActionButtonProps {
   buttonAction: React.ReactNode[]
   justify: 'start' | 'end'
   style?: CSSProperties
 }
 
-const ButtonFormAction = (props: IButtonFormActionProps) => {
+const FormActionButton = (props: IFormActionButtonProps) => {
   return (
     <Row
       justify={props.justify}
@@ -22,4 +22,4 @@ const ButtonFormAction = (props: IButtonFormActionProps) => {
   )
 }
 
-export default ButtonFormAction
+export default FormActionButton

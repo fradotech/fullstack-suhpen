@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import Profile from './Profile'
-import ProfileForm from './ProfileForm'
+import ProfileDetail from './Profile.Detail'
 
 export const routesProfile = {
   Profile: '/profile',
@@ -12,11 +11,11 @@ export default [
   <Route
     key={routesProfile.Profile}
     path={routesProfile.Profile}
-    element={<Profile />}
+    element={<ProfileDetail />}
   />,
   <Route
     key={routesProfile.ProfileEdit}
     path={routesProfile.ProfileEdit}
-    element={<ProfileForm />}
+    element={<ProfileDetail />}
   />,
 ]

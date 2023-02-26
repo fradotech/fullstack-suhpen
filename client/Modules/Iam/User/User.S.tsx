@@ -6,15 +6,15 @@ import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import DataTable, {
   paginationTransform,
 } from '../../../Components/Organs/DataTable/DataTable'
-import { useTableFilter } from '../../../Components/Organs/DataTable/hooks'
+import { useDataTable } from '../../../Components/Organs/DataTable/useDataTable'
 import { Route } from '../../../Enums/Route'
 import { ERole } from '../Role/Role.enum'
 import { userAction } from './user.action'
-import { usersColumns } from './users.columns'
+import { usersColumns } from './user.column'
 
 const UserS: React.FC = () => {
   const [props, setProps] = React.useState<IPaginateResponse<UserResponse>>()
-  const { setQueryParams, query, status } = useTableFilter<UserIndexRequest>()
+  const { setQueryParams, query, status } = useDataTable<UserIndexRequest>()
   const fetch = async () => {
     status.isFetching = true
     setProps(await userAction.fetch(query))

@@ -1,6 +1,6 @@
 import { Col, Form, FormProps, Grid, Row } from 'antd'
 import React from 'react'
-import ButtonFormAction from './ButtonFormAction'
+import FormActionButton from './FormActionButton'
 
 interface IFormProps extends FormProps {
   isFieldCentered?: boolean
@@ -43,7 +43,7 @@ const FormContainer = (props: IFormProps): JSX.Element => {
         >
           <>
             {children}
-            <ButtonFormAction
+            <FormActionButton
               justify={justifyButton}
               buttonAction={buttonAction}
             />

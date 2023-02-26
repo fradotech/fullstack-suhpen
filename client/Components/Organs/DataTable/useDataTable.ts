@@ -3,7 +3,7 @@ import React from 'react'
 
 export type TPropsTableFilter<T> = IndexRequest & T
 
-export const useTableFilter = <T>() => {
+export const useDataTable = <T>() => {
   const [status, setStatus] = React.useState({
     isFetching: false,
   })

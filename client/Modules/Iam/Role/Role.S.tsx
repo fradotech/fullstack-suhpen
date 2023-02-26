@@ -6,13 +6,13 @@ import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import DataTable, {
   paginationTransform,
 } from '../../../Components/Organs/DataTable/DataTable'
-import { useTableFilter } from '../../../Components/Organs/DataTable/hooks'
+import { useDataTable } from '../../../Components/Organs/DataTable/useDataTable'
 import { roleAction } from './role.action'
-import { rolesColumns } from './roles.columns'
+import { rolesColumns } from './Role.column'
 
 const RoleS: React.FC = () => {
   const [props, setProps] = React.useState<IPaginateResponse<RoleResponse>>()
-  const { status } = useTableFilter<RoleIndexRequest>()
+  const { status } = useDataTable<RoleIndexRequest>()
   const fetch = async () => {
     status.isFetching = true
     setProps(await roleAction.fetch())

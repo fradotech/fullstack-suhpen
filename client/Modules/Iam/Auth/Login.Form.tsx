@@ -3,12 +3,12 @@ import { Button, Card, Col, Form, Image, Input } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
-import FormContainer from '../../../Components/Organs/FormContainer/FormContainer'
+import FormContainer from '../../../Components/Organs/Form/FormContainer'
 import { Route } from '../../../Enums/Route'
 import { formRule } from '../../../utils/form.rules'
 import { authAction } from './auth.action'
 
-const Login: React.FC = () => {
+const LoginForm: React.FC = () => {
   const user = authAction.loggedUser()
   const navigate = useNavigate()
   const [form] = Form.useForm<AuthLoginRequest>()
@@ -80,4 +80,4 @@ const Login: React.FC = () => {
     )
 }
 
-export default Login
+export default LoginForm

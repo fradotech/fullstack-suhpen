@@ -4,7 +4,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import Attachment from '../../../Components/Organs/Attachment/Attachment'
-import FormContainer from '../../../Components/Organs/FormContainer/FormContainer'
+import FormContainer from '../../../Components/Organs/Form/FormContainer'
 import { Route } from '../../../Enums/Route'
 import { formRule } from '../../../utils/form.rules'
 import { profileAction } from './profile.action'
@@ -37,7 +37,7 @@ const ProfileForm: React.FC = () => {
 
   return (
     <>
-      <PageHeader title="User Edit" />
+      <PageHeader title="Profile Edit" />
       <FormContainer
         onFinish={onFinish}
         form={form}

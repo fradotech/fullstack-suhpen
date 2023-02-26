@@ -10,7 +10,7 @@ import { Route } from '../../../Enums/Route'
 import { ERole } from '../Role/Role.enum'
 import { profileAction } from './profile.action'
 
-const Profile: React.FC = () => {
+const ProfileDetail: React.FC = () => {
   const navigate = useNavigate()
   const [props, setProps] = React.useState<IApiRes<UserResponse>>()
   const fetch = async () => setProps(await profileAction.getUserLogged())
@@ -60,4 +60,4 @@ const Profile: React.FC = () => {
   )
 }
 
-export default Profile
+export default ProfileDetail

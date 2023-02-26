@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import UserDetail from './UserDetail'
-import UserForm from './UserForm'
-import UserS from './UserS'
+import UserDetail from './User.Detail'
+import UserForm from './User.Form'
+import UserS from './User.S'
 
 export const routesUser = {
   Users: '/users',

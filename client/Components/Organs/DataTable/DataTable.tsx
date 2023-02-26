@@ -8,7 +8,7 @@ import {
   TablePaginationConfig,
 } from 'antd/es/table/interface'
 import { FilterSection } from '../FilterSection/FilterSection'
-import { FilterState, IDataTableProps, TOnSort } from './Entities'
+import { FilterState, IDataTableProps, TOnSort } from './DataTable.interface'
 
 const stylePaginantion: React.CSSProperties = {
   display: 'flex',
