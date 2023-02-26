@@ -46,14 +46,14 @@ const UserDetail: React.FC = () => {
           <Descriptions.Item label="Gender">
             {props?.data?.gender}
           </Descriptions.Item>
-          <Descriptions.Item label="Birth Date">
-            {props?.data?.birthDate && Utils.dateFormat(props?.data?.birthDate)}
-          </Descriptions.Item>
           <Descriptions.Item label="Phone Number">
             {props?.data?.phoneNumber}
           </Descriptions.Item>
           <Descriptions.Item label="Address">
             {props?.data?.address}
+          </Descriptions.Item>
+          <Descriptions.Item label="Birth Date">
+            {props?.data?.birthDate && Utils.dateFormat(props?.data?.birthDate)}
           </Descriptions.Item>
         </DescriptionContainer>
       </Row>

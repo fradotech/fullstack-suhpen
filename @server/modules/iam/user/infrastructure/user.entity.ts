@@ -23,11 +23,14 @@ export class EttUser extends BaseEntity implements IUser {
   @Column({ default: null, type: 'enum', enum: EUserGender })
   gender?: EUserGender
 
+  @Column({ default: null, unique: true })
+  phoneNumber?: string
+
   @Column({ default: null })
   address?: string
 
-  @Column({ default: null, unique: true })
-  phoneNumber?: string
+  @Column({ default: null, type: 'datetime' })
+  birthDate?: Date | dayjs.Dayjs
 
   @Column({ default: null, unique: true })
   avatar?: string
@@ -40,9 +43,6 @@ export class EttUser extends BaseEntity implements IUser {
 
   @Column({ default: null })
   token?: string
-
-  @Column({ default: null, type: 'datetime' })
-  birthDate?: Date | dayjs.Dayjs
 
   @Column({ default: null })
   startAt?: Date

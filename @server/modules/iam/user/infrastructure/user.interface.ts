@@ -10,13 +10,13 @@ export interface IUser extends IBaseEntity {
   role: ERole
   gender?: EUserGender
   phoneNumber?: string
-  avatar?: string
   address?: string
+  birthDate?: Date | dayjs.Dayjs
+  avatar?: string
   otp?: number
   otpExpiredAt?: Date
   isVerified: boolean
   token?: string
-  birthDate?: Date | dayjs.Dayjs
   startAt?: Date
   endAt?: Date
   dateRange?: [dayjs.Dayjs, dayjs.Dayjs]

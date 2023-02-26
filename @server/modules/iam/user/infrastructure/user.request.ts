@@ -80,12 +80,16 @@ export class UserRequest implements IUser {
   @IsOptional()
   @IsString()
   @ApiProperty()
-  avatar?: string
+  address?: string
+
+  @IsOptional()
+  @ApiProperty()
+  birthDate?: Date | dayjs.Dayjs
 
   @IsOptional()
   @IsString()
   @ApiProperty()
-  address?: string
+  avatar?: string
 
   @IsNotEmpty()
   @IsNumber()
@@ -96,10 +100,6 @@ export class UserRequest implements IUser {
   @IsString()
   @ApiProperty()
   token: string
-
-  @IsOptional()
-  @ApiProperty()
-  birthDate?: Date | dayjs.Dayjs
 
   @IsOptional()
   @IsDate()
