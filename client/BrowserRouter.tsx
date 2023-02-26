@@ -7,12 +7,11 @@ import {
 import { Route as ERoute } from './Enums/Route'
 import LayoutMain from './Layouts/MainLayout/LayoutMain'
 import DashboardRoute from './Modules/Dashboard/Dashboard.route'
+import FeatureRoute from './Modules/Feature/Feature.route'
 import Home from './Modules/Home'
 import { authAction } from './Modules/Iam/Auth/auth.action'
 import AuthRoute from './Modules/Iam/Auth/Auth.route'
-import ProfileRoute from './Modules/Iam/Profile/Profile.route'
-import RoleRoute from './Modules/Iam/Role/Role.route'
-import UserRoute from './Modules/Iam/User/User.route'
+import IamRouter from './Modules/Iam/Iam.router'
 import NotFound from './Modules/NotFound'
 import Unauthorized from './Modules/Unauthorized'
 
@@ -30,9 +29,8 @@ const BrowserRouter: React.FC = () => (
       <LayoutMain>
         <Routes>
           {DashboardRoute}
-          {ProfileRoute}
-          {UserRoute}
-          {RoleRoute}
+          {IamRouter}
+          {FeatureRoute}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </LayoutMain>
