@@ -16,7 +16,7 @@ async function bootstrap() {
   patchTypeORMRepositoryWithBaseRepository()
 
   const globalPrefix = config.app.prefix
-  const publicPath = path.resolve('./') + config.assets.storage
+  const publicPath = path.resolve('./') + config.assets.public
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
   const host = config.server.host
   const docsUrl = 'docs'

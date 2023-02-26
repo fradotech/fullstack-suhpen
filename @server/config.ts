@@ -49,6 +49,7 @@ export const config = {
   },
 
   assets: {
+    public: '/public',
     storage: process.env.ASSETS_STORAGE || '/public/uploads',
   },
 }
