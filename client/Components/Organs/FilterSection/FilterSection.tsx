@@ -55,7 +55,7 @@ export const FilterSection = (props: IFilterSection) => {
             return (
               <Col key={index}>
                 <Form.Item name={item.name} noStyle>
-                  {item.name == 'dateRangePicker' ? (
+                  {item.name == 'dateRange' ? (
                     <DatePicker.RangePicker />
                   ) : (
                     <Select

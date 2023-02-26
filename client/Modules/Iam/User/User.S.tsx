@@ -36,13 +36,13 @@ const UserS: React.FC = () => {
         loading={status.isFetching}
         filterComponents={[
           { name: 'role', enum: ERole },
-          { name: 'dateRangePicker' },
+          { name: 'dateRange' },
         ]}
-        onChange={({ dateRangePicker, ...filtersState }) => {
+        onChange={({ dateRange, ...filtersState }) => {
           setQueryParams({
             ...filtersState,
-            startAt: dateRangePicker?.[0]?.toISOString(),
-            endAt: dateRangePicker?.[1]?.toISOString(),
+            startAt: dateRange?.[0]?.toISOString(),
+            endAt: dateRange?.[1]?.toISOString(),
           })
         }}
       />
