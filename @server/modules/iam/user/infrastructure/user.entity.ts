@@ -23,7 +23,7 @@ export class EttUser extends BaseEntity implements IUser {
   @Column({ default: null, type: 'enum', enum: EUserGender })
   gender?: EUserGender
 
-  @Column({ default: null, unique: true })
+  @Column({ default: null })
   phoneNumber?: string
 
   @Column({ default: null })
@@ -32,7 +32,7 @@ export class EttUser extends BaseEntity implements IUser {
   @Column({ default: null, type: 'datetime' })
   birthDate?: Date | dayjs.Dayjs
 
-  @Column({ default: null, unique: true })
+  @Column({ default: null })
   avatar?: string
 
   @Column({ default: null })
