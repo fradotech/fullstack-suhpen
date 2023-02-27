@@ -1,14 +1,14 @@
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { UserCreateRequest } from '@server/modules/iam/user/infrastructure/user.request'
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
-import { Button, DatePicker, Divider, Form, Input, Select } from 'antd'
+import { Button, Divider, Form } from 'antd'
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
-import Attachment from '../../../Components/Organs/Attachment/Attachment'
 import FormContainer from '../../../Components/Organs/Form/FormContainer'
+import FormItem from '../../../Components/Organs/Form/FormItem'
 import { Route } from '../../../Enums/Route'
-import { formRule } from '../../../utils/form.rules'
+import { rule } from '../../../utils/form.rules'
 import { userAction } from './user.action'
 import { EUserGender } from './User.enum'
 
@@ -56,65 +56,43 @@ const UserForm: React.FC = () => {
           </Button>,
         ]}
       >
-        <Form.Item label="Avatar">
-          <Attachment total={1} name="avatar" />
-        </Form.Item>
-
-        <Form.Item label="Name" name="name" rules={[formRule.required]}>
-          <Input />
-        </Form.Item>
+        <FormItem name="avatar" input="attachment" total={1} />
+        <FormItem name="name" rules={[rule.required]} />
 
         {!id && (
           <>
-            <Form.Item label="Email" name="email" rules={[formRule.email]}>
-              <Input type="email" />
-            </Form.Item>
-
-            <Form.Item
-              label="Password"
+            <FormItem name="email" rules={[rule.email]} type="email" />
+            <FormItem
               name="password"
-              rules={[formRule.password]}
-              required
-            >
-              <Input.Password type="password" />
-            </Form.Item>
-
-            <Form.Item
-              label="Password Confirmation"
+              rules={[rule.password]}
+              input="inputPassword"
+            />
+            <FormItem
               name="passwordConfirmation"
-              rules={[formRule.password]}
-              required
-            >
-              <Input.Password type="password" />
-            </Form.Item>
+              rules={[rule.password]}
+              input="inputPassword"
+              placeholder="Password Confirmation"
+            />
           </>
         )}
 
         <Divider />
 
-        <Form.Item label="Gender" name="gender">
-          <Select
-            options={Object.values(EUserGender).map((data) => {
-              return { label: data, value: data }
-            })}
-          />
-        </Form.Item>
+        <FormItem
+          name="gender"
+          input="select"
+          optionsEnum={Object.values(EUserGender)}
+        />
 
-        <Form.Item label="Phone Number" name="phoneNumber">
-          <Input />
-        </Form.Item>
-
-        <Form.Item label="Address" name="address">
-          <Input />
-        </Form.Item>
-
-        <Form.Item label="Birth Date" name="birthDate">
-          <DatePicker />
-        </Form.Item>
-
-        <Form.Item label="Date Range" name="dateRange">
-          <DatePicker.RangePicker showTime format="YYYY-MM-DD HH:mm" />
-        </Form.Item>
+        <FormItem name="phoneNumber" />
+        <FormItem name="address" />
+        <FormItem name="birthDate" input="datePicker" />
+        <FormItem
+          name="dateRange"
+          input="rangePicker"
+          showTime
+          format="YYYY-MM-DD HH:mm"
+        />
       </FormContainer>
     </>
   )

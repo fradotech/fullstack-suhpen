@@ -1,11 +1,12 @@
 import { AuthLoginRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
-import { Button, Card, Col, Form, Image, Input } from 'antd'
+import { Button, Card, Col, Form, Image } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import FormContainer from '../../../Components/Organs/Form/FormContainer'
+import FormItem from '../../../Components/Organs/Form/FormItem'
 import { Route } from '../../../Enums/Route'
-import { formRule } from '../../../utils/form.rules'
+import { rule } from '../../../utils/form.rules'
 import { authAction } from './auth.action'
 
 const LoginForm: React.FC = () => {
@@ -36,7 +37,7 @@ const LoginForm: React.FC = () => {
       <Col
         style={{
           backgroundColor: '#eeeeee',
-          paddingBottom: '150px',
+          paddingBottom: '92px',
           textAlign: 'center',
         }}
       >
@@ -67,13 +68,8 @@ const LoginForm: React.FC = () => {
               </Button>,
             ]}
           >
-            <Form.Item name="email" rules={[formRule.email]}>
-              <Input placeholder="Email" type="email" />
-            </Form.Item>
-
-            <Form.Item name="password">
-              <Input.Password placeholder="Password" type="password" />
-            </Form.Item>
+            <FormItem name="email" rules={[rule.email]} type="email" />
+            <FormItem name="password" input="inputPassword" />
           </FormContainer>
         </Card>
       </Col>

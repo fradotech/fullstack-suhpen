@@ -1,11 +1,12 @@
 import { AuthRegisterRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
-import { Button, Card, Col, Form, Image, Input } from 'antd'
+import { Button, Card, Col, Form, Image } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import FormContainer from '../../../Components/Organs/Form/FormContainer'
+import FormItem from '../../../Components/Organs/Form/FormItem'
 import { Route } from '../../../Enums/Route'
-import { formRule } from '../../../utils/form.rules'
+import { rule } from '../../../utils/form.rules'
 import { authAction } from './auth.action'
 
 const RegisterForm: React.FC = () => {
@@ -36,7 +37,7 @@ const RegisterForm: React.FC = () => {
       <Col
         style={{
           backgroundColor: '#eeeeee',
-          paddingBottom: '45px',
+          paddingBottom: '10px',
           textAlign: 'center',
         }}
       >
@@ -67,24 +68,19 @@ const RegisterForm: React.FC = () => {
               </Button>,
             ]}
           >
-            <Form.Item name="name" required>
-              <Input placeholder="Name" />
-            </Form.Item>
-
-            <Form.Item name="email" rules={[formRule.email]}>
-              <Input placeholder="Email" type="email" />
-            </Form.Item>
-
-            <Form.Item name="password" rules={[formRule.password]}>
-              <Input.Password placeholder="Password" type="password" />
-            </Form.Item>
-
-            <Form.Item name="passwordConfirmation" rules={[formRule.password]}>
-              <Input.Password
-                placeholder="Password Confirmation"
-                type="password"
-              />
-            </Form.Item>
+            <FormItem name="name" required />
+            <FormItem name="email" rules={[rule.email]} type="email" />
+            <FormItem
+              name="password"
+              rules={[rule.password]}
+              input="inputPassword"
+            />
+            <FormItem
+              name="passwordConfirmation"
+              rules={[rule.password]}
+              input="inputPassword"
+              placeholder="Password Confirmation"
+            />
           </FormContainer>
         </Card>
       </Col>

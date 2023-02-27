@@ -1,12 +1,12 @@
 import { UserUpdateRequest } from '@server/modules/iam/user/infrastructure/user.request'
-import { Button, Divider, Form, Input } from 'antd'
+import { Button, Form } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
-import Attachment from '../../../Components/Organs/Attachment/Attachment'
 import FormContainer from '../../../Components/Organs/Form/FormContainer'
+import FormItem from '../../../Components/Organs/Form/FormItem'
 import { Route } from '../../../Enums/Route'
-import { formRule } from '../../../utils/form.rules'
+import { rule } from '../../../utils/form.rules'
 import { profileAction } from './profile.action'
 
 const ProfileForm: React.FC = () => {
@@ -49,23 +49,10 @@ const ProfileForm: React.FC = () => {
           </Button>,
         ]}
       >
-        <Form.Item label="Avatar">
-          <Attachment total={1} name="avatar" />
-        </Form.Item>
-
-        <Form.Item label="Name" name="name" rules={[formRule.required]}>
-          <Input />
-        </Form.Item>
-
-        <Form.Item label="Phone Number" name="phoneNumber">
-          <Input />
-        </Form.Item>
-
-        <Form.Item label="Address" name="address">
-          <Input />
-        </Form.Item>
-
-        <Divider />
+        <FormItem name="avatar" input="attachment" total={1} />
+        <FormItem name="name" rules={[rule.required]} />
+        <FormItem name="phoneNumber" />
+        <FormItem name="address" />
       </FormContainer>
     </>
   )

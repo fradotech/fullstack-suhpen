@@ -17,8 +17,8 @@ const dataPrepare = (
 ): UserCreateRequest | UserUpdateRequest => {
   data.birthDate =
     data.birthDate && (data.birthDate as unknown as dayjs.Dayjs).toDate()
-  data.startAt = data.dateRange[0]?.toDate()
-  data.endAt = data.dateRange[1]?.toDate()
+  data.startAt = data.dateRange && data.dateRange[0]?.toDate()
+  data.endAt = data.dateRange && data.dateRange[1]?.toDate()
   data.avatar = getAttachment(data.avatar) as string
 
   return data
