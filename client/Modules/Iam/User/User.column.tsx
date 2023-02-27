@@ -54,9 +54,7 @@ export const usersColumns: ColumnsType<UserResponse> = [
           {
             type: 'delete',
             onClick: async () => {
-              confirm('Are you sure?') &&
-                (await userAction.remove(data.id)) &&
-                location.reload()
+              ;(await userAction.remove(data.id)) && location.reload()
             },
           },
         ]}

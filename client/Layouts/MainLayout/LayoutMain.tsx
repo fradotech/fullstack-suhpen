@@ -3,9 +3,8 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
 } from '@ant-design/icons'
-import { Layout } from 'antd'
+import { Layout, Popconfirm } from 'antd'
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Section } from '../../Components/Molecules/Section/Section'
 import { Route } from '../../Enums/Route'
 import useUser from '../../Hooks/useUser'
@@ -26,14 +25,9 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
     localStorage.getItem('isSidebarCollapsed') == 'false' ? true : false,
   )
 
-  const handleLogout = (
-    event:
-      | React.MouseEvent<HTMLAnchorElement, MouseEvent>
-      | React.KeyboardEvent<HTMLAnchorElement>,
-  ) => {
-    event.preventDefault()
-    const isConfirm = confirm('Are you sure to logout? ')
-    isConfirm && authAction.logout() && location.replace(Route.Login)
+  const handleLogout = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault()
+    authAction.logout() && location.replace(Route.Login)
   }
 
   const handleSidebarCollapse = () => {
@@ -69,9 +63,12 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
             {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           </a>
           <LayoutProfile user={user} />
-          <Link to="#" onClick={handleLogout}>
+          <Popconfirm
+            title="Are you sure want to logout?"
+            onConfirm={handleLogout}
+          >
             <LogoutOutlined style={{ color: 'red', marginLeft: '1%' }} />
-          </Link>
+          </Popconfirm>
         </Layout.Header>
         <Layout.Content
           style={{

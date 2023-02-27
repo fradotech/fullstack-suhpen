@@ -5,11 +5,11 @@ import {
   EditOutlined,
   EyeOutlined,
 } from '@ant-design/icons'
-import { Space, Tooltip } from 'antd'
+import { Popconfirm, Space, Tooltip } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-type ButtonType = 'view' | 'edit' | 'delete' | 'check' | 'close'
+type ButtonType = 'view' | 'edit' | 'delete' | 'approve' | 'reject'
 
 interface IRowActionButtonsProps {
   type?: ButtonType
@@ -31,16 +31,20 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
         case 'view':
           icon = <EyeOutlined style={{ color: 'green' }} />
           break
+
         case 'edit':
           icon = <EditOutlined style={{ color: 'blue' }} />
           break
+
         case 'delete':
           icon = <DeleteOutlined style={{ color: 'red' }} />
           break
-        case 'check':
+
+        case 'approve':
           icon = <CheckCircleOutlined style={{ color: 'green' }} />
           break
-        case 'close':
+
+        case 'reject':
           icon = <CloseCircleOutlined style={{ color: 'red' }} />
           break
 
@@ -51,9 +55,18 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
 
     return (
       <Tooltip title={action.type} key={action.type}>
-        <Link to={action.href || ''} onClick={action.onClick}>
-          {icon}
-        </Link>
+        {action.type == 'view' || action.type == 'edit' ? (
+          <Link to={action.href || '#'} onClick={action.onClick}>
+            {icon}
+          </Link>
+        ) : (
+          <Popconfirm
+            title={`Are you sure want to ${action.type}?`}
+            onConfirm={action.onClick}
+          >
+            {icon}
+          </Popconfirm>
+        )}
       </Tooltip>
     )
   }
