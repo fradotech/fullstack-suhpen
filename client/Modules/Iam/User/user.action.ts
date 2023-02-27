@@ -6,6 +6,7 @@ import {
   UserUpdateRequest,
 } from '@server/modules/iam/user/infrastructure/user.request'
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
+import { notification } from 'antd'
 import dayjs from 'dayjs'
 import { getAttachment } from '../../../Components/Organs/Attachment/attachment.util'
 import { Route } from '../../../Enums/Route'
@@ -33,7 +34,7 @@ export const userAction = {
   create: async (data: UserCreateRequest): Promise<IApiRes<UserResponse>> => {
     data = dataPrepare(data) as UserCreateRequest
     const res = await axiosService.post(Route.Users, data)
-    res.data && alert('Success create data')
+    res.data && notification.success({ message: 'Success create data' })
     return res
   },
 
@@ -57,7 +58,7 @@ export const userAction = {
   ): Promise<IApiRes<UserResponse>> => {
     data = dataPrepare(data)
     const res = await axiosService.put(`${Route.Users}/${id}`, data)
-    res.data && alert('Success update data')
+    res.data && notification.success({ message: 'Success update data' })
     return res
   },
 

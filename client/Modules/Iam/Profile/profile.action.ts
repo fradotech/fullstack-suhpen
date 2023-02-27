@@ -1,6 +1,7 @@
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { UserUpdateRequest } from '@server/modules/iam/user/infrastructure/user.request'
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
+import { notification } from 'antd'
 import { getAttachment } from '../../../Components/Organs/Attachment/attachment.util'
 import { Route } from '../../../Enums/Route'
 import { axiosService } from '../../../services/axios.service'
@@ -22,7 +23,9 @@ export const profileAction = {
       Route.Profile,
       data,
     )
-    res.data && alert('Success update data')
+
+    res.data && notification.success({ message: 'Success update data' })
+
     return res
   },
 }

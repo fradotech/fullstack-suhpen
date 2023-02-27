@@ -1,3 +1,4 @@
+import { notification } from 'antd'
 import axios from 'axios'
 
 const hostLocal = 'http://localhost:3000/api/v1'
@@ -19,7 +20,7 @@ export const axiosService = {
 
       return data
     } catch (error) {
-      alert(error.response.data.message)
+      notification.error({ message: error.response.data.message })
       return error
     }
   },
@@ -40,7 +41,7 @@ export const axiosService = {
 
       return data
     } catch (error) {
-      !isCatch && alert(error.response.data.message)
+      !isCatch && notification.error({ message: error.response.data.message })
       return error
     }
   },
@@ -61,7 +62,7 @@ export const axiosService = {
 
       return data
     } catch (error) {
-      !isCatch && alert(error.response.data.message)
+      !isCatch && notification.error({ message: error.response.data.message })
       return error
     }
   },
@@ -78,12 +79,12 @@ export const axiosService = {
 
       return data
     } catch (error) {
-      alert(error.response.data.message)
+      notification.error({ message: error.response.data.message })
       return error
     }
   },
 
   catch: (res: any): void => {
-    !res.data && alert(res.response.data.message)
+    !res.data && notification.error({ message: res.response.data.message })
   },
 }
