@@ -4,7 +4,7 @@ import {
   MenuUnfoldOutlined,
 } from '@ant-design/icons'
 import { Layout, Popconfirm } from 'antd'
-import Style from './layout_main.module.css'
+import Style from './LayoutMain.module.css'
 import React from 'react'
 import { Section } from '../../Components/Molecules/Section/Section'
 import { Route } from '../../Enums/Route'
