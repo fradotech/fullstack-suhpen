@@ -60,12 +60,12 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
       </Layout.Sider>
       <Layout>
         <Layout.Header style={{ background: '#ffffff' }}>
-          <div className={Style.profile_view}>
+          <div className={Style.profileView}>
             <a onClick={handleSidebarCollapse}>
               {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             </a>
 
-            <div className={Style.item_profile_view}>
+            <div className={Style.itemProfileView}>
               <LayoutProfile user={user} />
               <Popconfirm
                 title="Are you sure want to logout?"
