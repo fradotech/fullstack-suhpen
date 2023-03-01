@@ -1,0 +1,8 @@
+.profile_view{
+    display: flex;
+    justify-content: space-between;
+}
+
+.item_profile_view{
+    display: flex;
+}
