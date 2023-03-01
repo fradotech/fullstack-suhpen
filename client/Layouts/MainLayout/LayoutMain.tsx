@@ -4,6 +4,7 @@ import {
   MenuUnfoldOutlined,
 } from '@ant-design/icons'
 import { Layout, Popconfirm } from 'antd'
+import Style from './LayoutMain.module.css'
 import React from 'react'
 import { Section } from '../../Components/Molecules/Section/Section'
 import { Route } from '../../Enums/Route'
@@ -59,16 +60,21 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
       </Layout.Sider>
       <Layout>
         <Layout.Header style={{ background: '#ffffff' }}>
-          <a onClick={handleSidebarCollapse}>
-            {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          </a>
-          <LayoutProfile user={user} />
-          <Popconfirm
-            title="Are you sure want to logout?"
-            onConfirm={handleLogout}
-          >
-            <LogoutOutlined style={{ color: 'red', marginLeft: '1%' }} />
-          </Popconfirm>
+          <div className={Style.profileView}>
+            <a onClick={handleSidebarCollapse}>
+              {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            </a>
+
+            <div className={Style.itemProfileView}>
+              <LayoutProfile user={user} />
+              <Popconfirm
+                title="Are you sure want to logout?"
+                onConfirm={handleLogout}
+              >
+                <LogoutOutlined style={{ color: 'red', marginLeft: '1%' }} />
+              </Popconfirm>
+            </div>
+          </div>
         </Layout.Header>
         <Layout.Content
           style={{

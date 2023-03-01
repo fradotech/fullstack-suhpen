@@ -1,0 +1,8 @@
+.profileView{
+    display: flex;
+    justify-content: space-between;
+}
+
+.itemProfileView{
+    display: flex;
+}
