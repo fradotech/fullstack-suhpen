@@ -1,8 +1,8 @@
-.profileView{
-    display: flex;
-    justify-content: space-between;
+.profileView {
+  display: flex;
+  justify-content: space-between;
 }
 
-.itemProfileView{
-    display: flex;
+.itemProfileView {
+  display: flex;
 }

@@ -1,7 +1,7 @@
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { UserCreateRequest } from '@server/modules/iam/user/infrastructure/user.request'
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
-import { Button, Divider, Form } from 'antd'
+import { Divider, Form } from 'antd'
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
@@ -50,11 +50,7 @@ const UserForm: React.FC = () => {
         form={form}
         layout="vertical"
         centered
-        buttonAction={[
-          <Button type="primary" htmlType="submit" disabled={isLoading}>
-            Save
-          </Button>,
-        ]}
+        button={{ disabled: isLoading }}
       >
         <FormItem name="avatar" input="attachment" total={1} />
         <FormItem name="name" rules={[rule.required]} />

@@ -1,5 +1,5 @@
 import { AuthLoginRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
-import { Button, Card, Col, Form, Image } from 'antd'
+import { Card, Col, Form, Image } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
@@ -37,7 +37,7 @@ const LoginForm: React.FC = () => {
       <Col
         style={{
           backgroundColor: '#eeeeee',
-          paddingBottom: '92px',
+          padding: '12px',
           textAlign: 'center',
         }}
       >
@@ -52,6 +52,7 @@ const LoginForm: React.FC = () => {
             margin: 'auto',
             padding: '5px',
             marginTop: '20px',
+            marginBottom: '40px',
           }}
         >
           <PageHeader title="Login" />
@@ -59,18 +60,14 @@ const LoginForm: React.FC = () => {
             onFinish={onFinish}
             form={form}
             layout="vertical"
-            buttonAction={[
-              <a onClick={() => navigate(Route.Register)}>
-                Don't have an account? Register
-              </a>,
-              <Button type="primary" htmlType="submit" disabled={isLoading}>
-                Login
-              </Button>,
-            ]}
+            button={{ singleSubmitText: 'Login', disabled: isLoading }}
           >
             <FormItem name="email" rules={[rule.email]} type="email" />
             <FormItem name="password" input="inputPassword" />
           </FormContainer>
+          <a onClick={() => navigate(Route.Register)}>
+            Don't have an account? Register
+          </a>
         </Card>
       </Col>
     )

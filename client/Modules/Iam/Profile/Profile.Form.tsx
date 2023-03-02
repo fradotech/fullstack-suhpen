@@ -1,5 +1,5 @@
 import { UserUpdateRequest } from '@server/modules/iam/user/infrastructure/user.request'
-import { Button, Form } from 'antd'
+import { Form } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
@@ -43,11 +43,7 @@ const ProfileForm: React.FC = () => {
         form={form}
         layout="vertical"
         centered
-        buttonAction={[
-          <Button type="primary" htmlType="submit" disabled={isLoading}>
-            Save
-          </Button>,
-        ]}
+        button={{ disabled: isLoading }}
       >
         <FormItem name="avatar" input="attachment" total={1} />
         <FormItem name="name" rules={[rule.required]} />
