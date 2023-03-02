@@ -1,7 +1,8 @@
 import { AuthRegisterRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
-import { Button, Card, Col, Form, Image } from 'antd'
+import { Card, Col, Form } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import CompanyLogo from '../../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import FormContainer from '../../../Components/Organs/Form/FormContainer'
 import FormItem from '../../../Components/Organs/Form/FormItem'
@@ -37,21 +38,17 @@ const RegisterForm: React.FC = () => {
       <Col
         style={{
           backgroundColor: '#eeeeee',
-          paddingBottom: '10px',
           textAlign: 'center',
         }}
       >
-        <Image
-          src="https://avatars.githubusercontent.com/u/55073493?v=4"
-          preview={false}
-          style={{ width: '60%' }}
-        />
+        <CompanyLogo />
         <Card
           style={{
             width: '400px',
             margin: 'auto',
             padding: '5px',
             marginTop: '20px',
+            marginBottom: '10px',
           }}
         >
           <PageHeader title="Register" />
@@ -59,14 +56,7 @@ const RegisterForm: React.FC = () => {
             onFinish={onFinish}
             form={form}
             layout="vertical"
-            buttonAction={[
-              <a onClick={() => navigate(Route.Login)}>
-                Have an account? Login
-              </a>,
-              <Button type="primary" htmlType="submit" disabled={isLoading}>
-                Register
-              </Button>,
-            ]}
+            button={{ singleSubmitText: 'Register', disabled: isLoading }}
           >
             <FormItem name="name" required />
             <FormItem name="email" rules={[rule.email]} type="email" />
@@ -82,6 +72,7 @@ const RegisterForm: React.FC = () => {
               placeholder="Password Confirmation"
             />
           </FormContainer>
+          <a onClick={() => navigate(Route.Login)}>Have an account? Login</a>
         </Card>
       </Col>
     )

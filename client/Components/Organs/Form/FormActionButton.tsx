@@ -1,23 +1,42 @@
-import { Row, Space } from 'antd'
-import React, { CSSProperties } from 'react'
+import { Button, Row } from 'antd'
+import React from 'react'
 
 export interface IFormActionButtonProps {
-  buttonAction: React.ReactNode[]
-  justify: 'start' | 'end'
-  style?: CSSProperties
+  buttonActions?: React.ReactNode[]
+  justify?: 'start' | 'end'
+  style?: React.CSSProperties
+  disabled?: boolean
+  singleSubmitText?: string
 }
 
 const FormActionButton = (props: IFormActionButtonProps) => {
   return (
     <Row
-      justify={props.justify}
-      style={{ marginTop: '24px', marginBottom: '8px', ...props.style }}
+      justify={props.justify || 'end'}
+      style={{
+        marginTop: '24px',
+        marginBottom: '16px',
+        ...props.style,
+      }}
     >
-      <Space>
-        {props.buttonAction?.map((field, key) => (
-          <React.Fragment key={key}>{field}</React.Fragment>
-        ))}
-      </Space>
+      <div style={{ width: '100%' }}>
+        {props.buttonActions ? (
+          props.buttonActions.map((field, key) => (
+            <React.Fragment key={key}>{field}</React.Fragment>
+          ))
+        ) : (
+          <React.Fragment>
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={props.disabled}
+              style={{ width: '100%' }}
+            >
+              {props.singleSubmitText || 'Save'}
+            </Button>
+          </React.Fragment>
+        )}
+      </div>
     </Row>
   )
 }

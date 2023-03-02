@@ -4,14 +4,14 @@ import {
   MenuUnfoldOutlined,
 } from '@ant-design/icons'
 import { Layout, Popconfirm } from 'antd'
-import Style from './LayoutMain.module.css'
 import React from 'react'
+import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { Section } from '../../Components/Molecules/Section/Section'
 import { Route } from '../../Enums/Route'
 import useUser from '../../Hooks/useUser'
 import { authAction } from '../../Modules/Iam/Auth/auth.action'
 import { sidebarThemeConfig } from '../../utils/theme'
-import LayoutCompanyLogo from './LayoutCompanyLogo'
+import Style from './LayoutMain.module.css'
 import LayoutProfile from './LayoutProfile'
 import LayoutSidebar from './LayoutSidebar'
 
@@ -54,7 +54,7 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
             height: '100%',
           }}
         >
-          <LayoutCompanyLogo />
+          <CompanyLogo />
           <LayoutSidebar />
         </div>
       </Layout.Sider>

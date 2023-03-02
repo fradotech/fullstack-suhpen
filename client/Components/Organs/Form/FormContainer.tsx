@@ -1,23 +1,15 @@
 import { Col, Form, FormProps, Grid, Row } from 'antd'
 import React from 'react'
-import FormActionButton from './FormActionButton'
+import FormActionButton, { IFormActionButtonProps } from './FormActionButton'
 
 interface IFormProps extends FormProps {
   isFieldCentered?: boolean
   centered?: boolean
-  justifyButton?: 'start' | 'end'
-  buttonAction?: React.ReactNode[]
+  button: IFormActionButtonProps
 }
 
 const FormContainer = (props: IFormProps): JSX.Element => {
-  const {
-    isFieldCentered,
-    centered,
-    justifyButton = 'end',
-    buttonAction,
-    children,
-    ...rest
-  } = props
+  const { isFieldCentered, centered: centered, children, ...rest } = props
   const { lg } = Grid.useBreakpoint()
 
   return (
@@ -43,10 +35,7 @@ const FormContainer = (props: IFormProps): JSX.Element => {
         >
           <>
             {children}
-            <FormActionButton
-              justify={justifyButton}
-              buttonAction={buttonAction}
-            />
+            <FormActionButton {...props.button} />
           </>
         </Form>
       </Col>

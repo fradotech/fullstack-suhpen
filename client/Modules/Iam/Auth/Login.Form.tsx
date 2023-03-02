@@ -1,7 +1,8 @@
 import { AuthLoginRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
-import { Button, Card, Col, Form, Image } from 'antd'
+import { Card, Col, Form } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import CompanyLogo from '../../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import FormContainer from '../../../Components/Organs/Form/FormContainer'
 import FormItem from '../../../Components/Organs/Form/FormItem'
@@ -37,21 +38,17 @@ const LoginForm: React.FC = () => {
       <Col
         style={{
           backgroundColor: '#eeeeee',
-          paddingBottom: '92px',
           textAlign: 'center',
         }}
       >
-        <Image
-          src="https://avatars.githubusercontent.com/u/55073493?v=4"
-          preview={false}
-          style={{ width: '60%' }}
-        />
+        <CompanyLogo />
         <Card
           style={{
             width: '400px',
             margin: 'auto',
             padding: '5px',
             marginTop: '20px',
+            marginBottom: '66px',
           }}
         >
           <PageHeader title="Login" />
@@ -59,18 +56,18 @@ const LoginForm: React.FC = () => {
             onFinish={onFinish}
             form={form}
             layout="vertical"
-            buttonAction={[
-              <a onClick={() => navigate(Route.Register)}>
-                Don't have an account? Register
-              </a>,
-              <Button type="primary" htmlType="submit" disabled={isLoading}>
-                Login
-              </Button>,
-            ]}
+            button={{ singleSubmitText: 'Login', disabled: isLoading }}
           >
             <FormItem name="email" rules={[rule.email]} type="email" />
-            <FormItem name="password" input="inputPassword" />
+            <FormItem
+              name="password"
+              input="inputPassword"
+              rules={[rule.required]}
+            />
           </FormContainer>
+          <a onClick={() => navigate(Route.Register)}>
+            Don't have an account? Register
+          </a>
         </Card>
       </Col>
     )
