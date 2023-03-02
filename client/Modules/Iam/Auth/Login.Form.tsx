@@ -38,7 +38,6 @@ const LoginForm: React.FC = () => {
       <Col
         style={{
           backgroundColor: '#eeeeee',
-          padding: '12px',
           textAlign: 'center',
         }}
       >
@@ -49,7 +48,7 @@ const LoginForm: React.FC = () => {
             margin: 'auto',
             padding: '5px',
             marginTop: '20px',
-            marginBottom: '54px',
+            marginBottom: '66px',
           }}
         >
           <PageHeader title="Login" />
@@ -60,7 +59,11 @@ const LoginForm: React.FC = () => {
             button={{ singleSubmitText: 'Login', disabled: isLoading }}
           >
             <FormItem name="email" rules={[rule.email]} type="email" />
-            <FormItem name="password" input="inputPassword" />
+            <FormItem
+              name="password"
+              input="inputPassword"
+              rules={[rule.required]}
+            />
           </FormContainer>
           <a onClick={() => navigate(Route.Register)}>
             Don't have an account? Register

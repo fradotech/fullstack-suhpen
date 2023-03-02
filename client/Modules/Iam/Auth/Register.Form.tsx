@@ -38,7 +38,6 @@ const RegisterForm: React.FC = () => {
       <Col
         style={{
           backgroundColor: '#eeeeee',
-          padding: '12px',
           textAlign: 'center',
         }}
       >
