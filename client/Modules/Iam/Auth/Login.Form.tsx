@@ -1,7 +1,8 @@
 import { AuthLoginRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
-import { Card, Col, Form, Image } from 'antd'
+import { Card, Col, Form } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import CompanyLogo from '../../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import FormContainer from '../../../Components/Organs/Form/FormContainer'
 import FormItem from '../../../Components/Organs/Form/FormItem'
@@ -41,18 +42,14 @@ const LoginForm: React.FC = () => {
           textAlign: 'center',
         }}
       >
-        <Image
-          src="https://avatars.githubusercontent.com/u/55073493?v=4"
-          preview={false}
-          style={{ width: '60%' }}
-        />
+        <CompanyLogo />
         <Card
           style={{
             width: '400px',
             margin: 'auto',
             padding: '5px',
             marginTop: '20px',
-            marginBottom: '40px',
+            marginBottom: '54px',
           }}
         >
           <PageHeader title="Login" />
