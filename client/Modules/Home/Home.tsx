@@ -17,8 +17,8 @@ const Home: React.FC = () => {
     <Layout style={{ backgroundColor: 'white' }}>
       <Layout.Header style={{ backgroundColor: themeColors.primary }}>
         <div style={{ float: 'right' }}>
-          <Link className={styles.headerItem} to={'#'}>
-            Portfolio
+          <Link className={styles.headerItem} to={'#home'}>
+            Home
           </Link>
           {user ? (
             <Link className={styles.headerItem} to={Route.Dashboard}>
@@ -32,7 +32,7 @@ const Home: React.FC = () => {
         </div>
       </Layout.Header>
       <Layout.Content className={styles.layoutContent}>
-        <section>
+        <section id="home">
           <Row style={{ justifyContent: 'space-between' }}>
             <Col style={{ padding: '10%' }}>
               <Title style={{ color: themeColors.primary }}>Fradotech</Title>
