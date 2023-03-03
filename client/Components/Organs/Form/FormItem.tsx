@@ -17,6 +17,7 @@ interface IProps {
     | 'datePicker'
     | 'rangePicker'
     | 'attachment'
+    | 'textArea'
   rules?: Rule[]
   required?: boolean
   placeholder?: string
@@ -77,6 +78,10 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
 
     case 'attachment':
       input = <Attachment total={props.total} name={props.name} />
+      break
+
+    case 'textArea':
+      input = <AntdInput.TextArea />
       break
 
     default:
