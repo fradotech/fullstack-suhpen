@@ -32,7 +32,7 @@ const Home: React.FC = () => {
         </div>
       </Layout.Header>
       <Layout.Content className={styles.layoutContent}>
-        <div>
+        <section>
           <Row style={{ justifyContent: 'space-between' }}>
             <Col style={{ padding: '10%' }}>
               <Title style={{ color: themeColors.primary }}>Fradotech</Title>
@@ -51,7 +51,7 @@ const Home: React.FC = () => {
               <CompanyLogo style={{ width: '500px', padding: '12%' }} />
             </Col>
           </Row>
-        </div>
+        </section>
       </Layout.Content>
     </Layout>
   )
