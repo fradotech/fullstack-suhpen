@@ -11,7 +11,7 @@ import { Route } from '../../Enums/Route'
 import useUser from '../../Hooks/useUser'
 import { authAction } from '../../Modules/Iam/Auth/auth.action'
 import { sidebarThemeConfig } from '../../utils/theme'
-import Style from './LayoutMain.module.css'
+import styles from './LayoutMain.module.css'
 import LayoutProfile from './LayoutProfile'
 import LayoutSidebar from './LayoutSidebar'
 
@@ -47,25 +47,19 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
           height: '100vh',
         }}
       >
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            height: '100%',
-          }}
-        >
+        <div className={styles.sidebarContainer}>
           <CompanyLogo />
           <LayoutSidebar />
         </div>
       </Layout.Sider>
       <Layout>
-        <Layout.Header style={{ background: '#ffffff' }}>
-          <div className={Style.profileView}>
+        <Layout.Header style={{ background: '#ffffff', paddingLeft: '10px' }}>
+          <div className={styles.headerContainer}>
             <a onClick={handleSidebarCollapse}>
               {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             </a>
 
-            <div className={Style.itemProfileView}>
+            <div className={styles.profile}>
               <LayoutProfile user={user} />
               <Popconfirm
                 title="Are you sure want to logout?"

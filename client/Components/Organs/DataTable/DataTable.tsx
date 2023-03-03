@@ -9,12 +9,7 @@ import {
 } from 'antd/es/table/interface'
 import { FilterSection } from '../FilterSection/FilterSection'
 import { FilterState, IDataTableProps, TOnSort } from './DataTable.interface'
-
-const stylePaginantion: React.CSSProperties = {
-  display: 'flex',
-  justifyContent: 'end',
-  padding: '8px',
-}
+import styles from './DataTable.module.css'
 
 const tableLayout: React.CSSProperties = { width: '100%' }
 
@@ -92,7 +87,7 @@ function DataTable<T extends object = any>(
           }
         />
 
-        <div style={stylePaginantion}>
+        <div className={styles.pagination}>
           {pagination && !!pagination?.total && (
             <Pagination
               showTotal={(total, range) =>

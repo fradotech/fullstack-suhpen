@@ -1,5 +1,5 @@
 import { AuthLoginRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
-import { Card, Col, Form } from 'antd'
+import { Card, Form } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import CompanyLogo from '../../../Components/Molecules/CompanyLogo/CompanyLogo'
@@ -9,6 +9,7 @@ import FormItem from '../../../Components/Organs/Form/FormItem'
 import { Route } from '../../../Enums/Route'
 import { rule } from '../../../utils/form.rules'
 import { authAction } from './auth.action'
+import styles from './Auth.module.css'
 
 const LoginForm: React.FC = () => {
   const user = authAction.loggedUser()
@@ -35,22 +36,9 @@ const LoginForm: React.FC = () => {
     return undefined
   } else
     return (
-      <Col
-        style={{
-          backgroundColor: '#eeeeee',
-          textAlign: 'center',
-        }}
-      >
+      <div className={styles.container}>
         <CompanyLogo />
-        <Card
-          style={{
-            width: '400px',
-            margin: 'auto',
-            padding: '5px',
-            marginTop: '20px',
-            marginBottom: '66px',
-          }}
-        >
+        <Card className={styles.cardContainer}>
           <PageHeader title="Login" />
           <FormContainer
             onFinish={onFinish}
@@ -69,7 +57,7 @@ const LoginForm: React.FC = () => {
             Don't have an account? Register
           </a>
         </Card>
-      </Col>
+      </div>
     )
 }
 
