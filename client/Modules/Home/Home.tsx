@@ -20,7 +20,11 @@ const Home: React.FC = () => {
           <Link className={styles.headerItem} to={'#'}>
             Portfolio
           </Link>
-          {!user && (
+          {user ? (
+            <Link className={styles.headerItem} to={Route.Dashboard}>
+              Dashboard
+            </Link>
+          ) : (
             <Link className={styles.headerItem} to={Route.Login}>
               Login
             </Link>
