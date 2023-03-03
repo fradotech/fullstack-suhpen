@@ -1,8 +1,21 @@
-.profileView {
+.headerContainer {
   display: flex;
   justify-content: space-between;
 }
 
-.itemProfileView {
+.profile {
   display: flex;
+}
+
+.sidebarContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sidebar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

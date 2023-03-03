@@ -48,35 +48,36 @@ export const FilterSection = (props: IFilterSection) => {
 
   return (
     <Row gutter={[8, 0]} align="middle">
-      {/* Filters */}
-      <Form form={form}>
-        <Row gutter={[8, 0]} align="middle">
-          {props.filters?.map((item, index) => {
-            return (
-              <Col key={index}>
-                <Form.Item name={item.name} noStyle>
-                  {item.name == 'dateRange' ? (
-                    <DatePicker.RangePicker />
-                  ) : (
-                    <Select
-                      placeholder={Utils.titleCase(item.name)}
-                      options={React.useMemo(() => {
-                        return Object.keys(item.enum).map((key) => {
-                          return { label: key, value: key }
-                        })
-                      }, [])}
-                      allowClear
-                      style={{ minWidth: '120px' }}
-                    />
-                  )}
-                </Form.Item>
-              </Col>
-            )
-          })}
-        </Row>
-      </Form>
-
       <Col flex="auto">
+        <Form form={form}>
+          <Row gutter={[8, 0]} align="middle">
+            {props.filters?.map((item, index) => {
+              return (
+                <Col key={index} style={{ margin: '2px' }}>
+                  <Form.Item name={item.name} noStyle>
+                    {item.name == 'dateRange' ? (
+                      <DatePicker.RangePicker />
+                    ) : (
+                      <Select
+                        placeholder={Utils.titleCase(item.name)}
+                        options={React.useMemo(() => {
+                          return Object.keys(item.enum).map((key) => {
+                            return { label: key, value: key }
+                          })
+                        }, [])}
+                        allowClear
+                        style={{ minWidth: '120px' }}
+                      />
+                    )}
+                  </Form.Item>
+                </Col>
+              )
+            })}
+          </Row>
+        </Form>
+      </Col>
+
+      <Col flex="auto" style={{ margin: '2px' }}>
         <Input
           prefix={<SearchOutlined />}
           placeholder="Search"

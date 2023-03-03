@@ -1,0 +1,13 @@
+.container {
+  background-color: #eeeeee;
+  text-align: center;
+  padding-top: 18px;
+  padding-bottom: 74px;
+}
+
+.cardContainer {
+  width: 400px;
+  margin: auto;
+  padding: 5px;
+  margin-top: 20px;
+}

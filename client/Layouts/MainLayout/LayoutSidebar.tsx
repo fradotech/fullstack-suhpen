@@ -2,6 +2,7 @@ import { ConfigProvider, Menu } from 'antd'
 import React from 'react'
 import { sidebarThemeConfig } from '../../utils/theme'
 import { layoutItems } from './LayoutItems'
+import styles from './LayoutMain.module.css'
 
 const LayoutSidebar: React.FC = () => {
   const activeMenuKey = React.useMemo(
@@ -26,14 +27,7 @@ const LayoutSidebar: React.FC = () => {
   return (
     <>
       <ConfigProvider theme={sidebarThemeConfig}>
-        <div
-          style={{
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-          }}
-        >
+        <div className={styles.sidebar}>
           <Menu
             mode="inline"
             items={layoutItems}
