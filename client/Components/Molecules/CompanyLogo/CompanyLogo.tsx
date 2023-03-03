@@ -2,7 +2,11 @@ import { Col, Image } from 'antd'
 import React from 'react'
 import { host } from '../../../services/axios.service'
 
-const CompanyLogo: React.FC = () => (
+interface IProps {
+  style?: React.CSSProperties
+}
+
+const CompanyLogo: React.FC<IProps> = (props: IProps) => (
   <Col
     style={{
       padding: '8px',
@@ -12,7 +16,9 @@ const CompanyLogo: React.FC = () => (
     <Image
       src={`${host}/images/company-logo.jpg`}
       preview={false}
-      style={{ width: '50%' }}
+      style={
+        props.style || { width: '50%', maxWidth: '250px', borderRadius: '10px' }
+      }
     />
   </Col>
 )
