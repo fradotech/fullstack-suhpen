@@ -1,5 +1,6 @@
 import { Col, Image } from 'antd'
 import React from 'react'
+import { host } from '../../../services/axios.service'
 
 const CompanyLogo: React.FC = () => (
   <Col
@@ -9,7 +10,7 @@ const CompanyLogo: React.FC = () => (
     }}
   >
     <Image
-      src="https://avatars.githubusercontent.com/u/55073493?v=4"
+      src={`${host}/images/company-logo.jpg`}
       preview={false}
       style={{ width: '50%' }}
     />

@@ -1,15 +1,16 @@
 import { notification } from 'antd'
 import axios from 'axios'
 
-const hostLocal = 'http://localhost:3000/api/v1'
-const hostOnline = 'https://fradotech.up.railway.app/api/v1'
+const hostLocal = 'http://localhost:3000'
+const hostOnline = 'https://fradotech.up.railway.app'
 
 export const host = location.href.includes('localhost') ? hostLocal : hostOnline
+export const hostApi = host + '/api/v1'
 
 export const axiosService = {
   get: async (endpoint: string, params?: any): Promise<any> => {
     try {
-      const { data } = await axios.get(`${host}${endpoint}`, {
+      const { data } = await axios.get(`${hostApi}${endpoint}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('_accessToken')}`,
         },
@@ -31,7 +32,7 @@ export const axiosService = {
     isCatch?: boolean,
   ): Promise<any> => {
     try {
-      const { data } = await axios.post(`${host}${endpoint}`, dataPost, {
+      const { data } = await axios.post(`${hostApi}${endpoint}`, dataPost, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('_accessToken')}`,
         },
@@ -52,7 +53,7 @@ export const axiosService = {
     isCatch?: boolean,
   ): Promise<any> => {
     try {
-      const { data } = await axios.put(`${host}${endpoint}`, dataPost, {
+      const { data } = await axios.put(`${hostApi}${endpoint}`, dataPost, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('_accessToken')}`,
         },
@@ -69,7 +70,7 @@ export const axiosService = {
 
   delete: async (endpoint: string): Promise<any> => {
     try {
-      const { data } = await axios.delete(`${host}${endpoint}`, {
+      const { data } = await axios.delete(`${hostApi}${endpoint}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('_accessToken')}`,
         },
