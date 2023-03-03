@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import {
   BrowserRouter as ReactBrowserRouter,
   Route,
@@ -15,12 +15,22 @@ import IamRouter from './Modules/Iam/Iam.router'
 import NotFound from './Modules/NotFound'
 import Unauthorized from './Modules/Unauthorized'
 
+// Declare Page for Lazy react
+// const Home = lazy(() => import('./Modules/Home'))
+
 const user = authAction.loggedUser()
 
 const BrowserRouter: React.FC = () => (
   <ReactBrowserRouter>
     <Routes>
-      <Route path={ERoute.Home} element={<Home />} />
+      <Route
+        path={ERoute.Home}
+        element={
+          <Suspense fallback="loading....">
+            <Home />
+          </Suspense>
+        }
+      />
       {AuthRoute}
       {!user && <Route path="*" element={<Unauthorized />} />}
     </Routes>
