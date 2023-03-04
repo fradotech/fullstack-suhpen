@@ -1,7 +1,8 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import LoginForm from './Login.Form'
-import RegisterForm from './Register.Form'
+
+const LoginForm = React.lazy(() => import('./Login.Form'))
+const RegisterForm = React.lazy(() => import('./Register.Form'))
 
 export const routesAuth = {
   Login: '/auth/login',
