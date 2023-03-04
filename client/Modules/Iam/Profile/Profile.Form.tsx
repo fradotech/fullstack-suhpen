@@ -45,7 +45,7 @@ const ProfileForm: React.FC = () => {
         centered
         button={{ disabled: isLoading }}
       >
-        <FormItem name="avatar" input="attachment" total={1} />
+        <FormItem name="avatar" input="attachment" total={1} form={form} />
         <FormItem name="name" rules={[rule.required]} />
         <FormItem name="phoneNumber" />
         <FormItem name="address" />
