@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons'
-import { Form, Modal, Upload } from 'antd'
+import { Form, FormInstance, Modal, Upload } from 'antd'
 import type { RcFile, UploadProps } from 'antd/es/upload'
 import type { UploadFile } from 'antd/es/upload/interface'
 import React from 'react'
@@ -8,25 +8,40 @@ import { hostApi } from '../../../services/axios.service'
 import { getBase64 } from './attachment.util'
 
 interface IProps {
+  form: FormInstance
   total: number
-  defaultValues?: string[]
   name: string
 }
 
 const Attachment: React.FC<IProps> = (props: IProps) => {
-  const defaultValues = () =>
-    props.defaultValues?.length > 0
-      ? props.defaultValues?.map((data) => {
-          return { uid: data, name: data, url: data }
-        })
-      : []
-
+  const [isInit, setIsInit] = React.useState(true)
   const [previewOpen, setPreviewOpen] = React.useState(false)
   const [previewImage, setPreviewImage] = React.useState('')
   const [previewTitle, setPreviewTitle] = React.useState('')
-  const [fileList, setFileList] = React.useState<UploadFile[]>(defaultValues())
-
+  const [fileList, setFileList] = React.useState<UploadFile[]>([])
   const handleCancel = () => setPreviewOpen(false)
+
+  React.useMemo(() => {
+    const fieldValue = props?.form.getFieldValue(props.name)
+    const defaultValues: string[] =
+      isInit && typeof fieldValue == typeof ''
+        ? [fieldValue]
+        : fieldValue
+        ? fieldValue
+        : fileList
+
+    const attachments: UploadFile[] =
+      defaultValues?.length > 0
+        ? defaultValues?.map((data: any) => {
+            isInit && setIsInit(false)
+            if (data.status == 'uploading') return null
+            if (data.file) return data.file
+            return { uid: data, name: data, url: data }
+          })
+        : []
+
+    typeof attachments[0]?.url == typeof '' && setFileList(attachments)
+  }, [props])
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
@@ -38,8 +53,8 @@ const Attachment: React.FC<IProps> = (props: IProps) => {
     setPreviewTitle(file.name || file.url)
   }
 
-  const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) =>
-    setFileList(newFileList)
+  const handleChange: UploadProps['onChange'] = ({ fileList }) =>
+    setFileList(fileList)
 
   return (
     <>
@@ -54,7 +69,7 @@ const Attachment: React.FC<IProps> = (props: IProps) => {
         >
           {fileList.length >= props.total ? null : (
             <>
-              <PlusOutlined />
+              <PlusOutlined style={{ margin: '4px' }} />
               <div> Upload</div>
             </>
           )}

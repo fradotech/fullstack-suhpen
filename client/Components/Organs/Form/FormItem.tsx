@@ -1,5 +1,5 @@
 import { DatePicker, Form, Input as AntdInput, Select } from 'antd'
-import { Rule } from 'antd/es/form'
+import { FormInstance, Rule } from 'antd/es/form'
 import { DefaultOptionType } from 'antd/es/select'
 import dayjs from 'dayjs'
 import { SharedTimeProps } from 'rc-picker/lib/panels/TimePanel'
@@ -8,6 +8,7 @@ import { Utils } from '../../../utils/utils'
 import Attachment from '../Attachment/Attachment'
 
 interface IProps {
+  form?: FormInstance
   label?: string
   name: string
   input?:
@@ -76,12 +77,14 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
       )
       break
 
-    case 'attachment':
-      input = <Attachment total={props.total} name={props.name} />
-      break
-
     case 'textArea':
       input = <AntdInput.TextArea />
+      break
+
+    case 'attachment':
+      input = (
+        <Attachment total={props.total} name={props.name} form={props.form} />
+      )
       break
 
     default:
