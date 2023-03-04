@@ -27,6 +27,7 @@ const RoleS: React.FC = () => {
     <>
       <PageHeader title="Role" />
       <DataTable
+        rowKey="id"
         columns={rolesColumns}
         dataSource={props?.data}
         pagination={paginationTransform(props?.meta)}

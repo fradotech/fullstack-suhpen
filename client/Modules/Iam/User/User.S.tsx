@@ -29,6 +29,7 @@ const UserS: React.FC = () => {
     <>
       <PageHeader title="User" hrefCreate={Route.UserForm} />
       <DataTable
+        rowKey="id"
         columns={usersColumns}
         dataSource={props?.data}
         search={query.search}

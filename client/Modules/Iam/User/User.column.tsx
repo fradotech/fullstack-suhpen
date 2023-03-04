@@ -19,7 +19,6 @@ export const usersColumns: ColumnsType<UserResponse> = [
   },
   {
     title: 'Role',
-    key: 'role',
     render: (data: UserResponse) => {
       if (data.role == ERole.Administrator)
         return <Tag color="blue">{data.role}</Tag>
