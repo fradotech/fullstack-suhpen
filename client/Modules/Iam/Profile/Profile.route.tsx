@@ -1,7 +1,8 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import ProfileDetail from './Profile.Detail'
-import ProfileForm from './Profile.Form'
+
+const ProfileDetail = React.lazy(() => import('./Profile.Detail'))
+const ProfileForm = React.lazy(() => import('./Profile.Form'))
 
 export const routesProfile = {
   Profile: '/profile',

@@ -1,6 +1,6 @@
-import React, { lazy } from 'react'
+import React from 'react'
 import { Route } from 'react-router-dom'
-const Dashboard = lazy(() => import('./Dashboard'))
+const Dashboard = React.lazy(() => import('./Dashboard'))
 
 export const routesDashboard = {
   Dashboard: '/dashboard',
