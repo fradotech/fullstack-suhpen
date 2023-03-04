@@ -7,7 +7,7 @@ import { EttUser } from './user.entity'
 import { UserIndexRequest } from './user.request'
 
 const tableName = 'user'
-const tableKeys = ['name', 'email', 'role', 'phoneNumber']
+const tableKeys = ['name', 'email', 'role', 'phoneNumber', 'createdAt']
 
 export class UserIndexApp extends BaseIndexService {
   constructor(
@@ -49,10 +49,10 @@ export class UserIndexApp extends BaseIndexService {
       )
     }
 
-    const sort = this.orderByKey(tableName, tableKeys, req.sort)
-    const order = this.getOrder(req.order)
+    const sort = this.orderByKey(tableName, tableKeys, req.sortField)
+    const order = this.getOrder(req.sortOrder)
     query.orderBy(sort, order)
-    query.take(this.take(req.perPage))
+    query.take(this.take(req.pageSize))
     query.skip(this.countOffset(req))
 
     const [data, count] = await query.getManyAndCount()

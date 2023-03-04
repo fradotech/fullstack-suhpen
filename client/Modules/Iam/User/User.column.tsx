@@ -12,29 +12,49 @@ export const usersColumns: ColumnsType<UserResponse> = [
   {
     title: 'Name',
     dataIndex: 'name',
+    sorter: () => 0,
+    sortDirections: ['ascend', 'descend'],
   },
   {
     title: 'Email',
     dataIndex: 'email',
+    sorter: () => 0,
+    sortDirections: ['ascend', 'descend'],
   },
   {
     title: 'Role',
-    render: (data: UserResponse) => {
-      if (data.role == ERole.Administrator)
-        return <Tag color="blue">{data.role}</Tag>
-      else if (data.role == ERole.User)
-        return <Tag color="green">{data.role}</Tag>
+    dataIndex: 'role',
+    sorter: () => 0,
+    sortDirections: ['ascend', 'descend'],
+    render: (data: string) => {
+      if (data == ERole.Administrator) return <Tag color="blue">{data}</Tag>
+      else if (data == ERole.User) return <Tag color="green">{data}</Tag>
 
       return <Tag color="red">Error</Tag>
     },
+    filters: [
+      {
+        text: ERole.Administrator,
+        value: ERole.Administrator,
+      },
+      {
+        text: ERole.User,
+        value: ERole.User,
+      },
+    ],
   },
   {
     title: 'Phone Number',
     dataIndex: 'phoneNumber',
+    sorter: () => 0,
+    sortDirections: ['ascend', 'descend'],
   },
   {
     title: 'Created At',
-    render: (data: UserResponse) => Utils.dateFormat(data.createdAt),
+    dataIndex: 'createdAt',
+    sorter: () => 0,
+    sortDirections: ['ascend', 'descend'],
+    render: (data: Date) => Utils.dateFormat(data),
   },
   {
     title: 'Action',

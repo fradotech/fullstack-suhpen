@@ -29,8 +29,8 @@ function DataTable<T extends object = any>(
   const [state, setState] = useState<FilterState<T>>({ search })
 
   const handlePageChange: PaginationProps['onChange'] = (page, pageSize) => {
-    setState({ ...state, page, perPage: pageSize, per_page: pageSize })
-    onChange({ ...state, page, perPage: pageSize, per_page: pageSize })
+    setState({ ...state, page, pageSize, per_page: pageSize })
+    onChange({ ...state, page, pageSize, per_page: pageSize })
   }
 
   const handleSearch = (value: string) => {
@@ -50,10 +50,8 @@ function DataTable<T extends object = any>(
     const newState = {
       ...state,
       ...filters,
-      field: sorter.field,
-      column: sorter.column,
-      sort: String(sorter.columnKey),
-      order: sorter.order,
+      sortField: String(sorter.field),
+      sortOrder: sorter.order,
     }
 
     setState(newState)
@@ -111,7 +109,7 @@ export const paginationTransform = (
   return {
     current: meta?.page,
     total: meta?.total,
-    pageSize: meta?.perPage,
+    pageSize: meta?.pageSize,
   }
 }
 

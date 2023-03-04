@@ -22,7 +22,7 @@ export abstract class BaseIndexService {
 
   abstract fetch(arg0: any, arg1: any): Promise<IPaginateResponse<IBaseEntity>>
 
-  countOffset({ page, perPage }: IPaginateRequest): number {
+  countOffset({ page: page, pageSize: perPage }: IPaginateRequest): number {
     page = page ?? this.DefaultPage
     perPage = perPage ?? this.DefaultPerPage
 
@@ -53,13 +53,16 @@ export abstract class BaseIndexService {
     return querySearch.slice(0, -4)
   }
 
-  mapMeta(count: number, { page, perPage }: IPaginateRequest): IPaginationMeta {
+  mapMeta(
+    count: number,
+    { page: page, pageSize: perPage }: IPaginateRequest,
+  ): IPaginationMeta {
     page = page ?? this.DefaultPage
     perPage = perPage ?? this.DefaultPerPage
 
     return {
       page: page,
-      perPage: perPage,
+      pageSize: perPage,
       total: count,
       totalPage: Math.ceil(count / perPage),
     }
