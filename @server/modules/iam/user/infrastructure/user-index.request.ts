@@ -8,7 +8,7 @@ class UserIndexFilterRequest {
   @IsOptional()
   @IsEnum(ERole, { each: true })
   @ApiProperty({ example: ERole.User })
-  role?: string[]
+  role?: ERole
 }
 
 export class UserIndexRequest extends IndexRequest {
