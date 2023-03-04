@@ -3,7 +3,7 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
 } from '@ant-design/icons'
-import { Layout, Popconfirm } from 'antd'
+import { Col, Layout, Popconfirm } from 'antd'
 import React from 'react'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { Section } from '../../Components/Molecules/Section/Section'
@@ -48,7 +48,9 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
         }}
       >
         <div className={styles.sidebarContainer}>
-          <CompanyLogo />
+          <Col style={{ padding: '8px', textAlign: 'center' }}>
+            <CompanyLogo />
+          </Col>
           <LayoutSidebar />
         </div>
       </Layout.Sider>
@@ -70,12 +72,7 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
             </div>
           </div>
         </Layout.Header>
-        <Layout.Content
-          style={{
-            padding: '20px 20px',
-            overflow: 'auto',
-          }}
-        >
+        <Layout.Content style={{ padding: '20px 20px', overflow: 'auto' }}>
           <Section>{children}</Section>
         </Layout.Content>
       </Layout>

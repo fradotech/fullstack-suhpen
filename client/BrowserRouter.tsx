@@ -5,7 +5,7 @@ import {
   Routes,
 } from 'react-router-dom'
 import { Route as ERoute } from './Enums/Route'
-import LayoutMain from './Layouts/MainLayout/LayoutMain'
+import LayoutMain from './Layouts/LayoutMain/LayoutMain'
 import DashboardRoute from './Modules/Dashboard/Dashboard.route'
 import FeatureRoute from './Modules/Feature/Feature.route'
 import Home from './Modules/Home/Home'

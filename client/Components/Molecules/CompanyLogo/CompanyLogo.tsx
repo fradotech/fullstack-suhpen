@@ -1,5 +1,6 @@
-import { Col, Image } from 'antd'
+import { Image } from 'antd'
 import React from 'react'
+import { Route } from '../../../Enums/Route'
 import { host } from '../../../services/axios.service'
 
 interface IProps {
@@ -7,12 +8,7 @@ interface IProps {
 }
 
 const CompanyLogo: React.FC<IProps> = (props: IProps) => (
-  <Col
-    style={{
-      padding: '8px',
-      textAlign: 'center',
-    }}
-  >
+  <a href={Route.Home}>
     <Image
       src={`${host}/images/company-logo.jpg`}
       preview={false}
@@ -20,7 +16,7 @@ const CompanyLogo: React.FC<IProps> = (props: IProps) => (
         props.style || { width: '50%', maxWidth: '250px', borderRadius: '10px' }
       }
     />
-  </Col>
+  </a>
 )
 
 export default CompanyLogo

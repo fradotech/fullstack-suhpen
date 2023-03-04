@@ -1,36 +1,18 @@
 import { Button, Col, Layout, Row } from 'antd'
 import Title from 'antd/es/typography/Title'
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
-import { Route } from '../../Enums/Route'
 import { themeColors } from '../../utils/theme'
-import { authAction } from '../Iam/Auth/auth.action'
 import styles from './Home.module.css'
-
-const user = authAction.loggedUser()
+import HomeHeader from './HomeHeader'
 
 const Home: React.FC = () => {
   const navigate = useNavigate()
 
   return (
     <Layout style={{ backgroundColor: 'white' }}>
-      <Layout.Header style={{ backgroundColor: themeColors.primary }}>
-        <div style={{ float: 'right' }}>
-          <Link className={styles.headerItem} to={'#home'}>
-            Home
-          </Link>
-          {user ? (
-            <Link className={styles.headerItem} to={Route.Dashboard}>
-              Dashboard
-            </Link>
-          ) : (
-            <Link className={styles.headerItem} to={Route.Login}>
-              Login
-            </Link>
-          )}
-        </div>
-      </Layout.Header>
+      <HomeHeader />
       <Layout.Content className={styles.layoutContent}>
         <section id="home">
           <Row style={{ justifyContent: 'space-between' }}>
@@ -44,7 +26,7 @@ const Home: React.FC = () => {
                 style={{ marginTop: '6px' }}
                 onClick={() => navigate('#')}
               >
-                Get Started!
+                Get Started
               </Button>
             </Col>
             <Col>
