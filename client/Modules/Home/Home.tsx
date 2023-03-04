@@ -4,7 +4,6 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { themeColors } from '../../utils/theme'
-import styles from './Home.module.css'
 import HomeHeader from './HomeHeader'
 
 const Home: React.FC = () => {
@@ -13,7 +12,7 @@ const Home: React.FC = () => {
   return (
     <Layout style={{ backgroundColor: 'white' }}>
       <HomeHeader />
-      <Layout.Content className={styles.layoutContent}>
+      <Layout.Content>
         <section id="home">
           <Row style={{ justifyContent: 'space-between' }}>
             <Col style={{ padding: '10%' }}>
