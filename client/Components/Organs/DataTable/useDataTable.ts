@@ -33,8 +33,8 @@ export const useDataTable = <T>() => {
         ...propsParams,
       } as TPropsTableFilter<T>
 
-      if (data.order === undefined) {
-        delete data.sort
+      if (data.sortOrder === undefined) {
+        delete data.sortField
       }
 
       const listPropsParams = Object.keys(propsParams) as string[]

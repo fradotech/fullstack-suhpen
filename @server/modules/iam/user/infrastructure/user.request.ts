@@ -1,5 +1,4 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger'
-import { IndexRequest } from '@server/infrastructure/index/index.request'
 import { ERole } from '@server/modules/iam/role/infrastructure/role.enum'
 import {
   IsDate,
@@ -17,14 +16,6 @@ import dayjs from 'dayjs'
 import { REGEX_PASSWORD } from '../common/character.constant'
 import { IUser } from '../infrastructure/user.interface'
 import { EUserGender } from './user.enum'
-
-export class UserIndexRequest extends IndexRequest {
-  @IsOptional()
-  @IsString()
-  @IsEnum(ERole)
-  @ApiProperty({ example: ERole.User })
-  role?: string
-}
 
 export class UserRequest implements IUser {
   id: string

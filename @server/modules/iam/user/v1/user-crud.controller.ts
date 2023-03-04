@@ -15,9 +15,9 @@ import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interfa
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { Modules } from '@server/modules/modules'
 import { AdminGuard } from '../../auth/common/admin.guard'
+import { UserIndexRequest } from '../infrastructure/user-index.request'
 import {
   UserCreateRequest,
-  UserIndexRequest,
   UserUpdateRequest,
 } from '../infrastructure/user.request'
 import { UserStrictResponse } from '../infrastructure/user.response'

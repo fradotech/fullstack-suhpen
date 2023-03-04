@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common'
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
 import { UserIndexApp } from '../infrastructure/user-index.app'
+import { UserIndexRequest } from '../infrastructure/user-index.request'
 import { EttUser } from '../infrastructure/user.entity'
 import { IUser } from '../infrastructure/user.interface'
 import {
   UserCreateRequest,
-  UserIndexRequest,
   UserUpdateRequest,
 } from '../infrastructure/user.request'
 import { UserService } from '../infrastructure/user.service'
