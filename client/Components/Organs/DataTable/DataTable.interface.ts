@@ -14,7 +14,6 @@ export type TOrder = {
 
 export type TOnSort<T> = Omit<SorterResult<T>, 'order'> & TOrder
 
-/* Custom types component Dropdown ant design for supporting passing selectedRowKeys from component DataTable */
 export declare type MenuClickEventHandler = (
   info: MenuInfo,
   selectedRowKeys?: React.Key[],
@@ -23,7 +22,6 @@ export declare type MenuClickEventHandler = (
 export type MenuInfo = {
   key: string
   keyPath: string[]
-  /** @deprecated This will not support in future. You should avoid to use this */
   item: React.ReactInstance
   domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>
 }
@@ -53,13 +51,18 @@ export type FilterState<T> = {
   perPage?: number
 }
 
+export interface IDataTableHeader {
+  search?: boolean
+  dateRange?: boolean
+  onSearch?: (value: string) => void
+  searchValue?: string
+  hrefCreate?: string
+}
+
 export interface IDataTableProps<T> extends Omit<TableProps<T>, 'onChange'> {
   defaultCurrent?: number
   batchActionMenus?: ItemType[]
-  filterComponents?: {
-    name: string
-    enum?: Record<string, any>
-  }[]
+  dataTableHeader?: IDataTableHeader
   search?: string
   onChange?: (filters: FilterState<T>) => void
 }

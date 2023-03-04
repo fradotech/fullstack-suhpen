@@ -2,7 +2,7 @@ import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interfa
 import { UserUpdateRequest } from '@server/modules/iam/user/infrastructure/user.request'
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { notification } from 'antd'
-import { getAttachment } from '../../../Components/Organs/Attachment/attachment.util'
+import { getAttachment } from '../../../Components/Molecules/Attachment/attachment.util'
 import { Route } from '../../../Enums/Route'
 import { axiosService } from '../../../services/axios.service'
 

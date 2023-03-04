@@ -3,8 +3,8 @@ import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Repository, SelectQueryBuilder } from 'typeorm'
 import { IPaginateResponse } from '../../../../infrastructure/index/index.interface'
 import { BaseIndexService } from '../../../../infrastructure/index/index.service'
+import { UserIndexRequest } from './user-index.request'
 import { EttUser } from './user.entity'
-import { UserIndexRequest } from './user.request'
 
 const tableName = 'user'
 const tableKeys = ['name', 'email', 'role', 'phoneNumber', 'createdAt']
@@ -21,12 +21,7 @@ export class UserIndexApp extends BaseIndexService {
     query: SelectQueryBuilder<IUser>,
     req: UserIndexRequest,
   ): SelectQueryBuilder<IUser> {
-    if (req.role) {
-      query.andWhere('user.role = :role', {
-        role: req.role,
-      })
-    }
-
+    req
     return query
   }
 
@@ -47,6 +42,16 @@ export class UserIndexApp extends BaseIndexService {
         `CAST(${tableName}.updatedAt as DATE) BETWEEN CAST(:startAt AS DATE) AND CAST(:endAt AS DATE)`,
         { startAt: req.startAt, endAt: req.endAt },
       )
+    }
+
+    if (req.filters) {
+      Object.keys(req.filters).forEach((filterField) => {
+        ;(req.filters[filterField] as string[]).forEach((filterValue) => {
+          query.andWhere(`${tableName}.${filterField} = :filterValue`, {
+            filterValue,
+          })
+        })
+      })
     }
 
     const sort = this.orderByKey(tableName, tableKeys, req.sortField)

@@ -5,7 +5,7 @@ import dayjs from 'dayjs'
 import { SharedTimeProps } from 'rc-picker/lib/panels/TimePanel'
 import React from 'react'
 import { Utils } from '../../../utils/utils'
-import Attachment from '../Attachment/Attachment'
+import Attachment from '../../Molecules/Attachment/Attachment'
 
 interface IProps {
   form?: FormInstance

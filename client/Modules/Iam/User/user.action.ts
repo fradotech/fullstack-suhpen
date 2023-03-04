@@ -1,14 +1,14 @@
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
+import { UserIndexRequest } from '@server/modules/iam/user/infrastructure/user-index.request'
 import {
   UserCreateRequest,
-  UserIndexRequest,
   UserUpdateRequest,
 } from '@server/modules/iam/user/infrastructure/user.request'
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { notification } from 'antd'
 import dayjs from 'dayjs'
-import { getAttachment } from '../../../Components/Organs/Attachment/attachment.util'
+import { getAttachment } from '../../../Components/Molecules/Attachment/attachment.util'
 import { Route } from '../../../Enums/Route'
 import { axiosService } from '../../../services/axios.service'
 

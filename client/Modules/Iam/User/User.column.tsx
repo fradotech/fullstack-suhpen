@@ -33,14 +33,8 @@ export const usersColumns: ColumnsType<UserResponse> = [
       return <Tag color="red">Error</Tag>
     },
     filters: [
-      {
-        text: ERole.Administrator,
-        value: ERole.Administrator,
-      },
-      {
-        text: ERole.User,
-        value: ERole.User,
-      },
+      { text: ERole.Administrator, value: ERole.Administrator },
+      { text: ERole.User, value: ERole.User },
     ],
   },
   {

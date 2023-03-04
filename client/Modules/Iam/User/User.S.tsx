@@ -1,5 +1,5 @@
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
-import { UserIndexRequest } from '@server/modules/iam/user/infrastructure/user.request'
+import { UserIndexRequest } from '@server/modules/iam/user/infrastructure/user-index.request'
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import React from 'react'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
@@ -8,7 +8,6 @@ import DataTable, {
 } from '../../../Components/Organs/DataTable/DataTable'
 import { useDataTable } from '../../../Components/Organs/DataTable/useDataTable'
 import { Route } from '../../../Enums/Route'
-import { ERole } from '../Role/Role.enum'
 import { userAction } from './user.action'
 import { usersColumns } from './User.column'
 
@@ -27,7 +26,7 @@ const UserS: React.FC = () => {
 
   return (
     <>
-      <PageHeader title="User" hrefCreate={Route.UserForm} />
+      <PageHeader title="User" />
       <DataTable
         rowKey="id"
         columns={usersColumns}
@@ -35,10 +34,11 @@ const UserS: React.FC = () => {
         search={query.search}
         pagination={paginationTransform(props?.meta)}
         loading={status.isFetching}
-        filterComponents={[
-          { name: 'role', enum: ERole },
-          { name: 'dateRange' },
-        ]}
+        dataTableHeader={{
+          search: true,
+          dateRange: true,
+          hrefCreate: Route.UserForm,
+        }}
         onChange={({ dateRange, ...filtersState }) => {
           setQueryParams({
             ...filtersState,

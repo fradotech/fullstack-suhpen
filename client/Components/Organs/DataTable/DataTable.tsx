@@ -7,9 +7,9 @@ import {
   SorterResult,
   TablePaginationConfig,
 } from 'antd/es/table/interface'
-import { FilterSection } from '../FilterSection/FilterSection'
 import { FilterState, IDataTableProps, TOnSort } from './DataTable.interface'
 import styles from './DataTable.module.css'
+import DataTableHeader from './DataTableHeader'
 
 const tableLayout: React.CSSProperties = { width: '100%' }
 
@@ -20,7 +20,7 @@ function DataTable<T extends object = any>(
   const {
     pagination,
     defaultCurrent,
-    filterComponents,
+    dataTableHeader: filters,
     onChange,
     search,
     ...rest
@@ -38,51 +38,40 @@ function DataTable<T extends object = any>(
     onChange({ ...state, page: 1, search: value })
   }
 
-  const handleFiltersChange = (values: Record<string, any>) => {
-    setState({ ...state, ...values })
-    onChange({ ...state, ...values })
-  }
-
   const handleTableChange = (
     filters: Record<string, FilterValue>,
     sorter: TOnSort<T>,
   ) => {
-    const newState = {
+    const newParam = {
       ...state,
-      ...filters,
+      filters: { ...filters },
       sortField: String(sorter.field),
       sortOrder: sorter.order,
     }
 
-    setState(newState)
-    onChange(newState)
+    setState(newParam)
+    onChange(newParam)
   }
 
   return (
     <>
-      <FilterSection
-        searchValue={state.search}
-        onSearch={handleSearch}
-        filters={filterComponents}
-        onFiltersChange={handleFiltersChange}
-      />
+      <DataTableHeader onSearch={handleSearch} {...filters} />
       <Space.Compact direction="vertical" style={tableLayout}>
         <Table<T>
           {...rest}
           style={tableLayout}
           size="small"
           pagination={false}
-          onChange={(pagination, filters, sorter: SorterResult<T>): void =>
+          onChange={(pagination, filters, sorter: SorterResult<T>): void => {
             handleTableChange(filters, {
               ...sorter,
-              order:
-                sorter.order !== undefined
-                  ? sorter.order === 'ascend'
-                    ? 'ASC'
-                    : 'DESC'
-                  : undefined,
+              order: sorter.order
+                ? sorter.order == 'ascend'
+                  ? 'ASC'
+                  : 'DESC'
+                : undefined,
             })
-          }
+          }}
         />
 
         <div className={styles.pagination}>
