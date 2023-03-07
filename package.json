@@ -37,6 +37,8 @@
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.1.2",
     "@nestjs/typeorm": "^9.0.1",
+    "@sentry/react": "^7.41.0",
+    "@sentry/tracing": "^7.41.0",
     "antd": "^5.2.0",
     "babel-plugin-react-css-modules": "^5.2.6",
     "bcrypt": "^5.1.0",
