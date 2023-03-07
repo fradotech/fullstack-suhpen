@@ -1,8 +1,16 @@
-import { PlusCircleFilled, SearchOutlined } from '@ant-design/icons'
+import {
+  FileExcelOutlined,
+  PlusCircleFilled,
+  SearchOutlined,
+} from '@ant-design/icons'
 import { Button, Col, DatePicker, Form, Input, Row } from 'antd'
+import axios from 'axios'
+import FileDownload from 'js-file-download'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { hostApi } from '../../../services/axios.service'
 import { IDataTableHeader } from './DataTable.interface'
+import styles from './DataTable.module.css'
 
 const DataTableHeader: React.FC<IDataTableHeader> = (
   props: IDataTableHeader,
@@ -21,11 +29,28 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
     }
   }, [value])
 
+  const handleExport = async () => {
+    await axios
+      .post(
+        `${hostApi}${props.hrefExport}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('_accessToken')}`,
+          },
+          params: props.query,
+        },
+      )
+      .then((response: any) =>
+        FileDownload(response.data.data, response.data.fileName),
+      )
+  }
+
   return (
     <Row style={{ justifyContent: 'space-between' }}>
       <Row>
         {props.search && (
-          <Col style={{ margin: '2px' }}>
+          <Col className={styles.headerItem}>
             <Input
               prefix={<SearchOutlined />}
               placeholder="Search"
@@ -36,20 +61,33 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
           </Col>
         )}
         {props.dateRange && (
-          <Col style={{ margin: '2px' }}>
+          <Col className={styles.headerItem}>
             <Form form={form}>
               <DatePicker.RangePicker />
             </Form>
           </Col>
         )}
       </Row>
-      <Col style={{ margin: '2px' }}>
-        {props.hrefCreate && (
-          <Button type="primary" onClick={() => navigate(props.hrefCreate)}>
-            <PlusCircleFilled /> New Data
-          </Button>
+      <Row>
+        {props.hrefExport && (
+          <Col className={styles.headerItem}>
+            <Button
+              type="primary"
+              onClick={handleExport}
+              style={{ backgroundColor: '#0f9d59' }}
+            >
+              <FileExcelOutlined /> Export
+            </Button>
+          </Col>
         )}
-      </Col>
+        {props.hrefCreate && (
+          <Col className={styles.headerItem}>
+            <Button type="primary" onClick={() => navigate(props.hrefCreate)}>
+              <PlusCircleFilled /> New
+            </Button>
+          </Col>
+        )}
+      </Row>
     </Row>
   )
 }

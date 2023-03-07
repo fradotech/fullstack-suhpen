@@ -37,7 +37,9 @@ const UserS: React.FC = () => {
         dataTableHeader={{
           search: true,
           dateRange: true,
+          query,
           hrefCreate: Route.UserForm,
+          hrefExport: Route.UserExport,
         }}
         onChange={({ dateRange, ...filtersState }) => {
           setQueryParams({

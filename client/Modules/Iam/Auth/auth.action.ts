@@ -12,7 +12,7 @@ export const authAction = {
     JSON.parse(localStorage.getItem('user') || 'null'),
 
   login: async (req: AuthLoginRequest): Promise<UserResponse> => {
-    const data = await axiosService.post(Route.Login, req, false)
+    const data = await axiosService.post(Route.Login, req)
     const user = data?.data
     localStorage.setItem('_accessToken', user._accessToken || '')
     localStorage.setItem('user', JSON.stringify(user))

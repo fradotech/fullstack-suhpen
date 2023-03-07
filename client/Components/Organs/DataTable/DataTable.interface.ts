@@ -56,7 +56,9 @@ export interface IDataTableHeader {
   dateRange?: boolean
   onSearch?: (value: string) => void
   searchValue?: string
+  query?: Record<string, any>
   hrefCreate?: string
+  hrefExport?: string
 }
 
 export interface IDataTableProps<T> extends Omit<TableProps<T>, 'onChange'> {
