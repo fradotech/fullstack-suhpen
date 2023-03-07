@@ -15,6 +15,7 @@ import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interfa
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { Modules } from '@server/modules/modules'
 import { AdminGuard } from '../../auth/common/admin.guard'
+import { UserIndexApp } from '../infrastructure/user-index.app'
 import { UserIndexRequest } from '../infrastructure/user-index.request'
 import {
   UserCreateRequest,
@@ -30,13 +31,16 @@ const THIS_MODULE = Modules.Users
 @ApiBearerAuth()
 @UseGuards(AdminGuard)
 export class UserCrudController implements BaseCrudController {
-  constructor(private readonly userCrudApp: UserCrudApp) {}
+  constructor(
+    private readonly userIndexApp: UserIndexApp,
+    private readonly userCrudApp: UserCrudApp,
+  ) {}
 
   @Get()
   async fetch(
     @Query() req: UserIndexRequest,
   ): Promise<IApiRes<UserStrictResponse[]>> {
-    const res = await this.userCrudApp.fetch(req)
+    const res = await this.userIndexApp.fetch(req)
     return ApiRes.fromEntity(
       UserStrictResponse.fromEntities(res.data),
       res.meta,

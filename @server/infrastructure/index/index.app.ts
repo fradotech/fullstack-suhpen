@@ -7,6 +7,7 @@ import {
   OrderDirectionEnum,
   OrderDirectionType,
 } from '@server/infrastructure/index/index.enum'
+import { SelectQueryBuilder } from 'typeorm'
 import { IBaseEntity } from '../base/base-entity.interface'
 import {
   IPaginateRequest,
@@ -14,7 +15,7 @@ import {
   IPaginationMeta,
 } from './index.interface'
 
-export abstract class BaseIndexService {
+export abstract class BaseIndexApp {
   readonly DefaultPerPage: number = 10
   readonly DefaultPage: number = 1
   readonly DefaultSort: string = 'created_at'
@@ -66,5 +67,13 @@ export abstract class BaseIndexService {
       total: count,
       totalPage: Math.ceil(count / perPage),
     }
+  }
+
+  async getData<T>(
+    query: SelectQueryBuilder<T>,
+    isExport?: boolean,
+  ): Promise<[T[], number]> {
+    if (isExport) return [await query.getMany(), null]
+    return await query.getManyAndCount()
   }
 }

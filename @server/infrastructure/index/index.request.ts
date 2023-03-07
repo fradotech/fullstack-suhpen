@@ -7,6 +7,8 @@ import { IsEnum, IsNumber, IsOptional, IsString, Min } from 'class-validator'
 import { IPaginateRequest, ISortRequest } from './index.interface'
 
 export class IndexRequest implements ISortRequest, IPaginateRequest {
+  isExport?: boolean
+
   @IsOptional()
   @IsString()
   @ApiProperty({
