@@ -4,7 +4,7 @@ import {
   Route,
   Routes,
 } from 'react-router-dom'
-import LoaderPage from './Components/Molecules/Loader/LoaderPage'
+import Loading from './Components/Molecules/Loading/Loading'
 import { Route as ERoute } from './Enums/Route'
 import DashboardRoute from './Modules/Dashboard/Dashboard.route'
 import FeatureRoute from './Modules/Feature/Feature.route'
@@ -22,7 +22,7 @@ const noGuardRoutes = [ERoute.Home]
 
 const BrowserRouter: React.FC = () => (
   <ReactBrowserRouter>
-    <React.Suspense fallback={<LoaderPage />}>
+    <React.Suspense fallback={<Loading isLoading={true} />}>
       <Routes>
         <Route path={ERoute.Home} element={<Home />} />
         {AuthRoute}
@@ -32,7 +32,7 @@ const BrowserRouter: React.FC = () => (
 
     {user && !noGuardRoutes.includes(location.pathname) && (
       <LayoutMain>
-        <React.Suspense fallback={<LoaderPage />}>
+        <React.Suspense fallback={<Loading isLoading={true} />}>
           <Routes>
             {DashboardRoute}
             {IamRoute}

@@ -12,16 +12,19 @@ import { userAction } from './user.action'
 
 const UserDetail: React.FC = () => {
   const { id } = useParams()
+  const [isLoading, setIsLoading] = React.useState(false)
   const [props, setProps] = React.useState<IApiRes<UserResponse>>()
   const fetch = async () => setProps(await userAction.findOne(id))
 
   React.useEffect(() => {
+    setIsLoading(true)
     fetch()
+    setIsLoading(false)
   }, [])
 
   return (
     <>
-      <PageHeader title="User Detail" />
+      <PageHeader title="User Detail" isLoading={isLoading} />
       <Row>
         <Avatar
           size={250}

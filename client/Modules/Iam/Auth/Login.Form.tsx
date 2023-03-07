@@ -39,7 +39,7 @@ const LoginForm: React.FC = () => {
       <div className={styles.container}>
         <CompanyLogo />
         <Card className={styles.cardContainer}>
-          <PageHeader title="Login" />
+          <PageHeader title="Login" isLoading={isLoading} />
           <FormContainer
             onFinish={onFinish}
             form={form}
