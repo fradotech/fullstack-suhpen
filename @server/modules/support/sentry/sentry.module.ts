@@ -15,12 +15,12 @@ export class SentryModule {
       attachStacktrace: true,
       debug: false,
       environment: config.server.nodeEnv,
+      tracesSampleRate: config.sentry.tracesSampleRate,
       ignoreErrors: [
         'EntityNotFoundError',
         'QueryFailedError',
         'FindRelationsNotFoundError',
       ],
-      tracesSampleRate: 1.0,
     }
 
     Sentry.init(options)
