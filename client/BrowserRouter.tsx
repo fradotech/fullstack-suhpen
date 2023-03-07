@@ -18,6 +18,7 @@ const NotFound = React.lazy(() => import('./Modules/NotFound'))
 const Unauthorized = React.lazy(() => import('./Modules/Unauthorized'))
 
 const user = authAction.loggedUser()
+const noGuardRoutes = [ERoute.Home]
 
 const BrowserRouter: React.FC = () => (
   <ReactBrowserRouter>
@@ -29,7 +30,7 @@ const BrowserRouter: React.FC = () => (
       </Routes>
     </React.Suspense>
 
-    {user && location.pathname != ERoute.Home && (
+    {user && !noGuardRoutes.includes(location.pathname) && (
       <LayoutMain>
         <React.Suspense fallback={<LoaderPage />}>
           <Routes>
