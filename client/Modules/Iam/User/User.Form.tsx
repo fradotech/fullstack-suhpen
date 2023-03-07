@@ -14,9 +14,9 @@ import { EUserGender } from './User.enum'
 
 const UserForm: React.FC = () => {
   const navigate = useNavigate()
+  const [isLoading, setIsLoading] = React.useState(false)
   const { id } = useParams()
   const [form] = Form.useForm<UserCreateRequest>()
-  const [isLoading, setIsLoading] = React.useState(false)
   const fetch = async () => {
     const res = await userAction.findOne(id)
     form.setFieldsValue(res.data)
@@ -24,7 +24,9 @@ const UserForm: React.FC = () => {
   }
 
   React.useEffect(() => {
+    setIsLoading(true)
     id && fetch()
+    setIsLoading(false)
   }, [])
 
   const onFinish = async () => {
@@ -44,7 +46,10 @@ const UserForm: React.FC = () => {
 
   return (
     <>
-      <PageHeader title={id ? 'User Edit' : 'User Create'} />
+      <PageHeader
+        title={id ? 'User Edit' : 'User Create'}
+        isLoading={isLoading}
+      />
       <FormContainer
         onFinish={onFinish}
         form={form}

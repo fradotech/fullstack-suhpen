@@ -7,11 +7,16 @@ import { EttUser } from './infrastructure/user.entity'
 import { UserService } from './infrastructure/user.service'
 import { UserCrudApp } from './v1/user-crud.app'
 import { UserCrudController } from './v1/user-crud.controller'
+import { UserExportController } from './v1/user-export.controller'
 import { UserProfileController } from './v1/user-profile.controller'
 
 @Module({
   imports: [TypeOrmModule.forFeature([EttUser]), AuthModule, HttpModule],
-  controllers: [UserCrudController, UserProfileController],
+  controllers: [
+    UserExportController,
+    UserProfileController,
+    UserCrudController,
+  ],
   providers: [UserService, UserCrudApp, UserIndexApp],
   exports: [UserService],
 })

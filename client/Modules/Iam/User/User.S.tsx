@@ -14,19 +14,17 @@ import { usersColumns } from './User.column'
 const UserS: React.FC = () => {
   const [props, setProps] = React.useState<IPaginateResponse<UserResponse>>()
   const { setQueryParams, query, status } = useDataTable<UserIndexRequest>()
-  const fetch = async () => {
-    status.isFetching = true
-    setProps(await userAction.fetch(query))
-    status.isFetching = false
-  }
+  const fetch = async () => setProps(await userAction.fetch(query))
 
   React.useEffect(() => {
+    status.isFetching = true
     fetch()
+    status.isFetching = false
   }, [query])
 
   return (
     <>
-      <PageHeader title="User" />
+      <PageHeader title="User" isLoading={status.isFetching} />
       <DataTable
         rowKey="id"
         columns={usersColumns}
@@ -37,7 +35,9 @@ const UserS: React.FC = () => {
         dataTableHeader={{
           search: true,
           dateRange: true,
+          query,
           hrefCreate: Route.UserForm,
+          hrefExport: Route.UserExport,
         }}
         onChange={({ dateRange, ...filtersState }) => {
           setQueryParams({

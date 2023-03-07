@@ -10,6 +10,7 @@ export const routesUser = {
   UserDetail: '/users/:id',
   UserForm: '/users/save',
   UserEdit: '/users/save/:id',
+  UserExport: '/users/export',
 }
 
 export default [

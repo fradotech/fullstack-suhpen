@@ -6,6 +6,12 @@ export interface IApiRes<T> {
   data: T
 }
 
+export interface IApiExportRes<T> {
+  message: string
+  data: T
+  fileName?: string
+}
+
 interface IDataUnprocessable {
   property: string
   message: string[]
