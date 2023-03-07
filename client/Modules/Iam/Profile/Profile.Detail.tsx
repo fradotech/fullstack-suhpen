@@ -13,16 +13,19 @@ import { profileAction } from './profile.action'
 
 const ProfileDetail: React.FC = () => {
   const navigate = useNavigate()
+  const [isLoading, setIsLoading] = React.useState(false)
   const [props, setProps] = React.useState<IApiRes<UserResponse>>()
   const fetch = async () => setProps(await profileAction.getUserLogged())
 
   React.useEffect(() => {
+    setIsLoading(true)
     fetch()
+    setIsLoading(false)
   }, [])
 
   return (
     <>
-      <PageHeader title="Profile" />
+      <PageHeader title="Profile" isLoading={isLoading} />
       <Row>
         <Avatar
           size={250}

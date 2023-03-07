@@ -1,15 +1,15 @@
 import { InjectRepository } from '@nestjs/typeorm'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Repository, SelectQueryBuilder } from 'typeorm'
+import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
 import { IPaginateResponse } from '../../../../infrastructure/index/index.interface'
-import { BaseIndexService } from '../../../../infrastructure/index/index.service'
 import { UserIndexRequest } from './user-index.request'
 import { EttUser } from './user.entity'
 
 const tableName = 'user'
 const tableKeys = ['name', 'email', 'role', 'phoneNumber', 'createdAt']
 
-export class UserIndexApp extends BaseIndexService {
+export class UserIndexApp extends BaseIndexApp {
   constructor(
     @InjectRepository(EttUser)
     private readonly userRepo: Repository<IUser>,
@@ -60,8 +60,9 @@ export class UserIndexApp extends BaseIndexService {
     query.take(this.take(req.pageSize))
     query.skip(this.countOffset(req))
 
-    const [data, count] = await query.getManyAndCount()
+    const [data, count] = await this.getData<IUser>(query, req.isExport)
+    const meta = this.mapMeta(count, req)
 
-    return { data, meta: this.mapMeta(count, req) }
+    return { data, meta }
   }
 }

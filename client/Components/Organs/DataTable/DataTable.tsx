@@ -42,20 +42,20 @@ function DataTable<T extends object = any>(
     filters: Record<string, FilterValue>,
     sorter: TOnSort<T>,
   ) => {
-    const newParam = {
+    const newQuery = {
       ...state,
       filters: { ...filters },
       sortField: String(sorter.field),
       sortOrder: sorter.order,
     }
 
-    setState(newParam)
-    onChange(newParam)
+    setState(newQuery)
+    onChange(newQuery)
   }
 
   return (
     <>
-      <DataTableHeader onSearch={handleSearch} {...filters} />
+      <DataTableHeader {...filters} onSearch={handleSearch} />
       <Space.Compact direction="vertical" style={tableLayout}>
         <Table<T>
           {...rest}

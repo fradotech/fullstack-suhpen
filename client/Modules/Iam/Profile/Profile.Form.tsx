@@ -19,7 +19,9 @@ const ProfileForm: React.FC = () => {
   }
 
   React.useEffect(() => {
+    setIsLoading(true)
     fetch()
+    setIsLoading(false)
   }, [])
 
   const onFinish = async () => {
@@ -37,7 +39,7 @@ const ProfileForm: React.FC = () => {
 
   return (
     <>
-      <PageHeader title="Profile Edit" />
+      <PageHeader title="Profile Edit" isLoading={isLoading} />
       <FormContainer
         onFinish={onFinish}
         form={form}

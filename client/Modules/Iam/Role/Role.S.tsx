@@ -13,19 +13,17 @@ import { rolesColumns } from './Role.column'
 const RoleS: React.FC = () => {
   const [props, setProps] = React.useState<IPaginateResponse<RoleResponse>>()
   const { status } = useDataTable<RoleIndexRequest>()
-  const fetch = async () => {
-    status.isFetching = true
-    setProps(await roleAction.fetch())
-    status.isFetching = false
-  }
+  const fetch = async () => setProps(await roleAction.fetch())
 
   React.useEffect(() => {
+    status.isFetching = true
     fetch()
+    status.isFetching = false
   }, [status])
 
   return (
     <>
-      <PageHeader title="Role" />
+      <PageHeader title="Role" isLoading={status.isFetching} />
       <DataTable
         rowKey="id"
         columns={rolesColumns}

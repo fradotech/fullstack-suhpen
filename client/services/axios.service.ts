@@ -29,29 +29,26 @@ export const axiosService = {
   post: async (
     endpoint: string,
     dataPost?: Record<string, any>,
-    isCatch?: boolean,
+    params?: any,
   ): Promise<any> => {
     try {
       const { data } = await axios.post(`${hostApi}${endpoint}`, dataPost, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('_accessToken')}`,
         },
+        params,
       })
 
       axiosService.catch(data)
 
       return data
     } catch (error) {
-      !isCatch && notification.error({ message: error.response.data.message })
+      notification.error({ message: error.response.data.message })
       return error
     }
   },
 
-  put: async (
-    endpoint: string,
-    dataPost?: any,
-    isCatch?: boolean,
-  ): Promise<any> => {
+  put: async (endpoint: string, dataPost?: any): Promise<any> => {
     try {
       const { data } = await axios.put(`${hostApi}${endpoint}`, dataPost, {
         headers: {
@@ -63,7 +60,7 @@ export const axiosService = {
 
       return data
     } catch (error) {
-      !isCatch && notification.error({ message: error.response.data.message })
+      notification.error({ message: error.response.data.message })
       return error
     }
   },

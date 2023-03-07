@@ -1,7 +1,4 @@
 import { Injectable } from '@nestjs/common'
-import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
-import { UserIndexApp } from '../infrastructure/user-index.app'
-import { UserIndexRequest } from '../infrastructure/user-index.request'
 import { EttUser } from '../infrastructure/user.entity'
 import { IUser } from '../infrastructure/user.interface'
 import {
@@ -12,14 +9,10 @@ import { UserService } from '../infrastructure/user.service'
 
 @Injectable()
 export class UserCrudApp {
-  constructor(
-    private readonly userIndexApp: UserIndexApp,
-    private readonly userService: UserService,
-  ) {}
+  constructor(private readonly userService: UserService) {}
 
-  async fetch(req: UserIndexRequest): Promise<IPaginateResponse<IUser>> {
-    const res = await this.userIndexApp.fetch(req)
-    return res
+  async find(): Promise<IUser[]> {
+    return await this.userService.find()
   }
 
   async create(req: UserCreateRequest): Promise<IUser> {
@@ -27,10 +20,6 @@ export class UserCrudApp {
     Object.assign(data, req)
 
     return await this.userService.create(data)
-  }
-
-  async find(): Promise<IUser[]> {
-    return await this.userService.find()
   }
 
   async findOneOrFail(id: string): Promise<IUser> {
