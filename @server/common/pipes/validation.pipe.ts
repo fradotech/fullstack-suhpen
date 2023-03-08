@@ -13,13 +13,15 @@ export class ValidationPipe implements PipeTransform {
     if (!metatype || !this.toValidate(metatype)) {
       return value
     }
+
     const object = plainToClass(metatype, value, {
       enableImplicitConversion: true,
     })
+
     const errors = await validate(object)
     if (errors.length > 0) {
       throw new UnprocessableEntityException({
-        message: 'Data Not Valid',
+        message: JSON.stringify(this.flattenValidation(errors)[0].constraints),
         data: this.flattenValidation(errors).map(
           (data: {
             parentName: string

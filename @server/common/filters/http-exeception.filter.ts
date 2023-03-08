@@ -92,7 +92,7 @@ export class QueryErrorFilter extends BaseExceptionFilter {
 
       default:
         response.status(422).json({
-          message: exception.toString(),
+          message: String(exception),
           data: null,
         })
     }

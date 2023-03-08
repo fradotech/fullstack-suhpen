@@ -24,7 +24,7 @@ export const userCreateSeeder = async (): Promise<boolean> => {
 
   Logger.log(
     'Success run users seeders ',
-    data.map((data) => data.email).toString(),
+    String(data.map((data) => data.email)),
   )
 
   return true

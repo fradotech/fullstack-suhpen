@@ -1,9 +1,10 @@
-import { UserOutlined } from '@ant-design/icons'
+import { LogoutOutlined, UserOutlined } from '@ant-design/icons'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
-import { Avatar, Space, Typography } from 'antd'
+import { Avatar, Popconfirm, Space, Typography } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Route } from '../../Enums/Route'
+import { authAction } from '../../Modules/Iam/Auth/auth.action'
 
 type IProps = {
   children?: React.ReactNode
@@ -12,15 +13,25 @@ type IProps = {
 }
 
 const LayoutProfile: React.FC<IProps> = (props: IProps) => {
+  const handleLogout = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault()
+    authAction.logout() && location.replace(Route.Login)
+  }
+
   return (
-    <Link to={Route.Profile} style={{ width: '6rem' }}>
-      <Space size="small">
-        <Avatar icon={<UserOutlined />} src={props?.user.avatar} />
-        <Space.Compact direction="vertical" size="small">
-          <Typography.Text>{props?.user?.name}</Typography.Text>
-        </Space.Compact>
-      </Space>
-    </Link>
+    <>
+      <Link to={Route.Profile} style={{ width: '6rem' }}>
+        <Space size="small">
+          <Avatar icon={<UserOutlined />} src={props?.user.avatar} />
+          <Space.Compact direction="vertical" size="small">
+            <Typography.Text>{props?.user?.name}</Typography.Text>
+          </Space.Compact>
+        </Space>
+      </Link>
+      <Popconfirm title="Are you sure want to logout?" onConfirm={handleLogout}>
+        <LogoutOutlined style={{ color: 'red', marginBottom: '5px' }} />
+      </Popconfirm>
+    </>
   )
 }
 

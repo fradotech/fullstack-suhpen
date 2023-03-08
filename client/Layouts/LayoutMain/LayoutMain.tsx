@@ -1,15 +1,9 @@
-import {
-  LogoutOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-} from '@ant-design/icons'
-import { Col, Layout, Popconfirm } from 'antd'
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
+import { Col, Layout } from 'antd'
 import React from 'react'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { Section } from '../../Components/Molecules/Section/Section'
-import { Route } from '../../Enums/Route'
 import useUser from '../../Hooks/useUser'
-import { authAction } from '../../Modules/Iam/Auth/auth.action'
 import { sidebarThemeConfig } from '../../utils/theme'
 import styles from './LayoutMain.module.css'
 import LayoutProfile from './LayoutProfile'
@@ -25,11 +19,6 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
   const [isCollapsed, setIsCollapsed] = React.useState(
     localStorage.getItem('isSidebarCollapsed') == 'false' ? true : false,
   )
-
-  const handleLogout = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault()
-    authAction.logout() && location.replace(Route.Login)
-  }
 
   const handleSidebarCollapse = () => {
     setIsCollapsed(!isCollapsed)
@@ -55,7 +44,7 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
         </div>
       </Layout.Sider>
       <Layout>
-        <Layout.Header style={{ background: '#ffffff', paddingLeft: '10px' }}>
+        <Layout.Header className={styles.header}>
           <div className={styles.headerContainer}>
             <a onClick={handleSidebarCollapse}>
               {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -63,16 +52,10 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
 
             <div className={styles.profile}>
               <LayoutProfile user={user} />
-              <Popconfirm
-                title="Are you sure want to logout?"
-                onConfirm={handleLogout}
-              >
-                <LogoutOutlined style={{ color: 'red', marginLeft: '1%' }} />
-              </Popconfirm>
             </div>
           </div>
         </Layout.Header>
-        <Layout.Content style={{ padding: '20px 20px', overflow: 'auto' }}>
+        <Layout.Content className={styles.content}>
           <Section>{children}</Section>
         </Layout.Content>
       </Layout>

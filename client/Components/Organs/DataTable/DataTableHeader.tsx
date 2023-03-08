@@ -3,7 +3,7 @@ import {
   PlusCircleFilled,
   SearchOutlined,
 } from '@ant-design/icons'
-import { Button, Col, DatePicker, Form, Input, Row } from 'antd'
+import { Button, Col, DatePicker, Form, Input, notification, Row } from 'antd'
 import axios from 'axios'
 import FileDownload from 'js-file-download'
 import React from 'react'
@@ -47,7 +47,10 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
       .then((response: any) =>
         FileDownload(response.data.data, response.data.fileName),
       )
-      .catch(() => setIsLoading(false))
+      .catch((e) => {
+        setIsLoading(false)
+        notification.error({ message: String(e) })
+      })
     setIsLoading(false)
   }
 
