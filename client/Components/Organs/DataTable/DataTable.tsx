@@ -19,15 +19,6 @@ const tableLayout: React.CSSProperties = { width: '100%' }
 function DataTable<T extends object = any>(
   props: IDataTableProps<T>,
 ): JSX.Element {
-  const columns: ColumnsType<T> = props.columns.map((data) => {
-    return {
-      ...data,
-      title: data.title || Utils.titleCase(data['dataIndex'] || ''),
-      sorter: !data.title ? () => 0 : undefined,
-      sortDirections: !data.title ? ['ascend', 'descend'] : undefined,
-    }
-  })
-
   const [state, setState] = useState<FilterState<T>>({ search: props.search })
 
   const handlePageChange: PaginationProps['onChange'] = (page, pageSize) => {
@@ -54,6 +45,15 @@ function DataTable<T extends object = any>(
     setState(newQuery)
     props.onChange(newQuery)
   }
+
+  const columns: ColumnsType<T> = props.columns.map((data) => {
+    return {
+      ...data,
+      title: data.title || Utils.titleCase(data['dataIndex'] || ''),
+      sorter: data.title != 'Actions' ? () => 0 : null,
+      sortDirections: ['ascend', 'descend'],
+    }
+  })
 
   return (
     <>

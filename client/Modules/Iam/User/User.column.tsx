@@ -36,7 +36,7 @@ export const usersColumns: ColumnsType<UserResponse> = [
     render: (data: Date) => Utils.dateFormat(data),
   },
   {
-    title: 'Action',
+    title: 'Actions',
     width: '75px',
     render: (data: UserResponse) => (
       <RowActionButtons
