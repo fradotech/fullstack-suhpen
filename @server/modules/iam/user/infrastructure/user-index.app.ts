@@ -1,66 +1,40 @@
+import { Inject, Injectable, Scope } from '@nestjs/common'
+import { REQUEST } from '@nestjs/core'
 import { InjectRepository } from '@nestjs/typeorm'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
-import { Repository, SelectQueryBuilder } from 'typeorm'
+import { Request } from 'express'
+import { Repository } from 'typeorm'
 import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
 import { IPaginateResponse } from '../../../../infrastructure/index/index.interface'
 import { UserIndexRequest } from './user-index.request'
 import { EttUser } from './user.entity'
 
-const tableName = 'user'
-const tableKeys = ['name', 'email', 'role', 'phoneNumber', 'createdAt']
-
+@Injectable({ scope: Scope.REQUEST })
 export class UserIndexApp extends BaseIndexApp {
   constructor(
+    @Inject(REQUEST)
+    private readonly request: Request,
     @InjectRepository(EttUser)
     private readonly userRepo: Repository<IUser>,
   ) {
     super()
   }
 
-  additionalQuery(
-    query: SelectQueryBuilder<IUser>,
-    req: UserIndexRequest,
-  ): SelectQueryBuilder<IUser> {
-    req
-    return query
-  }
-
   async fetch(req: UserIndexRequest): Promise<IPaginateResponse<IUser>> {
-    const query = this.additionalQuery(
-      this.userRepo.createQueryBuilder(tableName),
+    const tableName = 'user'
+    const tableKeys = ['name', 'email', 'role', 'phoneNumber', 'createdAt']
+    const query = this.createQueryIndex(
       req,
+      this.userRepo.createQueryBuilder(tableName),
+      tableName,
+      tableKeys,
+      this.userRepo,
+      this.request,
     )
 
-    if (req.search) {
-      query.andWhere(this.querySearch(tableName, tableKeys), {
-        search: `%${req.search.toLowerCase()}%`,
-      })
-    }
+    // TODO: add additional query
 
-    if (req.startAt && req.endAt) {
-      query.andWhere(
-        `CAST(${tableName}.updatedAt as DATE) BETWEEN CAST(:startAt AS DATE) AND CAST(:endAt AS DATE)`,
-        { startAt: req.startAt, endAt: req.endAt },
-      )
-    }
-
-    if (req.filters) {
-      Object.keys(req.filters).forEach((filterField) => {
-        ;(req.filters[filterField] as string[]).forEach((filterValue) => {
-          query.andWhere(`${tableName}.${filterField} = :filterValue`, {
-            filterValue,
-          })
-        })
-      })
-    }
-
-    const sort = this.orderByKey(tableName, tableKeys, req.sortField)
-    const order = this.getOrder(req.sortOrder)
-    query.orderBy(sort, order)
-    query.take(this.take(req.pageSize))
-    query.skip(this.countOffset(req))
-
-    const [data, count] = await this.getData<IUser>(query, req.isExport)
+    const [data, count] = await this.getData(query, req.isExport)
     const meta = this.mapMeta(count, req)
 
     return { data, meta }

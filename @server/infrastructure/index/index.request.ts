@@ -8,6 +8,7 @@ import { IPaginateRequest, ISortRequest } from './index.interface'
 
 export class IndexRequest implements ISortRequest, IPaginateRequest {
   isExport?: boolean
+  filters?: Record<string, any>
 
   @IsOptional()
   @IsString()
