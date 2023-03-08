@@ -54,9 +54,7 @@ export const config = {
   },
 
   sentry: {
-    dsn:
-      process.env.SENTRY_DSN ||
-      'https://c512ccff0a8b4952b8332515e79d5a58@o4504796336619520.ingest.sentry.io/4504796451373056',
+    dsn: process.env.SENTRY_DSN,
     tracesSampleRate: 1.0,
   },
 }
