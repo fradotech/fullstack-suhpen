@@ -14,14 +14,14 @@ const ProfileForm: React.FC = () => {
   const [form] = Form.useForm<UserUpdateRequest>()
   const [isLoading, setIsLoading] = React.useState(false)
   const fetch = async () => {
+    setIsLoading(true)
     const res = await profileAction.getUserLogged()
     form.setFieldsValue(res.data)
+    setIsLoading(false)
   }
 
   React.useEffect(() => {
-    setIsLoading(true)
     fetch()
-    setIsLoading(false)
   }, [])
 
   const onFinish = async () => {

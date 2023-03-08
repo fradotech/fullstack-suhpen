@@ -1,9 +1,9 @@
-import { Spin } from 'antd'
+import { Spin, SpinProps } from 'antd'
 import React from 'react'
 import styles from './Loading.module.css'
 
 interface IProps {
-  isLoading: boolean
+  isLoading: boolean | SpinProps
 }
 
 const Loading: React.FC<IProps> = (props: IProps) => {

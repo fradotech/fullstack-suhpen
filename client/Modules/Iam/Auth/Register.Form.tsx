@@ -13,9 +13,9 @@ import styles from './Auth.module.css'
 
 const RegisterForm: React.FC = () => {
   const user = authAction.loggedUser()
+  const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const [form] = Form.useForm<AuthRegisterRequest>()
-  const [isLoading, setIsLoading] = React.useState(false)
 
   const onFinish = async () => {
     setIsLoading(true)

@@ -12,26 +12,29 @@ import { userAction } from './user.action'
 import { usersColumns } from './User.column'
 
 const UserS: React.FC = () => {
+  const [isLoading, setIsLoading] = React.useState(false)
   const [props, setProps] = React.useState<IPaginateResponse<UserResponse>>()
-  const { setQueryParams, query, status } = useDataTable<UserIndexRequest>()
-  const fetch = async () => setProps(await userAction.fetch(query))
+  const { setQueryParams, query } = useDataTable<UserIndexRequest>()
+  const fetch = async () => {
+    setIsLoading(true)
+    setProps(await userAction.fetch(query))
+    setIsLoading(false)
+  }
 
   React.useEffect(() => {
-    status.isFetching = true
     fetch()
-    status.isFetching = false
   }, [query])
 
   return (
     <>
-      <PageHeader title="User" isLoading={status.isFetching} />
+      <PageHeader title="User" />
       <DataTable
         rowKey="id"
         columns={usersColumns}
         dataSource={props?.data}
         search={query.search}
         pagination={paginationTransform(props?.meta)}
-        loading={status.isFetching}
+        loading={isLoading}
         dataTableHeader={{
           search: true,
           dateRange: true,

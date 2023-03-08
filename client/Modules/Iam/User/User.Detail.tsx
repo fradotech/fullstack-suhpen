@@ -14,12 +14,14 @@ const UserDetail: React.FC = () => {
   const { id } = useParams()
   const [isLoading, setIsLoading] = React.useState(false)
   const [props, setProps] = React.useState<IApiRes<UserResponse>>()
-  const fetch = async () => setProps(await userAction.findOne(id))
+  const fetch = async () => {
+    setIsLoading(true)
+    setProps(await userAction.findOne(id))
+    setIsLoading(false)
+  }
 
   React.useEffect(() => {
-    setIsLoading(true)
     fetch()
-    setIsLoading(false)
   }, [])
 
   return (

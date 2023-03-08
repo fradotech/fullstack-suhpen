@@ -18,15 +18,15 @@ const UserForm: React.FC = () => {
   const { id } = useParams()
   const [form] = Form.useForm<UserCreateRequest>()
   const fetch = async () => {
+    setIsLoading(true)
     const res = await userAction.findOne(id)
     form.setFieldsValue(res.data)
+    setIsLoading(false)
     return res
   }
 
   React.useEffect(() => {
-    setIsLoading(true)
     id && fetch()
-    setIsLoading(false)
   }, [])
 
   const onFinish = async () => {

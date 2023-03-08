@@ -15,12 +15,14 @@ const ProfileDetail: React.FC = () => {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = React.useState(false)
   const [props, setProps] = React.useState<IApiRes<UserResponse>>()
-  const fetch = async () => setProps(await profileAction.getUserLogged())
+  const fetch = async () => {
+    setIsLoading(true)
+    setProps(await profileAction.getUserLogged())
+    setIsLoading(false)
+  }
 
   React.useEffect(() => {
-    setIsLoading(true)
     fetch()
-    setIsLoading(false)
   }, [])
 
   return (

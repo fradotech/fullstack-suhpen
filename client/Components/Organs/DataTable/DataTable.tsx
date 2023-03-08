@@ -7,6 +7,7 @@ import {
   SorterResult,
   TablePaginationConfig,
 } from 'antd/es/table/interface'
+import Loading from '../../../Components/Molecules/Loading/Loading'
 import { FilterState, IDataTableProps, TOnSort } from './DataTable.interface'
 import styles from './DataTable.module.css'
 import DataTableHeader from './DataTableHeader'
@@ -17,25 +18,16 @@ const tableLayout: React.CSSProperties = { width: '100%' }
 function DataTable<T extends object = any>(
   props: IDataTableProps<T>,
 ): JSX.Element {
-  const {
-    pagination,
-    defaultCurrent,
-    dataTableHeader: filters,
-    onChange,
-    search,
-    ...rest
-  } = props
-
-  const [state, setState] = useState<FilterState<T>>({ search })
+  const [state, setState] = useState<FilterState<T>>({ search: props.search })
 
   const handlePageChange: PaginationProps['onChange'] = (page, pageSize) => {
     setState({ ...state, page, pageSize, per_page: pageSize })
-    onChange({ ...state, page, pageSize, per_page: pageSize })
+    props.onChange({ ...state, page, pageSize, per_page: pageSize })
   }
 
   const handleSearch = (value: string) => {
     setState({ ...state, page: 1, search: value })
-    onChange({ ...state, page: 1, search: value })
+    props.onChange({ ...state, page: 1, search: value })
   }
 
   const handleTableChange = (
@@ -50,15 +42,16 @@ function DataTable<T extends object = any>(
     }
 
     setState(newQuery)
-    onChange(newQuery)
+    props.onChange(newQuery)
   }
 
   return (
     <>
-      <DataTableHeader {...filters} onSearch={handleSearch} />
+      <Loading isLoading={props.loading} />
+      <DataTableHeader {...props.dataTableHeader} onSearch={handleSearch} />
       <Space.Compact direction="vertical" style={tableLayout}>
         <Table<T>
-          {...rest}
+          {...props}
           style={tableLayout}
           size="small"
           pagination={false}
@@ -75,15 +68,15 @@ function DataTable<T extends object = any>(
         />
 
         <div className={styles.pagination}>
-          {pagination && !!pagination?.total && (
+          {props.pagination && !!props.pagination?.total && (
             <Pagination
               showTotal={(total, range) =>
                 `${range[0]}-${range[1]} of ${total} items`
               }
-              defaultCurrent={defaultCurrent || 1}
+              defaultCurrent={props.defaultCurrent || 1}
               showSizeChanger
               onChange={handlePageChange}
-              {...pagination}
+              {...props.pagination}
             />
           )}
         </div>

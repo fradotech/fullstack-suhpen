@@ -14,8 +14,8 @@ import styles from './Auth.module.css'
 const LoginForm: React.FC = () => {
   const user = authAction.loggedUser()
   const navigate = useNavigate()
-  const [form] = Form.useForm<AuthLoginRequest>()
   const [isLoading, setIsLoading] = React.useState(false)
+  const [form] = Form.useForm<AuthLoginRequest>()
 
   const onFinish = async () => {
     setIsLoading(true)
