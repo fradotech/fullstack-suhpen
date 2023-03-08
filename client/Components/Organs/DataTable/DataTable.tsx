@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
-
 import { IPaginationMeta } from '@server/infrastructure/index/index.interface'
 import { Pagination, PaginationProps, Space, Table } from 'antd'
 import {
+  ColumnsType,
   FilterValue,
   SorterResult,
   TablePaginationConfig,
 } from 'antd/es/table/interface'
+import React, { useState } from 'react'
 import Loading from '../../../Components/Molecules/Loading/Loading'
+import { Utils } from '../../../utils/utils'
 import { FilterState, IDataTableProps, TOnSort } from './DataTable.interface'
 import styles from './DataTable.module.css'
 import DataTableHeader from './DataTableHeader'
@@ -18,6 +19,15 @@ const tableLayout: React.CSSProperties = { width: '100%' }
 function DataTable<T extends object = any>(
   props: IDataTableProps<T>,
 ): JSX.Element {
+  const columns: ColumnsType<T> = props.columns.map((data) => {
+    return {
+      ...data,
+      title: data.title || Utils.titleCase(data['dataIndex'] || ''),
+      sorter: !data.title ? () => 0 : undefined,
+      sortDirections: !data.title ? ['ascend', 'descend'] : undefined,
+    }
+  })
+
   const [state, setState] = useState<FilterState<T>>({ search: props.search })
 
   const handlePageChange: PaginationProps['onChange'] = (page, pageSize) => {
@@ -52,6 +62,7 @@ function DataTable<T extends object = any>(
       <Space.Compact direction="vertical" style={tableLayout}>
         <Table<T>
           {...props}
+          columns={columns}
           style={tableLayout}
           size="small"
           pagination={false}

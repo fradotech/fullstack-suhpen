@@ -10,22 +10,13 @@ import { userAction } from './user.action'
 
 export const usersColumns: ColumnsType<UserResponse> = [
   {
-    title: 'Name',
     dataIndex: 'name',
-    sorter: () => 0,
-    sortDirections: ['ascend', 'descend'],
   },
   {
-    title: 'Email',
     dataIndex: 'email',
-    sorter: () => 0,
-    sortDirections: ['ascend', 'descend'],
   },
   {
-    title: 'Role',
     dataIndex: 'role',
-    sorter: () => 0,
-    sortDirections: ['ascend', 'descend'],
     render: (data: string) => {
       if (data == ERole.Administrator) return <Tag color="blue">{data}</Tag>
       else if (data == ERole.User) return <Tag color="green">{data}</Tag>
@@ -38,16 +29,10 @@ export const usersColumns: ColumnsType<UserResponse> = [
     ],
   },
   {
-    title: 'Phone Number',
     dataIndex: 'phoneNumber',
-    sorter: () => 0,
-    sortDirections: ['ascend', 'descend'],
   },
   {
-    title: 'Created At',
     dataIndex: 'createdAt',
-    sorter: () => 0,
-    sortDirections: ['ascend', 'descend'],
     render: (data: Date) => Utils.dateFormat(data),
   },
   {

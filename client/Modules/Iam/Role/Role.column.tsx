@@ -3,7 +3,6 @@ import { ColumnsType } from 'antd/es/table'
 
 export const rolesColumns: ColumnsType<RoleResponse> = [
   {
-    title: 'Name',
     dataIndex: 'name',
   },
 ]
