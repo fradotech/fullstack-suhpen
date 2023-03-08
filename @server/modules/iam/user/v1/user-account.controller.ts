@@ -10,13 +10,13 @@ import { UserUpdateRequest } from '../infrastructure/user.request'
 import { UserResponse } from '../infrastructure/user.response'
 import { UserCrudApp } from './user-crud.app'
 
-const THIS_MODULE = Modules.Profile
+const THIS_MODULE = Modules.Account
 
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
 @UseGuards(LoggedInGuard)
-export class UserProfileController {
+export class UserAccountController {
   constructor(private readonly userCrudApp: UserCrudApp) {}
 
   @Get()

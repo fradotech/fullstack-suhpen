@@ -7,15 +7,15 @@ import FormContainer from '../../../Components/Organs/Form/FormContainer'
 import FormItem from '../../../Components/Organs/Form/FormItem'
 import { Route } from '../../../Enums/Route'
 import { rule } from '../../../utils/form.rules'
-import { profileAction } from './profile.action'
+import { accountAction } from './account.action'
 
-const ProfileForm: React.FC = () => {
+const AccountForm: React.FC = () => {
   const navigate = useNavigate()
   const [form] = Form.useForm<UserUpdateRequest>()
   const [isLoading, setIsLoading] = React.useState(false)
   const fetch = async () => {
     setIsLoading(true)
-    const res = await profileAction.getUserLogged()
+    const res = await accountAction.getUserLogged()
     form.setFieldsValue(res.data)
     setIsLoading(false)
   }
@@ -29,9 +29,9 @@ const ProfileForm: React.FC = () => {
     const data = form.getFieldsValue()
 
     try {
-      const res = await profileAction.update(data)
+      const res = await accountAction.update(data)
       setIsLoading(false)
-      res.data && navigate(Route.Profile)
+      res.data && navigate(Route.Account)
     } catch (e) {
       setIsLoading(false)
     }
@@ -39,7 +39,7 @@ const ProfileForm: React.FC = () => {
 
   return (
     <>
-      <PageHeader title="Profile Edit" isLoading={isLoading} />
+      <PageHeader title="Account Edit" isLoading={isLoading} />
       <FormContainer
         onFinish={onFinish}
         form={form}
@@ -56,4 +56,4 @@ const ProfileForm: React.FC = () => {
   )
 }
 
-export default ProfileForm
+export default AccountForm

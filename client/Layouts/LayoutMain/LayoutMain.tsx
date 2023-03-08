@@ -5,8 +5,8 @@ import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { Section } from '../../Components/Molecules/Section/Section'
 import useUser from '../../Hooks/useUser'
 import { sidebarThemeConfig } from '../../utils/theme'
+import LayoutAccount from './LayoutAccount'
 import styles from './LayoutMain.module.css'
-import LayoutProfile from './LayoutProfile'
 import LayoutSidebar from './LayoutSidebar'
 
 type IProps = {
@@ -50,8 +50,8 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
               {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             </a>
 
-            <div className={styles.profile}>
-              <LayoutProfile user={user} />
+            <div className={styles.account}>
+              <LayoutAccount user={user} />
             </div>
           </div>
         </Layout.Header>

@@ -12,15 +12,15 @@ const dataPrepare = (data: UserUpdateRequest): UserUpdateRequest => {
   return data
 }
 
-export const profileAction = {
+export const accountAction = {
   getUserLogged: async (): Promise<IApiRes<UserResponse>> => {
-    return await axiosService.get(Route.Profile)
+    return await axiosService.get(Route.Account)
   },
 
   update: async (data: UserUpdateRequest): Promise<IApiRes<UserResponse>> => {
     data = dataPrepare(data)
     const res: IApiRes<UserResponse> = await axiosService.put(
-      Route.Profile,
+      Route.Account,
       data,
     )
 
