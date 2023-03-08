@@ -47,6 +47,7 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
       .then((response: any) =>
         FileDownload(response.data.data, response.data.fileName),
       )
+      .catch(() => setIsLoading(false))
     setIsLoading(false)
   }
 

@@ -20,9 +20,9 @@ export const axiosService = {
       axiosService.catch(data)
 
       return data
-    } catch (error) {
-      notification.error({ message: error.response.data.message })
-      return error
+    } catch (e) {
+      notification.error({ message: e.response?.data?.message || String(e) })
+      return e
     }
   },
 
@@ -42,9 +42,9 @@ export const axiosService = {
       axiosService.catch(data)
 
       return data
-    } catch (error) {
-      notification.error({ message: error.response.data.message })
-      return error
+    } catch (e) {
+      notification.error({ message: e.response?.data?.message || String(e) })
+      return e
     }
   },
 
@@ -59,9 +59,9 @@ export const axiosService = {
       axiosService.catch(data)
 
       return data
-    } catch (error) {
-      notification.error({ message: error.response.data.message })
-      return error
+    } catch (e) {
+      notification.error({ message: e.response?.data?.message || String(e) })
+      return e
     }
   },
 
@@ -76,9 +76,9 @@ export const axiosService = {
       axiosService.catch(data)
 
       return data
-    } catch (error) {
-      notification.error({ message: error.response.data.message })
-      return error
+    } catch (e) {
+      notification.error({ message: e.response?.data?.message || String(e) })
+      return e
     }
   },
 
