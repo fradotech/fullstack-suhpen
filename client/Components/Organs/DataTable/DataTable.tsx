@@ -44,7 +44,7 @@ function DataTable<T extends object = any>(
   ) => {
     const newQuery = {
       ...state,
-      filters: { ...filters },
+      filters,
       sortField: String(sorter.field),
       sortOrder: sorter.order,
     }

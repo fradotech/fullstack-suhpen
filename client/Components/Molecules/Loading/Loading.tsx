@@ -1,3 +1,4 @@
+import { Spin } from 'antd'
 import React from 'react'
 import styles from './Loading.module.css'
 
@@ -10,10 +11,7 @@ const Loading: React.FC<IProps> = (props: IProps) => {
   return (
     <div className={styles.overlay}>
       <div className={styles.ldsRing}>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        <Spin />
       </div>
     </div>
   )
