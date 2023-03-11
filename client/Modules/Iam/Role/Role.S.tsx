@@ -1,6 +1,5 @@
-import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
-import { RoleResponse } from '@server/modules/iam/role/infrastructure/role.response'
 import React from 'react'
+import { useQuery } from 'react-query'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import DataTable, {
   paginationTransform,
@@ -9,15 +8,8 @@ import { roleAction } from './role.action'
 import { rolesColumns } from './Role.column'
 
 const RoleS: React.FC = () => {
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [props, setProps] = React.useState<IPaginateResponse<RoleResponse>>()
-  const fetch = async () => setProps(await roleAction.fetch())
-
-  React.useEffect(() => {
-    setIsLoading(true)
-    fetch()
-    setIsLoading(false)
-  }, [])
+  const fetch = async () => await roleAction.fetch()
+  const { isLoading, data } = useQuery([RoleS.name], fetch)
 
   return (
     <>
@@ -25,8 +17,8 @@ const RoleS: React.FC = () => {
       <DataTable
         rowKey="id"
         columns={rolesColumns}
-        dataSource={props?.data}
-        pagination={paginationTransform(props?.meta)}
+        dataSource={data?.data}
+        pagination={paginationTransform(data?.meta)}
         loading={isLoading}
       />
     </>
