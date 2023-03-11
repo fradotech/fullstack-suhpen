@@ -20,6 +20,7 @@ const RoleS: React.FC = () => {
         dataSource={data?.data}
         pagination={paginationTransform(data?.meta)}
         loading={isLoading}
+        onChange={() => null}
       />
     </>
   )

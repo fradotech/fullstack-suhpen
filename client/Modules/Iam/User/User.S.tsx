@@ -15,9 +15,8 @@ const UserS: React.FC = () => {
   const { setQueryParams, query } = useDataTable<UserIndexRequest>()
   const [searchParams, setSearchParams] = useSearchParams()
   const { isLoading, data } = useQuery([UserS.name, query], async () => {
-    //TODO: searchParams
-    searchParams
-    const queryEntries = Object.entries(query).filter(([{}, v]) => v)
+    searchParams // TODO
+    const queryEntries = Object.entries(query).filter(([{}, data]) => data)
     setSearchParams(Object.fromEntries(queryEntries))
     return await userAction.fetch(query)
   })

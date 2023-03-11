@@ -20,15 +20,16 @@ function DataTable<T extends object = any>(
   props: IDataTableProps<T>,
 ): JSX.Element {
   const [state, setState] = useState<FilterState<T>>({ search: props.search })
+  const { onChange } = props
 
   const handlePageChange: PaginationProps['onChange'] = (page, pageSize) => {
     setState({ ...state, page, pageSize, per_page: pageSize })
-    props.onChange({ ...state, page, pageSize, per_page: pageSize })
+    onChange({ ...state, page, pageSize, per_page: pageSize })
   }
 
   const handleSearch = (value: string) => {
     setState({ ...state, page: 1, search: value })
-    props.onChange({ ...state, page: 1, search: value })
+    onChange({ ...state, page: 1, search: value })
   }
 
   const handleTableChange = (
@@ -43,7 +44,7 @@ function DataTable<T extends object = any>(
     }
 
     setState(newQuery)
-    props.onChange(newQuery)
+    onChange(newQuery)
   }
 
   const columns: ColumnsType<T> = props.columns.map((data) => {

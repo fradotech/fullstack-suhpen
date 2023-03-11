@@ -32,7 +32,7 @@ const RegisterForm: React.FC = () => {
   }
 
   if (user) {
-    navigate(Route.Dashboard)
+    location.replace(Route.Dashboard)
     return undefined
   } else
     return (
