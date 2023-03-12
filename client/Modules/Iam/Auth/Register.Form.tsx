@@ -12,9 +12,9 @@ import { authAction } from './auth.action'
 import styles from './Auth.module.css'
 
 const RegisterForm: React.FC = () => {
-  const user = authAction.loggedUser()
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
+  const user = authAction.loggedUser()
   const [form] = Form.useForm<AuthRegisterRequest>()
 
   const onFinish = async () => {
@@ -32,7 +32,7 @@ const RegisterForm: React.FC = () => {
   }
 
   if (user) {
-    navigate(Route.Dashboard)
+    location.replace(Route.Dashboard)
     return undefined
   } else
     return (

@@ -1,6 +1,7 @@
 import { UserUpdateRequest } from '@server/modules/iam/user/infrastructure/user.request'
 import { Form } from 'antd'
 import React from 'react'
+import { useQuery } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import FormContainer from '../../../Components/Organs/Form/FormContainer'
@@ -10,19 +11,16 @@ import { rule } from '../../../utils/form.rules'
 import { accountAction } from './account.action'
 
 const AccountForm: React.FC = () => {
+  const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const [form] = Form.useForm<UserUpdateRequest>()
-  const [isLoading, setIsLoading] = React.useState(false)
-  const fetch = async () => {
+
+  useQuery([AccountForm.name], async () => {
     setIsLoading(true)
     const res = await accountAction.getUserLogged()
     form.setFieldsValue(res.data)
     setIsLoading(false)
-  }
-
-  React.useEffect(() => {
-    fetch()
-  }, [])
+  })
 
   const onFinish = async () => {
     setIsLoading(true)

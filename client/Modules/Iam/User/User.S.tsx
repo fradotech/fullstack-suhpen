@@ -1,7 +1,7 @@
-import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
 import { UserIndexRequest } from '@server/modules/iam/user/infrastructure/user-index.request'
-import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import React from 'react'
+import { useQuery } from 'react-query'
+import { useSearchParams } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import DataTable, {
   paginationTransform,
@@ -12,18 +12,14 @@ import { userAction } from './user.action'
 import { usersColumns } from './User.column'
 
 const UserS: React.FC = () => {
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [props, setProps] = React.useState<IPaginateResponse<UserResponse>>()
   const { setQueryParams, query } = useDataTable<UserIndexRequest>()
-  const fetch = async () => {
-    setIsLoading(true)
-    setProps(await userAction.fetch(query))
-    setIsLoading(false)
-  }
-
-  React.useEffect(() => {
-    fetch()
-  }, [query])
+  const [searchParams, setSearchParams] = useSearchParams()
+  const { isLoading, data } = useQuery([UserS.name, query], async () => {
+    searchParams // TODO
+    const queryEntries = Object.entries(query).filter(([{}, data]) => data)
+    setSearchParams(Object.fromEntries(queryEntries))
+    return await userAction.fetch(query)
+  })
 
   return (
     <>
@@ -31,9 +27,9 @@ const UserS: React.FC = () => {
       <DataTable
         rowKey="id"
         columns={usersColumns}
-        dataSource={props?.data}
+        dataSource={data?.data}
         search={query.search}
-        pagination={paginationTransform(props?.meta)}
+        pagination={paginationTransform(data?.meta)}
         loading={isLoading}
         dataTableHeader={{
           search: true,

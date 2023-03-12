@@ -38,7 +38,7 @@ const Attachment: React.FC<IProps> = (props: IProps) => {
             if (data.file) return data.file
             return { uid: data, name: data, url: data }
           })
-        : []
+        : [defaultValues]
 
     typeof attachments[0]?.url == typeof '' && setFileList(attachments)
   }, [props])

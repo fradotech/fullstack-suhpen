@@ -3,6 +3,7 @@ import { UserCreateRequest } from '@server/modules/iam/user/infrastructure/user.
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { Divider, Form } from 'antd'
 import React from 'react'
+import { useQuery } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import FormContainer from '../../../Components/Organs/Form/FormContainer'
@@ -13,21 +14,21 @@ import { userAction } from './user.action'
 import { EUserGender } from './User.enum'
 
 const UserForm: React.FC = () => {
-  const navigate = useNavigate()
   const [isLoading, setIsLoading] = React.useState(false)
+  const navigate = useNavigate()
   const { id } = useParams()
   const [form] = Form.useForm<UserCreateRequest>()
-  const fetch = async () => {
-    setIsLoading(true)
-    const res = await userAction.findOne(id)
-    form.setFieldsValue(res.data)
-    setIsLoading(false)
-    return res
-  }
 
-  React.useEffect(() => {
-    id && fetch()
-  }, [])
+  useQuery(
+    [UserForm.name],
+    id &&
+      (async () => {
+        setIsLoading(true)
+        const res = await userAction.findOne(id)
+        form.setFieldsValue(res.data)
+        setIsLoading(false)
+      }),
+  )
 
   const onFinish = async () => {
     setIsLoading(true)

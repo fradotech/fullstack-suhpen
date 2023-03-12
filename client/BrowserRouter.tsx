@@ -19,21 +19,27 @@ const Unauthorized = React.lazy(() => import('./Modules/Unauthorized'))
 
 const user = authAction.loggedUser()
 const noGuardRoutes = [ERoute.Home]
+const noGuardRouters = [
+  <Route key={ERoute.Home} path={ERoute.Home} element={<Home />} />,
+  ...AuthRoute,
+]
 
 const BrowserRouter: React.FC = () => (
   <ReactBrowserRouter>
-    <React.Suspense fallback={<Loading isLoading={true} />}>
-      <Routes>
-        <Route path={ERoute.Home} element={<Home />} />
-        {AuthRoute}
-        {!user && <Route path="*" element={<Unauthorized />} />}
-      </Routes>
-    </React.Suspense>
+    {!user && (
+      <React.Suspense fallback={<Loading isLoading={true} />}>
+        <Routes>
+          {noGuardRouters}
+          {<Route path="*" element={<Unauthorized />} />}
+        </Routes>
+      </React.Suspense>
+    )}
 
     {user && !noGuardRoutes.includes(location.pathname) && (
       <LayoutMain>
         <React.Suspense fallback={<Loading isLoading={true} />}>
           <Routes>
+            {noGuardRouters}
             {DashboardRoute}
             {IamRoute}
             {FeatureRoute}
