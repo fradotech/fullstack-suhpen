@@ -7,9 +7,8 @@ export const useDataTable = <T>() => {
   const [query, setQuery] = React.useState<TPropsTableFilter<T> | any>(() => {
     const queryParams = new URLSearchParams(window.location.search)
     const filtersObj = {}
-    for (const [key, value] of queryParams.entries()) {
-      filtersObj[key] = value
-    }
+    for (const [key, value] of queryParams.entries()) filtersObj[key] = value
+
     return filtersObj
   })
 
@@ -35,12 +34,7 @@ export const useDataTable = <T>() => {
 
       const listPropsParams = Object.keys(propsParams) as string[]
 
-      if (
-        !(
-          listPropsParams.includes('page') &&
-          listPropsParams.includes('per_page')
-        )
-      ) {
+      if (!listPropsParams.includes('page')) {
         if (
           !(
             listPropsParams.includes('sort') &&

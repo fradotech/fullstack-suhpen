@@ -23,8 +23,8 @@ function DataTable<T extends object = any>(
   const { onChange } = props
 
   const handlePageChange: PaginationProps['onChange'] = (page, pageSize) => {
-    setState({ ...state, page, pageSize, per_page: pageSize })
-    onChange({ ...state, page, pageSize, per_page: pageSize })
+    setState({ ...state, page, pageSize })
+    onChange({ ...state, page, pageSize })
   }
 
   const handleSearch = (value: string) => {
