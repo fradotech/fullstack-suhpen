@@ -37,7 +37,9 @@ const BrowserRouter: React.FC = () => (
 
     {user && (
       <React.Suspense fallback={<Loading isLoading />}>
-        <Routes>{noGuardRouters}</Routes>
+        {noGuardRoutes.includes(location.pathname) && (
+          <Routes>{noGuardRouters}</Routes>
+        )}
         {!noGuardRoutes.includes(location.pathname) && (
           <LayoutMain>
             <Routes>
