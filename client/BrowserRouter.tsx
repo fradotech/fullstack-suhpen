@@ -27,26 +27,28 @@ const noGuardRouters = [
 const BrowserRouter: React.FC = () => (
   <ReactBrowserRouter>
     {!user && (
-      <React.Suspense fallback={<Loading isLoading={true} />}>
+      <React.Suspense fallback={<Loading isLoading />}>
         <Routes>
           {noGuardRouters}
-          {<Route path="*" element={<Unauthorized />} />}
+          <Route path="*" element={<Unauthorized />} />
         </Routes>
       </React.Suspense>
     )}
 
-    {user && !noGuardRoutes.includes(location.pathname) && (
-      <LayoutMain>
-        <React.Suspense fallback={<Loading isLoading={true} />}>
-          <Routes>
-            {noGuardRouters}
-            {DashboardRoute}
-            {IamRoute}
-            {FeatureRoute}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </React.Suspense>
-      </LayoutMain>
+    {user && (
+      <React.Suspense fallback={<Loading isLoading />}>
+        <Routes>{noGuardRouters}</Routes>
+        {!noGuardRoutes.includes(location.pathname) && (
+          <LayoutMain>
+            <Routes>
+              {DashboardRoute}
+              {IamRoute}
+              {FeatureRoute}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </LayoutMain>
+        )}
+      </React.Suspense>
     )}
   </ReactBrowserRouter>
 )
