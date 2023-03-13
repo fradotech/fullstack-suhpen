@@ -1,8 +1,8 @@
 import dayjs from 'dayjs'
 import { IUser } from '../infrastructure/user.interface'
-import { EttUser } from './user.entity'
+import { EntUser } from './user.entity'
 
-export class UserResponse extends EttUser {
+export class UserResponse extends EntUser {
   otpExpiredAt?: Date
   _accessToken?: string
   dateRange?: [dayjs.Dayjs, dayjs.Dayjs]

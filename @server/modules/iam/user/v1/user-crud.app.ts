@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { EttUser } from '../infrastructure/user.entity'
+import { EntUser } from '../infrastructure/user.entity'
 import { IUser } from '../infrastructure/user.interface'
 import {
   UserCreateRequest,
@@ -16,7 +16,7 @@ export class UserCrudApp {
   }
 
   async create(req: UserCreateRequest): Promise<IUser> {
-    const data = new EttUser()
+    const data = new EntUser()
     Object.assign(data, req)
 
     return await this.userService.create(data)

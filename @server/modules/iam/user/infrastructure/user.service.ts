@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { BaseService } from '@server/infrastructure/base/base.service'
 import { Repository } from 'typeorm'
-import { EttUser } from '../infrastructure/user.entity'
+import { EntUser } from '../infrastructure/user.entity'
 import { IUser } from '../infrastructure/user.interface'
 
 @Injectable()
 export class UserService implements BaseService {
   constructor(
-    @InjectRepository(EttUser)
+    @InjectRepository(EntUser)
     private readonly userRepo: Repository<IUser>,
   ) {}
 
@@ -36,12 +36,12 @@ export class UserService implements BaseService {
   }
 
   async remove(id: string): Promise<IUser> {
-    const data = (await this.findOneOrFail(id)) as EttUser
+    const data = (await this.findOneOrFail(id)) as EntUser
     return await this.userRepo.remove(data)
   }
 
   async softRemove(id: string): Promise<IUser> {
-    const data = (await this.findOneOrFail(id)) as EttUser
+    const data = (await this.findOneOrFail(id)) as EntUser
     return await this.userRepo.softRemove(data)
   }
 

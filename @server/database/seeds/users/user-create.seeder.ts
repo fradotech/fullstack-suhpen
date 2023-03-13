@@ -1,17 +1,14 @@
 import { Logger } from '@nestjs/common'
-import { DataSourceOptions } from '@server/database/config.db'
-import { EttUser } from '@server/modules/iam/user/infrastructure/user.entity'
+import dataSource from '@server/database/data-source'
+import { EntUser } from '@server/modules/iam/user/infrastructure/user.entity'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { EntityManager, Repository } from 'typeorm'
 import { usersDummies } from './user.dummy'
 
 export const userCreateSeeder = async (): Promise<boolean> => {
   const data = usersDummies
-  const repo = new Repository<IUser>(
-    EttUser,
-    new EntityManager(DataSourceOptions),
-  )
-  const table = EttUser.name
+  const repo = new Repository<IUser>(EntUser, new EntityManager(dataSource))
+  const table = EntUser.name
 
   const userExist = await repo
     .createQueryBuilder(table)
