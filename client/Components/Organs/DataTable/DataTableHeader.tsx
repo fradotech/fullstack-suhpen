@@ -22,13 +22,11 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
   const [form] = Form.useForm()
 
   React.useEffect(() => {
-    const timeout = setTimeout(() => {
-      props.onSearch && props.onSearch(value)
-    }, 500)
-
-    return () => {
-      clearTimeout(timeout)
-    }
+    const timeout = setTimeout(
+      () => props.onSearch && props.onSearch(value),
+      500,
+    )
+    return () => clearTimeout(timeout)
   }, [value])
 
   const handleExport = async () => {
