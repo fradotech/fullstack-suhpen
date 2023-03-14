@@ -7,14 +7,14 @@ import { Repository } from 'typeorm'
 import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
 import { IPaginateResponse } from '../../../../infrastructure/index/index.interface'
 import { UserIndexRequest } from './user-index.request'
-import { EttUser } from './user.entity'
+import { EntUser } from './user.entity'
 
 @Injectable({ scope: Scope.REQUEST })
 export class UserIndexApp extends BaseIndexApp {
   constructor(
     @Inject(REQUEST)
     private readonly request: Request,
-    @InjectRepository(EttUser)
+    @InjectRepository(EntUser)
     private readonly userRepo: Repository<IUser>,
   ) {
     super()

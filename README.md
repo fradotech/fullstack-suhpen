@@ -22,13 +22,24 @@ $ yarn server:dev
 $ yarn client:dev
 ```
 
+## Database (If only use migration)
+
+- Migration Run
+
+```bash
+$ yarn migrate
+```
+
+- Migration generate
+
+```bash
+$ yarn migrate:generate @server/database/migrations/[MigrationName]
+```
+
 ## Results
 
-- Server url
-  http://localhost:3000
+- Server url http://localhost:3000
 
-- Client url
-  http://localhost:8080
+- Client url http://localhost:8080
 
-- API Documentation by Swagger UI
-  http://localhost:3000/api/v1/docs
+- API Documentation by Swagger UI http://localhost:3000/api/v1/docs

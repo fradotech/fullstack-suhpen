@@ -15,6 +15,10 @@
     "server:dev": "nest start --watch",
     "server:debug": "nest start --debug --watch",
     "server:prod": "node dist/@server/main",
+    "typeorm": "yarn server:build && npx typeorm -d dist/@server/database/data-source.js",
+    "migrate": "yarn typeorm migration:run",
+    "migrate:generate": "yarn typeorm migration:generate",
+    "migrate:revert": "yarn typeorm migration:revert",
     "client:dev": "webpack-dev-server --open --hot --config webpack.config.js --mode=development",
     "client:build": "webpack --config webpack.config.js --mode=production",
     "client": "webpack-dev-server --mode=production --config webpack.config.js "

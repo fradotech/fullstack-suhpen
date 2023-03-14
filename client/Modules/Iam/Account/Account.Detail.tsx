@@ -1,8 +1,7 @@
 import { UserOutlined } from '@ant-design/icons'
-import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
-import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { Avatar, Descriptions, Row, Tag } from 'antd'
 import React from 'react'
+import { useQuery } from 'react-query'
 import DescriptionContainer from '../../../Components/Molecules/DescriptionContainer/DescriptionContainer'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import { Utils } from '../../../utils/utils'
@@ -10,17 +9,8 @@ import { ERole } from '../Role/Role.enum'
 import { accountAction } from './account.action'
 
 const AccountDetail: React.FC = () => {
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [props, setProps] = React.useState<IApiRes<UserResponse>>()
-  const fetch = async () => {
-    setIsLoading(true)
-    setProps(await accountAction.getUserLogged())
-    setIsLoading(false)
-  }
-
-  React.useEffect(() => {
-    fetch()
-  }, [])
+  const fetch = async () => await accountAction.getUserLogged()
+  const { isLoading, data } = useQuery([AccountDetail.name], fetch)
 
   return (
     <>
@@ -30,33 +20,31 @@ const AccountDetail: React.FC = () => {
           size={250}
           icon={<UserOutlined />}
           style={{ margin: '32px' }}
-          src={props?.data.avatar}
+          src={data?.data.avatar}
         />
         <DescriptionContainer>
-          <Descriptions.Item label="Name">
-            {props?.data?.name}
-          </Descriptions.Item>
+          <Descriptions.Item label="Name">{data?.data?.name}</Descriptions.Item>
           <Descriptions.Item label="Role">
-            {props?.data.role == ERole.Administrator ? (
-              <Tag color="blue">{props?.data.role}</Tag>
+            {data?.data.role == ERole.Administrator ? (
+              <Tag color="blue">{data?.data.role}</Tag>
             ) : (
-              <Tag color="green">{props?.data.role}</Tag>
+              <Tag color="green">{data?.data.role}</Tag>
             )}
           </Descriptions.Item>
           <Descriptions.Item label="Email">
-            {props?.data?.email}
+            {data?.data?.email}
           </Descriptions.Item>
           <Descriptions.Item label="Gender">
-            {props?.data?.gender}
+            {data?.data?.gender}
           </Descriptions.Item>
           <Descriptions.Item label="Birth Date">
-            {props?.data?.birthDate && Utils.dateFormat(props?.data?.birthDate)}
+            {data?.data?.birthDate && Utils.dateFormat(data?.data?.birthDate)}
           </Descriptions.Item>
           <Descriptions.Item label="Phone Number">
-            {props?.data?.phoneNumber}
+            {data?.data?.phoneNumber}
           </Descriptions.Item>
           <Descriptions.Item label="Address">
-            {props?.data?.address}
+            {data?.data?.address}
           </Descriptions.Item>
         </DescriptionContainer>
       </Row>

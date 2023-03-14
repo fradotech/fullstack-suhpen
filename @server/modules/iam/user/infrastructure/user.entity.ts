@@ -1,13 +1,62 @@
-import { BaseEntity } from '@server/infrastructure/base/base.entity'
 import * as bcrypt from 'bcrypt'
 import dayjs from 'dayjs'
-import { BeforeInsert, Column, Entity } from 'typeorm'
+import {
+  BeforeInsert,
+  BeforeSoftRemove,
+  BeforeUpdate,
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm'
 import { ERole } from '../../role/infrastructure/role.enum'
 import { IUser } from '../infrastructure/user.interface'
 import { EUserGender } from './user.enum'
 
 @Entity()
-export class EttUser extends BaseEntity implements IUser {
+export class EntUser implements IUser {
+  @PrimaryGeneratedColumn('uuid')
+  id: string
+
+  @CreateDateColumn()
+  createdAt: Date
+
+  @ManyToOne(() => EntUser)
+  createdBy: IUser
+
+  @UpdateDateColumn()
+  updatedAt: Date
+
+  @ManyToOne(() => EntUser)
+  updatedBy: IUser
+
+  @DeleteDateColumn()
+  deletedAt: Date
+
+  @ManyToOne(() => EntUser)
+  deletedBy: IUser
+
+  @BeforeInsert()
+  beforeInsert(): void {
+    // this.createdBy = user
+  }
+
+  @BeforeUpdate()
+  beforeUpdate(): void {
+    // this.updatedBy = user
+    this.updatedAt = new Date()
+  }
+
+  @BeforeSoftRemove()
+  beforeSoftRemove(): void {
+    // this.deletedBy = user
+  }
+
+  // <--- Regular attributs --->
+
   @Column()
   name: string
 

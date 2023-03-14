@@ -7,6 +7,7 @@ import {
   TablePaginationConfig,
 } from 'antd/es/table/interface'
 import React, { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import Loading from '../../../Components/Molecules/Loading/Loading'
 import { Utils } from '../../../utils/utils'
 import { FilterState, IDataTableProps, TOnSort } from './DataTable.interface'
@@ -19,17 +20,21 @@ const tableLayout: React.CSSProperties = { width: '100%' }
 function DataTable<T extends object = any>(
   props: IDataTableProps<T>,
 ): JSX.Element {
+  const [searchParams] = useSearchParams()
   const [state, setState] = useState<FilterState<T>>({ search: props.search })
   const { onChange } = props
 
   const handlePageChange: PaginationProps['onChange'] = (page, pageSize) => {
-    setState({ ...state, page, pageSize, per_page: pageSize })
-    onChange({ ...state, page, pageSize, per_page: pageSize })
+    setState({ ...state, page, pageSize })
+    onChange({ ...state, page, pageSize })
   }
 
   const handleSearch = (value: string) => {
-    setState({ ...state, page: 1, search: value })
-    onChange({ ...state, page: 1, search: value })
+    const page = value ? 1 : +searchParams.get('page') || 1
+    const pageSize = value ? 100000 : 10
+
+    setState({ ...state, page, pageSize, search: value })
+    onChange({ ...state, page, pageSize, search: value })
   }
 
   const handleTableChange = (

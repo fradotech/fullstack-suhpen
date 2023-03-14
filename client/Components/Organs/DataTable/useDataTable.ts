@@ -1,58 +1,44 @@
 import { IndexRequest } from '@server/infrastructure/index/index.request'
 import React from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 export type TPropsTableFilter<T> = IndexRequest & T
 
 export const useDataTable = <T>() => {
+  const [searchParams, setSearchParams] = useSearchParams()
   const [query, setQuery] = React.useState<TPropsTableFilter<T> | any>(() => {
-    const queryParams = new URLSearchParams(window.location.search)
-    const filtersObj = {}
-    for (const [key, value] of queryParams.entries()) {
-      filtersObj[key] = value
-    }
-    return filtersObj
+    const queryParams = {} as TPropsTableFilter<T>
+    for (const [key, value] of searchParams.entries()) queryParams[key] = value
+
+    delete queryParams.filters
+    delete queryParams.search
+
+    return queryParams
   })
 
-  const existingParams = React.useMemo(
-    () =>
-      Object.keys(query).reduce(
-        (a, c) => (query[c] ? { ...a, [c]: query[c] } : a),
-        {},
-      ),
-    [query],
-  ) as TPropsTableFilter<T>
+  const existingParams = React.useMemo(() => {
+    const queryParams = Object.keys(query).reduce(
+      (a, c) => (query[c] ? { ...a, [c]: query[c] } : a),
+      {} as TPropsTableFilter<T>,
+    )
+
+    delete queryParams.filters
+    delete queryParams.search
+
+    setSearchParams(queryParams as any)
+    return queryParams
+  }, [query]) as TPropsTableFilter<T>
 
   return {
     setQueryParams: (propsParams: TPropsTableFilter<T>) => {
-      const data = {
+      const queryParams = {
         ...existingParams,
         ...propsParams,
       } as TPropsTableFilter<T>
-
-      if (data.sortOrder === undefined) {
-        delete data.sortField
-      }
-
-      const listPropsParams = Object.keys(propsParams) as string[]
-
-      if (
-        !(
-          listPropsParams.includes('page') &&
-          listPropsParams.includes('per_page')
-        )
-      ) {
-        if (
-          !(
-            listPropsParams.includes('sort') &&
-            listPropsParams.includes('order')
-          )
-        ) {
-          data.page = 1
-        }
-      }
-
-      setQuery(data)
+      !queryParams.sortOrder && delete queryParams.sortField
+      setQuery(queryParams)
     },
-    query: query as TPropsTableFilter<T>,
+
+    query,
   }
 }
