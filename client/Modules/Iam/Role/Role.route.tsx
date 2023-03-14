@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import RoleS from './RoleS'
+
+const RoleS = React.lazy(() => import('./Role.S'))
 
 export const routesRole = {
   Roles: '/roles',

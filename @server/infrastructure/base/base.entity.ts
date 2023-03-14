@@ -1,4 +1,4 @@
-import { EttUser } from '@server/modules/iam/user/infrastructure/user.entity'
+import { EntUser } from '@server/modules/iam/user/infrastructure/user.entity'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import {
   BeforeInsert,
@@ -19,19 +19,19 @@ export class BaseEntity implements IBaseEntity {
   @CreateDateColumn()
   createdAt: Date
 
-  @ManyToOne(() => EttUser)
+  @ManyToOne(() => EntUser)
   createdBy: IUser
 
   @UpdateDateColumn()
   updatedAt: Date
 
-  @ManyToOne(() => EttUser)
+  @ManyToOne(() => EntUser)
   updatedBy: IUser
 
   @DeleteDateColumn()
   deletedAt: Date
 
-  @ManyToOne(() => EttUser)
+  @ManyToOne(() => EntUser)
   deletedBy: IUser
 
   @BeforeInsert()

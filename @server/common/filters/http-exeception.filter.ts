@@ -82,7 +82,7 @@ export class QueryErrorFilter extends BaseExceptionFilter {
       case 'ER_DUP_ENTRY':
         const sqlMessage = exception.sqlMessage.replace('Duplicate entry ', '')
         const indexValue = sqlMessage.indexOf(' ') - 1
-        const message = sqlMessage.slice(1, indexValue) + ' telah digunakan'
+        const message = sqlMessage.slice(1, indexValue) + ' has been used'
 
         response.status(409).json({
           message,
@@ -92,7 +92,7 @@ export class QueryErrorFilter extends BaseExceptionFilter {
 
       default:
         response.status(422).json({
-          message: 'Unprocessable entity',
+          message: String(exception),
           data: null,
         })
     }

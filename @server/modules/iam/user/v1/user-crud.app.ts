@@ -1,36 +1,25 @@
 import { Injectable } from '@nestjs/common'
-import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
-import { UserIndexApp } from '../infrastructure/user-index.app'
-import { EttUser } from '../infrastructure/user.entity'
+import { EntUser } from '../infrastructure/user.entity'
 import { IUser } from '../infrastructure/user.interface'
 import {
   UserCreateRequest,
-  UserIndexRequest,
   UserUpdateRequest,
 } from '../infrastructure/user.request'
 import { UserService } from '../infrastructure/user.service'
 
 @Injectable()
 export class UserCrudApp {
-  constructor(
-    private readonly userIndexApp: UserIndexApp,
-    private readonly userService: UserService,
-  ) {}
-
-  async fetch(req: UserIndexRequest): Promise<IPaginateResponse<IUser>> {
-    const res = await this.userIndexApp.fetch(req)
-    return res
-  }
-
-  async create(req: UserCreateRequest): Promise<IUser> {
-    const data = new EttUser()
-    Object.assign(data, req)
-
-    return await this.userService.create(data)
-  }
+  constructor(private readonly userService: UserService) {}
 
   async find(): Promise<IUser[]> {
     return await this.userService.find()
+  }
+
+  async create(req: UserCreateRequest): Promise<IUser> {
+    const data = new EntUser()
+    Object.assign(data, req)
+
+    return await this.userService.create(data)
   }
 
   async findOneOrFail(id: string): Promise<IUser> {
@@ -41,9 +30,13 @@ export class UserCrudApp {
     const data = await this.userService.findOneOrFail(id)
 
     data.name = req.name
+    data.gender = req.gender
     data.phoneNumber = req.phoneNumber
     data.avatar = req.avatar
     data.address = req.address
+    data.birthDate = req.birthDate
+    data.startAt = req.startAt
+    data.endAt = req.endAt
 
     return await this.userService.update(data)
   }

@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt'
 import { config } from '@server/config'
 import * as bcrypt from 'bcrypt'
 import { Exception } from '../../../../common/exceptions/index.exception'
-import { EttUser } from '../../user/infrastructure/user.entity'
+import { EntUser } from '../../user/infrastructure/user.entity'
 import { IUser } from '../../user/infrastructure/user.interface'
 import { UserService } from '../../user/infrastructure/user.service'
 import { authMessages } from '../common/auth.message'
@@ -24,7 +24,7 @@ export class AuthApp {
   ) {}
 
   async register(req: AuthRegisterRequest): Promise<IUser> {
-    const user = new EttUser()
+    const user = new EntUser()
     Object.assign(user, req)
 
     return await this.userService.create(user)

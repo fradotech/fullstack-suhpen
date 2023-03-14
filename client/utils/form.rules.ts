@@ -1,6 +1,6 @@
 import { REGEX_EMAIL, REGEX_PASSWORD } from './character.constant'
 
-export const formRule = {
+export const rule = {
   required: { required: true },
   email: {
     required: true,

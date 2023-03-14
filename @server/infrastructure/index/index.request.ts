@@ -7,13 +7,16 @@ import { IsEnum, IsNumber, IsOptional, IsString, Min } from 'class-validator'
 import { IPaginateRequest, ISortRequest } from './index.interface'
 
 export class IndexRequest implements ISortRequest, IPaginateRequest {
+  isExport?: boolean
+  filters?: Record<string, any>
+
   @IsOptional()
   @IsString()
   @ApiProperty({
     example: 'updatedAt',
-    description: 'Sort entity by column name',
+    description: 'Sort entity by field name',
   })
-  sort?: string
+  sortField?: string
 
   @IsOptional()
   @IsEnum(OrderDirectionEnum)
@@ -21,13 +24,13 @@ export class IndexRequest implements ISortRequest, IPaginateRequest {
     example: OrderDirectionEnum.Desc,
     description: `${OrderDirectionEnum.Asc} || ${OrderDirectionEnum.Desc}`,
   })
-  order?: OrderDirectionType
+  sortOrder?: OrderDirectionType
 
   @IsOptional()
   @IsNumber()
   @Min(1)
   @ApiProperty({ example: 10, description: 'Number of entities in one page' })
-  perPage?: number
+  pageSize?: number
 
   @IsOptional()
   @IsNumber()

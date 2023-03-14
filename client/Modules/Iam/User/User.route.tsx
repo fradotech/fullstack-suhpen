@@ -1,14 +1,16 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import UserDetail from './UserDetail'
-import UserForm from './UserForm'
-import UserS from './UserS'
+
+const UserDetail = React.lazy(() => import('./User.Detail'))
+const UserForm = React.lazy(() => import('./User.Form'))
+const UserS = React.lazy(() => import('./User.S'))
 
 export const routesUser = {
   Users: '/users',
   UserDetail: '/users/:id',
   UserForm: '/users/save',
   UserEdit: '/users/save/:id',
+  UserExport: '/users/export',
 }
 
 export default [

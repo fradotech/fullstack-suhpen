@@ -18,10 +18,8 @@ export class Utils {
   }
 
   static titleCase = (str: string) => {
-    return str
-      .split(' ')
-      .map((w) => w[0].toUpperCase() + w.substring(1).toLowerCase())
-      .join(' ')
+    const res2 = str.replace(/([A-Z])/g, ' $1')
+    return res2.charAt(0).toUpperCase() + res2.slice(1)
   }
 
   static camelToSnake = (str: string) => {

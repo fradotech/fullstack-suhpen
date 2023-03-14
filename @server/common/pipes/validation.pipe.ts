@@ -9,21 +9,19 @@ import { validate, ValidationError } from 'class-validator'
 
 @Injectable()
 export class ValidationPipe implements PipeTransform {
-  async transform(
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    value: any,
-    { metatype }: ArgumentMetadata,
-  ): Promise<any[]> {
+  async transform(value: any, { metatype }: ArgumentMetadata): Promise<any[]> {
     if (!metatype || !this.toValidate(metatype)) {
       return value
     }
+
     const object = plainToClass(metatype, value, {
       enableImplicitConversion: true,
     })
+
     const errors = await validate(object)
     if (errors.length > 0) {
       throw new UnprocessableEntityException({
-        message: 'Data Not Valid',
+        message: JSON.stringify(this.flattenValidation(errors)[0].constraints),
         data: this.flattenValidation(errors).map(
           (data: {
             parentName: string
@@ -34,7 +32,6 @@ export class ValidationPipe implements PipeTransform {
               property: data.parentName
                 ? data.parentName.substring(1)
                 : data.property,
-              // TODO implement i18n
               message: Object.values(data.constraints).map(
                 (constraint) => constraint,
               ),

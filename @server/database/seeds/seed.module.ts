@@ -1,11 +1,12 @@
 import { Logger } from '@nestjs/common'
-import { DataSourceOptions } from '../config.db'
+import dataSource from '../data-source'
 import { userCreateSeeder } from './users/user-create.seeder'
 
 export const seeders = async () => {
-  await DataSourceOptions.initialize()
+  await dataSource
+    .initialize()
     .then(async () => Logger.log('Success connect seeder', 'Automatic Seeder'))
     .catch((error) => Logger.error(error))
 
-  await userCreateSeeder()
+  await Promise.all([userCreateSeeder()])
 }

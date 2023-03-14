@@ -1,7 +1,7 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger'
-import { IndexRequest } from '@server/infrastructure/index/index.request'
 import { ERole } from '@server/modules/iam/role/infrastructure/role.enum'
 import {
+  IsDate,
   IsEmail,
   IsEnum,
   IsNotEmpty,
@@ -12,16 +12,10 @@ import {
   Matches,
   MinLength,
 } from 'class-validator'
+import dayjs from 'dayjs'
 import { REGEX_PASSWORD } from '../common/character.constant'
 import { IUser } from '../infrastructure/user.interface'
-
-export class UserIndexRequest extends IndexRequest {
-  @IsOptional()
-  @IsString()
-  @IsEnum(ERole)
-  @ApiProperty({ example: ERole.User })
-  role?: string
-}
+import { EUserGender } from './user.enum'
 
 export class UserRequest implements IUser {
   id: string
@@ -59,6 +53,16 @@ export class UserRequest implements IUser {
   passwordConfirmation: string
 
   @IsOptional()
+  @IsEnum(ERole)
+  @ApiProperty({ example: ERole.User })
+  role: ERole
+
+  @IsOptional()
+  @IsEnum(EUserGender)
+  @ApiProperty({ example: EUserGender.Man })
+  gender?: EUserGender
+
+  @IsOptional()
   @IsString()
   @IsPhoneNumber('ID')
   @ApiProperty({ example: '085123456789' })
@@ -67,12 +71,16 @@ export class UserRequest implements IUser {
   @IsOptional()
   @IsString()
   @ApiProperty()
-  avatar?: string
+  address?: string
+
+  @IsOptional()
+  @ApiProperty()
+  birthDate?: Date | dayjs.Dayjs
 
   @IsOptional()
   @IsString()
   @ApiProperty()
-  address?: string
+  avatar?: string
 
   @IsNotEmpty()
   @IsNumber()
@@ -84,7 +92,17 @@ export class UserRequest implements IUser {
   @ApiProperty()
   token: string
 
-  role: ERole
+  @IsOptional()
+  @IsDate()
+  @ApiProperty()
+  startAt?: Date
+
+  @IsOptional()
+  @IsDate()
+  @ApiProperty()
+  endAt?: Date
+
+  dateRange?: [dayjs.Dayjs, dayjs.Dayjs]
   isVerified: boolean
 }
 

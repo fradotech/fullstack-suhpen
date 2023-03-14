@@ -1,14 +1,12 @@
-// Index Request
-
 import { OrderDirectionType } from '@server/infrastructure/index/index.enum'
 
 export interface ISortRequest {
-  sort?: string
-  order?: OrderDirectionType
+  sortField?: string
+  sortOrder?: OrderDirectionType
 }
 
 export interface IPaginateRequest {
-  perPage?: number
+  pageSize?: number
   page?: number
 }
 
@@ -16,7 +14,7 @@ export interface IPaginateRequest {
 
 export interface IPaginationMeta {
   page: number
-  perPage: number
+  pageSize: number
   total: number
   totalPage: number
 }
@@ -24,5 +22,4 @@ export interface IPaginationMeta {
 export interface IPaginateResponse<T> {
   meta: IPaginationMeta
   data: Array<T>
-  dataExport?: Array<T>
 }

@@ -1,6 +1,6 @@
 import { Logger } from '@nestjs/common'
-import { DataSourceOptions } from '@server/database/config.db'
-import { EttUser } from '@server/modules/iam/user/infrastructure/user.entity'
+import dataSource from '@server/database/data-source'
+import { EntUser } from '@server/modules/iam/user/infrastructure/user.entity'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { EntityManager, Repository } from 'typeorm'
 import { UserCreateRequest } from '../../../modules/iam/user/infrastructure/user.request'
@@ -8,10 +8,7 @@ import { usersDummies } from './user.dummy'
 
 export const userUpdateSeeder = async (): Promise<boolean> => {
   const data = usersDummies
-  const repo = new Repository<IUser>(
-    EttUser,
-    new EntityManager(DataSourceOptions),
-  )
+  const repo = new Repository<IUser>(EntUser, new EntityManager(dataSource))
 
   data.forEach(async (data) => {
     const dataExist = await repo.findOne({ where: { email: data.email } })
@@ -24,7 +21,7 @@ export const userUpdateSeeder = async (): Promise<boolean> => {
 
   Logger.log(
     'Success run users seeders ',
-    data.map((data) => data.email).toString(),
+    String(data.map((data) => data.email)),
   )
 
   return true

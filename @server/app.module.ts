@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common'
-import { APP_FILTER, APP_PIPE } from '@nestjs/core'
+import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
+import { RavenInterceptor, RavenModule } from 'nest-raven'
 import {
   EntityNotFoundExceptionFilter,
   HttpExceptionFilter,
@@ -9,22 +10,25 @@ import {
 import { ValidationPipe } from './common/pipes/validation.pipe'
 import { DatabaseModule } from './database/database.module'
 import { FeatureModule } from './modules/feature/feature.module'
-import { AuthModule } from './modules/iam/auth/auth.module'
-import { RoleModule } from './modules/iam/role/role.module'
-import { UserModule } from './modules/iam/user/user.module'
+import { IamModule } from './modules/iam/iam.module'
+import { SentryModule } from './modules/support/sentry/sentry.module'
 import { SupportModule } from './modules/support/support.module'
 
 @Module({
   imports: [
+    SentryModule.forRoot(),
+    RavenModule,
     DatabaseModule,
-    AuthModule,
     SupportModule,
-    UserModule,
-    RoleModule,
+    IamModule,
     FeatureModule,
   ],
   controllers: [],
   providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useValue: new RavenInterceptor(),
+    },
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,

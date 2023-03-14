@@ -1,21 +1,18 @@
-import React, { useState } from 'react'
-
 import { IPaginationMeta } from '@server/infrastructure/index/index.interface'
 import { Pagination, PaginationProps, Space, Table } from 'antd'
 import {
+  ColumnsType,
   FilterValue,
   SorterResult,
   TablePaginationConfig,
 } from 'antd/es/table/interface'
-import { FilterSection } from '../FilterSection/FilterSection'
-import { FilterState, IDataTableProps, TOnSort } from './Entities'
-
-const stylePaginantion: React.CSSProperties = {
-  display: 'flex',
-  justifyContent: 'end',
-  padding: '8px',
-  backgroundColor: 'white',
-}
+import React, { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import Loading from '../../../Components/Molecules/Loading/Loading'
+import { Utils } from '../../../utils/utils'
+import { FilterState, IDataTableProps, TOnSort } from './DataTable.interface'
+import styles from './DataTable.module.css'
+import DataTableHeader from './DataTableHeader'
 
 const tableLayout: React.CSSProperties = { width: '100%' }
 
@@ -23,86 +20,80 @@ const tableLayout: React.CSSProperties = { width: '100%' }
 function DataTable<T extends object = any>(
   props: IDataTableProps<T>,
 ): JSX.Element {
-  const {
-    pagination,
-    defaultCurrent,
-    filterComponents,
-    onChange,
-    search,
-    ...rest
-  } = props
-
-  const [state, setState] = useState<FilterState<T>>({ search })
+  const [searchParams] = useSearchParams()
+  const [state, setState] = useState<FilterState<T>>({ search: props.search })
+  const { onChange } = props
 
   const handlePageChange: PaginationProps['onChange'] = (page, pageSize) => {
-    setState({ ...state, page, perPage: pageSize, per_page: pageSize })
-    onChange({ ...state, page, perPage: pageSize, per_page: pageSize })
+    setState({ ...state, page, pageSize })
+    onChange({ ...state, page, pageSize })
   }
 
   const handleSearch = (value: string) => {
-    setState({ ...state, page: 1, search: value })
-    onChange({ ...state, page: 1, search: value })
-  }
+    const page = value ? 1 : +searchParams.get('page') || 1
+    const pageSize = value ? 100000 : 10
 
-  const handleFiltersChange = (values: Record<string, any>) => {
-    setState({ ...state, ...values })
-    onChange({ ...state, ...values })
+    setState({ ...state, page, pageSize, search: value })
+    onChange({ ...state, page, pageSize, search: value })
   }
 
   const handleTableChange = (
     filters: Record<string, FilterValue>,
     sorter: TOnSort<T>,
   ) => {
-    const newState = {
+    const newQuery = {
       ...state,
-      ...filters,
-      field: sorter.field,
-      column: sorter.column,
-      sort: String(sorter.columnKey),
-      order: sorter.order,
+      filters,
+      sortField: String(sorter.field),
+      sortOrder: sorter.order,
     }
 
-    setState(newState)
-    onChange(newState)
+    setState(newQuery)
+    onChange(newQuery)
   }
+
+  const columns: ColumnsType<T> = props.columns.map((data) => {
+    return {
+      ...data,
+      title: data.title || Utils.titleCase(data['dataIndex'] || ''),
+      sorter: data.title != 'Actions' ? () => 0 : null,
+      sortDirections: ['ascend', 'descend'],
+    }
+  })
 
   return (
     <>
-      <FilterSection
-        searchValue={state.search}
-        onSearch={handleSearch}
-        filters={filterComponents}
-        onFiltersChange={handleFiltersChange}
-      />
+      <Loading isLoading={props.loading} />
+      <DataTableHeader {...props.dataTableHeader} onSearch={handleSearch} />
       <Space.Compact direction="vertical" style={tableLayout}>
         <Table<T>
-          {...rest}
+          {...props}
+          columns={columns}
           style={tableLayout}
           size="small"
           pagination={false}
-          onChange={(pagination, filters, sorter: SorterResult<T>): void =>
+          onChange={(pagination, filters, sorter: SorterResult<T>): void => {
             handleTableChange(filters, {
               ...sorter,
-              order:
-                sorter.order !== undefined
-                  ? sorter.order === 'ascend'
-                    ? 'ASC'
-                    : 'DESC'
-                  : undefined,
+              order: sorter.order
+                ? sorter.order == 'ascend'
+                  ? 'ASC'
+                  : 'DESC'
+                : undefined,
             })
-          }
+          }}
         />
 
-        <div style={stylePaginantion}>
-          {pagination && !!pagination?.total && (
+        <div className={styles.pagination}>
+          {props.pagination && !!props.pagination?.total && (
             <Pagination
               showTotal={(total, range) =>
                 `${range[0]}-${range[1]} of ${total} items`
               }
-              defaultCurrent={defaultCurrent || 1}
+              defaultCurrent={props.defaultCurrent || 1}
               showSizeChanger
               onChange={handlePageChange}
-              {...pagination}
+              {...props.pagination}
             />
           )}
         </div>
@@ -117,7 +108,7 @@ export const paginationTransform = (
   return {
     current: meta?.page,
     total: meta?.total,
-    pageSize: meta?.perPage,
+    pageSize: meta?.pageSize,
   }
 }
 
