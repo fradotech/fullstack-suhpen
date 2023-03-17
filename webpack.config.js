@@ -1,20 +1,19 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const webpack = require('webpack')
 
 module.exports = (env, argv) => {
   const devMode = argv.mode === 'development'
 
   return {
     mode: argv.mode,
-    devtool: devMode ? 'inline-source-map' : false,
+    devtool: devMode && 'inline-source-map',
     devServer: {
       contentBase: './dist',
       historyApiFallback: true,
     },
     entry: './client/index.tsx',
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, '/dist'),
       filename: '[name].bundle.js',
       chunkFilename: '[id].js',
       publicPath: '/',
@@ -36,8 +35,16 @@ module.exports = (env, argv) => {
           loader: 'babel-loader',
         },
         {
-          test: /\.(png|jpe?g|gif)$/,
-          loader: 'url-loader?limit=10000&name=img/[name].[ext]',
+          test: /\.(jpe?g|png|gif|woff|woff2|otf|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 1000,
+                name: 'assets/img/[name].[ext]',
+              },
+            },
+          ],
         },
         {
           include: path.resolve(__dirname, './client'),
@@ -56,13 +63,10 @@ module.exports = (env, argv) => {
                   loader: require.resolve('css-loader'),
                   options: {
                     importLoaders: 1,
+                    modules: true,
                     modules: {
-                      localIdentName: devMode
-                        ? '[name]-[local]__[hash:base64:5]'
-                        : '[hash:base64:5]',
-                      context: './client',
+                      localIdentName: '[name]__[local]__[hash:base64:5]',
                     },
-                    sourceMap: false,
                   },
                 },
               ],
@@ -72,10 +76,6 @@ module.exports = (env, argv) => {
       ],
     },
     plugins: [
-      new webpack.DefinePlugin({
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-      }),
       new HtmlWebpackPlugin({
         template: __dirname + '/client/index.html',
         filename: 'index.html',
