@@ -33,7 +33,7 @@ $ yarn migrate
 - Migration generate
 
 ```bash
-$ yarn migrate:generate @server/database/migrations/[MigrationName]
+$ yarn migrate:generate <MigrationName>
 ```
 
 ## Results
