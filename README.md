@@ -22,7 +22,7 @@ $ yarn server:dev
 $ yarn client:dev
 ```
 
-## Database (If only use migration)
+## Database
 
 - Migration Run
 

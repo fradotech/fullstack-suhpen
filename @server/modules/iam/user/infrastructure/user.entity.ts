@@ -60,6 +60,9 @@ export class EntUser implements IUser {
   @Column()
   name: string
 
+  @Column()
+  descriptions: string
+
   @Column({ unique: true })
   email: string
 
