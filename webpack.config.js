@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = (env, argv) => {
   const devMode = argv.mode === 'development'
@@ -13,7 +14,7 @@ module.exports = (env, argv) => {
     },
     entry: './client/index.tsx',
     output: {
-      path: path.resolve(__dirname, '/dist'),
+      path: path.resolve(__dirname, 'dist'),
       filename: '[name].bundle.js',
       chunkFilename: '[id].js',
       publicPath: '/',
@@ -76,6 +77,10 @@ module.exports = (env, argv) => {
       ],
     },
     plugins: [
+      new webpack.DefinePlugin({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      }),
       new HtmlWebpackPlugin({
         template: __dirname + '/client/index.html',
         filename: 'index.html',
