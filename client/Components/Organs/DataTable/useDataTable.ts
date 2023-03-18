@@ -1,6 +1,6 @@
 import { IndexRequest } from '@server/infrastructure/index/index.request'
 import React from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { URLSearchParamsInit, useSearchParams } from 'react-router-dom'
 
 export type TPropsTableFilter<T> = IndexRequest & T
 
@@ -12,6 +12,8 @@ export const useDataTable = <T>() => {
 
     delete queryParams.filters
     delete queryParams.search
+    delete queryParams.sortField
+    delete queryParams.sortOrder
 
     return queryParams
   })
@@ -24,21 +26,21 @@ export const useDataTable = <T>() => {
 
     delete queryParams.filters
     delete queryParams.search
+    delete queryParams.sortField
+    delete queryParams.sortOrder
 
-    setSearchParams(queryParams as any)
+    setSearchParams(queryParams as URLSearchParamsInit)
     return queryParams
-  }, [query]) as TPropsTableFilter<T>
+  }, [query])
 
   return {
+    query,
     setQueryParams: (propsParams: TPropsTableFilter<T>) => {
       const queryParams = {
         ...existingParams,
         ...propsParams,
-      } as TPropsTableFilter<T>
-      !queryParams.sortOrder && delete queryParams.sortField
+      }
       setQuery(queryParams)
     },
-
-    query,
   }
 }
