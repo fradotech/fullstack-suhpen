@@ -16,8 +16,9 @@ import { FilterState, IDataTableProps, TOnSort } from './DataTable.interface'
 import styles from './DataTable.module.css'
 import DataTableHeader from './DataTableHeader'
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
-function DataTable<T extends object>(props: IDataTableProps<T>): JSX.Element {
+const DataTable: React.FC<IDataTableProps<object>> = <T extends object>(
+  props: IDataTableProps<T>,
+): JSX.Element => {
   const [params] = useSearchParams()
   const [state, setState] = useState<FilterState<T>>({ search: props.search })
   const { onChange } = props
