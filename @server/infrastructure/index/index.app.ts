@@ -102,10 +102,8 @@ export abstract class BaseIndexApp {
 
     if (req.filters) {
       Object.keys(req.filters).forEach((field) => {
-        ;(req.filters[field] as string[]).forEach((value) => {
-          query.andWhere(`${tableName}.${field} = :value`, {
-            value,
-          })
+        query.andWhere(`${tableName}.${field} IN (:value)`, {
+          value: req.filters[field],
         })
       })
     }

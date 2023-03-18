@@ -6,7 +6,7 @@ import {
   HttpExceptionFilter,
   QueryErrorFilter,
   RelationNotFoundExceptionFilter,
-} from './common/filters/http-exeception.filter'
+} from './common/exceptions/http-exeception.filter'
 import { ValidationPipe } from './common/pipes/validation.pipe'
 import { DatabaseModule } from './database/database.module'
 import { FeatureModule } from './modules/feature/feature.module'

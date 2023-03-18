@@ -3,6 +3,7 @@ import {
   Catch,
   ExceptionFilter,
   HttpException,
+  Logger,
   UnprocessableEntityException,
 } from '@nestjs/common'
 import { BaseExceptionFilter } from '@nestjs/core'
@@ -91,6 +92,8 @@ export class QueryErrorFilter extends BaseExceptionFilter {
         break
 
       default:
+        Logger.error(`\n\n${exception}\n\n`, QueryFailedError.name)
+
         response.status(422).json({
           message: String(exception),
           data: null,
