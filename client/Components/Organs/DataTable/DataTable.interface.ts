@@ -6,6 +6,7 @@ import {
 } from 'antd/es/menu/hooks/useItems'
 import type { TableProps } from 'antd/es/table'
 import { ColumnType, SorterResult } from 'antd/es/table/interface'
+import dayjs from 'dayjs'
 import React from 'react'
 
 export type TOrder = {
@@ -53,8 +54,9 @@ export type FilterState<T> = {
 
 export interface IDataTableHeader {
   search?: boolean
-  dateRange?: (dateRange: any) => void
+  dateRange?: boolean
   onSearch?: (value: string) => void
+  onDateRange?: (dateRange: [dayjs.Dayjs, dayjs.Dayjs]) => void
   searchValue?: string
   query?: Record<string, any>
   hrefCreate?: string

@@ -1,11 +1,12 @@
 import { IPaginationMeta } from '@server/infrastructure/index/index.interface'
-import { Pagination, PaginationProps, Space, Table } from 'antd'
+import { Col, Pagination, PaginationProps, Space, Table } from 'antd'
 import {
   ColumnsType,
   FilterValue,
   SorterResult,
   TablePaginationConfig,
 } from 'antd/es/table/interface'
+import dayjs from 'dayjs'
 import React, { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import Loading from '../../../Components/Molecules/Loading/Loading'
@@ -14,12 +15,8 @@ import { FilterState, IDataTableProps, TOnSort } from './DataTable.interface'
 import styles from './DataTable.module.css'
 import DataTableHeader from './DataTableHeader'
 
-const tableLayout: React.CSSProperties = { width: '100%' }
-
 // eslint-disable-next-line @typescript-eslint/naming-convention
-function DataTable<T extends object = any>(
-  props: IDataTableProps<T>,
-): JSX.Element {
+function DataTable<T extends object>(props: IDataTableProps<T>): JSX.Element {
   const [params] = useSearchParams()
   const [state, setState] = useState<FilterState<T>>({ search: props.search })
   const { onChange } = props
@@ -35,6 +32,14 @@ function DataTable<T extends object = any>(
 
     setState({ ...state, page, pageSize, search })
     onChange({ ...state, page, pageSize, search })
+  }
+
+  const handleDateRange = (dateRange: [dayjs.Dayjs, dayjs.Dayjs]) => {
+    const startAt = dateRange?.[0]?.toISOString()
+    const endAt = dateRange?.[1]?.toISOString()
+
+    setState({ ...state, startAt, endAt })
+    onChange({ ...state, startAt, endAt })
   }
 
   const handleTableChange = (
@@ -64,27 +69,27 @@ function DataTable<T extends object = any>(
   return (
     <>
       <Loading isLoading={props.loading} />
-      <DataTableHeader {...props.dataTableHeader} onSearch={handleSearch} />
-      <Space.Compact direction="vertical" style={tableLayout}>
+      <DataTableHeader
+        {...props.dataTableHeader}
+        onSearch={handleSearch}
+        onDateRange={handleDateRange}
+      />
+      <Space.Compact direction="vertical" className={styles.tableLayout}>
         <Table<T>
           {...props}
           columns={columns}
-          style={tableLayout}
+          className={styles.tableLayout}
           size="small"
           pagination={false}
           onChange={(pagination, filters, sorter: SorterResult<T>): void => {
             handleTableChange(filters, {
               ...sorter,
-              order: sorter.order
-                ? sorter.order == 'ascend'
-                  ? 'ASC'
-                  : 'DESC'
-                : undefined,
+              order: sorter.order && sorter.order == 'ascend' ? 'ASC' : 'DESC',
             })
           }}
         />
 
-        <div className={styles.pagination}>
+        <Col className={styles.pagination}>
           {props.pagination && !!props.pagination?.total && (
             <Pagination
               showTotal={(total, range) =>
@@ -96,7 +101,7 @@ function DataTable<T extends object = any>(
               {...props.pagination}
             />
           )}
-        </div>
+        </Col>
       </Space.Compact>
     </>
   )

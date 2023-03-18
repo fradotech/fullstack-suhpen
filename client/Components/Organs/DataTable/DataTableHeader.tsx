@@ -72,7 +72,7 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
           {props.dateRange && (
             <Col className={styles.headerItem}>
               <DatePicker.RangePicker
-                onChange={props.dateRange}
+                onChange={props.onDateRange}
                 defaultValue={[
                   params.get('startAt') && dayjs(params.get('startAt')),
                   params.get('endAt') && dayjs(params.get('endAt')),
