@@ -4,6 +4,7 @@ import {
   ColumnsType,
   FilterValue,
   SorterResult,
+  SortOrder,
   TablePaginationConfig,
 } from 'antd/es/table/interface'
 import dayjs from 'dayjs'
@@ -22,48 +23,50 @@ function DataTable<T extends object>(props: IDataTableProps<T>): JSX.Element {
   const { onChange } = props
 
   const handlePageChange: PaginationProps['onChange'] = (page, pageSize) => {
-    setState({ ...state, page, pageSize })
-    onChange({ ...state, page, pageSize })
+    const newQuery = { ...state, page, pageSize }
+
+    setState(newQuery)
+    onChange(newQuery)
   }
 
   const handleSearch = (search: string) => {
     const page = search ? 1 : +params.get('page') || 1
     const pageSize = search ? 100000 : 10
+    const newQuery = { ...state, page, pageSize, search }
 
-    setState({ ...state, page, pageSize, search })
-    onChange({ ...state, page, pageSize, search })
+    setState(newQuery)
+    onChange(newQuery)
   }
 
   const handleDateRange = (dateRange: [dayjs.Dayjs, dayjs.Dayjs]) => {
     const startAt = dateRange?.[0]?.toISOString()
     const endAt = dateRange?.[1]?.toISOString()
 
-    setState({ ...state, startAt, endAt })
-    onChange({ ...state, startAt, endAt })
+    const newQuery = { ...state, startAt, endAt }
+
+    setState(newQuery)
+    onChange(newQuery)
   }
 
   const handleTableChange = (
     filters: Record<string, FilterValue>,
     sorter: TOnSort<T>,
   ) => {
-    const newQuery = {
-      ...state,
-      filters,
-      sortField: String(sorter.field),
-      sortOrder: sorter.order,
-    }
+    const sortField = String(sorter.field)
+    const sortOrder = sorter.order
+
+    const newQuery = { ...state, filters, sortField, sortOrder }
 
     setState(newQuery)
     onChange(newQuery)
   }
 
   const columns: ColumnsType<T> = props.columns.map((data) => {
-    return {
-      ...data,
-      title: data.title || Utils.titleCase(data['dataIndex'] || ''),
-      sorter: data.title != 'Actions' ? () => 0 : null,
-      sortDirections: ['ascend', 'descend'],
-    }
+    const title = data.title || Utils.titleCase(data['dataIndex'] || '')
+    const sorter = data.title != 'Actions' ? () => 0 : null
+    const sortDirections: SortOrder[] = ['ascend', 'descend']
+
+    return { ...data, title, sorter, sortDirections }
   })
 
   return (
