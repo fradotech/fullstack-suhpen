@@ -20,7 +20,7 @@ const tableLayout: React.CSSProperties = { width: '100%' }
 function DataTable<T extends object = any>(
   props: IDataTableProps<T>,
 ): JSX.Element {
-  const [searchParams] = useSearchParams()
+  const [params] = useSearchParams()
   const [state, setState] = useState<FilterState<T>>({ search: props.search })
   const { onChange } = props
 
@@ -29,12 +29,12 @@ function DataTable<T extends object = any>(
     onChange({ ...state, page, pageSize })
   }
 
-  const handleSearch = (value: string) => {
-    const page = value ? 1 : +searchParams.get('page') || 1
-    const pageSize = value ? 100000 : 10
+  const handleSearch = (search: string) => {
+    const page = search ? 1 : +params.get('page') || 1
+    const pageSize = search ? 100000 : 10
 
-    setState({ ...state, page, pageSize, search: value })
-    onChange({ ...state, page, pageSize, search: value })
+    setState({ ...state, page, pageSize, search })
+    onChange({ ...state, page, pageSize, search })
   }
 
   const handleTableChange = (

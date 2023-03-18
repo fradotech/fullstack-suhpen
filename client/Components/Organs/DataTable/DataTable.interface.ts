@@ -53,7 +53,7 @@ export type FilterState<T> = {
 
 export interface IDataTableHeader {
   search?: boolean
-  dateRange?: boolean
+  dateRange?: (dateRange: any) => void
   onSearch?: (value: string) => void
   searchValue?: string
   query?: Record<string, any>
