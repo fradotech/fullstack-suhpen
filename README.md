@@ -22,7 +22,7 @@ $ yarn server:dev
 $ yarn client:dev
 ```
 
-## Database (If only use migration)
+## Database
 
 - Migration Run
 
@@ -33,7 +33,7 @@ $ yarn migrate
 - Migration generate
 
 ```bash
-$ yarn migrate:generate @server/database/migrations/[MigrationName]
+$ yarn migrate:generate <MigrationName>
 ```
 
 ## Results

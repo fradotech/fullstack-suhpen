@@ -13,7 +13,6 @@ export const dataSourceOptions: DataSourceOptions = {
   entities: ['dist/**/*.entity.js'],
   migrations: ['dist/@server/database/migrations/*.js'],
   logging: config.server.nodeEnv === 'local',
-  synchronize: true, // Jika hanya aplikasi kecil
 }
 
 const dataSource = new DataSource(dataSourceOptions)

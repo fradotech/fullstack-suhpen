@@ -1,4 +1,3 @@
-import { TransportType } from '@nestjs-modules/mailer/dist/interfaces/mailer-options.interface'
 import { Logger } from '@nestjs/common'
 import { config } from '@server/config'
 import nodemailer from 'nodemailer'
@@ -6,7 +5,7 @@ import { MailOptions } from 'nodemailer/lib/json-transport'
 import { Exception } from '../../../../common/exceptions/index.exception'
 
 export class MailService {
-  constructor(private readonly transporter: TransportType) {
+  constructor(private readonly transporter: nodemailer.Transporter) {
     this.transporter = nodemailer.createTransport({
       host: config.smtp.host,
       port: +config.smtp.port,
