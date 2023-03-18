@@ -9,18 +9,6 @@
   },
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
-  "editor.detectIndentation": true,
-  "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
-  "prettier.tabWidth": 2,
-  "prettier.useTabs": true,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
-  "prettier.semi": false
+  "editor.detectIndentation": false
 }

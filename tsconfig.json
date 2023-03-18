@@ -24,6 +24,10 @@
     "moduleResolution": "node",
     "rootDir": "./",
     "noImplicitReturns": true,
-    "noImplicitThis": true
+    "noImplicitThis": true,
+    "inlineSources": true,
+    "sourceRoot": "/",
+    "resolveJsonModule": true,
+    "paths": {}
   }
 }
