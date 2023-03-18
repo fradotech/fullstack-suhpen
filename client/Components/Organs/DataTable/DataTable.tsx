@@ -1,11 +1,13 @@
 import { IPaginationMeta } from '@server/infrastructure/index/index.interface'
-import { Pagination, PaginationProps, Space, Table } from 'antd'
+import { Col, Pagination, PaginationProps, Space, Table } from 'antd'
 import {
   ColumnsType,
   FilterValue,
   SorterResult,
+  SortOrder,
   TablePaginationConfig,
 } from 'antd/es/table/interface'
+import dayjs from 'dayjs'
 import React, { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import Loading from '../../../Components/Molecules/Loading/Loading'
@@ -14,77 +16,84 @@ import { FilterState, IDataTableProps, TOnSort } from './DataTable.interface'
 import styles from './DataTable.module.css'
 import DataTableHeader from './DataTableHeader'
 
-const tableLayout: React.CSSProperties = { width: '100%' }
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-function DataTable<T extends object = any>(
+const DataTable: React.FC<IDataTableProps<object>> = <T extends object>(
   props: IDataTableProps<T>,
-): JSX.Element {
-  const [searchParams] = useSearchParams()
+): JSX.Element => {
+  const [params] = useSearchParams()
   const [state, setState] = useState<FilterState<T>>({ search: props.search })
   const { onChange } = props
 
   const handlePageChange: PaginationProps['onChange'] = (page, pageSize) => {
-    setState({ ...state, page, pageSize })
-    onChange({ ...state, page, pageSize })
+    const newQuery = { ...state, page, pageSize }
+
+    setState(newQuery)
+    onChange(newQuery)
   }
 
-  const handleSearch = (value: string) => {
-    const page = value ? 1 : +searchParams.get('page') || 1
-    const pageSize = value ? 100000 : 10
+  const handleSearch = (search: string) => {
+    const page = search ? 1 : +params.get('page') || 1
+    const pageSize = search ? 100000 : 10
+    const newQuery = { ...state, page, pageSize, search }
 
-    setState({ ...state, page, pageSize, search: value })
-    onChange({ ...state, page, pageSize, search: value })
+    setState(newQuery)
+    onChange(newQuery)
+  }
+
+  const handleDateRange = (dateRange: [dayjs.Dayjs, dayjs.Dayjs]) => {
+    const startAt = dateRange?.[0]?.toISOString()
+    const endAt = dateRange?.[1]?.toISOString()
+
+    const newQuery = { ...state, startAt, endAt }
+
+    setState(newQuery)
+    onChange(newQuery)
   }
 
   const handleTableChange = (
     filters: Record<string, FilterValue>,
     sorter: TOnSort<T>,
   ) => {
-    const newQuery = {
-      ...state,
-      filters,
-      sortField: String(sorter.field),
-      sortOrder: sorter.order,
-    }
+    const sortField = String(sorter.field)
+    const sortOrder = sorter.order
+
+    const newQuery = { ...state, filters, sortField, sortOrder }
 
     setState(newQuery)
     onChange(newQuery)
   }
 
   const columns: ColumnsType<T> = props.columns.map((data) => {
-    return {
-      ...data,
-      title: data.title || Utils.titleCase(data['dataIndex'] || ''),
-      sorter: data.title != 'Actions' ? () => 0 : null,
-      sortDirections: ['ascend', 'descend'],
-    }
+    const title = data.title || Utils.titleCase(data['dataIndex'] || '')
+    const sorter = data.title != 'Actions' ? () => 0 : null
+    const sortDirections: SortOrder[] = ['ascend', 'descend']
+
+    return { ...data, title, sorter, sortDirections }
   })
 
   return (
     <>
       <Loading isLoading={props.loading} />
-      <DataTableHeader {...props.dataTableHeader} onSearch={handleSearch} />
-      <Space.Compact direction="vertical" style={tableLayout}>
+      <DataTableHeader
+        {...props.dataTableHeader}
+        onSearch={handleSearch}
+        onDateRange={handleDateRange}
+      />
+      <Space.Compact direction="vertical" className={styles.tableLayout}>
         <Table<T>
           {...props}
           columns={columns}
-          style={tableLayout}
+          className={styles.tableLayout}
           size="small"
           pagination={false}
           onChange={(pagination, filters, sorter: SorterResult<T>): void => {
             handleTableChange(filters, {
               ...sorter,
-              order: sorter.order
-                ? sorter.order == 'ascend'
-                  ? 'ASC'
-                  : 'DESC'
-                : undefined,
+              order: sorter.order && sorter.order == 'ascend' ? 'ASC' : 'DESC',
             })
           }}
         />
 
-        <div className={styles.pagination}>
+        <Col className={styles.pagination}>
           {props.pagination && !!props.pagination?.total && (
             <Pagination
               showTotal={(total, range) =>
@@ -96,7 +105,7 @@ function DataTable<T extends object = any>(
               {...props.pagination}
             />
           )}
-        </div>
+        </Col>
       </Space.Compact>
     </>
   )

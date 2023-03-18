@@ -3,11 +3,12 @@ import {
   PlusCircleFilled,
   SearchOutlined,
 } from '@ant-design/icons'
-import { Button, Col, DatePicker, Form, Input, notification, Row } from 'antd'
+import { Button, Col, DatePicker, Input, notification, Row } from 'antd'
 import axios from 'axios'
+import dayjs from 'dayjs'
 import FileDownload from 'js-file-download'
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import Loading from '../../../Components/Molecules/Loading/Loading'
 import { hostApi } from '../../../services/axios.service'
 import { IDataTableHeader } from './DataTable.interface'
@@ -19,7 +20,7 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const [value, setValue] = React.useState(props.searchValue)
-  const [form] = Form.useForm()
+  const [params] = useSearchParams()
 
   React.useEffect(() => {
     const timeout = setTimeout(
@@ -70,9 +71,13 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
           )}
           {props.dateRange && (
             <Col className={styles.headerItem}>
-              <Form form={form}>
-                <DatePicker.RangePicker />
-              </Form>
+              <DatePicker.RangePicker
+                onChange={props.onDateRange}
+                defaultValue={[
+                  params.get('startAt') && dayjs(params.get('startAt')),
+                  params.get('endAt') && dayjs(params.get('endAt')),
+                ]}
+              />
             </Col>
           )}
         </Row>
