@@ -4,10 +4,7 @@ module.exports = {
     project: 'tsconfig.json',
     sourceType: 'module',
   },
-  plugins: [
-    '@typescript-eslint/eslint-plugin',
-    'unused-imports', // remove unused import
-  ],
+  plugins: ['@typescript-eslint/eslint-plugin', 'unused-imports'],
   extends: ['plugin:@typescript-eslint/recommended', 'prettier'],
   root: true,
   env: {
