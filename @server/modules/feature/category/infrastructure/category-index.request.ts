@@ -1,14 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IndexRequest } from '@server/infrastructure/index/index.request'
 import { Type } from 'class-transformer'
-import { IsEnum, IsOptional, ValidateNested } from 'class-validator'
-import { ECategoryName } from './category.enum'
+import { IsOptional, IsString, ValidateNested } from 'class-validator'
 
 class CategoryIndexFilterRequest {
   @IsOptional()
-  @IsEnum(ECategoryName, { each: true })
-  @ApiProperty({ example: ECategoryName.Pulsa })
-  name?: ECategoryName
+  @IsString()
+  @ApiProperty({ example: 'Pulsa' })
+  name?: string
 }
 
 export class CategoryIndexRequest extends IndexRequest {

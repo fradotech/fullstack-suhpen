@@ -1,15 +1,9 @@
-import { ApiProperty } from '@nestjs/swagger'
 import { IndexRequest } from '@server/infrastructure/index/index.request'
-import { ERole } from '@server/modules/iam/role/infrastructure/role.enum'
 import { Type } from 'class-transformer'
-import { IsEnum, IsOptional, ValidateNested } from 'class-validator'
+import { ValidateNested } from 'class-validator'
+import { EntUser } from './user.entity'
 
-class UserIndexFilterRequest {
-  @IsOptional()
-  @IsEnum(ERole, { each: true })
-  @ApiProperty({ example: ERole.User })
-  role?: ERole
-}
+class UserIndexFilterRequest extends EntUser {}
 
 export class UserIndexRequest extends IndexRequest {
   @ValidateNested({ each: true })

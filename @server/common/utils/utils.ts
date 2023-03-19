@@ -47,7 +47,7 @@ export class Utils {
   }
 
   static camelToSnake = (str: string) => {
-    str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`)
+    return str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`)
   }
 
   static camelToTitle = (str: string) => {

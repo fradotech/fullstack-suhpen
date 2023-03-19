@@ -5,32 +5,30 @@ import { Request } from 'express'
 import { Repository } from 'typeorm'
 import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
 import { IPaginateResponse } from '../../../../infrastructure/index/index.interface'
-import { CategoryIndexRequest } from './category-index.request'
-import { EntCategory } from './category.entity'
-import { ICategory } from './category.interface'
+import { ProductIndexRequest } from './product-index.request'
+import { EntProduct } from './product.entity'
+import { IProduct } from './product.interface'
 
 @Injectable({ scope: Scope.REQUEST })
-export class CategoryIndexApp extends BaseIndexApp {
+export class ProductIndexApp extends BaseIndexApp {
   constructor(
     @Inject(REQUEST)
     private readonly request: Request,
-    @InjectRepository(EntCategory)
-    private readonly categoryRepo: Repository<ICategory>,
+    @InjectRepository(EntProduct)
+    private readonly productRepo: Repository<IProduct>,
   ) {
     super()
   }
 
-  async fetch(
-    req: CategoryIndexRequest,
-  ): Promise<IPaginateResponse<ICategory>> {
-    const tableName = 'category'
-    const tableKeys = Object.keys(EntCategory)
+  async fetch(req: ProductIndexRequest): Promise<IPaginateResponse<IProduct>> {
+    const tableName = 'product'
+    const tableKeys = Object.keys(EntProduct)
     const query = this.createQueryIndex(
       req,
-      this.categoryRepo.createQueryBuilder(tableName),
+      this.productRepo.createQueryBuilder(tableName),
       tableName,
       tableKeys,
-      this.categoryRepo,
+      this.productRepo,
       this.request,
     )
 

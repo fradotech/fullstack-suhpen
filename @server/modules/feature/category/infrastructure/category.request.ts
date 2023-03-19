@@ -1,17 +1,7 @@
-import { ApiProperty, OmitType } from '@nestjs/swagger'
-import { IsNotEmpty, IsString, Matches } from 'class-validator'
-import { ECategoryName } from './category.enum'
-import { ICategory } from './category.interface'
+import { OmitType } from '@nestjs/swagger'
+import { BaseProductRequest } from '@server/infrastructure/base/product/base-product.request'
 
-class CategoryRequest implements ICategory {
-  id: string
-
-  @IsNotEmpty()
-  @IsString()
-  @Matches(/^[a-zA-Z ]+$/)
-  @ApiProperty({ example: 'Frado' })
-  name: ECategoryName
-}
+class CategoryRequest extends BaseProductRequest {}
 
 export class CategoryCreateRequest extends OmitType(CategoryRequest, []) {}
 

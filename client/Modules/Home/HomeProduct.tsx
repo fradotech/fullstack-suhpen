@@ -1,3 +1,4 @@
+import { IProduct } from '@server/modules/feature/product/infrastructure/product.interface'
 import { Card, Col, Image, Layout, Row, Tag } from 'antd'
 import Meta from 'antd/es/card/Meta'
 import Title from 'antd/es/typography/Title'
@@ -10,7 +11,7 @@ import styles from './Home.module.css'
 const url = 'https://dummyjson.com/products?limit=100'
 
 const HomeProduct: React.FC = () => {
-  const fetch = async () => (await axios.get(url)).data.products as any[]
+  const fetch = async () => (await axios.get(url)).data.products as IProduct[]
   const { isLoading, data } = useQuery([HomeProduct.name], fetch)
 
   return (
@@ -33,7 +34,7 @@ const HomeProduct: React.FC = () => {
                   />
                 }
               >
-                {data.title}
+                {data['title']}
                 <Meta
                   style={{ margin: '4px 0px' }}
                   title={

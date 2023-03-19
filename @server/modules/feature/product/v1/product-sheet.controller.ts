@@ -5,18 +5,18 @@ import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.respo
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { AdminGuard } from '@server/modules/iam/auth/common/admin.guard'
 import { Modules } from '@server/modules/modules'
-import { CategoryIndexApp } from '../infrastructure/category-index.app'
-import { CategoryIndexRequest } from '../infrastructure/category-index.request'
-import { CategoryResponse } from '../infrastructure/category.response'
+import { ProductIndexApp } from '../infrastructure/product-index.app'
+import { ProductIndexRequest } from '../infrastructure/product-index.request'
+import { ProductResponse } from '../infrastructure/product.response'
 
-const THIS_MODULE = Modules.Category + '/sheet'
+const THIS_MODULE = Modules.Product + '/sheet'
 
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
 @UseGuards(AdminGuard)
-export class CategorySheetController {
-  constructor(private readonly productIndexApp: CategoryIndexApp) {}
+export class ProductSheetController {
+  constructor(private readonly userIndexApp: ProductIndexApp) {}
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
@@ -25,16 +25,16 @@ export class CategorySheetController {
 
   @Post('export')
   async fetch(
-    @Query() req: CategoryIndexRequest,
-  ): Promise<IApiExportRes<CategoryResponse[]>> {
+    @Query() req: ProductIndexRequest,
+  ): Promise<IApiExportRes<ProductResponse[]>> {
     req.isExport = true
-    const response = await this.productIndexApp.fetch(req)
+    const response = await this.userIndexApp.fetch(req)
 
-    const data = CategoryResponse.fromEntities(response.data)
+    const data = ProductResponse.fromEntities(response.data)
     const parser = new Parser()
     const dataExport = parser.parse(data)
     const fileName = `Data - ${
-      Modules.Category
+      Modules.Product
     } - ${new Date().toISOString()}.xlsx`
 
     return ApiExportRes.fromEntity(dataExport, fileName)

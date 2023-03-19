@@ -8,4 +8,5 @@ export enum Modules {
   // <--- Feature Modules --->
 
   Category = 'Categories',
+  Product = 'products',
 }

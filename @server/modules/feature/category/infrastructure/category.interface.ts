@@ -1,12 +1,6 @@
-import { IBaseEntity } from '@server/infrastructure/base/base-entity.interface'
-import { ECategoryName } from './category.enum'
+import { IBaseProduct } from '@server/infrastructure/base/product/base-product.interface'
 
-export interface ICategory extends IBaseEntity {
-  id: string
-  name: ECategoryName
-  key?: string
-  description?: string
-  thumbnail?: string
+export interface ICategory extends IBaseProduct {
   parent?: ICategory
   childs?: ICategory[]
 }

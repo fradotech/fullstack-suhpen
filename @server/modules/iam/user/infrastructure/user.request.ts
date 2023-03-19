@@ -22,7 +22,6 @@ export class UserRequest implements IUser {
 
   @IsNotEmpty()
   @IsString()
-  @Matches(/^[a-zA-Z ]+$/)
   @ApiProperty({ example: 'Frado' })
   name: string
 
