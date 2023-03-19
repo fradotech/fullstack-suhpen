@@ -3,7 +3,7 @@ import { useQuery } from 'react-query'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import DataTable, {
   paginationTransform,
-} from '../../../Components/Organs/DataTable/DataTable'
+} from '../../../Components/Organisms/DataTable/DataTable'
 import { roleAction } from './role.action'
 import { rolesColumns } from './Role.column'
 

@@ -4,7 +4,6 @@ import {
   ColumnsType,
   FilterValue,
   SorterResult,
-  SortOrder,
   TablePaginationConfig,
 } from 'antd/es/table/interface'
 import dayjs from 'dayjs'
@@ -63,11 +62,12 @@ const DataTable: React.FC<IDataTableProps<object>> = <T extends object>(
   }
 
   const columns: ColumnsType<T> = props.columns.map((data) => {
-    const title = data.title || Utils.titleCase(data['dataIndex'] || '')
-    const sorter = data.title != 'Actions' ? () => 0 : null
-    const sortDirections: SortOrder[] = ['ascend', 'descend']
-
-    return { ...data, title, sorter, sortDirections }
+    return {
+      ...data,
+      title: data.title || Utils.titleCase(data['dataIndex'] || ''),
+      sorter: data.title != 'Actions' && (() => 0),
+      sortDirections: ['ascend', 'descend'],
+    }
   })
 
   return (

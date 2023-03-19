@@ -1,11 +1,12 @@
 import { UserIndexRequest } from '@server/modules/iam/user/infrastructure/user-index.request'
 import React from 'react'
 import { useQuery } from 'react-query'
+import CardItem from '../../../Components/Molecules/CardItem/CardItem'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import DataTable, {
   paginationTransform,
-} from '../../../Components/Organs/DataTable/DataTable'
-import { useDataTable } from '../../../Components/Organs/DataTable/useDataTable'
+} from '../../../Components/Organisms/DataTable/DataTable'
+import { useDataTable } from '../../../Components/Organisms/DataTable/useDataTable'
 import { Route } from '../../../Enums/Route'
 import { userAction } from './user.action'
 import { usersColumns } from './User.column'
@@ -34,6 +35,7 @@ const UserS: React.FC = () => {
           hrefExport: Route.UserExport,
         }}
       />
+      <CardItem mainText={''} />
     </>
   )
 }
