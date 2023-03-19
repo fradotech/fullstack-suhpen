@@ -1,3 +1,4 @@
+import { IBaseEntity } from '@server/infrastructure/base/base-entity.interface'
 import { IPaginationMeta } from '@server/infrastructure/index/index.interface'
 import { Col, Pagination, PaginationProps, Row, Space, Table } from 'antd'
 import {
@@ -16,7 +17,9 @@ import styles from './DataTable.module.css'
 import DataTableCard from './DataTableCard'
 import DataTableHeader from './DataTableHeader'
 
-const DataTable: React.FC<IDataTableProps<object>> = <T extends object>(
+const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
+  T extends IBaseEntity,
+>(
   props: IDataTableProps<T>,
 ): JSX.Element => {
   const [params] = useSearchParams()
@@ -85,7 +88,9 @@ const DataTable: React.FC<IDataTableProps<object>> = <T extends object>(
       <Space.Compact direction="vertical" className={styles.tableLayout}>
         {isCard ? (
           <Row style={{ paddingTop: '12px' }}>
-            <DataTableCard data={[...props?.dataSource]} />
+            <DataTableCard
+              data={props?.dataSource as unknown as IBaseEntity[]}
+            />
           </Row>
         ) : (
           <Table<T>
