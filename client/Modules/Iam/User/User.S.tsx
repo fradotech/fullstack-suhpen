@@ -30,8 +30,8 @@ const UserS: React.FC = () => {
           query,
           search: true,
           dateRange: true,
-          hrefCreate: Route.UserForm,
-          hrefExport: Route.UserExport,
+          hrefCreate: Route.user.form,
+          hrefExport: Route.user.export,
         }}
       />
     </>

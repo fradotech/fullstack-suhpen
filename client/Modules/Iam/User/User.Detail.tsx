@@ -20,8 +20,8 @@ const UserDetail: React.FC = () => {
       <PageHeader
         title="User Detail"
         isLoading={isLoading}
-        hrefEdit={`${Route.UserForm}/${id}`}
-        hrefDelete={`${Route.Users}/${id}`}
+        hrefEdit={Route.user.edit(id)}
+        hrefDelete={Route.user.detail(id)}
       />
       <Row>
         <Avatar

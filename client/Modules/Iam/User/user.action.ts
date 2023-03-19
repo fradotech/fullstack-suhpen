@@ -28,19 +28,19 @@ export const userAction = {
   fetch: async (
     req?: UserIndexRequest,
   ): Promise<IPaginateResponse<UserResponse>> => {
-    return await axiosService.get(Route.Users, req)
+    return await axiosService.get(Route.users, req)
   },
 
   create: async (data: UserCreateRequest): Promise<IApiRes<UserResponse>> => {
     data = dataPrepare(data) as UserCreateRequest
-    const res = await axiosService.post(Route.Users, data)
+    const res = await axiosService.post(Route.users, data)
     res.data && notification.success({ message: 'Success create data' })
     return res
   },
 
   findOne: async (id: string): Promise<IApiRes<UserResponse>> => {
     const res: IApiRes<UserResponse> = await axiosService.get(
-      `${Route.Users}/${id}`,
+      Route.user.detail(id),
     )
 
     res.data.birthDate = res.data.birthDate && dayjs(res.data.birthDate)
@@ -57,12 +57,12 @@ export const userAction = {
     data: UserUpdateRequest,
   ): Promise<IApiRes<UserResponse>> => {
     data = dataPrepare(data)
-    const res = await axiosService.put(`${Route.Users}/${id}`, data)
+    const res = await axiosService.put(Route.user.detail(id), data)
     res.data && notification.success({ message: 'Success update data' })
     return res
   },
 
   remove: async (id: string): Promise<IApiRes<UserResponse>> => {
-    return await axiosService.delete(`${Route.Users}/${id}`)
+    return await axiosService.delete(Route.user.detail(id))
   },
 }
