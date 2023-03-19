@@ -3,12 +3,14 @@ import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
+import { isMobileScreen } from '../../utils/is-mobile'
 import { themeColors } from '../../utils/theme'
 import HomeHeader from './HomeHeader'
 import HomeProduct from './HomeProduct'
 
 const Home: React.FC = () => {
   const navigate = useNavigate()
+  const isMobile = isMobileScreen()
 
   return (
     <Layout style={{ backgroundColor: 'white' }}>
@@ -30,7 +32,9 @@ const Home: React.FC = () => {
               </Button>
             </Col>
             <Col>
-              <CompanyLogo style={{ width: '500px', padding: '12%' }} />
+              {!isMobile && (
+                <CompanyLogo style={{ width: '500px', padding: '12%' }} />
+              )}
             </Col>
           </Row>
         </section>
