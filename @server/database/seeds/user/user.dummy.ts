@@ -1,7 +1,7 @@
 import { ERole } from '../../../modules/iam/role/infrastructure/role.enum'
 
 // <--- KEY: email --->
-export const usersDummies = [
+export const userDummies = [
   {
     name: 'Admin',
     email: 'Admin@admin.com',

@@ -7,7 +7,7 @@ export class EntBaseProduct extends BaseEntity implements IBaseProduct {
   @Column()
   name: string
 
-  @Column()
+  @Column({ unique: true })
   key: string
 
   @Column({ default: true })
