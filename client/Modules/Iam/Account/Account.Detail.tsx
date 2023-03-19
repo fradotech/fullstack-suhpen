@@ -38,7 +38,7 @@ const AccountDetail: React.FC = () => {
             {data?.data?.gender}
           </Descriptions.Item>
           <Descriptions.Item label="Birth Date">
-            {data?.data?.birthDate && Utils.dateFormat(data?.data?.birthDate)}
+            {data?.data?.birthDate && Utils.formatDate(data?.data?.birthDate)}
           </Descriptions.Item>
           <Descriptions.Item label="Phone Number">
             {data?.data?.phoneNumber}

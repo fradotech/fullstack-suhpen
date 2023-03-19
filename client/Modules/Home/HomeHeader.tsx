@@ -27,6 +27,9 @@ const HomeHeader: React.FC = () => {
         <a className={styles.headerItem} href={'#home'}>
           Home
         </a>
+        <a className={styles.headerItem} href={'#product'}>
+          Product
+        </a>
         {user ? (
           <a
             className={styles.headerItem}

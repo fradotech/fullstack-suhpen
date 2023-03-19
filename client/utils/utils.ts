@@ -31,7 +31,16 @@ export class Utils {
     return result.charAt(0).toUpperCase() + result.slice(1)
   }
 
-  static dateFormat = (date: Date | string | dayjs.Dayjs) => {
+  static formatDate = (date: Date | string | dayjs.Dayjs) => {
     return dayjs(date).format('YYYY-MM-DD HH:MM')
+  }
+
+  static formatCurrency = (str: number | string) => {
+    const formatter = new Intl.NumberFormat('in-ID', {
+      style: 'currency',
+      currency: 'IDR',
+    })
+
+    return formatter.format(+str)
   }
 }

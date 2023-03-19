@@ -33,7 +33,7 @@ export const usersColumns: ColumnsType<UserResponse> = [
   },
   {
     dataIndex: 'createdAt',
-    render: (data: Date) => Utils.dateFormat(data),
+    render: (data: Date) => Utils.formatDate(data),
   },
   {
     title: 'Actions',

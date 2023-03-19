@@ -52,7 +52,7 @@ const UserDetail: React.FC = () => {
             {data?.data?.address}
           </Descriptions.Item>
           <Descriptions.Item label="Birth Date">
-            {data?.data?.birthDate && Utils.dateFormat(data?.data?.birthDate)}
+            {data?.data?.birthDate && Utils.formatDate(data?.data?.birthDate)}
           </Descriptions.Item>
         </DescriptionContainer>
       </Row>
