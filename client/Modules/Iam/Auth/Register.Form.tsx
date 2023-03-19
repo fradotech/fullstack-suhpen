@@ -60,7 +60,7 @@ const RegisterForm: React.FC = () => {
               placeholder="Password Confirmation"
             />
           </FormContainer>
-          <a onClick={() => navigate(Route.Login)}>Have an account? Login</a>
+          <a onClick={() => navigate(Route.login)}>Have an account? Login</a>
         </Card>
       </div>
     )

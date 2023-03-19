@@ -43,8 +43,8 @@ const itemsRoleAdministrator: MenuItem[] =
               icon: <UsergroupAddOutlined />,
             },
             {
-              key: Route.Roles,
-              label: <Link to={Route.Roles}>Role</Link>,
+              key: Route.roles,
+              label: <Link to={Route.roles}>Role</Link>,
               icon: <UserSwitchOutlined />,
             },
           ],

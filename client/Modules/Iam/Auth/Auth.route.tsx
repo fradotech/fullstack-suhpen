@@ -4,21 +4,23 @@ import { Route } from 'react-router-dom'
 const LoginForm = React.lazy(() => import('./Login.Form'))
 const RegisterForm = React.lazy(() => import('./Register.Form'))
 
+const path = '/auth'
+
 export const routesAuth = {
-  Login: '/auth/login',
-  Register: '/auth/register',
-  Logout: '/auth/logout',
+  login: `${path}/login`,
+  register: `${path}/register`,
+  logout: `${path}/logout`,
 }
 
 export default [
   <Route
-    key={routesAuth.Login}
-    path={routesAuth.Login}
+    key={routesAuth.login}
+    path={routesAuth.login}
     element={<LoginForm />}
   />,
   <Route
-    key={routesAuth.Register}
-    path={routesAuth.Register}
+    key={routesAuth.register}
+    path={routesAuth.register}
     element={<RegisterForm />}
   />,
 ]

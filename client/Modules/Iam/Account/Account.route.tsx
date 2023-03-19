@@ -4,20 +4,22 @@ import { Route } from 'react-router-dom'
 const AccountDetail = React.lazy(() => import('./Account.Detail'))
 const AccountForm = React.lazy(() => import('./Account.Form'))
 
+const path = '/account'
+
 export const routesAccount = {
-  Account: '/account',
-  AccountEdit: '/account/edit',
+  account: path,
+  accountEdit: `${path}/edit`,
 }
 
 export default [
   <Route
-    key={routesAccount.Account}
-    path={routesAccount.Account}
+    key={routesAccount.account}
+    path={routesAccount.account}
     element={<AccountDetail />}
   />,
   <Route
-    key={routesAccount.AccountEdit}
-    path={routesAccount.AccountEdit}
+    key={routesAccount.accountEdit}
+    path={routesAccount.accountEdit}
     element={<AccountForm />}
   />,
 ]

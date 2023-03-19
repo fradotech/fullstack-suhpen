@@ -37,7 +37,7 @@ const HomeHeader: React.FC = () => {
         ) : (
           <a
             className={styles.headerItem}
-            onClick={() => location.replace(Route.Login)}
+            onClick={() => location.replace(Route.login)}
           >
             Login
           </a>

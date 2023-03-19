@@ -7,7 +7,7 @@ const useUser = () => {
   const navigate = useNavigate()
 
   React.useEffect(() => {
-    !authAction.loggedUser() && navigate(Route.Login)
+    !authAction.loggedUser() && navigate(Route.login)
     authAction.loggedUser() && navigate(window.location.pathname)
   }, [])
 

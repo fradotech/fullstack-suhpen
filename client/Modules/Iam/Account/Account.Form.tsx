@@ -29,7 +29,7 @@ const AccountForm: React.FC = () => {
     try {
       const res = await accountAction.update(data)
       setIsLoading(false)
-      res.data && navigate(Route.Account)
+      res.data && navigate(Route.account)
     } catch (e) {
       setIsLoading(false)
     }

@@ -53,7 +53,7 @@ const LoginForm: React.FC = () => {
               rules={[rule.required]}
             />
           </FormContainer>
-          <a onClick={() => navigate(Route.Register)}>
+          <a onClick={() => navigate(Route.register)}>
             Don't have an account? Register
           </a>
         </Card>
