@@ -1,7 +1,12 @@
 export enum Modules {
   Auth = 'auth',
-  Users = 'users',
-  Roles = 'roles',
+  User = 'users',
+  Role = 'roles',
   Account = 'account',
   Attachment = 'attachments',
+
+  // <--- Feature Modules --->
+
+  Category = 'Categories',
+  Product = 'products',
 }

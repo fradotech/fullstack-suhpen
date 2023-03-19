@@ -13,7 +13,8 @@ export const routesUser = {
     form: `${path}/save`,
     edit: (id?: string) => `${path}/save/${id || ':id'}`,
     detail: (id?: string) => `${path}/${id || ':id'}`,
-    export: `${path}/export`,
+    import: `${path}/sheet/import`,
+    export: `${path}/sheet/export`,
   },
 }
 

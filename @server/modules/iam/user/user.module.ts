@@ -8,15 +8,11 @@ import { UserService } from './infrastructure/user.service'
 import { UserAccountController } from './v1/account/user-account.controller'
 import { UserCrudApp } from './v1/user-crud.app'
 import { UserCrudController } from './v1/user-crud.controller'
-import { UserExportController } from './v1/user-export.controller'
+import { UserSheetController } from './v1/user-export.controller'
 
 @Module({
   imports: [TypeOrmModule.forFeature([EntUser]), AuthModule, HttpModule],
-  controllers: [
-    UserExportController,
-    UserAccountController,
-    UserCrudController,
-  ],
+  controllers: [UserSheetController, UserAccountController, UserCrudController],
   providers: [UserService, UserCrudApp, UserIndexApp],
   exports: [UserService],
 })

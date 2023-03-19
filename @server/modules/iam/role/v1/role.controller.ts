@@ -9,7 +9,7 @@ import { IRole } from '../infrastructure/role.interface'
 import { RoleResponse } from '../infrastructure/role.response'
 import { RoleService } from '../infrastructure/role.service'
 
-const THIS_MODULE = Modules.Roles
+const THIS_MODULE = Modules.Role
 
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)

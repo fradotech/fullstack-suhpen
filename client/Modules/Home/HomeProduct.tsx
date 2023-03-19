@@ -1,29 +1,20 @@
+import { IProduct } from '@server/modules/feature/product/infrastructure/product.interface'
 import { Card, Col, Image, Layout, Row, Tag } from 'antd'
-import Meta from 'antd/es/card/Meta'
 import Title from 'antd/es/typography/Title'
-import axios from 'axios'
 import React from 'react'
 import { useQuery } from 'react-query'
+import { axiosService } from '../../services/axios.service'
 import { Utils } from '../../utils/utils'
 import styles from './Home.module.css'
 
-const url = 'https://dummyjson.com/products?limit=100'
-
-interface IProduct {
-  id: string
-  title: string
-  description: string
-  price: string
-  discountPercentage: string
-  rating: string
-  stock: string
-  brand: string
-  category: string
-  thumbnail: string
-}
+const path = '/products'
 
 const HomeProduct: React.FC = () => {
-  const fetch = async () => (await axios.get(url)).data.products as IProduct[]
+  const fetch = async () => {
+    const query = { pageSize: 100 }
+    const res = await axiosService.get(path, query)
+    return res.data as IProduct[]
+  }
   const { isLoading, data } = useQuery([HomeProduct.name], fetch)
 
   return (
@@ -46,28 +37,25 @@ const HomeProduct: React.FC = () => {
                   />
                 }
               >
-                {data.title}
-                <Meta
-                  style={{ margin: '4px 0px' }}
-                  title={
-                    <Row>
-                      <Title
-                        style={{ color: '#FF5F1F', margin: '0' }}
-                        level={5}
-                      >
-                        {Utils.formatCurrency(data.price + '0000')}
-                      </Title>
-                    </Row>
-                  }
-                ></Meta>
-                <Row style={{ justifyContent: 'space-between' }}>
-                  {+data.id % 3 == 0 ? (
+                {data.name}
+                <Title style={{ color: '#FF5F1F', margin: '2px' }} level={5}>
+                  {Utils.formatCurrency(
+                    data.price - (data.price * data.discountPercentage) / 100,
+                  )}
+                </Title>
+                <Row>
+                  {+data.discountPercentage % 3 == 0 ? (
                     <Tag color="green">Cashback</Tag>
                   ) : (
-                    <Tag color="red">30 %</Tag>
+                    <>
+                      <Tag color="red">{data.discountPercentage + '%'}</Tag>
+                      <s style={{ opacity: '70%' }}>
+                        {Utils.formatCurrency(data.price)}
+                      </s>
+                    </>
                   )}
-                  10rb+ Terjual
                 </Row>
+                <p style={{ opacity: '70%', margin: '0px' }}>10rb+ Terjual</p>
               </Card>
             )
           })}
