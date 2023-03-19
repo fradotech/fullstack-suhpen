@@ -6,10 +6,10 @@ import { axiosService } from '../../../services/axios.service'
 
 export const roleAction = {
   fetch: async (): Promise<IPaginateResponse<RoleResponse>> => {
-    return await axiosService.get(Route.Roles)
+    return await axiosService.get(Route.roles)
   },
 
   findOne: async (id: string): Promise<IApiRes<RoleResponse>> => {
-    return await axiosService.get(`${Route.Roles}/${id}`)
+    return await axiosService.get(`${Route.roles}/${id}`)
   },
 }

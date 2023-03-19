@@ -2,8 +2,8 @@ import { UserOutlined } from '@ant-design/icons'
 import { Avatar, Descriptions, Row, Tag } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
-import DescriptionContainer from '../../../Components/Molecules/DescriptionContainer/DescriptionContainer'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
+import DescriptionContainer from '../../../Components/Organisms/Description/DescriptionContainer'
 import { Utils } from '../../../utils/utils'
 import { ERole } from '../Role/Role.enum'
 import { accountAction } from './account.action'
@@ -38,7 +38,7 @@ const AccountDetail: React.FC = () => {
             {data?.data?.gender}
           </Descriptions.Item>
           <Descriptions.Item label="Birth Date">
-            {data?.data?.birthDate && Utils.dateFormat(data?.data?.birthDate)}
+            {data?.data?.birthDate && Utils.formatDate(data?.data?.birthDate)}
           </Descriptions.Item>
           <Descriptions.Item label="Phone Number">
             {data?.data?.phoneNumber}

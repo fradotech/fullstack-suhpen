@@ -4,8 +4,8 @@ import { useQuery } from 'react-query'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import DataTable, {
   paginationTransform,
-} from '../../../Components/Organs/DataTable/DataTable'
-import { useDataTable } from '../../../Components/Organs/DataTable/useDataTable'
+} from '../../../Components/Organisms/DataTable/DataTable'
+import { useDataTable } from '../../../Components/Organisms/DataTable/useDataTable'
 import { Route } from '../../../Enums/Route'
 import { userAction } from './user.action'
 import { usersColumns } from './User.column'
@@ -30,8 +30,8 @@ const UserS: React.FC = () => {
           query,
           search: true,
           dateRange: true,
-          hrefCreate: Route.UserForm,
-          hrefExport: Route.UserExport,
+          hrefCreate: Route.user.form,
+          hrefExport: Route.user.export,
         }}
       />
     </>

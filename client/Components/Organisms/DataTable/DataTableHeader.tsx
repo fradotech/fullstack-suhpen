@@ -1,7 +1,9 @@
 import {
+  AppstoreOutlined,
   FileExcelOutlined,
   PlusCircleFilled,
   SearchOutlined,
+  UnorderedListOutlined,
 } from '@ant-design/icons'
 import { Button, Col, DatePicker, Input, notification, Row } from 'antd'
 import axios from 'axios'
@@ -58,6 +60,17 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
       <Loading isLoading={isLoading} />
       <Row style={{ justifyContent: 'space-between' }}>
         <Row>
+          {props.setIsCard && (
+            <Col className={styles.headerItem}>
+              <Button onClick={() => props.setIsCard(!props.isCard)}>
+                {props.isCard ? (
+                  <UnorderedListOutlined />
+                ) : (
+                  <AppstoreOutlined />
+                )}
+              </Button>
+            </Col>
+          )}
           {props.search && (
             <Col className={styles.headerItem}>
               <Input

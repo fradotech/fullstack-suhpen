@@ -20,7 +20,7 @@ type IProps = {
 const LayoutAccount: React.FC<IProps> = (props: IProps) => {
   const handleLogout = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
-    authAction.logout() && location.replace(Route.Login)
+    authAction.logout() && location.replace(Route.login)
   }
 
   return (
@@ -50,7 +50,7 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
             {
               key: '1',
               label: (
-                <Link to={Route.Account} style={{ width: '6rem' }}>
+                <Link to={Route.account} style={{ width: '6rem' }}>
                   <UserOutlined style={{ margin: '6px' }} /> My Account
                 </Link>
               ),
@@ -58,7 +58,7 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
             {
               key: '2',
               label: (
-                <Link to={Route.AccountEdit} style={{ width: '6rem' }}>
+                <Link to={Route.accountEdit} style={{ width: '6rem' }}>
                   <SettingOutlined style={{ margin: '6px' }} /> Settings
                 </Link>
               ),

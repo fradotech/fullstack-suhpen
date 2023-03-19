@@ -14,13 +14,13 @@ const dataPrepare = (data: UserUpdateRequest): UserUpdateRequest => {
 
 export const accountAction = {
   getUserLogged: async (): Promise<IApiRes<UserResponse>> => {
-    return await axiosService.get(Route.Account)
+    return await axiosService.get(Route.account)
   },
 
   update: async (data: UserUpdateRequest): Promise<IApiRes<UserResponse>> => {
     data = dataPrepare(data)
     const res: IApiRes<UserResponse> = await axiosService.put(
-      Route.Account,
+      Route.account,
       data,
     )
 

@@ -1,0 +1,14 @@
+.container {
+  justify-content: space-between !important;
+}
+
+.title {
+  font-size: 24px !important;
+  line-height: 32px !important;
+  margin-top: 0 !important;
+  margin-left: 2 !important;
+}
+
+.actionButton {
+  margin-left: 10px;
+}

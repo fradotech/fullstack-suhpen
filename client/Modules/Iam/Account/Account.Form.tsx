@@ -4,8 +4,8 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
-import FormContainer from '../../../Components/Organs/Form/FormContainer'
-import FormItem from '../../../Components/Organs/Form/FormItem'
+import FormContainer from '../../../Components/Organisms/Form/FormContainer'
+import FormItem from '../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../Enums/Route'
 import { rule } from '../../../utils/form.rules'
 import { accountAction } from './account.action'
@@ -29,7 +29,7 @@ const AccountForm: React.FC = () => {
     try {
       const res = await accountAction.update(data)
       setIsLoading(false)
-      res.data && navigate(Route.Account)
+      res.data && navigate(Route.account)
     } catch (e) {
       setIsLoading(false)
     }

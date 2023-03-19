@@ -27,6 +27,9 @@ const HomeHeader: React.FC = () => {
         <a className={styles.headerItem} href={'#home'}>
           Home
         </a>
+        <a className={styles.headerItem} href={'#product'}>
+          Product
+        </a>
         {user ? (
           <a
             className={styles.headerItem}
@@ -37,7 +40,7 @@ const HomeHeader: React.FC = () => {
         ) : (
           <a
             className={styles.headerItem}
-            onClick={() => location.replace(Route.Login)}
+            onClick={() => location.replace(Route.login)}
           >
             Login
           </a>

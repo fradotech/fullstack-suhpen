@@ -3,8 +3,9 @@ import { Avatar, Descriptions, Row, Tag } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
-import DescriptionContainer from '../../../Components/Molecules/DescriptionContainer/DescriptionContainer'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
+import DescriptionContainer from '../../../Components/Organisms/Description/DescriptionContainer'
+import { Route } from '../../../Enums/Route'
 import { Utils } from '../../../utils/utils'
 import { ERole } from '../Role/Role.enum'
 import { userAction } from './user.action'
@@ -16,7 +17,12 @@ const UserDetail: React.FC = () => {
 
   return (
     <>
-      <PageHeader title="User Detail" isLoading={isLoading} />
+      <PageHeader
+        title="User Detail"
+        isLoading={isLoading}
+        hrefEdit={Route.user.edit(id)}
+        hrefDelete={Route.user.detail(id)}
+      />
       <Row>
         <Avatar
           size={250}
@@ -46,7 +52,7 @@ const UserDetail: React.FC = () => {
             {data?.data?.address}
           </Descriptions.Item>
           <Descriptions.Item label="Birth Date">
-            {data?.data?.birthDate && Utils.dateFormat(data?.data?.birthDate)}
+            {data?.data?.birthDate && Utils.formatDate(data?.data?.birthDate)}
           </Descriptions.Item>
         </DescriptionContainer>
       </Row>

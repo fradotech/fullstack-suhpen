@@ -33,7 +33,7 @@ export const usersColumns: ColumnsType<UserResponse> = [
   },
   {
     dataIndex: 'createdAt',
-    render: (data: Date) => Utils.dateFormat(data),
+    render: (data: Date) => Utils.formatDate(data),
   },
   {
     title: 'Actions',
@@ -43,11 +43,11 @@ export const usersColumns: ColumnsType<UserResponse> = [
         actions={[
           {
             type: 'view',
-            href: `${Route.Users}/${data.id}`,
+            href: Route.user.detail(data.id),
           },
           {
             type: 'edit',
-            href: `${Route.UserForm}/${data.id}`,
+            href: Route.user.edit(data.id),
           },
           {
             type: 'delete',

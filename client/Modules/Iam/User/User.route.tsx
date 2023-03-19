@@ -5,29 +5,33 @@ const UserDetail = React.lazy(() => import('./User.Detail'))
 const UserForm = React.lazy(() => import('./User.Form'))
 const UserS = React.lazy(() => import('./User.S'))
 
+const path = '/users'
+
 export const routesUser = {
-  Users: '/users',
-  UserDetail: '/users/:id',
-  UserForm: '/users/save',
-  UserEdit: '/users/save/:id',
-  UserExport: '/users/export',
+  users: path,
+  user: {
+    form: `${path}/save`,
+    edit: (id?: string) => `${path}/save/${id || ':id'}`,
+    detail: (id?: string) => `${path}/${id || ':id'}`,
+    export: `${path}/export`,
+  },
 }
 
 export default [
-  <Route key={routesUser.Users} path={routesUser.Users} element={<UserS />} />,
+  <Route key={routesUser.users} path={routesUser.users} element={<UserS />} />,
   <Route
-    key={routesUser.UserForm}
-    path={routesUser.UserForm}
+    key={routesUser.user.form}
+    path={routesUser.user.form}
     element={<UserForm />}
   />,
   <Route
-    key={routesUser.UserDetail}
-    path={routesUser.UserDetail}
+    key={routesUser.user.detail()}
+    path={routesUser.user.detail()}
     element={<UserDetail />}
   />,
   <Route
-    key={routesUser.UserEdit}
-    path={routesUser.UserEdit}
+    key={routesUser.user.edit()}
+    path={routesUser.user.edit()}
     element={<UserForm />}
   />,
 ]

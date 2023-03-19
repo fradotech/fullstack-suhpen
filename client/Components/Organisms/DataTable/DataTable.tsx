@@ -1,10 +1,10 @@
+import { IBaseEntity } from '@server/infrastructure/base/base-entity.interface'
 import { IPaginationMeta } from '@server/infrastructure/index/index.interface'
-import { Col, Pagination, PaginationProps, Space, Table } from 'antd'
+import { Col, Pagination, PaginationProps, Row, Space, Table } from 'antd'
 import {
   ColumnsType,
   FilterValue,
   SorterResult,
-  SortOrder,
   TablePaginationConfig,
 } from 'antd/es/table/interface'
 import dayjs from 'dayjs'
@@ -14,13 +14,17 @@ import Loading from '../../../Components/Molecules/Loading/Loading'
 import { Utils } from '../../../utils/utils'
 import { FilterState, IDataTableProps, TOnSort } from './DataTable.interface'
 import styles from './DataTable.module.css'
+import DataTableCard from './DataTableCard'
 import DataTableHeader from './DataTableHeader'
 
-const DataTable: React.FC<IDataTableProps<object>> = <T extends object>(
+const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
+  T extends IBaseEntity,
+>(
   props: IDataTableProps<T>,
 ): JSX.Element => {
   const [params] = useSearchParams()
   const [state, setState] = useState<FilterState<T>>({ search: props.search })
+  const [isCard, setIsCard] = useState(false)
   const { onChange } = props
 
   const handlePageChange: PaginationProps['onChange'] = (page, pageSize) => {
@@ -63,11 +67,12 @@ const DataTable: React.FC<IDataTableProps<object>> = <T extends object>(
   }
 
   const columns: ColumnsType<T> = props.columns.map((data) => {
-    const title = data.title || Utils.titleCase(data['dataIndex'] || '')
-    const sorter = data.title != 'Actions' ? () => 0 : null
-    const sortDirections: SortOrder[] = ['ascend', 'descend']
-
-    return { ...data, title, sorter, sortDirections }
+    return {
+      ...data,
+      title: data.title || Utils.titleCase(data['dataIndex'] || ''),
+      sorter: data.title != 'Actions' && (() => 0),
+      sortDirections: ['ascend', 'descend'],
+    }
   })
 
   return (
@@ -77,21 +82,32 @@ const DataTable: React.FC<IDataTableProps<object>> = <T extends object>(
         {...props.dataTableHeader}
         onSearch={handleSearch}
         onDateRange={handleDateRange}
+        isCard={isCard}
+        setIsCard={setIsCard}
       />
       <Space.Compact direction="vertical" className={styles.tableLayout}>
-        <Table<T>
-          {...props}
-          columns={columns}
-          className={styles.tableLayout}
-          size="small"
-          pagination={false}
-          onChange={(pagination, filters, sorter: SorterResult<T>): void => {
-            handleTableChange(filters, {
-              ...sorter,
-              order: sorter.order && sorter.order == 'ascend' ? 'ASC' : 'DESC',
-            })
-          }}
-        />
+        {isCard ? (
+          <Row style={{ paddingTop: '12px' }}>
+            <DataTableCard
+              data={props?.dataSource as unknown as IBaseEntity[]}
+            />
+          </Row>
+        ) : (
+          <Table<T>
+            {...props}
+            columns={columns}
+            className={styles.tableLayout}
+            size="small"
+            pagination={false}
+            onChange={(pagination, filters, sorter: SorterResult<T>): void => {
+              handleTableChange(filters, {
+                ...sorter,
+                order:
+                  sorter.order && sorter.order == 'ascend' ? 'ASC' : 'DESC',
+              })
+            }}
+          />
+        )}
 
         <Col className={styles.pagination}>
           {props.pagination && !!props.pagination?.total && (

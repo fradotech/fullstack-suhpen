@@ -2,3 +2,24 @@
   margin: 12px;
   color: white;
 }
+
+.card {
+  width: 180px;
+  margin: 7px;
+  box-shadow: 2px 4px 2px #eeeeee;
+}
+
+.cardImage {
+  height: 180px !important;
+  object-fit: cover;
+}
+
+.productContainer {
+  align-content: center;
+  padding: 0 4%;
+}
+
+.productRow {
+  align-content: center;
+  padding-top: 12px;
+}

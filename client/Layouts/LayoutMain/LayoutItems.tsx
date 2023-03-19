@@ -38,13 +38,13 @@ const itemsRoleAdministrator: MenuItem[] =
           icon: <IdcardOutlined />,
           children: [
             {
-              key: Route.Users,
-              label: <Link to={Route.Users}>User</Link>,
+              key: Route.users,
+              label: <Link to={Route.users}>User</Link>,
               icon: <UsergroupAddOutlined />,
             },
             {
-              key: Route.Roles,
-              label: <Link to={Route.Roles}>Role</Link>,
+              key: Route.roles,
+              label: <Link to={Route.roles}>Role</Link>,
               icon: <UserSwitchOutlined />,
             },
           ],

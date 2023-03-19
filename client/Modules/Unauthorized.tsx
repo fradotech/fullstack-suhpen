@@ -12,7 +12,7 @@ const Unauthorized: React.FC = () => {
       title="403"
       subTitle="Unauthorized"
       extra={
-        <Button onClick={() => navigate(Route.Login)} type="primary">
+        <Button onClick={() => navigate(Route.login)} type="primary">
           Login
         </Button>
       }
