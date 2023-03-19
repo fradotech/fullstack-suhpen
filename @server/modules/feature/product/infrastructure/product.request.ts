@@ -1,4 +1,4 @@
-import { ApiProperty, OmitType } from '@nestjs/swagger'
+import { ApiProperty, PartialType } from '@nestjs/swagger'
 import { BaseProductRequest } from '@server/infrastructure/base/product/base-product.request'
 import {
   IsDate,
@@ -10,7 +10,7 @@ import {
 import { ICategory } from '../../category/infrastructure/category.interface'
 import { IProduct } from './product.interface'
 
-class ProductRequest extends BaseProductRequest implements IProduct {
+export class ProductRequest extends BaseProductRequest implements IProduct {
   childs?: IProduct[]
 
   @IsOptional()
@@ -60,6 +60,6 @@ class ProductRequest extends BaseProductRequest implements IProduct {
   parent?: IProduct
 }
 
-export class ProductCreateRequest extends OmitType(ProductRequest, []) {}
+export class ProductCreateRequest extends PartialType(ProductRequest) {}
 
-export class ProductUpdateRequest extends OmitType(ProductRequest, []) {}
+export class ProductUpdateRequest extends PartialType(ProductRequest) {}

@@ -1,6 +1,7 @@
 import { Logger } from '@nestjs/common'
 import dataSource from '../data-source'
-import { userCreateSeeder } from './users/user-create.seeder'
+import { categoryUpdateSeeder } from './category/category-update.seeder'
+import { userCreateSeeder } from './user/user-create.seeder'
 
 export const seeders = async () => {
   await dataSource
@@ -8,5 +9,5 @@ export const seeders = async () => {
     .then(async () => Logger.log('Success connect seeder', 'Automatic Seeder'))
     .catch((error) => Logger.error(error))
 
-  await Promise.all([userCreateSeeder()])
+  await Promise.all([userCreateSeeder(), categoryUpdateSeeder()])
 }
