@@ -84,8 +84,8 @@ const DataTable: React.FC<IDataTableProps<object>> = <T extends object>(
       />
       <Space.Compact direction="vertical" className={styles.tableLayout}>
         {isCard ? (
-          <Row style={{ padding: '4px 0px' }}>
-            <DataTableCard data={props?.dataSource?.map((data) => data)} />
+          <Row style={{ paddingTop: '12px' }}>
+            <DataTableCard data={[...props?.dataSource]} />
           </Row>
         ) : (
           <Table<T>
