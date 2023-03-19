@@ -1,5 +1,5 @@
 import { IPaginationMeta } from '@server/infrastructure/index/index.interface'
-import { Col, Pagination, PaginationProps, Space, Table } from 'antd'
+import { Col, Pagination, PaginationProps, Row, Space, Table } from 'antd'
 import {
   ColumnsType,
   FilterValue,
@@ -13,6 +13,7 @@ import Loading from '../../../Components/Molecules/Loading/Loading'
 import { Utils } from '../../../utils/utils'
 import { FilterState, IDataTableProps, TOnSort } from './DataTable.interface'
 import styles from './DataTable.module.css'
+import DataTableCard from './DataTableCard'
 import DataTableHeader from './DataTableHeader'
 
 const DataTable: React.FC<IDataTableProps<object>> = <T extends object>(
@@ -20,6 +21,7 @@ const DataTable: React.FC<IDataTableProps<object>> = <T extends object>(
 ): JSX.Element => {
   const [params] = useSearchParams()
   const [state, setState] = useState<FilterState<T>>({ search: props.search })
+  const [isCard, setIsCard] = useState(false)
   const { onChange } = props
 
   const handlePageChange: PaginationProps['onChange'] = (page, pageSize) => {
@@ -77,21 +79,30 @@ const DataTable: React.FC<IDataTableProps<object>> = <T extends object>(
         {...props.dataTableHeader}
         onSearch={handleSearch}
         onDateRange={handleDateRange}
+        isCard={isCard}
+        setIsCard={setIsCard}
       />
       <Space.Compact direction="vertical" className={styles.tableLayout}>
-        <Table<T>
-          {...props}
-          columns={columns}
-          className={styles.tableLayout}
-          size="small"
-          pagination={false}
-          onChange={(pagination, filters, sorter: SorterResult<T>): void => {
-            handleTableChange(filters, {
-              ...sorter,
-              order: sorter.order && sorter.order == 'ascend' ? 'ASC' : 'DESC',
-            })
-          }}
-        />
+        {isCard ? (
+          <Row style={{ padding: '4px 0px' }}>
+            <DataTableCard data={props?.dataSource?.map((data) => data)} />
+          </Row>
+        ) : (
+          <Table<T>
+            {...props}
+            columns={columns}
+            className={styles.tableLayout}
+            size="small"
+            pagination={false}
+            onChange={(pagination, filters, sorter: SorterResult<T>): void => {
+              handleTableChange(filters, {
+                ...sorter,
+                order:
+                  sorter.order && sorter.order == 'ascend' ? 'ASC' : 'DESC',
+              })
+            }}
+          />
+        )}
 
         <Col className={styles.pagination}>
           {props.pagination && !!props.pagination?.total && (

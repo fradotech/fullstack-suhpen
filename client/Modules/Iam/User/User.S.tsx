@@ -1,7 +1,6 @@
 import { UserIndexRequest } from '@server/modules/iam/user/infrastructure/user-index.request'
 import React from 'react'
 import { useQuery } from 'react-query'
-import CardItem from '../../../Components/Molecules/CardItem/CardItem'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import DataTable, {
   paginationTransform,
@@ -35,7 +34,6 @@ const UserS: React.FC = () => {
           hrefExport: Route.UserExport,
         }}
       />
-      <CardItem mainText={''} />
     </>
   )
 }
