@@ -7,7 +7,7 @@ import { useQuery } from 'react-query'
 import { Utils } from '../../utils/utils'
 import styles from './Home.module.css'
 
-const url = 'https://dummyjson.com/products'
+const url = 'https://dummyjson.com/products?limit=100'
 
 interface IProduct {
   id: string
@@ -61,10 +61,10 @@ const HomeProduct: React.FC = () => {
                   }
                 ></Meta>
                 <Row style={{ justifyContent: 'space-between' }}>
-                  {+data.id % 2 == 0 ? (
-                    <Tag color="red">30 %</Tag>
-                  ) : (
+                  {+data.id % 3 == 0 ? (
                     <Tag color="green">Cashback</Tag>
+                  ) : (
+                    <Tag color="red">30 %</Tag>
                   )}
                   10rb+ Terjual
                 </Row>

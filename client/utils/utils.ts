@@ -41,6 +41,8 @@ export class Utils {
       currency: 'IDR',
     })
 
-    return formatter.format(+str)
+    const currency = formatter.format(+str)
+
+    return currency.substring(0, currency.length - 3)
   }
 }
