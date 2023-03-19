@@ -24,7 +24,7 @@ import {
 import { UserStrictResponse } from '../infrastructure/user.response'
 import { UserCrudApp } from './user-crud.app'
 
-const THIS_MODULE = Modules.Users
+const THIS_MODULE = Modules.User
 
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)

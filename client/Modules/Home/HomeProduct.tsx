@@ -9,21 +9,8 @@ import styles from './Home.module.css'
 
 const url = 'https://dummyjson.com/products?limit=100'
 
-interface IProduct {
-  id: string
-  title: string
-  description: string
-  price: string
-  discountPercentage: string
-  rating: string
-  stock: string
-  brand: string
-  category: string
-  thumbnail: string
-}
-
 const HomeProduct: React.FC = () => {
-  const fetch = async () => (await axios.get(url)).data.products as IProduct[]
+  const fetch = async () => (await axios.get(url)).data.products as any[]
   const { isLoading, data } = useQuery([HomeProduct.name], fetch)
 
   return (
