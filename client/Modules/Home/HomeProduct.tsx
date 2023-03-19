@@ -23,10 +23,7 @@ interface IProduct {
 }
 
 const HomeProduct: React.FC = () => {
-  const fetch = async () => {
-    const res = await axios.get(url)
-    return res.data.products as IProduct[]
-  }
+  const fetch = async () => (await axios.get(url)).data.products as IProduct[]
   const { isLoading, data } = useQuery([HomeProduct.name], fetch)
 
   return (
