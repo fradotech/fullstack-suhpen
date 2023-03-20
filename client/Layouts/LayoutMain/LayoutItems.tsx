@@ -46,8 +46,8 @@ const itemsRoleAdministrator: MenuItem[] =
               icon: <InboxOutlined />,
             },
             {
-              key: 'Route.category.index',
-              label: <Link to={'Route.category.index'}>Category</Link>,
+              key: Route.category.index,
+              label: <Link to={Route.category.index}>Category</Link>,
               icon: <PartitionOutlined />,
             },
           ],

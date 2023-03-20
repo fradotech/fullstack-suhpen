@@ -1,36 +1,27 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
-import { ProductResponse } from '@server/modules/feature/product/infrastructure/product.response'
+import { CategoryResponse } from '@server/modules/feature/category/infrastructure/category.response'
+import { Tag } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import React from 'react'
 import { RowActionButtons } from '../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../Enums/Route'
 import { Utils } from '../../../utils/utils'
-import { productAction } from './product.action'
-
-export const productsColumns: ColumnsType<ProductResponse> = [
+import { categoryAction } from './category.action'
+export const categoryColumns: ColumnsType<CategoryResponse> = [
+  {
+    dataIndex: 'key',
+  },
   {
     dataIndex: 'name',
-  },
-  {
-    dataIndex: 'stock',
-  },
-  {
-    dataIndex: 'price',
-  },
-  {
-    title: 'Discount (%)',
-    dataIndex: 'discountPercentage',
-    render: (data: number) => `${data}%`,
-  },
-  {
-    dataIndex: 'brand',
-    filters: [
-      { text: 'Apple', value: 'Apple' },
-      { text: 'Oppo', value: 'Oppo' },
-      { text: 'Samsung', value: 'Samsung' },
-      { text: 'Vivo', value: 'Vivo' },
-      { text: 'Xiaomi', value: 'Xiaomi' },
-    ],
+    render: (data: string) => {
+      const color = ['blue', 'green', 'yellow', 'red', 'purple', 'orange']
+
+      return (
+        <Tag color={color[Math.floor(Math.random() * color.length)]}>
+          {data}
+        </Tag>
+      )
+    },
   },
   {
     title: 'Active',
@@ -54,21 +45,21 @@ export const productsColumns: ColumnsType<ProductResponse> = [
   {
     title: 'Actions',
     width: '75px',
-    render: (data: ProductResponse) => (
+    render: (data: CategoryResponse) => (
       <RowActionButtons
         actions={[
           {
             type: 'view',
-            href: Route.product.id(data.id),
+            href: Route.category.id(data.id),
           },
           {
             type: 'edit',
-            href: Route.product.edit(data.id),
+            href: Route.category.edit(data.id),
           },
           {
             type: 'delete',
             onClick: async () => {
-              ;(await productAction.remove(data.id)) && location.reload()
+              ;(await categoryAction.remove(data.id)) && location.reload()
             },
           },
         ]}
