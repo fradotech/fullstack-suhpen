@@ -43,7 +43,7 @@ export const usersColumns: ColumnsType<UserResponse> = [
         actions={[
           {
             type: 'view',
-            href: Route.user.detail(data.id),
+            href: Route.user.id(data.id),
           },
           {
             type: 'edit',

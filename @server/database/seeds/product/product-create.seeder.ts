@@ -22,10 +22,7 @@ export const productCreateSeeder = async (): Promise<boolean> => {
 
   await repo.createQueryBuilder(table).insert().values(data).execute()
 
-  Logger.log(
-    'Success run products seeders ',
-    String(data.map((data) => data.key)),
-  )
+  Logger.log(String(data.map((data) => data.key)), 'SeederCreate:Product')
 
   return true
 }

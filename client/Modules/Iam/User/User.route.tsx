@@ -8,26 +8,30 @@ const UserS = React.lazy(() => import('./User.S'))
 const path = '/users'
 
 export const routesUser = {
-  users: path,
   user: {
+    index: path,
     form: `${path}/save`,
     edit: (id?: string) => `${path}/save/${id || ':id'}`,
-    detail: (id?: string) => `${path}/${id || ':id'}`,
+    id: (id?: string) => `${path}/${id || ':id'}`,
     import: `${path}/sheet/import`,
     export: `${path}/sheet/export`,
   },
 }
 
 export default [
-  <Route key={routesUser.users} path={routesUser.users} element={<UserS />} />,
+  <Route
+    key={routesUser.user.index}
+    path={routesUser.user.index}
+    element={<UserS />}
+  />,
   <Route
     key={routesUser.user.form}
     path={routesUser.user.form}
     element={<UserForm />}
   />,
   <Route
-    key={routesUser.user.detail()}
-    path={routesUser.user.detail()}
+    key={routesUser.user.id()}
+    path={routesUser.user.id()}
     element={<UserDetail />}
   />,
   <Route
