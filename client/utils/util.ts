@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 
-export class Utils {
+export class Util {
   static isValidJSON = (str: string): boolean => {
     try {
       JSON.parse(str)

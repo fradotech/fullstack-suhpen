@@ -1,4 +1,4 @@
-import { Utils } from '@server/common/utils/utils'
+import { Util } from '@server/common/utils/util'
 import { BaseEntity } from '@server/infrastructure/base/base.entity'
 import { BeforeInsert, Column, ManyToOne, OneToMany } from 'typeorm'
 import { IBaseProduct } from './base-product.interface'
@@ -27,6 +27,6 @@ export class EntBaseProduct extends BaseEntity implements IBaseProduct {
 
   @BeforeInsert()
   beforeInsert(): void {
-    this.key = this.key || Utils.camelToSnake(this.name)
+    this.key = this.key || Util.camelToSnake(this.name)
   }
 }

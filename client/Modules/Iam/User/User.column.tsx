@@ -4,7 +4,7 @@ import { ColumnsType } from 'antd/es/table'
 import React from 'react'
 import { RowActionButtons } from '../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../Enums/Route'
-import { Utils } from '../../../utils/utils'
+import { Util } from '../../../utils/util'
 import { ERole } from '../Role/Role.enum'
 import { userAction } from './user.action'
 
@@ -33,7 +33,7 @@ export const usersColumns: ColumnsType<UserResponse> = [
   },
   {
     dataIndex: 'createdAt',
-    render: (data: Date) => Utils.formatDate(data),
+    render: (data: Date) => Util.formatDate(data),
   },
   {
     title: 'Actions',

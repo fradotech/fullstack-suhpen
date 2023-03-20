@@ -4,7 +4,7 @@ import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { axiosService } from '../../services/axios.service'
-import { Utils } from '../../utils/utils'
+import { Util } from '../../utils/util'
 import styles from './Home.module.css'
 
 const path = '/products'
@@ -39,7 +39,7 @@ const HomeProduct: React.FC = () => {
               >
                 {data.name}
                 <Title style={{ color: '#FF5F1F', margin: '2px' }} level={5}>
-                  {Utils.formatCurrency(
+                  {Util.formatCurrency(
                     data.price - (data.price * data.discountPercentage) / 100,
                   )}
                 </Title>
@@ -50,7 +50,7 @@ const HomeProduct: React.FC = () => {
                     <>
                       <Tag color="red">{data.discountPercentage + '%'}</Tag>
                       <s style={{ opacity: '70%' }}>
-                        {Utils.formatCurrency(data.price)}
+                        {Util.formatCurrency(data.price)}
                       </s>
                     </>
                   )}

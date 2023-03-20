@@ -1,9 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
-import DataTable, {
-  paginationTransform,
-} from '../../../Components/Organisms/DataTable/DataTable'
+import DataTable from '../../../Components/Organisms/DataTable/DataTable'
 import { roleAction } from './role.action'
 import { rolesColumns } from './Role.column'
 
@@ -18,9 +16,7 @@ const RoleS: React.FC = () => {
         rowKey="id"
         columns={rolesColumns}
         dataSource={data?.data}
-        pagination={paginationTransform(data?.meta)}
         loading={isLoading}
-        onChange={() => null}
       />
     </>
   )

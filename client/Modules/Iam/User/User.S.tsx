@@ -2,9 +2,8 @@ import { UserIndexRequest } from '@server/modules/iam/user/infrastructure/user-i
 import React from 'react'
 import { useQuery } from 'react-query'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
-import DataTable, {
-  paginationTransform,
-} from '../../../Components/Organisms/DataTable/DataTable'
+import DataTable from '../../../Components/Organisms/DataTable/DataTable'
+import { paginationTransform } from '../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../Components/Organisms/DataTable/useDataTable'
 import { Route } from '../../../Enums/Route'
 import { userAction } from './user.action'

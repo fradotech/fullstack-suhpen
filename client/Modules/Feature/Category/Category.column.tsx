@@ -5,7 +5,7 @@ import { ColumnsType } from 'antd/es/table'
 import React from 'react'
 import { RowActionButtons } from '../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../Enums/Route'
-import { Utils } from '../../../utils/utils'
+import { Util } from '../../../utils/util'
 import { categoryAction } from './category.action'
 export const categoryColumns: ColumnsType<CategoryResponse> = [
   {
@@ -40,7 +40,7 @@ export const categoryColumns: ColumnsType<CategoryResponse> = [
   },
   {
     dataIndex: 'createdAt',
-    render: (data: Date) => Utils.formatDate(data),
+    render: (data: Date) => Util.formatDate(data),
   },
   {
     title: 'Actions',

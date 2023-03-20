@@ -4,7 +4,7 @@ import { DefaultOptionType } from 'antd/es/select'
 import dayjs from 'dayjs'
 import { SharedTimeProps } from 'rc-picker/lib/panels/TimePanel'
 import React from 'react'
-import { Utils } from '../../../utils/utils'
+import { Util } from '../../../utils/util'
 import Attachment from '../../Molecules/Attachment/Attachment'
 
 interface IProps {
@@ -38,7 +38,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
       input = (
         <AntdInput.Password
           type="password"
-          placeholder={props.placeholder || Utils.titleCase(props.name)}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
         />
       )
       break
@@ -53,7 +53,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
                 })
               : props.options
           }
-          placeholder={props.placeholder || Utils.titleCase(props.name)}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
         />
       )
       break
@@ -63,7 +63,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
         <DatePicker
           showTime={props.showTime}
           format={props.format}
-          placeholder={props.placeholder || Utils.titleCase(props.name)}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
         />
       )
       break
@@ -91,7 +91,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
       input = (
         <AntdInput
           type={props.type}
-          placeholder={props.placeholder || Utils.titleCase(props.name)}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
         />
       )
       break
@@ -99,7 +99,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
 
   return (
     <Form.Item
-      label={props.label || Utils.titleCase(props.name)}
+      label={props.label || Util.titleCase(props.name)}
       name={props.name}
       rules={props.rules}
     >

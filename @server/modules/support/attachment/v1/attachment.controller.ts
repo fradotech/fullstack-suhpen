@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { ApiTags } from '@nestjs/swagger'
-import { Utils } from '@server/common/utils/utils'
+import { Util } from '@server/common/utils/util'
 import { config } from '@server/config'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
@@ -39,7 +39,7 @@ export class AttachmentController {
   }
 
   @Post()
-  @UseInterceptors(FileInterceptor(THIS_MODULE, Utils.multerOptions()))
+  @UseInterceptors(FileInterceptor(THIS_MODULE, Util.multerOptions()))
   async uploadAttachment(
     @UploadedFile() file: Express.Multer.File,
     @Body() req: AttachmentUploadRequest,

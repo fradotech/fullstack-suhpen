@@ -1,19 +1,13 @@
 import { IBaseEntity } from '@server/infrastructure/base/base-entity.interface'
-import { IPaginationMeta } from '@server/infrastructure/index/index.interface'
 import { Col, Pagination, PaginationProps, Row, Space, Table } from 'antd'
-import {
-  ColumnsType,
-  FilterValue,
-  SorterResult,
-  TablePaginationConfig,
-} from 'antd/es/table/interface'
+import { ColumnsType, FilterValue, SorterResult } from 'antd/es/table/interface'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import Loading from '../../../Components/Molecules/Loading/Loading'
-import { Utils } from '../../../utils/utils'
 import { FilterState, IDataTableProps, TOnSort } from './DataTable.interface'
 import styles from './DataTable.module.css'
+import { formatColumns } from './DataTable.util'
 import DataTableCard from './DataTableCard'
 import DataTableHeader from './DataTableHeader'
 
@@ -25,6 +19,7 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
   const [params] = useSearchParams()
   const [state, setState] = useState<FilterState<T>>({ search: props.search })
   const [isCard, setIsCard] = useState(false)
+  const columns: ColumnsType<T> = formatColumns<T>(props.columns)
   const { onChange } = props
 
   const handlePageChange: PaginationProps['onChange'] = (page, pageSize) => {
@@ -65,15 +60,6 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
     setState(newQuery)
     onChange(newQuery)
   }
-
-  const columns: ColumnsType<T> = props.columns.map((data) => {
-    return {
-      ...data,
-      title: data.title || Utils.titleCase(data['dataIndex'] || ''),
-      sorter: data.title != 'Actions' && (() => 0),
-      sortDirections: ['ascend', 'descend'],
-    }
-  })
 
   return (
     <>
@@ -125,16 +111,6 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
       </Space.Compact>
     </>
   )
-}
-
-export const paginationTransform = (
-  meta: IPaginationMeta,
-): TablePaginationConfig => {
-  return {
-    current: meta?.page,
-    total: meta?.total,
-    pageSize: meta?.pageSize,
-  }
 }
 
 export default DataTable

@@ -1,10 +1,11 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { ProductResponse } from '@server/modules/feature/product/infrastructure/product.response'
+import { Tag } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import React from 'react'
 import { RowActionButtons } from '../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../Enums/Route'
-import { Utils } from '../../../utils/utils'
+import { Util } from '../../../utils/util'
 import { productAction } from './product.action'
 
 export const productsColumns: ColumnsType<ProductResponse> = [
@@ -24,6 +25,15 @@ export const productsColumns: ColumnsType<ProductResponse> = [
   },
   {
     dataIndex: 'brand',
+    render: (data: string) => {
+      const color = ['blue', 'green', 'yellow', 'red', 'purple', 'orange']
+
+      return (
+        <Tag color={color[Math.floor(Math.random() * color.length)]}>
+          {data}
+        </Tag>
+      )
+    },
     filters: [
       { text: 'Apple', value: 'Apple' },
       { text: 'Oppo', value: 'Oppo' },
@@ -49,7 +59,7 @@ export const productsColumns: ColumnsType<ProductResponse> = [
   },
   {
     dataIndex: 'createdAt',
-    render: (data: Date) => Utils.formatDate(data),
+    render: (data: Date) => Util.formatDate(data),
   },
   {
     title: 'Actions',

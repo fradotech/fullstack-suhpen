@@ -3,7 +3,7 @@ import { config } from '@server/config'
 import { diskStorage } from 'multer'
 import { Exception } from '../exceptions/index.exception'
 
-export class Utils {
+export class Util {
   static fileFilter = (req: Request, file: any, callback: any) => {
     if (!file.originalname.match(/\.(jpg|jpeg|png|pdf)$/)) {
       Exception.badRequest('This file type is not allowed!')

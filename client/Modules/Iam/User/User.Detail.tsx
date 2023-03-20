@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import DescriptionContainer from '../../../Components/Organisms/Description/DescriptionContainer'
 import { Route } from '../../../Enums/Route'
-import { Utils } from '../../../utils/utils'
+import { Util } from '../../../utils/util'
 import { ERole } from '../Role/Role.enum'
 import { userAction } from './user.action'
 
@@ -52,7 +52,7 @@ const UserDetail: React.FC = () => {
             {data?.data?.address}
           </Descriptions.Item>
           <Descriptions.Item label="Birth Date">
-            {data?.data?.birthDate && Utils.formatDate(data?.data?.birthDate)}
+            {data?.data?.birthDate && Util.formatDate(data?.data?.birthDate)}
           </Descriptions.Item>
         </DescriptionContainer>
       </Row>

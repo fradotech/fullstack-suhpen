@@ -2,9 +2,8 @@ import { ProductIndexRequest } from '@server/modules/feature/product/infrastruct
 import React from 'react'
 import { useQuery } from 'react-query'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
-import DataTable, {
-  paginationTransform,
-} from '../../../Components/Organisms/DataTable/DataTable'
+import DataTable from '../../../Components/Organisms/DataTable/DataTable'
+import { paginationTransform } from '../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../Components/Organisms/DataTable/useDataTable'
 import { Route } from '../../../Enums/Route'
 import { productAction } from './product.action'
