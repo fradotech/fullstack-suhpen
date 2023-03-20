@@ -6,7 +6,7 @@ export type TPropsTableFilter<T> = IndexRequest & T
 
 export const useDataTable = <T>() => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const [query, setQuery] = React.useState<TPropsTableFilter<T> | any>(() => {
+  const [query, setQuery] = React.useState<TPropsTableFilter<T>>(() => {
     const queryParams = {} as TPropsTableFilter<T>
     for (const [key, value] of searchParams.entries()) queryParams[key] = value
 

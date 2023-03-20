@@ -40,7 +40,8 @@ const HomeProduct: React.FC = () => {
                 {data.name}
                 <Title style={{ color: '#FF5F1F', margin: '2px' }} level={5}>
                   {Util.formatCurrency(
-                    data.price - (data.price * data.discountPercentage) / 100,
+                    data.sellPrice -
+                      (data.sellPrice * data.discountPercentage) / 100,
                   )}
                 </Title>
                 <Row>
@@ -50,7 +51,7 @@ const HomeProduct: React.FC = () => {
                     <>
                       <Tag color="red">{data.discountPercentage + '%'}</Tag>
                       <s style={{ opacity: '70%' }}>
-                        {Util.formatCurrency(data.price)}
+                        {Util.formatCurrency(data.sellPrice)}
                       </s>
                     </>
                   )}

@@ -10,8 +10,6 @@ export interface IPaginateRequest {
   page?: number
 }
 
-// Index Response
-
 export interface IPaginationMeta {
   page: number
   pageSize: number
@@ -22,4 +20,9 @@ export interface IPaginationMeta {
 export interface IPaginateResponse<T> {
   meta: IPaginationMeta
   data: Array<T>
+}
+
+export interface IIndexAppRelation {
+  name: string
+  keys: string[]
 }

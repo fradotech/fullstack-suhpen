@@ -1,6 +1,7 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
+import { CategoryResponse } from '@server/modules/feature/category/infrastructure/category.response'
 import { ProductResponse } from '@server/modules/feature/product/infrastructure/product.response'
-import { Tag } from 'antd'
+import { Row, Tag, Typography } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import React from 'react'
 import { RowActionButtons } from '../../../Components/Molecules/RowActionButtons/RowActionButtons'
@@ -16,30 +17,42 @@ export const productsColumns: ColumnsType<ProductResponse> = [
     dataIndex: 'stock',
   },
   {
-    dataIndex: 'price',
+    dataIndex: 'buyPrice',
+    render: (data: number) => (
+      <Typography.Text type="warning" strong>
+        {Util.formatCurrency(data)}
+      </Typography.Text>
+    ),
   },
   {
-    title: 'Discount (%)',
-    dataIndex: 'discountPercentage',
-    render: (data: number) => `${data}%`,
+    dataIndex: 'sellPrice',
+    render: (data: number) => (
+      <Typography.Text type="success" strong>
+        {Util.formatCurrency(data)}
+      </Typography.Text>
+    ),
   },
   {
-    dataIndex: 'brand',
-    render: (data: string) => {
-      const color = ['blue', 'green', 'yellow', 'red', 'purple', 'orange']
-
-      return (
-        <Tag color={color[Math.floor(Math.random() * color.length)]}>
-          {data}
-        </Tag>
-      )
-    },
+    dataIndex: 'marginPrice',
+    render: (data: number) => (
+      <Tag>
+        <Typography.Text strong>{Util.formatCurrency(data)}</Typography.Text>
+      </Tag>
+    ),
+  },
+  {
+    dataIndex: 'categories',
+    render: (data: CategoryResponse[]) => (
+      <Row>
+        {data?.map((data) => (
+          <Tag color={data.labelColor}>{data.name}</Tag>
+        ))}
+      </Row>
+    ),
     filters: [
-      { text: 'Apple', value: 'Apple' },
-      { text: 'Oppo', value: 'Oppo' },
+      { text: 'Tablet', value: 'Tablet' },
+      { text: 'Laptop', value: 'Laptop' },
       { text: 'Samsung', value: 'Samsung' },
-      { text: 'Vivo', value: 'Vivo' },
-      { text: 'Xiaomi', value: 'Xiaomi' },
     ],
   },
   {

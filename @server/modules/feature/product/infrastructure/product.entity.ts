@@ -1,5 +1,7 @@
 import { EntBaseProduct } from '@server/infrastructure/base/product/base-product.entity'
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   Entity,
   JoinTable,
@@ -20,7 +22,13 @@ export class EntProduct extends EntBaseProduct implements IProduct {
   stock: number
 
   @Column({ default: 0 })
-  price: number
+  buyPrice: number
+
+  @Column({ default: 0 })
+  sellPrice: number
+
+  @Column({ default: 0 })
+  marginPrice: number
 
   @ManyToMany(() => EntCategory)
   @JoinTable({ name: 'ent_product_categories' })
@@ -43,4 +51,10 @@ export class EntProduct extends EntBaseProduct implements IProduct {
 
   @OneToMany(() => EntProduct, (product) => product.parent)
   childs?: IProduct[]
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  beforeInsertAndUpdate(): void {
+    this.marginPrice = this.sellPrice - this.buyPrice
+  }
 }

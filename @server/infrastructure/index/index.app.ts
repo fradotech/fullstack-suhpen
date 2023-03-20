@@ -6,6 +6,7 @@ import { Request } from 'express'
 import { Repository, SelectQueryBuilder } from 'typeorm'
 import { IBaseEntity } from '../base/base-entity.interface'
 import {
+  IIndexAppRelation,
   IPaginateRequest,
   IPaginateResponse,
   IPaginationMeta,
@@ -84,9 +85,14 @@ export abstract class BaseIndexApp {
     query: SelectQueryBuilder<T>,
     tableName: string,
     tableKeys: string[],
+    relations: IIndexAppRelation[],
     repo: Repository<T>,
     request: Request,
   ): SelectQueryBuilder<T> {
+    relations.forEach((relation) =>
+      query.leftJoinAndSelect(`${tableName}.${relation.name}`, relation.name),
+    )
+
     if (req.search) {
       query.andWhere(this.querySearch(tableName, tableKeys), {
         search: `%${req.search.toLowerCase()}%`,
@@ -102,8 +108,17 @@ export abstract class BaseIndexApp {
 
     if (req.filters) {
       Object.keys(req.filters).forEach((field) => {
-        query.andWhere(`${tableName}.${field} IN (:value)`, {
-          value: req.filters[field],
+        tableKeys.includes(field) &&
+          query.andWhere(`${tableName}.${field} IN (:value)`, {
+            value: req.filters[field],
+          })
+
+        relations.forEach((relation) => {
+          relation.keys.forEach((key) => {
+            query.andWhere(`${relation.name}.${key} IN (:value)`, {
+              value: req.filters[field],
+            })
+          })
         })
       })
     }

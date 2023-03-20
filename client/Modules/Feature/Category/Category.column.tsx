@@ -12,15 +12,9 @@ export const categoryColumns: ColumnsType<CategoryResponse> = [
     dataIndex: 'key',
   },
   {
-    dataIndex: 'name',
-    render: (data: string) => {
-      const color = ['blue', 'green', 'yellow', 'red', 'purple', 'orange']
-
-      return (
-        <Tag color={color[Math.floor(Math.random() * color.length)]}>
-          {data}
-        </Tag>
-      )
+    title: 'name',
+    render: (data: CategoryResponse) => {
+      return <Tag color={data.labelColor}>{data.name}</Tag>
     },
   },
   {
