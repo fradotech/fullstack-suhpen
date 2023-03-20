@@ -1,6 +1,6 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { ProductResponse } from '@server/modules/feature/product/infrastructure/product.response'
-import { Tag } from 'antd'
+import { Tag, Typography } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import React from 'react'
 import { RowActionButtons } from '../../../Components/Molecules/RowActionButtons/RowActionButtons'
@@ -17,6 +17,13 @@ export const productsColumns: ColumnsType<ProductResponse> = [
   },
   {
     dataIndex: 'price',
+    render: (data: number) => (
+      <Tag color="orange">
+        <Typography.Text type="warning" strong>
+          {Util.formatCurrency(data)}
+        </Typography.Text>
+      </Tag>
+    ),
   },
   {
     title: 'Discount (%)',
