@@ -8,18 +8,18 @@ import { categoryDummies } from './category.dummy'
 
 export const categoryUpdateSeeder = async (): Promise<boolean> => {
   const data = categoryDummies
-  const repo = new Repository<ICategory>(
+  const userRepo = new Repository<ICategory>(
     EntCategory,
     new EntityManager(dataSource),
   )
 
   data.forEach(async (data) => {
-    const dataExist = await repo.findOne({ where: { key: data.key } })
+    const dataExist = await userRepo.findOne({ where: { key: data.key } })
     const dataCreate = new CategoryCreateRequest()
     Object.assign(dataCreate, data)
 
     dataExist && (dataCreate.id = dataExist.id)
-    await repo.save(dataCreate)
+    await userRepo.save(dataCreate)
   })
 
   Logger.log(String([data.map((data) => data.key)]), 'SeederUpdate:Category')

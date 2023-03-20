@@ -11,6 +11,7 @@ import { ICategory } from '../../category/infrastructure/category.interface'
 import { IProduct } from './product.interface'
 
 export class ProductRequest extends BaseProductRequest implements IProduct {
+  marginPrice: number
   childs?: IProduct[]
 
   @IsOptional()
@@ -26,7 +27,12 @@ export class ProductRequest extends BaseProductRequest implements IProduct {
   @IsNotEmpty()
   @IsNumber()
   @ApiProperty({ example: 100000 })
-  price: number
+  buyPrice: number
+
+  @IsNotEmpty()
+  @IsNumber()
+  @ApiProperty({ example: 120000 })
+  sellPrice: number
 
   @IsOptional()
   @IsString()

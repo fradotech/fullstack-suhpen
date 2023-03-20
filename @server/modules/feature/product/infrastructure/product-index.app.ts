@@ -25,8 +25,9 @@ export class ProductIndexApp extends BaseIndexApp {
     const tableKeys = [
       'name',
       'stock',
-      'price',
-      'discountPercentage',
+      'buyPrice',
+      'sellPrice',
+      'marginPrice',
       'brand',
       'createdAt',
     ]
@@ -39,7 +40,7 @@ export class ProductIndexApp extends BaseIndexApp {
       this.request,
     )
 
-    // TODO: add additional query
+    query.leftJoinAndSelect('product.categories', 'categories')
 
     const [data, count] = await this.getData(query, req.isExport)
     const meta = this.mapMeta(count, req)

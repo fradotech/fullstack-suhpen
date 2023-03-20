@@ -30,8 +30,11 @@ const ProductDetail: React.FC = () => {
         />
         <DescriptionContainer>
           <Descriptions.Item label="Name">{data?.data?.name}</Descriptions.Item>
-          <Descriptions.Item label="Price">
-            {data?.data?.price}
+          <Descriptions.Item label="Buy Price">
+            {data?.data?.buyPrice}
+          </Descriptions.Item>
+          <Descriptions.Item label="Sell Price">
+            {data?.data?.sellPrice}
           </Descriptions.Item>
         </DescriptionContainer>
       </Row>

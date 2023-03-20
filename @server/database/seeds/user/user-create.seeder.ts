@@ -7,10 +7,10 @@ import { userDummies } from './user.dummy'
 
 export const userCreateSeeder = async (): Promise<boolean> => {
   const data = userDummies
-  const repo = new Repository<IUser>(EntUser, new EntityManager(dataSource))
+  const userRepo = new Repository<IUser>(EntUser, new EntityManager(dataSource))
   const table = EntUser.name
 
-  const userExist = await repo
+  const userExist = await userRepo
     .createQueryBuilder(table)
     .where(`${table}.email IN (:email)`, {
       email: data.map((data) => data.email),
@@ -19,7 +19,7 @@ export const userCreateSeeder = async (): Promise<boolean> => {
 
   if (userExist) return false
 
-  await repo.createQueryBuilder(table).insert().values(data).execute()
+  await userRepo.createQueryBuilder(table).insert().values(data).execute()
 
   Logger.log(String(data.map((data) => data.email)), 'SeederCreate:User')
 

@@ -4,7 +4,9 @@ import { ICategory } from '../../category/infrastructure/category.interface'
 export interface IProduct extends IBaseProduct {
   sku?: string
   stock: number
-  price: number
+  buyPrice: number
+  sellPrice: number
+  marginPrice: number
   categories?: ICategory[]
   discountPercentage?: number
   brand?: string
