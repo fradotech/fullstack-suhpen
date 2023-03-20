@@ -22,10 +22,7 @@ export const categoryUpdateSeeder = async (): Promise<boolean> => {
     await repo.save(dataCreate)
   })
 
-  Logger.log(
-    'Success run categories seeders ',
-    String([data.map((data) => data.key)]),
-  )
+  Logger.log(String([data.map((data) => data.key)]), 'SeederUpdate:Category')
 
   return true
 }
