@@ -1,5 +1,5 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
-import { Col, Descriptions, Image } from 'antd'
+import { Descriptions, Image } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
@@ -23,40 +23,38 @@ const UserDetail: React.FC = () => {
         hrefEdit={Route.user.edit(id)}
         hrefDelete={Route.user.id(id)}
       />
-      <Col>
-        <DescriptionContainer>
-          {keys?.map((key) => {
-            if (
-              key == 'avatar' ||
-              key == 'image' ||
-              key == 'thumbnail' ||
-              key == 'attachment'
-            ) {
-              return (
-                <Descriptions.Item label={Util.titleCase(key)}>
-                  <Image style={{ width: '50px' }} src={data?.data.avatar} />
-                </Descriptions.Item>
-              )
-            } else if (data?.data[key] == true || data?.data[key] == false) {
-              return (
-                <Descriptions.Item label={Util.titleCase(key)}>
-                  {data?.data[key] ? (
-                    <CheckCircleOutlined style={{ color: 'green' }} />
-                  ) : (
-                    <CloseCircleOutlined style={{ color: 'red' }} />
-                  )}
-                </Descriptions.Item>
-              )
-            } else {
-              return (
-                <Descriptions.Item label={Util.titleCase(key)}>
-                  {data?.data[key] || '-'}
-                </Descriptions.Item>
-              )
-            }
-          })}
-        </DescriptionContainer>
-      </Col>
+      <DescriptionContainer>
+        {keys?.map((key) => {
+          if (
+            key == 'avatar' ||
+            key == 'image' ||
+            key == 'thumbnail' ||
+            key == 'attachment'
+          ) {
+            return (
+              <Descriptions.Item label={Util.titleCase(key)}>
+                <Image style={{ width: '50px' }} src={data?.data.avatar} />
+              </Descriptions.Item>
+            )
+          } else if (data?.data[key] == true || data?.data[key] == false) {
+            return (
+              <Descriptions.Item label={Util.titleCase(key)}>
+                {data?.data[key] ? (
+                  <CheckCircleOutlined style={{ color: 'green' }} />
+                ) : (
+                  <CloseCircleOutlined style={{ color: 'red' }} />
+                )}
+              </Descriptions.Item>
+            )
+          } else {
+            return (
+              <Descriptions.Item label={Util.titleCase(key)}>
+                {data?.data[key] || '-'}
+              </Descriptions.Item>
+            )
+          }
+        })}
+      </DescriptionContainer>
     </>
   )
 }
