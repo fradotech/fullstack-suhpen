@@ -4,7 +4,10 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Request } from 'express'
 import { Repository } from 'typeorm'
 import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
-import { IPaginateResponse } from '../../../../infrastructure/index/index.interface'
+import {
+  IIndexAppRelation,
+  IPaginateResponse,
+} from '../../../../infrastructure/index/index.interface'
 import { CategoryIndexRequest } from './category-index.request'
 import { EntCategory } from './category.entity'
 import { ICategory } from './category.interface'
@@ -24,12 +27,16 @@ export class CategoryIndexApp extends BaseIndexApp {
     req: CategoryIndexRequest,
   ): Promise<IPaginateResponse<ICategory>> {
     const tableName = 'category'
-    const tableKeys = Object.keys(EntCategory)
+    const tableKeys = ['name', 'key', 'createdAt']
+    const relations: IIndexAppRelation[] = [
+      { name: 'categories', keys: ['name'] },
+    ]
     const query = this.createQueryIndex(
       req,
       this.categoryRepo.createQueryBuilder(tableName),
       tableName,
       tableKeys,
+      relations,
       this.categoryRepo,
       this.request,
     )

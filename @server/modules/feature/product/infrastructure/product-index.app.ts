@@ -4,7 +4,10 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Request } from 'express'
 import { Repository } from 'typeorm'
 import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
-import { IPaginateResponse } from '../../../../infrastructure/index/index.interface'
+import {
+  IIndexAppRelation,
+  IPaginateResponse,
+} from '../../../../infrastructure/index/index.interface'
 import { ProductIndexRequest } from './product-index.request'
 import { EntProduct } from './product.entity'
 import { IProduct } from './product.interface'
@@ -31,16 +34,19 @@ export class ProductIndexApp extends BaseIndexApp {
       'brand',
       'createdAt',
     ]
+    const relations: IIndexAppRelation[] = [
+      { name: 'categories', keys: ['name'] },
+    ]
+
     const query = this.createQueryIndex(
       req,
       this.productRepo.createQueryBuilder(tableName),
       tableName,
       tableKeys,
+      relations,
       this.productRepo,
       this.request,
     )
-
-    query.leftJoinAndSelect('product.categories', 'categories')
 
     const [data, count] = await this.getData(query, req.isExport)
     const meta = this.mapMeta(count, req)

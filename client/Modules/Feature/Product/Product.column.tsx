@@ -44,14 +44,14 @@ export const productsColumns: ColumnsType<ProductResponse> = [
     dataIndex: 'categories',
     render: (data: CategoryResponse[]) => (
       <Row>
-        {data.map((data) => (
+        {data?.map((data) => (
           <Tag color={data.labelColor}>{data.name}</Tag>
         ))}
       </Row>
     ),
     filters: [
-      { text: 'Apple', value: 'Apple' },
-      { text: 'Oppo', value: 'Oppo' },
+      { text: 'Tablet', value: 'Tablet' },
+      { text: 'Laptop', value: 'Laptop' },
       { text: 'Samsung', value: 'Samsung' },
     ],
   },

@@ -5,7 +5,10 @@ import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Request } from 'express'
 import { Repository } from 'typeorm'
 import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
-import { IPaginateResponse } from '../../../../infrastructure/index/index.interface'
+import {
+  IIndexAppRelation,
+  IPaginateResponse,
+} from '../../../../infrastructure/index/index.interface'
 import { UserIndexRequest } from './user-index.request'
 import { EntUser } from './user.entity'
 
@@ -23,11 +26,15 @@ export class UserIndexApp extends BaseIndexApp {
   async fetch(req: UserIndexRequest): Promise<IPaginateResponse<IUser>> {
     const tableName = 'user'
     const tableKeys = ['name', 'email', 'role', 'phoneNumber', 'createdAt']
+    const relations: IIndexAppRelation[] = [
+      { name: 'categories', keys: ['name'] },
+    ]
     const query = this.createQueryIndex(
       req,
       this.userRepo.createQueryBuilder(tableName),
       tableName,
       tableKeys,
+      relations,
       this.userRepo,
       this.request,
     )
