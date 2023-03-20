@@ -1,6 +1,9 @@
 import {
+  ApartmentOutlined,
   DashboardOutlined,
   IdcardOutlined,
+  InboxOutlined,
+  PartitionOutlined,
   UsergroupAddOutlined,
   UserSwitchOutlined,
 } from '@ant-design/icons'
@@ -33,13 +36,30 @@ const itemsRoleAdministrator: MenuItem[] =
   user?.role == ERole.Administrator
     ? [
         {
+          key: 'SCM',
+          label: 'SCM',
+          icon: <ApartmentOutlined />,
+          children: [
+            {
+              key: Route.product.index,
+              label: <Link to={Route.product.index}>Product</Link>,
+              icon: <InboxOutlined />,
+            },
+            {
+              key: 'Route.category.index',
+              label: <Link to={'Route.category.index'}>Category</Link>,
+              icon: <PartitionOutlined />,
+            },
+          ],
+        },
+        {
           key: 'Iam',
           label: 'Iam',
           icon: <IdcardOutlined />,
           children: [
             {
-              key: Route.users,
-              label: <Link to={Route.users}>User</Link>,
+              key: Route.user.index,
+              label: <Link to={Route.user.index}>User</Link>,
               icon: <UsergroupAddOutlined />,
             },
             {

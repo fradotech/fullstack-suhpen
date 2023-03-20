@@ -21,7 +21,7 @@ const UserDetail: React.FC = () => {
         title="User Detail"
         isLoading={isLoading}
         hrefEdit={Route.user.edit(id)}
-        hrefDelete={Route.user.detail(id)}
+        hrefDelete={Route.user.id(id)}
       />
       <Row>
         <Avatar

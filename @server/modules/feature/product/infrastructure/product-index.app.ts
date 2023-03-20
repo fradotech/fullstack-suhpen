@@ -22,7 +22,14 @@ export class ProductIndexApp extends BaseIndexApp {
 
   async fetch(req: ProductIndexRequest): Promise<IPaginateResponse<IProduct>> {
     const tableName = 'product'
-    const tableKeys = Object.keys(EntProduct)
+    const tableKeys = [
+      'name',
+      'stock',
+      'price',
+      'discountPercentage',
+      'brand',
+      'createdAt',
+    ]
     const query = this.createQueryIndex(
       req,
       this.productRepo.createQueryBuilder(tableName),

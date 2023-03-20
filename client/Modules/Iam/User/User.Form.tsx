@@ -39,7 +39,7 @@ const UserForm: React.FC = () => {
       if (!id) res = await userAction.create(data)
       if (id) res = await userAction.update(id, data)
       setIsLoading(false)
-      res.data && navigate(Route.users)
+      res.data && navigate(Route.user.index)
     } catch (e) {
       setIsLoading(false)
     }

@@ -1,4 +1,5 @@
 import { routesDashboard } from '../Modules/Dashboard/Dashboard.route'
+import { routesProduct } from '../Modules/Feature/Product/Product.route'
 import { routesAccount } from '../Modules/Iam/Account/Account.route'
 import { routesAuth } from '../Modules/Iam/Auth/Auth.route'
 import { routesRole } from '../Modules/Iam/Role/Role.route'
@@ -15,4 +16,6 @@ export const Route = {
   ...routesRole,
 
   // <--- Feature --->
+
+  ...routesProduct,
 }
