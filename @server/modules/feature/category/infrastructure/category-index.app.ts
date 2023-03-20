@@ -28,9 +28,7 @@ export class CategoryIndexApp extends BaseIndexApp {
   ): Promise<IPaginateResponse<ICategory>> {
     const tableName = 'category'
     const tableKeys = ['name', 'key', 'createdAt']
-    const relations: IIndexAppRelation[] = [
-      { name: 'categories', keys: ['name'] },
-    ]
+    const relations: IIndexAppRelation[] = []
     const query = this.createQueryIndex(
       req,
       this.categoryRepo.createQueryBuilder(tableName),
