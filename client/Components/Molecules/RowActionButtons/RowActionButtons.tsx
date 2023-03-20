@@ -4,10 +4,12 @@ import {
   DeleteOutlined,
   EditOutlined,
   EyeOutlined,
+  MoreOutlined,
 } from '@ant-design/icons'
-import { Popconfirm, Space, Tooltip } from 'antd'
+import { Button, Card, Dropdown, Popconfirm, Space, Tooltip } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { isMobileScreen } from '../../../utils/is-mobile'
 
 type ButtonType = 'view' | 'edit' | 'delete' | 'approve' | 'reject'
 
@@ -23,6 +25,8 @@ interface IRowActionProps {
 }
 
 export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
+  const isMobile = isMobileScreen()
+
   const renderButton = (action: IRowActionButtonsProps) => {
     let { icon } = action
 
@@ -71,7 +75,21 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
     )
   }
 
-  return (
+  return isMobile ? (
+    <Dropdown
+      trigger={['click']}
+      overlay={
+        <Card size="small">
+          <Space wrap>
+            {actions.slice(0, 3).map((action) => renderButton(action))}
+          </Space>
+        </Card>
+      }
+      placement="bottomLeft"
+    >
+      <Button type="text" icon={<MoreOutlined />} />
+    </Dropdown>
+  ) : (
     <Space direction="vertical">
       <Space wrap>{actions.map((action) => renderButton(action))}</Space>
     </Space>

@@ -12,9 +12,7 @@ export const seeders = async () => {
     )
     .catch((error) => Logger.error(error))
 
-  await Promise.all([
-    userCreateSeeder(),
-    categoryUpdateSeeder(),
-    productCreateSeeder(),
-  ])
+  await userCreateSeeder()
+  await categoryUpdateSeeder()
+  await productCreateSeeder()
 }
