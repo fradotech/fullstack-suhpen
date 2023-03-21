@@ -4,9 +4,10 @@ export enum Modules {
   Role = 'roles',
   Account = 'account',
   Attachment = 'attachments',
+  Dashboard = 'dashboard',
 
   // <--- Feature Modules --->
 
-  Category = 'Categories',
+  Category = 'categories',
   Product = 'products',
 }

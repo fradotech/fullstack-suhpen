@@ -1,12 +1,12 @@
-import { Result } from 'antd'
 import React from 'react'
 import { PageHeader } from '../../Components/Molecules/Headers/PageHeader'
+import DashboardProduct from './Sections/DashboardProduct'
 
 const Dashboard: React.FC = () => {
   return (
     <>
       <PageHeader title="Dashboard" />
-      <Result status="500" title="500" subTitle="Slicing Dashboard" />
+      <DashboardProduct />
     </>
   )
 }

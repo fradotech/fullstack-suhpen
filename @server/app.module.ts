@@ -9,6 +9,7 @@ import {
 } from './common/exceptions/http-exeception.filter'
 import { ValidationPipe } from './common/pipes/validation.pipe'
 import { DatabaseModule } from './database/database.module'
+import { DashboardModule } from './modules/dashboard/dashboard.module'
 import { FeatureModule } from './modules/feature/feature.module'
 import { IamModule } from './modules/iam/iam.module'
 import { SentryModule } from './modules/support/sentry/sentry.module'
@@ -21,6 +22,7 @@ import { SupportModule } from './modules/support/support.module'
     DatabaseModule,
     SupportModule,
     IamModule,
+    DashboardModule,
     FeatureModule,
   ],
   controllers: [],

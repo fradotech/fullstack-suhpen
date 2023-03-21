@@ -20,12 +20,12 @@ const LoginForm: React.FC = () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
     const user = await authAction.login(data)
-    user && location.replace(Route.Dashboard)
+    user && location.replace(Route.dashboard.index)
     setIsLoading(false)
   }
 
   if (user) {
-    location.replace(Route.Dashboard)
+    location.replace(Route.dashboard.index)
     return undefined
   } else
     return (

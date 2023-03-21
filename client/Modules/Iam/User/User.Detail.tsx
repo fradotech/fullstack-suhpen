@@ -13,7 +13,7 @@ const UserDetail: React.FC = () => {
   const { id } = useParams()
   const fetch = async () => await userAction.findOne(id)
   const { isLoading, data } = useQuery([UserDetail.name], fetch)
-  const keys = data?.data && Object.keys(data.data)
+  const fields = data?.data && Object.keys(data.data)
 
   return (
     <>
@@ -24,7 +24,7 @@ const UserDetail: React.FC = () => {
         hrefDelete={Route.user.id(id)}
       />
       <DescriptionContainer>
-        {keys?.map((key) => {
+        {fields?.map((key) => {
           if (
             key == 'avatar' ||
             key == 'image' ||
