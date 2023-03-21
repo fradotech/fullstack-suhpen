@@ -13,7 +13,7 @@ const CategoryDetail: React.FC = () => {
   const { id } = useParams()
   const fetch = async () => await categoryAction.findOne(id)
   const { isLoading, data } = useQuery([CategoryDetail.name], fetch)
-  const keys = data?.data && Object.keys(data.data)
+  const fields = data?.data && Object.keys(data.data)
 
   return (
     <>
@@ -24,7 +24,7 @@ const CategoryDetail: React.FC = () => {
         hrefDelete={Route.category.id(id)}
       />
       <DescriptionContainer>
-        {keys?.map((key) => {
+        {fields?.map((key) => {
           if (
             key == 'avatar' ||
             key == 'image' ||

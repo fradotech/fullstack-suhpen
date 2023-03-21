@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards } from '@nestjs/common'
+import { Controller, Get, Param, UseGuards } from '@nestjs/common'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
@@ -16,21 +16,10 @@ const THIS_MODULE = Modules.Dashboard + '/' + Modules.Product
 export class DashboardProductController {
   constructor(private readonly dashboardProductApp: DashboardProductApp) {}
 
-  @Get('buyPrice')
-  async buyPrice(): Promise<IApiRes<IAggreate>> {
-    const res = await this.dashboardProductApp.aggregate(this.buyPrice.name)
-    return ApiRes.fromEntity(res)
-  }
-
-  @Get('sellPrice')
-  async sellPrice(): Promise<IApiRes<IAggreate>> {
-    const res = await this.dashboardProductApp.aggregate(this.sellPrice.name)
-    return ApiRes.fromEntity(res)
-  }
-
-  @Get('marginPrice')
-  async marginPrice(): Promise<IApiRes<IAggreate>> {
-    const res = await this.dashboardProductApp.aggregate(this.marginPrice.name)
+  @Get('aggregate/:field')
+  async aggregate(@Param('field') field: string): Promise<IApiRes<IAggreate>> {
+    // TODO: Add validation field
+    const res = await this.dashboardProductApp.aggregate(field)
     return ApiRes.fromEntity(res)
   }
 }

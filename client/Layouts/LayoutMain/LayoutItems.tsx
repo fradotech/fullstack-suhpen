@@ -26,8 +26,8 @@ const user = authAction.loggedUser()
 
 const itemsRoleUser: MenuItem[] = [
   {
-    key: Route.Dashboard,
-    label: <Link to={Route.Dashboard}>Dashboard</Link>,
+    key: Route.dashboard.index,
+    label: <Link to={Route.dashboard.index}>Dashboard</Link>,
     icon: <DashboardOutlined />,
   },
 ]

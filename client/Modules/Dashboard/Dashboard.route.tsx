@@ -2,14 +2,21 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 const Dashboard = React.lazy(() => import('./Dashboard'))
 
+const path = '/dashboard'
+
 export const routesDashboard = {
-  Dashboard: '/dashboard',
+  dashboard: {
+    index: path,
+    product: {
+      aggregate: (field: string) => `${path}/products/aggregate/${field}`,
+    },
+  },
 }
 
 export default [
   <Route
-    key={routesDashboard.Dashboard}
-    path={routesDashboard.Dashboard}
+    key={routesDashboard.dashboard.index}
+    path={routesDashboard.dashboard.index}
     element={<Dashboard />}
   />,
 ]

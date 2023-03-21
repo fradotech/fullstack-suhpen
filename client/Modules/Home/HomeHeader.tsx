@@ -33,7 +33,7 @@ const HomeHeader: React.FC = () => {
         {user ? (
           <a
             className={styles.headerItem}
-            onClick={() => location.replace(Route.Dashboard)}
+            onClick={() => location.replace(Route.dashboard.index)}
           >
             Dashboard
           </a>

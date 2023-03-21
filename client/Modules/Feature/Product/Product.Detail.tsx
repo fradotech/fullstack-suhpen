@@ -13,7 +13,7 @@ const ProductDetail: React.FC = () => {
   const { id } = useParams()
   const fetch = async () => await productAction.findOne(id)
   const { isLoading, data } = useQuery([ProductDetail.name], fetch)
-  const keys = data?.data && Object.keys(data.data)
+  const fields = data?.data && Object.keys(data.data)
 
   return (
     <>
@@ -24,7 +24,7 @@ const ProductDetail: React.FC = () => {
         hrefDelete={Route.product.id(id)}
       />
       <DescriptionContainer>
-        {keys?.map((key) => {
+        {fields?.map((key) => {
           if (
             key == 'avatar' ||
             key == 'image' ||
