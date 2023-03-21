@@ -1,12 +1,12 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common'
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { Modules } from '@server/modules/modules'
 import { UserResponse } from '../../user/infrastructure/user.response'
 import {
-  AuthChangePasswordRequest,
-  AuthEmailRequest,
+  AuthPasswordChangeRequest,
+  AuthPasswordSendRequest,
 } from '../infrastructure/auth.request'
 import { AuthApp } from './auth.app'
 
@@ -19,7 +19,9 @@ export class AuthPasswordController {
   constructor(private readonly authApp: AuthApp) {}
 
   @Post('send')
-  async send(@Body() req: AuthEmailRequest): Promise<IApiRes<UserResponse>> {
+  async send(
+    @Body() req: AuthPasswordSendRequest,
+  ): Promise<IApiRes<UserResponse>> {
     const link = await this.authApp.passwordSendLink(req)
     return ApiRes.fromEntity(link)
   }
@@ -30,9 +32,9 @@ export class AuthPasswordController {
     return ApiRes.fromEntity(user)
   }
 
-  @Put('change')
+  @Patch('change')
   async change(
-    @Body() req: AuthChangePasswordRequest,
+    @Body() req: AuthPasswordChangeRequest,
   ): Promise<IApiRes<UserResponse>> {
     const user = await this.authApp.passwordChange(req)
     return ApiRes.fromEntity(user)
