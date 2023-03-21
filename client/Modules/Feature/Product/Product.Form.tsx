@@ -32,16 +32,11 @@ const ProductForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-
-    try {
-      let res: IApiRes<ProductResponse>
-      if (!id) res = await productAction.create(data)
-      if (id) res = await productAction.update(id, data)
-      setIsLoading(false)
-      res.data && navigate(Route.product.index)
-    } catch (e) {
-      setIsLoading(false)
-    }
+    let res: IApiRes<ProductResponse>
+    if (!id) res = await productAction.create(data)
+    if (id) res = await productAction.update(id, data)
+    setIsLoading(false)
+    res.data && navigate(Route.product.index)
   }
 
   return (

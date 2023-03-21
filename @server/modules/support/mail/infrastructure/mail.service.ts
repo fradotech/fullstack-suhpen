@@ -21,7 +21,7 @@ export class MailService {
     this.transporter.sendMail(mailOptions, (error: Error, info: any) => {
       error && Exception.unprocessable(error)
       info &&
-        Logger.log('Success send mail to ' + info.accepted, 'Mail Service')
+        Logger.log('Success send mail to ' + info.accepted, MailService.name)
     })
   }
 }

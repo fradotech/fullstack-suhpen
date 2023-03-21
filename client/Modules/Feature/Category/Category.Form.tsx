@@ -32,16 +32,11 @@ const CategoryForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-
-    try {
-      let res: IApiRes<CategoryResponse>
-      if (!id) res = await categoryAction.create(data)
-      if (id) res = await categoryAction.update(id, data)
-      setIsLoading(false)
-      res.data && navigate(Route.category.index)
-    } catch (e) {
-      setIsLoading(false)
-    }
+    let res: IApiRes<CategoryResponse>
+    if (!id) res = await categoryAction.create(data)
+    if (id) res = await categoryAction.update(id, data)
+    setIsLoading(false)
+    res.data && navigate(Route.category.index)
   }
 
   return (

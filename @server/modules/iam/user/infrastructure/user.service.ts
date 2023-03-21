@@ -56,6 +56,6 @@ export class UserService implements BaseService {
   }
 
   public async findOneByToken(token: string): Promise<IUser> {
-    return await this.userRepo.findOneOrFail({ where: { token } })
+    return await this.userRepo.findOne({ where: { token } })
   }
 }

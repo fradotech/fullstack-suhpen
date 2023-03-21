@@ -19,9 +19,9 @@ export class AuthLoginRequest extends PickType(UserRequest, ['email']) {
   password!: string
 }
 
-export class AuthEmailRequest extends PickType(UserRequest, ['email']) {}
+export class AuthPasswordSendRequest extends PickType(UserRequest, ['email']) {}
 
-export class AuthChangePasswordRequest extends PickType(UserRequest, [
+export class AuthPasswordChangeRequest extends PickType(UserRequest, [
   'password',
   'passwordConfirmation',
   'token',

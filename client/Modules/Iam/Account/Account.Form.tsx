@@ -25,14 +25,9 @@ const AccountForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-
-    try {
-      const res = await accountAction.update(data)
-      setIsLoading(false)
-      res.data && navigate(Route.account)
-    } catch (e) {
-      setIsLoading(false)
-    }
+    const res = await accountAction.update(data)
+    setIsLoading(false)
+    res.data && navigate(Route.account)
   }
 
   return (

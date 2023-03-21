@@ -8,9 +8,9 @@ import { IUser } from '../../user/infrastructure/user.interface'
 import { UserService } from '../../user/infrastructure/user.service'
 import { authMessages } from '../common/auth.message'
 import {
-  AuthChangePasswordRequest,
-  AuthEmailRequest,
   AuthLoginRequest,
+  AuthPasswordChangeRequest,
+  AuthPasswordSendRequest,
   AuthRegisterRequest,
 } from '../infrastructure/auth.request'
 import { AuthService } from '../infrastructure/auth.service'
@@ -44,12 +44,12 @@ export class AuthApp {
     return user
   }
 
-  async passwordSendLink(req: AuthEmailRequest): Promise<string> {
+  async passwordSendLink(req: AuthPasswordSendRequest): Promise<string> {
     const user = await this.userService.findOneByEmail(req.email)
     if (!user) return 'Failed'
 
     user.token = await this.jwtService.signAsync({ id: user.id })
-    const link = `${config.server.host}/auth/password/${user.token}`
+    const link = `${config.server.hostClient}/auth/password?token=${user.token}`
 
     await this.userService.update(user)
     await this.authPasswordService.passwordResetLink(user, link)
@@ -64,7 +64,7 @@ export class AuthApp {
   }
 
   async passwordChange(
-    req: AuthChangePasswordRequest,
+    req: AuthPasswordChangeRequest,
   ): Promise<IUser | string> {
     const user = await this.userService.findOneByToken(req.token)
     if (!user) return authMessages.tokenInvalid

@@ -65,6 +65,23 @@ export const axiosService = {
     }
   },
 
+  patch: async (endpoint: string, dataPost?: any): Promise<any> => {
+    try {
+      const { data } = await axios.patch(`${hostApi}${endpoint}`, dataPost, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('_accessToken')}`,
+        },
+      })
+
+      axiosService.catch(data)
+
+      return data
+    } catch (e) {
+      notification.error({ message: e.response?.data?.message || String(e) })
+      return e
+    }
+  },
+
   delete: async (endpoint: string): Promise<any> => {
     try {
       const { data } = await axios.delete(`${hostApi}${endpoint}`, {

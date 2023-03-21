@@ -1,7 +1,7 @@
 import { AuthLoginRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
-import { Card, Form } from 'antd'
+import { Card, Form, Row } from 'antd'
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import CompanyLogo from '../../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import FormContainer from '../../../Components/Organisms/Form/FormContainer'
@@ -13,22 +13,15 @@ import styles from './Auth.module.css'
 
 const LoginForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
-  const navigate = useNavigate()
   const user = authAction.loggedUser()
   const [form] = Form.useForm<AuthLoginRequest>()
 
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-
-    try {
-      await form.validateFields()
-      const user = await authAction.login(data)
-      user && location.replace(Route.Dashboard)
-      setIsLoading(false)
-    } catch (e) {
-      setIsLoading(false)
-    }
+    const user = await authAction.login(data)
+    user && location.replace(Route.Dashboard)
+    setIsLoading(false)
   }
 
   if (user) {
@@ -53,9 +46,10 @@ const LoginForm: React.FC = () => {
               rules={[rule.required]}
             />
           </FormContainer>
-          <a onClick={() => navigate(Route.register)}>
-            Don't have an account? Register
-          </a>
+          <Row style={{ justifyContent: 'space-between' }}>
+            <Link to={Route.passwordSend}>Forgot password?</Link>
+            <Link to={Route.register}>Don't have an account? Register</Link>
+          </Row>
         </Card>
       </div>
     )
