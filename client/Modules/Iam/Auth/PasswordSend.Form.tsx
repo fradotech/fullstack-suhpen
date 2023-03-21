@@ -25,7 +25,7 @@ const PasswordSendForm: React.FC = () => {
   }
 
   if (user) {
-    location.replace(Route.Dashboard)
+    location.replace(Route.dashboard.index)
     return undefined
   } else
     return (

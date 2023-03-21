@@ -32,15 +32,15 @@ const THIS_MODULE = Modules.Category
 @UseGuards(AdminGuard)
 export class CategoryCrudController implements BaseCrudController {
   constructor(
-    private readonly productIndexApp: CategoryIndexApp,
-    private readonly productCrudApp: CategoryCrudApp,
+    private readonly categoryIndexApp: CategoryIndexApp,
+    private readonly categoryCrudApp: CategoryCrudApp,
   ) {}
 
   @Get()
   async fetch(
     @Query() req: CategoryIndexRequest,
   ): Promise<IApiRes<CategoryResponse[]>> {
-    const res = await this.productIndexApp.fetch(req)
+    const res = await this.categoryIndexApp.fetch(req)
     return ApiRes.fromEntity(CategoryResponse.fromEntities(res.data), res.meta)
   }
 
@@ -48,7 +48,7 @@ export class CategoryCrudController implements BaseCrudController {
   async create(
     @Body() req: CategoryCreateRequest,
   ): Promise<IApiRes<CategoryResponse>> {
-    const data = await this.productCrudApp.create(req)
+    const data = await this.categoryCrudApp.create(req)
     return ApiRes.fromEntity(CategoryResponse.fromEntity(data))
   }
 
@@ -56,7 +56,7 @@ export class CategoryCrudController implements BaseCrudController {
   async findOneOrFail(
     @Param('id') id: string,
   ): Promise<IApiRes<CategoryResponse>> {
-    const data = await this.productCrudApp.findOneOrFail(id)
+    const data = await this.categoryCrudApp.findOneOrFail(id)
     return ApiRes.fromEntity(CategoryResponse.fromEntity(data))
   }
 
@@ -65,13 +65,13 @@ export class CategoryCrudController implements BaseCrudController {
     @Param('id') id: string,
     @Body() req: CategoryUpdateRequest,
   ): Promise<IApiRes<CategoryResponse>> {
-    const data = await this.productCrudApp.update(id, req)
+    const data = await this.categoryCrudApp.update(id, req)
     return ApiRes.fromEntity(CategoryResponse.fromEntity(data))
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<CategoryResponse>> {
-    const data = await this.productCrudApp.softRemove(id)
+    const data = await this.categoryCrudApp.softRemove(id)
     return ApiRes.fromEntity(CategoryResponse.fromEntity(data))
   }
 }

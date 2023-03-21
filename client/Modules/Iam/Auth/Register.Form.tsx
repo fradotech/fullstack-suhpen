@@ -20,12 +20,12 @@ const RegisterForm: React.FC = () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
     const res = await authAction.register(data)
-    res.data && location.replace(Route.Dashboard)
+    res.data && location.replace(Route.dashboard.index)
     setIsLoading(false)
   }
 
   if (user) {
-    location.replace(Route.Dashboard)
+    location.replace(Route.dashboard.index)
     return undefined
   } else
     return (
