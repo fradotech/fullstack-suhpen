@@ -19,15 +19,9 @@ const LoginForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-
-    try {
-      await form.validateFields()
-      const user = await authAction.login(data)
-      user && location.replace(Route.Dashboard)
-      setIsLoading(false)
-    } catch (e) {
-      setIsLoading(false)
-    }
+    const user = await authAction.login(data)
+    user && location.replace(Route.Dashboard)
+    setIsLoading(false)
   }
 
   if (user) {

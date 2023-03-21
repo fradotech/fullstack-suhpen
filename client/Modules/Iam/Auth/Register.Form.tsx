@@ -19,15 +19,9 @@ const RegisterForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-
-    try {
-      await form.validateFields()
-      const res = await authAction.register(data)
-      res.data && location.replace(Route.Dashboard)
-      setIsLoading(false)
-    } catch (e) {
-      setIsLoading(false)
-    }
+    const res = await authAction.register(data)
+    res.data && location.replace(Route.Dashboard)
+    setIsLoading(false)
   }
 
   if (user) {

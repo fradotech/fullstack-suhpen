@@ -24,15 +24,9 @@ const PasswordChangeForm: React.FC = () => {
 
   const onFinish = async () => {
     const data = form.getFieldsValue()
-
-    try {
-      await form.validateFields()
-      const res = await authAction.passwordChange(data, token)
-      res && setIsSuccess(true)
-      setIsLoading(false)
-    } catch (e) {
-      setIsLoading(false)
-    }
+    const res = await authAction.passwordChange(data, token)
+    res && setIsSuccess(true)
+    setIsLoading(false)
   }
 
   if (!isValid) {

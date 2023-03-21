@@ -33,16 +33,11 @@ const UserForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-
-    try {
-      let res: IApiRes<UserResponse>
-      if (!id) res = await userAction.create(data)
-      if (id) res = await userAction.update(id, data)
-      setIsLoading(false)
-      res.data && navigate(Route.user.index)
-    } catch (e) {
-      setIsLoading(false)
-    }
+    let res: IApiRes<UserResponse>
+    if (!id) res = await userAction.create(data)
+    if (id) res = await userAction.update(id, data)
+    setIsLoading(false)
+    res.data && navigate(Route.user.index)
   }
 
   return (

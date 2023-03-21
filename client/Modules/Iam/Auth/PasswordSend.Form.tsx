@@ -19,15 +19,9 @@ const PasswordSendForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-
-    try {
-      await form.validateFields()
-      const res = await authAction.passwordSend(data)
-      res && setIsSuccess(true)
-      setIsLoading(false)
-    } catch (e) {
-      setIsLoading(false)
-    }
+    const res = await authAction.passwordSend(data)
+    res && setIsSuccess(true)
+    setIsLoading(false)
   }
 
   if (user) {
