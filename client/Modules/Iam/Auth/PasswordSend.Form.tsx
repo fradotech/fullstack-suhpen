@@ -1,7 +1,6 @@
 import { AuthPasswordSendRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
-import { Alert, Card, Col, Form } from 'antd'
+import { Alert, Card, Form } from 'antd'
 import React from 'react'
-import { Link } from 'react-router-dom'
 import CompanyLogo from '../../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import FormContainer from '../../../Components/Organisms/Form/FormContainer'
@@ -41,18 +40,15 @@ const PasswordSendForm: React.FC = () => {
         <Card className={styles.cardContainer}>
           <PageHeader title="Reset Password" isLoading={isLoading} />
           {isSuccess ? (
-            <Col>
-              <Alert
-                style={{ textAlign: 'left' }}
-                message={'Successfull operation!'}
-                description={`Success send link reset password to your email ${form.getFieldValue(
-                  'email',
-                )}. Please check your email inbox`}
-                type="success"
-                showIcon
-              />
-              <Link to={Route.login}>Login</Link>
-            </Col>
+            <Alert
+              style={{ textAlign: 'left' }}
+              message={'Successfull operation!'}
+              description={`Success send link reset password to your email ${form.getFieldValue(
+                'email',
+              )}. Please check your email inbox`}
+              type="success"
+              showIcon
+            />
           ) : (
             <FormContainer
               onFinish={onFinish}

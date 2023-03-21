@@ -15,7 +15,7 @@ export const authAction = {
     JSON.parse(localStorage.getItem('user') || 'null'),
 
   login: async (req: AuthLoginRequest): Promise<UserResponse> => {
-    const res = await axiosService.post(Route.login, req)
+    const res: IApiRes<UserResponse> = await axiosService.post(Route.login, req)
     const user = res?.data
     localStorage.setItem('_accessToken', user._accessToken || '')
     localStorage.setItem('user', JSON.stringify(user))
@@ -35,7 +35,10 @@ export const authAction = {
   },
 
   passwordSend: async (req: AuthPasswordSendRequest): Promise<boolean> => {
-    const res = await axiosService.post(Route.passwordSend, req)
+    const res: IApiRes<UserResponse> = await axiosService.post(
+      Route.passwordSend,
+      req,
+    )
     const isSuccess = !!res?.data
     isSuccess &&
       notification.success({
@@ -45,11 +48,22 @@ export const authAction = {
     return isSuccess
   },
 
+  password: async (token: string): Promise<boolean> => {
+    const endpoint = `${Route.password}/${token}`
+    const res: IApiRes<UserResponse> = await axiosService.get(endpoint)
+    return !!res.data.token
+  },
+
   passwordChange: async (
     req: AuthPasswordChangeRequest,
     token: string,
-  ): Promise<UserResponse> => {
+  ): Promise<boolean> => {
     req.token = token
-    return await axiosService.patch(Route.passwordChange, req)
+    const res: IApiRes<string> = await axiosService.patch(
+      Route.passwordChange,
+      req,
+    )
+
+    return !!res.data
   },
 }
