@@ -16,6 +16,7 @@ export const config = {
     host:
       `${process.env.HOST}${process.env.APP_PREFIX}` ||
       `http://localhost:${process.env.PORT}${process.env.APP_PREFIX}`,
+    hostClient: process.env.HOST_CLIENT || 'http://localhost:8080',
   },
 
   database: {

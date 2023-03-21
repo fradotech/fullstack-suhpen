@@ -1,7 +1,7 @@
 import { AuthRegisterRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
 import { Card, Form } from 'antd'
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import CompanyLogo from '../../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import FormContainer from '../../../Components/Organisms/Form/FormContainer'
@@ -13,22 +13,15 @@ import styles from './Auth.module.css'
 
 const RegisterForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
-  const navigate = useNavigate()
   const user = authAction.loggedUser()
   const [form] = Form.useForm<AuthRegisterRequest>()
 
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-
-    try {
-      await form.validateFields()
-      const res = await authAction.register(data)
-      res.data && location.replace(Route.Dashboard)
-      setIsLoading(false)
-    } catch (e) {
-      setIsLoading(false)
-    }
+    const res = await authAction.register(data)
+    res.data && location.replace(Route.Dashboard)
+    setIsLoading(false)
   }
 
   if (user) {
@@ -46,7 +39,7 @@ const RegisterForm: React.FC = () => {
             layout="vertical"
             button={{ singleSubmitText: 'Register', disabled: isLoading }}
           >
-            <FormItem name="name" required />
+            <FormItem name="name" rules={[rule.required]} />
             <FormItem name="email" rules={[rule.email]} type="email" />
             <FormItem
               name="password"
@@ -60,7 +53,7 @@ const RegisterForm: React.FC = () => {
               placeholder="Password Confirmation"
             />
           </FormContainer>
-          <a onClick={() => navigate(Route.login)}>Have an account? Login</a>
+          <Link to={Route.login}>Have an account? Login</Link>
         </Card>
       </div>
     )
