@@ -7,8 +7,8 @@ import {
 } from '@server/modules/feature/inventory/infrastructure/inventory.request'
 import { InventoryResponse } from '@server/modules/feature/inventory/infrastructure/inventory.response'
 import { notification } from 'antd'
-import { Route } from '../../../Enums/Route'
-import { axiosService } from '../../../services/axios.service'
+import { Route } from '../../../../Enums/Route'
+import { axiosService } from '../../../../services/axios.service'
 
 const dataPrepare = (
   data: InventoryCreateRequest | InventoryUpdateRequest,
@@ -19,7 +19,9 @@ const dataPrepare = (
 export const inventoryAction = {
   fetch: async (
     req?: InventoryIndexRequest,
+    productId?: string,
   ): Promise<IPaginateResponse<InventoryResponse>> => {
+    req.productId = productId
     return await axiosService.get(Route.inventory.index, req)
   },
 

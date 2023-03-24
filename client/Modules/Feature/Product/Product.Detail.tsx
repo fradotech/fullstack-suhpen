@@ -1,5 +1,5 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
-import { Descriptions, Image } from 'antd'
+import { Descriptions, Divider, Image } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
@@ -7,6 +7,7 @@ import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import DescriptionContainer from '../../../Components/Organisms/Description/DescriptionContainer'
 import { Route } from '../../../Enums/Route'
 import { Util } from '../../../utils/util'
+import InventoryS from './Inventory/Inventory.S'
 import { productAction } from './product.action'
 
 const ProductDetail: React.FC = () => {
@@ -61,6 +62,9 @@ const ProductDetail: React.FC = () => {
           }
         })}
       </DescriptionContainer>
+      <Divider />
+      <InventoryS productId={data?.data.id} />
+      <Divider />
     </>
   )
 }

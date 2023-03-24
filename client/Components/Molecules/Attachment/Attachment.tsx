@@ -30,15 +30,14 @@ const Attachment: React.FC<IProps> = (props: IProps) => {
         ? fieldValue
         : fileList
 
-    const attachments: UploadFile[] =
-      defaultValues?.length > 0
-        ? defaultValues?.map((data: any) => {
-            isInit && setIsInit(false)
-            if (data.status == 'uploading') return null
-            if (data.file) return data.file
-            return { uid: data, name: data, url: data }
-          })
-        : [defaultValues]
+    const attachments: UploadFile[] = Array.isArray(defaultValues)
+      ? defaultValues?.map((data: any) => {
+          isInit && setIsInit(false)
+          if (data.status == 'uploading') return null
+          if (data.file) return data.file
+          return { uid: data, name: data, url: data }
+        })
+      : [defaultValues]
 
     typeof attachments[0]?.url == typeof '' && setFileList(attachments)
   }, [props])

@@ -40,6 +40,10 @@ export class InventoryIndexApp extends BaseIndexApp {
       this.request,
     )
 
+    if (req.productId) {
+      query.andWhere('product.id = :productId', { productId: req.productId })
+    }
+
     const [data, count] = await this.getData(query, req.isExport)
     const meta = this.mapMeta(count, req)
 

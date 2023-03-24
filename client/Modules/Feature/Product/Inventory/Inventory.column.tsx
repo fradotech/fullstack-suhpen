@@ -4,9 +4,10 @@ import { IProduct } from '@server/modules/feature/product/infrastructure/product
 import { Tag, Typography } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import React from 'react'
-import { RowActionButtons } from '../../../Components/Molecules/RowActionButtons/RowActionButtons'
-import { Route } from '../../../Enums/Route'
-import { Util } from '../../../utils/util'
+import { Link } from 'react-router-dom'
+import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
+import { Route } from '../../../../Enums/Route'
+import { Util } from '../../../../utils/util'
 import { inventoryAction } from './inventory.action'
 
 export const inventoryColumns: ColumnsType<InventoryResponse> = [
@@ -16,7 +17,13 @@ export const inventoryColumns: ColumnsType<InventoryResponse> = [
   },
   {
     dataIndex: 'product',
-    render: (data: IProduct) => data?.name,
+    render: (data: IProduct) => (
+      <Link to={Route.product.id(data?.id)}>{data?.name}</Link>
+    ),
+  },
+  {
+    title: 'Variant',
+    dataIndex: 'productVariantName',
   },
   {
     dataIndex: 'stock',

@@ -29,6 +29,9 @@ export const productColumns: ColumnsType<ProductResponse> = [
     ],
   },
   {
+    dataIndex: 'brand',
+  },
+  {
     title: 'Active',
     dataIndex: 'isActive',
     width: '1px',
