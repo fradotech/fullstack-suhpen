@@ -1,7 +1,7 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { CategoryResponse } from '@server/modules/feature/category/infrastructure/category.response'
 import { ProductResponse } from '@server/modules/feature/product/infrastructure/product.response'
-import { Row, Tag } from 'antd'
+import { Row, Tag, Typography } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import React from 'react'
 import { RowActionButtons } from '../../../Components/Molecules/RowActionButtons/RowActionButtons'
@@ -12,6 +12,30 @@ import { productAction } from './product.action'
 export const productsColumns: ColumnsType<ProductResponse> = [
   {
     dataIndex: 'name',
+  },
+  {
+    dataIndex: 'buyPrice',
+    render: (data: number) => (
+      <Typography.Text type="warning" strong>
+        {Util.formatCurrency(data)}
+      </Typography.Text>
+    ),
+  },
+  {
+    dataIndex: 'sellPrice',
+    render: (data: number) => (
+      <Typography.Text type="success" strong>
+        {Util.formatCurrency(data)}
+      </Typography.Text>
+    ),
+  },
+  {
+    dataIndex: 'marginPrice',
+    render: (data: number) => (
+      <Tag>
+        <Typography.Text strong>{Util.formatCurrency(data)}</Typography.Text>
+      </Tag>
+    ),
   },
   {
     dataIndex: 'categories',

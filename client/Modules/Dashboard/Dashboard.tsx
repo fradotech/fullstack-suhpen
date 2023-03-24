@@ -1,6 +1,6 @@
 import React from 'react'
 import { PageHeader } from '../../Components/Molecules/Headers/PageHeader'
-import DashboardProduct from './Sections/DashboardProduct'
+import DashboardProduct from './Sections/DashboardInventory'
 
 const Dashboard: React.FC = () => {
   return (

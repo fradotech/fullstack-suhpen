@@ -7,8 +7,8 @@ const path = '/dashboard'
 export const routesDashboard = {
   dashboard: {
     index: path,
-    product: {
-      aggregate: (field: string) => `${path}/products/aggregate/${field}`,
+    inventory: {
+      aggregate: (field: string) => `${path}/inventories/aggregate/${field}`,
     },
   },
 }

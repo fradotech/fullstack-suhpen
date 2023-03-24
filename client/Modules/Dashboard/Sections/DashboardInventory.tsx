@@ -3,12 +3,12 @@ import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { Util } from '../../../utils/util'
-import { dashboardProductAction } from './dashboardProduct.action'
+import { dashboardInventoryAction } from './dashboardInventory.action'
 
-const DashboardProduct: React.FC = () => {
-  const buyPrice = async () => await dashboardProductAction.buyPrice()
-  const sellPrice = async () => await dashboardProductAction.sellPrice()
-  const marginPrice = async () => await dashboardProductAction.marginPrice()
+const DashboardInventory: React.FC = () => {
+  const buyPrice = async () => await dashboardInventoryAction.buyPrice()
+  const sellPrice = async () => await dashboardInventoryAction.sellPrice()
+  const marginPrice = async () => await dashboardInventoryAction.marginPrice()
 
   const fetch = async () => {
     return {
@@ -18,7 +18,7 @@ const DashboardProduct: React.FC = () => {
     }
   }
 
-  const { data } = useQuery([DashboardProduct.name], fetch)
+  const { data } = useQuery([DashboardInventory.name], fetch)
 
   return (
     <>
@@ -68,4 +68,4 @@ const DashboardProduct: React.FC = () => {
   )
 }
 
-export default DashboardProduct
+export default DashboardInventory

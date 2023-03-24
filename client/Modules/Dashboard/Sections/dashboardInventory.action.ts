@@ -3,24 +3,24 @@ import { IAggreate } from '@server/modules/dashboard/infrastructure/dashboard.in
 import { Route } from '../../../Enums/Route'
 import { axiosService } from '../../../services/axios.service'
 
-export const dashboardProductAction = {
+export const dashboardInventoryAction = {
   buyPrice: async (): Promise<IAggreate> => {
     const res: IApiRes<IAggreate> = await axiosService.get(
-      Route.dashboard.product.aggregate('buyPrice'),
+      Route.dashboard.inventory.aggregate('buyPrice'),
     )
     return res.data
   },
 
   sellPrice: async (): Promise<IAggreate> => {
     const res: IApiRes<IAggreate> = await axiosService.get(
-      Route.dashboard.product.aggregate('sellPrice'),
+      Route.dashboard.inventory.aggregate('sellPrice'),
     )
     return res.data
   },
 
   marginPrice: async (): Promise<IAggreate> => {
     const res: IApiRes<IAggreate> = await axiosService.get(
-      Route.dashboard.product.aggregate('marginPrice'),
+      Route.dashboard.inventory.aggregate('marginPrice'),
     )
     return res.data
   },
