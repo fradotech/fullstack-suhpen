@@ -54,8 +54,19 @@ const ProductForm: React.FC = () => {
       >
         <FormItem name="thumbnail" input="attachment" total={1} form={form} />
         <FormItem name="name" rules={[rule.required]} />
-        <FormItem name="price" rules={[rule.required, { type: 'number' }]} />
-        <FormItem name="description" />
+        <FormItem name="key" />
+        <FormItem name="upc" />
+        <FormItem name="description" input="textArea" />
+        <FormItem
+          name="categories"
+          input="select"
+          options={[
+            { label: 'Category 1', value: 'Category 1' },
+            { label: 'Category 2', value: 'Category 2' },
+          ]}
+        />
+        <FormItem name="brand" />
+        <FormItem name="rating" />
       </FormContainer>
     </>
   )

@@ -7,7 +7,7 @@ import { paginationTransform } from '../../../Components/Organisms/DataTable/Dat
 import { useDataTable } from '../../../Components/Organisms/DataTable/useDataTable'
 import { Route } from '../../../Enums/Route'
 import { productAction } from './product.action'
-import { productsColumns } from './Product.column'
+import { productColumns } from './Product.column'
 
 const ProductS: React.FC = () => {
   const { query, setQueryParams } = useDataTable<ProductIndexRequest>()
@@ -19,7 +19,7 @@ const ProductS: React.FC = () => {
       <PageHeader title="Product" />
       <DataTable
         rowKey="id"
-        columns={productsColumns}
+        columns={productColumns}
         dataSource={data?.data}
         search={query.search}
         pagination={paginationTransform(data?.meta)}
@@ -28,7 +28,6 @@ const ProductS: React.FC = () => {
         dataTableHeader={{
           query,
           search: true,
-          dateRange: true,
           hrefCreate: Route.product.form,
           hrefExport: Route.product.export,
         }}

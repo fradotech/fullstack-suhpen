@@ -1,9 +1,9 @@
 import { AuthPasswordChangeRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
 import { Alert, Card, Col, Form } from 'antd'
+import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import CompanyLogo from '../../../Components/Molecules/CompanyLogo/CompanyLogo'
-import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import FormContainer from '../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../Enums/Route'
@@ -11,7 +11,6 @@ import { rule } from '../../../utils/form.rules'
 import { authAction } from './auth.action'
 import styles from './Auth.module.css'
 
-// TODO: Slicing center title
 const PasswordChangeForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
   const [searchParams] = useSearchParams()
@@ -31,13 +30,13 @@ const PasswordChangeForm: React.FC = () => {
 
   if (!isValid) {
     isValid == false && location.replace(Route.login)
-    return undefined
+    return null
   } else
     return (
-      <div className={styles.container}>
-        <CompanyLogo />
+      <Col className={styles.container}>
+        <CompanyLogo className={styles.companyLogo} />
         <Card className={styles.cardContainer}>
-          <PageHeader title="Create New Password" isLoading={isLoading} />
+          <Title className={styles.title}>Create New Password</Title>
           {isSuccess ? (
             <Col>
               <Alert
@@ -66,11 +65,11 @@ const PasswordChangeForm: React.FC = () => {
                 rules={[rule.password]}
                 input="inputPassword"
                 placeholder="Password Confirmation"
-              />{' '}
+              />
             </FormContainer>
           )}
         </Card>
-      </div>
+      </Col>
     )
 }
 

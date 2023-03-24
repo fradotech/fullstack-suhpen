@@ -1,7 +1,7 @@
 import { PartialType } from '@nestjs/swagger'
-import { BaseProductRequest } from '@server/infrastructure/base/product/base-product.request'
+import { BaseMasterDataRequest } from '@server/infrastructure/base/product/base-master-data.request'
 
-export class CategoryRequest extends BaseProductRequest {}
+export class CategoryRequest extends BaseMasterDataRequest {}
 
 export class CategoryCreateRequest extends PartialType(CategoryRequest) {}
 

@@ -1,8 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator'
-import { IBaseProduct } from './base-product.interface'
+import { IBaseMasterData } from './base-master-data.interface'
 
-export class BaseProductRequest implements IBaseProduct {
+export class BaseMasterDataRequest implements IBaseMasterData {
+  parent?: IBaseMasterData
+  childs?: IBaseMasterData[]
   id: string
 
   @IsNotEmpty()
@@ -29,14 +31,4 @@ export class BaseProductRequest implements IBaseProduct {
   @IsString()
   @ApiProperty()
   thumbnail?: string
-
-  @IsOptional()
-  @IsString()
-  @ApiProperty()
-  parent?: IBaseProduct
-
-  @IsOptional()
-  @IsString()
-  @ApiProperty()
-  childs?: IBaseProduct[]
 }

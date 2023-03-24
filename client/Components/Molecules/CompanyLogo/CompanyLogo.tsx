@@ -1,14 +1,14 @@
 import { Image } from 'antd'
 import React from 'react'
-import { Route } from '../../../Enums/Route'
 import { host } from '../../../services/axios.service'
 
 interface IProps {
   style?: React.CSSProperties
+  className?: string
 }
 
 const CompanyLogo: React.FC<IProps> = (props: IProps) => (
-  <a href={Route.Home}>
+  <div className={props.className}>
     <Image
       src={`${host}/images/company-logo.jpg`}
       preview={false}
@@ -16,7 +16,7 @@ const CompanyLogo: React.FC<IProps> = (props: IProps) => (
         props.style || { width: '50%', maxWidth: '250px', borderRadius: '10px' }
       }
     />
-  </a>
+  </div>
 )
 
 export default CompanyLogo

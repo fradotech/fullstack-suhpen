@@ -16,7 +16,7 @@ const THIS_MODULE = Modules.Category + '/sheet'
 @ApiBearerAuth()
 @UseGuards(AdminGuard)
 export class CategorySheetController {
-  constructor(private readonly productIndexApp: CategoryIndexApp) {}
+  constructor(private readonly categoryIndexApp: CategoryIndexApp) {}
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
@@ -28,7 +28,7 @@ export class CategorySheetController {
     @Query() req: CategoryIndexRequest,
   ): Promise<IApiExportRes<CategoryResponse[]>> {
     req.isExport = true
-    const response = await this.productIndexApp.fetch(req)
+    const response = await this.categoryIndexApp.fetch(req)
 
     const data = CategoryResponse.fromEntities(response.data)
     const parser = new Parser()

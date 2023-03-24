@@ -1,10 +1,9 @@
 import { IProduct } from '@server/modules/feature/product/infrastructure/product.interface'
-import { Card, Col, Image, Layout, Row, Tag } from 'antd'
+import { Card, Col, Image, Layout, Row } from 'antd'
 import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { axiosService } from '../../services/axios.service'
-import { Util } from '../../utils/util'
 import styles from './Home.module.css'
 
 const path = '/products'
@@ -39,23 +38,8 @@ const HomeProduct: React.FC = () => {
               >
                 {data.name}
                 <Title style={{ color: '#FF5F1F', margin: '2px' }} level={5}>
-                  {Util.formatCurrency(
-                    data.sellPrice -
-                      (data.sellPrice * data.discountPercentage) / 100,
-                  )}
+                  {'Util.formatCurrency(data.sellPrice)'}
                 </Title>
-                <Row>
-                  {+data.discountPercentage % 3 == 0 ? (
-                    <Tag color="green">Cashback</Tag>
-                  ) : (
-                    <>
-                      <Tag color="red">{data.discountPercentage + '%'}</Tag>
-                      <s style={{ opacity: '70%' }}>
-                        {Util.formatCurrency(data.sellPrice)}
-                      </s>
-                    </>
-                  )}
-                </Row>
                 <p style={{ opacity: '70%', margin: '0px' }}>10rb+ Terjual</p>
               </Card>
             )

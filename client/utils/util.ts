@@ -23,7 +23,7 @@ export class Util {
   }
 
   static camelToSnake = (str: string) => {
-    str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`)
+    return str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`)
   }
 
   static camelToTitle = (str: string) => {
@@ -32,7 +32,11 @@ export class Util {
   }
 
   static formatDate = (date: Date | string | dayjs.Dayjs) => {
-    return dayjs(date).format('YYYY-MM-DD HH:MM')
+    return dayjs(date).format('YYYY MM DD')
+  }
+
+  static formatDatetime = (date: Date | string | dayjs.Dayjs) => {
+    return dayjs(date).format('YYYY MM DD - HH:MM')
   }
 
   static formatCurrency = (str: number | string) => {

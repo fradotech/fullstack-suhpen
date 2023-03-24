@@ -5,21 +5,21 @@ import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { AdminGuard } from '@server/modules/iam/auth/common/admin.guard'
 import { Modules } from '@server/modules/modules'
 import { IAggreate } from '../infrastructure/dashboard.interface'
-import { DashboardProductApp } from './dashboard-product.app'
+import { DashboardInventoryApp } from './dashboard-inventory.app'
 
-const THIS_MODULE = Modules.Dashboard + '/' + Modules.Product
+const THIS_MODULE = Modules.Dashboard + '/' + Modules.Inventory
 
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
 @UseGuards(AdminGuard)
-export class DashboardProductController {
-  constructor(private readonly dashboardProductApp: DashboardProductApp) {}
+export class DashboardInventoryController {
+  constructor(private readonly dashboardInventoryApp: DashboardInventoryApp) {}
 
   @Get('aggregate/:field')
   async aggregate(@Param('field') field: string): Promise<IApiRes<IAggreate>> {
     // TODO: Add validation field
-    const res = await this.dashboardProductApp.aggregate(field)
+    const res = await this.dashboardInventoryApp.aggregate(field)
     return ApiRes.fromEntity(res)
   }
 }

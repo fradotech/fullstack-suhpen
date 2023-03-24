@@ -1,16 +1,20 @@
-import { UserOutlined } from '@ant-design/icons'
-import { Avatar, Descriptions, Row, Tag } from 'antd'
+import {
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  UserOutlined,
+} from '@ant-design/icons'
+import { Avatar, Descriptions, Image, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import DescriptionContainer from '../../../Components/Organisms/Description/DescriptionContainer'
 import { Util } from '../../../utils/util'
-import { ERole } from '../Role/Role.enum'
 import { accountAction } from './account.action'
 
 const AccountDetail: React.FC = () => {
   const fetch = async () => await accountAction.getUserLogged()
   const { isLoading, data } = useQuery([AccountDetail.name], fetch)
+  const fields = data?.data && Object.keys(data.data)
 
   return (
     <>
@@ -23,29 +27,42 @@ const AccountDetail: React.FC = () => {
           src={data?.data.avatar}
         />
         <DescriptionContainer>
-          <Descriptions.Item label="Name">{data?.data?.name}</Descriptions.Item>
-          <Descriptions.Item label="Role">
-            {data?.data.role == ERole.Administrator ? (
-              <Tag color="blue">{data?.data.role}</Tag>
-            ) : (
-              <Tag color="green">{data?.data.role}</Tag>
-            )}
-          </Descriptions.Item>
-          <Descriptions.Item label="Email">
-            {data?.data?.email}
-          </Descriptions.Item>
-          <Descriptions.Item label="Gender">
-            {data?.data?.gender}
-          </Descriptions.Item>
-          <Descriptions.Item label="Birth Date">
-            {data?.data?.birthDate && Util.formatDate(data?.data?.birthDate)}
-          </Descriptions.Item>
-          <Descriptions.Item label="Phone Number">
-            {data?.data?.phoneNumber}
-          </Descriptions.Item>
-          <Descriptions.Item label="Address">
-            {data?.data?.address}
-          </Descriptions.Item>
+          {fields?.map((key) => {
+            if (
+              key == 'avatar' ||
+              key == 'image' ||
+              key == 'thumbnail' ||
+              key == 'attachment'
+            ) {
+              return (
+                <Descriptions.Item label={Util.titleCase(key)}>
+                  <Image style={{ width: '50px' }} src={data?.data[key]} />
+                </Descriptions.Item>
+              )
+            } else if (data?.data[key] == true || data?.data[key] == false) {
+              return (
+                <Descriptions.Item label={Util.titleCase(key)}>
+                  {data?.data[key] ? (
+                    <CheckCircleOutlined style={{ color: 'green' }} />
+                  ) : (
+                    <CloseCircleOutlined style={{ color: 'red' }} />
+                  )}
+                </Descriptions.Item>
+              )
+            } else if (key.includes('At')) {
+              return (
+                <Descriptions.Item label={Util.titleCase(key)}>
+                  {Util.formatDatetime(data?.data[key])}
+                </Descriptions.Item>
+              )
+            } else {
+              return (
+                <Descriptions.Item label={Util.titleCase(key)}>
+                  {data?.data[key] || '-'}
+                </Descriptions.Item>
+              )
+            }
+          })}
         </DescriptionContainer>
       </Row>
     </>

@@ -1,9 +1,9 @@
 import { AuthLoginRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
-import { Card, Form, Row } from 'antd'
+import { Card, Col, Form, Row } from 'antd'
+import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import CompanyLogo from '../../../Components/Molecules/CompanyLogo/CompanyLogo'
-import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import FormContainer from '../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../Enums/Route'
@@ -29,10 +29,10 @@ const LoginForm: React.FC = () => {
     return undefined
   } else
     return (
-      <div className={styles.container}>
-        <CompanyLogo />
+      <Col className={styles.container}>
+        <CompanyLogo className={styles.companyLogo} />
         <Card className={styles.cardContainer}>
-          <PageHeader title="Login" isLoading={isLoading} />
+          <Title className={styles.title}>Login</Title>
           <FormContainer
             onFinish={onFinish}
             form={form}
@@ -51,7 +51,7 @@ const LoginForm: React.FC = () => {
             <Link to={Route.register}>Don't have an account? Register</Link>
           </Row>
         </Card>
-      </div>
+      </Col>
     )
 }
 

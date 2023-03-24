@@ -10,4 +10,5 @@ export enum Modules {
 
   Category = 'categories',
   Product = 'products',
+  Inventory = 'inventories',
 }
