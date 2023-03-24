@@ -14,14 +14,16 @@ const HomeHeader: React.FC = () => {
       style={{ backgroundColor: themeColors.primary, padding: '0% 10%' }}
     >
       <div style={{ float: 'left' }}>
-        <CompanyLogo
-          style={{
-            padding: '4px',
-            width: '46px',
-            backgroundColor: 'white',
-            borderRadius: '28px',
-          }}
-        />
+        <a href={Route.Home}>
+          <CompanyLogo
+            style={{
+              padding: '4px',
+              width: '46px',
+              backgroundColor: 'white',
+              borderRadius: '28px',
+            }}
+          />
+        </a>
       </div>
       <div style={{ float: 'right' }}>
         <a className={styles.headerItem} href={'#home'}>

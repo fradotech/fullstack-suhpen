@@ -1,13 +1,25 @@
 .container {
+  top: 50%;
+}
+
+.title {
   text-align: center;
-  padding-top: 18px;
+  font-size: 24px !important;
+  line-height: 32px !important;
+  margin-top: 0 !important;
+  margin-left: 2 !important;
+}
+
+.companyLogo {
+  text-align: center;
+  margin: 20px;
 }
 
 .cardContainer {
+  top: 50%;
   width: 400px;
   margin: auto;
   padding: 5px;
-  margin-top: 20px;
   margin-bottom: 20px;
-  box-shadow: 5px 5px 2px #eeeeee;
+  box-shadow: 0px 3px 50px #dddddd;
 }

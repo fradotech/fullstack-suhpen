@@ -1,9 +1,9 @@
 import { AuthRegisterRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
-import { Card, Form } from 'antd'
+import { Card, Col, Form } from 'antd'
+import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import CompanyLogo from '../../../Components/Molecules/CompanyLogo/CompanyLogo'
-import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import FormContainer from '../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../Enums/Route'
@@ -29,10 +29,10 @@ const RegisterForm: React.FC = () => {
     return undefined
   } else
     return (
-      <div className={styles.container}>
-        <CompanyLogo />
+      <Col className={styles.container}>
+        <CompanyLogo className={styles.companyLogo} />
         <Card className={styles.cardContainer}>
-          <PageHeader title="Register" isLoading={isLoading} />
+          <Title className={styles.title}>Register</Title>
           <FormContainer
             onFinish={onFinish}
             form={form}
@@ -55,7 +55,7 @@ const RegisterForm: React.FC = () => {
           </FormContainer>
           <Link to={Route.login}>Have an account? Login</Link>
         </Card>
-      </div>
+      </Col>
     )
 }
 

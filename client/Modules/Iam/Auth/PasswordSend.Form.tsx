@@ -1,8 +1,8 @@
 import { AuthPasswordSendRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
-import { Alert, Card, Form } from 'antd'
+import { Alert, Card, Col, Form } from 'antd'
+import Title from 'antd/es/typography/Title'
 import React from 'react'
 import CompanyLogo from '../../../Components/Molecules/CompanyLogo/CompanyLogo'
-import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import FormContainer from '../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../Enums/Route'
@@ -29,10 +29,10 @@ const PasswordSendForm: React.FC = () => {
     return undefined
   } else
     return (
-      <div className={styles.container}>
-        <CompanyLogo />
+      <Col className={styles.container}>
+        <CompanyLogo className={styles.companyLogo} />
         <Card className={styles.cardContainer}>
-          <PageHeader title="Reset Password" isLoading={isLoading} />
+          <Title className={styles.title}>Reset Password</Title>
           {isSuccess ? (
             <Alert
               style={{ textAlign: 'left' }}
@@ -54,7 +54,7 @@ const PasswordSendForm: React.FC = () => {
             </FormContainer>
           )}
         </Card>
-      </div>
+      </Col>
     )
 }
 
