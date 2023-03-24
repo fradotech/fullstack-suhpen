@@ -21,11 +21,6 @@ export class ProductRequest extends BaseProductRequest implements IProduct {
 
   @IsNotEmpty()
   @IsNumber()
-  @ApiProperty({ example: 0 })
-  stock: number
-
-  @IsNotEmpty()
-  @IsNumber()
   @ApiProperty({ example: 100000 })
   buyPrice: number
 
@@ -38,11 +33,6 @@ export class ProductRequest extends BaseProductRequest implements IProduct {
   @IsString()
   @ApiProperty()
   categories?: ICategory[]
-
-  @IsOptional()
-  @IsNumber()
-  @ApiProperty()
-  discountPercentage?: number
 
   @IsOptional()
   @IsString()

@@ -18,9 +18,6 @@ export class EntProduct extends EntBaseProduct implements IProduct {
   @Column({ default: null })
   sku?: string
 
-  @Column()
-  stock: number
-
   @Column({ default: 0 })
   buyPrice: number
 
@@ -33,9 +30,6 @@ export class EntProduct extends EntBaseProduct implements IProduct {
   @ManyToMany(() => EntCategory)
   @JoinTable({ name: 'ent_product_categories' })
   categories?: ICategory[]
-
-  @Column({ default: 0 })
-  discountPercentage?: number
 
   @Column({ default: null })
   brand?: string
