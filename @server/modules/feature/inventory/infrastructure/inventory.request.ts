@@ -1,6 +1,7 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger'
 import {
   IsBoolean,
+  IsDate,
   IsNotEmpty,
   IsNumber,
   IsOptional,
@@ -11,12 +12,33 @@ import { IInventory } from './inventory.interface'
 
 export class InventoryRequest implements IInventory {
   id: string
+  marginPrice: number
 
   @IsNotEmpty()
   @IsString()
   @ApiProperty()
   productId: string
   product: IProduct
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty()
+  productVariantName?: string
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty()
+  sku?: string
+
+  @IsNotEmpty()
+  @IsNumber()
+  @ApiProperty({ example: 100000 })
+  buyPrice: number
+
+  @IsNotEmpty()
+  @IsNumber()
+  @ApiProperty({ example: 120000 })
+  sellPrice: number
 
   @IsNotEmpty()
   @IsNumber()
@@ -32,6 +54,11 @@ export class InventoryRequest implements IInventory {
   @IsNumber()
   @ApiProperty()
   discount?: number
+
+  @IsOptional()
+  @IsDate()
+  @ApiProperty()
+  expiredDate?: Date
 
   @IsNotEmpty()
   @IsBoolean()

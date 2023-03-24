@@ -1,7 +1,5 @@
-import { EntBaseProduct } from '@server/infrastructure/base/product/base-product.entity'
+import { EntBaseMasterData } from '@server/infrastructure/base/product/base-master-data.entity'
 import {
-  BeforeInsert,
-  BeforeUpdate,
   Column,
   Entity,
   JoinTable,
@@ -11,21 +9,14 @@ import {
 } from 'typeorm'
 import { EntCategory } from '../../category/infrastructure/category.entity'
 import { ICategory } from '../../category/infrastructure/category.interface'
+import { EntInventory } from '../../inventory/infrastructure/inventory.entity'
+import { IInventory } from '../../inventory/infrastructure/inventory.interface'
 import { IProduct } from './product.interface'
 
 @Entity()
-export class EntProduct extends EntBaseProduct implements IProduct {
+export class EntProduct extends EntBaseMasterData implements IProduct {
   @Column({ default: null })
-  sku?: string
-
-  @Column({ default: 0 })
-  buyPrice: number
-
-  @Column({ default: 0 })
-  sellPrice: number
-
-  @Column({ default: 0 })
-  marginPrice: number
+  upc?: string
 
   @ManyToMany(() => EntCategory)
   @JoinTable({ name: 'ent_product_categories' })
@@ -37,18 +28,12 @@ export class EntProduct extends EntBaseProduct implements IProduct {
   @Column({ default: null })
   rating?: string
 
-  @Column({ default: null })
-  expiredDate?: Date
-
   @ManyToOne(() => EntProduct, (product) => product.childs)
   parent?: IProduct
 
   @OneToMany(() => EntProduct, (product) => product.parent)
   childs?: IProduct[]
 
-  @BeforeInsert()
-  @BeforeUpdate()
-  beforeInsertAndUpdate(): void {
-    this.marginPrice = this.sellPrice - this.buyPrice
-  }
+  @OneToMany(() => EntInventory, (inventory) => inventory.product)
+  inventories: IInventory[]
 }

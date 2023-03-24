@@ -35,7 +35,6 @@ export const productCreateSeeder = async (): Promise<boolean> => {
     const getCategory = () => categories[iCategories()]
     const randomCategories = [getCategory(), getCategory()]
 
-    products[i].marginPrice = products[i].sellPrice - products[i].buyPrice
     products[i].categories = [...new Set(randomCategories)]
   }
 

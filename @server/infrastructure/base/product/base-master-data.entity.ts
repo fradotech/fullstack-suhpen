@@ -1,9 +1,9 @@
 import { Util } from '@server/common/utils/util'
 import { BaseEntity } from '@server/infrastructure/base/base.entity'
-import { BeforeInsert, Column, ManyToOne, OneToMany } from 'typeorm'
-import { IBaseProduct } from './base-product.interface'
+import { BeforeInsert, Column } from 'typeorm'
+import { IBaseMasterData } from './base-master-data.interface'
 
-export class EntBaseProduct extends BaseEntity implements IBaseProduct {
+export class EntBaseMasterData extends BaseEntity implements IBaseMasterData {
   @Column()
   name: string
 
@@ -18,12 +18,6 @@ export class EntBaseProduct extends BaseEntity implements IBaseProduct {
 
   @Column({ default: null })
   thumbnail?: string
-
-  @ManyToOne(() => EntBaseProduct, (baseProduct) => baseProduct.childs)
-  parent?: IBaseProduct
-
-  @OneToMany(() => EntBaseProduct, (baseProduct) => baseProduct.parent)
-  childs?: IBaseProduct[]
 
   @BeforeInsert()
   beforeInsert(): void {

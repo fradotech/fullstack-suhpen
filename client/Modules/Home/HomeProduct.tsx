@@ -4,7 +4,6 @@ import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { axiosService } from '../../services/axios.service'
-import { Util } from '../../utils/util'
 import styles from './Home.module.css'
 
 const path = '/products'
@@ -39,7 +38,7 @@ const HomeProduct: React.FC = () => {
               >
                 {data.name}
                 <Title style={{ color: '#FF5F1F', margin: '2px' }} level={5}>
-                  {Util.formatCurrency(data.sellPrice)}
+                  {'Util.formatCurrency(data.sellPrice)'}
                 </Title>
                 <p style={{ opacity: '70%', margin: '0px' }}>10rb+ Terjual</p>
               </Card>

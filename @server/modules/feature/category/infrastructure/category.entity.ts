@@ -1,9 +1,9 @@
-import { EntBaseProduct } from '@server/infrastructure/base/product/base-product.entity'
+import { EntBaseMasterData } from '@server/infrastructure/base/product/base-master-data.entity'
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm'
 import { ICategory } from './category.interface'
 
 @Entity()
-export class EntCategory extends EntBaseProduct implements ICategory {
+export class EntCategory extends EntBaseMasterData implements ICategory {
   @Column({ default: '#ffffff' })
   labelColor: string
 
