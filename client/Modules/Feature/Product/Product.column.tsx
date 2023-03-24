@@ -14,9 +14,6 @@ export const productsColumns: ColumnsType<ProductResponse> = [
     dataIndex: 'name',
   },
   {
-    dataIndex: 'stock',
-  },
-  {
     dataIndex: 'buyPrice',
     render: (data: number) => (
       <Typography.Text type="warning" strong>

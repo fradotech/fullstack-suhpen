@@ -5,18 +5,18 @@ import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.respo
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { AdminGuard } from '@server/modules/iam/auth/common/admin.guard'
 import { Modules } from '@server/modules/modules'
-import { CategoryIndexApp } from '../infrastructure/category-index.app'
-import { CategoryIndexRequest } from '../infrastructure/category-index.request'
-import { CategoryResponse } from '../infrastructure/category.response'
+import { InventoryIndexApp } from '../infrastructure/inventory-index.app'
+import { InventoryIndexRequest } from '../infrastructure/inventory-index.request'
+import { InventoryResponse } from '../infrastructure/inventory.response'
 
-const THIS_MODULE = Modules.Category + '/sheet'
+const THIS_MODULE = Modules.Inventory + '/sheet'
 
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
 @UseGuards(AdminGuard)
-export class CategorySheetController {
-  constructor(private readonly categoryIndexApp: CategoryIndexApp) {}
+export class InventorySheetController {
+  constructor(private readonly inventoryIndexApp: InventoryIndexApp) {}
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
@@ -25,16 +25,16 @@ export class CategorySheetController {
 
   @Post('export')
   async fetch(
-    @Query() req: CategoryIndexRequest,
-  ): Promise<IApiExportRes<CategoryResponse[]>> {
+    @Query() req: InventoryIndexRequest,
+  ): Promise<IApiExportRes<InventoryResponse[]>> {
     req.isExport = true
-    const response = await this.categoryIndexApp.fetch(req)
+    const response = await this.inventoryIndexApp.fetch(req)
 
-    const data = CategoryResponse.fromEntities(response.data)
+    const data = InventoryResponse.fromEntities(response.data)
     const parser = new Parser()
     const dataExport = parser.parse(data)
     const fileName = `Data - ${
-      Modules.Category
+      Modules.Inventory
     } - ${new Date().toISOString()}.xlsx`
 
     return ApiExportRes.fromEntity(dataExport, fileName)

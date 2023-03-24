@@ -16,7 +16,7 @@ const THIS_MODULE = Modules.Product + '/sheet'
 @ApiBearerAuth()
 @UseGuards(AdminGuard)
 export class ProductSheetController {
-  constructor(private readonly userIndexApp: ProductIndexApp) {}
+  constructor(private readonly productIndexApp: ProductIndexApp) {}
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
@@ -28,7 +28,7 @@ export class ProductSheetController {
     @Query() req: ProductIndexRequest,
   ): Promise<IApiExportRes<ProductResponse[]>> {
     req.isExport = true
-    const response = await this.userIndexApp.fetch(req)
+    const response = await this.productIndexApp.fetch(req)
 
     const data = ProductResponse.fromEntities(response.data)
     const parser = new Parser()

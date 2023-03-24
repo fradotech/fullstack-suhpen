@@ -3,8 +3,6 @@ export const productDummies = [
   {
     name: 'iPhone 9',
     key: 'iphone_9',
-    stock: 1234,
-    discountPercentage: 32,
     description: 'An apple mobile which is nothing like apple',
     buyPrice: 549000,
     sellPrice: 824000,
@@ -14,8 +12,6 @@ export const productDummies = [
   {
     name: 'iPhone X',
     key: 'iphone_x',
-    stock: 1234,
-    discountPercentage: 24,
     description: 'SIM-Free, Model A19211 6.5-inch Super Retina HD display',
     buyPrice: 899000,
     sellPrice: 1348500,
@@ -25,8 +21,6 @@ export const productDummies = [
   {
     name: 'Samsung Galaxy S21',
     key: 'samsung_galaxy_s21',
-    stock: 5678,
-    discountPercentage: 15,
     description:
       'The Samsung Galaxy S21 is a 5G smartphone with a 6.2-inch Dynamic AMOLED 2X display',
     buyPrice: 799000,
@@ -37,8 +31,6 @@ export const productDummies = [
   {
     name: 'Samsung Galaxy S20',
     key: 'samsung_galaxy_s20',
-    stock: 5678,
-    discountPercentage: 20,
     description:
       'The Samsung Galaxy S20 is a 5G smartphone with a 6.2-inch Dynamic AMOLED display',
     buyPrice: 699000,
@@ -49,8 +41,6 @@ export const productDummies = [
   {
     name: 'Xiaomi Redmi Note 10',
     key: 'xiaomi_redmi_note_10',
-    stock: 9012,
-    discountPercentage: 10,
     description:
       'The Xiaomi Redmi Note 10 is a 4G smartphone with a 6.43-inch AMOLED display',
     buyPrice: 299000,
@@ -61,8 +51,6 @@ export const productDummies = [
   {
     name: 'Xiaomi Poco X3 Pro',
     key: 'xiaomi_poco_x3_pro',
-    stock: 9012,
-    discountPercentage: 12,
     description:
       'The Xiaomi Poco X3 Pro is a 4G smartphone with a 6.67-inch IPS LCD display',
     buyPrice: 399000,
@@ -73,8 +61,6 @@ export const productDummies = [
   {
     name: 'OnePlus 9 Pro',
     key: 'oneplus_9_pro',
-    stock: 3456,
-    discountPercentage: 18,
     description:
       'The OnePlus 9 Pro is a 5G smartphone with a 6.7-inch Fluid AMOLED display',
     buyPrice: 1099000,
@@ -85,8 +71,6 @@ export const productDummies = [
   {
     name: 'OnePlus Nord 2',
     key: 'oneplus_nord_2',
-    stock: 3456,
-    discountPercentage: 22,
     description:
       'The OnePlus Nord 2 is a 5G smartphone with a 6.43-inch Fluid AMOLED display',
     buyPrice: 499000,
@@ -97,8 +81,6 @@ export const productDummies = [
   {
     name: 'Samsung Galaxy A52',
     key: 'samsung_galaxy_a52',
-    stock: 1234,
-    discountPercentage: 10,
     description:
       'The Samsung Galaxy A52 is a 4G smartphone with a 6.5-inch Super AMOLED display',
     buyPrice: 399000,
@@ -109,8 +91,6 @@ export const productDummies = [
   {
     name: 'Samsung Galaxy A72',
     key: 'samsung_galaxy_a72',
-    stock: 1234,
-    discountPercentage: 12,
     description:
       'The Samsung Galaxy A72 is a 4G smartphone with a 6.7-inch Super AMOLED display',
     buyPrice: 499000,
@@ -121,8 +101,6 @@ export const productDummies = [
   {
     name: 'Xiaomi Mi 11 Lite',
     key: 'xiaomi_mi_11_lite',
-    stock: 5678,
-    discountPercentage: 15,
     description:
       'The Xiaomi Mi 11 Lite is a 4G smartphone with a 6.55-inch AMOLED display',
     buyPrice: 399000,
@@ -133,8 +111,6 @@ export const productDummies = [
   {
     name: 'Xiaomi Mi 11',
     key: 'xiaomi_mi_11',
-    stock: 5678,
-    discountPercentage: 20,
     description:
       'The Xiaomi Mi 11 is a 5G smartphone with a 6.81-inch AMOLED display',
     buyPrice: 899000,
@@ -145,8 +121,6 @@ export const productDummies = [
   {
     name: 'OnePlus Nord CE 5G',
     key: 'oneplus_nord_ce_5g',
-    stock: 9012,
-    discountPercentage: 10,
     description:
       'The OnePlus Nord CE 5G is a 5G smartphone with a 6.43-inch Fluid AMOLED display',
     buyPrice: 399000,
@@ -157,8 +131,6 @@ export const productDummies = [
   {
     name: 'OnePlus 8T',
     key: 'oneplus_8t',
-    stock: 9012,
-    discountPercentage: 12,
     description:
       'The OnePlus 8T is a 5G smartphone with a 6.55-inch Fluid AMOLED display',
     buyPrice: 699000,
@@ -169,8 +141,6 @@ export const productDummies = [
   {
     name: 'Realme 8 Pro',
     key: 'realme_8_pro',
-    stock: 3456,
-    discountPercentage: 18,
     description:
       'The Realme 8 Pro is a 4G smartphone with a 6.4-inch Super AMOLED display',
     buyPrice: 399000,
@@ -181,8 +151,6 @@ export const productDummies = [
   {
     name: 'Realme 7 Pro',
     key: 'realme_7_pro',
-    stock: 3456,
-    discountPercentage: 22,
     description:
       'The Realme 7 Pro is a 4G smartphone with a 6.4-inch Super AMOLED display',
     buyPrice: 299000,
@@ -193,8 +161,6 @@ export const productDummies = [
   {
     name: 'Vivo Y33s',
     key: 'vivo_y33s',
-    stock: 1234,
-    discountPercentage: 10,
     description:
       'The Vivo Y33s is a 4G smartphone with a 6.58-inch IPS LCD display',
     buyPrice: 299000,
@@ -205,8 +171,6 @@ export const productDummies = [
   {
     name: 'Vivo Y72 5G',
     key: 'vivo_y72_5g',
-    stock: 1234,
-    discountPercentage: 12,
     description:
       'The Vivo Y72 5G is a 5G smartphone with a 6.58-inch IPS LCD display',
     buyPrice: 399000,
@@ -217,8 +181,6 @@ export const productDummies = [
   {
     name: 'Oppo A16',
     key: 'oppo_a16',
-    stock: 5678,
-    discountPercentage: 15,
     description:
       'The Oppo A16 is a 4G smartphone with a 6.52-inch IPS LCD display',
     buyPrice: 199000,
@@ -229,8 +191,6 @@ export const productDummies = [
   {
     name: 'Oppo A54',
     key: 'oppo_a54',
-    stock: 5678,
-    discountPercentage: 20,
     description:
       'The Oppo A54 is a 4G smartphone with a 6.51-inch IPS LCD display',
     buyPrice: 299000,
@@ -241,8 +201,6 @@ export const productDummies = [
   {
     name: 'Realme C25',
     key: 'realme_c25',
-    stock: 9012,
-    discountPercentage: 10,
     description:
       'The Realme C25 is a 4G smartphone with a 6.5-inch IPS LCD display',
     buyPrice: 199000,
@@ -253,8 +211,6 @@ export const productDummies = [
   {
     name: 'Realme C21',
     key: 'realme_c21',
-    stock: 9012,
-    discountPercentage: 12,
     description:
       'The Realme C21 is a 4G smartphone with a 6.5-inch IPS LCD display',
     buyPrice: 149000,
@@ -265,8 +221,6 @@ export const productDummies = [
   {
     name: 'Xiaomi Redmi 9T',
     key: 'xiaomi_redmi_9t',
-    stock: 3456,
-    discountPercentage: 18,
     description:
       'The Xiaomi Redmi 9T is a 4G smartphone with a 6.53-inch IPS LCD display',
     buyPrice: 299000,
@@ -277,8 +231,6 @@ export const productDummies = [
   {
     name: 'Xiaomi Redmi 9',
     key: 'xiaomi_redmi_9',
-    stock: 3456,
-    discountPercentage: 22,
     description:
       'The Xiaomi Redmi 9 is a 4G smartphone with a 6.53-inch IPS LCD display',
     buyPrice: 199000,
