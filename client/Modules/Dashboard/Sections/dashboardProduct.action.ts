@@ -6,23 +6,21 @@ import { axiosService } from '../../../services/axios.service'
 export const dashboardProductAction = {
   buyPrice: async (): Promise<IAggreate> => {
     const res: IApiRes<IAggreate> = await axiosService.get(
-      Route.dashboard.product.aggregate(dashboardProductAction.buyPrice.name),
+      Route.dashboard.product.aggregate('buyPrice'),
     )
     return res.data
   },
 
   sellPrice: async (): Promise<IAggreate> => {
     const res: IApiRes<IAggreate> = await axiosService.get(
-      Route.dashboard.product.aggregate(dashboardProductAction.sellPrice.name),
+      Route.dashboard.product.aggregate('sellPrice'),
     )
     return res.data
   },
 
   marginPrice: async (): Promise<IAggreate> => {
     const res: IApiRes<IAggreate> = await axiosService.get(
-      Route.dashboard.product.aggregate(
-        dashboardProductAction.marginPrice.name,
-      ),
+      Route.dashboard.product.aggregate('marginPrice'),
     )
     return res.data
   },

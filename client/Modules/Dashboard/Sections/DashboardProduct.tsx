@@ -25,169 +25,42 @@ const DashboardProduct: React.FC = () => {
       <Col>
         <Title level={4}>{'Buy Price'}</Title>
         <Row>
-          <Card
-            style={{
-              backgroundColor: '#007fd0',
-              margin: '10px',
-              boxShadow: '2px 2px 5px ',
-            }}
-            bodyStyle={{ padding: '0px 10px' }}
-            headStyle={{ padding: '0px 10px' }}
-            title={'Total'}
-          >
-            <Title level={4}>{Util.formatCurrency(data?.buyPrice.sum)}</Title>
+          <Card size="small" style={{ marginRight: '20px' }}>
+            Total
+            <Title level={5}>{Util.formatCurrency(data?.buyPrice.sum)}</Title>
           </Card>
-          <Card
-            style={{
-              backgroundColor: '#007fd0',
-              margin: '10px',
-              boxShadow: '2px 2px 5px ',
-            }}
-            bodyStyle={{ padding: '0px 10px' }}
-            headStyle={{ padding: '0px 10px' }}
-            title={'Average'}
-          >
-            <Title level={4}>{Util.formatCurrency(data?.buyPrice.avg)}</Title>
+          <Card size="small" style={{ marginRight: '20px' }}>
+            Average
+            <Title level={5}>{Util.formatCurrency(data?.buyPrice.avg)}</Title>
           </Card>
-          <Card
-            style={{
-              backgroundColor: '#007fd0',
-              margin: '10px',
-              boxShadow: '2px 2px 5px ',
-            }}
-            bodyStyle={{ padding: '0px 10px' }}
-            headStyle={{ padding: '0px 10px' }}
-            title={'Min'}
-          >
-            <Title level={4}>{Util.formatCurrency(data?.buyPrice.min)}</Title>
+          <Card size="small" style={{ marginRight: '20px' }}>
+            Min
+            <Title level={5}>{Util.formatCurrency(data?.buyPrice.min)}</Title>
           </Card>
-          <Card
-            style={{
-              backgroundColor: '#007fd0',
-              margin: '10px',
-              boxShadow: '2px 2px 5px ',
-            }}
-            bodyStyle={{ padding: '0px 10px' }}
-            headStyle={{ padding: '0px 10px' }}
-            title={'Max'}
-          >
-            <Title level={4}>{Util.formatCurrency(data?.buyPrice.max)}</Title>
+          <Card size="small" style={{ marginRight: '20px' }}>
+            Max
+            <Title level={5}>{Util.formatCurrency(data?.buyPrice.max)}</Title>
           </Card>
         </Row>
       </Col>
-
       <Col>
         <Title level={4}>{'Sell Price'}</Title>
         <Row>
-          <Card
-            style={{
-              backgroundColor: '#FFEF00',
-              margin: '10px',
-              boxShadow: '2px 2px 5px ',
-            }}
-            bodyStyle={{ padding: '0px 10px' }}
-            headStyle={{ padding: '0px 10px' }}
-            title={'Total'}
-          >
-            <Title level={4}>{Util.formatCurrency(data?.sellPrice.sum)}</Title>
+          <Card size="small" style={{ marginRight: '20px' }}>
+            Total
+            <Title level={5}>{Util.formatCurrency(data?.sellPrice.sum)}</Title>
           </Card>
-          <Card
-            style={{
-              backgroundColor: '#FFEF00',
-              margin: '10px',
-              boxShadow: '2px 2px 5px ',
-            }}
-            bodyStyle={{ padding: '0px 10px' }}
-            headStyle={{ padding: '0px 10px' }}
-            title={'Average'}
-          >
-            <Title level={4}>{Util.formatCurrency(data?.sellPrice.avg)}</Title>
+          <Card size="small" style={{ marginRight: '20px' }}>
+            Average
+            <Title level={5}>{Util.formatCurrency(data?.sellPrice.avg)}</Title>
           </Card>
-          <Card
-            style={{
-              backgroundColor: '#FFEF00',
-              margin: '10px',
-              boxShadow: '2px 2px 5px ',
-            }}
-            bodyStyle={{ padding: '0px 10px' }}
-            headStyle={{ padding: '0px 10px' }}
-            title={'Min'}
-          >
-            <Title level={4}>{Util.formatCurrency(data?.sellPrice.min)}</Title>
+          <Card size="small" style={{ marginRight: '20px' }}>
+            Min
+            <Title level={5}>{Util.formatCurrency(data?.sellPrice.min)}</Title>
           </Card>
-          <Card
-            style={{
-              backgroundColor: '#FFEF00',
-              margin: '10px',
-              boxShadow: '2px 2px 5px ',
-            }}
-            bodyStyle={{ padding: '0px 10px' }}
-            headStyle={{ padding: '0px 10px' }}
-            title={'Max'}
-          >
-            <Title level={4}>{Util.formatCurrency(data?.sellPrice.max)}</Title>
-          </Card>
-        </Row>
-      </Col>
-
-      <Col>
-        <Title level={4}>{'Margin Price'}</Title>
-        <Row>
-          <Card
-            style={{
-              backgroundColor: '#FFEF00',
-              margin: '10px',
-              boxShadow: '2px 2px 5px ',
-            }}
-            bodyStyle={{ padding: '0px 10px' }}
-            headStyle={{ padding: '0px 10px' }}
-            title={'Total'}
-          >
-            <Title level={4}>
-              {Util.formatCurrency(data?.marginPrice.sum)}
-            </Title>
-          </Card>
-          <Card
-            style={{
-              backgroundColor: '#FFEF00',
-              margin: '10px',
-              boxShadow: '2px 2px 5px ',
-            }}
-            bodyStyle={{ padding: '0px 10px' }}
-            headStyle={{ padding: '0px 10px' }}
-            title={'Average'}
-          >
-            <Title level={4}>
-              {Util.formatCurrency(data?.marginPrice.avg)}
-            </Title>
-          </Card>
-          <Card
-            style={{
-              backgroundColor: '#FFEF00',
-              margin: '10px',
-              boxShadow: '2px 2px 5px ',
-            }}
-            bodyStyle={{ padding: '0px 10px' }}
-            headStyle={{ padding: '0px 10px' }}
-            title={'Min'}
-          >
-            <Title level={4}>
-              {Util.formatCurrency(data?.marginPrice.min)}
-            </Title>
-          </Card>
-          <Card
-            style={{
-              backgroundColor: '#FFEF00',
-              margin: '10px',
-              boxShadow: '2px 2px 5px ',
-            }}
-            bodyStyle={{ padding: '0px 10px' }}
-            headStyle={{ padding: '0px 10px' }}
-            title={'Max'}
-          >
-            <Title level={4}>
-              {Util.formatCurrency(data?.marginPrice.max)}
-            </Title>
+          <Card size="small" style={{ marginRight: '20px' }}>
+            Max
+            <Title level={5}>{Util.formatCurrency(data?.sellPrice.max)}</Title>
           </Card>
         </Row>
       </Col>
