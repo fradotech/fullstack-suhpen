@@ -33,7 +33,7 @@ const ProductDetail: React.FC = () => {
           ) {
             return (
               <Descriptions.Item label={Util.titleCase(key)}>
-                <Image style={{ width: '50px' }} src={data?.data.thumbnail} />
+                <Image style={{ width: '50px' }} src={data?.data[key]} />
               </Descriptions.Item>
             )
           } else if (data?.data[key] == true || data?.data[key] == false) {
@@ -44,6 +44,12 @@ const ProductDetail: React.FC = () => {
                 ) : (
                   <CloseCircleOutlined style={{ color: 'red' }} />
                 )}
+              </Descriptions.Item>
+            )
+          } else if (key.includes('At')) {
+            return (
+              <Descriptions.Item label={Util.titleCase(key)}>
+                {Util.formatDatetime(data?.data[key])}
               </Descriptions.Item>
             )
           } else {
