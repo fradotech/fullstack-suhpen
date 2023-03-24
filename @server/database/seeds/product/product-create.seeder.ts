@@ -33,7 +33,13 @@ export const productCreateSeeder = async (): Promise<boolean> => {
   for (let i = 0; i < products.length; i++) {
     const iCategories = () => Math.floor(Math.random() * categories.length)
     const getCategory = () => categories[iCategories()]
-    const randomCategories = [getCategory(), getCategory()]
+    const randomCategories = [
+      getCategory(),
+      getCategory(),
+      getCategory(),
+      getCategory(),
+      getCategory(),
+    ]
 
     products[i].categories = [...new Set(randomCategories)]
   }
