@@ -9,7 +9,7 @@ import { Route } from '../../../Enums/Route'
 import { Util } from '../../../utils/util'
 import { productAction } from './product.action'
 
-export const productsColumns: ColumnsType<ProductResponse> = [
+export const productColumns: ColumnsType<ProductResponse> = [
   {
     dataIndex: 'name',
   },

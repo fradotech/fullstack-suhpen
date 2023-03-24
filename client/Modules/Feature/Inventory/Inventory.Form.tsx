@@ -1,6 +1,6 @@
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
-import { ProductCreateRequest } from '@server/modules/feature/product/infrastructure/product.request'
-import { ProductResponse } from '@server/modules/feature/product/infrastructure/product.response'
+import { InventoryCreateRequest } from '@server/modules/feature/inventory/infrastructure/inventory.request'
+import { InventoryResponse } from '@server/modules/feature/inventory/infrastructure/inventory.response'
 import { Form } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
@@ -10,20 +10,20 @@ import FormContainer from '../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../Enums/Route'
 import { rule } from '../../../utils/form.rules'
-import { productAction } from './product.action'
+import { inventoryAction } from './inventory.action'
 
-const ProductForm: React.FC = () => {
+const InventoryForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const { id } = useParams()
-  const [form] = Form.useForm<ProductCreateRequest>()
+  const [form] = Form.useForm<InventoryCreateRequest>()
 
   useQuery(
-    [ProductForm.name],
+    [InventoryForm.name],
     id &&
       (async () => {
         setIsLoading(true)
-        const res = await productAction.findOne(id)
+        const res = await inventoryAction.findOne(id)
         form.setFieldsValue(res.data)
         setIsLoading(false)
       }),
@@ -32,17 +32,17 @@ const ProductForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    let res: IApiRes<ProductResponse>
-    if (!id) res = await productAction.create(data)
-    if (id) res = await productAction.update(id, data)
+    let res: IApiRes<InventoryResponse>
+    if (!id) res = await inventoryAction.create(data)
+    if (id) res = await inventoryAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Route.product.index)
+    res.data && navigate(Route.inventory.index)
   }
 
   return (
     <>
       <PageHeader
-        title={id ? 'Product Edit' : 'Product Create'}
+        title={id ? 'Inventory Edit' : 'Inventory Create'}
         isLoading={isLoading}
       />
       <FormContainer
@@ -52,13 +52,18 @@ const ProductForm: React.FC = () => {
         centered
         button={{ disabled: isLoading }}
       >
-        <FormItem name="thumbnail" input="attachment" total={1} form={form} />
-        <FormItem name="name" rules={[rule.required]} />
-        <FormItem name="price" rules={[rule.required, { type: 'number' }]} />
-        <FormItem name="description" />
+        <FormItem name="buyPrice" rules={[rule.required, { type: 'number' }]} />
+        <FormItem
+          name="sellPrice"
+          rules={[rule.required, { type: 'number' }]}
+        />
+        <FormItem
+          name="marginPrice"
+          rules={[rule.required, { type: 'number' }]}
+        />
       </FormContainer>
     </>
   )
 }
 
-export default ProductForm
+export default InventoryForm

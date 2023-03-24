@@ -7,7 +7,7 @@ import { paginationTransform } from '../../../Components/Organisms/DataTable/Dat
 import { useDataTable } from '../../../Components/Organisms/DataTable/useDataTable'
 import { Route } from '../../../Enums/Route'
 import { userAction } from './user.action'
-import { usersColumns } from './User.column'
+import { userColumns } from './User.column'
 
 const UserS: React.FC = () => {
   const { query, setQueryParams } = useDataTable<UserIndexRequest>()
@@ -19,7 +19,7 @@ const UserS: React.FC = () => {
       <PageHeader title="User" />
       <DataTable
         rowKey="id"
-        columns={usersColumns}
+        columns={userColumns}
         dataSource={data?.data}
         search={query.search}
         pagination={paginationTransform(data?.meta)}

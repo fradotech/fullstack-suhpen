@@ -1,4 +1,4 @@
-import { ProductIndexRequest } from '@server/modules/feature/product/infrastructure/product-index.request'
+import { InventoryIndexRequest } from '@server/modules/feature/inventory/infrastructure/inventory-index.request'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
@@ -6,20 +6,20 @@ import DataTable from '../../../Components/Organisms/DataTable/DataTable'
 import { paginationTransform } from '../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../Components/Organisms/DataTable/useDataTable'
 import { Route } from '../../../Enums/Route'
-import { productAction } from './product.action'
-import { productsColumns } from './Product.column'
+import { inventoryAction } from './inventory.action'
+import { inventoryColumns } from './Inventory.column'
 
-const ProductS: React.FC = () => {
-  const { query, setQueryParams } = useDataTable<ProductIndexRequest>()
-  const fetch = async () => await productAction.fetch(query)
-  const { isLoading, data } = useQuery([ProductS.name, query], fetch)
+const InventoryS: React.FC = () => {
+  const { query, setQueryParams } = useDataTable<InventoryIndexRequest>()
+  const fetch = async () => await inventoryAction.fetch(query)
+  const { isLoading, data } = useQuery([InventoryS.name, query], fetch)
 
   return (
     <>
-      <PageHeader title="Product" />
+      <PageHeader title="Inventory" />
       <DataTable
         rowKey="id"
-        columns={productsColumns}
+        columns={inventoryColumns}
         dataSource={data?.data}
         search={query.search}
         pagination={paginationTransform(data?.meta)}
@@ -29,12 +29,12 @@ const ProductS: React.FC = () => {
           query,
           search: true,
           dateRange: true,
-          hrefCreate: Route.product.form,
-          hrefExport: Route.product.export,
+          hrefCreate: Route.inventory.form,
+          hrefExport: Route.inventory.export,
         }}
       />
     </>
   )
 }
 
-export default ProductS
+export default InventoryS

@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common'
 import { CategoryModule } from './category/category.module'
+import { InventoryModule } from './inventory/inventory.module'
 import { ProductModule } from './product/product.module'
 
 @Module({
-  imports: [ProductModule, CategoryModule],
+  imports: [InventoryModule, ProductModule, CategoryModule],
   controllers: [],
   providers: [],
 })

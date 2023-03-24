@@ -8,7 +8,7 @@ import { Util } from '../../../utils/util'
 import { ERole } from '../Role/Role.enum'
 import { userAction } from './user.action'
 
-export const usersColumns: ColumnsType<UserResponse> = [
+export const userColumns: ColumnsType<UserResponse> = [
   {
     dataIndex: 'name',
   },

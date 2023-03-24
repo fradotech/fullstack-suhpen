@@ -7,21 +7,21 @@ import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import DescriptionContainer from '../../../Components/Organisms/Description/DescriptionContainer'
 import { Route } from '../../../Enums/Route'
 import { Util } from '../../../utils/util'
-import { productAction } from './product.action'
+import { inventoryAction } from './inventory.action'
 
-const ProductDetail: React.FC = () => {
+const InventoryDetail: React.FC = () => {
   const { id } = useParams()
-  const fetch = async () => await productAction.findOne(id)
-  const { isLoading, data } = useQuery([ProductDetail.name], fetch)
+  const fetch = async () => await inventoryAction.findOne(id)
+  const { isLoading, data } = useQuery([InventoryDetail.name], fetch)
   const fields = data?.data && Object.keys(data.data)
 
   return (
     <>
       <PageHeader
-        title="Product Detail"
+        title="Inventory Detail"
         isLoading={isLoading}
-        hrefEdit={Route.product.edit(id)}
-        hrefDelete={Route.product.id(id)}
+        hrefEdit={Route.inventory.edit(id)}
+        hrefDelete={Route.inventory.id(id)}
       />
       <DescriptionContainer>
         {fields?.map((key) => {
@@ -65,4 +65,4 @@ const ProductDetail: React.FC = () => {
   )
 }
 
-export default ProductDetail
+export default InventoryDetail

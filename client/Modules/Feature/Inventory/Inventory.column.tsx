@@ -1,17 +1,25 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
-import { CategoryResponse } from '@server/modules/feature/category/infrastructure/category.response'
-import { ProductResponse } from '@server/modules/feature/product/infrastructure/product.response'
-import { Row, Tag, Typography } from 'antd'
+import { InventoryResponse } from '@server/modules/feature/inventory/infrastructure/inventory.response'
+import { IProduct } from '@server/modules/feature/product/infrastructure/product.interface'
+import { Tag, Typography } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import React from 'react'
 import { RowActionButtons } from '../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../Enums/Route'
 import { Util } from '../../../utils/util'
-import { productAction } from './product.action'
+import { inventoryAction } from './inventory.action'
 
-export const productsColumns: ColumnsType<ProductResponse> = [
+export const inventoryColumns: ColumnsType<InventoryResponse> = [
   {
-    dataIndex: 'name',
+    title: 'SKU',
+    dataIndex: 'sku',
+  },
+  {
+    dataIndex: 'product',
+    render: (data: IProduct) => data?.name,
+  },
+  {
+    dataIndex: 'stock',
   },
   {
     dataIndex: 'buyPrice',
@@ -38,21 +46,6 @@ export const productsColumns: ColumnsType<ProductResponse> = [
     ),
   },
   {
-    dataIndex: 'categories',
-    render: (data: CategoryResponse[]) => (
-      <Row>
-        {data?.map((data) => (
-          <Tag color={data.labelColor}>{data.name}</Tag>
-        ))}
-      </Row>
-    ),
-    filters: [
-      { text: 'Tablet', value: 'Tablet' },
-      { text: 'Laptop', value: 'Laptop' },
-      { text: 'Samsung', value: 'Samsung' },
-    ],
-  },
-  {
     title: 'Active',
     dataIndex: 'isActive',
     width: '1px',
@@ -74,21 +67,21 @@ export const productsColumns: ColumnsType<ProductResponse> = [
   {
     title: 'Actions',
     width: '75px',
-    render: (data: ProductResponse) => (
+    render: (data: InventoryResponse) => (
       <RowActionButtons
         actions={[
           {
             type: 'view',
-            href: Route.product.id(data.id),
+            href: Route.inventory.id(data.id),
           },
           {
             type: 'edit',
-            href: Route.product.edit(data.id),
+            href: Route.inventory.edit(data.id),
           },
           {
             type: 'delete',
             onClick: async () => {
-              ;(await productAction.remove(data.id)) && location.reload()
+              ;(await inventoryAction.remove(data.id)) && location.reload()
             },
           },
         ]}

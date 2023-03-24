@@ -1,9 +1,10 @@
 import {
   ApartmentOutlined,
   DashboardOutlined,
+  DropboxOutlined,
   IdcardOutlined,
-  InboxOutlined,
-  PartitionOutlined,
+  ShopOutlined,
+  TagsOutlined,
   UsergroupAddOutlined,
   UserSwitchOutlined,
 } from '@ant-design/icons'
@@ -41,14 +42,19 @@ const itemsRoleAdministrator: MenuItem[] =
           icon: <ApartmentOutlined />,
           children: [
             {
+              key: Route.inventory.index,
+              label: <Link to={Route.inventory.index}>Inventory</Link>,
+              icon: <ShopOutlined />,
+            },
+            {
               key: Route.product.index,
               label: <Link to={Route.product.index}>Product</Link>,
-              icon: <InboxOutlined />,
+              icon: <DropboxOutlined />,
             },
             {
               key: Route.category.index,
               label: <Link to={Route.category.index}>Category</Link>,
-              icon: <PartitionOutlined />,
+              icon: <TagsOutlined />,
             },
           ],
         },
