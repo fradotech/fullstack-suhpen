@@ -47,7 +47,7 @@ const ProductDetail: React.FC = () => {
                 )}
               </Descriptions.Item>
             )
-          } else if (key.includes('At')) {
+          } else if (key.includes('At') || key.includes('Date')) {
             return (
               <Descriptions.Item label={Util.titleCase(key)}>
                 {Util.formatDatetime(data?.data[key])}
