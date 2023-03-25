@@ -63,7 +63,7 @@ const ProductDetail: React.FC = () => {
         })}
       </DescriptionContainer>
       <Divider />
-      <InventoryS productId={data?.data.id} />
+      <InventoryS productId={id} />
       <Divider />
     </>
   )

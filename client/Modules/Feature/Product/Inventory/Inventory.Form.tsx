@@ -4,7 +4,7 @@ import { InventoryResponse } from '@server/modules/feature/inventory/infrastruct
 import { Form } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
@@ -16,7 +16,11 @@ const InventoryForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const { id } = useParams()
+  const [params, setParams] = useSearchParams()
   const [form] = Form.useForm<InventoryCreateRequest>()
+  const [productId] = React.useState(params.get('productId'))
+
+  React.useEffect(() => setParams({ productId }), [productId])
 
   useQuery(
     [InventoryForm.name],
@@ -32,6 +36,7 @@ const InventoryForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
+    productId && (data.productId = productId)
     let res: IApiRes<InventoryResponse>
     if (!id) res = await inventoryAction.create(data)
     if (id) res = await inventoryAction.update(id, data)
@@ -52,15 +57,18 @@ const InventoryForm: React.FC = () => {
         centered
         button={{ disabled: isLoading }}
       >
-        <FormItem name="buyPrice" rules={[rule.required, { type: 'number' }]} />
+        <FormItem name="sku" />
+        <FormItem name="productVariantName" />
+        <FormItem name="buyPrice" rules={[rule.required]} input="inputNumber" />
         <FormItem
           name="sellPrice"
-          rules={[rule.required, { type: 'number' }]}
+          rules={[rule.required]}
+          input="inputNumber"
         />
-        <FormItem
-          name="marginPrice"
-          rules={[rule.required, { type: 'number' }]}
-        />
+        <FormItem name="stock" rules={[rule.required]} input="inputNumber" />
+        <FormItem name="stockMinimum" input="inputNumber" />
+        <FormItem name="discount" input="inputNumber" />
+        <FormItem name="expiredDate" input="datePicker" />
       </FormContainer>
     </>
   )

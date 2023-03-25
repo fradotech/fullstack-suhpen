@@ -32,7 +32,9 @@ const InventoryS: React.FC<IProps> = (props: IProps) => {
         dataTableHeader={{
           query,
           search: true,
-          hrefCreate: Route.inventory.form,
+          hrefCreate:
+            props.productId &&
+            Route.inventory.form + '?productId=' + props.productId,
           hrefExport: Route.inventory.export,
         }}
       />
