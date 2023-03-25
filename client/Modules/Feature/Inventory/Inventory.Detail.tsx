@@ -1,10 +1,10 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
-import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
-import DescriptionContainer from '../../../../Components/Organisms/Description/DescriptionContainer'
-import DescriptionItem from '../../../../Components/Organisms/Description/DescriptionItem'
-import { Route } from '../../../../Enums/Route'
+import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
+import DescriptionContainer from '../../../Components/Organisms/Description/DescriptionContainer'
+import DescriptionItem from '../../../Components/Organisms/Description/DescriptionItem'
+import { Route } from '../../../Enums/Route'
 import { inventoryAction } from './inventory.action'
 
 const InventoryDetail: React.FC = () => {

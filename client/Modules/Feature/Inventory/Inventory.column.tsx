@@ -5,9 +5,9 @@ import { Tag, Typography } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
-import { Route } from '../../../../Enums/Route'
-import { Util } from '../../../../utils/util'
+import { RowActionButtons } from '../../../Components/Molecules/RowActionButtons/RowActionButtons'
+import { Route } from '../../../Enums/Route'
+import { Util } from '../../../utils/util'
 import { inventoryAction } from './inventory.action'
 
 export const inventoryColumns: ColumnsType<InventoryResponse> = [

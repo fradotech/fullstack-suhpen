@@ -8,8 +8,8 @@ import {
 import { InventoryResponse } from '@server/modules/feature/inventory/infrastructure/inventory.response'
 import { notification } from 'antd'
 import dayjs from 'dayjs'
-import { Route } from '../../../../Enums/Route'
-import { axiosService } from '../../../../services/axios.service'
+import { Route } from '../../../Enums/Route'
+import { axiosService } from '../../../services/axios.service'
 
 const dataPrepare = (
   data: InventoryCreateRequest | InventoryUpdateRequest,

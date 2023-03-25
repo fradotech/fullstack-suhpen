@@ -6,7 +6,7 @@ import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import DescriptionContainer from '../../../Components/Organisms/Description/DescriptionContainer'
 import DescriptionItem from '../../../Components/Organisms/Description/DescriptionItem'
 import { Route } from '../../../Enums/Route'
-import InventoryS from './Inventory/Inventory.S'
+import InventoryS from '../Inventory/Inventory.S'
 import { productAction } from './product.action'
 
 const ProductDetail: React.FC = () => {
