@@ -7,6 +7,7 @@ import {
 } from '@server/modules/feature/inventory/infrastructure/inventory.request'
 import { InventoryResponse } from '@server/modules/feature/inventory/infrastructure/inventory.response'
 import { notification } from 'antd'
+import dayjs from 'dayjs'
 import { Route } from '../../../../Enums/Route'
 import { axiosService } from '../../../../services/axios.service'
 
@@ -38,6 +39,8 @@ export const inventoryAction = {
     const res: IApiRes<InventoryResponse> = await axiosService.get(
       Route.inventory.id(id),
     )
+
+    res.data.expiredDate = res.data.expiredDate && dayjs(res.data.expiredDate)
 
     return res
   },

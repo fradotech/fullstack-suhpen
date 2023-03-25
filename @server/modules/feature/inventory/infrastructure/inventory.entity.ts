@@ -1,4 +1,5 @@
 import { BaseEntity } from '@server/infrastructure/base/base.entity'
+import dayjs from 'dayjs'
 import { BeforeInsert, BeforeUpdate, Column, Entity, ManyToOne } from 'typeorm'
 import { EntProduct } from '../../product/infrastructure/product.entity'
 import { IProduct } from '../../product/infrastructure/product.interface'
@@ -33,8 +34,8 @@ export class EntInventory extends BaseEntity implements IInventory {
   @Column({ default: 0 })
   discount?: number
 
-  @Column({ default: null })
-  expiredDate?: Date
+  @Column({ default: null, type: 'datetime' })
+  expiredDate?: Date | dayjs.Dayjs
 
   @Column({ default: true })
   isActive: boolean
