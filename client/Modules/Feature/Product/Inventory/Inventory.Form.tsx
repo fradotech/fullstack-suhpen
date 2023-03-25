@@ -20,7 +20,7 @@ const InventoryForm: React.FC = () => {
   const [form] = Form.useForm<InventoryCreateRequest>()
   const [productId] = React.useState(params.get('productId'))
 
-  React.useEffect(() => setParams({ productId }), [productId])
+  React.useMemo(() => setParams({ productId }), [])
 
   useQuery(
     [InventoryForm.name],
@@ -41,7 +41,7 @@ const InventoryForm: React.FC = () => {
     if (!id) res = await inventoryAction.create(data)
     if (id) res = await inventoryAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Route.inventory.index)
+    res.data && navigate(Route.product.id(productId))
   }
 
   return (
@@ -59,11 +59,11 @@ const InventoryForm: React.FC = () => {
       >
         <FormItem name="sku" />
         <FormItem name="productVariantName" />
-        <FormItem name="buyPrice" rules={[rule.required]} input="inputNumber" />
+        <FormItem name="buyPrice" rules={[rule.required]} input="inputRupiah" />
         <FormItem
           name="sellPrice"
           rules={[rule.required]}
-          input="inputNumber"
+          input="inputRupiah"
         />
         <FormItem name="stock" rules={[rule.required]} input="inputNumber" />
         <FormItem name="stockMinimum" input="inputNumber" />

@@ -14,6 +14,7 @@ interface IProps {
   input?:
     | 'input'
     | 'inputNumber'
+    | 'inputRupiah'
     | 'inputPassword'
     | 'select'
     | 'datePicker'
@@ -46,6 +47,17 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
 
     case 'inputNumber':
       input = <InputNumber />
+      break
+
+    case 'inputRupiah':
+      input = (
+        <InputNumber
+          formatter={(value) =>
+            `Rp. ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+          }
+          parser={(value) => +value.replace(/\$\s?|(,*)/g, '')}
+        />
+      )
       break
 
     case 'select':
