@@ -1,18 +1,15 @@
-import { IProduct } from '@server/modules/feature/product/infrastructure/product.interface'
 import { Card, Col, Image, Layout, Row } from 'antd'
 import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { useQuery } from 'react-query'
-import { axiosService } from '../../services/axios.service'
+import { Util } from '../../utils/util'
+import { inventoryAction } from '../Feature/Inventory/inventory.action'
 import styles from './Home.module.css'
-
-const path = '/products'
 
 const HomeProduct: React.FC = () => {
   const fetch = async () => {
-    const query = { pageSize: 100 }
-    const res = await axiosService.get(path, query)
-    return res.data as IProduct[]
+    const res = await inventoryAction.fetch({ pageSize: 100 })
+    return res.data
   }
   const { isLoading, data } = useQuery([HomeProduct.name], fetch)
 
@@ -32,13 +29,13 @@ const HomeProduct: React.FC = () => {
                   <Image
                     preview={false}
                     className={styles.cardImage}
-                    src={data.thumbnail}
+                    src={data.product?.thumbnail}
                   />
                 }
               >
-                {data.name}
+                {data.product?.name}
                 <Title style={{ color: '#FF5F1F', margin: '2px' }} level={5}>
-                  {'Util.formatCurrency(data.sellPrice)'}
+                  {Util.formatCurrency(data.sellPrice)}
                 </Title>
                 <p style={{ opacity: '70%', margin: '0px' }}>10rb+ Terjual</p>
               </Card>

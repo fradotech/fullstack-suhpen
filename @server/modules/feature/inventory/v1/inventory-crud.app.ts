@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { ProductService } from '../../product/infrastructure/product.service'
 import { EntInventory } from '../infrastructure/inventory.entity'
 import { IInventory } from '../infrastructure/inventory.interface'
 import {
@@ -9,7 +10,10 @@ import { InventoryService } from '../infrastructure/inventory.service'
 
 @Injectable()
 export class InventoryCrudApp {
-  constructor(private readonly inventoryService: InventoryService) {}
+  constructor(
+    private readonly inventoryService: InventoryService,
+    private readonly productService: ProductService,
+  ) {}
 
   async find(): Promise<IInventory[]> {
     return await this.inventoryService.find()
@@ -18,6 +22,9 @@ export class InventoryCrudApp {
   async create(req: InventoryCreateRequest): Promise<IInventory> {
     const data = new EntInventory()
     Object.assign(data, req)
+
+    const product = await this.productService.findOneOrFail(req.productId)
+    data.product = product
 
     return await this.inventoryService.create(data)
   }

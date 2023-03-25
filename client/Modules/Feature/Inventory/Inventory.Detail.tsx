@@ -1,4 +1,3 @@
-import { Divider } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
@@ -6,31 +5,27 @@ import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import DescriptionContainer from '../../../Components/Organisms/Description/DescriptionContainer'
 import DescriptionItem from '../../../Components/Organisms/Description/DescriptionItem'
 import { Route } from '../../../Enums/Route'
-import InventoryS from '../Inventory/Inventory.S'
-import { productAction } from './product.action'
+import { inventoryAction } from './inventory.action'
 
-const ProductDetail: React.FC = () => {
+const InventoryDetail: React.FC = () => {
   const { id } = useParams()
-  const fetch = async () => await productAction.findOne(id)
-  const { isLoading, data } = useQuery([ProductDetail.name], fetch)
+  const fetch = async () => await inventoryAction.findOne(id)
+  const { isLoading, data } = useQuery([InventoryDetail.name], fetch)
   const fields = data?.data && Object.keys(data.data)
 
   return (
     <>
       <PageHeader
-        title="Product Detail"
+        title="Inventory Detail"
         isLoading={isLoading}
-        hrefEdit={Route.product.edit(id)}
-        hrefDelete={Route.product.id(id)}
+        hrefEdit={Route.inventory.edit(id)}
+        hrefDelete={Route.inventory.id(id)}
       />
       <DescriptionContainer>
         {fields?.map((key) => DescriptionItem(data?.data, key))}
       </DescriptionContainer>
-      <Divider />
-      <InventoryS productId={id} />
-      <Divider />
     </>
   )
 }
 
-export default ProductDetail
+export default InventoryDetail

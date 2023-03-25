@@ -1,4 +1,5 @@
 import { IBaseEntity } from '@server/infrastructure/base/base-entity.interface'
+import dayjs from 'dayjs'
 import { IProduct } from '../../product/infrastructure/product.interface'
 
 export interface IInventory extends IBaseEntity {
@@ -10,7 +11,7 @@ export interface IInventory extends IBaseEntity {
   marginPrice: number
   stock: number
   stockMinimum: number
-  expiredDate?: Date
+  expiredDate?: Date | dayjs.Dayjs
   discount?: number
   isActive: boolean
   // store: IStore

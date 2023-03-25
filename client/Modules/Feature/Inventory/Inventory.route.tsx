@@ -10,7 +10,7 @@ const path = '/inventories'
 export const routesInventory = {
   inventory: {
     index: path,
-    form: `${path}/save`,
+    form: (productId?: string) => `${path}/${productId || ':productId'}/save`,
     edit: (id?: string) => `${path}/save/${id || ':id'}`,
     id: (id?: string) => `${path}/${id || ':id'}`,
     import: `${path}/sheet/import`,
@@ -25,8 +25,8 @@ export default [
     element={<InventoryS />}
   />,
   <Route
-    key={routesInventory.inventory.form}
-    path={routesInventory.inventory.form}
+    key={routesInventory.inventory.form()}
+    path={routesInventory.inventory.form()}
     element={<InventoryForm />}
   />,
   <Route

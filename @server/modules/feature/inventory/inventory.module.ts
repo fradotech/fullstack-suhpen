@@ -2,6 +2,8 @@ import { HttpModule } from '@nestjs/axios'
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { AuthModule } from '@server/modules/iam/auth/auth.module'
+import { EntProduct } from '../product/infrastructure/product.entity'
+import { ProductService } from '../product/infrastructure/product.service'
 import { InventoryIndexApp } from './infrastructure/inventory-index.app'
 import { EntInventory } from './infrastructure/inventory.entity'
 import { InventoryService } from './infrastructure/inventory.service'
@@ -10,9 +12,18 @@ import { InventoryCrudController } from './v1/inventory-crud.controller'
 import { InventorySheetController } from './v1/inventory-sheet.controller'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([EntInventory]), AuthModule, HttpModule],
+  imports: [
+    TypeOrmModule.forFeature([EntInventory, EntProduct]),
+    AuthModule,
+    HttpModule,
+  ],
   controllers: [InventorySheetController, InventoryCrudController],
-  providers: [InventoryService, InventoryCrudApp, InventoryIndexApp],
+  providers: [
+    InventoryService,
+    InventoryCrudApp,
+    InventoryIndexApp,
+    ProductService,
+  ],
   exports: [InventoryService],
 })
 export class InventoryModule {}

@@ -1,4 +1,4 @@
-import { DatePicker, Form, Input as AntdInput, Select } from 'antd'
+import { DatePicker, Form, Input as AntdInput, InputNumber, Select } from 'antd'
 import { FormInstance, Rule } from 'antd/es/form'
 import { DefaultOptionType } from 'antd/es/select'
 import dayjs from 'dayjs'
@@ -13,6 +13,8 @@ interface IProps {
   name: string
   input?:
     | 'input'
+    | 'inputNumber'
+    | 'inputRupiah'
     | 'inputPassword'
     | 'select'
     | 'datePicker'
@@ -41,6 +43,10 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           placeholder={props.placeholder || Util.titleCase(props.name)}
         />
       )
+      break
+
+    case 'inputNumber':
+      input = <InputNumber />
       break
 
     case 'select':
