@@ -28,7 +28,10 @@ const InventoryS: React.FC<IProps> = (props: IProps) => {
         search={query.search}
         pagination={!props.productId && paginationTransform(data?.meta)}
         loading={isLoading}
-        onChange={(filtersState) => setQueryParams(filtersState)}
+        onChange={(filtersState) => {
+          props.productId && (filtersState.pageSize = 100000)
+          setQueryParams(filtersState)
+        }}
         dataTableHeader={{
           query,
           search: true,
