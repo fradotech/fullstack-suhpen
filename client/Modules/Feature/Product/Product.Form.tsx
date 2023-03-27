@@ -60,11 +60,17 @@ const ProductForm: React.FC = () => {
         <FormItem name="name" rules={[rule.required]} />
         <FormItem name="key" rules={[rule.required]} />
         <FormItem name="description" input="textArea" />
-        <FormItem name="isActive" input="switch" form={form} />
+        <FormItem
+          name="isActive"
+          input="switch"
+          rules={[rule.required]}
+          form={form}
+        />
         <FormItem
           name="categories"
           input="selectMultiple"
           options={categories?.data}
+          disabled={!!id}
           form={form}
         />
         <FormItem name="brand" />

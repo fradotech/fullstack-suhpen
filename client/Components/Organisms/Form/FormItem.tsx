@@ -19,6 +19,7 @@ interface IProps {
   form?: FormInstance
   label?: string
   name: string
+  disabled?: boolean
   input?:
     | 'input'
     | 'inputNumber'
@@ -69,6 +70,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'inputPassword':
       input = (
         <AntdInput.Password
+          disabled={props.disabled}
           type="password"
           placeholder={props.placeholder || Util.titleCase(props.name)}
         />
@@ -76,12 +78,19 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
       break
 
     case 'inputNumber':
-      input = <InputNumber parser={(value: string) => +value} />
+      input = (
+        <InputNumber
+          disabled={props.disabled}
+          parser={(value: string) => +value}
+          style={{ width: '100%' }}
+        />
+      )
       break
 
     case 'select':
       input = (
         <Select
+          disabled={props.disabled}
           showSearch
           filterOption={filterOption}
           options={selectOption}
@@ -93,7 +102,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'selectMultiple':
       input = (
         <Select
-          disabled
+          disabled={props.disabled}
           allowClear
           mode="multiple"
           showSearch
@@ -107,9 +116,11 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'datePicker':
       input = (
         <DatePicker
+          disabled={props.disabled}
           showTime={props.showTime}
           format={props.format}
           placeholder={props.placeholder || Util.titleCase(props.name)}
+          style={{ width: '100%' }}
         />
       )
       break
@@ -117,8 +128,10 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'rangePicker':
       input = (
         <DatePicker.RangePicker
+          disabled={props.disabled}
           showTime={props.showTime}
           format={props.format}
+          style={{ width: '100%' }}
         />
       )
       break
@@ -126,6 +139,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'textArea':
       input = (
         <AntdInput.TextArea
+          disabled={props.disabled}
           placeholder={props.placeholder || Util.titleCase(props.name)}
         />
       )
@@ -139,7 +153,11 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
 
     case 'switch':
       input = (
-        <Switch checked={isChecked} onClick={() => setIsChecked(!isChecked)} />
+        <Switch
+          disabled={props.disabled}
+          checked={isChecked}
+          onClick={() => setIsChecked(!isChecked)}
+        />
       )
       break
 
@@ -150,6 +168,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     default:
       input = (
         <AntdInput
+          disabled={props.disabled}
           type={props.type}
           placeholder={props.placeholder || Util.titleCase(props.name)}
         />
