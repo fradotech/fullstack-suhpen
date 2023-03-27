@@ -30,6 +30,8 @@ export class ProductCrudApp {
     const data = await this.productService.findOneOrFail(id)
     Object.assign(data, req)
 
+    delete data.categories
+
     return await this.productService.update(data)
   }
 

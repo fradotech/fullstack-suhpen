@@ -1,4 +1,12 @@
-import { DatePicker, Form, Input as AntdInput, InputNumber, Select } from 'antd'
+import {
+  DatePicker,
+  Form,
+  Input as AntdInput,
+  InputNumber,
+  Select,
+  Switch,
+} from 'antd'
+import { Colorpicker } from 'antd-colorpicker'
 import { FormInstance, Rule } from 'antd/es/form'
 import { DefaultOptionType } from 'antd/es/select'
 import dayjs from 'dayjs'
@@ -17,15 +25,18 @@ interface IProps {
     | 'inputRupiah'
     | 'inputPassword'
     | 'select'
+    | 'selectMultiple'
     | 'datePicker'
     | 'rangePicker'
     | 'attachment'
     | 'textArea'
+    | 'colorPicker'
+    | 'switch'
   rules?: Rule[]
   required?: boolean
   placeholder?: string
   type?: string
-  options?: DefaultOptionType[]
+  options?: Record<string, any>[] | DefaultOptionType[]
   optionsEnum?: string[]
   showTime?: boolean | SharedTimeProps<dayjs.Dayjs> | any
   format?: string
@@ -34,6 +45,25 @@ interface IProps {
 
 const FormItem: React.FC<IProps> = (props: IProps) => {
   let input: React.ReactNode
+  const [isChecked, setIsChecked] = React.useState(false)
+
+  const filterOption = (input: string, option: DefaultOptionType) => {
+    return String(option?.label ?? '')
+      .toLowerCase()
+      .includes(input.toLowerCase())
+  }
+
+  const selectOption = props.optionsEnum
+    ? (props.optionsEnum.map((data) => {
+        return { label: data, value: data }
+      }) as DefaultOptionType[])
+    : (props.options?.map((data: Record<string, any>) => {
+        return { label: data['name'], value: data }
+      }) as unknown as DefaultOptionType[])
+
+  React.useMemo(() => {
+    setIsChecked(props.form?.getFieldValue(props.name))
+  }, [props.form?.getFieldValue(props.name)])
 
   switch (props.input) {
     case 'inputPassword':
@@ -46,19 +76,29 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
       break
 
     case 'inputNumber':
-      input = <InputNumber />
+      input = <InputNumber parser={(value: string) => +value} />
       break
 
     case 'select':
       input = (
         <Select
-          options={
-            props.optionsEnum
-              ? props.optionsEnum.map((data) => {
-                  return { label: data, value: data }
-                })
-              : props.options
-          }
+          showSearch
+          filterOption={filterOption}
+          options={selectOption}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
+        />
+      )
+      break
+
+    case 'selectMultiple':
+      input = (
+        <Select
+          disabled
+          allowClear
+          mode="multiple"
+          showSearch
+          filterOption={filterOption}
+          options={selectOption}
           placeholder={props.placeholder || Util.titleCase(props.name)}
         />
       )
@@ -84,13 +124,27 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
       break
 
     case 'textArea':
-      input = <AntdInput.TextArea />
+      input = (
+        <AntdInput.TextArea
+          placeholder={props.placeholder || Util.titleCase(props.name)}
+        />
+      )
       break
 
     case 'attachment':
       input = (
         <Attachment total={props.total} name={props.name} form={props.form} />
       )
+      break
+
+    case 'switch':
+      input = (
+        <Switch checked={isChecked} onClick={() => setIsChecked(!isChecked)} />
+      )
+      break
+
+    case 'colorPicker':
+      input = <Colorpicker />
       break
 
     default:

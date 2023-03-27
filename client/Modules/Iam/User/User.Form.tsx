@@ -28,6 +28,7 @@ const UserForm: React.FC = () => {
         form.setFieldsValue(res.data)
         setIsLoading(false)
       }),
+    { refetchOnWindowFocus: false },
   )
 
   const onFinish = async () => {

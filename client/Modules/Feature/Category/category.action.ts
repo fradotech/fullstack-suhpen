@@ -10,11 +10,13 @@ import { notification } from 'antd'
 import { getAttachment } from '../../../Components/Molecules/Attachment/attachment.util'
 import { Route } from '../../../Enums/Route'
 import { axiosService } from '../../../services/axios.service'
+import { themeColors } from './../../../utils/theme'
 
 const dataPrepare = (
   data: CategoryCreateRequest | CategoryUpdateRequest,
 ): CategoryCreateRequest | CategoryUpdateRequest => {
   data.thumbnail = getAttachment(data.thumbnail) as string
+  data.labelColor = data.labelColor?.['hex'] || themeColors.primary
 
   return data
 }
