@@ -18,13 +18,16 @@ export const userColumns: ColumnsType<UserResponse> = [
   {
     dataIndex: 'role',
     render: (data: string) => {
-      if (data == ERole.Administrator) return <Tag color="blue">{data}</Tag>
-      else if (data == ERole.User) return <Tag color="green">{data}</Tag>
+      const color = {}
+      color[ERole.SuperAdmin] = 'blue'
+      color[ERole.Admin] = 'green'
+      color[ERole.User] = 'yellow'
 
-      return <Tag color="red">Error</Tag>
+      return <Tag color={color[data]}>{data}</Tag>
     },
     filters: [
-      { text: ERole.Administrator, value: ERole.Administrator },
+      { text: ERole.SuperAdmin, value: ERole.SuperAdmin },
+      { text: ERole.Admin, value: ERole.Admin },
       { text: ERole.User, value: ERole.User },
     ],
   },

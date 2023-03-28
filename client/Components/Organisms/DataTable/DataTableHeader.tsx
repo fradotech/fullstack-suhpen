@@ -1,6 +1,6 @@
 import {
   AppstoreOutlined,
-  FileExcelOutlined,
+  FileExcelFilled,
   PlusCircleFilled,
   SearchOutlined,
   UnorderedListOutlined,
@@ -61,10 +61,10 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
       <Loading isLoading={isLoading} />
       <Row style={{ justifyContent: 'space-between' }}>
         <Row>
-          {props.setIsCard && (
+          {props.setShowCard && (
             <Col className={styles.headerItem}>
-              <Button onClick={() => props.setIsCard(!props.isCard)}>
-                {props.isCard ? (
+              <Button onClick={() => props.setShowCard(!props.showCard)}>
+                {props.showCard ? (
                   <UnorderedListOutlined />
                 ) : (
                   <AppstoreOutlined />
@@ -88,8 +88,8 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
               <DatePicker.RangePicker
                 onChange={props.onDateRange}
                 placeholder={[
-                  `${Util.camelToTitle(props.dateRangeColumn)} Start`,
-                  `${Util.camelToTitle(props.dateRangeColumn)} End`,
+                  `${Util.titleCase(props.dateRangeColumn)} Start`,
+                  `${Util.titleCase(props.dateRangeColumn)} End`,
                 ]}
                 defaultValue={[
                   params.get('startAt') && dayjs(params.get('startAt')),
@@ -107,7 +107,7 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
                 onClick={handleExport}
                 style={{ backgroundColor: '#0f9d59' }}
               >
-                <FileExcelOutlined /> Export
+                <FileExcelFilled /> Export
               </Button>
             </Col>
           )}

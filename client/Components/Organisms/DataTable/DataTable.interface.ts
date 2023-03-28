@@ -55,8 +55,8 @@ export type FilterState<T> = {
 export interface IDataTableHeader {
   search?: boolean
   dateRangeColumn?: string
-  isCard?: boolean
-  setIsCard?: React.Dispatch<React.SetStateAction<boolean>>
+  showCard?: boolean
+  setShowCard?: React.Dispatch<React.SetStateAction<boolean>>
   onSearch?: (value: string) => void
   onDateRange?: (dateRange: [dayjs.Dayjs, dayjs.Dayjs]) => void
   searchValue?: string

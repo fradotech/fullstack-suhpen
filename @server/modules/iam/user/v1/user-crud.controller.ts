@@ -14,7 +14,7 @@ import { BaseCrudController } from '@server/infrastructure/base/base-crud.contro
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { Modules } from '@server/modules/modules'
-import { AdminGuard } from '../../auth/common/admin.guard'
+import { SuperAdminGuard } from '../../auth/common/super-admin.guard'
 import { UserIndexApp } from '../infrastructure/user-index.app'
 import { UserIndexRequest } from '../infrastructure/user-index.request'
 import {
@@ -29,7 +29,7 @@ const THIS_MODULE = Modules.User
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
-@UseGuards(AdminGuard)
+@UseGuards(SuperAdminGuard)
 export class UserCrudController implements BaseCrudController {
   constructor(
     private readonly userIndexApp: UserIndexApp,

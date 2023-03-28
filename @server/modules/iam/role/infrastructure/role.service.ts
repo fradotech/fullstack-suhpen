@@ -6,11 +6,11 @@ import { IRole } from './role.interface'
 const roles: IRole[] = [
   {
     id: '1',
-    name: ERole.Administrator,
+    name: ERole.SuperAdmin,
   },
   {
     id: '2',
-    name: ERole.AdminSecond,
+    name: ERole.Admin,
   },
   {
     id: '3',

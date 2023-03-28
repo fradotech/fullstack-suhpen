@@ -26,14 +26,14 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
   }
 
   return (
-    <Layout style={{ height: '100vh' }}>
+    <Layout style={{ minHeight: '100vh' }}>
       <Layout.Sider
         trigger={null}
         collapsible
         collapsed={isCollapsed}
         style={{
           backgroundColor: sidebarThemeConfig.components.Menu.colorItemBg,
-          height: '100vh',
+          minHeight: '100vh',
         }}
       >
         <div className={styles.sidebarContainer}>

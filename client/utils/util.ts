@@ -18,17 +18,12 @@ export class Util {
   }
 
   static titleCase = (str: string) => {
-    const res2 = str.replace(/([A-Z])/g, ' $1')
-    return res2.charAt(0).toUpperCase() + res2.slice(1)
+    const res = str.replace(/([A-Z])/g, ' $1')
+    return res.charAt(0).toUpperCase() + res.slice(1)
   }
 
   static camelToSnake = (str: string) => {
     return str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`)
-  }
-
-  static camelToTitle = (str: string) => {
-    const result = str.replace(/([A-Z])/g, ' $1')
-    return result.charAt(0).toUpperCase() + result.slice(1)
   }
 
   static formatDate = (date: Date | string | dayjs.Dayjs) => {
