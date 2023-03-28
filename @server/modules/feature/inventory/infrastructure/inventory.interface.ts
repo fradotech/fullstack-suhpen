@@ -12,8 +12,8 @@ export interface IInventory extends IBaseEntity {
   stock: number
   stockMinimum: number
   expiredDate?: Date | dayjs.Dayjs
-  discount?: number
+  discountPercentage?: number
   isActive: boolean
-  // store: IStore
+  // outlet: IOutlet
   // supplier?: ISupplier
 }

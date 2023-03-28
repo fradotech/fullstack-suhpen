@@ -9,7 +9,7 @@ import {
   UserSwitchOutlined,
 } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
-import { ERole } from '../../Modules/Iam/Role/Role.enum'
+import { ERole } from '../../Modules/Iam/Role/common/Role.enum'
 
 import React from 'react'
 import { Link } from 'react-router-dom'

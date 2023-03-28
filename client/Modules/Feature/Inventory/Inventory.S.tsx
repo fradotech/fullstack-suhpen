@@ -35,6 +35,7 @@ const InventoryS: React.FC<IProps> = (props: IProps) => {
         dataTableHeader={{
           query,
           search: true,
+          dateRange: 'expiredDate',
           hrefCreate: props.productId && Route.inventory.form(props.productId),
           hrefExport: Route.inventory.export,
         }}

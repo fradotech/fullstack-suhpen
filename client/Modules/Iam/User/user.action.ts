@@ -17,8 +17,6 @@ const dataPrepare = (
 ): UserCreateRequest | UserUpdateRequest => {
   data.birthDate =
     data.birthDate && (data.birthDate as unknown as dayjs.Dayjs).toDate()
-  data.startAt = data.dateRange && data.dateRange[0]?.toDate()
-  data.endAt = data.dateRange && data.dateRange[1]?.toDate()
   data.avatar = getAttachment(data.avatar) as string
 
   return data
@@ -42,10 +40,6 @@ export const userAction = {
     const res: IApiRes<UserResponse> = await axiosService.get(Route.user.id(id))
 
     res.data.birthDate = res.data.birthDate && dayjs(res.data.birthDate)
-    res.data.dateRange = [
-      res.data.startAt && dayjs(res.data.startAt),
-      res.data.endAt && dayjs(res.data.endAt),
-    ]
 
     return res
   },

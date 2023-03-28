@@ -13,6 +13,7 @@ import React from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Loading from '../../../Components/Molecules/Loading/Loading'
 import { hostApi } from '../../../services/axios.service'
+import { Util } from '../../../utils/util'
 import { IDataTableHeader } from './DataTable.interface'
 import styles from './DataTable.module.css'
 
@@ -86,6 +87,10 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
             <Col className={styles.headerItem}>
               <DatePicker.RangePicker
                 onChange={props.onDateRange}
+                placeholder={[
+                  `${Util.camelToTitle(props.dateRange)} start`,
+                  `${Util.camelToTitle(props.dateRange)} end`,
+                ]}
                 defaultValue={[
                   params.get('startAt') && dayjs(params.get('startAt')),
                   params.get('endAt') && dayjs(params.get('endAt')),

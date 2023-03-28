@@ -53,7 +53,7 @@ export class InventoryRequest implements IInventory {
   @IsOptional()
   @IsNumber()
   @ApiProperty()
-  discount?: number
+  discountPercentage?: number
 
   @IsOptional()
   @IsDate()

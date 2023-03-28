@@ -28,7 +28,6 @@ const CategoryS: React.FC = () => {
         dataTableHeader={{
           query,
           search: true,
-          dateRange: true,
           hrefCreate: Route.category.form,
           hrefExport: Route.category.export,
         }}

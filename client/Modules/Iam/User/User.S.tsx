@@ -28,7 +28,6 @@ const UserS: React.FC = () => {
         dataTableHeader={{
           query,
           search: true,
-          dateRange: true,
           hrefCreate: Route.user.form,
           hrefExport: Route.user.export,
         }}

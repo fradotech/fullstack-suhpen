@@ -16,9 +16,11 @@
     "server:debug": "nest start --debug --watch",
     "server:prod": "node dist/@server/main",
     "typeorm": "rm -rf dist && yarn server:build && npx typeorm -d dist/@server/database/data-source.js",
+    "typeorm:reset": "yarn schema:drop && yarn migrate",
     "migrate": "yarn typeorm migration:run",
     "migrate:generate": "sh -c 'yarn typeorm migration:generate @server/database/migrations/$0'",
     "migrate:revert": "yarn typeorm migration:revert",
+    "schema:drop": "yarn typeorm schema:drop",
     "client:dev": "webpack-dev-server --open --hot --config webpack.config.js --mode=development",
     "client:build": "webpack --config webpack.config.js --mode=production",
     "client": "webpack-dev-server --mode=production --config webpack.config.js "

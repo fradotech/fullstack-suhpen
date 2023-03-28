@@ -35,8 +35,6 @@ export class UserCrudApp {
     data.avatar = req.avatar
     data.address = req.address
     data.birthDate = req.birthDate
-    data.startAt = req.startAt
-    data.endAt = req.endAt
 
     return await this.userService.update(data)
   }

@@ -1,7 +1,6 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger'
 import { ERole } from '@server/modules/iam/role/infrastructure/role.enum'
 import {
-  IsDate,
   IsEmail,
   IsEnum,
   IsNotEmpty,
@@ -90,16 +89,6 @@ export class UserRequest implements IUser {
   @IsString()
   @ApiProperty()
   token: string
-
-  @IsOptional()
-  @IsDate()
-  @ApiProperty()
-  startAt?: Date
-
-  @IsOptional()
-  @IsDate()
-  @ApiProperty()
-  endAt?: Date
 
   dateRange?: [dayjs.Dayjs, dayjs.Dayjs]
   isVerified: boolean

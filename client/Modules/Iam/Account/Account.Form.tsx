@@ -8,7 +8,8 @@ import FormContainer from '../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../Enums/Route'
 import { rule } from '../../../utils/form.rules'
-import { EUserGender } from '../User/User.enum'
+import { ERole } from '../Role/common/Role.enum'
+import { EUserGender } from '../User/common/User.enum'
 import { accountAction } from './account.action'
 
 const AccountForm: React.FC = () => {
@@ -49,6 +50,12 @@ const AccountForm: React.FC = () => {
         <FormItem name="name" rules={[rule.required]} />
 
         <Divider />
+
+        <FormItem
+          name="role"
+          input="select"
+          optionsEnum={Object.values(ERole)}
+        />
 
         <FormItem
           name="gender"
