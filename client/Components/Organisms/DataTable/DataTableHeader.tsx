@@ -1,6 +1,6 @@
 import {
   AppstoreOutlined,
-  FileExcelOutlined,
+  FileExcelFilled,
   PlusCircleFilled,
   SearchOutlined,
   UnorderedListOutlined,
@@ -107,7 +107,7 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
                 onClick={handleExport}
                 style={{ backgroundColor: '#0f9d59' }}
               >
-                <FileExcelOutlined /> Export
+                <FileExcelFilled /> Export
               </Button>
             </Col>
           )}
