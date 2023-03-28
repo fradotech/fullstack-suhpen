@@ -25,9 +25,7 @@ const DescriptionItem = (data: IBaseEntity, key: string) => {
   } else if (key.includes('At') || key.includes('Date')) {
     return (
       <Descriptions.Item label={Util.titleCase(key)}>
-        {Util.formatDatetime(data[key]) != 'Invalid Date'
-          ? Util.formatDatetime(data[key])
-          : '-'}
+        {Util.formatDatetime(data[key])}
       </Descriptions.Item>
     )
   } else if (data[key]?.id && data[key]?.name) {

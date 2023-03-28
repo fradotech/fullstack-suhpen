@@ -8,6 +8,8 @@ import { IPaginateRequest, ISortRequest } from './index.interface'
 
 export class IndexRequest implements ISortRequest, IPaginateRequest {
   isExport?: boolean
+
+  @IsOptional()
   filters?: Record<string, any>
 
   @IsOptional()
@@ -47,11 +49,30 @@ export class IndexRequest implements ISortRequest, IPaginateRequest {
   })
   search?: string
 
+  @IsOptional()
+  @IsString()
+  @ApiProperty({
+    example: '',
+    description: 'Column name for filter startAt and endAt',
+    required: false,
+  })
+  dateRangeColumn?: string
+
   @IsString()
   @IsOptional()
+  @ApiProperty({
+    example: '',
+    description: 'Filter startAt by dateRangeColumn',
+    required: false,
+  })
   startAt?: string
 
   @IsString()
   @IsOptional()
+  @ApiProperty({
+    example: '',
+    description: 'Filter endAt by dateRangeColumn',
+    required: false,
+  })
   endAt?: string
 }

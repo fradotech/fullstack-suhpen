@@ -68,6 +68,10 @@ export const inventoryColumns: ColumnsType<InventoryResponse> = [
     ],
   },
   {
+    dataIndex: 'expiredDate',
+    render: (data: Date) => Util.formatDate(data),
+  },
+  {
     dataIndex: 'createdAt',
     render: (data: Date) => Util.formatDate(data),
   },

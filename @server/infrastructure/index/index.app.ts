@@ -101,7 +101,9 @@ export abstract class BaseIndexApp {
 
     if (req.startAt && req.endAt) {
       query.andWhere(
-        `CAST(${tableName}.updatedAt as DATE) BETWEEN CAST(:startAt AS DATE) AND CAST(:endAt AS DATE)`,
+        `CAST(${tableName}.${
+          req.dateRangeColumn || 'createdAt'
+        } as DATE) BETWEEN CAST(:startAt AS DATE) AND CAST(:endAt AS DATE)`,
         { startAt: req.startAt, endAt: req.endAt },
       )
     }
