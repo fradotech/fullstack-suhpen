@@ -10,8 +10,9 @@ import FormContainer from '../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../Enums/Route'
 import { rule } from '../../../utils/form.rules'
+import { ERole } from '../Role/common/Role.enum'
+import { EUserGender } from './common/User.enum'
 import { userAction } from './user.action'
-import { EUserGender } from './User.enum'
 
 const UserForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
@@ -28,6 +29,7 @@ const UserForm: React.FC = () => {
         form.setFieldsValue(res.data)
         setIsLoading(false)
       }),
+    { refetchOnWindowFocus: false },
   )
 
   const onFinish = async () => {
@@ -76,6 +78,12 @@ const UserForm: React.FC = () => {
         <Divider />
 
         <FormItem
+          name="role"
+          input="select"
+          optionsEnum={Object.values(ERole)}
+        />
+
+        <FormItem
           name="gender"
           input="select"
           optionsEnum={Object.values(EUserGender)}
@@ -84,12 +92,6 @@ const UserForm: React.FC = () => {
         <FormItem name="phoneNumber" />
         <FormItem name="address" />
         <FormItem name="birthDate" input="datePicker" />
-        <FormItem
-          name="dateRange"
-          input="rangePicker"
-          showTime
-          format="YYYY-MM-DD HH:mm"
-        />
       </FormContainer>
     </>
   )

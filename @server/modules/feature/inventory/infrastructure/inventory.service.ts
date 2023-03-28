@@ -26,7 +26,12 @@ export class InventoryService implements BaseService {
   }
 
   async findOneOrFail(id: string): Promise<IInventory> {
-    return await this.inventoryRepo.findOneOrFail({ where: { id } })
+    const res = await this.inventoryRepo.findOneOrFail({
+      where: { id },
+      relations: ['product'],
+    })
+
+    return res
   }
 
   async update(req: IInventory): Promise<IInventory> {

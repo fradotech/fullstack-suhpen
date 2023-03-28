@@ -93,12 +93,6 @@ export class EntUser implements IUser {
   @Column({ default: null })
   token?: string
 
-  @Column({ default: null })
-  startAt?: Date
-
-  @Column({ default: null })
-  endAt?: Date
-
   @BeforeInsert()
   async hashPassword() {
     this.password = await bcrypt.hash(this.password, 10)

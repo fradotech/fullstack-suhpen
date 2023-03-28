@@ -1,7 +1,7 @@
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { InventoryCreateRequest } from '@server/modules/feature/inventory/infrastructure/inventory.request'
 import { InventoryResponse } from '@server/modules/feature/inventory/infrastructure/inventory.response'
-import { Form } from 'antd'
+import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -15,8 +15,8 @@ import { inventoryAction } from './inventory.action'
 const InventoryForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
-  const { id, productId } = useParams()
   const [form] = Form.useForm<InventoryCreateRequest>()
+  const { id, productId } = useParams()
 
   useQuery(
     [InventoryForm.name],
@@ -32,12 +32,12 @@ const InventoryForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    data.productId = productId
+    productId && (data.productId = productId)
     let res: IApiRes<InventoryResponse>
     if (!id) res = await inventoryAction.create(data)
     if (id) res = await inventoryAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Route.product.id(data.productId))
+    res.data && navigate(Route.product.id(res.data.product.id))
   }
 
   return (
@@ -53,17 +53,42 @@ const InventoryForm: React.FC = () => {
         centered
         button={{ disabled: isLoading }}
       >
+        <FormItem name="thumbnail" input="attachment" total={1} form={form} />
         <FormItem name="sku" />
         <FormItem name="productVariantName" />
-        <FormItem name="buyPrice" rules={[rule.required]} input="inputNumber" />
+        <Row gutter={12}>
+          <Col sm={24} md={12} lg={12}>
+            <FormItem
+              name="buyPrice"
+              rules={[rule.required]}
+              input="inputRupiah"
+            />
+          </Col>
+          <Col sm={24} md={12} lg={12}>
+            <FormItem
+              name="sellPrice"
+              rules={[rule.required]}
+              input="inputRupiah"
+            />
+          </Col>
+          <Col sm={24} md={12} lg={12}>
+            <FormItem
+              name="stock"
+              rules={[rule.required]}
+              input="inputRupiah"
+            />
+          </Col>
+          <Col sm={24} md={12} lg={12}>
+            <FormItem name="stockMinimum" input="inputNumber" />
+          </Col>
+        </Row>
         <FormItem
-          name="sellPrice"
+          name="isActive"
+          input="switch"
           rules={[rule.required]}
-          input="inputNumber"
+          form={form}
         />
-        <FormItem name="stock" rules={[rule.required]} input="inputNumber" />
-        <FormItem name="stockMinimum" input="inputNumber" />
-        <FormItem name="discount" input="inputNumber" />
+        <FormItem name="discountPercentage" input="inputNumber" />
         <FormItem name="expiredDate" input="datePicker" />
       </FormContainer>
     </>

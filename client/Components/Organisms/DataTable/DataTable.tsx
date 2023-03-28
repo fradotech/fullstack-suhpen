@@ -1,4 +1,5 @@
 import { IBaseEntity } from '@server/infrastructure/base/base-entity.interface'
+import { IndexRequest } from '@server/infrastructure/index/index.request'
 import { Col, Pagination, PaginationProps, Row, Space, Table } from 'antd'
 import { ColumnsType, FilterValue, SorterResult } from 'antd/es/table/interface'
 import dayjs from 'dayjs'
@@ -51,11 +52,18 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
   const handleTableChange = (
     filters: Record<string, FilterValue>,
     sorter: TOnSort<T>,
+    dateRangeColumn: string,
   ) => {
     const sortField = String(sorter.field)
     const sortOrder = sorter.order
 
-    const newQuery = { ...state, filters, sortField, sortOrder }
+    const newQuery: IndexRequest = {
+      ...state,
+      filters,
+      sortField,
+      sortOrder,
+      dateRangeColumn,
+    }
 
     setState(newQuery)
     onChange(newQuery)
@@ -86,11 +94,15 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
             size="small"
             pagination={false}
             onChange={(pagination, filters, sorter: SorterResult<T>): void => {
-              handleTableChange(filters, {
-                ...sorter,
-                order:
-                  sorter.order && sorter.order == 'ascend' ? 'ASC' : 'DESC',
-              })
+              handleTableChange(
+                filters,
+                {
+                  ...sorter,
+                  order:
+                    sorter.order && sorter.order == 'ascend' ? 'ASC' : 'DESC',
+                },
+                props.dataTableHeader.dateRangeColumn,
+              )
             }}
           />
         )}

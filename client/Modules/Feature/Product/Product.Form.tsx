@@ -10,6 +10,7 @@ import FormContainer from '../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../Enums/Route'
 import { rule } from '../../../utils/form.rules'
+import useCategories from '../Category/common/useCategories'
 import { productAction } from './product.action'
 
 const ProductForm: React.FC = () => {
@@ -17,6 +18,7 @@ const ProductForm: React.FC = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const [form] = Form.useForm<ProductCreateRequest>()
+  const { isLoading: isLoadingCategories, data: categories } = useCategories()
 
   useQuery(
     [ProductForm.name],
@@ -27,6 +29,7 @@ const ProductForm: React.FC = () => {
         form.setFieldsValue(res.data)
         setIsLoading(false)
       }),
+    { refetchOnWindowFocus: false },
   )
 
   const onFinish = async () => {
@@ -43,7 +46,7 @@ const ProductForm: React.FC = () => {
     <>
       <PageHeader
         title={id ? 'Product Edit' : 'Product Create'}
-        isLoading={isLoading}
+        isLoading={isLoading || isLoadingCategories}
       />
       <FormContainer
         onFinish={onFinish}
@@ -53,17 +56,22 @@ const ProductForm: React.FC = () => {
         button={{ disabled: isLoading }}
       >
         <FormItem name="thumbnail" input="attachment" total={1} form={form} />
-        <FormItem name="name" rules={[rule.required]} />
-        <FormItem name="key" />
         <FormItem name="upc" />
+        <FormItem name="name" rules={[rule.required]} />
+        <FormItem name="key" rules={[rule.required]} />
         <FormItem name="description" input="textArea" />
         <FormItem
+          name="isActive"
+          input="switch"
+          rules={[rule.required]}
+          form={form}
+        />
+        <FormItem
           name="categories"
-          input="select"
-          options={[
-            { label: 'Category 1', value: 'Category 1' },
-            { label: 'Category 2', value: 'Category 2' },
-          ]}
+          input="selectMultiple"
+          options={categories?.data}
+          disabled={!!id}
+          form={form}
         />
         <FormItem name="brand" />
         <FormItem name="rating" />

@@ -7,7 +7,7 @@ import { IInventory } from './inventory.interface'
 
 @Entity()
 export class EntInventory extends BaseEntity implements IInventory {
-  @Column({ default: null })
+  @Column({ default: null, unique: true })
   sku?: string
 
   @ManyToOne(() => EntProduct, (product) => product.inventories)
@@ -32,13 +32,16 @@ export class EntInventory extends BaseEntity implements IInventory {
   stockMinimum: number
 
   @Column({ default: 0 })
-  discount?: number
+  discountPercentage?: number
 
   @Column({ default: null, type: 'datetime' })
   expiredDate?: Date | dayjs.Dayjs
 
   @Column({ default: true })
   isActive: boolean
+
+  @Column({ default: null })
+  thumbnail?: string
 
   @BeforeInsert()
   @BeforeUpdate()

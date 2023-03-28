@@ -8,12 +8,15 @@ import {
 import { InventoryResponse } from '@server/modules/feature/inventory/infrastructure/inventory.response'
 import { notification } from 'antd'
 import dayjs from 'dayjs'
+import { getAttachment } from '../../../Components/Molecules/Attachment/attachment.util'
 import { Route } from '../../../Enums/Route'
 import { axiosService } from '../../../services/axios.service'
 
 const dataPrepare = (
   data: InventoryCreateRequest | InventoryUpdateRequest,
 ): InventoryCreateRequest | InventoryUpdateRequest => {
+  data.thumbnail = getAttachment(data.thumbnail) as string
+
   return data
 }
 

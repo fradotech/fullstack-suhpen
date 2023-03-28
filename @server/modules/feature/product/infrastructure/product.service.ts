@@ -26,7 +26,10 @@ export class ProductService implements BaseService {
   }
 
   async findOneOrFail(id: string): Promise<IProduct> {
-    return await this.productRepo.findOneOrFail({ where: { id } })
+    return await this.productRepo.findOneOrFail({
+      where: { id },
+      relations: ['categories'],
+    })
   }
 
   async update(req: IProduct): Promise<IProduct> {

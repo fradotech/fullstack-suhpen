@@ -15,7 +15,7 @@ import { IProduct } from './product.interface'
 
 @Entity()
 export class EntProduct extends EntBaseMasterData implements IProduct {
-  @Column({ default: null })
+  @Column({ default: null, unique: true })
   upc?: string
 
   @ManyToMany(() => EntCategory)

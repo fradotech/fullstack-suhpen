@@ -27,14 +27,20 @@ export class InventoryIndexApp extends BaseIndexApp {
     req: InventoryIndexRequest,
   ): Promise<IPaginateResponse<IInventory>> {
     const tableName = 'inventory'
-    const tableKeys = ['sku', 'stock', 'buyPrice', 'sellPrice', 'marginPrice']
+    const tableColumns = [
+      'sku',
+      'stock',
+      'buyPrice',
+      'sellPrice',
+      'marginPrice',
+    ]
     const relations: IIndexAppRelation[] = [{ name: 'product', keys: ['name'] }]
 
     const query = this.createQueryIndex(
       req,
       this.inventoryRepo.createQueryBuilder(tableName),
       tableName,
-      tableKeys,
+      tableColumns,
       relations,
       this.inventoryRepo,
       this.request,

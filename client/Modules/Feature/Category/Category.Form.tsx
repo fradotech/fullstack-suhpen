@@ -27,6 +27,7 @@ const CategoryForm: React.FC = () => {
         form.setFieldsValue(res.data)
         setIsLoading(false)
       }),
+    { refetchOnWindowFocus: false },
   )
 
   const onFinish = async () => {
@@ -55,7 +56,9 @@ const CategoryForm: React.FC = () => {
         <FormItem name="thumbnail" input="attachment" total={1} form={form} />
         <FormItem name="name" rules={[rule.required]} />
         <FormItem name="key" rules={[rule.required]} />
-        <FormItem name="description" />
+        <FormItem name="description" input="textArea" />
+        <FormItem name="isActive" input="switch" form={form} />
+        <FormItem name="labelColor" input="colorPicker" />
       </FormContainer>
     </>
   )

@@ -27,19 +27,19 @@ const DashboardInventory: React.FC = () => {
         <Row>
           <Card size="small" style={{ marginRight: '20px' }}>
             Total
-            <Title level={5}>{Util.formatCurrency(data?.buyPrice.sum)}</Title>
+            <Title level={5}>{Util.formatCurrency(data?.buyPrice?.sum)}</Title>
           </Card>
           <Card size="small" style={{ marginRight: '20px' }}>
             Average
-            <Title level={5}>{Util.formatCurrency(data?.buyPrice.avg)}</Title>
+            <Title level={5}>{Util.formatCurrency(data?.buyPrice?.avg)}</Title>
           </Card>
           <Card size="small" style={{ marginRight: '20px' }}>
             Min
-            <Title level={5}>{Util.formatCurrency(data?.buyPrice.min)}</Title>
+            <Title level={5}>{Util.formatCurrency(data?.buyPrice?.min)}</Title>
           </Card>
           <Card size="small" style={{ marginRight: '20px' }}>
             Max
-            <Title level={5}>{Util.formatCurrency(data?.buyPrice.max)}</Title>
+            <Title level={5}>{Util.formatCurrency(data?.buyPrice?.max)}</Title>
           </Card>
         </Row>
       </Col>
@@ -48,19 +48,19 @@ const DashboardInventory: React.FC = () => {
         <Row>
           <Card size="small" style={{ marginRight: '20px' }}>
             Total
-            <Title level={5}>{Util.formatCurrency(data?.sellPrice.sum)}</Title>
+            <Title level={5}>{Util.formatCurrency(data?.sellPrice?.sum)}</Title>
           </Card>
           <Card size="small" style={{ marginRight: '20px' }}>
             Average
-            <Title level={5}>{Util.formatCurrency(data?.sellPrice.avg)}</Title>
+            <Title level={5}>{Util.formatCurrency(data?.sellPrice?.avg)}</Title>
           </Card>
           <Card size="small" style={{ marginRight: '20px' }}>
             Min
-            <Title level={5}>{Util.formatCurrency(data?.sellPrice.min)}</Title>
+            <Title level={5}>{Util.formatCurrency(data?.sellPrice?.min)}</Title>
           </Card>
           <Card size="small" style={{ marginRight: '20px' }}>
             Max
-            <Title level={5}>{Util.formatCurrency(data?.sellPrice.max)}</Title>
+            <Title level={5}>{Util.formatCurrency(data?.sellPrice?.max)}</Title>
           </Card>
         </Row>
       </Col>

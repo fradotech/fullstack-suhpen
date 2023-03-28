@@ -84,7 +84,7 @@ export abstract class BaseIndexApp {
     req: IndexRequest,
     query: SelectQueryBuilder<T>,
     tableName: string,
-    tableKeys: string[],
+    tableColumns: string[],
     relations: IIndexAppRelation[],
     repo: Repository<T>,
     request: Request,
@@ -94,21 +94,23 @@ export abstract class BaseIndexApp {
     )
 
     if (req.search) {
-      query.andWhere(this.querySearch(tableName, tableKeys), {
+      query.andWhere(this.querySearch(tableName, tableColumns), {
         search: `%${req.search.toLowerCase()}%`,
       })
     }
 
     if (req.startAt && req.endAt) {
       query.andWhere(
-        `CAST(${tableName}.updatedAt as DATE) BETWEEN CAST(:startAt AS DATE) AND CAST(:endAt AS DATE)`,
+        `CAST(${tableName}.${
+          req.dateRangeColumn || 'createdAt'
+        } as DATE) BETWEEN CAST(:startAt AS DATE) AND CAST(:endAt AS DATE)`,
         { startAt: req.startAt, endAt: req.endAt },
       )
     }
 
     if (req.filters) {
       Object.keys(req.filters).forEach((column) => {
-        tableKeys.includes(column) &&
+        tableColumns.includes(column) &&
           query.andWhere(`${tableName}.${column} IN (:value)`, {
             value: req.filters[column],
           })
@@ -132,7 +134,7 @@ export abstract class BaseIndexApp {
         .andWhere('user.id = :userId', { userId })
     }
 
-    const sort = this.orderByKey(tableName, tableKeys, req.sortField)
+    const sort = this.orderByKey(tableName, tableColumns, req.sortField)
     const order = this.getOrder(req.sortOrder)
     query.orderBy(sort, order)
     query.take(this.take(req.pageSize))

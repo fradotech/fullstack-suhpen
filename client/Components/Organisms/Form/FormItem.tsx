@@ -1,4 +1,12 @@
-import { DatePicker, Form, Input as AntdInput, InputNumber, Select } from 'antd'
+import {
+  DatePicker,
+  Form,
+  Input as AntdInput,
+  InputNumber,
+  Select,
+  Switch,
+} from 'antd'
+import { Colorpicker } from 'antd-colorpicker'
 import { FormInstance, Rule } from 'antd/es/form'
 import { DefaultOptionType } from 'antd/es/select'
 import dayjs from 'dayjs'
@@ -11,21 +19,25 @@ interface IProps {
   form?: FormInstance
   label?: string
   name: string
+  disabled?: boolean
   input?:
     | 'input'
     | 'inputNumber'
     | 'inputRupiah'
     | 'inputPassword'
     | 'select'
+    | 'selectMultiple'
     | 'datePicker'
     | 'rangePicker'
     | 'attachment'
     | 'textArea'
+    | 'colorPicker'
+    | 'switch'
   rules?: Rule[]
   required?: boolean
   placeholder?: string
   type?: string
-  options?: DefaultOptionType[]
+  options?: Record<string, any>[] | DefaultOptionType[]
   optionsEnum?: string[]
   showTime?: boolean | SharedTimeProps<dayjs.Dayjs> | any
   format?: string
@@ -34,11 +46,31 @@ interface IProps {
 
 const FormItem: React.FC<IProps> = (props: IProps) => {
   let input: React.ReactNode
+  const [isChecked, setIsChecked] = React.useState(false)
+
+  const filterOption = (input: string, option: DefaultOptionType) => {
+    return String(option?.label ?? '')
+      .toLowerCase()
+      .includes(input.toLowerCase())
+  }
+
+  const selectOption = props.optionsEnum
+    ? (props.optionsEnum.map((data) => {
+        return { label: data, value: data }
+      }) as DefaultOptionType[])
+    : (props.options?.map((data: Record<string, any>) => {
+        return { label: data['name'], value: data }
+      }) as unknown as DefaultOptionType[])
+
+  React.useMemo(() => {
+    setIsChecked(props.form?.getFieldValue(props.name))
+  }, [props.form?.getFieldValue(props.name)])
 
   switch (props.input) {
     case 'inputPassword':
       input = (
         <AntdInput.Password
+          disabled={props.disabled}
           type="password"
           placeholder={props.placeholder || Util.titleCase(props.name)}
         />
@@ -46,19 +78,49 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
       break
 
     case 'inputNumber':
-      input = <InputNumber />
+      input = (
+        <InputNumber
+          placeholder={props.placeholder || Util.titleCase(props.name)}
+          disabled={props.disabled}
+          parser={(value: string) => +value}
+          style={{ width: '100%' }}
+        />
+      )
+      break
+
+    case 'inputRupiah':
+      input = (
+        <InputNumber
+          placeholder={props.placeholder || Util.titleCase(props.name)}
+          disabled={props.disabled}
+          prefix="Rp"
+          parser={(value: string) => +value}
+          style={{ width: '100%' }}
+        />
+      )
       break
 
     case 'select':
       input = (
         <Select
-          options={
-            props.optionsEnum
-              ? props.optionsEnum.map((data) => {
-                  return { label: data, value: data }
-                })
-              : props.options
-          }
+          disabled={props.disabled}
+          showSearch
+          filterOption={filterOption}
+          options={selectOption}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
+        />
+      )
+      break
+
+    case 'selectMultiple':
+      input = (
+        <Select
+          disabled={props.disabled}
+          allowClear
+          mode="multiple"
+          showSearch
+          filterOption={filterOption}
+          options={selectOption}
           placeholder={props.placeholder || Util.titleCase(props.name)}
         />
       )
@@ -67,9 +129,11 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'datePicker':
       input = (
         <DatePicker
+          disabled={props.disabled}
           showTime={props.showTime}
           format={props.format}
           placeholder={props.placeholder || Util.titleCase(props.name)}
+          style={{ width: '100%' }}
         />
       )
       break
@@ -77,14 +141,21 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'rangePicker':
       input = (
         <DatePicker.RangePicker
+          disabled={props.disabled}
           showTime={props.showTime}
           format={props.format}
+          style={{ width: '100%' }}
         />
       )
       break
 
     case 'textArea':
-      input = <AntdInput.TextArea />
+      input = (
+        <AntdInput.TextArea
+          disabled={props.disabled}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
+        />
+      )
       break
 
     case 'attachment':
@@ -93,9 +164,24 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
       )
       break
 
+    case 'switch':
+      input = (
+        <Switch
+          disabled={props.disabled}
+          checked={isChecked}
+          onClick={() => setIsChecked(!isChecked)}
+        />
+      )
+      break
+
+    case 'colorPicker':
+      input = <Colorpicker />
+      break
+
     default:
       input = (
         <AntdInput
+          disabled={props.disabled}
           type={props.type}
           placeholder={props.placeholder || Util.titleCase(props.name)}
         />

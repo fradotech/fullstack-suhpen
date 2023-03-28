@@ -6,7 +6,7 @@ import DataTable from '../../../Components/Organisms/DataTable/DataTable'
 import { paginationTransform } from '../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../Components/Organisms/DataTable/useDataTable'
 import { Route } from '../../../Enums/Route'
-import { categoryAction } from '../Category/category.action'
+import useCategories from '../Category/common/useCategories'
 import { productAction } from './product.action'
 import { productColumns } from './Product.column'
 
@@ -14,20 +14,14 @@ const ProductS: React.FC = () => {
   const { query, setQueryParams } = useDataTable<ProductIndexRequest>()
   const fetch = async () => await productAction.fetch(query)
   const { isLoading, data } = useQuery([ProductS.name, query], fetch)
-
-  const fetchCategories = async () =>
-    await categoryAction.fetch({ pageSize: 100000 })
-  const { isLoading: isLoadingCategories, data: dataCategories } = useQuery(
-    [ProductS.name + '/categories', query],
-    fetchCategories,
-  )
+  const { isLoading: isLoadingCategories, data: categories } = useCategories()
 
   return (
     <>
       <PageHeader title="Product" />
       <DataTable
         rowKey="id"
-        columns={productColumns(dataCategories?.data)}
+        columns={productColumns(categories?.data)}
         dataSource={data?.data}
         search={query.search}
         pagination={paginationTransform(data?.meta)}

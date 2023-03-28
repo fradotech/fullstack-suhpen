@@ -47,7 +47,6 @@ export const productColumns = (
         ),
       filters: [
         { text: <CheckCircleOutlined style={{ color: 'green' }} />, value: 1 },
-        { text: <CloseCircleOutlined style={{ color: 'red' }} />, value: 0 },
       ],
     },
     {
