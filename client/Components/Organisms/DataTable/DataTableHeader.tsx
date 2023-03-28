@@ -61,10 +61,10 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
       <Loading isLoading={isLoading} />
       <Row style={{ justifyContent: 'space-between' }}>
         <Row>
-          {props.setIsCard && (
+          {props.setShowCard && (
             <Col className={styles.headerItem}>
-              <Button onClick={() => props.setIsCard(!props.isCard)}>
-                {props.isCard ? (
+              <Button onClick={() => props.setShowCard(!props.showCard)}>
+                {props.showCard ? (
                   <UnorderedListOutlined />
                 ) : (
                   <AppstoreOutlined />

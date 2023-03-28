@@ -25,60 +25,73 @@ type MenuItem = Required<MenuProps>['items'][number]
 
 const user = authAction.loggedUser()
 
-const itemsRoleUser: MenuItem[] = [
-  {
-    key: Route.dashboard.index,
-    label: <Link to={Route.dashboard.index}>Dashboard</Link>,
-    icon: <DashboardOutlined />,
-  },
-]
+const itemsRoleSuperAdmin: MenuItem[] = [ERole.SuperAdmin].includes(user?.role)
+  ? [
+      {
+        key: 'IAM',
+        label: 'IAM',
+        icon: <IdcardOutlined />,
+        children: [
+          {
+            key: Route.user.index,
+            label: <Link to={Route.user.index}>User</Link>,
+            icon: <UsergroupAddOutlined />,
+          },
+          {
+            key: Route.roles,
+            label: <Link to={Route.roles}>Role</Link>,
+            icon: <UserSwitchOutlined />,
+          },
+        ],
+      },
+    ]
+  : []
 
-const itemsRoleAdministrator: MenuItem[] =
-  user?.role == ERole.Administrator
-    ? [
-        {
-          key: 'SCM',
-          label: 'SCM',
-          icon: <ApartmentOutlined />,
-          children: [
-            {
-              key: Route.inventory.index,
-              label: <Link to={Route.inventory.index}>Inventory</Link>,
-              icon: <ShopOutlined />,
-            },
-            {
-              key: Route.product.index,
-              label: <Link to={Route.product.index}>Product</Link>,
-              icon: <DropboxOutlined />,
-            },
-            {
-              key: Route.category.index,
-              label: <Link to={Route.category.index}>Category</Link>,
-              icon: <TagsOutlined />,
-            },
-          ],
-        },
-        {
-          key: 'Iam',
-          label: 'Iam',
-          icon: <IdcardOutlined />,
-          children: [
-            {
-              key: Route.user.index,
-              label: <Link to={Route.user.index}>User</Link>,
-              icon: <UsergroupAddOutlined />,
-            },
-            {
-              key: Route.roles,
-              label: <Link to={Route.roles}>Role</Link>,
-              icon: <UserSwitchOutlined />,
-            },
-          ],
-        },
-      ]
-    : []
+const itemsRoleAdmin: MenuItem[] = [ERole.SuperAdmin, ERole.Admin].includes(
+  user?.role,
+)
+  ? [
+      {
+        key: 'SCM',
+        label: 'SCM',
+        icon: <ApartmentOutlined />,
+        children: [
+          {
+            key: Route.inventory.index,
+            label: <Link to={Route.inventory.index}>Inventory</Link>,
+            icon: <ShopOutlined />,
+          },
+          {
+            key: Route.product.index,
+            label: <Link to={Route.product.index}>Product</Link>,
+            icon: <DropboxOutlined />,
+          },
+          {
+            key: Route.category.index,
+            label: <Link to={Route.category.index}>Category</Link>,
+            icon: <TagsOutlined />,
+          },
+        ],
+      },
+    ]
+  : []
+
+const itemsRoleUser: MenuItem[] = [
+  ERole.SuperAdmin,
+  ERole.Admin,
+  ERole.User,
+].includes(user?.role)
+  ? [
+      {
+        key: Route.dashboard.index,
+        label: <Link to={Route.dashboard.index}>Dashboard</Link>,
+        icon: <DashboardOutlined />,
+      },
+    ]
+  : []
 
 export const layoutItems: MenuItem[] = [
   ...itemsRoleUser,
-  ...itemsRoleAdministrator,
+  ...itemsRoleAdmin,
+  ...itemsRoleSuperAdmin,
 ]

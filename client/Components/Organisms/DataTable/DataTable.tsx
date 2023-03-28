@@ -19,7 +19,7 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
 ): JSX.Element => {
   const [params] = useSearchParams()
   const [state, setState] = useState<FilterState<T>>({ search: props.search })
-  const [isCard, setIsCard] = useState(false)
+  const [showCard, setShowCard] = useState(false)
   const columns: ColumnsType<T> = formatColumns<T>(props.columns)
   const { onChange } = props
 
@@ -76,11 +76,11 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
         {...props.dataTableHeader}
         onSearch={handleSearch}
         onDateRange={handleDateRange}
-        isCard={isCard}
-        setIsCard={setIsCard}
+        showCard={showCard}
+        setShowCard={setShowCard}
       />
       <Space.Compact direction="vertical" className={styles.tableLayout}>
-        {isCard ? (
+        {showCard ? (
           <Row style={{ paddingTop: '12px' }}>
             <DataTableCard
               data={props?.dataSource as unknown as IBaseEntity[]}

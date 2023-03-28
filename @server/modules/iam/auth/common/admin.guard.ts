@@ -13,9 +13,10 @@ export class AdminGuard extends AuthGuard('jwt') {
     return super.canActivate(context)
   }
 
-  handleRequest(err: any, user: any) {
+  handleRequest(err: Error, user: any) {
     if (err || !user) throw err || new UnauthorizedException()
-    if (user.role != ERole.Administrator) throw err || new ForbiddenException()
+    if (user.role != ERole.SuperAdmin && user.role != ERole.Admin)
+      throw err || new ForbiddenException()
 
     return user
   }
