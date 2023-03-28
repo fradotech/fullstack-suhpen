@@ -64,6 +64,11 @@ export class InventoryRequest implements IInventory {
   @IsBoolean()
   @ApiProperty({ example: false })
   isActive: boolean
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty()
+  thumbnail?: string
 }
 
 export class InventoryCreateRequest extends PartialType(InventoryRequest) {}

@@ -16,8 +16,7 @@ const InventoryForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const [form] = Form.useForm<InventoryCreateRequest>()
-  const { id } = useParams()
-  let { productId } = useParams()
+  const { id, productId } = useParams()
 
   useQuery(
     [InventoryForm.name],
@@ -25,7 +24,6 @@ const InventoryForm: React.FC = () => {
       (async () => {
         setIsLoading(true)
         const res = await inventoryAction.findOne(id)
-        productId = res.data.product.id
         form.setFieldsValue(res.data)
         setIsLoading(false)
       }),
@@ -39,7 +37,7 @@ const InventoryForm: React.FC = () => {
     if (!id) res = await inventoryAction.create(data)
     if (id) res = await inventoryAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Route.product.id(data.product?.id || productId))
+    res.data && navigate(Route.product.id(res.data.product.id))
   }
 
   return (
@@ -55,6 +53,7 @@ const InventoryForm: React.FC = () => {
         centered
         button={{ disabled: isLoading }}
       >
+        <FormItem name="thumbnail" input="attachment" total={1} form={form} />
         <FormItem name="sku" />
         <FormItem name="productVariantName" />
         <Row gutter={12}>
@@ -62,28 +61,34 @@ const InventoryForm: React.FC = () => {
             <FormItem
               name="buyPrice"
               rules={[rule.required]}
-              input="inputNumber"
+              input="inputRupiah"
             />
           </Col>
           <Col sm={24} md={12} lg={12}>
             <FormItem
               name="sellPrice"
               rules={[rule.required]}
-              input="inputNumber"
+              input="inputRupiah"
             />
           </Col>
           <Col sm={24} md={12} lg={12}>
             <FormItem
               name="stock"
               rules={[rule.required]}
-              input="inputNumber"
+              input="inputRupiah"
             />
           </Col>
           <Col sm={24} md={12} lg={12}>
             <FormItem name="stockMinimum" input="inputNumber" />
           </Col>
         </Row>
-        <FormItem name="discount" input="inputNumber" />
+        <FormItem
+          name="isActive"
+          input="switch"
+          rules={[rule.required]}
+          form={form}
+        />
+        <FormItem name="discountPercentage" input="inputNumber" />
         <FormItem name="expiredDate" input="datePicker" />
       </FormContainer>
     </>

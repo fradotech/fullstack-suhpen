@@ -80,7 +80,20 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'inputNumber':
       input = (
         <InputNumber
+          placeholder={props.placeholder || Util.titleCase(props.name)}
           disabled={props.disabled}
+          parser={(value: string) => +value}
+          style={{ width: '100%' }}
+        />
+      )
+      break
+
+    case 'inputRupiah':
+      input = (
+        <InputNumber
+          placeholder={props.placeholder || Util.titleCase(props.name)}
+          disabled={props.disabled}
+          prefix="Rp"
           parser={(value: string) => +value}
           style={{ width: '100%' }}
         />

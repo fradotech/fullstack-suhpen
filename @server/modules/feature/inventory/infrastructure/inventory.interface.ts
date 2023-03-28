@@ -14,6 +14,7 @@ export interface IInventory extends IBaseEntity {
   expiredDate?: Date | dayjs.Dayjs
   discountPercentage?: number
   isActive: boolean
+  thumbnail?: string
   // outlet: IOutlet
   // supplier?: ISupplier
 }

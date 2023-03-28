@@ -40,6 +40,9 @@ export class EntInventory extends BaseEntity implements IInventory {
   @Column({ default: true })
   isActive: boolean
 
+  @Column({ default: null })
+  thumbnail?: string
+
   @BeforeInsert()
   @BeforeUpdate()
   beforeInsertAndUpdate(): void {
