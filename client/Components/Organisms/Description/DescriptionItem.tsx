@@ -12,7 +12,7 @@ const DescriptionItem = (data: IBaseEntity, key: string) => {
         <Image style={{ width: '50px' }} src={data[key]} />
       </Descriptions.Item>
     )
-  } else if (data[key] == true || data[key] == false) {
+  } else if (data[key] === true || data[key] === false) {
     return (
       <Descriptions.Item label={Util.titleCase(key)}>
         {data[key] ? (
@@ -26,6 +26,12 @@ const DescriptionItem = (data: IBaseEntity, key: string) => {
     return (
       <Descriptions.Item label={Util.titleCase(key)}>
         {Util.formatDatetime(data[key])}
+      </Descriptions.Item>
+    )
+  } else if (key.includes('Price')) {
+    return (
+      <Descriptions.Item label={Util.titleCase(key)}>
+        {Util.formatCurrency(data[key])}
       </Descriptions.Item>
     )
   } else if (data[key]?.id && data[key]?.name) {
