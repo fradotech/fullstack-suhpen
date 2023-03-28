@@ -6,9 +6,9 @@ const RoleS = React.lazy(() => import('./Role.S'))
 const path = '/roles'
 
 export const routesRole = {
-  roles: path,
+  role: path,
 }
 
 export default [
-  <Route key={routesRole.roles} path={routesRole.roles} element={<RoleS />} />,
+  <Route key={routesRole.role} path={routesRole.role} element={<RoleS />} />,
 ]

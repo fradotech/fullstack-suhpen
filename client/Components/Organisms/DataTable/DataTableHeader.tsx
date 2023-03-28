@@ -88,8 +88,8 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
               <DatePicker.RangePicker
                 onChange={props.onDateRange}
                 placeholder={[
-                  `${Util.camelToTitle(props.dateRangeColumn)} Start`,
-                  `${Util.camelToTitle(props.dateRangeColumn)} End`,
+                  `${Util.titleCase(props.dateRangeColumn)} Start`,
+                  `${Util.titleCase(props.dateRangeColumn)} End`,
                 ]}
                 defaultValue={[
                   params.get('startAt') && dayjs(params.get('startAt')),
