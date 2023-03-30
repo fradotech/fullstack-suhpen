@@ -6,13 +6,14 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
+import { Section } from '../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../Enums/Route'
 import { rule } from '../../../utils/form.rules'
-import { ERole } from '../Role/common/Role.enum'
-import { EUserGender } from './common/User.enum'
+import { ERole } from '../Role/Role.enum'
 import { userAction } from './user.action'
+import { EUserGender } from './User.enum'
 
 const UserForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
@@ -43,7 +44,7 @@ const UserForm: React.FC = () => {
   }
 
   return (
-    <>
+    <Section>
       <PageHeader
         title={id ? 'User Edit' : 'User Create'}
         isLoading={isLoading}
@@ -93,7 +94,7 @@ const UserForm: React.FC = () => {
         <FormItem name="address" />
         <FormItem name="birthDate" input="datePicker" />
       </FormContainer>
-    </>
+    </Section>
   )
 }
 

@@ -6,6 +6,7 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
+import { Section } from '../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../Enums/Route'
@@ -43,7 +44,7 @@ const ProductForm: React.FC = () => {
   }
 
   return (
-    <>
+    <Section>
       <PageHeader
         title={id ? 'Product Edit' : 'Product Create'}
         isLoading={isLoading || isLoadingCategories}
@@ -76,7 +77,7 @@ const ProductForm: React.FC = () => {
         <FormItem name="brand" />
         <FormItem name="rating" />
       </FormContainer>
-    </>
+    </Section>
   )
 }
 

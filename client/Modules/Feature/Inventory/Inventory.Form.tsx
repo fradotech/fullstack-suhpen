@@ -6,6 +6,7 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
+import { Section } from '../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../Enums/Route'
@@ -41,7 +42,7 @@ const InventoryForm: React.FC = () => {
   }
 
   return (
-    <>
+    <Section>
       <PageHeader
         title={id ? 'Inventory Edit' : 'Inventory Create'}
         isLoading={isLoading}
@@ -91,7 +92,7 @@ const InventoryForm: React.FC = () => {
         <FormItem name="discountPercentage" input="inputNumber" />
         <FormItem name="expiredDate" input="datePicker" />
       </FormContainer>
-    </>
+    </Section>
   )
 }
 

@@ -27,7 +27,6 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
     <>
       <Dropdown
         trigger={['click']}
-        arrow={{ pointAtCenter: true }}
         menu={{
           items: [
             {

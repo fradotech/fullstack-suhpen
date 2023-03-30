@@ -17,8 +17,8 @@ import {
   VerticalAlignBottomOutlined,
   VerticalAlignTopOutlined,
 } from '@ant-design/icons'
-import type { MenuProps } from 'antd'
-import { ERole } from '../../Modules/Iam/Role/common/Role.enum'
+import { MenuProps } from 'antd'
+import { ERole } from '../../Modules/Iam/Role/Role.enum'
 
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -92,6 +92,15 @@ const itemsRoleAdmin: MenuItem[] = [ERole.SuperAdmin, ERole.Admin].includes(
             icon: <TagsOutlined />,
           },
           {
+            key: 'Route.orderIn.index',
+            label: (
+              <Link to={'Route.orderIn.index'}>
+                {Util.titleCase('orderIn')}
+              </Link>
+            ),
+            icon: <VerticalAlignBottomOutlined />,
+          },
+          {
             key: 'Route.supplier.index',
             label: (
               <Link to={'Route.supplier.index'}>
@@ -134,20 +143,27 @@ const itemsRoleAdmin: MenuItem[] = [ERole.SuperAdmin, ERole.Admin].includes(
           },
         ],
       },
+    ]
+  : []
+
+const itemsRoleUser: MenuItem[] = [
+  ERole.SuperAdmin,
+  ERole.Admin,
+  ERole.User,
+].includes(user?.role)
+  ? [
+      {
+        key: Route.dashboard.index,
+        label: (
+          <Link to={Route.dashboard.index}>{Util.titleCase('dashboard')}</Link>
+        ),
+        icon: <DashboardOutlined />,
+      },
       {
         key: 'POS',
         label: 'POS',
         icon: <ReconciliationOutlined />,
         children: [
-          {
-            key: 'Route.orderIn.index',
-            label: (
-              <Link to={'Route.orderIn.index'}>
-                {Util.titleCase('orderIn')}
-              </Link>
-            ),
-            icon: <VerticalAlignBottomOutlined />,
-          },
           {
             key: 'Route.orderOut.index',
             label: (
@@ -167,22 +183,6 @@ const itemsRoleAdmin: MenuItem[] = [ERole.SuperAdmin, ERole.Admin].includes(
             icon: <LineChartOutlined />,
           },
         ],
-      },
-    ]
-  : []
-
-const itemsRoleUser: MenuItem[] = [
-  ERole.SuperAdmin,
-  ERole.Admin,
-  ERole.User,
-].includes(user?.role)
-  ? [
-      {
-        key: Route.dashboard.index,
-        label: (
-          <Link to={Route.dashboard.index}>{Util.titleCase('dashboard')}</Link>
-        ),
-        icon: <DashboardOutlined />,
       },
     ]
   : []

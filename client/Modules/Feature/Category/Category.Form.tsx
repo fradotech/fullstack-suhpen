@@ -6,6 +6,7 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
+import { Section } from '../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../Enums/Route'
@@ -41,7 +42,7 @@ const CategoryForm: React.FC = () => {
   }
 
   return (
-    <>
+    <Section>
       <PageHeader
         title={id ? 'Category Edit' : 'Category Create'}
         isLoading={isLoading}
@@ -60,7 +61,7 @@ const CategoryForm: React.FC = () => {
         <FormItem name="isActive" input="switch" form={form} />
         <FormItem name="labelColor" input="colorPicker" />
       </FormContainer>
-    </>
+    </Section>
   )
 }
 

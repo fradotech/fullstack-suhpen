@@ -2,6 +2,7 @@ import { InventoryIndexRequest } from '@server/modules/feature/inventory/infrast
 import React from 'react'
 import { useQuery } from 'react-query'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
+import { Section } from '../../../Components/Molecules/Section/Section'
 import DataTable from '../../../Components/Organisms/DataTable/DataTable'
 import { paginationTransform } from '../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../Components/Organisms/DataTable/useDataTable'
@@ -19,7 +20,7 @@ const InventoryS: React.FC<IProps> = (props: IProps) => {
   const { isLoading, data } = useQuery([InventoryS.name, query], fetch)
 
   return (
-    <>
+    <Section>
       <PageHeader title="Inventory" />
       <DataTable
         rowKey="id"
@@ -40,7 +41,7 @@ const InventoryS: React.FC<IProps> = (props: IProps) => {
           hrefExport: Route.inventory.export,
         }}
       />
-    </>
+    </Section>
   )
 }
 
