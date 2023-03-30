@@ -1,9 +1,7 @@
 import { Col, Row } from 'antd'
-import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { useQuery } from 'react-query'
-import { Section } from '../../../Components/Molecules/Section/Section'
-import { Util } from '../../../utils/util'
+import CardData from '../../../Components/Molecules/CardData/CardData'
 import { dashboardInventoryAction } from './dashboardInventory.action'
 
 const DashboardInventory: React.FC = () => {
@@ -24,45 +22,39 @@ const DashboardInventory: React.FC = () => {
   return (
     <>
       <Col>
-        <Title level={4}>{'Buy Price'}</Title>
-        <Row>
-          <Section>
-            Total
-            <Title level={5}>{Util.formatCurrency(data?.buyPrice?.sum)}</Title>
-          </Section>
-          <Section>
-            Average
-            <Title level={5}>{Util.formatCurrency(data?.buyPrice?.avg)}</Title>
-          </Section>
-          <Section>
-            Min
-            <Title level={5}>{Util.formatCurrency(data?.buyPrice?.min)}</Title>
-          </Section>
-          <Section>
-            Max
-            <Title level={5}>{Util.formatCurrency(data?.buyPrice?.max)}</Title>
-          </Section>
+        <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <CardData
+            oneLineWidth="23%"
+            title="Buy Price Total"
+            value={data?.buyPrice.sum}
+          />
+          <CardData
+            oneLineWidth="23%"
+            title="Sell Price Total"
+            value={data?.sellPrice.sum}
+          />
+          <CardData
+            oneLineWidth="23%"
+            title="Buy Price Average"
+            value={data?.buyPrice.avg}
+          />
+          <CardData
+            oneLineWidth="23%"
+            title="Sell Price Average"
+            value={data?.sellPrice.avg}
+          />
         </Row>
-      </Col>
-      <Col>
-        <Title level={4}>{'Sell Price'}</Title>
-        <Row>
-          <Section>
-            Total
-            <Title level={5}>{Util.formatCurrency(data?.sellPrice?.sum)}</Title>
-          </Section>
-          <Section>
-            Average
-            <Title level={5}>{Util.formatCurrency(data?.sellPrice?.avg)}</Title>
-          </Section>
-          <Section>
-            Min
-            <Title level={5}>{Util.formatCurrency(data?.sellPrice?.min)}</Title>
-          </Section>
-          <Section>
-            Max
-            <Title level={5}>{Util.formatCurrency(data?.sellPrice?.max)}</Title>
-          </Section>
+        <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <CardData
+            oneLineWidth="48%"
+            title="Margin Total"
+            value={data?.marginPrice.sum}
+          />
+          <CardData
+            oneLineWidth="48%"
+            title="Margin Average"
+            value={data?.marginPrice.avg}
+          />
         </Row>
       </Col>
     </>
