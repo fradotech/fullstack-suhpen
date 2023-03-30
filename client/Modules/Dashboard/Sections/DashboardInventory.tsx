@@ -3,6 +3,7 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import CardData from '../../../Components/Molecules/CardData/CardData'
 import { dashboardInventoryAction } from './dashboardInventory.action'
+import DemoLine from './DemoLine'
 
 const DashboardInventory: React.FC = () => {
   const buyPrice = async () => await dashboardInventoryAction.buyPrice()
@@ -43,6 +44,14 @@ const DashboardInventory: React.FC = () => {
             title="Sell Price Average"
             value={data?.sellPrice.avg}
           />
+        </Row>
+        <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <CardData oneLineWidth="48%" title="Pembelian">
+            <DemoLine />
+          </CardData>
+          <CardData oneLineWidth="48%" title="Penjualan">
+            <DemoLine />
+          </CardData>
         </Row>
         <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
           <CardData
