@@ -1,8 +1,8 @@
-import { Divider } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
+import { Section } from '../../../Components/Molecules/Section/Section'
 import DescriptionContainer from '../../../Components/Organisms/Description/DescriptionContainer'
 import DescriptionItem from '../../../Components/Organisms/Description/DescriptionItem'
 import { Route } from '../../../Enums/Route'
@@ -17,18 +17,18 @@ const ProductDetail: React.FC = () => {
 
   return (
     <>
-      <PageHeader
-        title="Product Detail"
-        isLoading={isLoading}
-        hrefEdit={Route.product.edit(id)}
-        hrefDelete={Route.product.id(id)}
-      />
-      <DescriptionContainer>
-        {fields?.map((key) => DescriptionItem(data?.data, key))}
-      </DescriptionContainer>
-      <Divider />
+      <Section>
+        <PageHeader
+          title="Product Detail"
+          isLoading={isLoading}
+          hrefEdit={Route.product.edit(id)}
+          hrefDelete={Route.product.id(id)}
+        />
+        <DescriptionContainer>
+          {fields?.map((key) => DescriptionItem(data?.data, key))}
+        </DescriptionContainer>
+      </Section>
       <InventoryS productId={id} />
-      <Divider />
     </>
   )
 }

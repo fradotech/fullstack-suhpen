@@ -2,6 +2,7 @@ import { UserIndexRequest } from '@server/modules/iam/user/infrastructure/user-i
 import React from 'react'
 import { useQuery } from 'react-query'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
+import { Section } from '../../../Components/Molecules/Section/Section'
 import DataTable from '../../../Components/Organisms/DataTable/DataTable'
 import { paginationTransform } from '../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../Components/Organisms/DataTable/useDataTable'
@@ -15,7 +16,7 @@ const UserS: React.FC = () => {
   const { isLoading, data } = useQuery([UserS.name, query], fetch)
 
   return (
-    <>
+    <Section>
       <PageHeader title="User" />
       <DataTable
         rowKey="id"
@@ -33,7 +34,7 @@ const UserS: React.FC = () => {
           hrefExport: Route.user.export,
         }}
       />
-    </>
+    </Section>
   )
 }
 

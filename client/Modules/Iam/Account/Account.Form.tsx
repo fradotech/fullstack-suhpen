@@ -4,6 +4,7 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
+import { Section } from '../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../Enums/Route'
@@ -37,7 +38,7 @@ const AccountForm: React.FC = () => {
   }
 
   return (
-    <>
+    <Section>
       <PageHeader title="Account Edit" isLoading={isLoading} />
       <FormContainer
         onFinish={onFinish}
@@ -67,7 +68,7 @@ const AccountForm: React.FC = () => {
         <FormItem name="address" />
         <FormItem name="birthDate" input="datePicker" />
       </FormContainer>
-    </>
+    </Section>
   )
 }
 

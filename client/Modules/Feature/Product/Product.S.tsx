@@ -2,6 +2,7 @@ import { ProductIndexRequest } from '@server/modules/feature/product/infrastruct
 import React from 'react'
 import { useQuery } from 'react-query'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
+import { Section } from '../../../Components/Molecules/Section/Section'
 import DataTable from '../../../Components/Organisms/DataTable/DataTable'
 import { paginationTransform } from '../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../Components/Organisms/DataTable/useDataTable'
@@ -17,7 +18,7 @@ const ProductS: React.FC = () => {
   const { isLoading: isLoadingCategories, data: categories } = useCategories()
 
   return (
-    <>
+    <Section>
       <PageHeader title="Product" />
       <DataTable
         rowKey="id"
@@ -34,7 +35,7 @@ const ProductS: React.FC = () => {
           hrefExport: Route.product.export,
         }}
       />
-    </>
+    </Section>
   )
 }
 

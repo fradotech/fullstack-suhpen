@@ -2,6 +2,7 @@ import { CategoryIndexRequest } from '@server/modules/feature/category/infrastru
 import React from 'react'
 import { useQuery } from 'react-query'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
+import { Section } from '../../../Components/Molecules/Section/Section'
 import DataTable from '../../../Components/Organisms/DataTable/DataTable'
 import { paginationTransform } from '../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../Components/Organisms/DataTable/useDataTable'
@@ -15,7 +16,7 @@ const CategoryS: React.FC = () => {
   const { isLoading, data } = useQuery([CategoryS.name, query], fetch)
 
   return (
-    <>
+    <Section>
       <PageHeader title="Category" />
       <DataTable
         rowKey="id"
@@ -32,7 +33,7 @@ const CategoryS: React.FC = () => {
           hrefExport: Route.category.export,
         }}
       />
-    </>
+    </Section>
   )
 }
 

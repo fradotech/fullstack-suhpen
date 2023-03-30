@@ -1,4 +1,4 @@
-import { ConfigProvider, Menu } from 'antd'
+import { Col, ConfigProvider, Menu } from 'antd'
 import React from 'react'
 import { sidebarThemeConfig } from '../../utils/theme'
 import { layoutItems } from './LayoutItems'
@@ -27,14 +27,14 @@ const LayoutSidebar: React.FC = () => {
   return (
     <>
       <ConfigProvider theme={sidebarThemeConfig}>
-        <div className={styles.sidebar}>
+        <Col className={styles.sidebar}>
           <Menu
             mode="inline"
             items={layoutItems}
             defaultOpenKeys={[defaultOpenedKey]}
             selectedKeys={[activeMenuKey]}
           />
-        </div>
+        </Col>
       </ConfigProvider>
     </>
   )

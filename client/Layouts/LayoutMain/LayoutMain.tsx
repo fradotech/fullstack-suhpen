@@ -2,7 +2,6 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { Col, Layout } from 'antd'
 import React from 'react'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
-import { Section } from '../../Components/Molecules/Section/Section'
 import useUser from '../../Modules/Iam/User/common/useUser'
 import { sidebarThemeConfig } from '../../utils/theme'
 import LayoutAccount from './LayoutAccount'
@@ -26,37 +25,37 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
   }
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout style={{ height: '100vh' }}>
       <Layout.Sider
         trigger={null}
         collapsible
         collapsed={isCollapsed}
         style={{
           backgroundColor: sidebarThemeConfig.components.Menu.colorItemBg,
-          minHeight: '100vh',
+          height: '82vh',
         }}
       >
-        <div className={styles.sidebarContainer}>
-          <Col style={{ padding: '8px', textAlign: 'center' }}>
-            <CompanyLogo />
-          </Col>
+        <Col style={{ padding: '8px', textAlign: 'center' }}>
+          <CompanyLogo />
+        </Col>
+        <Col className={styles.sidebarContainer}>
           <LayoutSidebar />
-        </div>
+        </Col>
       </Layout.Sider>
       <Layout>
-        <Layout.Header className={styles.header}>
-          <div className={styles.headerContainer}>
-            <a onClick={handleSidebarCollapse}>
-              {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            </a>
+        <Layout.Content className={styles.contentContainer}>
+          <Layout.Header className={styles.header}>
+            <Col className={styles.headerContainer}>
+              <a onClick={handleSidebarCollapse}>
+                {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              </a>
 
-            <div className={styles.account}>
-              <LayoutAccount user={user} />
-            </div>
-          </div>
-        </Layout.Header>
-        <Layout.Content className={styles.content}>
-          <Section>{children}</Section>
+              <Col className={styles.account}>
+                <LayoutAccount user={user} />
+              </Col>
+            </Col>
+          </Layout.Header>
+          <Col className={styles.content}>{children}</Col>
         </Layout.Content>
       </Layout>
     </Layout>

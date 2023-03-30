@@ -3,6 +3,7 @@ import { Avatar, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
+import { Section } from '../../../Components/Molecules/Section/Section'
 import DescriptionContainer from '../../../Components/Organisms/Description/DescriptionContainer'
 import DescriptionItem from '../../../Components/Organisms/Description/DescriptionItem'
 import { accountAction } from './account.action'
@@ -13,7 +14,7 @@ const AccountDetail: React.FC = () => {
   const fields = data?.data && Object.keys(data.data)
 
   return (
-    <>
+    <Section>
       <PageHeader title="Account" isLoading={isLoading} />
       <Row>
         <Avatar
@@ -26,7 +27,7 @@ const AccountDetail: React.FC = () => {
           {fields?.map((key) => DescriptionItem(data?.data, key))}
         </DescriptionContainer>
       </Row>
-    </>
+    </Section>
   )
 }
 

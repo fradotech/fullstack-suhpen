@@ -1,7 +1,8 @@
-import { Card, Col, Row } from 'antd'
+import { Col, Row } from 'antd'
 import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { useQuery } from 'react-query'
+import { Section } from '../../../Components/Molecules/Section/Section'
 import { Util } from '../../../utils/util'
 import { dashboardInventoryAction } from './dashboardInventory.action'
 
@@ -25,43 +26,43 @@ const DashboardInventory: React.FC = () => {
       <Col>
         <Title level={4}>{'Buy Price'}</Title>
         <Row>
-          <Card size="small" style={{ marginRight: '20px' }}>
+          <Section>
             Total
             <Title level={5}>{Util.formatCurrency(data?.buyPrice?.sum)}</Title>
-          </Card>
-          <Card size="small" style={{ marginRight: '20px' }}>
+          </Section>
+          <Section>
             Average
             <Title level={5}>{Util.formatCurrency(data?.buyPrice?.avg)}</Title>
-          </Card>
-          <Card size="small" style={{ marginRight: '20px' }}>
+          </Section>
+          <Section>
             Min
             <Title level={5}>{Util.formatCurrency(data?.buyPrice?.min)}</Title>
-          </Card>
-          <Card size="small" style={{ marginRight: '20px' }}>
+          </Section>
+          <Section>
             Max
             <Title level={5}>{Util.formatCurrency(data?.buyPrice?.max)}</Title>
-          </Card>
+          </Section>
         </Row>
       </Col>
       <Col>
         <Title level={4}>{'Sell Price'}</Title>
         <Row>
-          <Card size="small" style={{ marginRight: '20px' }}>
+          <Section>
             Total
             <Title level={5}>{Util.formatCurrency(data?.sellPrice?.sum)}</Title>
-          </Card>
-          <Card size="small" style={{ marginRight: '20px' }}>
+          </Section>
+          <Section>
             Average
             <Title level={5}>{Util.formatCurrency(data?.sellPrice?.avg)}</Title>
-          </Card>
-          <Card size="small" style={{ marginRight: '20px' }}>
+          </Section>
+          <Section>
             Min
             <Title level={5}>{Util.formatCurrency(data?.sellPrice?.min)}</Title>
-          </Card>
-          <Card size="small" style={{ marginRight: '20px' }}>
+          </Section>
+          <Section>
             Max
             <Title level={5}>{Util.formatCurrency(data?.sellPrice?.max)}</Title>
-          </Card>
+          </Section>
         </Row>
       </Col>
     </>
