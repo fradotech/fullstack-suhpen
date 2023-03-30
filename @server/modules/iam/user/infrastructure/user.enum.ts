@@ -1,4 +1,2 @@
-export enum EUserGender {
-  Man = 'Man',
-  Woman = 'Woman',
-}
+import { EUserGender } from '../../../../../client/Modules/Iam/User/User.enum'
+export { EUserGender }

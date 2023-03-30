@@ -8,8 +8,8 @@ import FormContainer from '../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../Enums/Route'
 import { rule } from '../../../utils/form.rules'
-import { ERole } from '../Role/common/Role.enum'
-import { EUserGender } from '../User/common/User.enum'
+import { ERole } from '../Role/Role.enum'
+import { EUserGender } from '../User/User.enum'
 import { accountAction } from './account.action'
 
 const AccountForm: React.FC = () => {

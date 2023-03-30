@@ -5,7 +5,7 @@ import React from 'react'
 import { RowActionButtons } from '../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../Enums/Route'
 import { Util } from '../../../utils/util'
-import { ERole } from '../Role/common/Role.enum'
+import { ERole } from '../Role/Role.enum'
 import { userAction } from './user.action'
 
 export const userColumns: ColumnsType<UserResponse> = [
