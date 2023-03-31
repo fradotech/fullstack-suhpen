@@ -126,7 +126,7 @@ export abstract class BaseIndexApp {
     }
 
     const isUser = repo.metadata.propertiesMap['user']
-    const userId = request['user']['id']
+    const userId = request['user']?.['id']
 
     if (isUser && userId) {
       query

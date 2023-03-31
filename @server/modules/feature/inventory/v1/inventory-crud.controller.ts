@@ -29,7 +29,6 @@ const THIS_MODULE = Modules.Inventory
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
-@UseGuards(AdminGuard)
 export class InventoryCrudController implements BaseCrudController {
   constructor(
     private readonly inventoryIndexApp: InventoryIndexApp,
@@ -44,6 +43,7 @@ export class InventoryCrudController implements BaseCrudController {
     return ApiRes.fromEntity(InventoryResponse.fromEntities(res.data), res.meta)
   }
 
+  @UseGuards(AdminGuard)
   @Post()
   async create(
     @Body() req: InventoryCreateRequest,
@@ -52,6 +52,7 @@ export class InventoryCrudController implements BaseCrudController {
     return ApiRes.fromEntity(InventoryResponse.fromEntity(data))
   }
 
+  @UseGuards(AdminGuard)
   @Get(':id')
   async findOneOrFail(
     @Param('id') id: string,
@@ -60,6 +61,7 @@ export class InventoryCrudController implements BaseCrudController {
     return ApiRes.fromEntity(InventoryResponse.fromEntity(data))
   }
 
+  @UseGuards(AdminGuard)
   @Put(':id')
   async update(
     @Param('id') id: string,
@@ -69,6 +71,7 @@ export class InventoryCrudController implements BaseCrudController {
     return ApiRes.fromEntity(InventoryResponse.fromEntity(data))
   }
 
+  @UseGuards(AdminGuard)
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<InventoryResponse>> {
     const data = await this.inventoryCrudApp.softRemove(id)
