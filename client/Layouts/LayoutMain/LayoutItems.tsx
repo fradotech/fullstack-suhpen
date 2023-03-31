@@ -112,8 +112,8 @@ const itemsRoleAdmin: MenuItem[] = [ERole.SuperAdmin, ERole.Admin].includes(
         ],
       },
       {
-        key: 'Logistic',
-        label: 'Logistic',
+        key: 'LOGISTIC',
+        label: 'LOGISTIC',
         icon: <CodepenCircleOutlined />,
         children: [
           {
@@ -154,9 +154,7 @@ const itemsRoleUser: MenuItem[] = [
   ? [
       {
         key: Route.dashboard.index,
-        label: (
-          <Link to={Route.dashboard.index}>{Util.titleCase('dashboard')}</Link>
-        ),
+        label: <Link to={Route.dashboard.index}>DASHBOARD</Link>,
         icon: <DashboardOutlined />,
       },
       {
