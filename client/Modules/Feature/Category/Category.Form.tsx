@@ -57,7 +57,7 @@ const CategoryForm: React.FC = () => {
         <FormItem name="thumbnail" input="attachment" total={1} form={form} />
         <Row gutter={12}>
           <Col sm={24} md={20}>
-            <FormItem name="name" />
+            <FormItem name="name" rules={[rule.required]} />
           </Col>
           <Col sm={24} md={4}>
             <FormItem
