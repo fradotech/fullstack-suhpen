@@ -73,7 +73,7 @@ const DemoLine = () => {
       },
     ],
   }
-  return <Line {...config} style={{ height: '200px' }} />
+  return <Line {...config} style={{ height: '280px' }} />
 }
 
 export default DemoLine

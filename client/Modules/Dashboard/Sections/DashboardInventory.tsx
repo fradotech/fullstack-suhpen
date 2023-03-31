@@ -25,26 +25,6 @@ const DashboardInventory: React.FC = () => {
     <>
       <Col>
         <Row gutter={12}>
-          <Col sm={24} md={12}>
-            <CardData title="Product At Warehouse" value={946} />
-          </Col>
-          <Col sm={24} md={12}>
-            <CardData title="Product At Sales" value={315} />
-          </Col>
-        </Row>
-        <Row gutter={12}>
-          <Col sm={24} md={16}>
-            <CardData title="Penjualan">
-              <DemoLine />
-            </CardData>
-          </Col>
-          <Col sm={24} md={8}>
-            <CardData title="Categories">
-              <DemoPie />
-            </CardData>
-          </Col>
-        </Row>
-        <Row gutter={12}>
           <Col sm={24} md={6}>
             <CardData title="Buy Price Total" price={data?.buyPrice.sum} />
           </Col>
@@ -59,11 +39,15 @@ const DashboardInventory: React.FC = () => {
           </Col>
         </Row>
         <Row gutter={12}>
-          <Col sm={24} md={12}>
-            <CardData title="Margin Total" price={data?.marginPrice.sum} />
+          <Col sm={24} md={14}>
+            <CardData title="Penjualan">
+              <DemoLine />
+            </CardData>
           </Col>
-          <Col sm={24} md={12}>
-            <CardData title="Margin Average" price={data?.marginPrice.avg} />
+          <Col sm={24} md={10}>
+            <CardData title="Categories">
+              <DemoPie />
+            </CardData>
           </Col>
         </Row>
       </Col>
