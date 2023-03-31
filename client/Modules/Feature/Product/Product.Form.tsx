@@ -72,7 +72,8 @@ const ProductForm: React.FC = () => {
         </Row>
         <FormItem name="name" rules={[rule.required]} />
         <FormItem
-          name="categories"
+          name="categoryIds"
+          label="Categories"
           input="selectMultiple"
           options={categories?.data}
           disabled={!!id}

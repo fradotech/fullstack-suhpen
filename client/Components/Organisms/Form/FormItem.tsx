@@ -60,7 +60,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
         return { label: data, value: data }
       }) as DefaultOptionType[])
     : (props.options?.map((data: Record<string, any>) => {
-        return { label: data['name'], value: data }
+        return { label: data['name'], value: data['id'] }
       }) as unknown as DefaultOptionType[])
 
   React.useMemo(() => {
