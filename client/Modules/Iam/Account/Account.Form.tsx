@@ -1,5 +1,5 @@
 import { UserUpdateRequest } from '@server/modules/iam/user/infrastructure/user.request'
-import { Divider, Form } from 'antd'
+import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate } from 'react-router-dom'
@@ -50,23 +50,30 @@ const AccountForm: React.FC = () => {
         <FormItem name="avatar" input="attachment" total={1} form={form} />
         <FormItem name="name" rules={[rule.required]} />
 
-        <Divider />
+        <Row gutter={12}>
+          <Col sm={24} md={12}>
+            <FormItem
+              name="role"
+              input="select"
+              optionsEnum={Object.values(ERole)}
+            />
+          </Col>
+          <Col sm={24} md={12}>
+            <FormItem
+              name="gender"
+              input="select"
+              optionsEnum={Object.values(EUserGender)}
+            />
+          </Col>
+          <Col sm={24} md={12}>
+            <FormItem name="phoneNumber" />
+          </Col>
+          <Col sm={24} md={12}>
+            <FormItem name="birthDate" input="datePicker" />
+          </Col>
+        </Row>
 
-        <FormItem
-          name="role"
-          input="select"
-          optionsEnum={Object.values(ERole)}
-        />
-
-        <FormItem
-          name="gender"
-          input="select"
-          optionsEnum={Object.values(EUserGender)}
-        />
-
-        <FormItem name="phoneNumber" />
         <FormItem name="address" />
-        <FormItem name="birthDate" input="datePicker" />
       </FormContainer>
     </Section>
   )

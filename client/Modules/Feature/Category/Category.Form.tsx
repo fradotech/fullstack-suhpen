@@ -1,7 +1,7 @@
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { CategoryCreateRequest } from '@server/modules/feature/category/infrastructure/category.request'
 import { CategoryResponse } from '@server/modules/feature/category/infrastructure/category.response'
-import { Form } from 'antd'
+import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -55,10 +55,20 @@ const CategoryForm: React.FC = () => {
         button={{ disabled: isLoading }}
       >
         <FormItem name="thumbnail" input="attachment" total={1} form={form} />
-        <FormItem name="name" rules={[rule.required]} />
-        <FormItem name="key" rules={[rule.required]} />
+        <Row gutter={12}>
+          <Col sm={24} md={20}>
+            <FormItem name="name" />
+          </Col>
+          <Col sm={24} md={4}>
+            <FormItem
+              name="isActive"
+              input="switch"
+              rules={[rule.required]}
+              form={form}
+            />
+          </Col>
+        </Row>
         <FormItem name="description" input="textArea" />
-        <FormItem name="isActive" input="switch" form={form} />
         <FormItem name="labelColor" input="colorPicker" />
       </FormContainer>
     </Section>

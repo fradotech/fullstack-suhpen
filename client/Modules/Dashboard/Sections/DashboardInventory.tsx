@@ -4,6 +4,7 @@ import { useQuery } from 'react-query'
 import CardData from '../../../Components/Molecules/CardData/CardData'
 import { dashboardInventoryAction } from './dashboardInventory.action'
 import DemoLine from './DemoLine'
+import DemoPie from './DemoPie'
 
 const DashboardInventory: React.FC = () => {
   const buyPrice = async () => await dashboardInventoryAction.buyPrice()
@@ -23,47 +24,47 @@ const DashboardInventory: React.FC = () => {
   return (
     <>
       <Col>
-        <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <CardData
-            oneLineWidth="23%"
-            title="Buy Price Total"
-            value={data?.buyPrice.sum}
-          />
-          <CardData
-            oneLineWidth="23%"
-            title="Sell Price Total"
-            value={data?.sellPrice.sum}
-          />
-          <CardData
-            oneLineWidth="23%"
-            title="Buy Price Average"
-            value={data?.buyPrice.avg}
-          />
-          <CardData
-            oneLineWidth="23%"
-            title="Sell Price Average"
-            value={data?.sellPrice.avg}
-          />
+        <Row gutter={12}>
+          <Col sm={24} md={12}>
+            <CardData title="Product At Warehouse" value={946} />
+          </Col>
+          <Col sm={24} md={12}>
+            <CardData title="Product At Sales" value={315} />
+          </Col>
         </Row>
-        <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <CardData oneLineWidth="48%" title="Pembelian">
-            <DemoLine />
-          </CardData>
-          <CardData oneLineWidth="48%" title="Penjualan">
-            <DemoLine />
-          </CardData>
+        <Row gutter={12}>
+          <Col sm={24} md={16}>
+            <CardData title="Penjualan">
+              <DemoLine />
+            </CardData>
+          </Col>
+          <Col sm={24} md={8}>
+            <CardData title="Categories">
+              <DemoPie />
+            </CardData>
+          </Col>
         </Row>
-        <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <CardData
-            oneLineWidth="48%"
-            title="Margin Total"
-            value={data?.marginPrice.sum}
-          />
-          <CardData
-            oneLineWidth="48%"
-            title="Margin Average"
-            value={data?.marginPrice.avg}
-          />
+        <Row gutter={12}>
+          <Col sm={24} md={6}>
+            <CardData title="Buy Price Total" price={data?.buyPrice.sum} />
+          </Col>
+          <Col sm={24} md={6}>
+            <CardData title="Sell Price Total" price={data?.sellPrice.sum} />
+          </Col>
+          <Col sm={24} md={6}>
+            <CardData title="Buy Price Average" price={data?.buyPrice.avg} />
+          </Col>
+          <Col sm={24} md={6}>
+            <CardData title="Sell Price Average" price={data?.sellPrice.avg} />
+          </Col>
+        </Row>
+        <Row gutter={12}>
+          <Col sm={24} md={12}>
+            <CardData title="Margin Total" price={data?.marginPrice.sum} />
+          </Col>
+          <Col sm={24} md={12}>
+            <CardData title="Margin Average" price={data?.marginPrice.avg} />
+          </Col>
         </Row>
       </Col>
     </>

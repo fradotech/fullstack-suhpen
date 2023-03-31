@@ -23,6 +23,7 @@ interface IProps {
   input?:
     | 'input'
     | 'inputNumber'
+    | 'inputPercentage'
     | 'inputRupiah'
     | 'inputPassword'
     | 'select'
@@ -88,12 +89,24 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
       )
       break
 
+    case 'inputPercentage':
+      input = (
+        <InputNumber
+          placeholder={props.placeholder || Util.titleCase(props.name)}
+          disabled={props.disabled}
+          addonAfter="%"
+          parser={(value: string) => +value}
+          style={{ width: '100%' }}
+        />
+      )
+      break
+
     case 'inputRupiah':
       input = (
         <InputNumber
           placeholder={props.placeholder || Util.titleCase(props.name)}
           disabled={props.disabled}
-          prefix="Rp"
+          addonBefore="Rp"
           parser={(value: string) => +value}
           style={{ width: '100%' }}
         />
@@ -108,6 +121,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           filterOption={filterOption}
           options={selectOption}
           placeholder={props.placeholder || Util.titleCase(props.name)}
+          style={{ width: '100%' }}
         />
       )
       break
@@ -122,6 +136,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           filterOption={filterOption}
           options={selectOption}
           placeholder={props.placeholder || Util.titleCase(props.name)}
+          style={{ width: '100%' }}
         />
       )
       break
