@@ -47,7 +47,7 @@ const DemoPie = () => {
       },
     ],
   }
-  return <Pie {...config} style={{ height: '200px' }} />
+  return <Pie {...config} style={{ height: '280px' }} />
 }
 
 export default DemoPie
