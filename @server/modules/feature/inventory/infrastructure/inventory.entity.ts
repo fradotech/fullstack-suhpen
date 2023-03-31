@@ -1,4 +1,5 @@
 import { BaseEntity } from '@server/infrastructure/base/base.entity'
+import { EInventorySupplyType } from 'client/Modules/Feature/Inventory/Inventory.enum'
 import dayjs from 'dayjs'
 import { BeforeInsert, BeforeUpdate, Column, Entity, ManyToOne } from 'typeorm'
 import { EntProduct } from '../../product/infrastructure/product.entity'
@@ -15,6 +16,13 @@ export class EntInventory extends BaseEntity implements IInventory {
 
   @Column({ default: null })
   productVariantName?: string
+
+  @Column({
+    default: EInventorySupplyType.SelfStock,
+    type: 'enum',
+    enum: EInventorySupplyType,
+  })
+  supplyType: EInventorySupplyType
 
   @Column({ default: 0 })
   buyPrice: number
