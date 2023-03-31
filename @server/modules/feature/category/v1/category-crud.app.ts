@@ -9,39 +9,39 @@ import { CategoryService } from '../infrastructure/category.service'
 
 @Injectable()
 export class CategoryCrudApp {
-  constructor(private readonly productService: CategoryService) {}
+  constructor(private readonly categoryService: CategoryService) {}
 
   async find(): Promise<ICategory[]> {
-    return await this.productService.find()
+    return await this.categoryService.find()
   }
 
   async create(req: CategoryCreateRequest): Promise<ICategory> {
     const data = new EntCategory()
     Object.assign(data, req)
 
-    return await this.productService.create(data)
+    return await this.categoryService.create(data)
   }
 
   async findOneOrFail(id: string): Promise<ICategory> {
-    return await this.productService.findOneOrFail(id)
+    return await this.categoryService.findOneOrFail(id)
   }
 
   async update(id: string, req: CategoryUpdateRequest): Promise<ICategory> {
-    const data = await this.productService.findOneOrFail(id)
+    const data = await this.categoryService.findOneOrFail(id)
     Object.assign(data, req)
 
-    return await this.productService.update(data)
+    return await this.categoryService.update(data)
   }
 
   async remove(id: string): Promise<ICategory> {
-    const data = this.productService.findOneOrFail(id)
-    await this.productService.remove(id)
+    const data = this.categoryService.findOneOrFail(id)
+    await this.categoryService.remove(id)
     return data
   }
 
   async softRemove(id: string): Promise<ICategory> {
-    const data = this.productService.findOneOrFail(id)
-    await this.productService.softRemove(id)
+    const data = this.categoryService.findOneOrFail(id)
+    await this.categoryService.softRemove(id)
     return data
   }
 }
