@@ -1,7 +1,7 @@
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { ProductCreateRequest } from '@server/modules/feature/product/infrastructure/product.request'
 import { ProductResponse } from '@server/modules/feature/product/infrastructure/product.response'
-import { Form } from 'antd'
+import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -57,16 +57,20 @@ const ProductForm: React.FC = () => {
         button={{ disabled: isLoading }}
       >
         <FormItem name="thumbnail" input="attachment" total={1} form={form} />
-        <FormItem name="upc" />
+        <Row gutter={12}>
+          <Col sm={24} md={20}>
+            <FormItem name="upc" label="UPC" />
+          </Col>
+          <Col sm={24} md={4}>
+            <FormItem
+              name="isActive"
+              input="switch"
+              rules={[rule.required]}
+              form={form}
+            />
+          </Col>
+        </Row>
         <FormItem name="name" rules={[rule.required]} />
-        <FormItem name="key" rules={[rule.required]} />
-        <FormItem name="description" input="textArea" />
-        <FormItem
-          name="isActive"
-          input="switch"
-          rules={[rule.required]}
-          form={form}
-        />
         <FormItem
           name="categories"
           input="selectMultiple"
@@ -74,8 +78,15 @@ const ProductForm: React.FC = () => {
           disabled={!!id}
           form={form}
         />
-        <FormItem name="brand" />
-        <FormItem name="rating" />
+        <FormItem name="description" input="textArea" />
+        <Row gutter={12}>
+          <Col sm={24} md={12}>
+            <FormItem name="rating" />
+          </Col>
+          <Col sm={24} md={12}>
+            <FormItem name="brand" />
+          </Col>
+        </Row>
       </FormContainer>
     </Section>
   )

@@ -1,7 +1,7 @@
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { UserCreateRequest } from '@server/modules/iam/user/infrastructure/user.request'
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
-import { Divider, Form } from 'antd'
+import { Col, Divider, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -78,21 +78,30 @@ const UserForm: React.FC = () => {
 
         <Divider />
 
-        <FormItem
-          name="role"
-          input="select"
-          optionsEnum={Object.values(ERole)}
-        />
+        <Row gutter={12}>
+          <Col sm={24} md={12}>
+            <FormItem
+              name="role"
+              input="select"
+              optionsEnum={Object.values(ERole)}
+            />
+          </Col>
+          <Col sm={24} md={12}>
+            <FormItem
+              name="gender"
+              input="select"
+              optionsEnum={Object.values(EUserGender)}
+            />
+          </Col>
+          <Col sm={24} md={12}>
+            <FormItem name="phoneNumber" />
+          </Col>
+          <Col sm={24} md={12}>
+            <FormItem name="birthDate" input="datePicker" />
+          </Col>
+        </Row>
 
-        <FormItem
-          name="gender"
-          input="select"
-          optionsEnum={Object.values(EUserGender)}
-        />
-
-        <FormItem name="phoneNumber" />
         <FormItem name="address" />
-        <FormItem name="birthDate" input="datePicker" />
       </FormContainer>
     </Section>
   )

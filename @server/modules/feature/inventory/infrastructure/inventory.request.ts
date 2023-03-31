@@ -2,11 +2,13 @@ import { ApiProperty, PartialType } from '@nestjs/swagger'
 import {
   IsBoolean,
   IsDate,
+  IsEnum,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
 } from 'class-validator'
+import { EInventorySupplyType } from 'client/Modules/Feature/Inventory/Inventory.enum'
 import { IProduct } from '../../product/infrastructure/product.interface'
 import { IInventory } from './inventory.interface'
 
@@ -24,6 +26,11 @@ export class InventoryRequest implements IInventory {
   @IsString()
   @ApiProperty()
   productVariantName?: string
+
+  @IsNotEmpty()
+  @IsEnum(EInventorySupplyType)
+  @ApiProperty({ example: EInventorySupplyType.SelfStock })
+  supplyType: EInventorySupplyType
 
   @IsOptional()
   @IsString()

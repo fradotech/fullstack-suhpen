@@ -28,6 +28,7 @@ const InventoryForm: React.FC = () => {
         form.setFieldsValue(res.data)
         setIsLoading(false)
       }),
+    { refetchOnWindowFocus: false },
   )
 
   const onFinish = async () => {
@@ -55,42 +56,52 @@ const InventoryForm: React.FC = () => {
         button={{ disabled: isLoading }}
       >
         <FormItem name="thumbnail" input="attachment" total={1} form={form} />
-        <FormItem name="sku" />
+        <Row gutter={12}>
+          <Col sm={24} md={20}>
+            <FormItem name="sku" label="SKU" />
+          </Col>
+          <Col sm={24} md={4}>
+            <FormItem
+              name="isActive"
+              input="switch"
+              rules={[rule.required]}
+              form={form}
+            />
+          </Col>
+        </Row>
         <FormItem name="productVariantName" />
         <Row gutter={12}>
-          <Col sm={24} md={12} lg={12}>
+          <Col sm={24} md={12}>
             <FormItem
               name="buyPrice"
               rules={[rule.required]}
               input="inputRupiah"
             />
           </Col>
-          <Col sm={24} md={12} lg={12}>
+          <Col sm={24} md={12}>
             <FormItem
               name="sellPrice"
               rules={[rule.required]}
               input="inputRupiah"
             />
           </Col>
-          <Col sm={24} md={12} lg={12}>
+          <Col sm={24} md={12}>
             <FormItem
               name="stock"
               rules={[rule.required]}
               input="inputRupiah"
             />
           </Col>
-          <Col sm={24} md={12} lg={12}>
+          <Col sm={24} md={12}>
             <FormItem name="stockMinimum" input="inputNumber" />
           </Col>
+          <Col sm={24} md={12}>
+            <FormItem name="discountPercentage" input="inputPercentage" />
+          </Col>
+          <Col sm={24} md={12}>
+            <FormItem name="expiredDate" input="datePicker" />
+          </Col>
         </Row>
-        <FormItem
-          name="isActive"
-          input="switch"
-          rules={[rule.required]}
-          form={form}
-        />
-        <FormItem name="discountPercentage" input="inputNumber" />
-        <FormItem name="expiredDate" input="datePicker" />
       </FormContainer>
     </Section>
   )

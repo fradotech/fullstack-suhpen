@@ -1,4 +1,5 @@
 import { IBaseEntity } from '@server/infrastructure/base/base-entity.interface'
+import { EInventorySupplyType } from 'client/Modules/Feature/Inventory/Inventory.enum'
 import dayjs from 'dayjs'
 import { IProduct } from '../../product/infrastructure/product.interface'
 
@@ -6,6 +7,7 @@ export interface IInventory extends IBaseEntity {
   sku?: string
   product: IProduct
   productVariantName?: string
+  supplyType: EInventorySupplyType
   buyPrice: number
   sellPrice: number
   marginPrice: number
@@ -15,6 +17,6 @@ export interface IInventory extends IBaseEntity {
   discountPercentage?: number
   isActive: boolean
   thumbnail?: string
-  // outlet: IOutlet
+  // store: IStore
   // supplier?: ISupplier
 }
