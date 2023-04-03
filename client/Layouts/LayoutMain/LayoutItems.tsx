@@ -28,6 +28,7 @@ const user = authAction.loggedUser()
 
 const itemsRoleSuperAdmin: MenuItem[] = [ERole.SuperAdmin].includes(user?.role)
   ? [
+      { type: 'divider' },
       {
         key: 'IAM',
         label: 'IAM',
