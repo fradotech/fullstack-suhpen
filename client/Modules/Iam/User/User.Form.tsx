@@ -44,66 +44,68 @@ const UserForm: React.FC = () => {
   }
 
   return (
-    <Section>
+    <>
       <PageHeader
         title={id ? 'User Edit' : 'User Create'}
         isLoading={isLoading}
       />
-      <FormContainer
-        onFinish={onFinish}
-        form={form}
-        layout="vertical"
-        centered
-        button={{ disabled: isLoading }}
-      >
-        <FormItem name="avatar" input="attachment" total={1} form={form} />
-        <FormItem name="name" rules={[rule.required]} />
+      <Section>
+        <FormContainer
+          onFinish={onFinish}
+          form={form}
+          layout="vertical"
+          centered
+          button={{ disabled: isLoading }}
+        >
+          <FormItem name="avatar" input="attachment" total={1} form={form} />
+          <FormItem name="name" rules={[rule.required]} />
 
-        {!id && (
-          <>
-            <FormItem name="email" rules={[rule.email]} type="email" />
-            <FormItem
-              name="password"
-              rules={[rule.password]}
-              input="inputPassword"
-            />
-            <FormItem
-              name="passwordConfirmation"
-              rules={[rule.password]}
-              input="inputPassword"
-              placeholder="Password Confirmation"
-            />
-          </>
-        )}
+          {!id && (
+            <>
+              <FormItem name="email" rules={[rule.email]} type="email" />
+              <FormItem
+                name="password"
+                rules={[rule.password]}
+                input="inputPassword"
+              />
+              <FormItem
+                name="passwordConfirmation"
+                rules={[rule.password]}
+                input="inputPassword"
+                placeholder="Password Confirmation"
+              />
+            </>
+          )}
 
-        <Divider />
+          <Divider />
 
-        <Row gutter={12}>
-          <Col sm={24} md={12}>
-            <FormItem
-              name="role"
-              input="select"
-              optionsEnum={Object.values(ERole)}
-            />
-          </Col>
-          <Col sm={24} md={12}>
-            <FormItem
-              name="gender"
-              input="select"
-              optionsEnum={Object.values(EUserGender)}
-            />
-          </Col>
-          <Col sm={24} md={12}>
-            <FormItem name="phoneNumber" />
-          </Col>
-          <Col sm={24} md={12}>
-            <FormItem name="birthDate" input="datePicker" />
-          </Col>
-        </Row>
+          <Row gutter={12}>
+            <Col sm={24} md={12}>
+              <FormItem
+                name="role"
+                input="select"
+                optionsEnum={Object.values(ERole)}
+              />
+            </Col>
+            <Col sm={24} md={12}>
+              <FormItem
+                name="gender"
+                input="select"
+                optionsEnum={Object.values(EUserGender)}
+              />
+            </Col>
+            <Col sm={24} md={12}>
+              <FormItem name="phoneNumber" />
+            </Col>
+            <Col sm={24} md={12}>
+              <FormItem name="birthDate" input="datePicker" />
+            </Col>
+          </Row>
 
-        <FormItem name="address" />
-      </FormContainer>
-    </Section>
+          <FormItem name="address" />
+        </FormContainer>
+      </Section>
+    </>
   )
 }
 

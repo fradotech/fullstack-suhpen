@@ -15,17 +15,19 @@ const UserDetail: React.FC = () => {
   const fields = data?.data && Object.keys(data.data)
 
   return (
-    <Section>
+    <>
       <PageHeader
         title="User Detail"
         isLoading={isLoading}
         hrefEdit={Route.user.edit(id)}
         hrefDelete={Route.user.id(id)}
       />
-      <DescriptionContainer>
-        {fields?.map((key) => DescriptionItem(data?.data, key))}
-      </DescriptionContainer>
-    </Section>
+      <Section>
+        <DescriptionContainer>
+          {fields?.map((key) => DescriptionItem(data?.data, key))}
+        </DescriptionContainer>
+      </Section>
+    </>
   )
 }
 

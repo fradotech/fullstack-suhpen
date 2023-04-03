@@ -20,28 +20,31 @@ const InventoryS: React.FC<IProps> = (props: IProps) => {
   const { isLoading, data } = useQuery([InventoryS.name, query], fetch)
 
   return (
-    <Section>
+    <>
       <PageHeader title="Inventory" />
-      <DataTable
-        rowKey="id"
-        columns={inventoryColumns}
-        dataSource={data?.data}
-        search={query.search}
-        pagination={!props.productId && paginationTransform(data?.meta)}
-        loading={isLoading}
-        onChange={(filtersState) => {
-          props.productId && (filtersState.pageSize = 100000)
-          setQueryParams(filtersState)
-        }}
-        dataTableHeader={{
-          query,
-          search: true,
-          dateRangeColumn: 'expiredDate',
-          hrefCreate: props.productId && Route.inventory.form(props.productId),
-          hrefExport: Route.inventory.export,
-        }}
-      />
-    </Section>
+      <Section>
+        <DataTable
+          rowKey="id"
+          columns={inventoryColumns}
+          dataSource={data?.data}
+          search={query.search}
+          pagination={!props.productId && paginationTransform(data?.meta)}
+          loading={isLoading}
+          onChange={(filtersState) => {
+            props.productId && (filtersState.pageSize = 100000)
+            setQueryParams(filtersState)
+          }}
+          dataTableHeader={{
+            query,
+            search: true,
+            dateRangeColumn: 'expiredDate',
+            hrefCreate:
+              props.productId && Route.inventory.form(props.productId),
+            hrefExport: Route.inventory.export,
+          }}
+        />
+      </Section>
+    </>
   )
 }
 

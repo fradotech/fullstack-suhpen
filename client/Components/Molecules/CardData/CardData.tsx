@@ -21,7 +21,7 @@ const CardData: React.FC<IProps> = (props: IProps) => {
       <Typography.Text strong type="secondary">
         {props.title}
       </Typography.Text>
-      <Col style={{ marginBottom: '10px' }}>
+      <Col>
         <Typography.Text strong style={{ fontSize: '24px' }}>
           {(props.price && Util.formatCurrency(props.price)) ||
             (props.value && props.value)}

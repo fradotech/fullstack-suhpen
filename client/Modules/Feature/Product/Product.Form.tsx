@@ -44,52 +44,54 @@ const ProductForm: React.FC = () => {
   }
 
   return (
-    <Section>
+    <>
       <PageHeader
         title={id ? 'Product Edit' : 'Product Create'}
         isLoading={isLoading || isLoadingCategories}
       />
-      <FormContainer
-        onFinish={onFinish}
-        form={form}
-        layout="vertical"
-        centered
-        button={{ disabled: isLoading }}
-      >
-        <FormItem name="thumbnail" input="attachment" total={1} form={form} />
-        <Row gutter={12}>
-          <Col sm={24} md={20}>
-            <FormItem name="upc" label="UPC" />
-          </Col>
-          <Col sm={24} md={4}>
-            <FormItem
-              name="isActive"
-              input="switch"
-              rules={[rule.required]}
-              form={form}
-            />
-          </Col>
-        </Row>
-        <FormItem name="name" rules={[rule.required]} />
-        <FormItem
-          name="categoryIds"
-          label="Categories"
-          input="selectMultiple"
-          options={categories?.data}
-          disabled={!!id}
+      <Section>
+        <FormContainer
+          onFinish={onFinish}
           form={form}
-        />
-        <FormItem name="description" input="textArea" />
-        <Row gutter={12}>
-          <Col sm={24} md={12}>
-            <FormItem name="rating" />
-          </Col>
-          <Col sm={24} md={12}>
-            <FormItem name="brand" />
-          </Col>
-        </Row>
-      </FormContainer>
-    </Section>
+          layout="vertical"
+          centered
+          button={{ disabled: isLoading }}
+        >
+          <FormItem name="thumbnail" input="attachment" total={1} form={form} />
+          <Row gutter={12}>
+            <Col sm={24} md={20}>
+              <FormItem name="upc" label="UPC" />
+            </Col>
+            <Col sm={24} md={4}>
+              <FormItem
+                name="isActive"
+                input="switch"
+                rules={[rule.required]}
+                form={form}
+              />
+            </Col>
+          </Row>
+          <FormItem name="name" rules={[rule.required]} />
+          <FormItem
+            name="categoryIds"
+            label="Categories"
+            input="selectMultiple"
+            options={categories?.data}
+            disabled={!!id}
+            form={form}
+          />
+          <FormItem name="description" input="textArea" />
+          <Row gutter={12}>
+            <Col sm={24} md={12}>
+              <FormItem name="rating" />
+            </Col>
+            <Col sm={24} md={12}>
+              <FormItem name="brand" />
+            </Col>
+          </Row>
+        </FormContainer>
+      </Section>
+    </>
   )
 }
 

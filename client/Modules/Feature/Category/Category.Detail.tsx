@@ -15,17 +15,19 @@ const CategoryDetail: React.FC = () => {
   const fields = data?.data && Object.keys(data.data)
 
   return (
-    <Section>
+    <>
       <PageHeader
         title="Category Detail"
         isLoading={isLoading}
         hrefEdit={Route.category.edit(id)}
         hrefDelete={Route.category.id(id)}
       />
-      <DescriptionContainer>
-        {fields?.map((key) => DescriptionItem(data?.data, key))}
-      </DescriptionContainer>
-    </Section>
+      <Section>
+        <DescriptionContainer>
+          {fields?.map((key) => DescriptionItem(data?.data, key))}
+        </DescriptionContainer>
+      </Section>
+    </>
   )
 }
 

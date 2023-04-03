@@ -15,17 +15,19 @@ const InventoryDetail: React.FC = () => {
   const fields = data?.data && Object.keys(data.data)
 
   return (
-    <Section>
+    <>
       <PageHeader
         title="Inventory Detail"
         isLoading={isLoading}
         hrefEdit={Route.inventory.edit(id)}
         hrefDelete={Route.inventory.id(id)}
       />
-      <DescriptionContainer>
-        {fields?.map((key) => DescriptionItem(data?.data, key))}
-      </DescriptionContainer>
-    </Section>
+      <Section>
+        <DescriptionContainer>
+          {fields?.map((key) => DescriptionItem(data?.data, key))}
+        </DescriptionContainer>
+      </Section>
+    </>
   )
 }
 

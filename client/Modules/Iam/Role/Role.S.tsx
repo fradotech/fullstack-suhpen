@@ -11,15 +11,17 @@ const RoleS: React.FC = () => {
   const { isLoading, data } = useQuery([RoleS.name], fetch)
 
   return (
-    <Section>
+    <>
       <PageHeader title="Role" isLoading={isLoading} />
-      <DataTable
-        rowKey="id"
-        columns={rolesColumns}
-        dataSource={data?.data}
-        loading={isLoading}
-      />
-    </Section>
+      <Section>
+        <DataTable
+          rowKey="id"
+          columns={rolesColumns}
+          dataSource={data?.data}
+          loading={isLoading}
+        />
+      </Section>
+    </>
   )
 }
 

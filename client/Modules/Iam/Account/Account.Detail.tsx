@@ -14,20 +14,22 @@ const AccountDetail: React.FC = () => {
   const fields = data?.data && Object.keys(data.data)
 
   return (
-    <Section>
+    <>
       <PageHeader title="Account" isLoading={isLoading} />
-      <Row>
-        <Avatar
-          size={250}
-          icon={<UserOutlined />}
-          style={{ margin: '32px' }}
-          src={data?.data.avatar}
-        />
-        <DescriptionContainer>
-          {fields?.map((key) => DescriptionItem(data?.data, key))}
-        </DescriptionContainer>
-      </Row>
-    </Section>
+      <Section>
+        <Row>
+          <Avatar
+            size={250}
+            icon={<UserOutlined />}
+            style={{ margin: '32px' }}
+            src={data?.data.avatar}
+          />
+          <DescriptionContainer>
+            {fields?.map((key) => DescriptionItem(data?.data, key))}
+          </DescriptionContainer>
+        </Row>
+      </Section>
+    </>
   )
 }
 

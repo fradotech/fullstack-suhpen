@@ -42,36 +42,38 @@ const CategoryForm: React.FC = () => {
   }
 
   return (
-    <Section>
+    <>
       <PageHeader
         title={id ? 'Category Edit' : 'Category Create'}
         isLoading={isLoading}
       />
-      <FormContainer
-        onFinish={onFinish}
-        form={form}
-        layout="vertical"
-        centered
-        button={{ disabled: isLoading }}
-      >
-        <FormItem name="thumbnail" input="attachment" total={1} form={form} />
-        <Row gutter={12}>
-          <Col sm={24} md={20}>
-            <FormItem name="name" rules={[rule.required]} />
-          </Col>
-          <Col sm={24} md={4}>
-            <FormItem
-              name="isActive"
-              input="switch"
-              rules={[rule.required]}
-              form={form}
-            />
-          </Col>
-        </Row>
-        <FormItem name="description" input="textArea" />
-        <FormItem name="labelColor" input="colorPicker" />
-      </FormContainer>
-    </Section>
+      <Section>
+        <FormContainer
+          onFinish={onFinish}
+          form={form}
+          layout="vertical"
+          centered
+          button={{ disabled: isLoading }}
+        >
+          <FormItem name="thumbnail" input="attachment" total={1} form={form} />
+          <Row gutter={12}>
+            <Col sm={24} md={20}>
+              <FormItem name="name" rules={[rule.required]} />
+            </Col>
+            <Col sm={24} md={4}>
+              <FormItem
+                name="isActive"
+                input="switch"
+                rules={[rule.required]}
+                form={form}
+              />
+            </Col>
+          </Row>
+          <FormItem name="description" input="textArea" />
+          <FormItem name="labelColor" input="colorPicker" />
+        </FormContainer>
+      </Section>
+    </>
   )
 }
 

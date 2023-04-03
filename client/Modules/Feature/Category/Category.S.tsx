@@ -16,24 +16,26 @@ const CategoryS: React.FC = () => {
   const { isLoading, data } = useQuery([CategoryS.name, query], fetch)
 
   return (
-    <Section>
+    <>
       <PageHeader title="Category" />
-      <DataTable
-        rowKey="id"
-        columns={categoryColumns}
-        dataSource={data?.data}
-        search={query.search}
-        pagination={paginationTransform(data?.meta)}
-        loading={isLoading}
-        onChange={(filtersState) => setQueryParams(filtersState)}
-        dataTableHeader={{
-          query,
-          search: true,
-          hrefCreate: Route.category.form,
-          hrefExport: Route.category.export,
-        }}
-      />
-    </Section>
+      <Section>
+        <DataTable
+          rowKey="id"
+          columns={categoryColumns}
+          dataSource={data?.data}
+          search={query.search}
+          pagination={paginationTransform(data?.meta)}
+          loading={isLoading}
+          onChange={(filtersState) => setQueryParams(filtersState)}
+          dataTableHeader={{
+            query,
+            search: true,
+            hrefCreate: Route.category.form,
+            hrefExport: Route.category.export,
+          }}
+        />
+      </Section>
+    </>
   )
 }
 

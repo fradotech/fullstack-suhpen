@@ -18,24 +18,26 @@ const ProductS: React.FC = () => {
   const { isLoading: isLoadingCategories, data: categories } = useCategories()
 
   return (
-    <Section>
+    <>
       <PageHeader title="Product" />
-      <DataTable
-        rowKey="id"
-        columns={productColumns(categories?.data)}
-        dataSource={data?.data}
-        search={query.search}
-        pagination={paginationTransform(data?.meta)}
-        loading={isLoading || isLoadingCategories}
-        onChange={(filtersState) => setQueryParams(filtersState)}
-        dataTableHeader={{
-          query,
-          search: true,
-          hrefCreate: Route.product.form,
-          hrefExport: Route.product.export,
-        }}
-      />
-    </Section>
+      <Section>
+        <DataTable
+          rowKey="id"
+          columns={productColumns(categories?.data)}
+          dataSource={data?.data}
+          search={query.search}
+          pagination={paginationTransform(data?.meta)}
+          loading={isLoading || isLoadingCategories}
+          onChange={(filtersState) => setQueryParams(filtersState)}
+          dataTableHeader={{
+            query,
+            search: true,
+            hrefCreate: Route.product.form,
+            hrefExport: Route.product.export,
+          }}
+        />
+      </Section>
+    </>
   )
 }
 

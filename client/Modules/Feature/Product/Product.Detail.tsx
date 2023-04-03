@@ -17,13 +17,13 @@ const ProductDetail: React.FC = () => {
 
   return (
     <>
+      <PageHeader
+        title="Product Detail"
+        isLoading={isLoading}
+        hrefEdit={Route.product.edit(id)}
+        hrefDelete={Route.product.id(id)}
+      />
       <Section>
-        <PageHeader
-          title="Product Detail"
-          isLoading={isLoading}
-          hrefEdit={Route.product.edit(id)}
-          hrefDelete={Route.product.id(id)}
-        />
         <DescriptionContainer>
           {fields?.map((key) => DescriptionItem(data?.data, key))}
         </DescriptionContainer>

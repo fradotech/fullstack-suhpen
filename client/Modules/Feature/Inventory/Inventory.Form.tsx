@@ -43,67 +43,69 @@ const InventoryForm: React.FC = () => {
   }
 
   return (
-    <Section>
+    <>
       <PageHeader
         title={id ? 'Inventory Edit' : 'Inventory Create'}
         isLoading={isLoading}
       />
-      <FormContainer
-        onFinish={onFinish}
-        form={form}
-        layout="vertical"
-        centered
-        button={{ disabled: isLoading }}
-      >
-        <FormItem name="thumbnail" input="attachment" total={1} form={form} />
-        <Row gutter={12}>
-          <Col sm={24} md={20}>
-            <FormItem name="sku" label="SKU" />
-          </Col>
-          <Col sm={24} md={4}>
-            <FormItem
-              name="isActive"
-              input="switch"
-              rules={[rule.required]}
-              form={form}
-            />
-          </Col>
-        </Row>
-        <FormItem name="productVariantName" />
-        <Row gutter={12}>
-          <Col sm={24} md={12}>
-            <FormItem
-              name="buyPrice"
-              rules={[rule.required]}
-              input="inputRupiah"
-            />
-          </Col>
-          <Col sm={24} md={12}>
-            <FormItem
-              name="sellPrice"
-              rules={[rule.required]}
-              input="inputRupiah"
-            />
-          </Col>
-          <Col sm={24} md={12}>
-            <FormItem
-              name="stock"
-              rules={[rule.required]}
-              input="inputRupiah"
-            />
-          </Col>
-          <Col sm={24} md={12}>
-            <FormItem name="stockMinimum" input="inputNumber" />
-          </Col>
-          <Col sm={24} md={12}>
-            <FormItem name="discountPercentage" input="inputPercentage" />
-          </Col>
-          <Col sm={24} md={12}>
-            <FormItem name="expiredDate" input="datePicker" />
-          </Col>
-        </Row>
-      </FormContainer>
-    </Section>
+      <Section>
+        <FormContainer
+          onFinish={onFinish}
+          form={form}
+          layout="vertical"
+          centered
+          button={{ disabled: isLoading }}
+        >
+          <FormItem name="thumbnail" input="attachment" total={1} form={form} />
+          <Row gutter={12}>
+            <Col sm={24} md={20}>
+              <FormItem name="sku" label="SKU" />
+            </Col>
+            <Col sm={24} md={4}>
+              <FormItem
+                name="isActive"
+                input="switch"
+                rules={[rule.required]}
+                form={form}
+              />
+            </Col>
+          </Row>
+          <FormItem name="productVariantName" />
+          <Row gutter={12}>
+            <Col sm={24} md={12}>
+              <FormItem
+                name="buyPrice"
+                rules={[rule.required]}
+                input="inputRupiah"
+              />
+            </Col>
+            <Col sm={24} md={12}>
+              <FormItem
+                name="sellPrice"
+                rules={[rule.required]}
+                input="inputRupiah"
+              />
+            </Col>
+            <Col sm={24} md={12}>
+              <FormItem
+                name="stock"
+                rules={[rule.required]}
+                input="inputRupiah"
+              />
+            </Col>
+            <Col sm={24} md={12}>
+              <FormItem name="stockMinimum" input="inputNumber" />
+            </Col>
+            <Col sm={24} md={12}>
+              <FormItem name="discountPercentage" input="inputPercentage" />
+            </Col>
+            <Col sm={24} md={12}>
+              <FormItem name="expiredDate" input="datePicker" />
+            </Col>
+          </Row>
+        </FormContainer>
+      </Section>
+    </>
   )
 }
 

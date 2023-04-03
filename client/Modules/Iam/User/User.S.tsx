@@ -16,25 +16,27 @@ const UserS: React.FC = () => {
   const { isLoading, data } = useQuery([UserS.name, query], fetch)
 
   return (
-    <Section>
+    <>
       <PageHeader title="User" />
-      <DataTable
-        rowKey="id"
-        columns={userColumns}
-        dataSource={data?.data}
-        search={query.search}
-        pagination={paginationTransform(data?.meta)}
-        loading={isLoading}
-        onChange={(filtersState) => setQueryParams(filtersState)}
-        dataTableHeader={{
-          query,
-          search: true,
-          dateRangeColumn: 'createdAt',
-          hrefCreate: Route.user.form,
-          hrefExport: Route.user.export,
-        }}
-      />
-    </Section>
+      <Section>
+        <DataTable
+          rowKey="id"
+          columns={userColumns}
+          dataSource={data?.data}
+          search={query.search}
+          pagination={paginationTransform(data?.meta)}
+          loading={isLoading}
+          onChange={(filtersState) => setQueryParams(filtersState)}
+          dataTableHeader={{
+            query,
+            search: true,
+            dateRangeColumn: 'createdAt',
+            hrefCreate: Route.user.form,
+            hrefExport: Route.user.export,
+          }}
+        />
+      </Section>
+    </>
   )
 }
 
