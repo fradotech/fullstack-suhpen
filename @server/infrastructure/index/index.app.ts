@@ -2,6 +2,7 @@ import {
   OrderDirectionEnum,
   OrderDirectionType,
 } from '@server/infrastructure/index/index.enum'
+import { ERole } from 'client/Modules/Iam/Role/Role.enum'
 import { Request } from 'express'
 import { Repository, SelectQueryBuilder } from 'typeorm'
 import { IBaseEntity } from '../base/base-entity.interface'
@@ -127,8 +128,11 @@ export abstract class BaseIndexApp {
 
     const isUser = repo.metadata.propertiesMap['user']
     const userId = request['user']?.['id']
+    const isAdmin = [ERole.SuperAdmin, ERole.Admin].includes(
+      request['user']?.['role'],
+    )
 
-    if (isUser && userId) {
+    if (isUser && userId && !isAdmin) {
       query
         .leftJoinAndSelect(`${tableName}.user`, 'user')
         .andWhere('user.id = :userId', { userId })
