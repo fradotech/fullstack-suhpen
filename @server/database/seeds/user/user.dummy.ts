@@ -1,4 +1,4 @@
-import { ERole } from '../../../modules/iam/role/infrastructure/role.enum'
+import { ERole } from 'client/Modules/Iam/Role/Role.enum'
 
 // <--- KEY: email --->
 export const userDummies = [

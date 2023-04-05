@@ -1,7 +1,7 @@
 import { IBaseEntity } from '@server/infrastructure/base/base-entity.interface'
+import { ERole } from 'client/Modules/Iam/Role/Role.enum'
+import { EUserGender } from 'client/Modules/Iam/User/User.enum'
 import dayjs from 'dayjs'
-import { ERole } from '../../role/infrastructure/role.enum'
-import { EUserGender } from './user.enum'
 
 export interface IUser extends IBaseEntity {
   name: string

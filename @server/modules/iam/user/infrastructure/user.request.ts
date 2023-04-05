@@ -1,5 +1,4 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger'
-import { ERole } from '@server/modules/iam/role/infrastructure/role.enum'
 import {
   IsEmail,
   IsEnum,
@@ -11,10 +10,11 @@ import {
   Matches,
   MinLength,
 } from 'class-validator'
+import { ERole } from 'client/Modules/Iam/Role/Role.enum'
+import { EUserGender } from 'client/Modules/Iam/User/User.enum'
 import dayjs from 'dayjs'
 import { REGEX_PASSWORD } from '../common/character.constant'
 import { IUser } from '../infrastructure/user.interface'
-import { EUserGender } from './user.enum'
 
 export class UserRequest implements IUser {
   id: string

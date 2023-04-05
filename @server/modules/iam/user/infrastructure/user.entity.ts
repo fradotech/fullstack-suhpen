@@ -1,4 +1,6 @@
 import * as bcrypt from 'bcrypt'
+import { ERole } from 'client/Modules/Iam/Role/Role.enum'
+import { EUserGender } from 'client/Modules/Iam/User/User.enum'
 import dayjs from 'dayjs'
 import {
   BeforeInsert,
@@ -12,9 +14,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
-import { ERole } from '../../role/infrastructure/role.enum'
 import { IUser } from '../infrastructure/user.interface'
-import { EUserGender } from './user.enum'
 
 @Entity()
 export class EntUser implements IUser {

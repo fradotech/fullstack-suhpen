@@ -1,4 +1,4 @@
-import { ERole } from './role.enum'
+import { ERole } from 'client/Modules/Iam/Role/Role.enum'
 import { IRole } from './role.interface'
 
 export class RoleResponse implements IRole {
