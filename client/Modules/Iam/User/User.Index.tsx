@@ -13,7 +13,7 @@ import { userColumns } from './User.column'
 const UserIndex: React.FC = () => {
   const { query, setQueryParams } = useDataTable<UserIndexRequest>()
   const fetch = async () => await userAction.fetch(query)
-  const { isLoading, data } = useQuery([UserIndex.name, query], fetch)
+  const { isLoading, data, refetch } = useQuery([UserIndex.name, query], fetch)
 
   return (
     <>
@@ -21,7 +21,7 @@ const UserIndex: React.FC = () => {
       <Section>
         <DataTable
           rowKey="id"
-          columns={userColumns}
+          columns={userColumns(refetch)}
           dataSource={data?.data}
           search={query.search}
           pagination={paginationTransform(data?.meta)}

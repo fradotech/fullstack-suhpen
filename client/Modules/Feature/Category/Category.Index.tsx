@@ -13,7 +13,10 @@ import { categoryColumns } from './Category.column'
 const CategoryIndex: React.FC = () => {
   const { query, setQueryParams } = useDataTable<CategoryIndexRequest>()
   const fetch = async () => await categoryAction.fetch(query)
-  const { isLoading, data } = useQuery([CategoryIndex.name, query], fetch)
+  const { isLoading, data, refetch } = useQuery(
+    [CategoryIndex.name, query],
+    fetch,
+  )
 
   return (
     <>
@@ -21,7 +24,7 @@ const CategoryIndex: React.FC = () => {
       <Section>
         <DataTable
           rowKey="id"
-          columns={categoryColumns}
+          columns={categoryColumns(refetch)}
           dataSource={data?.data}
           search={query.search}
           pagination={paginationTransform(data?.meta)}

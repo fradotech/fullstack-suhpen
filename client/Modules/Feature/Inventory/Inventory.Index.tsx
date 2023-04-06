@@ -17,7 +17,10 @@ interface IProps {
 const InventoryIndex: React.FC<IProps> = (props: IProps) => {
   const { query, setQueryParams } = useDataTable<InventoryIndexRequest>()
   const fetch = async () => await inventoryAction.fetch(query, props.productId)
-  const { isLoading, data } = useQuery([InventoryIndex.name, query], fetch)
+  const { isLoading, data, refetch } = useQuery(
+    [InventoryIndex.name, query],
+    fetch,
+  )
 
   return (
     <>
@@ -25,7 +28,7 @@ const InventoryIndex: React.FC<IProps> = (props: IProps) => {
       <Section>
         <DataTable
           rowKey="id"
-          columns={inventoryColumns}
+          columns={inventoryColumns(refetch)}
           dataSource={data?.data}
           search={query.search}
           pagination={!props.productId && paginationTransform(data?.meta)}

@@ -1,9 +1,15 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
+import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
 import { CategoryResponse } from '@server/modules/feature/category/infrastructure/category.response'
 import { ProductResponse } from '@server/modules/feature/product/infrastructure/product.response'
 import { Row, Tag } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import React from 'react'
+import {
+  QueryObserverResult,
+  RefetchOptions,
+  RefetchQueryFilters,
+} from 'react-query'
 import { RowActionButtons } from '../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../Enums/Route'
 import { Util } from '../../../utils/util'
@@ -11,6 +17,11 @@ import { productAction } from './product.action'
 
 export const productColumns = (
   optionsCategory: CategoryResponse[],
+  refetch: <TPageData>(
+    options?: RefetchOptions & RefetchQueryFilters<TPageData>,
+  ) => Promise<
+    QueryObserverResult<IPaginateResponse<ProductResponse>, unknown>
+  >,
 ): ColumnsType<ProductResponse> => {
   return [
     {
@@ -71,6 +82,7 @@ export const productColumns = (
               type: 'delete',
               onClick: async () => {
                 await productAction.remove(data.id)
+                refetch()
               },
             },
           ]}
