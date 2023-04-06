@@ -115,15 +115,15 @@ export abstract class BaseIndexApp {
           query.andWhere(`${tableName}.${column} IN (:value)`, {
             value: req.filters[column],
           })
-        }
-
-        relations.forEach((relation) => {
-          relation.keys.forEach((key) => {
-            query.andWhere(`${relation.name}.${key} IN (:value)`, {
-              value: req.filters[column],
+        } else {
+          relations.forEach((relation) => {
+            relation.keys.forEach((key) => {
+              query.andWhere(`${relation.name}.${key} IN (:value)`, {
+                value: req.filters[column],
+              })
             })
           })
-        })
+        }
       })
     }
 
