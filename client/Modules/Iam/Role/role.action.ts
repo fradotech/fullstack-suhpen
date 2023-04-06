@@ -14,7 +14,7 @@ export const roleAction = {
     return await axiosService.get(`${Route.role}/${id}`)
   },
 
-  // <--- Another ---> \\
+  // --- Another --- \\
 
   colorRole: (status: ERole): string => {
     const color = {}
