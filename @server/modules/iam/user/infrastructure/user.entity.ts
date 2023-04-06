@@ -55,7 +55,7 @@ export class EntUser implements IUser {
     // this.deletedBy = user
   }
 
-  // <--- Regular attributs --->
+  // --- Regular attributs --- \\
 
   @Column()
   name: string

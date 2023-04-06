@@ -5,19 +5,21 @@ import {
   EditOutlined,
   EyeOutlined,
   MoreOutlined,
+  SendOutlined,
 } from '@ant-design/icons'
-import { Button, Card, Dropdown, Popconfirm, Space, Tooltip } from 'antd'
+import { Button, Card, Dropdown, Popconfirm, Tooltip } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { isMobileScreen } from '../../../utils/is-mobile'
 
-type ButtonType = 'view' | 'edit' | 'delete' | 'approve' | 'reject'
+type ButtonType = 'view' | 'edit' | 'delete' | 'approve' | 'reject' | 'submit'
 
 interface IRowActionButtonsProps {
   type?: ButtonType
   href?: string
   onClick?: () => void
   icon?: React.ReactNode
+  disabled?: boolean
 }
 
 interface IRowActionProps {
@@ -28,6 +30,8 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
   const isMobile = isMobileScreen()
 
   const renderButton = (action: IRowActionButtonsProps) => {
+    if (!action) return null
+
     let { icon } = action
 
     if (!icon) {
@@ -52,6 +56,10 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
           icon = <CloseCircleOutlined style={{ color: 'red' }} />
           break
 
+        case 'submit':
+          icon = <SendOutlined style={{ color: 'blue' }} />
+          break
+
         default:
           break
       }
@@ -60,15 +68,27 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
     return (
       <Tooltip title={action.type} key={action.type}>
         {action.type == 'view' || action.type == 'edit' ? (
-          <Link to={action.href || '#'} onClick={action.onClick}>
-            {icon}
+          <Link to={action.href || '#'}>
+            <Button
+              type="text"
+              shape="circle"
+              onClick={action.onClick}
+              icon={icon}
+              disabled={action.disabled}
+            />
           </Link>
         ) : (
           <Popconfirm
             title={`Are you sure want to ${action.type}?`}
             onConfirm={action.onClick}
           >
-            {icon}
+            <Button
+              type="text"
+              shape="circle"
+              onClick={action.onClick}
+              icon={icon}
+              disabled={action.disabled}
+            />
           </Popconfirm>
         )}
       </Tooltip>
@@ -80,9 +100,7 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
       trigger={['click']}
       overlay={
         <Card size="small">
-          <Space wrap>
-            {actions.slice(0, 3).map((action) => renderButton(action))}
-          </Space>
+          <>{actions.slice(0, 3).map((action) => renderButton(action))}</>
         </Card>
       }
       placement="bottomLeft"
@@ -90,8 +108,6 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
       <Button type="text" icon={<MoreOutlined />} />
     </Dropdown>
   ) : (
-    <Space direction="vertical">
-      <Space wrap>{actions.map((action) => renderButton(action))}</Space>
-    </Space>
+    <>{actions.map((action) => renderButton(action))}</>
   )
 }

@@ -77,7 +77,7 @@ export const inventoryColumns: ColumnsType<InventoryResponse> = [
   },
   {
     title: 'Actions',
-    width: '75px',
+    width: '120px',
     render: (data: InventoryResponse) => (
       <RowActionButtons
         actions={[

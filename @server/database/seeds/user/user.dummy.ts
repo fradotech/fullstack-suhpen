@@ -1,6 +1,6 @@
 import { ERole } from 'client/Modules/Iam/Role/Role.enum'
 
-// <--- KEY: email --->
+// --- KEY: email --- \\
 export const userDummies = [
   {
     name: 'Super Admin',

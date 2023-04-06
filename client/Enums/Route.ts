@@ -17,7 +17,7 @@ export const Route = {
   ...routesUser,
   ...routesRole,
 
-  // <--- Feature --->
+  // --- Feature --- \\
 
   ...routesProduct,
   ...routesCategory,

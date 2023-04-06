@@ -5,6 +5,7 @@ import React from 'react'
 import { RowActionButtons } from '../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../Enums/Route'
 import { Util } from '../../../utils/util'
+import { roleAction } from '../Role/role.action'
 import { ERole } from '../Role/Role.enum'
 import { userAction } from './user.action'
 
@@ -17,13 +18,8 @@ export const userColumns: ColumnsType<UserResponse> = [
   },
   {
     dataIndex: 'role',
-    render: (data: string) => {
-      const color = {}
-      color[ERole.SuperAdmin] = 'blue'
-      color[ERole.Admin] = 'green'
-      color[ERole.User] = 'yellow'
-
-      return <Tag color={color[data]}>{data}</Tag>
+    render: (data: ERole) => {
+      return <Tag color={roleAction.colorRole(data)}>{data}</Tag>
     },
     filters: [
       { text: ERole.SuperAdmin, value: ERole.SuperAdmin },
@@ -40,7 +36,7 @@ export const userColumns: ColumnsType<UserResponse> = [
   },
   {
     title: 'Actions',
-    width: '75px',
+    width: '120px',
     render: (data: UserResponse) => (
       <RowActionButtons
         actions={[

@@ -37,7 +37,7 @@ export const categoryColumns: ColumnsType<CategoryResponse> = [
   },
   {
     title: 'Actions',
-    width: '75px',
+    width: '120px',
     render: (data: CategoryResponse) => (
       <RowActionButtons
         actions={[

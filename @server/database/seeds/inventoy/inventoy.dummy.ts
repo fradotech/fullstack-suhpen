@@ -1,4 +1,4 @@
-// <--- KEY: buyPrice --->
+// --- KEY: buyPrice --- \\
 export const inventoryDummies = [
   {
     buyPrice: 1234567,

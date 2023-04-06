@@ -55,7 +55,7 @@ export const productColumns = (
     },
     {
       title: 'Actions',
-      width: '75px',
+      width: '120px',
       render: (data: ProductResponse) => (
         <RowActionButtons
           actions={[

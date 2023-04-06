@@ -106,15 +106,20 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
                 type="primary"
                 onClick={handleExport}
                 style={{ backgroundColor: '#0f9d59' }}
+                icon={<FileExcelFilled />}
               >
-                <FileExcelFilled /> Export
+                Export
               </Button>
             </Col>
           )}
           {props.hrefCreate && (
             <Col className={styles.headerItem}>
-              <Button type="primary" onClick={() => navigate(props.hrefCreate)}>
-                <PlusCircleFilled /> New
+              <Button
+                type="primary"
+                onClick={() => navigate(props.hrefCreate)}
+                icon={<PlusCircleFilled />}
+              >
+                New
               </Button>
             </Col>
           )}

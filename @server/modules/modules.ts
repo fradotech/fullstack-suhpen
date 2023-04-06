@@ -6,7 +6,7 @@ export enum Modules {
   Attachment = 'attachments',
   Dashboard = 'dashboard',
 
-  // <--- Feature Modules --->
+  // --- Feature Modules --- \\
 
   Category = 'categories',
   Product = 'products',

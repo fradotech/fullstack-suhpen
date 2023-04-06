@@ -1,4 +1,4 @@
-// <--- KEY: key --->
+// --- KEY: key --- \\
 export const productDummies = [
   {
     name: 'iPhone 9',

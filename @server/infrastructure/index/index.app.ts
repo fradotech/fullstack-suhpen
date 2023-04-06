@@ -79,7 +79,7 @@ export abstract class BaseIndexApp {
     return await query.getManyAndCount()
   }
 
-  // <--- Create Index Query --->
+  // --- Create Index Query --- \\
 
   createQueryIndex<T>(
     req: IndexRequest,
