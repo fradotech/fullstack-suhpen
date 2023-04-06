@@ -26,16 +26,16 @@ const DashboardInventory: React.FC = () => {
       <Col>
         <Row gutter={12}>
           <Col sm={24} md={6}>
-            <CardData title="Buy Price Total" price={data?.buyPrice?.sum} />
+            <CardData title="Buy Price Total" price={data?.buyPrice.sum} />
           </Col>
           <Col sm={24} md={6}>
-            <CardData title="Sell Price Total" price={data?.sellPrice?.sum} />
+            <CardData title="Sell Price Total" price={data?.sellPrice.sum} />
           </Col>
           <Col sm={24} md={6}>
-            <CardData title="Buy Price Average" price={data?.buyPrice?.avg} />
+            <CardData title="Buy Price Average" price={data?.buyPrice.avg} />
           </Col>
           <Col sm={24} md={6}>
-            <CardData title="Sell Price Average" price={data?.sellPrice?.avg} />
+            <CardData title="Sell Price Average" price={data?.sellPrice.avg} />
           </Col>
         </Row>
         <Row gutter={12}>
