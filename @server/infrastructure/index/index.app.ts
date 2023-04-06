@@ -111,18 +111,20 @@ export abstract class BaseIndexApp {
 
     if (req.filters) {
       Object.keys(req.filters).forEach((column) => {
-        if (tableColumns.includes(column)) {
-          query.andWhere(`${tableName}.${column} IN (:value)`, {
-            value: req.filters[column],
-          })
-        } else {
-          relations.forEach((relation) => {
-            relation.keys.forEach((key) => {
-              query.andWhere(`${relation.name}.${key} IN (:value)`, {
-                value: req.filters[column],
+        if (!column.includes('_')) {
+          if (tableColumns.includes(column)) {
+            query.andWhere(`${tableName}.${column} IN (:value)`, {
+              value: req.filters[column],
+            })
+          } else {
+            relations.forEach((relation) => {
+              relation.keys.forEach((key) => {
+                query.andWhere(`${relation.name}.${key} IN (:value)`, {
+                  value: req.filters[column],
+                })
               })
             })
-          })
+          }
         }
       })
     }
