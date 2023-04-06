@@ -52,7 +52,7 @@ export const categoryColumns: ColumnsType<CategoryResponse> = [
           {
             type: 'delete',
             onClick: async () => {
-              ;(await categoryAction.remove(data.id)) && location.reload()
+              await categoryAction.remove(data.id)
             },
           },
         ]}

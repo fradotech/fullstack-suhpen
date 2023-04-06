@@ -56,6 +56,8 @@ export const categoryAction = {
   },
 
   remove: async (id: string): Promise<IApiRes<CategoryResponse>> => {
-    return await axiosService.delete(Route.category.id(id))
+    const res = await axiosService.delete(Route.category.id(id))
+    res.data && notification.success({ message: 'Success delete data' })
+    return res
   },
 }

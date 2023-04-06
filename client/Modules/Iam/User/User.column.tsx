@@ -51,7 +51,7 @@ export const userColumns: ColumnsType<UserResponse> = [
           {
             type: 'delete',
             onClick: async () => {
-              ;(await userAction.remove(data.id)) && location.reload()
+              await userAction.remove(data.id)
             },
           },
         ]}

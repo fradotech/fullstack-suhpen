@@ -70,7 +70,7 @@ export const productColumns = (
             {
               type: 'delete',
               onClick: async () => {
-                ;(await productAction.remove(data.id)) && location.reload()
+                await productAction.remove(data.id)
               },
             },
           ]}

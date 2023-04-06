@@ -92,7 +92,7 @@ export const inventoryColumns: ColumnsType<InventoryResponse> = [
           {
             type: 'delete',
             onClick: async () => {
-              ;(await inventoryAction.remove(data.id)) && location.reload()
+              await inventoryAction.remove(data.id)
             },
           },
         ]}

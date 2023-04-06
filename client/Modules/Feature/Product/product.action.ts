@@ -54,6 +54,8 @@ export const productAction = {
   },
 
   remove: async (id: string): Promise<IApiRes<ProductResponse>> => {
-    return await axiosService.delete(Route.product.id(id))
+    const res = await axiosService.delete(Route.product.id(id))
+    res.data && notification.success({ message: 'Success delete data' })
+    return res
   },
 }

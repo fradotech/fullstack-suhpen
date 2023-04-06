@@ -90,9 +90,9 @@ export abstract class BaseIndexApp {
     repo: Repository<T>,
     request: Request,
   ): SelectQueryBuilder<T> {
-    relations.forEach((relation) =>
-      query.leftJoinAndSelect(`${tableName}.${relation.name}`, relation.name),
-    )
+    relations.forEach((relation) => {
+      query.leftJoinAndSelect(`${tableName}.${relation.name}`, relation.name)
+    })
 
     if (req.search) {
       query.andWhere(this.querySearch(tableName, tableColumns), {
@@ -111,10 +111,11 @@ export abstract class BaseIndexApp {
 
     if (req.filters) {
       Object.keys(req.filters).forEach((column) => {
-        tableColumns.includes(column) &&
+        if (tableColumns.includes(column)) {
           query.andWhere(`${tableName}.${column} IN (:value)`, {
             value: req.filters[column],
           })
+        }
 
         relations.forEach((relation) => {
           relation.keys.forEach((key) => {
@@ -128,14 +129,16 @@ export abstract class BaseIndexApp {
 
     const isUser = repo.metadata.propertiesMap['user']
     const userId = request['user']?.['id']
+    const isUserRelation = relations
+      .map((data) => data.name)
+      .find((data) => data == 'user')
     const isAdmin = [ERole.SuperAdmin, ERole.Admin].includes(
       request['user']?.['role'],
     )
 
     if (isUser && userId && !isAdmin) {
-      query
-        .leftJoinAndSelect(`${tableName}.user`, 'user')
-        .andWhere('user.id = :userId', { userId })
+      !isUserRelation && query.leftJoinAndSelect(`${tableName}.user`, 'user')
+      query.andWhere('user.id = :userId', { userId })
     }
 
     const sort = this.orderByKey(tableName, tableColumns, req.sortField)
