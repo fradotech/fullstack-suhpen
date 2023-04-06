@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom'
 
 const InventoryDetail = React.lazy(() => import('./Inventory.Detail'))
 const InventoryForm = React.lazy(() => import('./Inventory.Form'))
-const InventoryS = React.lazy(() => import('./Inventory.S'))
+const InventoryS = React.lazy(() => import('./Inventory.Index'))
 
 const path = '/inventories'
 

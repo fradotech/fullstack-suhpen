@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom'
 
 const ProductDetail = React.lazy(() => import('./Product.Detail'))
 const ProductForm = React.lazy(() => import('./Product.Form'))
-const ProductS = React.lazy(() => import('./Product.S'))
+const ProductS = React.lazy(() => import('./Product.Index'))
 
 const path = '/products'
 

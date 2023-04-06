@@ -6,7 +6,7 @@ import { Section } from '../../../Components/Molecules/Section/Section'
 import DescriptionContainer from '../../../Components/Organisms/Description/DescriptionContainer'
 import DescriptionItem from '../../../Components/Organisms/Description/DescriptionItem'
 import { Route } from '../../../Enums/Route'
-import InventoryS from '../Inventory/Inventory.S'
+import InventoryIndex from '../Inventory/Inventory.Index'
 import { productAction } from './product.action'
 
 const ProductDetail: React.FC = () => {
@@ -28,7 +28,7 @@ const ProductDetail: React.FC = () => {
           {fields?.map((key) => DescriptionItem(data?.data, key))}
         </DescriptionContainer>
       </Section>
-      <InventoryS productId={id} />
+      <InventoryIndex productId={id} />
     </>
   )
 }

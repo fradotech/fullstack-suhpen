@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 
-const RoleS = React.lazy(() => import('./Role.S'))
+const RoleS = React.lazy(() => import('./Role.Index'))
 
 const path = '/roles'
 

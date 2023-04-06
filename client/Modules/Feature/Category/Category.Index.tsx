@@ -10,10 +10,10 @@ import { Route } from '../../../Enums/Route'
 import { categoryAction } from './category.action'
 import { categoryColumns } from './Category.column'
 
-const CategoryS: React.FC = () => {
+const CategoryIndex: React.FC = () => {
   const { query, setQueryParams } = useDataTable<CategoryIndexRequest>()
   const fetch = async () => await categoryAction.fetch(query)
-  const { isLoading, data } = useQuery([CategoryS.name, query], fetch)
+  const { isLoading, data } = useQuery([CategoryIndex.name, query], fetch)
 
   return (
     <>
@@ -39,4 +39,4 @@ const CategoryS: React.FC = () => {
   )
 }
 
-export default CategoryS
+export default CategoryIndex

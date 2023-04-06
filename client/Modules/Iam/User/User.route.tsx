@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom'
 
 const UserDetail = React.lazy(() => import('./User.Detail'))
 const UserForm = React.lazy(() => import('./User.Form'))
-const UserS = React.lazy(() => import('./User.S'))
+const UserS = React.lazy(() => import('./User.Index'))
 
 const path = '/users'
 

@@ -1,4 +1,4 @@
-import { UserIndexRequest } from '@server/modules/iam/user/infrastructure/user-index.request'
+import { ProductIndexRequest } from '@server/modules/feature/product/infrastructure/product-index.request'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
@@ -7,32 +7,33 @@ import DataTable from '../../../Components/Organisms/DataTable/DataTable'
 import { paginationTransform } from '../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../Components/Organisms/DataTable/useDataTable'
 import { Route } from '../../../Enums/Route'
-import { userAction } from './user.action'
-import { userColumns } from './User.column'
+import useCategories from '../Category/common/useCategories'
+import { productAction } from './product.action'
+import { productColumns } from './Product.column'
 
-const UserS: React.FC = () => {
-  const { query, setQueryParams } = useDataTable<UserIndexRequest>()
-  const fetch = async () => await userAction.fetch(query)
-  const { isLoading, data } = useQuery([UserS.name, query], fetch)
+const ProductIndex: React.FC = () => {
+  const { query, setQueryParams } = useDataTable<ProductIndexRequest>()
+  const fetch = async () => await productAction.fetch(query)
+  const { isLoading, data } = useQuery([ProductIndex.name, query], fetch)
+  const { isLoading: isLoadingCategories, data: categories } = useCategories()
 
   return (
     <>
-      <PageHeader title="User" />
+      <PageHeader title="Product" />
       <Section>
         <DataTable
           rowKey="id"
-          columns={userColumns}
+          columns={productColumns(categories?.data)}
           dataSource={data?.data}
           search={query.search}
           pagination={paginationTransform(data?.meta)}
-          loading={isLoading}
+          loading={isLoading || isLoadingCategories}
           onChange={(filtersState) => setQueryParams(filtersState)}
           dataTableHeader={{
             query,
             search: true,
-            dateRangeColumn: 'createdAt',
-            hrefCreate: Route.user.form,
-            hrefExport: Route.user.export,
+            hrefCreate: Route.product.form,
+            hrefExport: Route.product.export,
           }}
         />
       </Section>
@@ -40,4 +41,4 @@ const UserS: React.FC = () => {
   )
 }
 
-export default UserS
+export default ProductIndex

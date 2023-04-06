@@ -14,10 +14,10 @@ interface IProps {
   productId?: string
 }
 
-const InventoryS: React.FC<IProps> = (props: IProps) => {
+const InventoryIndex: React.FC<IProps> = (props: IProps) => {
   const { query, setQueryParams } = useDataTable<InventoryIndexRequest>()
   const fetch = async () => await inventoryAction.fetch(query, props.productId)
-  const { isLoading, data } = useQuery([InventoryS.name, query], fetch)
+  const { isLoading, data } = useQuery([InventoryIndex.name, query], fetch)
 
   return (
     <>
@@ -48,4 +48,4 @@ const InventoryS: React.FC<IProps> = (props: IProps) => {
   )
 }
 
-export default InventoryS
+export default InventoryIndex

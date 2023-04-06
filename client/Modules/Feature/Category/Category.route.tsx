@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom'
 
 const CategoryDetail = React.lazy(() => import('./Category.Detail'))
 const CategoryForm = React.lazy(() => import('./Category.Form'))
-const CategoryS = React.lazy(() => import('./Category.S'))
+const CategoryS = React.lazy(() => import('./Category.Index'))
 
 const path = '/categories'
 
