@@ -85,7 +85,6 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
             <Button
               type="text"
               shape="circle"
-              onClick={action.onClick}
               icon={icon}
               disabled={action.disabled}
             />
