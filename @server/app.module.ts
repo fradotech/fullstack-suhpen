@@ -12,14 +12,12 @@ import { DatabaseModule } from './database/database.module'
 import { DashboardModule } from './modules/dashboard/dashboard.module'
 import { FeatureModule } from './modules/feature/feature.module'
 import { IamModule } from './modules/iam/iam.module'
-import { LoggerModule } from './modules/support/logger/logger.module'
 import { SentryModule } from './modules/support/sentry/sentry.module'
 import { SupportModule } from './modules/support/support.module'
 
 @Module({
   imports: [
     SentryModule.forRoot(),
-    LoggerModule,
     RavenModule,
     DatabaseModule,
     SupportModule,
