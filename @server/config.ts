@@ -8,7 +8,7 @@ export const config = {
     version: process.env.APP_VERSION,
     description: process.env.APP_DESCRIPTION,
     prefix: process.env.APP_PREFIX || '/api/v1',
-    logFile: 'app-log.json',
+    logFile: 'app.log',
   },
 
   server: {

@@ -9,16 +9,17 @@ import {
 } from './common/exceptions/http-exeception.filter'
 import { ValidationPipe } from './common/pipes/validation.pipe'
 import { DatabaseModule } from './database/database.module'
-import { LoggerInterceptor } from './infrastructure/interceptors/logger/logger.interceptor'
 import { DashboardModule } from './modules/dashboard/dashboard.module'
 import { FeatureModule } from './modules/feature/feature.module'
 import { IamModule } from './modules/iam/iam.module'
+import { LoggerModule } from './modules/support/logger/logger.module'
 import { SentryModule } from './modules/support/sentry/sentry.module'
 import { SupportModule } from './modules/support/support.module'
 
 @Module({
   imports: [
     SentryModule.forRoot(),
+    LoggerModule,
     RavenModule,
     DatabaseModule,
     SupportModule,
@@ -31,10 +32,6 @@ import { SupportModule } from './modules/support/support.module'
     {
       provide: APP_INTERCEPTOR,
       useValue: new RavenInterceptor(),
-    },
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: LoggerInterceptor,
     },
     {
       provide: APP_FILTER,

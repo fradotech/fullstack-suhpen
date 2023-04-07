@@ -16,7 +16,7 @@ export class MailService {
     })
   }
 
-  async send(mailOptions: MailOptions) {
+  send(mailOptions: MailOptions) {
     mailOptions.from = 'fradotech.id@gmail.com'
     this.transporter.sendMail(mailOptions, (error: Error, info: any) => {
       error && Exception.unprocessable(error)
