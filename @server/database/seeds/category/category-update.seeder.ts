@@ -1,4 +1,3 @@
-import { Logger } from '@nestjs/common'
 import dataSource from '@server/database/data-source'
 import { EntCategory } from '@server/modules/feature/category/infrastructure/category.entity'
 import { ICategory } from '@server/modules/feature/category/infrastructure/category.interface'
@@ -21,8 +20,6 @@ export const categoryUpdateSeeder = async (): Promise<boolean> => {
     dataExist && (dataCreate.id = dataExist.id)
     await userRepo.save(dataCreate)
   })
-
-  Logger.log(String([data.map((data) => data.key)]), 'SeederUpdate:Category')
 
   return true
 }

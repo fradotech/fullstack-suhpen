@@ -20,11 +20,19 @@ export class LoggerInterceptor implements NestInterceptor {
     const req = context.switchToHttp().getRequest() as Request
     const dateNow = Date.now()
     const logPath = process.cwd() + '/' + config.app.logFile
+    const getFile = () => {
+      try {
+        return String(fs.readFileSync(logPath))
+      } catch (e) {
+        fs.writeFileSync(logPath, '[]')
+        return String(fs.readFileSync(logPath))
+      }
+    }
+    const file = getFile()
 
     return next.handle().pipe(
       tap(() => {
         const logRes = LoggerResponse.fromEntity(Date.now() - dateNow, req)
-        const file = String(fs.readFileSync(logPath))
 
         if (Util.isValidJSON(file)) {
           const logFile = JSON.parse(file)
