@@ -23,6 +23,7 @@ export interface IPaginateResponse<T> {
 }
 
 export interface IIndexAppRelation {
-  name: string
-  keys: string[]
+  table: string
+  columns?: string[]
+  relations?: IIndexAppRelation[]
 }

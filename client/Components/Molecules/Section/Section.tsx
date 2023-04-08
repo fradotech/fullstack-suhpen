@@ -15,7 +15,7 @@ export const Section: React.FC<IProps> = (props: IProps) => {
         marginTop: props.marginTop ? '20px' : '0px',
         marginRight: props.marginRight ? '20px' : '0px',
         marginLeft: props.marginLeft ? '20px' : '0px',
-        marginBottom: '20px',
+        marginBottom: '12px',
       }}
       bordered={false}
     >

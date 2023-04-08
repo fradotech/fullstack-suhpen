@@ -46,11 +46,15 @@ export abstract class BaseIndexApp {
     return keys.includes(sort) ? `${table}.${sort}` : `${table}.updatedAt`
   }
 
-  private querySearch(table: string, keys: string[]): string {
+  private querySearch(relations: IIndexAppRelation[]): string {
     let querySearch = `CONCAT_WS(''`
 
-    for (const key of keys) {
-      querySearch += `, lower(${table}.${key})`
+    for (const relation of relations) {
+      if (relation.columns) {
+        for (const key of relation.columns) {
+          querySearch += `, lower(${relation.table}.${key})`
+        }
+      }
     }
 
     return (querySearch += ') like :search')
@@ -90,12 +94,21 @@ export abstract class BaseIndexApp {
     repo: Repository<T>,
     request: Request,
   ): SelectQueryBuilder<T> {
-    relations.forEach((relation) => {
-      query.leftJoinAndSelect(`${tableName}.${relation.name}`, relation.name)
-    })
+    const leftJoin = (relations: IIndexAppRelation[]) => {
+      relations.forEach((relation) => {
+        query.leftJoinAndSelect(
+          `${tableName}.${relation.table}`,
+          relation.table,
+        )
+        relation.relations && leftJoin(relation.relations)
+      })
+    }
+
+    leftJoin(relations)
 
     if (req.search) {
-      query.andWhere(this.querySearch(tableName, tableColumns), {
+      const thisTable = { table: tableName, columns: tableColumns }
+      query.andWhere(this.querySearch([thisTable, ...relations]), {
         search: `%${req.search.toLowerCase()}%`,
       })
     }
@@ -110,7 +123,7 @@ export abstract class BaseIndexApp {
     }
 
     if (req.filters) {
-      Object.keys(req.filters).forEach((column) => {
+      Object.keys(req.filters)?.forEach((column) => {
         if (!column.includes('_')) {
           if (tableColumns.includes(column)) {
             query.andWhere(`${tableName}.${column} IN (:value)`, {
@@ -118,8 +131,8 @@ export abstract class BaseIndexApp {
             })
           } else {
             relations.forEach((relation) => {
-              relation.keys.forEach((key) => {
-                query.andWhere(`${relation.name}.${key} IN (:value)`, {
+              relation.columns.forEach((key) => {
+                query.andWhere(`${relation.table}.${key} IN (:value)`, {
                   value: req.filters[column],
                 })
               })
@@ -132,7 +145,7 @@ export abstract class BaseIndexApp {
     const isUser = repo.metadata.propertiesMap['user']
     const userId = request['user']?.['id']
     const isUserRelation = relations
-      .map((data) => data.name)
+      .map((data) => data.table)
       .find((data) => data == 'user')
     const isAdmin = [ERole.SuperAdmin, ERole.Admin].includes(
       request['user']?.['role'],
