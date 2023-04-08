@@ -107,7 +107,10 @@ export abstract class BaseIndexApp {
     leftJoin(relations)
 
     if (req.search) {
-      const thisTable = { table: tableName, columns: tableColumns }
+      const thisTable: IIndexAppRelation = {
+        table: tableName,
+        columns: tableColumns,
+      }
       query.andWhere(this.querySearch([thisTable, ...relations]), {
         search: `%${req.search.toLowerCase()}%`,
       })
