@@ -94,17 +94,17 @@ export abstract class BaseIndexApp {
     repo: Repository<T>,
     request: Request,
   ): SelectQueryBuilder<T> {
-    const leftJoin = (relations: IIndexAppRelation[]) => {
+    const leftJoin = (tableName: string, relations: IIndexAppRelation[]) => {
       relations.forEach((relation) => {
         query.leftJoinAndSelect(
           `${tableName}.${relation.table}`,
           relation.table,
         )
-        relation.relations && leftJoin(relation.relations)
+        relation.relations && leftJoin(relation.table, relation.relations)
       })
     }
 
-    leftJoin(relations)
+    leftJoin(tableName, relations)
 
     if (req.search) {
       const thisTable: IIndexAppRelation = {
@@ -133,13 +133,20 @@ export abstract class BaseIndexApp {
               value: req.filters[column],
             })
           } else {
-            relations.forEach((relation) => {
-              relation.columns.forEach((key) => {
-                query.andWhere(`${relation.table}.${key} IN (:value)`, {
-                  value: req.filters[column],
+            const filterRelation = (relations: IIndexAppRelation[]) => {
+              relations.forEach((relation) => {
+                relation.columns?.forEach((key) => {
+                  if (relation.table.includes(column)) {
+                    query.andWhere(`${relation.table}.${key} IN (:value)`, {
+                      value: req.filters[column],
+                    })
+                  }
+                  relation.relations && filterRelation(relation.relations)
                 })
               })
-            })
+            }
+
+            filterRelation(relations)
           }
         }
       })
