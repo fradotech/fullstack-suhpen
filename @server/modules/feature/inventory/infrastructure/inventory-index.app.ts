@@ -35,7 +35,7 @@ export class InventoryIndexApp extends BaseIndexApp {
       'marginPrice',
     ]
     const relations: IIndexAppRelation[] = [
-      { table: 'product', columns: ['name'] },
+      { name: 'product', columns: ['name'] },
     ]
 
     const query = this.createQueryIndex(

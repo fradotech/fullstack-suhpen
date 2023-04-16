@@ -52,7 +52,7 @@ export abstract class BaseIndexApp {
     for (const relation of relations) {
       if (relation.columns) {
         for (const key of relation.columns) {
-          querySearch += `, lower(${relation.table}.${key})`
+          querySearch += `, lower(${relation.name}.${key})`
         }
       }
     }
@@ -96,11 +96,8 @@ export abstract class BaseIndexApp {
   ): SelectQueryBuilder<T> {
     const leftJoin = (tableName: string, relations: IIndexAppRelation[]) => {
       relations.forEach((relation) => {
-        query.leftJoinAndSelect(
-          `${tableName}.${relation.table}`,
-          relation.table,
-        )
-        relation.relations && leftJoin(relation.table, relation.relations)
+        query.leftJoinAndSelect(`${tableName}.${relation.name}`, relation.name)
+        relation.relations && leftJoin(relation.name, relation.relations)
       })
     }
 
@@ -108,7 +105,7 @@ export abstract class BaseIndexApp {
 
     if (req.search) {
       const thisTable: IIndexAppRelation = {
-        table: tableName,
+        name: tableName,
         columns: tableColumns,
       }
       query.andWhere(this.querySearch([thisTable, ...relations]), {
@@ -136,8 +133,8 @@ export abstract class BaseIndexApp {
             const filterRelation = (relations: IIndexAppRelation[]) => {
               relations.forEach((relation) => {
                 relation.columns?.forEach((key) => {
-                  if (relation.table.includes(column)) {
-                    query.andWhere(`${relation.table}.${key} IN (:value)`, {
+                  if (relation.name.includes(column)) {
+                    query.andWhere(`${relation.name}.${key} IN (:value)`, {
                       value: req.filters[column],
                     })
                   }
@@ -155,7 +152,7 @@ export abstract class BaseIndexApp {
     const isUser = repo.metadata.propertiesMap['user']
     const userId = request['user']?.['id']
     const isUserRelation = relations
-      .map((data) => data.table)
+      .map((data) => data.name)
       .find((data) => data == 'user')
     const isAdmin = [ERole.SuperAdmin, ERole.Admin].includes(
       request['user']?.['role'],
