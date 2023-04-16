@@ -1,4 +1,3 @@
-import { HttpModule } from '@nestjs/axios'
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { AuthModule } from '@server/modules/iam/auth/auth.module'
@@ -10,7 +9,7 @@ import { CategoryCrudController } from './v1/category-crud.controller'
 import { CategorySheetController } from './v1/category-sheet.controller'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([EntCategory]), AuthModule, HttpModule],
+  imports: [TypeOrmModule.forFeature([EntCategory]), AuthModule],
   controllers: [CategorySheetController, CategoryCrudController],
   providers: [CategoryService, CategoryCrudApp, CategoryIndexApp],
   exports: [CategoryService],

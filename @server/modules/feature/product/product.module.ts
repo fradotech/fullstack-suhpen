@@ -1,4 +1,3 @@
-import { HttpModule } from '@nestjs/axios'
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { AuthModule } from '@server/modules/iam/auth/auth.module'
@@ -10,7 +9,7 @@ import { ProductCrudController } from './v1/product-crud.controller'
 import { ProductSheetController } from './v1/product-sheet.controller'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([EntProduct]), AuthModule, HttpModule],
+  imports: [TypeOrmModule.forFeature([EntProduct]), AuthModule],
   controllers: [ProductSheetController, ProductCrudController],
   providers: [ProductService, ProductCrudApp, ProductIndexApp],
   exports: [ProductService],
