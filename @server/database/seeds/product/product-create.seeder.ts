@@ -9,10 +9,8 @@ import { productDummies } from './product.dummy'
 
 export const productCreateSeeder = async (): Promise<boolean> => {
   const data = productDummies
-  const productRepo = new Repository<IProduct>(
-    EntProduct,
-    new EntityManager(dataSource),
-  )
+  const entityManager = new EntityManager(dataSource)
+  const productRepo = new Repository<IProduct>(EntProduct, entityManager)
   const table = EntProduct.name
 
   const productExist = await productRepo
@@ -22,24 +20,14 @@ export const productCreateSeeder = async (): Promise<boolean> => {
 
   if (productExist) return false
 
-  const categoryRepo = new Repository<ICategory>(
-    EntCategory,
-    new EntityManager(dataSource),
-  )
-
+  const categoryRepo = new Repository<ICategory>(EntCategory, entityManager)
   const categories = await categoryRepo.find()
   const products = data as unknown as IProduct[]
 
   for (let i = 0; i < products.length; i++) {
     const iCategories = () => Math.floor(Math.random() * categories.length)
     const getCategory = () => categories[iCategories()]
-    const randomCategories = [
-      getCategory(),
-      getCategory(),
-      getCategory(),
-      getCategory(),
-      getCategory(),
-    ]
+    const randomCategories = [getCategory(), getCategory()]
 
     products[i].categories = [...new Set(randomCategories)]
   }

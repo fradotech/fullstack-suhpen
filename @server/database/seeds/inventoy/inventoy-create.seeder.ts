@@ -9,10 +9,8 @@ import { inventoryDummies } from './inventoy.dummy'
 
 export const inventoryCreateSeeder = async (): Promise<boolean> => {
   const data = inventoryDummies
-  const inventoryRepo = new Repository<IInventory>(
-    EntInventory,
-    new EntityManager(dataSource),
-  )
+  const entityManager = new EntityManager(dataSource)
+  const inventoryRepo = new Repository<IInventory>(EntInventory, entityManager)
   const table = EntInventory.name
 
   const inventoryExist = await inventoryRepo
@@ -24,11 +22,7 @@ export const inventoryCreateSeeder = async (): Promise<boolean> => {
 
   if (inventoryExist) return false
 
-  const productRepo = new Repository<IProduct>(
-    EntProduct,
-    new EntityManager(dataSource),
-  )
-
+  const productRepo = new Repository<IProduct>(EntProduct, entityManager)
   const products = await productRepo.find()
   const inventorys = data as unknown as IInventory[]
 
