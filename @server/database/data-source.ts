@@ -10,8 +10,8 @@ export const dataSourceOptions: DataSourceOptions = {
   password: config.database.password,
   database: config.database.database,
   namingStrategy: new SnakeNamingStrategy(),
-  entities: ['dist/**/*.entity.js'],
-  migrations: ['dist/@server/database/migrations/*.js'],
+  entities: ['@server/**/*.entity.ts'],
+  migrations: ['@server/database/migrations/*.ts'],
   logging: config.server.nodeEnv === 'local',
 }
 
