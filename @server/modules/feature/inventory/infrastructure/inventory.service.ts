@@ -49,4 +49,19 @@ export class InventoryService implements BaseService {
     const data = (await this.findOneOrFail(id)) as EntInventory
     return await this.inventoryRepo.softRemove(data)
   }
+
+  // --- Another findOneBy() Methods --- \\
+
+  async findNoRelation(
+    id: string | string[],
+  ): Promise<IInventory | IInventory[]> {
+    if (!Array.isArray(id)) {
+      return await this.inventoryRepo.findOneOrFail({ where: { id } })
+    }
+
+    return await this.inventoryRepo
+      .createQueryBuilder('inventory')
+      .whereInIds(id)
+      .getMany()
+  }
 }
