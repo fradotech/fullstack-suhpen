@@ -17,11 +17,7 @@ export class EntInventory extends BaseEntity implements IInventory {
   @Column({ default: null })
   productVariantName?: string
 
-  @Column({
-    default: EInventorySupplyType.SelfStock,
-    type: 'enum',
-    enum: EInventorySupplyType,
-  })
+  @Column({ default: EInventorySupplyType.SelfStock })
   supplyType: EInventorySupplyType
 
   @Column({ default: 0 })

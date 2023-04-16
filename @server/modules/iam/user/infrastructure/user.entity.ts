@@ -66,10 +66,10 @@ export class EntUser implements IUser {
   @Column()
   password: string
 
-  @Column({ default: ERole.User, type: 'enum', enum: ERole })
+  @Column({ default: ERole.User })
   role: ERole
 
-  @Column({ default: null, type: 'enum', enum: EUserGender })
+  @Column({ default: null })
   gender?: EUserGender
 
   @Column({ default: null })
