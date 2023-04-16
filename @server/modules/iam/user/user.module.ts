@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { AuthModule } from '../auth/auth.module'
 import { UserIndexApp } from './infrastructure/user-index.app'
 import { EntUser } from './infrastructure/user.entity'
 import { UserService } from './infrastructure/user.service'
@@ -10,7 +9,7 @@ import { UserCrudController } from './v1/user-crud.controller'
 import { UserSheetController } from './v1/user-export.controller'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([EntUser]), AuthModule],
+  imports: [TypeOrmModule.forFeature([EntUser])],
   controllers: [UserSheetController, UserAccountController, UserCrudController],
   providers: [UserService, UserCrudApp, UserIndexApp],
   exports: [UserService],
