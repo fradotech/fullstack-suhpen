@@ -2,6 +2,8 @@ import { config } from '@server/config'
 import { DataSource, DataSourceOptions } from 'typeorm'
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
 
+const isRunning = process.argv[2]
+
 export const dataSourceOptions: DataSourceOptions = {
   type: 'mysql',
   host: config.database.host,
@@ -10,8 +12,10 @@ export const dataSourceOptions: DataSourceOptions = {
   password: config.database.password,
   database: config.database.database,
   namingStrategy: new SnakeNamingStrategy(),
-  entities: ['@server/**/*.entity.ts'],
-  migrations: ['@server/database/migrations/*.ts'],
+  entities: isRunning ? ['@server/**/*.entity.ts'] : ['dist/**/*.entity.js'],
+  migrations: isRunning
+    ? ['@server/database/migrations/*.ts']
+    : ['dist/@server/database/migrations/*.js'],
   logging: config.server.nodeEnv === 'local',
 }
 
