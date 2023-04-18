@@ -46,11 +46,15 @@ export abstract class BaseIndexApp {
     return keys.includes(sort) ? `${table}.${sort}` : `${table}.updatedAt`
   }
 
-  private querySearch(table: string, keys: string[]): string {
+  private querySearch(relations: IIndexAppRelation[]): string {
     let querySearch = `CONCAT_WS(''`
 
-    for (const key of keys) {
-      querySearch += `, lower(${table}.${key})`
+    for (const relation of relations) {
+      if (relation.columns) {
+        for (const key of relation.columns) {
+          querySearch += `, lower(${relation.name}.${key})`
+        }
+      }
     }
 
     return (querySearch += ') like :search')
@@ -90,12 +94,21 @@ export abstract class BaseIndexApp {
     repo: Repository<T>,
     request: Request,
   ): SelectQueryBuilder<T> {
-    relations.forEach((relation) => {
-      query.leftJoinAndSelect(`${tableName}.${relation.name}`, relation.name)
-    })
+    const leftJoin = (tableName: string, relations: IIndexAppRelation[]) => {
+      relations.forEach((relation) => {
+        query.leftJoinAndSelect(`${tableName}.${relation.name}`, relation.name)
+        relation.relations && leftJoin(relation.name, relation.relations)
+      })
+    }
+
+    leftJoin(tableName, relations)
 
     if (req.search) {
-      query.andWhere(this.querySearch(tableName, tableColumns), {
+      const thisTable: IIndexAppRelation = {
+        name: tableName,
+        columns: tableColumns,
+      }
+      query.andWhere(this.querySearch([thisTable, ...relations]), {
         search: `%${req.search.toLowerCase()}%`,
       })
     }
@@ -110,20 +123,29 @@ export abstract class BaseIndexApp {
     }
 
     if (req.filters) {
-      Object.keys(req.filters).forEach((column) => {
-        if (tableColumns.includes(column)) {
-          query.andWhere(`${tableName}.${column} IN (:value)`, {
-            value: req.filters[column],
-          })
-        }
-
-        relations.forEach((relation) => {
-          relation.keys.forEach((key) => {
-            query.andWhere(`${relation.name}.${key} IN (:value)`, {
+      Object.keys(req.filters)?.forEach((column) => {
+        if (!column.includes('_')) {
+          if (tableColumns.includes(column)) {
+            query.andWhere(`${tableName}.${column} IN (:value)`, {
               value: req.filters[column],
             })
-          })
-        })
+          } else {
+            const filterRelation = (relations: IIndexAppRelation[]) => {
+              relations.forEach((relation) => {
+                relation.columns?.forEach((key) => {
+                  if (relation.name.includes(column)) {
+                    query.andWhere(`${relation.name}.${key} IN (:value)`, {
+                      value: req.filters[column],
+                    })
+                  }
+                  relation.relations && filterRelation(relation.relations)
+                })
+              })
+            }
+
+            filterRelation(relations)
+          }
+        }
       })
     }
 

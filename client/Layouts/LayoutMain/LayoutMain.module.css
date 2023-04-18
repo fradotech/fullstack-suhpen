@@ -4,12 +4,16 @@
 }
 
 .header {
-  background: #ffffff !important;
   padding-left: 10px !important;
 }
 
-.account {
-  display: flex;
+.themeButton {
+  margin-right: 20px;
+}
+
+.sider {
+  height: 100vh;
+  overflow-y: scroll;
 }
 
 .sidebarContainer {
@@ -32,4 +36,5 @@
 
 .content {
   padding: 20px 20px;
+  min-height: 92%;
 }

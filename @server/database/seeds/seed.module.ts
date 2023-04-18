@@ -1,6 +1,6 @@
 import { Logger } from '@nestjs/common'
 import dataSource from '../data-source'
-import { categoryUpdateSeeder } from './category/category-update.seeder'
+import { categoryCreateSeeder } from './category/category-create.seeder'
 import { inventoryCreateSeeder } from './inventoy/inventoy-create.seeder'
 import { productCreateSeeder } from './product/product-create.seeder'
 import { userCreateSeeder } from './user/user-create.seeder'
@@ -14,7 +14,7 @@ export const seeders = async () => {
     .catch((error) => Logger.error(error))
 
   await userCreateSeeder()
-  await categoryUpdateSeeder()
+  await categoryCreateSeeder()
   await productCreateSeeder()
   await inventoryCreateSeeder()
 }

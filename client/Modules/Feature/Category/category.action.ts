@@ -9,8 +9,8 @@ import { CategoryResponse } from '@server/modules/feature/category/infrastructur
 import { notification } from 'antd'
 import { getAttachment } from '../../../Components/Molecules/Attachment/attachment.util'
 import { Route } from '../../../Enums/Route'
+import { themeColors } from '../../../Layouts/ThemeProvider/theme'
 import { axiosService } from '../../../services/axios.service'
-import { themeColors } from './../../../utils/theme'
 
 const dataPrepare = (
   data: CategoryCreateRequest | CategoryUpdateRequest,

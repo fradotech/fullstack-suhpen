@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common'
 import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface'
 import { config } from '@server/config'
 import { diskStorage } from 'multer'
@@ -27,6 +28,7 @@ export class Util {
     try {
       JSON.parse(str)
     } catch (e) {
+      Logger.error(e, this.name)
       return false
     }
     return true

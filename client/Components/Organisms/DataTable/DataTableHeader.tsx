@@ -26,10 +26,9 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
   const [params] = useSearchParams()
 
   React.useEffect(() => {
-    const timeout = setTimeout(
-      () => props.onSearch && props.onSearch(value),
-      500,
-    )
+    const timeout = setTimeout(() => {
+      props.onSearch && props.onSearch(value)
+    }, 500)
     return () => clearTimeout(timeout)
   }, [value])
 

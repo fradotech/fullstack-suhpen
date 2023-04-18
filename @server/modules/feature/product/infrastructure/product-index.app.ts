@@ -27,7 +27,7 @@ export class ProductIndexApp extends BaseIndexApp {
     const tableName = 'product'
     const tableColumns = ['name', 'brand', 'isActive', 'createdAt']
     const relations: IIndexAppRelation[] = [
-      { name: 'categories', keys: ['name'] },
+      { name: 'categories', columns: ['name'] },
     ]
 
     const query = this.createQueryIndex(

@@ -7,7 +7,8 @@ import { userDummies } from './user.dummy'
 
 export const userCreateSeeder = async (): Promise<boolean> => {
   const data = userDummies
-  const userRepo = new Repository<IUser>(EntUser, new EntityManager(dataSource))
+  const entityManager = new EntityManager(dataSource)
+  const userRepo = new Repository<IUser>(EntUser, entityManager)
   const table = EntUser.name
 
   const userExist = await userRepo

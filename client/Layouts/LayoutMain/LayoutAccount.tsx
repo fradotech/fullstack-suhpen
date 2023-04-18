@@ -47,7 +47,7 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
               type: 'divider',
             },
             {
-              key: '1',
+              key: 'My Account',
               label: (
                 <Link to={Route.account} style={{ width: '6rem' }}>
                   <UserOutlined style={{ margin: '6px' }} /> My Account
@@ -55,7 +55,7 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
               ),
             },
             {
-              key: '2',
+              key: 'Settings',
               label: (
                 <Link to={Route.accountEdit} style={{ width: '6rem' }}>
                   <SettingOutlined style={{ margin: '6px' }} /> Settings
@@ -66,7 +66,7 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
               type: 'divider',
             },
             {
-              key: '3',
+              key: 'Logout',
               label: (
                 <a onClick={handleLogout}>
                   <LogoutOutlined style={{ color: 'red', margin: '6px' }} />{' '}

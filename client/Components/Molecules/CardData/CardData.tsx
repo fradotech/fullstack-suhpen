@@ -14,7 +14,6 @@ const CardData: React.FC<IProps> = (props: IProps) => {
       bordered={false}
       style={{
         width: '100%',
-        boxShadow: '0px 1px 20px #eeeeee',
         marginBottom: '12px',
       }}
     >

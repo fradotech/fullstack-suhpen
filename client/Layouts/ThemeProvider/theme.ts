@@ -3,6 +3,19 @@ import type { ThemeConfig } from 'antd/es/config-provider/context'
 import type { CSSProperties } from 'react'
 
 export const themeColors = {
+  backgroundSolid: '#ffffff',
+  background: '#fafafa',
+  primary: '#007fd0',
+  secondary: '',
+  success: '',
+  warning: '',
+  error: '',
+  info: '',
+}
+
+export const themeColorsDark = {
+  backgroundSolid: '#141414',
+  background: '#1d1d1d',
   primary: '#007fd0',
   secondary: '',
   success: '',
@@ -15,18 +28,25 @@ export const iconActionTableStyle: CSSProperties = {
   color: themeColors.primary,
 }
 
-export const sidebarThemeConfig: ThemeConfig = {
-  components: {
-    Menu: {
-      colorItemText: '#777777',
-      colorItemTextSelected: themeColors.primary,
-      colorItemBgSelected: '#daf1ff',
-      colorItemTextHover: themeColors.primary,
-      colorItemBgHover: '#daf1ff',
-      fontSize: 14,
-      colorItemBg: '#ffffff',
+export const sidebarThemeConfig = (isDarkMode: boolean): ThemeConfig => {
+  return {
+    components: {
+      Menu: {
+        colorItemText: '#777777',
+        colorItemTextSelected: isDarkMode ? '#ffffff' : themeColorsDark.primary,
+        colorItemBgSelected: isDarkMode ? themeColorsDark.primary : '#daf1ff',
+        colorItemTextHover: isDarkMode ? '#ffffff' : themeColors.primary,
+        colorItemBgHover: isDarkMode ? themeColorsDark.primary : '#daf1ff',
+        fontSize: 14,
+        colorItemBg: isDarkMode
+          ? themeColorsDark.backgroundSolid
+          : themeColors.backgroundSolid,
+        colorSubItemBg: isDarkMode
+          ? themeColorsDark.backgroundSolid
+          : themeColors.backgroundSolid,
+      },
     },
-  },
+  }
 }
 
 export const globalThemeConfig: ThemeConfig = {

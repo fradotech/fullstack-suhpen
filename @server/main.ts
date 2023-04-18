@@ -30,7 +30,7 @@ async function bootstrap() {
 
   await app.listen(config.server.port)
 
-  Logger.log(`Application running at ${host}`, 'NestApplication')
-  Logger.log(`API Documentation Swagger at ${host}/${docsUrl}`, 'SwaggerUI')
+  Logger.verbose(`🚀 App running at ${host}`, 'NestApplication')
+  Logger.verbose(`🚀 API Docs Swagger at ${host}/${docsUrl}`, 'Swagger UI')
 }
 bootstrap()

@@ -47,4 +47,17 @@ export class ProductService implements BaseService {
     const data = (await this.findOneOrFail(id)) as EntProduct
     return await this.productRepo.softRemove(data)
   }
+
+  // --- Another findOneBy() Methods --- \\
+
+  async findNoRelation(id: string | string[]): Promise<IProduct | IProduct[]> {
+    if (!Array.isArray(id)) {
+      return await this.productRepo.findOneOrFail({ where: { id } })
+    }
+
+    return await this.productRepo
+      .createQueryBuilder('product')
+      .whereInIds(id)
+      .getMany()
+  }
 }

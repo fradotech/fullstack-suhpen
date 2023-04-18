@@ -1,9 +1,11 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
-import { Col, Layout } from 'antd'
-import React from 'react'
+import { Button, Col, Layout } from 'antd'
+import React, { useContext } from 'react'
+import { FaMoon, FaSun } from 'react-icons/fa'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
 import useUser from '../../Modules/Iam/User/common/useUser'
-import { sidebarThemeConfig } from '../../utils/theme'
+import { themeColors, themeColorsDark } from '../ThemeProvider/theme'
+import { ThemeContext } from '../ThemeProvider/ThemeProvider'
 import LayoutAccount from './LayoutAccount'
 import styles from './LayoutMain.module.css'
 import LayoutSidebar from './LayoutSidebar'
@@ -24,38 +26,66 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
     localStorage.setItem('isSidebarCollapsed', isCollapsed ? 'true' : 'false')
   }
 
+  const { isDarkMode, handleSwitchTheme } = useContext(ThemeContext)
+
+  const bgLayoutColor = React.useMemo(() => {
+    return isDarkMode
+      ? themeColorsDark?.backgroundSolid
+      : themeColors.backgroundSolid
+  }, [isDarkMode])
+
   return (
     <Layout style={{ height: '100vh' }}>
       <Layout.Sider
         trigger={null}
         collapsible
         collapsed={isCollapsed}
-        style={{
-          backgroundColor: sidebarThemeConfig.components.Menu.colorItemBg,
-          height: '82vh',
-        }}
+        className={styles.sider}
+        style={{ background: bgLayoutColor }}
       >
         <Col style={{ padding: '8px', textAlign: 'center' }}>
           <CompanyLogo />
         </Col>
-        <Col className={styles.sidebarContainer}>
-          <LayoutSidebar />
+        <Col
+          className={styles.sidebarContainer}
+          style={{ background: bgLayoutColor }}
+        >
+          <LayoutSidebar isDarkMode={isDarkMode} />
         </Col>
       </Layout.Sider>
       <Layout>
         <Layout.Content className={styles.contentContainer}>
-          <Layout.Header className={styles.header}>
+          <Layout.Header
+            className={styles.header}
+            style={{ background: bgLayoutColor }}
+          >
             <Col className={styles.headerContainer}>
               <a onClick={handleSidebarCollapse}>
                 {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
               </a>
 
-              <Col className={styles.account}>
+              <Col>
+                <Button
+                  type="ghost"
+                  shape="circle"
+                  icon={isDarkMode ? <FaMoon /> : <FaSun />}
+                  onClick={() => handleSwitchTheme(isDarkMode)}
+                  className={styles.themeButton}
+                />
                 <LayoutAccount user={user} />
               </Col>
             </Col>
           </Layout.Header>
-          <Col className={styles.content}>{children}</Col>
+          <Col
+            className={styles.content}
+            style={{
+              background: isDarkMode
+                ? themeColorsDark.background
+                : themeColors.background,
+            }}
+          >
+            {children}
+          </Col>
         </Layout.Content>
       </Layout>
     </Layout>

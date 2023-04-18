@@ -44,4 +44,19 @@ export class CategoryService implements BaseService {
     const data = (await this.findOneOrFail(id)) as EntCategory
     return await this.categoryRepo.softRemove(data)
   }
+
+  // --- Another findOneBy() Methods --- \\
+
+  async findNoRelation(
+    id: string | string[],
+  ): Promise<ICategory | ICategory[]> {
+    if (!Array.isArray(id)) {
+      return await this.categoryRepo.findOneOrFail({ where: { id } })
+    }
+
+    return await this.categoryRepo
+      .createQueryBuilder('category')
+      .whereInIds(id)
+      .getMany()
+  }
 }
