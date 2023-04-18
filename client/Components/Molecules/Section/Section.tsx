@@ -11,7 +11,6 @@ export const Section: React.FC<IProps> = (props: IProps) => {
   return (
     <Card
       style={{
-        boxShadow: '0px 1px 20px #eeeeee',
         marginTop: props.marginTop ? '20px' : '0px',
         marginRight: props.marginRight ? '20px' : '0px',
         marginLeft: props.marginLeft ? '20px' : '0px',

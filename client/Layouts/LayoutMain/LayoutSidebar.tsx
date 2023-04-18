@@ -1,10 +1,14 @@
 import { Col, ConfigProvider, Menu } from 'antd'
 import React from 'react'
-import { sidebarThemeConfig } from '../../utils/theme'
+import { sidebarThemeConfig } from '../ThemeProvider/theme'
 import { layoutItems } from './LayoutItems'
 import styles from './LayoutMain.module.css'
 
-const LayoutSidebar: React.FC = () => {
+interface IProps {
+  isDarkMode: boolean
+}
+
+const LayoutSidebar: React.FC<IProps> = (props: IProps) => {
   const activeMenuKey = React.useMemo(
     () => window.location.pathname,
     [window.location.pathname],
@@ -26,9 +30,10 @@ const LayoutSidebar: React.FC = () => {
 
   return (
     <>
-      <ConfigProvider theme={sidebarThemeConfig}>
+      <ConfigProvider theme={sidebarThemeConfig(props.isDarkMode)}>
         <Col className={styles.sidebar}>
           <Menu
+            theme={props.isDarkMode ? 'dark' : 'light'}
             mode="inline"
             items={layoutItems}
             defaultOpenKeys={[defaultOpenedKey]}

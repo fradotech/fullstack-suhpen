@@ -2,7 +2,7 @@ import { Layout } from 'antd'
 import React from 'react'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { Route } from '../../Enums/Route'
-import { themeColors } from '../../utils/theme'
+import { themeColors } from '../../Layouts/ThemeProvider/theme'
 import { authAction } from '../Iam/Auth/auth.action'
 import styles from './Home.module.css'
 
