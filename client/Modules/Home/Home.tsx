@@ -13,7 +13,7 @@ const Home: React.FC = () => {
   const isMobile = isMobileScreen()
 
   return (
-    <Layout style={{ backgroundColor: 'white' }}>
+    <Layout>
       <HomeHeader />
       <Layout.Content>
         <section id="home">

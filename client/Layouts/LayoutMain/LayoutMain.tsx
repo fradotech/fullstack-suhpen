@@ -1,5 +1,5 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
-import { Button, Col, Layout } from 'antd'
+import { Button, Col, Layout, Row } from 'antd'
 import React, { useContext } from 'react'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
@@ -59,22 +59,24 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
             className={styles.header}
             style={{ background: bgLayoutColor }}
           >
-            <Col className={styles.headerContainer}>
+            <Row className={styles.headerContainer}>
               <a onClick={handleSidebarCollapse}>
                 {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
               </a>
 
-              <Col>
+              <Row>
                 <Button
                   type="ghost"
                   shape="circle"
-                  icon={isDarkMode ? <FaMoon /> : <FaSun />}
+                  size="large"
+                  icon={isDarkMode ? <FaSun /> : <FaMoon />}
                   onClick={() => handleSwitchTheme(isDarkMode)}
                   className={styles.themeButton}
                 />
+
                 <LayoutAccount user={user} />
-              </Col>
-            </Col>
+              </Row>
+            </Row>
           </Layout.Header>
           <Col
             className={styles.content}
