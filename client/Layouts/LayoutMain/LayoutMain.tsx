@@ -29,9 +29,7 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
   const { isDarkMode, handleSwitchTheme } = useContext(ThemeContext)
 
   const bgLayoutColor = React.useMemo(() => {
-    return isDarkMode
-      ? themeColorsDark?.backgroundSolid
-      : themeColors.backgroundSolid
+    return isDarkMode ? themeColorsDark?.solid : themeColors.solid
   }, [isDarkMode])
 
   return (
@@ -74,7 +72,7 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
                   className={styles.themeButton}
                 />
 
-                <LayoutAccount user={user} />
+                <LayoutAccount user={user} isDarkMode={isDarkMode} />
               </Row>
             </Row>
           </Layout.Header>
