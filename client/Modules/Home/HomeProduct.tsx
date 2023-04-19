@@ -14,13 +14,14 @@ const HomeProduct: React.FC = () => {
   const { isLoading, data } = useQuery([HomeProduct.name], fetch)
 
   return (
-    <Layout style={{ backgroundColor: '#FAFAFA' }}>
+    <Layout>
       <Title style={{ textAlign: 'center' }}>Products</Title>
       <Col className={styles.productContainer}>
         <Row className={styles.productRow}>
           {data?.map((data) => {
             return (
               <Card
+                bordered={false}
                 loading={isLoading}
                 hoverable
                 className={styles.card}
