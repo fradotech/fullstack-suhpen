@@ -3,7 +3,7 @@ import type { ThemeConfig } from 'antd/es/config-provider/context'
 import type { CSSProperties } from 'react'
 
 export const themeColors = {
-  backgroundSolid: '#ffffff',
+  solid: '#ffffff',
   background: '#fafafa',
   primary: '#007fd0',
   secondary: '',
@@ -14,7 +14,7 @@ export const themeColors = {
 }
 
 export const themeColorsDark = {
-  backgroundSolid: '#141414',
+  solid: '#141414',
   background: '#1d1d1d',
   primary: '#007fd0',
   secondary: '',
@@ -33,17 +33,17 @@ export const sidebarThemeConfig = (isDarkMode: boolean): ThemeConfig => {
     components: {
       Menu: {
         colorItemText: '#777777',
-        colorItemTextSelected: isDarkMode ? '#ffffff' : themeColorsDark.primary,
+        colorItemTextSelected: isDarkMode
+          ? themeColors.solid
+          : themeColorsDark.primary,
         colorItemBgSelected: isDarkMode ? themeColorsDark.primary : '#daf1ff',
-        colorItemTextHover: isDarkMode ? '#ffffff' : themeColors.primary,
+        colorItemTextHover: isDarkMode
+          ? themeColors.solid
+          : themeColors.primary,
         colorItemBgHover: isDarkMode ? themeColorsDark.primary : '#daf1ff',
         fontSize: 14,
-        colorItemBg: isDarkMode
-          ? themeColorsDark.backgroundSolid
-          : themeColors.backgroundSolid,
-        colorSubItemBg: isDarkMode
-          ? themeColorsDark.backgroundSolid
-          : themeColors.backgroundSolid,
+        colorItemBg: isDarkMode ? themeColorsDark.solid : themeColors.solid,
+        colorSubItemBg: isDarkMode ? themeColorsDark.solid : themeColors.solid,
       },
     },
   }

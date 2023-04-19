@@ -10,11 +10,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Route } from '../../Enums/Route'
 import { authAction } from '../../Modules/Iam/Auth/auth.action'
+import { themeColors, themeColorsDark } from '../ThemeProvider/theme'
 
 type IProps = {
   children?: React.ReactNode
   headerRightMenu?: React.FC
   user: IUser
+  isDarkMode: boolean
 }
 
 const LayoutAccount: React.FC<IProps> = (props: IProps) => {
@@ -77,7 +79,12 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
           ],
         }}
       >
-        <a style={{ color: 'black' }} onClick={(e) => e.preventDefault()}>
+        <a
+          onClick={(e) => e.preventDefault()}
+          style={{
+            color: props.isDarkMode ? themeColors.solid : themeColorsDark.solid,
+          }}
+        >
           <Space>
             <Avatar icon={<UserOutlined />} src={props?.user.avatar} />
             <Typography.Text>{props?.user?.name}</Typography.Text>
