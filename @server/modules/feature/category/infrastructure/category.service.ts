@@ -45,18 +45,9 @@ export class CategoryService implements BaseService {
     return await this.categoryRepo.softRemove(data)
   }
 
-  async findNoRelation(
-    id: string | string[],
-  ): Promise<ICategory | ICategory[]> {
-    if (!Array.isArray(id)) {
-      return await this.categoryRepo.findOneOrFail({ where: { id } })
-    }
-
-    return await this.categoryRepo
-      .createQueryBuilder('category')
-      .whereInIds(id)
-      .getMany()
+  async findNoRelation(id: string): Promise<ICategory> {
+    return await this.categoryRepo.findOneOrFail({ where: { id } })
   }
 
-  // --- Another findOneBy() Methods --- \\
+  // --- Another findOneBy() --- \\
 }

@@ -45,18 +45,11 @@ export class UserService implements BaseService {
     return await this.userRepo.softRemove(data)
   }
 
-  async findNoRelation(id: string | string[]): Promise<IUser | IUser[]> {
-    if (!Array.isArray(id)) {
-      return await this.userRepo.findOneOrFail({ where: { id } })
-    }
-
-    return await this.userRepo
-      .createQueryBuilder('user')
-      .whereInIds(id)
-      .getMany()
+  async findNoRelation(id: string): Promise<IUser> {
+    return await this.userRepo.findOneOrFail({ where: { id } })
   }
 
-  // --- Another findOneBy() Methods --- \\
+  // --- Another findOneBy() --- \\
 
   public async findOneByEmail(email: string): Promise<IUser> {
     return await this.userRepo.findOneOrFail({ where: { email } })
