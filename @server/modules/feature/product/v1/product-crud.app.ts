@@ -27,7 +27,7 @@ export class ProductCrudApp {
   }
 
   async update(id: string, req: ProductUpdateRequest): Promise<IProduct> {
-    const data = await this.productService.findOneOrFail(id)
+    const data = await this.productService.findNoRelation(id)
     Object.assign(data, req)
 
     delete data.categories
@@ -36,13 +36,13 @@ export class ProductCrudApp {
   }
 
   async remove(id: string): Promise<IProduct> {
-    const data = this.productService.findOneOrFail(id)
+    const data = this.productService.findNoRelation(id)
     await this.productService.remove(id)
     return data
   }
 
   async softRemove(id: string): Promise<IProduct> {
-    const data = this.productService.findOneOrFail(id)
+    const data = this.productService.findNoRelation(id)
     await this.productService.softRemove(id)
     return data
   }

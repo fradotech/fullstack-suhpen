@@ -27,7 +27,7 @@ export class UserCrudApp {
   }
 
   async update(id: string, req: UserUpdateRequest): Promise<IUser> {
-    const data = await this.userService.findOneOrFail(id)
+    const data = await this.userService.findNoRelation(id)
 
     data.name = req.name
     data.gender = req.gender
@@ -40,13 +40,13 @@ export class UserCrudApp {
   }
 
   async remove(id: string): Promise<IUser> {
-    const data = this.userService.findOneOrFail(id)
+    const data = this.userService.findNoRelation(id)
     await this.userService.remove(id)
     return data
   }
 
   async softRemove(id: string): Promise<IUser> {
-    const data = this.userService.findOneOrFail(id)
+    const data = this.userService.findNoRelation(id)
     await this.userService.softRemove(id)
     return data
   }

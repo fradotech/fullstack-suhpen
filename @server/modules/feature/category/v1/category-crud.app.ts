@@ -27,20 +27,20 @@ export class CategoryCrudApp {
   }
 
   async update(id: string, req: CategoryUpdateRequest): Promise<ICategory> {
-    const data = await this.categoryService.findOneOrFail(id)
+    const data = await this.categoryService.findNoRelation(id)
     Object.assign(data, req)
 
     return await this.categoryService.update(data)
   }
 
   async remove(id: string): Promise<ICategory> {
-    const data = this.categoryService.findOneOrFail(id)
+    const data = this.categoryService.findNoRelation(id)
     await this.categoryService.remove(id)
     return data
   }
 
   async softRemove(id: string): Promise<ICategory> {
-    const data = this.categoryService.findOneOrFail(id)
+    const data = this.categoryService.findNoRelation(id)
     await this.categoryService.softRemove(id)
     return data
   }
