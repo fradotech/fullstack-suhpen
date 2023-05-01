@@ -37,20 +37,18 @@ export class InventoryService implements BaseService {
   async update(req: IInventory): Promise<IInventory> {
     const data = this.inventoryRepo.create(req)
     await this.inventoryRepo.update(data.id, data)
-    return await this.findOneOrFail(req.id)
+    return (await this.findNoRelation(req.id)) as IInventory
   }
 
   async remove(id: string): Promise<IInventory> {
-    const data = (await this.findOneOrFail(id)) as EntInventory
+    const data = (await this.findNoRelation(id)) as IInventory
     return await this.inventoryRepo.remove(data)
   }
 
   async softRemove(id: string): Promise<IInventory> {
-    const data = (await this.findOneOrFail(id)) as EntInventory
+    const data = (await this.findNoRelation(id)) as IInventory
     return await this.inventoryRepo.softRemove(data)
   }
-
-  // --- Another findOneBy() Methods --- \\
 
   async findNoRelation(
     id: string | string[],
@@ -64,4 +62,6 @@ export class InventoryService implements BaseService {
       .whereInIds(id)
       .getMany()
   }
+
+  // --- Another findOneBy() Methods --- \\
 }

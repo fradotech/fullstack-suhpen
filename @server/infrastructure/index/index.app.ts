@@ -49,13 +49,19 @@ export abstract class BaseIndexApp {
   private querySearch(relations: IIndexAppRelation[]): string {
     let querySearch = `CONCAT_WS(''`
 
-    for (const relation of relations) {
-      if (relation.columns) {
-        for (const key of relation.columns) {
-          querySearch += `, lower(${relation.name}.${key})`
+    const nestedRelation = (relations: IIndexAppRelation[]) => {
+      for (const relation of relations) {
+        if (relation.columns) {
+          for (const key of relation.columns) {
+            querySearch += `, lower(${relation.name}.${key})`
+          }
         }
+
+        if (relation.relations) nestedRelation(relation.relations)
       }
     }
+
+    nestedRelation(relations)
 
     return (querySearch += ') like :search')
   }

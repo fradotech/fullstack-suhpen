@@ -32,20 +32,18 @@ export class UserService implements BaseService {
   async update(req: IUser): Promise<IUser> {
     const data = this.userRepo.create(req)
     await this.userRepo.update(data.id, data)
-    return await this.findOneOrFail(req.id)
+    return (await this.findNoRelation(req.id)) as IUser
   }
 
   async remove(id: string): Promise<IUser> {
-    const data = (await this.findOneOrFail(id)) as EntUser
+    const data = (await this.findNoRelation(id)) as IUser
     return await this.userRepo.remove(data)
   }
 
   async softRemove(id: string): Promise<IUser> {
-    const data = (await this.findOneOrFail(id)) as EntUser
+    const data = (await this.findNoRelation(id)) as IUser
     return await this.userRepo.softRemove(data)
   }
-
-  // --- Another findOneBy() Methods --- \\
 
   async findNoRelation(id: string | string[]): Promise<IUser | IUser[]> {
     if (!Array.isArray(id)) {
@@ -57,6 +55,8 @@ export class UserService implements BaseService {
       .whereInIds(id)
       .getMany()
   }
+
+  // --- Another findOneBy() Methods --- \\
 
   public async findOneByEmail(email: string): Promise<IUser> {
     return await this.userRepo.findOneOrFail({ where: { email } })

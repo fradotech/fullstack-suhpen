@@ -32,20 +32,18 @@ export class CategoryService implements BaseService {
   async update(req: ICategory): Promise<ICategory> {
     const data = this.categoryRepo.create(req)
     await this.categoryRepo.update(data.id, data)
-    return await this.findOneOrFail(req.id)
+    return (await this.findNoRelation(req.id)) as ICategory
   }
 
   async remove(id: string): Promise<ICategory> {
-    const data = (await this.findOneOrFail(id)) as EntCategory
+    const data = (await this.findNoRelation(id)) as ICategory
     return await this.categoryRepo.remove(data)
   }
 
   async softRemove(id: string): Promise<ICategory> {
-    const data = (await this.findOneOrFail(id)) as EntCategory
+    const data = (await this.findNoRelation(id)) as ICategory
     return await this.categoryRepo.softRemove(data)
   }
-
-  // --- Another findOneBy() Methods --- \\
 
   async findNoRelation(
     id: string | string[],
@@ -59,4 +57,6 @@ export class CategoryService implements BaseService {
       .whereInIds(id)
       .getMany()
   }
+
+  // --- Another findOneBy() Methods --- \\
 }

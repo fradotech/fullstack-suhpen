@@ -35,20 +35,18 @@ export class ProductService implements BaseService {
   async update(req: IProduct): Promise<IProduct> {
     const data = this.productRepo.create(req)
     await this.productRepo.update(data.id, data)
-    return await this.findOneOrFail(req.id)
+    return (await this.findNoRelation(req.id)) as IProduct
   }
 
   async remove(id: string): Promise<IProduct> {
-    const data = (await this.findOneOrFail(id)) as EntProduct
+    const data = (await this.findNoRelation(id)) as IProduct
     return await this.productRepo.remove(data)
   }
 
   async softRemove(id: string): Promise<IProduct> {
-    const data = (await this.findOneOrFail(id)) as EntProduct
+    const data = (await this.findNoRelation(id)) as IProduct
     return await this.productRepo.softRemove(data)
   }
-
-  // --- Another findOneBy() Methods --- \\
 
   async findNoRelation(id: string | string[]): Promise<IProduct | IProduct[]> {
     if (!Array.isArray(id)) {
@@ -60,4 +58,6 @@ export class ProductService implements BaseService {
       .whereInIds(id)
       .getMany()
   }
+
+  // --- Another findOneBy() Methods --- \\
 }
