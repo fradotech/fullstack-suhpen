@@ -4,7 +4,7 @@ import type { RcFile, UploadProps } from 'antd/es/upload'
 import type { UploadFile } from 'antd/es/upload/interface'
 import React from 'react'
 import { Route } from '../../../Enums/Route'
-import { hostApi } from '../../../services/api.service'
+import { HOST_API } from '../../../services/api.service'
 import { getBase64 } from './attachment.util'
 
 interface IProps {
@@ -59,7 +59,7 @@ const Attachment: React.FC<IProps> = (props: IProps) => {
     <>
       <Form.Item name={props.name}>
         <Upload
-          action={`${hostApi}${Route.Attachment}`}
+          action={`${HOST_API}${Route.Attachment}`}
           listType="picture-card"
           fileList={fileList}
           onPreview={handlePreview}
