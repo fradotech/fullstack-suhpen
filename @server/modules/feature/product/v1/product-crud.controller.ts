@@ -71,7 +71,7 @@ export class ProductCrudController implements BaseCrudController {
 
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<ProductResponse>> {
-    const data = await this.productCrudApp.softRemove(id)
+    const data = await this.productCrudApp.remove(id)
     return ApiRes.fromEntity(ProductResponse.fromEntity(data))
   }
 }

@@ -74,7 +74,7 @@ export class UserCrudController implements BaseCrudController {
 
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<UserStrictResponse>> {
-    const data = await this.userCrudApp.softRemove(id)
+    const data = await this.userCrudApp.remove(id)
     return ApiRes.fromEntity(UserStrictResponse.fromEntity(data))
   }
 }
