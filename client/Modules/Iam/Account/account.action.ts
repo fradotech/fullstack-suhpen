@@ -4,7 +4,7 @@ import { UserResponse } from '@server/modules/iam/user/infrastructure/user.respo
 import { notification } from 'antd'
 import { getAttachment } from '../../../Components/Molecules/Attachment/attachment.util'
 import { Route } from '../../../Enums/Route'
-import { axiosService } from '../../../services/axios.service'
+import { API } from '../../../services/api.service'
 
 const dataPrepare = (data: UserUpdateRequest): UserUpdateRequest => {
   data.avatar = getAttachment(data.avatar) as string
@@ -14,15 +14,12 @@ const dataPrepare = (data: UserUpdateRequest): UserUpdateRequest => {
 
 export const accountAction = {
   getUserLogged: async (): Promise<IApiRes<UserResponse>> => {
-    return await axiosService.get(Route.account)
+    return await API.get(Route.account)
   },
 
   update: async (data: UserUpdateRequest): Promise<IApiRes<UserResponse>> => {
     data = dataPrepare(data)
-    const res: IApiRes<UserResponse> = await axiosService.put(
-      Route.account,
-      data,
-    )
+    const res: IApiRes<UserResponse> = await API.put(Route.account, data)
 
     res.data && notification.success({ message: 'Success update data' })
 

@@ -3,7 +3,7 @@ import { Button, Popconfirm, Row } from 'antd'
 import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { axiosService } from '../../../services/axios.service'
+import { API } from '../../../services/api.service'
 import Loading from '../Loading/Loading'
 import styles from './PageHeader.module.css'
 
@@ -31,7 +31,7 @@ export const PageHeader: React.FC<IProps> = (props: IProps) => {
           {props.hrefDelete && (
             <Popconfirm
               title={'Are you sure want to delete?'}
-              onConfirm={() => axiosService.delete(props.hrefDelete)}
+              onConfirm={() => API.delete(props.hrefDelete)}
             >
               <Button type="primary" className={styles.actionButton} danger>
                 <DeleteOutlined />

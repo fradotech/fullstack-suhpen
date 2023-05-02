@@ -1,6 +1,6 @@
 import { Image } from 'antd'
 import React from 'react'
-import { host } from '../../../services/axios.service'
+import { host } from '../../../services/api.service'
 
 interface IProps {
   style?: React.CSSProperties

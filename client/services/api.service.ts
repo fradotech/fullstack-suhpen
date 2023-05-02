@@ -7,7 +7,7 @@ const hostOnline = 'https://fradotech.up.railway.app'
 export const host = location.href.includes('localhost') ? hostLocal : hostOnline
 export const hostApi = host + '/api/v1'
 
-export const axiosService = {
+export const API = {
   get: async (endpoint: string, params?: any): Promise<any> => {
     try {
       const { data } = await axios.get(`${hostApi}${endpoint}`, {
@@ -17,7 +17,7 @@ export const axiosService = {
         params,
       })
 
-      axiosService.catch(data)
+      API.catch(data)
 
       return data
     } catch (e) {
@@ -39,7 +39,7 @@ export const axiosService = {
         params,
       })
 
-      axiosService.catch(data)
+      API.catch(data)
 
       return data
     } catch (e) {
@@ -56,7 +56,7 @@ export const axiosService = {
         },
       })
 
-      axiosService.catch(data)
+      API.catch(data)
 
       return data
     } catch (e) {
@@ -73,7 +73,7 @@ export const axiosService = {
         },
       })
 
-      axiosService.catch(data)
+      API.catch(data)
 
       return data
     } catch (e) {
@@ -90,7 +90,7 @@ export const axiosService = {
         },
       })
 
-      axiosService.catch(data)
+      API.catch(data)
 
       return data
     } catch (e) {
