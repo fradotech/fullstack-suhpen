@@ -4,8 +4,6 @@ import { EUserGender } from 'client/Modules/Iam/User/User.enum'
 import dayjs from 'dayjs'
 import {
   BeforeInsert,
-  BeforeSoftRemove,
-  BeforeUpdate,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
@@ -38,22 +36,6 @@ export class EntUser implements IUser {
 
   @ManyToOne(() => EntUser)
   deletedBy: IUser
-
-  @BeforeInsert()
-  beforeInsert(): void {
-    // this.createdBy = user
-  }
-
-  @BeforeUpdate()
-  beforeUpdate(): void {
-    // this.updatedBy = user
-    this.updatedAt = new Date()
-  }
-
-  @BeforeSoftRemove()
-  beforeSoftRemove(): void {
-    // this.deletedBy = user
-  }
 
   // --- Regular attributs --- \\
 

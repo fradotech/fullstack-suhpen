@@ -71,7 +71,7 @@ export class CategoryCrudController implements BaseCrudController {
 
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<CategoryResponse>> {
-    const data = await this.categoryCrudApp.remove(id)
+    const data = await this.categoryCrudApp.delete(id)
     return ApiRes.fromEntity(CategoryResponse.fromEntity(data))
   }
 }

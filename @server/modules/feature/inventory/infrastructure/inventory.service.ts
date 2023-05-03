@@ -37,17 +37,19 @@ export class InventoryService implements BaseService {
   async update(req: IInventory): Promise<IInventory> {
     const data = this.inventoryRepo.create(req)
     await this.inventoryRepo.update(data.id, data)
-    return (await this.findNoRelation(req.id)) as IInventory
+    return await this.findNoRelation(req.id)
   }
 
-  async remove(id: string): Promise<IInventory> {
-    const data = (await this.findNoRelation(id)) as IInventory
-    return await this.inventoryRepo.remove(data)
+  async delete(id: string): Promise<IInventory> {
+    const data = await this.findNoRelation(id)
+    await this.inventoryRepo.delete(id)
+    return data
   }
 
-  async softRemove(id: string): Promise<IInventory> {
-    const data = (await this.findNoRelation(id)) as IInventory
-    return await this.inventoryRepo.softRemove(data)
+  async softDelete(id: string): Promise<IInventory> {
+    const data = await this.findNoRelation(id)
+    await this.inventoryRepo.softDelete(id)
+    return data
   }
 
   async findNoRelation(id: string): Promise<IInventory> {

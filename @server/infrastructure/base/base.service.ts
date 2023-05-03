@@ -6,7 +6,7 @@ export abstract class BaseService {
   abstract findOne(...arg: any): Promise<IBaseEntity>
   abstract findOneOrFail(...arg: any): Promise<IBaseEntity>
   abstract update(...arg: any): Promise<IBaseEntity>
-  abstract remove(...arg: any): Promise<IBaseEntity>
-  abstract softRemove(...arg: any): Promise<IBaseEntity>
+  abstract delete(...arg: any): Promise<IBaseEntity>
+  abstract softDelete(...arg: any): Promise<IBaseEntity>
   abstract findNoRelation(...arg: any): Promise<IBaseEntity | IBaseEntity[]>
 }

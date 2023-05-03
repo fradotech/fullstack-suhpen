@@ -74,7 +74,7 @@ export class InventoryCrudController implements BaseCrudController {
   @UseGuards(AdminGuard)
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<InventoryResponse>> {
-    const data = await this.inventoryCrudApp.remove(id)
+    const data = await this.inventoryCrudApp.delete(id)
     return ApiRes.fromEntity(InventoryResponse.fromEntity(data))
   }
 }

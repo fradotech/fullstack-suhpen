@@ -58,7 +58,7 @@ export const inventoryAction = {
     return res
   },
 
-  remove: async (id: string): Promise<IApiRes<InventoryResponse>> => {
+  delete: async (id: string): Promise<IApiRes<InventoryResponse>> => {
     const res = await API.delete(Route.inventory.id(id))
     res.data && notification.success({ message: 'Success delete data' })
     return res

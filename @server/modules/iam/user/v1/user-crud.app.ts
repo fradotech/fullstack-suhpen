@@ -39,15 +39,15 @@ export class UserCrudApp {
     return await this.userService.update(data)
   }
 
-  async remove(id: string): Promise<IUser> {
+  async delete(id: string): Promise<IUser> {
     const data = this.userService.findNoRelation(id)
-    await this.userService.remove(id)
+    await this.userService.delete(id)
     return data
   }
 
-  async softRemove(id: string): Promise<IUser> {
+  async softDelete(id: string): Promise<IUser> {
     const data = this.userService.findNoRelation(id)
-    await this.userService.softRemove(id)
+    await this.userService.softDelete(id)
     return data
   }
 }

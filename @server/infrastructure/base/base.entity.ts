@@ -1,9 +1,6 @@
 import { EntUser } from '@server/modules/iam/user/infrastructure/user.entity'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import {
-  BeforeInsert,
-  BeforeSoftRemove,
-  BeforeUpdate,
   CreateDateColumn,
   DeleteDateColumn,
   ManyToOne,
@@ -33,20 +30,4 @@ export class BaseEntity implements IBaseEntity {
 
   @ManyToOne(() => EntUser)
   deletedBy: IUser
-
-  @BeforeInsert()
-  beforeInsert(): void {
-    // this.createdBy = user
-  }
-
-  @BeforeUpdate()
-  beforeUpdate(): void {
-    // this.updatedBy = user
-    this.updatedAt = new Date()
-  }
-
-  @BeforeSoftRemove()
-  beforeSoftRemove(): void {
-    // this.deletedBy = user
-  }
 }

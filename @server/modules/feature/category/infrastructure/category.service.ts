@@ -32,17 +32,19 @@ export class CategoryService implements BaseService {
   async update(req: ICategory): Promise<ICategory> {
     const data = this.categoryRepo.create(req)
     await this.categoryRepo.update(data.id, data)
-    return (await this.findNoRelation(req.id)) as ICategory
+    return await this.findNoRelation(req.id)
   }
 
-  async remove(id: string): Promise<ICategory> {
-    const data = (await this.findNoRelation(id)) as ICategory
-    return await this.categoryRepo.remove(data)
+  async delete(id: string): Promise<ICategory> {
+    const data = await this.findNoRelation(id)
+    await this.categoryRepo.delete(id)
+    return data
   }
 
-  async softRemove(id: string): Promise<ICategory> {
-    const data = (await this.findNoRelation(id)) as ICategory
-    return await this.categoryRepo.softRemove(data)
+  async softDelete(id: string): Promise<ICategory> {
+    const data = await this.findNoRelation(id)
+    await this.categoryRepo.softDelete(id)
+    return data
   }
 
   async findNoRelation(id: string): Promise<ICategory> {

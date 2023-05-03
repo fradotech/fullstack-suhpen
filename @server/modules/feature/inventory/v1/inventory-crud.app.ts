@@ -39,15 +39,9 @@ export class InventoryCrudApp {
     return await this.inventoryService.update(data)
   }
 
-  async remove(id: string): Promise<IInventory> {
+  async delete(id: string): Promise<IInventory> {
     const data = this.inventoryService.findNoRelation(id)
-    await this.inventoryService.remove(id)
-    return data
-  }
-
-  async softRemove(id: string): Promise<IInventory> {
-    const data = this.inventoryService.findNoRelation(id)
-    await this.inventoryService.softRemove(id)
+    await this.inventoryService.delete(id)
     return data
   }
 }

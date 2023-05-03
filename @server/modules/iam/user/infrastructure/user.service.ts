@@ -32,17 +32,19 @@ export class UserService implements BaseService {
   async update(req: IUser): Promise<IUser> {
     const data = this.userRepo.create(req)
     await this.userRepo.update(data.id, data)
-    return (await this.findNoRelation(req.id)) as IUser
+    return await this.findNoRelation(req.id)
   }
 
-  async remove(id: string): Promise<IUser> {
-    const data = (await this.findNoRelation(id)) as IUser
-    return await this.userRepo.remove(data)
+  async delete(id: string): Promise<IUser> {
+    const data = await this.findNoRelation(id)
+    await this.userRepo.delete(id)
+    return data
   }
 
-  async softRemove(id: string): Promise<IUser> {
-    const data = (await this.findNoRelation(id)) as IUser
-    return await this.userRepo.softRemove(data)
+  async softDelete(id: string): Promise<IUser> {
+    const data = await this.findNoRelation(id)
+    await this.userRepo.softDelete(id)
+    return data
   }
 
   async findNoRelation(id: string): Promise<IUser> {

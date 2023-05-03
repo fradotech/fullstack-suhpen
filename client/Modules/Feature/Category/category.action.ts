@@ -53,7 +53,7 @@ export const categoryAction = {
     return res
   },
 
-  remove: async (id: string): Promise<IApiRes<CategoryResponse>> => {
+  delete: async (id: string): Promise<IApiRes<CategoryResponse>> => {
     const res = await API.delete(Route.category.id(id))
     res.data && notification.success({ message: 'Success delete data' })
     return res

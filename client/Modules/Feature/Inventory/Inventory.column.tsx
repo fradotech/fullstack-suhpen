@@ -105,7 +105,7 @@ export const inventoryColumns = (
             {
               type: 'delete',
               onClick: async () => {
-                await inventoryAction.remove(data.id)
+                await inventoryAction.delete(data.id)
                 await refetch()
               },
             },

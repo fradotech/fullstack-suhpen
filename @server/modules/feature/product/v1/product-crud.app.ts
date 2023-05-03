@@ -35,15 +35,9 @@ export class ProductCrudApp {
     return await this.productService.update(data)
   }
 
-  async remove(id: string): Promise<IProduct> {
+  async delete(id: string): Promise<IProduct> {
     const data = this.productService.findNoRelation(id)
-    await this.productService.remove(id)
-    return data
-  }
-
-  async softRemove(id: string): Promise<IProduct> {
-    const data = this.productService.findNoRelation(id)
-    await this.productService.softRemove(id)
+    await this.productService.delete(id)
     return data
   }
 }

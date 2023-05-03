@@ -35,17 +35,19 @@ export class ProductService implements BaseService {
   async update(req: IProduct): Promise<IProduct> {
     const data = this.productRepo.create(req)
     await this.productRepo.update(data.id, data)
-    return (await this.findNoRelation(req.id)) as IProduct
+    return await this.findNoRelation(req.id)
   }
 
-  async remove(id: string): Promise<IProduct> {
-    const data = (await this.findNoRelation(id)) as IProduct
-    return await this.productRepo.remove(data)
+  async delete(id: string): Promise<IProduct> {
+    const data = await this.findNoRelation(id)
+    await this.productRepo.delete(id)
+    return data
   }
 
-  async softRemove(id: string): Promise<IProduct> {
-    const data = (await this.findNoRelation(id)) as IProduct
-    return await this.productRepo.softRemove(data)
+  async softDelete(id: string): Promise<IProduct> {
+    const data = await this.findNoRelation(id)
+    await this.productRepo.softDelete(id)
+    return data
   }
 
   async findNoRelation(id: string): Promise<IProduct> {

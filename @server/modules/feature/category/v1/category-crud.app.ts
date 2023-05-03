@@ -33,15 +33,9 @@ export class CategoryCrudApp {
     return await this.categoryService.update(data)
   }
 
-  async remove(id: string): Promise<ICategory> {
+  async delete(id: string): Promise<ICategory> {
     const data = this.categoryService.findNoRelation(id)
-    await this.categoryService.remove(id)
-    return data
-  }
-
-  async softRemove(id: string): Promise<ICategory> {
-    const data = this.categoryService.findNoRelation(id)
-    await this.categoryService.softRemove(id)
+    await this.categoryService.delete(id)
     return data
   }
 }

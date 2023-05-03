@@ -51,7 +51,7 @@ export const productAction = {
     return res
   },
 
-  remove: async (id: string): Promise<IApiRes<ProductResponse>> => {
+  delete: async (id: string): Promise<IApiRes<ProductResponse>> => {
     const res = await API.delete(Route.product.id(id))
     res.data && notification.success({ message: 'Success delete data' })
     return res

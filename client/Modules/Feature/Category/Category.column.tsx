@@ -66,7 +66,7 @@ export const categoryColumns = (
             {
               type: 'delete',
               onClick: async () => {
-                await categoryAction.remove(data.id)
+                await categoryAction.delete(data.id)
                 await refetch()
               },
             },
