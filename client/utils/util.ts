@@ -32,7 +32,7 @@ export class Util {
   }
 
   static formatDatetime = (date: Date | string | dayjs.Dayjs) => {
-    const newDate = dayjs(date).format('YYYY-MM-DD HH:MM')
+    const newDate = dayjs(date).format('YYYY-MM-DD HH:mm')
     return newDate == 'Invalid Date' ? '-' : newDate
   }
 
