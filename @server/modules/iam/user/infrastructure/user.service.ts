@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { BaseService } from '@server/infrastructure/base/base.service'
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
 import { EntUser } from '../infrastructure/user.entity'
 import { IUser } from '../infrastructure/user.interface'
 
@@ -19,6 +19,10 @@ export class UserService implements BaseService {
 
   async find(): Promise<IUser[]> {
     return await this.userRepo.find()
+  }
+
+  async findByIds(ids: string[]): Promise<IUser[]> {
+    return await this.userRepo.findBy({ id: In(ids) })
   }
 
   async findOne(id: string): Promise<IUser> {
@@ -53,15 +57,15 @@ export class UserService implements BaseService {
 
   // --- Another findOneBy() --- \\
 
-  public async findOneByEmail(email: string): Promise<IUser> {
+  async findOneByEmail(email: string): Promise<IUser> {
     return await this.userRepo.findOneOrFail({ where: { email } })
   }
 
-  public async findOneByPhoneNumber(phoneNumber: string): Promise<IUser> {
+  async findOneByPhoneNumber(phoneNumber: string): Promise<IUser> {
     return await this.userRepo.findOneOrFail({ where: { phoneNumber } })
   }
 
-  public async findOneByToken(token: string): Promise<IUser> {
+  async findOneByToken(token: string): Promise<IUser> {
     return await this.userRepo.findOne({ where: { token } })
   }
 }

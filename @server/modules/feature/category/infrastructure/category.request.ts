@@ -1,5 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger'
-import { BaseMasterDataRequest } from '@server/infrastructure/base/product/base-master-data.request'
+import { BaseMasterDataRequest } from '@server/infrastructure/base/master-data/base-master-data.request'
 import { IsNotEmpty, IsString } from 'class-validator'
 
 export class CategoryRequest extends BaseMasterDataRequest {

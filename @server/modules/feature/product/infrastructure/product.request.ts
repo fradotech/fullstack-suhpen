@@ -1,5 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger'
-import { BaseMasterDataRequest } from '@server/infrastructure/base/product/base-master-data.request'
+import { BaseMasterDataRequest } from '@server/infrastructure/base/master-data/base-master-data.request'
 import { IsArray, IsOptional, IsString } from 'class-validator'
 import { ICategory } from '../../category/infrastructure/category.interface'
 import { IProduct } from './product.interface'

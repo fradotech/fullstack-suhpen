@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { BaseService } from '@server/infrastructure/base/base.service'
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
 import { EntProduct } from './product.entity'
 import { IProduct } from './product.interface'
 
@@ -19,6 +19,10 @@ export class ProductService implements BaseService {
 
   async find(): Promise<IProduct[]> {
     return await this.productRepo.find()
+  }
+
+  async findByIds(ids: string[]): Promise<IProduct[]> {
+    return await this.productRepo.findBy({ id: In(ids) })
   }
 
   async findOne(id: string): Promise<IProduct> {

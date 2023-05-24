@@ -3,6 +3,7 @@ import { IBaseEntity } from './base-entity.interface'
 export abstract class BaseService {
   abstract save(...arg: any): Promise<IBaseEntity>
   abstract find(): Promise<IBaseEntity[]>
+  abstract findByIds(...arg): Promise<IBaseEntity[]>
   abstract findOne(...arg: any): Promise<IBaseEntity>
   abstract findOneOrFail(...arg: any): Promise<IBaseEntity>
   abstract update(...arg: any): Promise<IBaseEntity>

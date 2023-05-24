@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { BaseService } from '@server/infrastructure/base/base.service'
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
 import { EntInventory } from './inventory.entity'
 import { IInventory } from './inventory.interface'
 
@@ -19,6 +19,10 @@ export class InventoryService implements BaseService {
 
   async find(): Promise<IInventory[]> {
     return await this.inventoryRepo.find()
+  }
+
+  async findByIds(ids: string[]): Promise<IInventory[]> {
+    return await this.inventoryRepo.findBy({ id: In(ids) })
   }
 
   async findOne(id: string): Promise<IInventory> {
