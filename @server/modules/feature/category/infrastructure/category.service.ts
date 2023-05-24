@@ -12,7 +12,7 @@ export class CategoryService implements BaseService {
     private readonly categoryRepo: Repository<ICategory>,
   ) {}
 
-  async create(req: ICategory): Promise<ICategory> {
+  async save(req: ICategory): Promise<ICategory> {
     const data = this.categoryRepo.create(req)
     return await this.categoryRepo.save(data)
   }

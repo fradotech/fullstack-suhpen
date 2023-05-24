@@ -27,7 +27,7 @@ export class AuthApp {
     const user = new EntUser()
     Object.assign(user, req)
 
-    return await this.userService.create(user)
+    return await this.userService.save(user)
   }
 
   async login(req: AuthLoginRequest): Promise<IUser> {

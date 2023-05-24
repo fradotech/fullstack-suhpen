@@ -12,7 +12,7 @@ export class UserService implements BaseService {
     private readonly userRepo: Repository<IUser>,
   ) {}
 
-  async create(req: IUser): Promise<IUser> {
+  async save(req: IUser): Promise<IUser> {
     const data = this.userRepo.create(req)
     return await this.userRepo.save(data)
   }

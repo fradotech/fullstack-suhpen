@@ -25,7 +25,7 @@ export class InventoryCrudApp {
 
     data.product = await this.productService.findNoRelation(req.productId)
 
-    return await this.inventoryService.create(data)
+    return await this.inventoryService.save(data)
   }
 
   async findOneOrFail(id: string): Promise<IInventory> {

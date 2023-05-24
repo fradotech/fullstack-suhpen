@@ -19,7 +19,7 @@ export class CategoryCrudApp {
     const data = new EntCategory()
     Object.assign(data, req)
 
-    return await this.categoryService.create(data)
+    return await this.categoryService.save(data)
   }
 
   async findOneOrFail(id: string): Promise<ICategory> {

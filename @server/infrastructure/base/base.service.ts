@@ -1,7 +1,7 @@
 import { IBaseEntity } from './base-entity.interface'
 
 export abstract class BaseService {
-  abstract create(...arg: any): Promise<IBaseEntity>
+  abstract save(...arg: any): Promise<IBaseEntity>
   abstract find(): Promise<IBaseEntity[]>
   abstract findOne(...arg: any): Promise<IBaseEntity>
   abstract findOneOrFail(...arg: any): Promise<IBaseEntity>

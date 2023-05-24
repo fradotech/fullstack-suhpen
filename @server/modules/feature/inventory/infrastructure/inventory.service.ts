@@ -12,7 +12,7 @@ export class InventoryService implements BaseService {
     private readonly inventoryRepo: Repository<IInventory>,
   ) {}
 
-  async create(req: IInventory): Promise<IInventory> {
+  async save(req: IInventory): Promise<IInventory> {
     const data = this.inventoryRepo.create(req)
     return await this.inventoryRepo.save(data)
   }

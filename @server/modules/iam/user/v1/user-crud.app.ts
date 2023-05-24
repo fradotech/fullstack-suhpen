@@ -19,7 +19,7 @@ export class UserCrudApp {
     const data = new EntUser()
     Object.assign(data, req)
 
-    return await this.userService.create(data)
+    return await this.userService.save(data)
   }
 
   async findOneOrFail(id: string): Promise<IUser> {

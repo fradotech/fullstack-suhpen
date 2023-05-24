@@ -25,7 +25,7 @@ export class ProductCrudApp {
 
     data.categories = await this.categoryService.findByIds(req.categoryIds)
 
-    return await this.productService.create(data)
+    return await this.productService.save(data)
   }
 
   async findOneOrFail(id: string): Promise<IProduct> {
@@ -38,7 +38,7 @@ export class ProductCrudApp {
 
     data.categories = await this.categoryService.findByIds(req.categoryIds)
 
-    return await this.productService.create(data)
+    return await this.productService.save(data)
   }
 
   async delete(id: string): Promise<IProduct> {

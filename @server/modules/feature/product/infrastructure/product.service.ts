@@ -12,7 +12,7 @@ export class ProductService implements BaseService {
     private readonly productRepo: Repository<IProduct>,
   ) {}
 
-  async create(req: IProduct): Promise<IProduct> {
+  async save(req: IProduct): Promise<IProduct> {
     const data = this.productRepo.create(req)
     return await this.productRepo.save(data)
   }
