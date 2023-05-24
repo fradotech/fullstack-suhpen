@@ -40,8 +40,6 @@ export class InventoryCrudApp {
   }
 
   async delete(id: string): Promise<IInventory> {
-    const data = this.inventoryService.findNoRelation(id)
-    await this.inventoryService.delete(id)
-    return data
+    return await this.inventoryService.delete(id)
   }
 }

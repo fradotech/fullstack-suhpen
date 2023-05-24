@@ -9,7 +9,7 @@ class InventoryIndexFilterRequest extends EntInventory {}
 export class InventoryIndexRequest extends IndexRequest {
   @IsOptional()
   @IsString()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   productId?: string
 
   @ValidateNested({ each: true })

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { BaseService } from '@server/infrastructure/base/base.service'
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
 import { EntCategory } from './category.entity'
 import { ICategory } from './category.interface'
 
@@ -19,6 +19,10 @@ export class CategoryService implements BaseService {
 
   async find(): Promise<ICategory[]> {
     return await this.categoryRepo.find()
+  }
+
+  async findByIds(ids: string[]): Promise<ICategory[]> {
+    return await this.categoryRepo.findBy({ id: In(ids) })
   }
 
   async findOne(id: string): Promise<ICategory> {

@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { CategoryService } from '../../category/infrastructure/category.service'
 import { EntProduct } from '../infrastructure/product.entity'
 import { IProduct } from '../infrastructure/product.interface'
 import {
@@ -9,7 +10,10 @@ import { ProductService } from '../infrastructure/product.service'
 
 @Injectable()
 export class ProductCrudApp {
-  constructor(private readonly productService: ProductService) {}
+  constructor(
+    private readonly productService: ProductService,
+    private readonly categoryService: CategoryService,
+  ) {}
 
   async find(): Promise<IProduct[]> {
     return await this.productService.find()
@@ -19,6 +23,8 @@ export class ProductCrudApp {
     const data = new EntProduct()
     Object.assign(data, req)
 
+    data.categories = await this.categoryService.findByIds(req.categoryIds)
+
     return await this.productService.create(data)
   }
 
@@ -27,17 +33,15 @@ export class ProductCrudApp {
   }
 
   async update(id: string, req: ProductUpdateRequest): Promise<IProduct> {
-    const data = await this.productService.findNoRelation(id)
+    const data = await this.productService.findOneOrFail(id)
     Object.assign(data, req)
 
-    delete data.categories
+    data.categories = await this.categoryService.findByIds(req.categoryIds)
 
-    return await this.productService.update(data)
+    return await this.productService.create(data)
   }
 
   async delete(id: string): Promise<IProduct> {
-    const data = this.productService.findNoRelation(id)
-    await this.productService.delete(id)
-    return data
+    return await this.productService.delete(id)
   }
 }

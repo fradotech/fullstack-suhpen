@@ -34,8 +34,6 @@ export class CategoryCrudApp {
   }
 
   async delete(id: string): Promise<ICategory> {
-    const data = this.categoryService.findNoRelation(id)
-    await this.categoryService.delete(id)
-    return data
+    return await this.categoryService.delete(id)
   }
 }

@@ -1,9 +1,7 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger'
 import { BaseMasterDataRequest } from '@server/infrastructure/base/product/base-master-data.request'
-import { Type } from 'class-transformer'
-import { IsOptional, IsString, ValidateNested } from 'class-validator'
+import { IsArray, IsOptional, IsString } from 'class-validator'
 import { ICategory } from '../../category/infrastructure/category.interface'
-import { CategoryUpdateRequest } from '../../category/infrastructure/category.request'
 import { IProduct } from './product.interface'
 
 export class ProductRequest extends BaseMasterDataRequest implements IProduct {
@@ -15,9 +13,9 @@ export class ProductRequest extends BaseMasterDataRequest implements IProduct {
   upc?: string
 
   @IsOptional()
-  @ValidateNested({ each: true })
-  @Type(() => CategoryUpdateRequest)
-  @ApiProperty()
+  @IsArray()
+  @ApiProperty({ example: ['categoryId1', 'categoryId2'] })
+  categoryIds: string[]
   categories?: ICategory[]
 
   @IsOptional()
