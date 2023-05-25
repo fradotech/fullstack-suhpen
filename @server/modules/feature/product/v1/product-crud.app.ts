@@ -23,7 +23,8 @@ export class ProductCrudApp {
     const data = new EntProduct()
     Object.assign(data, req)
 
-    data.categories = await this.categoryService.findByIds(req.categoryIds)
+    req.categoryIds &&
+      (data.categories = await this.categoryService.findByIds(req.categoryIds))
 
     return await this.productService.save(data)
   }
@@ -36,7 +37,8 @@ export class ProductCrudApp {
     const data = await this.productService.findOneOrFail(id)
     Object.assign(data, req)
 
-    data.categories = await this.categoryService.findByIds(req.categoryIds)
+    req.categoryIds &&
+      (data.categories = await this.categoryService.findByIds(req.categoryIds))
 
     return await this.productService.save(data)
   }

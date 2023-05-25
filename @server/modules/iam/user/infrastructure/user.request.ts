@@ -63,7 +63,7 @@ export class UserRequest implements IUser {
   @ApiProperty()
   address?: string
 
-  @ApiProperty({ example: '2000-01-01' })
+  @ApiProperty({ example: new Date() })
   birthDate?: Date | dayjs.Dayjs
 
   @ApiProperty()

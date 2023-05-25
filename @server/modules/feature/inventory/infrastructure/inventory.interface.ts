@@ -6,7 +6,7 @@ import { IProduct } from '../../product/infrastructure/product.interface'
 export interface IInventory extends IBaseEntity {
   sku?: string
   product: IProduct
-  productVariantName?: string
+  variant?: string
   supplyType: EInventorySupplyType
   buyPrice: number
   sellPrice: number

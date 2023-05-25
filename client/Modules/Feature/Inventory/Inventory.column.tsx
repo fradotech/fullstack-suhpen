@@ -36,7 +36,7 @@ export const inventoryColumns = (
     },
     {
       title: 'Variant',
-      dataIndex: 'productVariantName',
+      dataIndex: 'variant',
     },
     {
       dataIndex: 'stock',

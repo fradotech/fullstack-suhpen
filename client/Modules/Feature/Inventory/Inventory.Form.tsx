@@ -70,7 +70,7 @@ const InventoryForm: React.FC = () => {
               />
             </Col>
           </Row>
-          <FormItem name="productVariantName" />
+          <FormItem name="variant" />
           <Row gutter={12}>
             <Col sm={24} md={12}>
               <FormItem

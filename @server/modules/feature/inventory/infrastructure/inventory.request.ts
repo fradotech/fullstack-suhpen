@@ -1,13 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger'
-import {
-  IsBoolean,
-  IsDate,
-  IsEnum,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator'
+import { IsEnum, IsNotEmpty } from 'class-validator'
 import { EInventorySupplyType } from 'client/Modules/Feature/Inventory/Inventory.enum'
 import { IProduct } from '../../product/infrastructure/product.interface'
 import { IInventory } from './inventory.interface'
@@ -17,63 +9,42 @@ export class InventoryRequest implements IInventory {
   marginPrice: number
 
   @IsNotEmpty()
-  @IsString()
   @ApiProperty()
   productId: string
   product: IProduct
 
-  @IsNotEmpty()
-  @IsString()
   @ApiProperty()
-  productVariantName?: string
+  variant?: string
 
   @IsNotEmpty()
   @IsEnum(EInventorySupplyType)
   @ApiProperty({ example: EInventorySupplyType.SelfStock })
   supplyType: EInventorySupplyType
 
-  @IsOptional()
-  @IsString()
   @ApiProperty()
   sku?: string
 
-  @IsNotEmpty()
-  @IsNumber()
   @ApiProperty({ example: 100000 })
   buyPrice: number
 
-  @IsNotEmpty()
-  @IsNumber()
   @ApiProperty({ example: 120000 })
   sellPrice: number
 
-  @IsNotEmpty()
-  @IsNumber()
   @ApiProperty({ example: 10000 })
   stock: number
 
-  @IsNotEmpty()
-  @IsNumber()
   @ApiProperty({ example: 10000 })
   stockMinimum: number
 
-  @IsOptional()
-  @IsNumber()
   @ApiProperty()
   discountPercentage?: number
 
-  @IsOptional()
-  @IsDate()
   @ApiProperty()
   expiredDate?: Date
 
-  @IsNotEmpty()
-  @IsBoolean()
   @ApiProperty({ example: false })
   isActive: boolean
 
-  @IsOptional()
-  @IsString()
   @ApiProperty()
   thumbnail?: string
 }
