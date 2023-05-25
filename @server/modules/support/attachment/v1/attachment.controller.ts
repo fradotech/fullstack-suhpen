@@ -44,7 +44,8 @@ export class AttachmentController {
     @UploadedFile() file: Express.Multer.File,
     @Body() req: AttachmentUploadRequest,
   ): Promise<IApiRes<AttachmentUploadResponse>> {
-    const fileUrl = config.server.host + '/' + THIS_MODULE + '/' + file.filename
+    const fileUrl =
+      config.server.hostApi + '/' + THIS_MODULE + '/' + file.filename
 
     const attachment = await this.attachmentService.upload(fileUrl, req)
     return ApiRes.fromEntity(AttachmentUploadResponse.fromEntity(attachment))
