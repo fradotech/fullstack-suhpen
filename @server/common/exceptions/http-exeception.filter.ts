@@ -8,11 +8,7 @@ import {
 } from '@nestjs/common'
 import { BaseExceptionFilter } from '@nestjs/core'
 import { Response } from 'express'
-import {
-  EntityNotFoundError,
-  FindRelationsNotFoundError,
-  QueryFailedError,
-} from 'typeorm'
+import { EntityNotFoundError, QueryFailedError } from 'typeorm'
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -52,51 +48,45 @@ export class EntityNotFoundExceptionFilter implements ExceptionFilter {
       Object.values(where)[0]
     }' not found`
 
-    response.status(status).json({
-      message,
-      data: null,
-    })
-  }
-}
-
-@Catch(FindRelationsNotFoundError)
-export class RelationNotFoundExceptionFilter implements ExceptionFilter {
-  catch(exception: FindRelationsNotFoundError, host: ArgumentsHost): void {
-    const ctx = host.switchToHttp()
-    const response = ctx.getResponse<Response>()
-    const status = 404
-
-    response.status(status).json({
-      message: 'Relation data not found',
-      data: null,
-    })
+    response.status(status).json({ message, data: exception })
   }
 }
 
 @Catch(QueryFailedError)
 export class QueryErrorFilter extends BaseExceptionFilter {
-  public catch(exception: any, host: ArgumentsHost): any {
+  public catch(exception: any, host: ArgumentsHost): void {
     const ctx = host.switchToHttp()
     const response = ctx.getResponse<Response>()
 
-    switch (exception.code) {
-      case 'ER_DUP_ENTRY':
-        const sqlMessage = exception.sqlMessage.replace('Duplicate entry ', '')
-        const indexValue = sqlMessage.indexOf(' ') - 1
-        const message = sqlMessage.slice(1, indexValue) + ' has been used'
+    let sqlMessage: string
+    let indexValue: number
+    let message: string
 
-        response.status(409).json({
-          message,
-          data: null,
-        })
+    switch (exception.code) {
+      case 'ER_NO_DEFAULT_FOR_FIELD':
+        sqlMessage = 'Field '
+        sqlMessage = exception.sqlMessage.replace(sqlMessage, '')
+        indexValue = sqlMessage.indexOf(' ') - 1
+        message = sqlMessage.slice(1, indexValue) + ' should not be empty'
+
+        response.status(409).json({ message, data: exception })
+        break
+
+      case 'ER_DUP_ENTRY':
+        sqlMessage = 'Duplicate entry '
+        sqlMessage = exception.sqlMessage.replace(sqlMessage, '')
+        indexValue = sqlMessage.indexOf(' ') - 1
+        message = sqlMessage.slice(1, indexValue) + ' has been used'
+
+        response.status(409).json({ message, data: exception })
         break
 
       default:
-        Logger.error(`\n\n${exception}\n\n`, QueryFailedError.name)
+        Logger.error(`\n${exception}\n\n`, QueryFailedError.name)
 
         response.status(422).json({
           message: String(exception),
-          data: null,
+          data: exception,
         })
     }
   }

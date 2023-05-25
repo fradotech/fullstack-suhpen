@@ -19,33 +19,28 @@ import { IUser } from '../infrastructure/user.interface'
 export class UserRequest implements IUser {
   id: string
 
-  @IsNotEmpty()
-  @IsString()
   @ApiProperty({ example: 'Frado' })
   name: string
 
   @IsNotEmpty()
-  @IsString()
   @IsEmail()
   @ApiProperty({ example: 'Admin@admin.com' })
   email: string
 
   @IsNotEmpty()
-  @IsString()
   @MinLength(6)
   @Matches(REGEX_PASSWORD, {
     message:
-      'Password should contain number, under case, and upper case character',
+      'password should contain number, under case, and upper case character',
   })
   @ApiProperty({ example: 'Admin123' })
   password: string
 
   @IsNotEmpty()
-  @IsString()
   @MinLength(6)
   @Matches(REGEX_PASSWORD, {
     message:
-      'Password should contain number, under case, and upper case character',
+      'password should contain number, under case, and upper case character',
   })
   @ApiProperty({ example: 'Admin123' })
   passwordConfirmation: string
@@ -61,22 +56,16 @@ export class UserRequest implements IUser {
   gender?: EUserGender
 
   @IsOptional()
-  @IsString()
   @IsPhoneNumber('ID')
-  @ApiProperty({ example: '085123456789' })
+  @ApiProperty({ example: '085704816007' })
   phoneNumber?: string
 
-  @IsOptional()
-  @IsString()
   @ApiProperty()
   address?: string
 
-  @IsOptional()
-  @ApiProperty()
+  @ApiProperty({ example: '2000-01-01' })
   birthDate?: Date | dayjs.Dayjs
 
-  @IsOptional()
-  @IsString()
   @ApiProperty()
   avatar?: string
 
