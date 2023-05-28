@@ -1,7 +1,6 @@
 import { applyDecorators, Type } from '@nestjs/common'
 import { ApiOkResponse, getSchemaPath } from '@nestjs/swagger'
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export const ApiSuccessResponse = <TModel extends Type<unknown>>(
   model: TModel = null,
   isArray = false,
@@ -34,7 +33,6 @@ export const ApiSuccessResponse = <TModel extends Type<unknown>>(
   )
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export const PaginationSuccessResponse = <TModel extends Type<unknown>>(
   model: TModel = null,
 ): any => {
