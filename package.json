@@ -6,9 +6,6 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
     "format": "prettier --write \"@server/**/*.ts\" \"client/**/*{.ts,.tsx,.js,.css}\"",
     "lint": "eslint \"{@server,client}/**/*.ts\" --fix",
     "prepare": "husky install",
@@ -24,9 +21,9 @@
     "migrate:generate": "sh -c 'yarn typeorm migration:generate @server/database/migrations/$0'",
     "migrate:revert": "yarn typeorm migration:revert",
     "schema:drop": "yarn typeorm schema:drop",
-    "client:dev": "webpack-dev-server --open --hot --config webpack.config.js --mode=development",
-    "client:build": "webpack --config webpack.config.js --mode=production",
-    "client": "webpack-dev-server --mode=production --config webpack.config.js "
+    "client:dev": "vite",
+    "client:build": "tsc && vite build",
+    "client:preview": "vite preview"
   },
   "engines": {
     "node": "16.x"
