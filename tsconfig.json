@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "ESNext",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -16,18 +16,32 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false,
+    "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
-    "lib": ["es6", "dom", "es2021"],
+    "lib": ["es6", "dom", "es2021", "ES2020", "DOM", "DOM.Iterable"],
     "allowJs": true,
-    "jsx": "react",
-    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "moduleResolution": "bundler",
     "rootDir": "./",
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "inlineSources": true,
     "sourceRoot": "/",
     "resolveJsonModule": true,
-    "paths": {}
-  }
+    "paths": {},
+
+    /* Vite */
+    "useDefineForClassFields": true,
+
+    /* Bundler mode */
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
