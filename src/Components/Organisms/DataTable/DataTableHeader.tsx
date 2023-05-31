@@ -5,15 +5,15 @@ import {
   SearchOutlined,
   UnorderedListOutlined,
 } from '@ant-design/icons'
-import { Button, Col, DatePicker, Input, notification, Row } from 'antd'
+import { Button, Col, DatePicker, Input, Row, notification } from 'antd'
 import axios from 'axios'
 import dayjs from 'dayjs'
 import FileDownload from 'js-file-download'
 import React from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import Loading from '../../../Components/Molecules/Loading/Loading'
 import { HOST_API } from '../../../services/api.service'
 import { Util } from '../../../utils/util'
+import Loading from '../../Molecules/Loading/Loading'
 import { IDataTableHeader } from './DataTable.interface'
 import styles from './DataTable.module.css'
 

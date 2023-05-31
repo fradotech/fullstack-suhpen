@@ -14,6 +14,17 @@
   -webkit-text-size-adjust: 100%;
 }
 
+@media (max-width: 991.98px) {
+  aside {
+    max-width: 0px !important;
+    min-width: 0px !important;
+    width: 0px !important;
+  }
+  .menu {
+    display: none !important;
+  }
+}
+
 a {
   font-weight: 500;
   color: #646cff;
