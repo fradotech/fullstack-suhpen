@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Route } from '../../../../Enums/Route'
-import { authAction } from '../../../../Modules/Iam/Auth/auth.action'
+import { authAction } from '../../Auth/auth.action'
 
 const useUser = () => {
   const navigate = useNavigate()
@@ -9,7 +9,7 @@ const useUser = () => {
   React.useEffect(() => {
     !authAction.loggedUser() && navigate(Route.login)
     authAction.loggedUser() && navigate(window.location.pathname)
-  }, [])
+  }, [navigate])
 
   return { user: authAction.loggedUser() }
 }
