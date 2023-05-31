@@ -2,8 +2,8 @@ import { Controller, Get, Query, UseGuards } from '@nestjs/common'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
+import { RoleEnum } from '@server/modules/iam/role/common/role.enum'
 import { Modules } from '@server/modules/modules'
-import { ERole } from 'client/Modules/Iam/Role/Role.enum'
 import { SuperAdminGuard } from '../../auth/common/super-admin.guard'
 import { IRole } from '../infrastructure/role.interface'
 import { RoleResponse } from '../infrastructure/role.response'
@@ -26,7 +26,7 @@ export class RoleController {
 
   @Get(':name')
   async findOne(
-    @Query('name') name: ERole,
+    @Query('name') name: RoleEnum,
   ): Promise<IApiRes<IRole | undefined>> {
     const res = await this.roleService.findOne(name)
     return ApiRes.fromEntity(RoleResponse.fromEntity(res))

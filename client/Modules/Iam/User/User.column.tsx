@@ -8,11 +8,11 @@ import {
   RefetchOptions,
   RefetchQueryFilters,
 } from 'react-query'
+import { RoleEnum } from '../../../../@server/modules/iam/role/common/role.enum'
 import { RowActionButtons } from '../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../Enums/Route'
 import { Util } from '../../../utils/util'
 import { roleAction } from '../Role/role.action'
-import { ERole } from '../Role/Role.enum'
 import { userAction } from './user.action'
 
 export const userColumns = (
@@ -29,13 +29,13 @@ export const userColumns = (
     },
     {
       dataIndex: 'role',
-      render: (data: ERole) => {
+      render: (data: RoleEnum) => {
         return <Tag color={roleAction.colorRole(data)}>{data}</Tag>
       },
       filters: [
-        { text: ERole.SuperAdmin, value: ERole.SuperAdmin },
-        { text: ERole.Admin, value: ERole.Admin },
-        { text: ERole.User, value: ERole.User },
+        { text: RoleEnum.SuperAdmin, value: RoleEnum.SuperAdmin },
+        { text: RoleEnum.Admin, value: RoleEnum.Admin },
+        { text: RoleEnum.User, value: RoleEnum.User },
       ],
     },
     {

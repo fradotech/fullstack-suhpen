@@ -9,7 +9,7 @@ import {
   UserSwitchOutlined,
 } from '@ant-design/icons'
 import { MenuProps } from 'antd'
-import { ERole } from '../../Modules/Iam/Role/Role.enum'
+import { RoleEnum } from '../../../@server/modules/iam/role/common/role.enum'
 
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -26,7 +26,9 @@ type MenuItem = Required<MenuProps>['items'][number]
 
 const user = authAction.loggedUser()
 
-const itemsRoleSuperAdmin: MenuItem[] = [ERole.SuperAdmin].includes(user?.role)
+const itemsRoleSuperAdmin: MenuItem[] = [RoleEnum.SuperAdmin].includes(
+  user?.role,
+)
   ? [
       { type: 'divider' },
       {
@@ -49,9 +51,10 @@ const itemsRoleSuperAdmin: MenuItem[] = [ERole.SuperAdmin].includes(user?.role)
     ]
   : []
 
-const itemsRoleAdmin: MenuItem[] = [ERole.SuperAdmin, ERole.Admin].includes(
-  user?.role,
-)
+const itemsRoleAdmin: MenuItem[] = [
+  RoleEnum.SuperAdmin,
+  RoleEnum.Admin,
+].includes(user?.role)
   ? [
       {
         key: 'SCM',
@@ -89,9 +92,9 @@ const itemsRoleAdmin: MenuItem[] = [ERole.SuperAdmin, ERole.Admin].includes(
   : []
 
 const itemsRoleUser: MenuItem[] = [
-  ERole.SuperAdmin,
-  ERole.Admin,
-  ERole.User,
+  RoleEnum.SuperAdmin,
+  RoleEnum.Admin,
+  RoleEnum.User,
 ].includes(user?.role)
   ? [
       {
