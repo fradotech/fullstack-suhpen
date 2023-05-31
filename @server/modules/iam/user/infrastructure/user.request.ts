@@ -1,4 +1,6 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger'
+import { RoleEnum } from '@server/modules/iam/role/common/role.enum'
+import { UserGenderEnum } from '@server/modules/iam/user/common/user.enum'
 import {
   IsEmail,
   IsEnum,
@@ -10,8 +12,6 @@ import {
   Matches,
   MinLength,
 } from 'class-validator'
-import { ERole } from 'client/Modules/Iam/Role/Role.enum'
-import { EUserGender } from 'client/Modules/Iam/User/User.enum'
 import dayjs from 'dayjs'
 import { REGEX_PASSWORD } from '../common/character.constant'
 import { IUser } from '../infrastructure/user.interface'
@@ -46,14 +46,14 @@ export class UserRequest implements IUser {
   passwordConfirmation: string
 
   @IsOptional()
-  @IsEnum(ERole)
-  @ApiProperty({ example: ERole.User })
-  role: ERole
+  @IsEnum(RoleEnum)
+  @ApiProperty({ example: RoleEnum.User })
+  role: RoleEnum
 
   @IsOptional()
-  @IsEnum(EUserGender)
-  @ApiProperty({ example: EUserGender.Man })
-  gender?: EUserGender
+  @IsEnum(UserGenderEnum)
+  @ApiProperty({ example: UserGenderEnum.Man })
+  gender?: UserGenderEnum
 
   @IsOptional()
   @IsPhoneNumber('ID')

@@ -1,9 +1,9 @@
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { RoleResponse } from '@server/modules/iam/role/infrastructure/role.response'
+import { RoleEnum } from '../../../../@server/modules/iam/role/common/role.enum'
 import { Route } from '../../../Enums/Route'
 import { API } from '../../../services/api.service'
-import { ERole } from './Role.enum'
 
 export const roleAction = {
   fetch: async (): Promise<IPaginateResponse<RoleResponse>> => {
@@ -16,11 +16,11 @@ export const roleAction = {
 
   // --- Another --- \\
 
-  colorRole: (status: ERole): string => {
+  colorRole: (status: RoleEnum): string => {
     const color = {}
-    color[ERole.SuperAdmin] = 'blue'
-    color[ERole.Admin] = 'green'
-    color[ERole.User] = 'yellow'
+    color[RoleEnum.SuperAdmin] = 'blue'
+    color[RoleEnum.Admin] = 'green'
+    color[RoleEnum.User] = 'yellow'
 
     return color[status]
   },

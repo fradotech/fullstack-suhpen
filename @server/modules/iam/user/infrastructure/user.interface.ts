@@ -1,14 +1,14 @@
 import { IBaseEntity } from '@server/infrastructure/base/base-entity.interface'
-import { ERole } from 'client/Modules/Iam/Role/Role.enum'
-import { EUserGender } from 'client/Modules/Iam/User/User.enum'
+import { RoleEnum } from '@server/modules/iam/role/common/role.enum'
+import { UserGenderEnum } from '@server/modules/iam/user/common/user.enum'
 import dayjs from 'dayjs'
 
 export interface IUser extends IBaseEntity {
   name: string
   email: string
   password: string
-  role: ERole
-  gender?: EUserGender
+  role: RoleEnum
+  gender?: UserGenderEnum
   phoneNumber?: string
   address?: string
   birthDate?: Date | dayjs.Dayjs

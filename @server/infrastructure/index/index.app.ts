@@ -1,4 +1,4 @@
-import { ERole } from 'client/Modules/Iam/Role/Role.enum'
+import { RoleEnum } from '@server/modules/iam/role/common/role.enum'
 import { Request } from 'express'
 import { Repository, SelectQueryBuilder } from 'typeorm'
 import { IIndexAppRelation } from './index.interface'
@@ -79,7 +79,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
     const isUserRelation = relations
       .map((data) => data.name)
       .find((data) => data == 'user')
-    const isAdmin = [ERole.SuperAdmin, ERole.Admin].includes(
+    const isAdmin = [RoleEnum.SuperAdmin, RoleEnum.Admin].includes(
       request['user']?.['role'],
     )
 

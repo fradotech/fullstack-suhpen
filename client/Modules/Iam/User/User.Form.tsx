@@ -5,15 +5,15 @@ import { Col, Divider, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
+import { RoleEnum } from '../../../../@server/modules/iam/role/common/role.enum'
+import { UserGenderEnum } from '../../../../@server/modules/iam/user/common/user.enum'
 import { PageHeader } from '../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../Enums/Route'
 import { rule } from '../../../utils/form.rules'
-import { ERole } from '../Role/Role.enum'
 import { userAction } from './user.action'
-import { EUserGender } from './User.enum'
 
 const UserForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
@@ -84,14 +84,14 @@ const UserForm: React.FC = () => {
               <FormItem
                 name="role"
                 input="select"
-                optionsEnum={Object.values(ERole)}
+                optionsEnum={Object.values(RoleEnum)}
               />
             </Col>
             <Col sm={24} md={12}>
               <FormItem
                 name="gender"
                 input="select"
-                optionsEnum={Object.values(EUserGender)}
+                optionsEnum={Object.values(UserGenderEnum)}
               />
             </Col>
             <Col sm={24} md={12}>
