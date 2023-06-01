@@ -2,9 +2,9 @@ import { Col, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import CardData from '../../../Components/Molecules/CardData/CardData'
-import { dashboardInventoryAction } from './dashboardInventory.action'
 import DemoLine from './DemoLine'
 import DemoPie from './DemoPie'
+import { dashboardInventoryAction } from './dashboardInventory.action'
 
 const DashboardInventory: React.FC = () => {
   const buyPrice = async () => await dashboardInventoryAction.buyPrice()
