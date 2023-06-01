@@ -1,5 +1,5 @@
-import AccountRoute from './Account/Account.route'
-import RoleRoute from './Role/Role.route'
-import UserRoute from './User/User.route'
+import AccountRoute from './Account/account.route'
+import RoleRoute from './Role/role.route'
+import UserRoute from './User/user.route'
 
 export default [...AccountRoute, ...UserRoute, ...RoleRoute]

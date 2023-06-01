@@ -1,11 +1,11 @@
 import { routesDashboard } from '../Modules/Dashboard/Dashboard.route'
-import { routesCategory } from '../Modules/Feature/Category/Category.route'
-import { routesInventory } from '../Modules/Feature/Inventory/Inventory.route'
-import { routesProduct } from '../Modules/Feature/Product/Product.route'
-import { routesAccount } from '../Modules/Iam/Account/Account.route'
-import { routesAuth } from '../Modules/Iam/Auth/Auth.route'
-import { routesRole } from '../Modules/Iam/Role/Role.route'
-import { routesUser } from '../Modules/Iam/User/User.route'
+import { routesCategory } from '../Modules/Feature/Category/category.route'
+import { routesInventory } from '../Modules/Feature/Inventory/inventory.route'
+import { routesProduct } from '../Modules/Feature/Product/product.route'
+import { routesAccount } from '../Modules/Iam/Account/account.route'
+import { routesAuth } from '../Modules/Iam/Auth/auth.route'
+import { routesRole } from '../Modules/Iam/Role/role.route'
+import { routesUser } from '../Modules/Iam/User/user.route'
 
 export const Route = {
   Home: '/',

@@ -1,7 +1,7 @@
 import { IBaseEntity } from '@server/infrastructure/base/base-entity.interface'
-import { EInventorySupplyType } from 'client/Modules/Feature/Inventory/Inventory.enum'
 import dayjs from 'dayjs'
 import { IProduct } from '../../product/infrastructure/product.interface'
+import { EInventorySupplyType } from './inventory.enum'
 
 export interface IInventory extends IBaseEntity {
   sku?: string
@@ -17,6 +17,4 @@ export interface IInventory extends IBaseEntity {
   discountPercentage?: number
   isActive: boolean
   thumbnail?: string
-  // store: IStore
-  // supplier?: ISupplier
 }

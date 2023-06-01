@@ -1,7 +1,7 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty } from 'class-validator'
-import { EInventorySupplyType } from 'client/Modules/Feature/Inventory/Inventory.enum'
 import { IProduct } from '../../product/infrastructure/product.interface'
+import { EInventorySupplyType } from './inventory.enum'
 import { IInventory } from './inventory.interface'
 
 export class InventoryRequest implements IInventory {

@@ -1,6 +1,5 @@
-import React from 'react'
 import { Route } from 'react-router-dom'
-const Dashboard = React.lazy(() => import('./Dashboard'))
+import Dashboard from './Pages/Dashboard'
 
 const path = '/dashboard'
 

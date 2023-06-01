@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { themeColors } from '../../Layouts/ThemeProvider/theme'
 import { useIsMobileScreen } from '../../utils/is-mobile'
-import HomeHeader from './HomeHeader'
-import HomeProduct from './HomeProduct'
+import HomeHeaderSection from './common/HomeHeader.section'
+import HomeProductSection from './common/HomeProduct.section'
 
 const Home: React.FC = () => {
   const navigate = useNavigate()
@@ -14,7 +14,7 @@ const Home: React.FC = () => {
 
   return (
     <Layout>
-      <HomeHeader />
+      <HomeHeaderSection />
       <Layout.Content>
         <section id="home">
           <Row style={{ justifyContent: 'space-between' }}>
@@ -39,7 +39,7 @@ const Home: React.FC = () => {
           </Row>
         </section>
         <section id="product">
-          <HomeProduct />
+          <HomeProductSection />
         </section>
       </Layout.Content>
     </Layout>

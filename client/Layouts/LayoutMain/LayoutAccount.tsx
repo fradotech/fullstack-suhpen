@@ -9,7 +9,7 @@ import { Avatar, Dropdown, Space, Typography } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Route } from '../../Enums/Route'
-import { authAction } from '../../Modules/Iam/Auth/auth.action'
+import { authAction } from '../../Modules/Iam/Auth/infrastructure/auth.action'
 import { themeColors, themeColorsDark } from '../ThemeProvider/theme'
 
 type IProps = {

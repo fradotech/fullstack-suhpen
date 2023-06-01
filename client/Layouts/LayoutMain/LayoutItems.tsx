@@ -14,7 +14,7 @@ import { RoleEnum } from '../../../@server/modules/iam/role/common/role.enum'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Route } from '../../Enums/Route'
-import { authAction } from '../../Modules/Iam/Auth/auth.action'
+import { authAction } from '../../Modules/Iam/Auth/infrastructure/auth.action'
 import { Util } from '../../utils/util'
 
 export type IProps = {
