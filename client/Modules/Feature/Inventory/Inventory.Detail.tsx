@@ -19,6 +19,7 @@ const InventoryDetail: React.FC = () => {
       <PageHeader
         title="Inventory Detail"
         isLoading={isLoading}
+        hrefIndex={Route.inventory.index}
         hrefEdit={Route.inventory.edit(id)}
         hrefDelete={Route.inventory.id(id)}
       />

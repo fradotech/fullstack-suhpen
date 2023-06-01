@@ -19,6 +19,7 @@ const CategoryDetail: React.FC = () => {
       <PageHeader
         title="Category Detail"
         isLoading={isLoading}
+        hrefIndex={Route.category.index}
         hrefEdit={Route.category.edit(id)}
         hrefDelete={Route.category.id(id)}
       />

@@ -5,7 +5,6 @@ import {
   EntityNotFoundExceptionFilter,
   HttpExceptionFilter,
   QueryErrorFilter,
-  RelationNotFoundExceptionFilter,
 } from './common/exceptions/http-exeception.filter'
 import { ValidationPipe } from './common/pipes/validation.pipe'
 import { DatabaseModule } from './database/database.module'
@@ -38,10 +37,6 @@ import { SupportModule } from './modules/support/support.module'
     {
       provide: APP_FILTER,
       useClass: EntityNotFoundExceptionFilter,
-    },
-    {
-      provide: APP_FILTER,
-      useClass: RelationNotFoundExceptionFilter,
     },
     {
       provide: APP_FILTER,

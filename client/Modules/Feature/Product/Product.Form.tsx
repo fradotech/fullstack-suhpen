@@ -77,7 +77,6 @@ const ProductForm: React.FC = () => {
             label="Categories"
             input="selectMultiple"
             options={categories?.data}
-            disabled={!!id}
             form={form}
           />
           <FormItem name="description" input="textArea" />

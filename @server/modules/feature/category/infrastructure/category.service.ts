@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { BaseService } from '@server/infrastructure/base/base.service'
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
 import { EntCategory } from './category.entity'
 import { ICategory } from './category.interface'
 
@@ -12,13 +12,17 @@ export class CategoryService implements BaseService {
     private readonly categoryRepo: Repository<ICategory>,
   ) {}
 
-  async create(req: ICategory): Promise<ICategory> {
+  async save(req: ICategory): Promise<ICategory> {
     const data = this.categoryRepo.create(req)
     return await this.categoryRepo.save(data)
   }
 
   async find(): Promise<ICategory[]> {
     return await this.categoryRepo.find()
+  }
+
+  async findByIds(ids: string[]): Promise<ICategory[]> {
+    return await this.categoryRepo.findBy({ id: In(ids) })
   }
 
   async findOne(id: string): Promise<ICategory> {
@@ -32,31 +36,24 @@ export class CategoryService implements BaseService {
   async update(req: ICategory): Promise<ICategory> {
     const data = this.categoryRepo.create(req)
     await this.categoryRepo.update(data.id, data)
-    return await this.findOneOrFail(req.id)
+    return await this.findNoRelation(req.id)
   }
 
-  async remove(id: string): Promise<ICategory> {
-    const data = (await this.findOneOrFail(id)) as EntCategory
-    return await this.categoryRepo.remove(data)
+  async delete(id: string): Promise<ICategory> {
+    const data = await this.findNoRelation(id)
+    await this.categoryRepo.delete(id)
+    return data
   }
 
-  async softRemove(id: string): Promise<ICategory> {
-    const data = (await this.findOneOrFail(id)) as EntCategory
-    return await this.categoryRepo.softRemove(data)
+  async softDelete(id: string): Promise<ICategory> {
+    const data = await this.findNoRelation(id)
+    await this.categoryRepo.softDelete(id)
+    return data
   }
 
-  // --- Another findOneBy() Methods --- \\
-
-  async findNoRelation(
-    id: string | string[],
-  ): Promise<ICategory | ICategory[]> {
-    if (!Array.isArray(id)) {
-      return await this.categoryRepo.findOneOrFail({ where: { id } })
-    }
-
-    return await this.categoryRepo
-      .createQueryBuilder('category')
-      .whereInIds(id)
-      .getMany()
+  async findNoRelation(id: string): Promise<ICategory> {
+    return await this.categoryRepo.findOneOrFail({ where: { id } })
   }
+
+  // --- Another findOneBy() --- \\
 }

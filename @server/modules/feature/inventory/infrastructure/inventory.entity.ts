@@ -15,7 +15,7 @@ export class EntInventory extends BaseEntity implements IInventory {
   product: IProduct
 
   @Column({ default: null })
-  productVariantName?: string
+  variant?: string
 
   @Column({ default: EInventorySupplyType.SelfStock })
   supplyType: EInventorySupplyType
@@ -50,6 +50,6 @@ export class EntInventory extends BaseEntity implements IInventory {
   @BeforeInsert()
   @BeforeUpdate()
   beforeInsertAndUpdate(): void {
-    this.marginPrice = this.sellPrice - this.buyPrice
+    this.marginPrice = this.sellPrice || 0 - this.buyPrice || 0
   }
 }

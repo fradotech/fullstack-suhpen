@@ -31,7 +31,7 @@ export const useDataTable = <T>() => {
 
     setSearchParams(queryParams as URLSearchParamsInit)
     return queryParams
-  }, [query])
+  }, [query, setSearchParams])
 
   return {
     query,

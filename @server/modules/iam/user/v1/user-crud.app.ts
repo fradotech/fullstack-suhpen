@@ -19,7 +19,7 @@ export class UserCrudApp {
     const data = new EntUser()
     Object.assign(data, req)
 
-    return await this.userService.create(data)
+    return await this.userService.save(data)
   }
 
   async findOneOrFail(id: string): Promise<IUser> {
@@ -27,7 +27,7 @@ export class UserCrudApp {
   }
 
   async update(id: string, req: UserUpdateRequest): Promise<IUser> {
-    const data = await this.userService.findOneOrFail(id)
+    const data = await this.userService.findNoRelation(id)
 
     data.name = req.name
     data.gender = req.gender
@@ -39,15 +39,7 @@ export class UserCrudApp {
     return await this.userService.update(data)
   }
 
-  async remove(id: string): Promise<IUser> {
-    const data = this.userService.findOneOrFail(id)
-    await this.userService.remove(id)
-    return data
-  }
-
-  async softRemove(id: string): Promise<IUser> {
-    const data = this.userService.findOneOrFail(id)
-    await this.userService.softRemove(id)
-    return data
+  async delete(id: string): Promise<IUser> {
+    return await this.userService.delete(id)
   }
 }

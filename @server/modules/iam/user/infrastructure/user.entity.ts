@@ -1,11 +1,9 @@
+import { RoleEnum } from '@server/modules/iam/role/common/role.enum'
+import { UserGenderEnum } from '@server/modules/iam/user/common/user.enum'
 import * as bcrypt from 'bcrypt'
-import { ERole } from 'client/Modules/Iam/Role/Role.enum'
-import { EUserGender } from 'client/Modules/Iam/User/User.enum'
 import dayjs from 'dayjs'
 import {
   BeforeInsert,
-  BeforeSoftRemove,
-  BeforeUpdate,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
@@ -39,22 +37,6 @@ export class EntUser implements IUser {
   @ManyToOne(() => EntUser)
   deletedBy: IUser
 
-  @BeforeInsert()
-  beforeInsert(): void {
-    // this.createdBy = user
-  }
-
-  @BeforeUpdate()
-  beforeUpdate(): void {
-    // this.updatedBy = user
-    this.updatedAt = new Date()
-  }
-
-  @BeforeSoftRemove()
-  beforeSoftRemove(): void {
-    // this.deletedBy = user
-  }
-
   // --- Regular attributs --- \\
 
   @Column()
@@ -66,11 +48,11 @@ export class EntUser implements IUser {
   @Column()
   password: string
 
-  @Column({ default: ERole.User })
-  role: ERole
+  @Column({ default: RoleEnum.User })
+  role: RoleEnum
 
   @Column({ default: null })
-  gender?: EUserGender
+  gender?: UserGenderEnum
 
   @Column({ default: null })
   phoneNumber?: string

@@ -3,13 +3,27 @@ module.exports = {
   parserOptions: {
     project: 'tsconfig.json',
     sourceType: 'module',
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-  plugins: ['@typescript-eslint/eslint-plugin', 'unused-imports'],
-  extends: ['plugin:@typescript-eslint/recommended', 'prettier'],
+  plugins: [
+    '@typescript-eslint/eslint-plugin',
+    'unused-imports',
+    'react-refresh',
+  ],
+  extends: [
+    'prettier',
+    'plugin:@typescript-eslint/recommended',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
+  ],
   root: true,
   env: {
     node: true,
     jest: true,
+    browser: true,
+    es2020: true,
   },
   ignorePatterns: ['.eslintrc.js'],
   rules: {
@@ -54,8 +68,13 @@ module.exports = {
         format: ['PascalCase'],
       },
       {
+        selector: 'function',
+        format: ['PascalCase', 'camelCase'],
+        modifiers: [],
+      },
+      {
         selector: 'variable',
-        format: ['PascalCase', 'camelCase', 'UPPER_CASE'],
+        format: ['PascalCase', 'camelCase', 'UPPER_CASE', 'snake_case'],
         modifiers: [],
       },
       {
@@ -65,5 +84,6 @@ module.exports = {
       },
     ],
     'no-console': 1,
+    'react-refresh/only-export-components': 'warn',
   },
 }

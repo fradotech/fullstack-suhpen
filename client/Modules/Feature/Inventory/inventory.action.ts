@@ -10,7 +10,7 @@ import { notification } from 'antd'
 import dayjs from 'dayjs'
 import { getAttachment } from '../../../Components/Molecules/Attachment/attachment.util'
 import { Route } from '../../../Enums/Route'
-import { axiosService } from '../../../services/axios.service'
+import { API } from '../../../services/api.service'
 
 const dataPrepare = (
   data: InventoryCreateRequest | InventoryUpdateRequest,
@@ -26,20 +26,20 @@ export const inventoryAction = {
     productId?: string,
   ): Promise<IPaginateResponse<InventoryResponse>> => {
     req.productId = productId
-    return await axiosService.get(Route.inventory.index, req)
+    return await API.get(Route.inventory.index, req)
   },
 
   create: async (
     data: InventoryCreateRequest,
   ): Promise<IApiRes<InventoryResponse>> => {
     data = dataPrepare(data) as InventoryCreateRequest
-    const res = await axiosService.post(Route.inventory.index, data)
+    const res = await API.post(Route.inventory.index, data)
     res.data && notification.success({ message: 'Success create data' })
     return res
   },
 
   findOne: async (id: string): Promise<IApiRes<InventoryResponse>> => {
-    const res: IApiRes<InventoryResponse> = await axiosService.get(
+    const res: IApiRes<InventoryResponse> = await API.get(
       Route.inventory.id(id),
     )
 
@@ -53,13 +53,13 @@ export const inventoryAction = {
     data: InventoryUpdateRequest,
   ): Promise<IApiRes<InventoryResponse>> => {
     data = dataPrepare(data)
-    const res = await axiosService.put(Route.inventory.id(id), data)
+    const res = await API.put(Route.inventory.id(id), data)
     res.data && notification.success({ message: 'Success update data' })
     return res
   },
 
-  remove: async (id: string): Promise<IApiRes<InventoryResponse>> => {
-    const res = await axiosService.delete(Route.inventory.id(id))
+  delete: async (id: string): Promise<IApiRes<InventoryResponse>> => {
+    const res = await API.delete(Route.inventory.id(id))
     res.data && notification.success({ message: 'Success delete data' })
     return res
   },

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { BaseService } from '@server/infrastructure/base/base.service'
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
 import { EntInventory } from './inventory.entity'
 import { IInventory } from './inventory.interface'
 
@@ -12,13 +12,17 @@ export class InventoryService implements BaseService {
     private readonly inventoryRepo: Repository<IInventory>,
   ) {}
 
-  async create(req: IInventory): Promise<IInventory> {
+  async save(req: IInventory): Promise<IInventory> {
     const data = this.inventoryRepo.create(req)
     return await this.inventoryRepo.save(data)
   }
 
   async find(): Promise<IInventory[]> {
     return await this.inventoryRepo.find()
+  }
+
+  async findByIds(ids: string[]): Promise<IInventory[]> {
+    return await this.inventoryRepo.findBy({ id: In(ids) })
   }
 
   async findOne(id: string): Promise<IInventory> {
@@ -37,31 +41,24 @@ export class InventoryService implements BaseService {
   async update(req: IInventory): Promise<IInventory> {
     const data = this.inventoryRepo.create(req)
     await this.inventoryRepo.update(data.id, data)
-    return await this.findOneOrFail(req.id)
+    return await this.findNoRelation(req.id)
   }
 
-  async remove(id: string): Promise<IInventory> {
-    const data = (await this.findOneOrFail(id)) as EntInventory
-    return await this.inventoryRepo.remove(data)
+  async delete(id: string): Promise<IInventory> {
+    const data = await this.findNoRelation(id)
+    await this.inventoryRepo.delete(id)
+    return data
   }
 
-  async softRemove(id: string): Promise<IInventory> {
-    const data = (await this.findOneOrFail(id)) as EntInventory
-    return await this.inventoryRepo.softRemove(data)
+  async softDelete(id: string): Promise<IInventory> {
+    const data = await this.findNoRelation(id)
+    await this.inventoryRepo.softDelete(id)
+    return data
   }
 
-  // --- Another findOneBy() Methods --- \\
-
-  async findNoRelation(
-    id: string | string[],
-  ): Promise<IInventory | IInventory[]> {
-    if (!Array.isArray(id)) {
-      return await this.inventoryRepo.findOneOrFail({ where: { id } })
-    }
-
-    return await this.inventoryRepo
-      .createQueryBuilder('inventory')
-      .whereInIds(id)
-      .getMany()
+  async findNoRelation(id: string): Promise<IInventory> {
+    return await this.inventoryRepo.findOneOrFail({ where: { id } })
   }
+
+  // --- Another findOneBy() --- \\
 }

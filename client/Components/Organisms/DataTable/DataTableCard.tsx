@@ -35,7 +35,7 @@ const DataTableCard: React.FC<IProps> = (props: IProps) => {
               {data['name'] ||
                 data['title'] ||
                 data['key'] ||
-                data['productVariantName'] ||
+                data['variant'] ||
                 String(data)}
             </Card>
           </Link>

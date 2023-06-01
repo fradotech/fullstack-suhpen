@@ -81,7 +81,7 @@ export const productColumns = (
             {
               type: 'delete',
               onClick: async () => {
-                await productAction.remove(data.id)
+                await productAction.delete(data.id)
                 await refetch()
               },
             },

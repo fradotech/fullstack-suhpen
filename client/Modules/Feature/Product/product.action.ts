@@ -9,7 +9,7 @@ import { ProductResponse } from '@server/modules/feature/product/infrastructure/
 import { notification } from 'antd'
 import { getAttachment } from '../../../Components/Molecules/Attachment/attachment.util'
 import { Route } from '../../../Enums/Route'
-import { axiosService } from '../../../services/axios.service'
+import { API } from '../../../services/api.service'
 
 const dataPrepare = (
   data: ProductCreateRequest | ProductUpdateRequest,
@@ -23,22 +23,20 @@ export const productAction = {
   fetch: async (
     req?: ProductIndexRequest,
   ): Promise<IPaginateResponse<ProductResponse>> => {
-    return await axiosService.get(Route.product.index, req)
+    return await API.get(Route.product.index, req)
   },
 
   create: async (
     data: ProductCreateRequest,
   ): Promise<IApiRes<ProductResponse>> => {
     data = dataPrepare(data) as ProductCreateRequest
-    const res = await axiosService.post(Route.product.index, data)
+    const res = await API.post(Route.product.index, data)
     res.data && notification.success({ message: 'Success create data' })
     return res
   },
 
   findOne: async (id: string): Promise<IApiRes<ProductResponse>> => {
-    const res: IApiRes<ProductResponse> = await axiosService.get(
-      Route.product.id(id),
-    )
+    const res: IApiRes<ProductResponse> = await API.get(Route.product.id(id))
 
     return res
   },
@@ -48,13 +46,13 @@ export const productAction = {
     data: ProductUpdateRequest,
   ): Promise<IApiRes<ProductResponse>> => {
     data = dataPrepare(data)
-    const res = await axiosService.put(Route.product.id(id), data)
+    const res = await API.put(Route.product.id(id), data)
     res.data && notification.success({ message: 'Success update data' })
     return res
   },
 
-  remove: async (id: string): Promise<IApiRes<ProductResponse>> => {
-    const res = await axiosService.delete(Route.product.id(id))
+  delete: async (id: string): Promise<IApiRes<ProductResponse>> => {
+    const res = await API.delete(Route.product.id(id))
     res.data && notification.success({ message: 'Success delete data' })
     return res
   },

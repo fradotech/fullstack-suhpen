@@ -1,10 +1,7 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger'
-import { BaseMasterDataRequest } from '@server/infrastructure/base/product/base-master-data.request'
-import { IsNotEmpty, IsString } from 'class-validator'
+import { BaseMasterDataRequest } from '@server/infrastructure/base/master-data/base-master-data.request'
 
 export class CategoryRequest extends BaseMasterDataRequest {
-  @IsNotEmpty()
-  @IsString()
   @ApiProperty({ example: '#007fd0' })
   labelColor: string
 }

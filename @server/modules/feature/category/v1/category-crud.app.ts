@@ -19,7 +19,7 @@ export class CategoryCrudApp {
     const data = new EntCategory()
     Object.assign(data, req)
 
-    return await this.categoryService.create(data)
+    return await this.categoryService.save(data)
   }
 
   async findOneOrFail(id: string): Promise<ICategory> {
@@ -27,21 +27,13 @@ export class CategoryCrudApp {
   }
 
   async update(id: string, req: CategoryUpdateRequest): Promise<ICategory> {
-    const data = await this.categoryService.findOneOrFail(id)
+    const data = await this.categoryService.findNoRelation(id)
     Object.assign(data, req)
 
     return await this.categoryService.update(data)
   }
 
-  async remove(id: string): Promise<ICategory> {
-    const data = this.categoryService.findOneOrFail(id)
-    await this.categoryService.remove(id)
-    return data
-  }
-
-  async softRemove(id: string): Promise<ICategory> {
-    const data = this.categoryService.findOneOrFail(id)
-    await this.categoryService.softRemove(id)
-    return data
+  async delete(id: string): Promise<ICategory> {
+    return await this.categoryService.delete(id)
   }
 }

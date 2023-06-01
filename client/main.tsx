@@ -3,6 +3,7 @@ import { BrowserTracing } from '@sentry/tracing'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
+import './index.css'
 
 const sentryDsn = null
 ;('https://2777883bd089467c8edf2be21cc594ef@o4504796336619520.ingest.sentry.io/4504796343107584')
@@ -13,4 +14,8 @@ Sentry.init({
   tracesSampleRate: 1.0,
 })
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)

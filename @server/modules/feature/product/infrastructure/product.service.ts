@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { BaseService } from '@server/infrastructure/base/base.service'
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
 import { EntProduct } from './product.entity'
 import { IProduct } from './product.interface'
 
@@ -12,13 +12,17 @@ export class ProductService implements BaseService {
     private readonly productRepo: Repository<IProduct>,
   ) {}
 
-  async create(req: IProduct): Promise<IProduct> {
+  async save(req: IProduct): Promise<IProduct> {
     const data = this.productRepo.create(req)
     return await this.productRepo.save(data)
   }
 
   async find(): Promise<IProduct[]> {
     return await this.productRepo.find()
+  }
+
+  async findByIds(ids: string[]): Promise<IProduct[]> {
+    return await this.productRepo.findBy({ id: In(ids) })
   }
 
   async findOne(id: string): Promise<IProduct> {
@@ -35,29 +39,24 @@ export class ProductService implements BaseService {
   async update(req: IProduct): Promise<IProduct> {
     const data = this.productRepo.create(req)
     await this.productRepo.update(data.id, data)
-    return await this.findOneOrFail(req.id)
+    return await this.findNoRelation(req.id)
   }
 
-  async remove(id: string): Promise<IProduct> {
-    const data = (await this.findOneOrFail(id)) as EntProduct
-    return await this.productRepo.remove(data)
+  async delete(id: string): Promise<IProduct> {
+    const data = await this.findNoRelation(id)
+    await this.productRepo.delete(id)
+    return data
   }
 
-  async softRemove(id: string): Promise<IProduct> {
-    const data = (await this.findOneOrFail(id)) as EntProduct
-    return await this.productRepo.softRemove(data)
+  async softDelete(id: string): Promise<IProduct> {
+    const data = await this.findNoRelation(id)
+    await this.productRepo.softDelete(id)
+    return data
   }
 
-  // --- Another findOneBy() Methods --- \\
-
-  async findNoRelation(id: string | string[]): Promise<IProduct | IProduct[]> {
-    if (!Array.isArray(id)) {
-      return await this.productRepo.findOneOrFail({ where: { id } })
-    }
-
-    return await this.productRepo
-      .createQueryBuilder('product')
-      .whereInIds(id)
-      .getMany()
+  async findNoRelation(id: string): Promise<IProduct> {
+    return await this.productRepo.findOneOrFail({ where: { id } })
   }
+
+  // --- Another findOneBy() --- \\
 }

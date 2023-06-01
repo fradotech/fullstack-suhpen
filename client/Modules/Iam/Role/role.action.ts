@@ -1,26 +1,26 @@
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { RoleResponse } from '@server/modules/iam/role/infrastructure/role.response'
+import { RoleEnum } from '../../../../@server/modules/iam/role/common/role.enum'
 import { Route } from '../../../Enums/Route'
-import { axiosService } from '../../../services/axios.service'
-import { ERole } from './Role.enum'
+import { API } from '../../../services/api.service'
 
 export const roleAction = {
   fetch: async (): Promise<IPaginateResponse<RoleResponse>> => {
-    return await axiosService.get(Route.role)
+    return await API.get(Route.role)
   },
 
   findOne: async (id: string): Promise<IApiRes<RoleResponse>> => {
-    return await axiosService.get(`${Route.role}/${id}`)
+    return await API.get(`${Route.role}/${id}`)
   },
 
   // --- Another --- \\
 
-  colorRole: (status: ERole): string => {
+  colorRole: (status: RoleEnum): string => {
     const color = {}
-    color[ERole.SuperAdmin] = 'blue'
-    color[ERole.Admin] = 'green'
-    color[ERole.User] = 'yellow'
+    color[RoleEnum.SuperAdmin] = 'blue'
+    color[RoleEnum.Admin] = 'green'
+    color[RoleEnum.User] = 'yellow'
 
     return color[status]
   },

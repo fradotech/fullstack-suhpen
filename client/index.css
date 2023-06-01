@@ -1,4 +1,4 @@
-@media (max-width: 991.98px) {
+/* @media (max-width: 991.98px) {
   aside {
     max-width: 0px !important;
     min-width: 0px !important;
@@ -7,4 +7,18 @@
   .menu {
     display: none !important;
   }
+} */
+
+.anticon-menu-fold svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: 1.4rem;
+}
+.anticon-menu-unfold svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: 1.4rem;
+}
+.ant-table-content {
+  overflow-x: auto;
 }

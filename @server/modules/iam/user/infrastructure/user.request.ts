@@ -1,4 +1,6 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger'
+import { RoleEnum } from '@server/modules/iam/role/common/role.enum'
+import { UserGenderEnum } from '@server/modules/iam/user/common/user.enum'
 import {
   IsEmail,
   IsEnum,
@@ -10,8 +12,6 @@ import {
   Matches,
   MinLength,
 } from 'class-validator'
-import { ERole } from 'client/Modules/Iam/Role/Role.enum'
-import { EUserGender } from 'client/Modules/Iam/User/User.enum'
 import dayjs from 'dayjs'
 import { REGEX_PASSWORD } from '../common/character.constant'
 import { IUser } from '../infrastructure/user.interface'
@@ -19,64 +19,53 @@ import { IUser } from '../infrastructure/user.interface'
 export class UserRequest implements IUser {
   id: string
 
-  @IsNotEmpty()
-  @IsString()
   @ApiProperty({ example: 'Frado' })
   name: string
 
   @IsNotEmpty()
-  @IsString()
   @IsEmail()
   @ApiProperty({ example: 'Admin@admin.com' })
   email: string
 
   @IsNotEmpty()
-  @IsString()
   @MinLength(6)
   @Matches(REGEX_PASSWORD, {
     message:
-      'Password should contain number, under case, and upper case character',
+      'password should contain number, under case, and upper case character',
   })
   @ApiProperty({ example: 'Admin123' })
   password: string
 
   @IsNotEmpty()
-  @IsString()
   @MinLength(6)
   @Matches(REGEX_PASSWORD, {
     message:
-      'Password should contain number, under case, and upper case character',
+      'password should contain number, under case, and upper case character',
   })
   @ApiProperty({ example: 'Admin123' })
   passwordConfirmation: string
 
   @IsOptional()
-  @IsEnum(ERole)
-  @ApiProperty({ example: ERole.User })
-  role: ERole
+  @IsEnum(RoleEnum)
+  @ApiProperty({ example: RoleEnum.User })
+  role: RoleEnum
 
   @IsOptional()
-  @IsEnum(EUserGender)
-  @ApiProperty({ example: EUserGender.Man })
-  gender?: EUserGender
+  @IsEnum(UserGenderEnum)
+  @ApiProperty({ example: UserGenderEnum.Man })
+  gender?: UserGenderEnum
 
   @IsOptional()
-  @IsString()
   @IsPhoneNumber('ID')
-  @ApiProperty({ example: '085123456789' })
+  @ApiProperty({ example: '085704816007' })
   phoneNumber?: string
 
-  @IsOptional()
-  @IsString()
   @ApiProperty()
   address?: string
 
-  @IsOptional()
-  @ApiProperty()
+  @ApiProperty({ example: new Date() })
   birthDate?: Date | dayjs.Dayjs
 
-  @IsOptional()
-  @IsString()
   @ApiProperty()
   avatar?: string
 

@@ -1,4 +1,4 @@
-import { EntBaseMasterData } from '@server/infrastructure/base/product/base-master-data.entity'
+import { EntBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.entity'
 import {
   Column,
   Entity,

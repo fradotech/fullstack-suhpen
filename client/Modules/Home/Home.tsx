@@ -4,13 +4,13 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { themeColors } from '../../Layouts/ThemeProvider/theme'
-import { isMobileScreen } from '../../utils/is-mobile'
+import { useIsMobileScreen } from '../../utils/is-mobile'
 import HomeHeader from './HomeHeader'
 import HomeProduct from './HomeProduct'
 
 const Home: React.FC = () => {
   const navigate = useNavigate()
-  const isMobile = isMobileScreen()
+  const isMobile = useIsMobileScreen()
 
   return (
     <Layout>

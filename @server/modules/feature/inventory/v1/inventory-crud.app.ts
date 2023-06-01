@@ -23,10 +23,9 @@ export class InventoryCrudApp {
     const data = new EntInventory()
     Object.assign(data, req)
 
-    const product = await this.productService.findOneOrFail(req.productId)
-    data.product = product
+    data.product = await this.productService.findNoRelation(req.productId)
 
-    return await this.inventoryService.create(data)
+    return await this.inventoryService.save(data)
   }
 
   async findOneOrFail(id: string): Promise<IInventory> {
@@ -34,21 +33,13 @@ export class InventoryCrudApp {
   }
 
   async update(id: string, req: InventoryUpdateRequest): Promise<IInventory> {
-    const data = await this.inventoryService.findOneOrFail(id)
+    const data = await this.inventoryService.findNoRelation(id)
     Object.assign(data, req)
 
     return await this.inventoryService.update(data)
   }
 
-  async remove(id: string): Promise<IInventory> {
-    const data = this.inventoryService.findOneOrFail(id)
-    await this.inventoryService.remove(id)
-    return data
-  }
-
-  async softRemove(id: string): Promise<IInventory> {
-    const data = this.inventoryService.findOneOrFail(id)
-    await this.inventoryService.softRemove(id)
-    return data
+  async delete(id: string): Promise<IInventory> {
+    return await this.inventoryService.delete(id)
   }
 }

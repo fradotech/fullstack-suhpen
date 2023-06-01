@@ -19,18 +19,19 @@ async function bootstrap() {
   const publicPath = path.resolve('./') + config.assets.public
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
   const host = config.server.host
-  const docsUrl = 'docs'
+  const hostApi = config.server.hostApi
+  const docs = 'docs'
 
   app.useStaticAssets(publicPath)
   app.setGlobalPrefix(globalPrefix)
   app.enableCors()
 
   const document = SwaggerModule.createDocument(app, swaggerConfig)
-  SwaggerModule.setup(`${config.app.prefix}/${docsUrl}`, app, document)
+  SwaggerModule.setup(docs, app, document)
 
   await app.listen(config.server.port)
 
-  Logger.verbose(`🚀 App running at ${host}`, 'NestApplication')
-  Logger.verbose(`🚀 API Docs Swagger at ${host}/${docsUrl}`, 'Swagger UI')
+  Logger.verbose(`🚀 App running at ${hostApi}`, 'NestApplication')
+  Logger.verbose(`🚀 API Docs Swagger at ${host}/${docs}`, 'Swagger UI')
 }
 bootstrap()

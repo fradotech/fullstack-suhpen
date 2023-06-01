@@ -20,6 +20,7 @@ const ProductDetail: React.FC = () => {
       <PageHeader
         title="Product Detail"
         isLoading={isLoading}
+        hrefIndex={Route.product.index}
         hrefEdit={Route.product.edit(id)}
         hrefDelete={Route.product.id(id)}
       />

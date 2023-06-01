@@ -4,20 +4,20 @@ import axios from 'axios'
 const hostLocal = 'http://localhost:3000'
 const hostOnline = 'https://fradotech.up.railway.app'
 
-export const host = location.href.includes('localhost') ? hostLocal : hostOnline
-export const hostApi = host + '/api/v1'
+export const HOST = location.href.includes('localhost') ? hostLocal : hostOnline
+export const HOST_API = HOST + '/api/v1'
 
-export const axiosService = {
+export const API = {
   get: async (endpoint: string, params?: any): Promise<any> => {
     try {
-      const { data } = await axios.get(`${hostApi}${endpoint}`, {
+      const { data } = await axios.get(`${HOST_API}${endpoint}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('_accessToken')}`,
         },
         params,
       })
 
-      axiosService.catch(data)
+      API.catch(data)
 
       return data
     } catch (e) {
@@ -32,14 +32,14 @@ export const axiosService = {
     params?: any,
   ): Promise<any> => {
     try {
-      const { data } = await axios.post(`${hostApi}${endpoint}`, dataPost, {
+      const { data } = await axios.post(`${HOST_API}${endpoint}`, dataPost, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('_accessToken')}`,
         },
         params,
       })
 
-      axiosService.catch(data)
+      API.catch(data)
 
       return data
     } catch (e) {
@@ -50,13 +50,13 @@ export const axiosService = {
 
   put: async (endpoint: string, dataPost?: any): Promise<any> => {
     try {
-      const { data } = await axios.put(`${hostApi}${endpoint}`, dataPost, {
+      const { data } = await axios.put(`${HOST_API}${endpoint}`, dataPost, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('_accessToken')}`,
         },
       })
 
-      axiosService.catch(data)
+      API.catch(data)
 
       return data
     } catch (e) {
@@ -67,13 +67,13 @@ export const axiosService = {
 
   patch: async (endpoint: string, dataPost?: any): Promise<any> => {
     try {
-      const { data } = await axios.patch(`${hostApi}${endpoint}`, dataPost, {
+      const { data } = await axios.patch(`${HOST_API}${endpoint}`, dataPost, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('_accessToken')}`,
         },
       })
 
-      axiosService.catch(data)
+      API.catch(data)
 
       return data
     } catch (e) {
@@ -84,13 +84,13 @@ export const axiosService = {
 
   delete: async (endpoint: string): Promise<any> => {
     try {
-      const { data } = await axios.delete(`${hostApi}${endpoint}`, {
+      const { data } = await axios.delete(`${HOST_API}${endpoint}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('_accessToken')}`,
         },
       })
 
-      axiosService.catch(data)
+      API.catch(data)
 
       return data
     } catch (e) {

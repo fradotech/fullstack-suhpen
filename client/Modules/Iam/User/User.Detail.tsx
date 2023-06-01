@@ -22,6 +22,7 @@ const UserDetail: React.FC = () => {
       <PageHeader
         title="User Detail"
         isLoading={isLoading}
+        hrefIndex={Route.user.index}
         hrefEdit={Route.user.edit(id)}
         hrefDelete={Route.user.id(id)}
       />

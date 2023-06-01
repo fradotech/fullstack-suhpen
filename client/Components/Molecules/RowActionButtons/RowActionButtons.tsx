@@ -10,7 +10,7 @@ import {
 import { Button, Card, Dropdown, Popconfirm, Tooltip } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { isMobileScreen } from '../../../utils/is-mobile'
+import { useIsMobileScreen } from '../../../utils/is-mobile'
 
 type ButtonType = 'view' | 'edit' | 'delete' | 'approve' | 'reject' | 'submit'
 
@@ -27,7 +27,7 @@ interface IRowActionProps {
 }
 
 export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
-  const isMobile = isMobileScreen()
+  const isMobile = useIsMobileScreen()
 
   const renderButton = (action: IRowActionButtonsProps) => {
     if (!action) return null
