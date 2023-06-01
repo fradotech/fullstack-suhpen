@@ -5,7 +5,6 @@ import { ColumnsType, FilterValue, SorterResult } from 'antd/es/table/interface'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import Loading from '../../Molecules/Loading/Loading'
 import { FilterState, IDataTableProps, TOnSort } from './DataTable.interface'
 import styles from './DataTable.module.css'
 import { formatColumns } from './DataTable.util'
@@ -71,7 +70,6 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
 
   return (
     <>
-      <Loading isLoading={props.loading} />
       <DataTableHeader
         {...props.dataTableHeader}
         onSearch={handleSearch}

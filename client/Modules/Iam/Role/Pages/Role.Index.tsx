@@ -12,7 +12,7 @@ const RoleIndex: React.FC = () => {
 
   return (
     <>
-      <PageHeader title="Role" isLoading={isLoading} />
+      <PageHeader title="Role" />
       <Section>
         <DataTable
           rowKey="id"
