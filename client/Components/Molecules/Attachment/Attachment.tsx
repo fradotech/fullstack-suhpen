@@ -40,7 +40,7 @@ const Attachment: React.FC<IProps> = (props: IProps) => {
       : [defaultValues]
 
     typeof attachments[0]?.url == typeof '' && setFileList(attachments)
-  }, [props])
+  }, [fileList, isInit, props?.form, props.name])
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {

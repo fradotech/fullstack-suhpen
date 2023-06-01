@@ -9,7 +9,7 @@ interface IProps {
 const CompanyLogo: React.FC<IProps> = (props: IProps) => (
   <div className={props.className}>
     <Image
-      src="public/images/company-logo.jpg"
+      src="/images/company-logo.jpg"
       preview={false}
       style={
         props.style || { width: '50%', maxWidth: '250px', borderRadius: '10px' }
