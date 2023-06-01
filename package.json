@@ -11,8 +11,7 @@
     "prepare": "husky install",
     "server:prebuild": "rimraf dist",
     "server:build": "nest build",
-    "server": "nest start",
-    "server:dev": "nest start --watch",
+    "server": "nest start --watch",
     "server:debug": "nest start --debug --watch",
     "server:prod": "node dist/@server/main",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./@server/database/data-source.ts",
@@ -21,7 +20,7 @@
     "migrate:generate": "sh -c 'yarn typeorm migration:generate @server/database/migrations/$0'",
     "migrate:revert": "yarn typeorm migration:revert",
     "schema:drop": "yarn typeorm schema:drop",
-    "client:dev": "vite",
+    "client": "vite",
     "client:build": "tsc && vite build",
     "client:preview": "vite preview"
   },

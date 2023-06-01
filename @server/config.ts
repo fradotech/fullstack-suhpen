@@ -18,10 +18,11 @@ export const config = {
   server: {
     nodeEnv: process.env.NODE_ENV || 'local',
     port: process.env.PORT || 3000,
-    host: process.env.HOST || `${localhost}:${process.env.PORT || 3000}`,
-    hostApi: `${
-      process.env.HOST || `${localhost}:${process.env.PORT || 3000}`
-    }${process.env.APP_PREFIX || '/api/v1'}`,
+    host: process.env.HOST || localhost,
+    hostPort: `${process.env.HOST || localhost}:${process.env.PORT || 3000}`,
+    hostApi: `${`${process.env.HOST || localhost}:${
+      process.env.PORT || 3000
+    }`}${process.env.APP_PREFIX || '/api/v1'}`,
 
     hostClient: process.env.HOST_CLIENT || `${localhost}:8080`,
   },
