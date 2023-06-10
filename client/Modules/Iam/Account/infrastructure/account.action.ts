@@ -4,7 +4,7 @@ import { UserResponse } from '@server/modules/iam/user/infrastructure/user.respo
 import { notification } from 'antd'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
 import { Route } from '../../../../Enums/Route'
-import { API } from '../../../../services/api.service'
+import { API } from '../../../../infrastructure/api.service'
 
 const dataPrepare = (data: UserUpdateRequest): UserUpdateRequest => {
   data.avatar = getAttachment(data.avatar) as string

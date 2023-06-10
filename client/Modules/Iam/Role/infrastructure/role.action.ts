@@ -3,7 +3,7 @@ import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interfa
 import { RoleResponse } from '@server/modules/iam/role/infrastructure/role.response'
 import { RoleEnum } from '../../../../../@server/modules/iam/role/common/role.enum'
 import { Route } from '../../../../Enums/Route'
-import { API } from '../../../../services/api.service'
+import { API } from '../../../../infrastructure/api.service'
 
 export const roleAction = {
   fetch: async (): Promise<IPaginateResponse<RoleResponse>> => {
