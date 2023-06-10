@@ -32,9 +32,17 @@
     "@server/modules/feature/*/modules/*/templates",
     "@server/modules/feature/*/modules/*/v1/*",
     "client/assets",
+    "client/common/utils",
     "client/Components/Atoms/*",
     "client/Components/Molecules/*",
     "client/Components/Organisms/*",
-    "client/**"
+    "client/Enums",
+    "client/Layouts/Blank",
+    "client/Layouts/LayoutMain",
+    "client/Layouts/ThemeProvider",
+    "client/infrastructure",
+    "client/Modules/*/*/common",
+    "client/Modules/*/*/infrastructure/*",
+    "client/Modules/*/*/Pages/*"
   ]
 }
