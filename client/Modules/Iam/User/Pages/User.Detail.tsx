@@ -7,7 +7,7 @@ import { Section } from '../../../../Components/Molecules/Section/Section'
 import DescriptionContainer from '../../../../Components/Organisms/Description/DescriptionContainer'
 import DescriptionItem from '../../../../Components/Organisms/Description/DescriptionItem'
 import { Route } from '../../../../Enums/Route'
-import { Util } from '../../../../utils/util'
+import { Util } from '../../../../common/utils/util'
 import { roleAction } from '../../Role/infrastructure/role.action'
 import { userAction } from '../infrastructure/user.action'
 

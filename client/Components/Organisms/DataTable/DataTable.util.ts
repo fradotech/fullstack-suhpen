@@ -2,7 +2,7 @@ import { IPaginationMeta } from '@server/infrastructure/index/index.interface'
 import { TablePaginationConfig } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import { SortOrder } from 'antd/es/table/interface'
-import { Util } from '../../../utils/util'
+import { Util } from '../../../common/utils/util'
 
 export const paginationTransform = (
   meta: IPaginationMeta,

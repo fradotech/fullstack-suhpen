@@ -1,7 +1,7 @@
 import {
+  Input as AntdInput,
   DatePicker,
   Form,
-  Input as AntdInput,
   InputNumber,
   Select,
   Switch,
@@ -12,7 +12,7 @@ import { DefaultOptionType } from 'antd/es/select'
 import dayjs from 'dayjs'
 import { SharedTimeProps } from 'rc-picker/lib/panels/TimePanel'
 import React from 'react'
-import { Util } from '../../../utils/util'
+import { Util } from '../../../common/utils/util'
 import Attachment from '../../Molecules/Attachment/Attachment'
 
 interface IProps {

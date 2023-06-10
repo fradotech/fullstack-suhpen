@@ -2,7 +2,7 @@ import { Card, Col, Image, Layout, Row } from 'antd'
 import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { useQuery } from 'react-query'
-import { Util } from '../../../utils/util'
+import { Util } from '../../../common/utils/util'
 import { inventoryAction } from '../../Feature/Inventory/infrastructure/inventory.action'
 import styles from '../Home.module.css'
 

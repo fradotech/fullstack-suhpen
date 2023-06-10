@@ -4,7 +4,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { themeColors } from '../../Layouts/ThemeProvider/theme'
-import { useIsMobileScreen } from '../../utils/is-mobile'
+import { useIsMobileScreen } from '../../common/utils/is-mobile'
 import HomeHeaderSection from './common/HomeHeader.section'
 import HomeProductSection from './common/HomeProduct.section'
 

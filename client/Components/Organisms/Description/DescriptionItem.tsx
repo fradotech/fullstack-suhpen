@@ -1,9 +1,8 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { IBaseEntity } from '@server/infrastructure/base/base-entity.interface'
 import { Descriptions, Image, Tag } from 'antd'
-import React from 'react'
 import { themeColors } from '../../../Layouts/ThemeProvider/theme'
-import { Util } from '../../../utils/util'
+import { Util } from '../../../common/utils/util'
 
 const DescriptionItem = (data: IBaseEntity, key: string) => {
   if (['avatar', 'image', 'thumbnail', 'attachment'].includes(key)) {

@@ -12,7 +12,7 @@ import {
 import { Link } from 'react-router-dom'
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../../Enums/Route'
-import { Util } from '../../../../utils/util'
+import { Util } from '../../../../common/utils/util'
 import { inventoryAction } from './inventory.action'
 
 export const inventoryColumns = (

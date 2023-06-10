@@ -10,7 +10,7 @@ import {
 import { Button, Card, Dropdown, Popconfirm, Tooltip } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useIsMobileScreen } from '../../../utils/is-mobile'
+import { useIsMobileScreen } from '../../../common/utils/is-mobile'
 
 type ButtonType = 'view' | 'edit' | 'delete' | 'approve' | 'reject' | 'submit'
 

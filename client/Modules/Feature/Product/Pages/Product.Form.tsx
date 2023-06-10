@@ -10,7 +10,7 @@ import { Section } from '../../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../../Enums/Route'
-import { rule } from '../../../../utils/form.rules'
+import { rule } from '../../../../common/utils/form.rules'
 import useCategories from '../../Category/infrastructure/useCategories'
 import { productAction } from '../infrastructure/product.action'
 
