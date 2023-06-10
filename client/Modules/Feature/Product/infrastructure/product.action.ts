@@ -9,7 +9,7 @@ import { ProductResponse } from '@server/modules/feature/product/infrastructure/
 import { notification } from 'antd'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
 import { Route } from '../../../../Enums/Route'
-import { API } from '../../../../services/api.service'
+import { API } from '../../../../infrastructure/api.service'
 
 const dataPrepare = (
   data: ProductCreateRequest | ProductUpdateRequest,

@@ -10,7 +10,7 @@ import {
 import { RoleEnum } from '../../../../../@server/modules/iam/role/common/role.enum'
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../../Enums/Route'
-import { Util } from '../../../../utils/util'
+import { Util } from '../../../../common/utils/util'
 import { roleAction } from '../../Role/infrastructure/role.action'
 import { userAction } from './user.action'
 

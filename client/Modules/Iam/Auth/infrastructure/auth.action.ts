@@ -8,8 +8,8 @@ import {
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { notification } from 'antd'
 import { Route } from '../../../../Enums/Route'
-import { API } from '../../../../services/api.service'
-import { Util } from '../../../../utils/util'
+import { Util } from '../../../../common/utils/util'
+import { API } from '../../../../infrastructure/api.service'
 
 export const authAction = {
   loggedUser: (): UserResponse => {

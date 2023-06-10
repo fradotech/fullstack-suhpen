@@ -1,6 +1,6 @@
 import { Card, Col, Typography } from 'antd'
 import React from 'react'
-import { Util } from '../../../utils/util'
+import { Util } from '../../../common/utils/util'
 interface IProps {
   title?: string
   price?: number

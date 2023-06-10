@@ -11,7 +11,7 @@ import {
 } from 'react-query'
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../../Enums/Route'
-import { Util } from '../../../../utils/util'
+import { Util } from '../../../../common/utils/util'
 import { productAction } from './product.action'
 
 export const productColumns = (

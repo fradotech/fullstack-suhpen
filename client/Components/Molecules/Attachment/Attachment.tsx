@@ -4,7 +4,7 @@ import type { RcFile, UploadProps } from 'antd/es/upload'
 import type { UploadFile } from 'antd/es/upload/interface'
 import React from 'react'
 import { Route } from '../../../Enums/Route'
-import { HOST_API } from '../../../services/api.service'
+import { HOST_API } from '../../../infrastructure/api.service'
 import { getBase64 } from './attachment.util'
 
 interface IProps {

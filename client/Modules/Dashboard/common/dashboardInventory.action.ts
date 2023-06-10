@@ -1,7 +1,7 @@
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { IAggreate } from '@server/modules/dashboard/infrastructure/dashboard.interface'
 import { Route } from '../../../Enums/Route'
-import { API } from '../../../services/api.service'
+import { API } from '../../../infrastructure/api.service'
 
 export const dashboardInventoryAction = {
   buyPrice: async (): Promise<IAggreate> => {

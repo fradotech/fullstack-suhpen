@@ -10,7 +10,7 @@ import { notification } from 'antd'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
 import { Route } from '../../../../Enums/Route'
 import { themeColors } from '../../../../Layouts/ThemeProvider/theme'
-import { API } from '../../../../services/api.service'
+import { API } from '../../../../infrastructure/api.service'
 
 const dataPrepare = (
   data: CategoryCreateRequest | CategoryUpdateRequest,
