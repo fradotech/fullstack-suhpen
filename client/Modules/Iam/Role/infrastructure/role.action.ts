@@ -17,11 +17,12 @@ export const roleAction = {
   // --- Another --- \\
 
   colorRole: (status: RoleEnum): string => {
-    const color = {}
-    color[RoleEnum.SuperAdmin] = 'blue'
-    color[RoleEnum.Admin] = 'green'
-    color[RoleEnum.User] = 'yellow'
+    const color = new Map()
 
-    return color[status]
+    color.set(RoleEnum.SuperAdmin, 'blue')
+    color.set(RoleEnum.Admin, 'green')
+    color.set(RoleEnum.User, 'yellow')
+
+    return color.get(status)
   },
 }
