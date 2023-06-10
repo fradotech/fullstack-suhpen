@@ -2,9 +2,9 @@ import { Controller, Get, Param, UseGuards } from '@nestjs/common'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
+import { IAggreate } from '@server/modules/dashboard/infrastructure/dashboard.interface'
 import { AdminGuard } from '@server/modules/iam/auth/common/admin.guard'
 import { Modules } from '@server/modules/modules'
-import { IAggreate } from '../infrastructure/dashboard.interface'
 import { DashboardInventoryApp } from './dashboard-inventory.app'
 
 const THIS_MODULE = Modules.Dashboard + '/' + Modules.Inventory

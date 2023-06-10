@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
+import { IAggreate } from '@server/modules/dashboard/infrastructure/dashboard.interface'
 import { EntInventory } from '@server/modules/feature/inventory/infrastructure/inventory.entity'
 import { IInventory } from '@server/modules/feature/inventory/infrastructure/inventory.interface'
 import { Repository } from 'typeorm'
-import { IAggreate } from '../infrastructure/dashboard.interface'
 
 @Injectable()
 export class DashboardInventoryApp {
