@@ -8,6 +8,7 @@
   "scripts": {
     "format": "prettier --write \"@server/**/*.ts\" \"client/**/*{.ts,.tsx,.js,.css}\"",
     "lint": "eslint \"{@server,client}/**/*.ts\" --fix",
+    "folderslint": "folderslint",
     "prepare": "husky install",
     "server:prebuild": "rimraf dist",
     "server:build": "nest build",
@@ -118,15 +119,7 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
-    "*.{js,ts,tsx}": [
-      "folderslint"
-    ]
+    "*.js": "eslint --cache --fix"
   }
 }

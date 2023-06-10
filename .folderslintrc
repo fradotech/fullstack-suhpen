@@ -1,6 +1,27 @@
 {
   "root": "@server",
   "rules": [
-    "components/*"
+    "common/**",
+    "database/**",
+    "infrastructure/**",
+    "modules/dashboard/common",
+    "modules/dashboard/infrastructure",
+    "modules/dashboard/v1/*",
+    "modules/iam/*/common",
+    "modules/iam/*/infrastructure",
+    "modules/iam/*/templates",
+    "modules/iam/*/v1/*",
+    "modules/support/*/common",
+    "modules/support/*/infrastructure",
+    "modules/support/*/templates",
+    "modules/support/*/v1/*",
+    "modules/feature/*/common",
+    "modules/feature/*/infrastructure",
+    "modules/feature/*/templates",
+    "modules/feature/*/v1/*",
+    "modules/feature/*/modules/*/common",
+    "modules/feature/*/modules/*/infrastructure",
+    "modules/feature/*/modules/*/templates",
+    "modules/feature/*/modules/*/v1/*"
   ]
 }
