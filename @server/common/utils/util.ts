@@ -16,7 +16,7 @@ export class Util {
     return {
       fileFilter: this.fileFilter,
       storage: diskStorage({
-        destination: `.${config.assets.storage}`,
+        destination: `.${config.attachment.storage}`,
         filename: (req, file, callback) => {
           callback(null, `${Date.now() + '-'}${file.originalname}`)
         },

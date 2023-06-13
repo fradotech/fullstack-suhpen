@@ -7,11 +7,11 @@ import { Exception } from '../../../../common/exceptions/index.exception'
 export class MailService {
   constructor(private readonly transporter: nodemailer.Transporter) {
     this.transporter = nodemailer.createTransport({
-      host: config.smtp.host,
-      port: +config.smtp.port,
+      host: config.mail.host,
+      port: +config.mail.port,
       auth: {
-        user: config.smtp.username,
-        pass: config.smtp.password,
+        user: config.mail.username,
+        pass: config.mail.password,
       },
     })
   }

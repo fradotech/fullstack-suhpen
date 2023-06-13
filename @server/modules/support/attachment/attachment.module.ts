@@ -11,7 +11,7 @@ import { AttachmentController } from './v1/attachment.controller'
   imports: [
     TypeOrmModule.forFeature([EntAttachment]),
     MulterModule.register({
-      dest: path.resolve('./') + config.assets.storage,
+      dest: path.resolve('./') + config.attachment.storage,
     }),
   ],
   controllers: [AttachmentController],

@@ -16,7 +16,7 @@ async function bootstrap() {
   initializeTransactionalContext()
   patchTypeORMRepositoryWithBaseRepository()
 
-  const publicPath = path.resolve('./') + config.assets.public
+  const publicPath = path.resolve('./') + config.attachment.public
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
   const host = config.server.host
   const docs = 'docs'

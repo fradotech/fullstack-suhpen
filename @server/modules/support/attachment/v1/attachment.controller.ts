@@ -34,7 +34,7 @@ export class AttachmentController {
   @Get(':filePath')
   findUploadedAttachment(@Param('filePath') file: string, @Res() res: any) {
     return res.sendFile(file, {
-      root: path.resolve('./') + config.assets.storage,
+      root: path.resolve('./') + config.attachment.storage,
     })
   }
 
