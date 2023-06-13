@@ -19,7 +19,10 @@ const PasswordChangeForm: React.FC = () => {
   const [isValid, setIsValid] = React.useState<boolean>()
   const token = searchParams.get('token')
   const isValidToken = async () => setIsValid(await authAction.password(token))
-  React.useEffect(() => isValidToken() as undefined, [isValidToken])
+
+  React.useEffect(() => {
+    isValidToken()
+  }, [isValidToken])
 
   const onFinish = async () => {
     const data = form.getFieldsValue()
