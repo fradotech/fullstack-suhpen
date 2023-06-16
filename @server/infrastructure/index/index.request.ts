@@ -1,8 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import {
-  OrderDirectionEnum,
-  OrderDirectionType,
-} from '@server/infrastructure/index/index.enum'
+import { OrderDirectionEnum } from '@server/infrastructure/index/index.enum'
 import { IsEnum, IsNumber, IsOptional, IsString, Min } from 'class-validator'
 import { IPaginateRequest, ISortRequest } from './index.interface'
 
@@ -26,7 +23,7 @@ export class IndexRequest implements ISortRequest, IPaginateRequest {
     example: OrderDirectionEnum.Desc,
     description: `${OrderDirectionEnum.Asc} || ${OrderDirectionEnum.Desc}`,
   })
-  sortOrder?: OrderDirectionType
+  sortOrder?: OrderDirectionEnum
 
   @IsOptional()
   @IsNumber()

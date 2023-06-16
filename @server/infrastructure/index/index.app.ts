@@ -10,15 +10,16 @@ export abstract class BaseIndexApp extends BaseIndexService {
     super()
   }
 
-  createQueryIndex<T>(
+  protected createQueryIndex<T>(
     req: IndexRequest,
-    query: SelectQueryBuilder<T>,
-    tableName: string,
-    tableColumns: string[],
+    name: string,
+    columns: string[],
     relations: IIndexAppRelation[],
     repo: Repository<T>,
     request: Request,
   ): SelectQueryBuilder<T> {
+    const query = repo.createQueryBuilder(name)
+
     const leftJoin = (tableName: string, relations: IIndexAppRelation[]) => {
       relations.forEach((relation) => {
         query.leftJoinAndSelect(`${tableName}.${relation.name}`, relation.name)
@@ -26,13 +27,10 @@ export abstract class BaseIndexApp extends BaseIndexService {
       })
     }
 
-    leftJoin(tableName, relations)
+    leftJoin(name, relations)
 
     if (req.search) {
-      const thisTable: IIndexAppRelation = {
-        name: tableName,
-        columns: tableColumns,
-      }
+      const thisTable: IIndexAppRelation = { name, columns }
       query.andWhere(this.querySearch([thisTable, ...relations]), {
         search: `%${req.search.toLowerCase()}%`,
       })
@@ -40,7 +38,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
 
     if (req.startAt && req.endAt) {
       query.andWhere(
-        `CAST(${tableName}.${
+        `CAST(${name}.${
           req.dateRangeColumn || 'createdAt'
         } as DATE) BETWEEN CAST(:startAt AS DATE) AND CAST(:endAt AS DATE)`,
         { startAt: req.startAt, endAt: req.endAt },
@@ -50,8 +48,8 @@ export abstract class BaseIndexApp extends BaseIndexService {
     if (req.filters) {
       Object.keys(req.filters)?.forEach((column) => {
         if (!column.includes('_')) {
-          if (tableColumns.includes(column)) {
-            query.andWhere(`${tableName}.${column} IN (:value)`, {
+          if (columns.includes(column)) {
+            query.andWhere(`${name}.${column} IN (:value)`, {
               value: req.filters[column],
             })
           } else {
@@ -84,11 +82,11 @@ export abstract class BaseIndexApp extends BaseIndexService {
     )
 
     if (isUser && userId && !isAdmin) {
-      !isUserRelation && query.leftJoinAndSelect(`${tableName}.user`, 'user')
+      !isUserRelation && query.leftJoinAndSelect(`${name}.user`, 'user')
       query.andWhere('user.id = :userId', { userId })
     }
 
-    const sort = this.orderByKey(tableName, tableColumns, req.sortField)
+    const sort = this.orderByKey(name, columns, req.sortField)
     const order = this.getOrder(req.sortOrder)
     query.orderBy(sort, order)
     query.take(this.take(req.pageSize))

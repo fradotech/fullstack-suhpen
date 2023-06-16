@@ -26,14 +26,13 @@ export class CategoryIndexApp extends BaseIndexApp {
   async fetch(
     req: CategoryIndexRequest,
   ): Promise<IPaginateResponse<ICategory>> {
-    const tableName = 'categories'
-    const tableColumns = ['name', 'key', 'isActive', 'createdAt']
+    const name = 'categories'
+    const columns = ['name', 'key', 'isActive', 'createdAt']
     const relations: IIndexAppRelation[] = []
     const query = this.createQueryIndex(
       req,
-      this.categoryRepo.createQueryBuilder(tableName),
-      tableName,
-      tableColumns,
+      name,
+      columns,
       relations,
       this.categoryRepo,
       this.request,

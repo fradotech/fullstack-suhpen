@@ -1,8 +1,8 @@
-import { OrderDirectionType } from '@server/infrastructure/index/index.enum'
+import { OrderDirectionEnum } from './index.enum'
 
 export interface ISortRequest {
   sortField?: string
-  sortOrder?: OrderDirectionType
+  sortOrder?: OrderDirectionEnum
 }
 
 export interface IPaginateRequest {

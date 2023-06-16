@@ -1,7 +1,4 @@
-import {
-  OrderDirectionEnum,
-  OrderDirectionType,
-} from '@server/infrastructure/index/index.enum'
+import { OrderDirectionEnum } from '@server/infrastructure/index/index.enum'
 import { SelectQueryBuilder } from 'typeorm'
 import { IBaseEntity } from '../base/base-entity.interface'
 import {
@@ -15,7 +12,7 @@ export abstract class BaseIndexService {
   readonly DefaultPerPage: number = 10
   readonly DefaultPage: number = 1
   readonly DefaultSort: string = 'created_at'
-  readonly DefaultOrder: OrderDirectionType = 'DESC'
+  readonly DefaultOrder = OrderDirectionEnum.Desc
 
   abstract fetch(arg0: any, arg1: any): Promise<IPaginateResponse<IBaseEntity>>
 
