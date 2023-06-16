@@ -12,6 +12,6 @@ import { UserSheetController } from './v1/user-export.controller'
   imports: [TypeOrmModule.forFeature([EntUser])],
   controllers: [UserSheetController, UserAccountController, UserCrudController],
   providers: [UserService, UserCrudApp, UserIndexApp],
-  exports: [UserService],
+  exports: [],
 })
 export class UserModule {}
