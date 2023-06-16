@@ -28,6 +28,7 @@ export class Util {
     try {
       JSON.parse(str)
     } catch (e) {
+      if (str == '') return false
       Logger.error(e, this.name)
       return false
     }

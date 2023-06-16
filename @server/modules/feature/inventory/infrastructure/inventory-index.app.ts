@@ -26,7 +26,7 @@ export class InventoryIndexApp extends BaseIndexApp {
   async fetch(
     req: InventoryIndexRequest,
   ): Promise<IPaginateResponse<IInventory>> {
-    const tableName = 'inventory'
+    const tableName = 'inventories'
     const tableColumns = [
       'sku',
       'stock',

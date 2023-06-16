@@ -24,7 +24,7 @@ export class ProductIndexApp extends BaseIndexApp {
   }
 
   async fetch(req: ProductIndexRequest): Promise<IPaginateResponse<IProduct>> {
-    const tableName = 'product'
+    const tableName = 'products'
     const tableColumns = ['name', 'brand', 'isActive', 'createdAt']
     const relations: IIndexAppRelation[] = [
       { name: 'categories', columns: ['name'] },
