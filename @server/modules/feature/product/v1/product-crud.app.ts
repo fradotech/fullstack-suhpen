@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common'
 import { CategoryService } from '../../category/infrastructure/category.service'
-import { EntProduct } from '../infrastructure/product.entity'
 import { IProduct } from '../infrastructure/product.interface'
 import {
   ProductCreateRequest,
@@ -20,8 +19,7 @@ export class ProductCrudApp {
   }
 
   async create(req: ProductCreateRequest): Promise<IProduct> {
-    const data = new EntProduct()
-    Object.assign(data, req)
+    const data = ProductCreateRequest.dto(req)
 
     req.categoryIds &&
       (data.categories = await this.categoryService.findByIds(req.categoryIds))
@@ -35,12 +33,14 @@ export class ProductCrudApp {
 
   async update(id: string, req: ProductUpdateRequest): Promise<IProduct> {
     const data = await this.productService.findOneOrFail(id)
-    Object.assign(data, req)
+    const dataUpdate = ProductUpdateRequest.dto(data, req)
 
     req.categoryIds &&
-      (data.categories = await this.categoryService.findByIds(req.categoryIds))
+      (dataUpdate.categories = await this.categoryService.findByIds(
+        req.categoryIds,
+      ))
 
-    return await this.productService.save(data)
+    return await this.productService.save(dataUpdate)
   }
 
   async delete(id: string): Promise<IProduct> {

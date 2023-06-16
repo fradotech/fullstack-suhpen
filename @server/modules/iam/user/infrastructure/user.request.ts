@@ -15,8 +15,9 @@ import {
 import dayjs from 'dayjs'
 import { REGEX_PASSWORD } from '../common/character.constant'
 import { IUser } from '../infrastructure/user.interface'
+import { EntUser } from './user.entity'
 
-export class UserRequest implements IUser {
+export class UserRequest extends EntUser implements IUser {
   id: string
 
   @ApiProperty({ example: 'Frado' })
@@ -89,7 +90,7 @@ export class UserCreateRequest extends OmitType(UserRequest, [
   'isVerified',
   'token',
 ]) {
-  static dto(data: UserCreateRequest): UserCreateRequest {
+  static dto(data: UserCreateRequest): IUser {
     const res = new UserCreateRequest()
 
     res.name = data.name
@@ -115,14 +116,14 @@ export class UserUpdateRequest extends OmitType(UserRequest, [
   'isVerified',
   'token',
 ]) {
-  static dto(data: IUser, req: UserUpdateRequest): UserCreateRequest {
-    data.name = req.name
-    data.gender = req.gender
-    data.phoneNumber = req.phoneNumber
-    data.avatar = req.avatar
-    data.address = req.address
-    data.birthDate = req.birthDate
+  static dto(res: IUser, data: UserUpdateRequest): IUser {
+    res.name = data.name
+    res.gender = data.gender
+    res.phoneNumber = data.phoneNumber
+    res.avatar = data.avatar
+    res.address = data.address
+    res.birthDate = data.birthDate
 
-    return data
+    return res
   }
 }

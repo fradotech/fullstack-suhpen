@@ -39,7 +39,7 @@ const InventoryForm: React.FC = () => {
     if (!id) res = await inventoryAction.create(data)
     if (id) res = await inventoryAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Route.product.id(res.data.product.id))
+    res.data && navigate(Route.product.index)
   }
 
   return (

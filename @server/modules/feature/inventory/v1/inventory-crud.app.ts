@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common'
 import { ProductService } from '../../product/infrastructure/product.service'
-import { EntInventory } from '../infrastructure/inventory.entity'
 import { IInventory } from '../infrastructure/inventory.interface'
 import {
   InventoryCreateRequest,
@@ -20,8 +19,7 @@ export class InventoryCrudApp {
   }
 
   async create(req: InventoryCreateRequest): Promise<IInventory> {
-    const data = new EntInventory()
-    Object.assign(data, req)
+    const data = InventoryCreateRequest.dto(req)
 
     data.product = await this.productService.findNoRelation(req.productId)
 
@@ -34,9 +32,9 @@ export class InventoryCrudApp {
 
   async update(id: string, req: InventoryUpdateRequest): Promise<IInventory> {
     const data = await this.inventoryService.findNoRelation(id)
-    Object.assign(data, req)
+    const dataUpdate = InventoryUpdateRequest.dto(data, req)
 
-    return await this.inventoryService.update(data)
+    return await this.inventoryService.update(dataUpdate)
   }
 
   async delete(id: string): Promise<IInventory> {

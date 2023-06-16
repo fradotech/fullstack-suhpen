@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common'
-import { EntCategory } from '../infrastructure/category.entity'
 import { ICategory } from '../infrastructure/category.interface'
 import {
   CategoryCreateRequest,
@@ -16,9 +15,7 @@ export class CategoryCrudApp {
   }
 
   async create(req: CategoryCreateRequest): Promise<ICategory> {
-    const data = new EntCategory()
-    Object.assign(data, req)
-
+    const data = CategoryCreateRequest.dto(req)
     return await this.categoryService.save(data)
   }
 
@@ -28,9 +25,9 @@ export class CategoryCrudApp {
 
   async update(id: string, req: CategoryUpdateRequest): Promise<ICategory> {
     const data = await this.categoryService.findNoRelation(id)
-    Object.assign(data, req)
+    const dataUpdate = CategoryUpdateRequest.dto(data, req)
 
-    return await this.categoryService.update(data)
+    return await this.categoryService.update(dataUpdate)
   }
 
   async delete(id: string): Promise<ICategory> {
