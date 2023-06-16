@@ -85,11 +85,26 @@ export class UserRequest implements IUser {
 
 export class UserCreateRequest extends OmitType(UserRequest, [
   'passwordConfirmation',
-  'role',
   'otp',
   'isVerified',
   'token',
-]) {}
+]) {
+  static dto(data: UserCreateRequest): UserCreateRequest {
+    const res = new UserCreateRequest()
+
+    res.name = data.name
+    res.email = data.email
+    res.password = data.password
+    res.role = data.role
+    res.gender = data.gender
+    res.phoneNumber = data.phoneNumber
+    res.address = data.address
+    res.birthDate = data.birthDate
+    res.avatar = data.avatar
+
+    return res
+  }
+}
 
 export class UserUpdateRequest extends OmitType(UserRequest, [
   'email',
@@ -99,4 +114,15 @@ export class UserUpdateRequest extends OmitType(UserRequest, [
   'otp',
   'isVerified',
   'token',
-]) {}
+]) {
+  static dto(data: IUser, req: UserUpdateRequest): UserCreateRequest {
+    data.name = req.name
+    data.gender = req.gender
+    data.phoneNumber = req.phoneNumber
+    data.avatar = req.avatar
+    data.address = req.address
+    data.birthDate = req.birthDate
+
+    return data
+  }
+}

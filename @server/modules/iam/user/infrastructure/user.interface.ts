@@ -15,7 +15,7 @@ export interface IUser extends IBaseEntity {
   avatar?: string
   otp?: number
   otpExpiredAt?: Date
-  isVerified: boolean
+  isVerified?: boolean
   token?: string
   dateRange?: [dayjs.Dayjs, dayjs.Dayjs]
   _accessToken?: string

@@ -70,7 +70,7 @@ export class EntUser implements IUser {
   otp?: number
 
   @Column({ default: false })
-  isVerified: boolean
+  isVerified?: boolean
 
   @Column({ default: null })
   token?: string
