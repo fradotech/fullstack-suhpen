@@ -1,3 +1,4 @@
+import { IndexSortOderEnum } from '@server/infrastructure/index/index.interface'
 import {
   MenuDividerType,
   MenuItemGroupType,
@@ -10,7 +11,7 @@ import dayjs from 'dayjs'
 import React from 'react'
 
 export type TOrder = {
-  order: 'ASC' | 'DESC' | undefined
+  order: IndexSortOderEnum
 }
 
 export type TOnSort<T> = Omit<SorterResult<T>, 'order'> & TOrder

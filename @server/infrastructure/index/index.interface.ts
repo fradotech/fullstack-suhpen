@@ -1,8 +1,11 @@
-import { OrderDirectionEnum } from './index.enum'
+export enum IndexSortOderEnum {
+  Asc = 'ASC',
+  Desc = 'DESC',
+}
 
 export interface ISortRequest {
   sortField?: string
-  sortOrder?: OrderDirectionEnum
+  sortOrder?: IndexSortOderEnum
 }
 
 export interface IPaginateRequest {

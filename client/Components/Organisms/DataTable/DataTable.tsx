@@ -5,6 +5,7 @@ import { ColumnsType, FilterValue, SorterResult } from 'antd/es/table/interface'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { IndexSortOderEnum } from '../../../../@server/infrastructure/index/index.interface'
 import { FilterState, IDataTableProps, TOnSort } from './DataTable.interface'
 import styles from './DataTable.module.css'
 import { formatColumns } from './DataTable.util'
@@ -97,7 +98,9 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
                 {
                   ...sorter,
                   order:
-                    sorter.order && sorter.order == 'ascend' ? 'ASC' : 'DESC',
+                    sorter.order && sorter.order == 'ascend'
+                      ? IndexSortOderEnum.Asc
+                      : IndexSortOderEnum.Desc,
                 },
                 props.dataTableHeader.dateRangeColumn,
               )
