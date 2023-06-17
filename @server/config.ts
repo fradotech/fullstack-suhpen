@@ -3,6 +3,7 @@ import { APP_CONFIG } from './common/app.config'
 import { DATABASE_CONFIG } from './database/common/database.config'
 import { AUTH_CONFIG } from './modules/iam/auth/common/auth.config'
 import { ATTACHMENT_CONFIG } from './modules/support/attachment/common/attachment.config'
+import { CACHE_CONFIG } from './modules/support/cache/common/cache.config'
 import { MAIL_CONFIG } from './modules/support/mail/common/mail.config'
 import { SENTRY_CONFIG } from './modules/support/sentry/common/sentry.config'
 
@@ -30,4 +31,5 @@ export const config = {
   attachment: ATTACHMENT_CONFIG,
   sentry: SENTRY_CONFIG,
   mail: MAIL_CONFIG,
+  cache: CACHE_CONFIG,
 }
