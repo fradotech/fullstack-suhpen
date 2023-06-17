@@ -20,17 +20,17 @@ export class CategoryCrudApp {
   }
 
   async findOneOrFail(id: string): Promise<ICategory> {
-    return await this.categoryService.findOneOrFail(id)
+    return await this.categoryService.findOneByOrFail({ id })
   }
 
   async update(id: string, req: CategoryUpdateRequest): Promise<ICategory> {
-    const data = await this.categoryService.findNoRelation(id)
+    const data = await this.categoryService.findOneByOrFail({ id })
     const dataUpdate = CategoryUpdateRequest.dto(data, req)
-
-    return await this.categoryService.update(dataUpdate)
+    return await this.categoryService.save(dataUpdate)
   }
 
   async delete(id: string): Promise<ICategory> {
-    return await this.categoryService.delete(id)
+    await this.categoryService.delete(id)
+    return await this.categoryService.findOneByOrFail({ id })
   }
 }

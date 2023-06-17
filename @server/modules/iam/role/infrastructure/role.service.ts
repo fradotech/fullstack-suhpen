@@ -24,7 +24,7 @@ export class RoleService {
     return roles
   }
 
-  async findOne(name: string): Promise<IRole | undefined> {
+  async findOneByName(name: string): Promise<IRole | undefined> {
     const data = roles.find((role) => role.name == name)
     if (!data) Exception.entityNotFound('name', name)
     return data

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { BaseService } from '@server/infrastructure/base/base.service'
+import { In, Repository } from 'typeorm'
 import { EntUser } from '../infrastructure/user.entity'
 
 class UserRepo extends Repository<EntUser> {
@@ -13,6 +14,8 @@ class UserRepo extends Repository<EntUser> {
 }
 
 @Injectable()
-export class UserService extends UserRepo {
-  // TODO: Create a method if the repository can’t resolve
+export class UserService extends UserRepo implements BaseService {
+  async findByInIds(ids: string[]): Promise<EntUser[]> {
+    return await this.findBy({ id: In(ids) })
+  }
 }

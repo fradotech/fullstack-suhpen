@@ -26,9 +26,7 @@ export class UserCrudApp {
   async update(id: string, req: UserUpdateRequest): Promise<IUser> {
     const data = await this.userService.findOneByOrFail({ id })
     const dataUpdate = UserUpdateRequest.dto(data, req)
-
-    await this.userService.update(dataUpdate.id, dataUpdate)
-    return await this.userService.findOneByOrFail({ id })
+    return await this.userService.save(dataUpdate)
   }
 
   async delete(id: string): Promise<IUser> {

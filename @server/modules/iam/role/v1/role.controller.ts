@@ -28,7 +28,7 @@ export class RoleController {
   async findOne(
     @Query('name') name: RoleEnum,
   ): Promise<IApiRes<IRole | undefined>> {
-    const res = await this.roleService.findOne(name)
+    const res = await this.roleService.findOneByName(name)
     return ApiRes.fromEntity(RoleResponse.fromEntity(res))
   }
 }
