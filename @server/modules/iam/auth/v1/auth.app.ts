@@ -32,7 +32,7 @@ export class AuthApp {
 
   async login(req: AuthLoginRequest): Promise<IUser> {
     const { email, password } = req
-    const user = await this.userService.findOneByEmail(email)
+    const user = await this.userService.findOneBy({ email })
 
     !user && Exception.unauthorized(authMessages.wrongCredential)
     const isValid = await bcrypt.compare(password, user?.password || '')
@@ -45,20 +45,23 @@ export class AuthApp {
   }
 
   async passwordSendLink(req: AuthPasswordSendRequest): Promise<string> {
-    const user = await this.userService.findOneByEmail(req.email)
+    const { email } = req
+    const user = await this.userService.findOneBy({ email })
     if (!user) return 'Failed'
 
     user.token = await this.jwtService.signAsync({ id: user.id })
     const link = `${config.server.hostClient}/auth/password?token=${user.token}`
 
-    await this.userService.update(user)
-    await this.authPasswordService.passwordResetLink(user, link)
+    await Promise.all([
+      this.userService.update(user.id, user),
+      this.authPasswordService.passwordResetLink(user, link),
+    ])
 
     return link
   }
 
   async passwordGetLink(token: string): Promise<IUser | string> {
-    const user = await this.userService.findOneByToken(token)
+    const user = await this.userService.findOneBy({ token })
     if (!user) return authMessages.tokenInvalid
     return user
   }
@@ -66,7 +69,8 @@ export class AuthApp {
   async passwordChange(
     req: AuthPasswordChangeRequest,
   ): Promise<IUser | string> {
-    const user = await this.userService.findOneByToken(req.token)
+    const { token } = req
+    const user = await this.userService.findOneBy({ token })
     if (!user) return authMessages.tokenInvalid
 
     user.token != req.token &&
@@ -74,8 +78,10 @@ export class AuthApp {
     user.password = await bcrypt.hash(req.password, 10)
     user.token = null
 
-    await this.userService.update(user)
-    await this.authPasswordService.passwordResetSuccess(user)
+    await Promise.all([
+      this.userService.update(user.id, user),
+      this.authPasswordService.passwordResetSuccess(user),
+    ])
 
     return user
   }

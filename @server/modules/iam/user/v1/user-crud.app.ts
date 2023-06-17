@@ -20,17 +20,19 @@ export class UserCrudApp {
   }
 
   async findOneOrFail(id: string): Promise<IUser> {
-    return await this.userService.findOneOrFail(id)
+    return await this.userService.findOneByOrFail({ id })
   }
 
   async update(id: string, req: UserUpdateRequest): Promise<IUser> {
-    const data = await this.userService.findNoRelation(id)
+    const data = await this.userService.findOneByOrFail({ id })
     const dataUpdate = UserUpdateRequest.dto(data, req)
 
-    return await this.userService.update(dataUpdate)
+    await this.userService.update(dataUpdate.id, dataUpdate)
+    return await this.userService.findOneByOrFail({ id })
   }
 
   async delete(id: string): Promise<IUser> {
-    return await this.userService.delete(id)
+    await this.userService.delete(id)
+    return await this.userService.findOneByOrFail({ id })
   }
 }
