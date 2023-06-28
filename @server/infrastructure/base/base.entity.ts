@@ -14,20 +14,20 @@ export class BaseEntity implements IBaseEntity {
   id: string
 
   @CreateDateColumn()
-  createdAt: Date
+  createdAt?: Date
 
   @ManyToOne(() => EntUser)
-  createdBy: IUser
+  createdBy?: IUser
 
   @UpdateDateColumn()
-  updatedAt: Date
+  updatedAt?: Date
 
   @ManyToOne(() => EntUser)
-  updatedBy: IUser
+  updatedBy?: IUser
 
   @DeleteDateColumn()
-  deletedAt: Date
+  deletedAt?: Date
 
   @ManyToOne(() => EntUser)
-  deletedBy: IUser
+  deletedBy?: IUser
 }

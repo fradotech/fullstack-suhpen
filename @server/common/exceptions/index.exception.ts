@@ -28,8 +28,8 @@ export class Exception {
   }
 
   static unprocessable(exception?: any, message?: string): void {
-    let sqlMessage
-    let indexValue
+    let sqlMessage: string
+    let indexValue: number
 
     switch (exception?.code) {
       case 'ER_DUP_ENTRY':

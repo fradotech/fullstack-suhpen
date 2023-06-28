@@ -1,27 +1,24 @@
 import { Logger } from '@nestjs/common'
 import dataSource from '@server/database/data-source'
 import { EntCategory } from '@server/modules/feature/category/infrastructure/category.entity'
-import { ICategory } from '@server/modules/feature/category/infrastructure/category.interface'
 import { EntProduct } from '@server/modules/feature/product/infrastructure/product.entity'
 import { IProduct } from '@server/modules/feature/product/infrastructure/product.interface'
-import { EntityManager, Repository } from 'typeorm'
+import { EntityManager } from 'typeorm'
 import { productDummies } from './product.dummy'
 
 export const productCreateSeeder = async (): Promise<boolean> => {
   const data = productDummies
   const entityManager = new EntityManager(dataSource)
-  const productRepo = new Repository<IProduct>(EntProduct, entityManager)
   const table = EntProduct.name
 
-  const productExist = await productRepo
-    .createQueryBuilder(table)
+  const productExist = await entityManager
+    .createQueryBuilder(EntProduct, table)
     .where(`${table}.key IN (:key)`, { key: data.map((data) => data.key) })
     .getOne()
 
   if (productExist) return false
 
-  const categoryRepo = new Repository<ICategory>(EntCategory, entityManager)
-  const categories = await categoryRepo.find()
+  const categories = await entityManager.find(EntCategory)
   const products = data as unknown as IProduct[]
 
   for (let i = 0; i < products.length; i++) {
@@ -32,7 +29,11 @@ export const productCreateSeeder = async (): Promise<boolean> => {
     products[i].categories = [...new Set(randomCategories)]
   }
 
-  await productRepo.save(data)
+  await entityManager
+    .createQueryBuilder(EntProduct, table)
+    .insert()
+    .values(data)
+    .execute()
 
   Logger.log(String(data.map((data) => data.key)), 'SeederCreate:Product')
 

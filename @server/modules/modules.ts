@@ -3,6 +3,7 @@ export enum Modules {
   Auth = 'auth',
   User = 'users',
   Role = 'roles',
+  Permission = 'permissions',
   Account = 'account',
   Attachment = 'attachments',
   Dashboard = 'dashboard',

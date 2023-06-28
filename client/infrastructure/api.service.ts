@@ -13,7 +13,7 @@ const headers = {
 }
 
 const notificationError = (e: AxiosError<IApiExportRes<unknown>>) => {
-  if (e.response?.status === 401) {
+  if (e.response?.statusText === 'Unauthorized') {
     localStorage.removeItem('_accessToken')
     localStorage.removeItem('user')
     location.reload()
