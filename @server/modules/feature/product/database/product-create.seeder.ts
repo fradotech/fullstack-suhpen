@@ -29,11 +29,8 @@ export const productCreateSeeder = async (): Promise<boolean> => {
     products[i].categories = [...new Set(randomCategories)]
   }
 
-  await entityManager
-    .createQueryBuilder(EntProduct, table)
-    .insert()
-    .values(data)
-    .execute()
+  const dataCreate = entityManager.create(EntProduct, data)
+  await entityManager.save(dataCreate)
 
   Logger.log(String(data.map((data) => data.key)), 'SeederCreate:Product')
 

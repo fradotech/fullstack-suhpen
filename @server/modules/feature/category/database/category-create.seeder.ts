@@ -16,11 +16,8 @@ export const categoryCreateSeeder = async (): Promise<boolean> => {
 
   if (categoryExist) return false
 
-  await entityManager
-    .createQueryBuilder(EntCategory, table)
-    .insert()
-    .values(data)
-    .execute()
+  const dataCreate = entityManager.create(EntCategory, data)
+  await entityManager.save(dataCreate)
 
   Logger.log(String(data.map((data) => data.key)), 'SeederCreate:Category')
 

@@ -1,5 +1,5 @@
 import { Parser } from '@json2csv/plainjs'
-import { Controller, Post, Query, UseGuards } from '@nestjs/common'
+import { Controller, Get, Post, Query, UseGuards } from '@nestjs/common'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.response'
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
@@ -23,7 +23,7 @@ export class CategorySheetController {
     return ApiExportRes.fromEntity(true)
   }
 
-  @Post('export')
+  @Get('export')
   async fetch(
     @Query() req: CategoryIndexRequest,
   ): Promise<IApiExportRes<CategoryResponse[]>> {

@@ -11,14 +11,13 @@ import { AppModule } from './app.module'
 import { serverStartAtPort } from './common/utils/server-start-at-port.util'
 import { config } from './config'
 import { swaggerConfig } from './infrastructure/swagger/swagger.config'
-
-export let app: NestExpressApplication
+import { permissionSyncSeeder } from './modules/iam/permission/database/permission-sync.seeder'
 
 async function bootstrap() {
   initializeTransactionalContext()
   patchTypeORMRepositoryWithBaseRepository()
 
-  app = await NestFactory.create<NestExpressApplication>(AppModule)
+  const app = await NestFactory.create<NestExpressApplication>(AppModule)
 
   const publicPath = path.resolve('./') + config.attachment.public
   const host = config.server.host
@@ -32,6 +31,7 @@ async function bootstrap() {
   SwaggerModule.setup(docs, app, document)
 
   const port = await serverStartAtPort(app, +config.server.port)
+  await permissionSyncSeeder(app)
 
   Logger.verbose(`🚀 App running at ${host}:${port}`, 'NestApplication')
   Logger.verbose(`🚀 API Docs Swagger at ${host}:${port}/${docs}`, 'Swagger UI')

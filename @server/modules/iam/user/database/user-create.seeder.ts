@@ -18,11 +18,8 @@ export const userCreateSeeder = async (): Promise<boolean> => {
 
   if (userExist) return false
 
-  await entityManager
-    .createQueryBuilder(EntUser, table)
-    .insert()
-    .values(data)
-    .execute()
+  const dataCreate = entityManager.create(EntUser, data)
+  await entityManager.save(dataCreate)
 
   Logger.log(String(data.map((data) => data.email)), 'SeederCreate:User')
 

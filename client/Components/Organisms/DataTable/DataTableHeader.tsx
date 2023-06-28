@@ -35,16 +35,12 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
   const handleExport = async () => {
     setIsLoading(true)
     await axios
-      .post(
-        `${HOST_API}${props.hrefExport}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('_accessToken')}`,
-          },
-          params: props.query,
+      .get(`${HOST_API}${props.hrefExport}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('_accessToken')}`,
         },
-      )
+        params: props.query,
+      })
       .then((response: any) =>
         FileDownload(response.data.data, response.data.fileName),
       )

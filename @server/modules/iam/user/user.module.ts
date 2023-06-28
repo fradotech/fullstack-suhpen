@@ -6,7 +6,7 @@ import { UserService } from './infrastructure/user.service'
 import { UserAccountController } from './v1/account/user-account.controller'
 import { UserCrudApp } from './v1/user-crud.app'
 import { UserCrudController } from './v1/user-crud.controller'
-import { UserSheetController } from './v1/user-export.controller'
+import { UserSheetController } from './v1/user-sheet.controller'
 
 @Module({
   imports: [TypeOrmModule.forFeature([EntUser])],

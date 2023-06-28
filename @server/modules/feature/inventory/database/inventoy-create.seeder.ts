@@ -28,12 +28,8 @@ export const inventoryCreateSeeder = async (): Promise<boolean> => {
     inventorys[i].marginPrice = inventorys[i].sellPrice - inventorys[i].buyPrice
   }
 
-  await entityManager
-    .createQueryBuilder(EntInventory, table)
-    .insert()
-    .values(data)
-    .execute()
-
+  const dataCreate = entityManager.create(EntInventory, data)
+  await entityManager.save(dataCreate)
   Logger.log(
     String(data.map((data) => data.buyPrice)),
     'SeederCreate:Inventory',
