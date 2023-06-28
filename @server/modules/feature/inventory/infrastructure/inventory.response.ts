@@ -5,7 +5,7 @@ export class InventoryResponse extends EntInventory {
   productId: string
   supplierId: string
 
-  static fromEntity(data: IInventory): InventoryResponse {
+  static dto(data: IInventory): InventoryResponse {
     const res = new InventoryResponse()
     Object.assign(res, data)
 
@@ -14,7 +14,7 @@ export class InventoryResponse extends EntInventory {
     return res
   }
 
-  static fromEntities(data: IInventory[]): InventoryResponse[] {
-    return data.map((data) => this.fromEntity(data))
+  static dtos(data: IInventory[]): InventoryResponse[] {
+    return data.map((data) => this.dto(data))
   }
 }

@@ -22,6 +22,6 @@ export class LoggerController {
     @Query() req: LoggerIndexRequest,
   ): Promise<IApiRes<LoggerResponse[]>> {
     const res = await this.loggerIndexApp.fetch(req)
-    return ApiRes.fromEntity(res.data)
+    return ApiRes.dto(res.data)
   }
 }

@@ -41,10 +41,7 @@ export class PermissionCrudController implements BaseCrudController {
     @Query() req: PermissionIndexRequest,
   ): Promise<IApiRes<PermissionResponse[]>> {
     const res = await this.categoryIndexApp.fetch(req)
-    return ApiRes.fromEntity(
-      PermissionResponse.fromEntities(res.data),
-      res.meta,
-    )
+    return ApiRes.dto(PermissionResponse.dtos(res.data), res.meta)
   }
 
   @Post()
@@ -52,7 +49,7 @@ export class PermissionCrudController implements BaseCrudController {
     @Body() req: PermissionCreateRequest,
   ): Promise<IApiRes<PermissionResponse>> {
     const data = await this.categoryCrudApp.create(req)
-    return ApiRes.fromEntity(PermissionResponse.fromEntity(data))
+    return ApiRes.dto(PermissionResponse.dto(data))
   }
 
   @Get(':id')
@@ -60,7 +57,7 @@ export class PermissionCrudController implements BaseCrudController {
     @Param('id') id: string,
   ): Promise<IApiRes<PermissionResponse>> {
     const data = await this.categoryCrudApp.findOneOrFail(id)
-    return ApiRes.fromEntity(PermissionResponse.fromEntity(data))
+    return ApiRes.dto(PermissionResponse.dto(data))
   }
 
   @Put(':id')
@@ -69,12 +66,12 @@ export class PermissionCrudController implements BaseCrudController {
     @Body() req: PermissionUpdateRequest,
   ): Promise<IApiRes<PermissionResponse>> {
     const data = await this.categoryCrudApp.update(id, req)
-    return ApiRes.fromEntity(PermissionResponse.fromEntity(data))
+    return ApiRes.dto(PermissionResponse.dto(data))
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<PermissionResponse>> {
     const data = await this.categoryCrudApp.delete(id)
-    return ApiRes.fromEntity(PermissionResponse.fromEntity(data))
+    return ApiRes.dto(PermissionResponse.dto(data))
   }
 }

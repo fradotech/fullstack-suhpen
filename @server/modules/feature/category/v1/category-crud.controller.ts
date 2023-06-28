@@ -41,7 +41,7 @@ export class CategoryCrudController implements BaseCrudController {
     @Query() req: CategoryIndexRequest,
   ): Promise<IApiRes<CategoryResponse[]>> {
     const res = await this.categoryIndexApp.fetch(req)
-    return ApiRes.fromEntity(CategoryResponse.fromEntities(res.data), res.meta)
+    return ApiRes.dto(CategoryResponse.dtos(res.data), res.meta)
   }
 
   @Post()
@@ -49,7 +49,7 @@ export class CategoryCrudController implements BaseCrudController {
     @Body() req: CategoryCreateRequest,
   ): Promise<IApiRes<CategoryResponse>> {
     const data = await this.categoryCrudApp.create(req)
-    return ApiRes.fromEntity(CategoryResponse.fromEntity(data))
+    return ApiRes.dto(CategoryResponse.dto(data))
   }
 
   @Get(':id')
@@ -57,7 +57,7 @@ export class CategoryCrudController implements BaseCrudController {
     @Param('id') id: string,
   ): Promise<IApiRes<CategoryResponse>> {
     const data = await this.categoryCrudApp.findOneOrFail(id)
-    return ApiRes.fromEntity(CategoryResponse.fromEntity(data))
+    return ApiRes.dto(CategoryResponse.dto(data))
   }
 
   @Put(':id')
@@ -66,12 +66,12 @@ export class CategoryCrudController implements BaseCrudController {
     @Body() req: CategoryUpdateRequest,
   ): Promise<IApiRes<CategoryResponse>> {
     const data = await this.categoryCrudApp.update(id, req)
-    return ApiRes.fromEntity(CategoryResponse.fromEntity(data))
+    return ApiRes.dto(CategoryResponse.dto(data))
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<CategoryResponse>> {
     const data = await this.categoryCrudApp.delete(id)
-    return ApiRes.fromEntity(CategoryResponse.fromEntity(data))
+    return ApiRes.dto(CategoryResponse.dto(data))
   }
 }

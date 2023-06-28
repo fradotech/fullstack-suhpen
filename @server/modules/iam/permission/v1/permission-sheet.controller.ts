@@ -20,7 +20,7 @@ export class PermissionSheetController {
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
-    return ApiExportRes.fromEntity(true)
+    return ApiExportRes.dto(true)
   }
 
   @Get('export')
@@ -30,13 +30,13 @@ export class PermissionSheetController {
     req.isExport = true
     const response = await this.permissionIndexApp.fetch(req)
 
-    const data = PermissionResponse.fromEntities(response.data)
+    const data = PermissionResponse.dtos(response.data)
     const parser = new Parser()
     const dataExport = parser.parse(data)
     const fileName = `Data - ${
       Modules.Permission
     } - ${new Date().toISOString()}.xlsx`
 
-    return ApiExportRes.fromEntity(dataExport, fileName)
+    return ApiExportRes.dto(dataExport, fileName)
   }
 }

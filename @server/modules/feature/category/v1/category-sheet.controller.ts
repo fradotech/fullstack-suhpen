@@ -20,7 +20,7 @@ export class CategorySheetController {
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
-    return ApiExportRes.fromEntity(true)
+    return ApiExportRes.dto(true)
   }
 
   @Get('export')
@@ -30,13 +30,13 @@ export class CategorySheetController {
     req.isExport = true
     const response = await this.categoryIndexApp.fetch(req)
 
-    const data = CategoryResponse.fromEntities(response.data)
+    const data = CategoryResponse.dtos(response.data)
     const parser = new Parser()
     const dataExport = parser.parse(data)
     const fileName = `Data - ${
       Modules.Category
     } - ${new Date().toISOString()}.xlsx`
 
-    return ApiExportRes.fromEntity(dataExport, fileName)
+    return ApiExportRes.dto(dataExport, fileName)
   }
 }

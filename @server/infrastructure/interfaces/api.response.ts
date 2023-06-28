@@ -7,7 +7,7 @@ export class ApiRes implements IApiRes<any> {
   data: any
   meta?: IPaginationMeta
 
-  static fromEntity(
+  static dto(
     data?: IBaseEntity | IBaseEntity[] | any,
     meta?: IPaginationMeta,
     message?: string,

@@ -40,7 +40,7 @@ export class InventoryCrudController implements BaseCrudController {
     @Query() req: InventoryIndexRequest,
   ): Promise<IApiRes<InventoryResponse[]>> {
     const res = await this.inventoryIndexApp.fetch(req)
-    return ApiRes.fromEntity(InventoryResponse.fromEntities(res.data), res.meta)
+    return ApiRes.dto(InventoryResponse.dtos(res.data), res.meta)
   }
 
   @UseGuards(AdminGuard)
@@ -49,7 +49,7 @@ export class InventoryCrudController implements BaseCrudController {
     @Body() req: InventoryCreateRequest,
   ): Promise<IApiRes<InventoryResponse>> {
     const data = await this.inventoryCrudApp.create(req)
-    return ApiRes.fromEntity(InventoryResponse.fromEntity(data))
+    return ApiRes.dto(InventoryResponse.dto(data))
   }
 
   @UseGuards(AdminGuard)
@@ -58,7 +58,7 @@ export class InventoryCrudController implements BaseCrudController {
     @Param('id') id: string,
   ): Promise<IApiRes<InventoryResponse>> {
     const data = await this.inventoryCrudApp.findOneOrFail(id)
-    return ApiRes.fromEntity(InventoryResponse.fromEntity(data))
+    return ApiRes.dto(InventoryResponse.dto(data))
   }
 
   @UseGuards(AdminGuard)
@@ -68,13 +68,13 @@ export class InventoryCrudController implements BaseCrudController {
     @Body() req: InventoryUpdateRequest,
   ): Promise<IApiRes<InventoryResponse>> {
     const data = await this.inventoryCrudApp.update(id, req)
-    return ApiRes.fromEntity(InventoryResponse.fromEntity(data))
+    return ApiRes.dto(InventoryResponse.dto(data))
   }
 
   @UseGuards(AdminGuard)
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<InventoryResponse>> {
     const data = await this.inventoryCrudApp.delete(id)
-    return ApiRes.fromEntity(InventoryResponse.fromEntity(data))
+    return ApiRes.dto(InventoryResponse.dto(data))
   }
 }

@@ -20,7 +20,7 @@ export class InventorySheetController {
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
-    return ApiExportRes.fromEntity(true)
+    return ApiExportRes.dto(true)
   }
 
   @Get('export')
@@ -30,13 +30,13 @@ export class InventorySheetController {
     req.isExport = true
     const response = await this.inventoryIndexApp.fetch(req)
 
-    const data = InventoryResponse.fromEntities(response.data)
+    const data = InventoryResponse.dtos(response.data)
     const parser = new Parser()
     const dataExport = parser.parse(data)
     const fileName = `Data - ${
       Modules.Inventory
     } - ${new Date().toISOString()}.xlsx`
 
-    return ApiExportRes.fromEntity(dataExport, fileName)
+    return ApiExportRes.dto(dataExport, fileName)
   }
 }

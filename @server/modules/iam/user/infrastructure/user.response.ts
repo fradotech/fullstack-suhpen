@@ -7,7 +7,7 @@ export class UserResponse extends EntUser {
   _accessToken?: string
   dateRange?: [dayjs.Dayjs, dayjs.Dayjs]
 
-  static fromEntity(data: IUser): UserResponse {
+  static dto(data: IUser): UserResponse {
     const res = new UserResponse()
     Object.assign(res, data)
 
@@ -19,8 +19,8 @@ export class UserResponse extends EntUser {
     return res
   }
 
-  static fromEntities(data: IUser[]): UserResponse[] {
-    return data.map((data) => this.fromEntity(data))
+  static dtos(data: IUser[]): UserResponse[] {
+    return data.map((data) => this.dto(data))
   }
 }
 
@@ -28,7 +28,7 @@ export class UserStrictResponse extends UserResponse {
   otpExpiredAt?: Date
   dateRange?: [dayjs.Dayjs, dayjs.Dayjs]
 
-  static fromEntity(data: IUser): UserStrictResponse {
+  static dto(data: IUser): UserStrictResponse {
     const res = new UserStrictResponse()
     Object.assign(res, data)
 
@@ -39,7 +39,7 @@ export class UserStrictResponse extends UserResponse {
     return res
   }
 
-  static fromEntities(data: IUser[]): UserStrictResponse[] {
-    return data.map((data) => this.fromEntity(data))
+  static dtos(data: IUser[]): UserStrictResponse[] {
+    return data.map((data) => this.dto(data))
   }
 }

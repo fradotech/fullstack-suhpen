@@ -48,7 +48,7 @@ export class AttachmentController {
       config.server.hostApi + '/' + THIS_MODULE + '/' + file.filename
 
     const attachment = await this.attachmentService.upload(fileUrl, req)
-    return ApiRes.fromEntity(AttachmentUploadResponse.fromEntity(attachment))
+    return ApiRes.dto(AttachmentUploadResponse.dto(attachment))
   }
 
   @Get()
@@ -59,6 +59,6 @@ export class AttachmentController {
       attachmentFindRequest,
     )
 
-    return ApiRes.fromEntity(AttachmentUploadResponse.fromEntity(attachment))
+    return ApiRes.dto(AttachmentUploadResponse.dto(attachment))
   }
 }

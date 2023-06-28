@@ -21,7 +21,7 @@ export class AuthController {
   @Post('login')
   async login(@Body() req: AuthLoginRequest): Promise<IApiRes<UserResponse>> {
     const user = await this.authApp.login(req)
-    return ApiRes.fromEntity(UserResponse.fromEntity(user))
+    return ApiRes.dto(UserResponse.dto(user))
   }
 
   @Post('register')
@@ -29,6 +29,6 @@ export class AuthController {
     @Body() req: AuthRegisterRequest,
   ): Promise<IApiRes<UserResponse>> {
     const user = await this.authApp.register(req)
-    return ApiRes.fromEntity(UserResponse.fromEntity(user))
+    return ApiRes.dto(UserResponse.dto(user))
   }
 }

@@ -4,7 +4,7 @@ import { IProduct } from './product.interface'
 export class ProductResponse extends EntProduct {
   categoryIds: string[]
 
-  static fromEntity(data: IProduct): ProductResponse {
+  static dto(data: IProduct): ProductResponse {
     const res = new ProductResponse()
     Object.assign(res, data)
 
@@ -13,7 +13,7 @@ export class ProductResponse extends EntProduct {
     return res
   }
 
-  static fromEntities(data: IProduct[]): ProductResponse[] {
-    return data.map((data) => this.fromEntity(data))
+  static dtos(data: IProduct[]): ProductResponse[] {
+    return data.map((data) => this.dto(data))
   }
 }

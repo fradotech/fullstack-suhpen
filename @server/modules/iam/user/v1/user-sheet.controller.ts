@@ -20,7 +20,7 @@ export class UserSheetController {
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
-    return ApiExportRes.fromEntity(true)
+    return ApiExportRes.dto(true)
   }
 
   @Get('export')
@@ -30,11 +30,11 @@ export class UserSheetController {
     req.isExport = true
     const response = await this.userIndexApp.fetch(req)
 
-    const data = UserStrictResponse.fromEntities(response.data)
+    const data = UserStrictResponse.dtos(response.data)
     const parser = new Parser()
     const dataExport = parser.parse(data)
     const fileName = `Data - ${Modules.User} - ${new Date().toISOString()}.xlsx`
 
-    return ApiExportRes.fromEntity(dataExport, fileName)
+    return ApiExportRes.dto(dataExport, fileName)
   }
 }

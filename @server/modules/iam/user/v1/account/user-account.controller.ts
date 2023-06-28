@@ -24,7 +24,7 @@ export class UserAccountController {
     @GetUserLogged() user: IUser,
   ): Promise<IApiRes<UserResponse>> {
     const data = await this.userCrudApp.findOneOrFail(user.id)
-    return ApiRes.fromEntity(UserResponse.fromEntity(data))
+    return ApiRes.dto(UserResponse.dto(data))
   }
 
   @Put()
@@ -33,6 +33,6 @@ export class UserAccountController {
     @Body() req: UserUpdateRequest,
   ): Promise<IApiRes<UserResponse>> {
     const data = await this.userCrudApp.update(user.id, req)
-    return ApiRes.fromEntity(UserResponse.fromEntity(data))
+    return ApiRes.dto(UserResponse.dto(data))
   }
 }

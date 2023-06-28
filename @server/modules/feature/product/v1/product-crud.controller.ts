@@ -41,7 +41,7 @@ export class ProductCrudController implements BaseCrudController {
     @Query() req: ProductIndexRequest,
   ): Promise<IApiRes<ProductResponse[]>> {
     const res = await this.productIndexApp.fetch(req)
-    return ApiRes.fromEntity(ProductResponse.fromEntities(res.data), res.meta)
+    return ApiRes.dto(ProductResponse.dtos(res.data), res.meta)
   }
 
   @Post()
@@ -49,7 +49,7 @@ export class ProductCrudController implements BaseCrudController {
     @Body() req: ProductCreateRequest,
   ): Promise<IApiRes<ProductResponse>> {
     const data = await this.productCrudApp.create(req)
-    return ApiRes.fromEntity(ProductResponse.fromEntity(data))
+    return ApiRes.dto(ProductResponse.dto(data))
   }
 
   @Get(':id')
@@ -57,7 +57,7 @@ export class ProductCrudController implements BaseCrudController {
     @Param('id') id: string,
   ): Promise<IApiRes<ProductResponse>> {
     const data = await this.productCrudApp.findOneOrFail(id)
-    return ApiRes.fromEntity(ProductResponse.fromEntity(data))
+    return ApiRes.dto(ProductResponse.dto(data))
   }
 
   @Put(':id')
@@ -66,12 +66,12 @@ export class ProductCrudController implements BaseCrudController {
     @Body() req: ProductUpdateRequest,
   ): Promise<IApiRes<ProductResponse>> {
     const data = await this.productCrudApp.update(id, req)
-    return ApiRes.fromEntity(ProductResponse.fromEntity(data))
+    return ApiRes.dto(ProductResponse.dto(data))
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<ProductResponse>> {
     const data = await this.productCrudApp.delete(id)
-    return ApiRes.fromEntity(ProductResponse.fromEntity(data))
+    return ApiRes.dto(ProductResponse.dto(data))
   }
 }

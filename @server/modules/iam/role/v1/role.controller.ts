@@ -21,7 +21,7 @@ export class RoleController {
   @Get()
   async find(): Promise<IApiRes<IRole[]>> {
     const res = await this.roleService.find()
-    return ApiRes.fromEntity(RoleResponse.fromEntities(res))
+    return ApiRes.dto(RoleResponse.dtos(res))
   }
 
   @Get(':name')
@@ -29,6 +29,6 @@ export class RoleController {
     @Query('name') name: RoleEnum,
   ): Promise<IApiRes<IRole | undefined>> {
     const res = await this.roleService.findOneByName(name)
-    return ApiRes.fromEntity(RoleResponse.fromEntity(res))
+    return ApiRes.dto(RoleResponse.dto(res))
   }
 }

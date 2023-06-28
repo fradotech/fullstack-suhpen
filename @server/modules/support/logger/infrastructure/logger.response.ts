@@ -10,7 +10,7 @@ export class LoggerResponse {
   user: IUser
   body: ReadableStream<Uint8Array>
 
-  static fromEntity(executeTime: number, request: Request): LoggerResponse {
+  static dto(executeTime: number, request: Request): LoggerResponse {
     const res = new LoggerResponse()
 
     res.createdAt = Date.now()

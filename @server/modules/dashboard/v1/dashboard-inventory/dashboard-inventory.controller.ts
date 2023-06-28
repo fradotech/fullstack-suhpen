@@ -20,6 +20,6 @@ export class DashboardInventoryController {
   async aggregate(@Param('field') field: string): Promise<IApiRes<IAggreate>> {
     // TODO: Add validation field
     const res = await this.dashboardInventoryApp.aggregate(field)
-    return ApiRes.fromEntity(res)
+    return ApiRes.dto(res)
   }
 }
