@@ -13,6 +13,12 @@ const headers = {
 }
 
 const notificationError = (e: AxiosError<IApiExportRes<unknown>>) => {
+  if (e.response?.status === 401) {
+    localStorage.removeItem('_accessToken')
+    localStorage.removeItem('user')
+    location.reload()
+  }
+
   return notification.error({ message: e.response?.data?.message || String(e) })
 }
 
