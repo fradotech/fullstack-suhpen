@@ -12,12 +12,15 @@ import { serverStartAtPort } from './common/utils/server-start-at-port.util'
 import { config } from './config'
 import { swaggerConfig } from './infrastructure/swagger/swagger.config'
 
+export let app: NestExpressApplication
+
 async function bootstrap() {
   initializeTransactionalContext()
   patchTypeORMRepositoryWithBaseRepository()
 
+  app = await NestFactory.create<NestExpressApplication>(AppModule)
+
   const publicPath = path.resolve('./') + config.attachment.public
-  const app = await NestFactory.create<NestExpressApplication>(AppModule)
   const host = config.server.host
   const docs = 'docs'
 
