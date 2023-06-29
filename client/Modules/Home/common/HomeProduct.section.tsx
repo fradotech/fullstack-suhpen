@@ -3,12 +3,12 @@ import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { Util } from '../../../common/utils/util'
-import { inventoryAction } from '../../Feature/Inventory/infrastructure/inventory.action'
+import { InventoryAction } from '../../Feature/Inventory/infrastructure/inventory.action'
 import styles from '../Home.module.css'
 
 const HomeProductSection: React.FC = () => {
   const fetch = async () => {
-    const res = await inventoryAction.fetch({ pageSize: 100 })
+    const res = await InventoryAction.fetch({ pageSize: 100 })
     return res.data
   }
   const { isLoading, data } = useQuery([HomeProductSection.name], fetch)

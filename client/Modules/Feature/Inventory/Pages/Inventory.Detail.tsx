@@ -6,11 +6,11 @@ import { Section } from '../../../../Components/Molecules/Section/Section'
 import DescriptionContainer from '../../../../Components/Organisms/Description/DescriptionContainer'
 import DescriptionItem from '../../../../Components/Organisms/Description/DescriptionItem'
 import { Route } from '../../../../Enums/Route'
-import { inventoryAction } from '../infrastructure/inventory.action'
+import { InventoryAction } from '../infrastructure/inventory.action'
 
 const InventoryDetail: React.FC = () => {
   const { id } = useParams()
-  const fetch = async () => await inventoryAction.findOne(id)
+  const fetch = async () => await InventoryAction.findOne(id)
   const { isLoading, data } = useQuery([InventoryDetail.name], fetch)
   const fields = data?.data && Object.keys(data.data)
 

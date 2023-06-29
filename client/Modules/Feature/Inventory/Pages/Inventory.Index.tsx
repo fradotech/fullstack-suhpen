@@ -1,13 +1,12 @@
 import { InventoryIndexRequest } from '@server/modules/feature/inventory/infrastructure/inventory-index.request'
 import React from 'react'
-import { useQuery } from 'react-query'
 import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import DataTable from '../../../../Components/Organisms/DataTable/DataTable'
 import { paginationTransform } from '../../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../../Components/Organisms/DataTable/useDataTable'
 import { Route } from '../../../../Enums/Route'
-import { inventoryAction } from '../infrastructure/inventory.action'
+import { InventoryAction } from '../infrastructure/inventory.action'
 import { inventoryColumns } from '../infrastructure/inventory.column'
 
 interface IProps {
@@ -16,10 +15,9 @@ interface IProps {
 
 const InventoryIndex: React.FC<IProps> = (props: IProps) => {
   const { query, setQueryParams } = useDataTable<InventoryIndexRequest>()
-  const fetch = async () => await inventoryAction.fetch(query, props.productId)
-  const { isLoading, data, refetch } = useQuery(
-    [InventoryIndex.name, query],
-    fetch,
+  const { isLoading, data, refetch } = InventoryAction.useIndex(
+    query,
+    props.productId,
   )
 
   return (

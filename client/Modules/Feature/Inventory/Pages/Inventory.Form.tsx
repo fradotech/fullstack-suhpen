@@ -11,7 +11,7 @@ import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../../Enums/Route'
 import { rule } from '../../../../common/utils/form.rules'
-import { inventoryAction } from '../infrastructure/inventory.action'
+import { InventoryAction } from '../infrastructure/inventory.action'
 
 const InventoryForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
@@ -24,7 +24,7 @@ const InventoryForm: React.FC = () => {
     id &&
       (async () => {
         setIsLoading(true)
-        const res = await inventoryAction.findOne(id)
+        const res = await InventoryAction.findOne(id)
         form.setFieldsValue(res.data)
         setIsLoading(false)
       }),
@@ -36,8 +36,8 @@ const InventoryForm: React.FC = () => {
     const data = form.getFieldsValue()
     productId && (data.productId = productId)
     let res: IApiRes<InventoryResponse>
-    if (!id) res = await inventoryAction.create(data)
-    if (id) res = await inventoryAction.update(id, data)
+    if (!id) res = await InventoryAction.create(data)
+    if (id) res = await InventoryAction.update(id, data)
     setIsLoading(false)
     res.data && navigate(Route.product.index)
   }

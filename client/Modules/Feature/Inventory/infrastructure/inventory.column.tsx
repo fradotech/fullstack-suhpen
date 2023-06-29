@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom'
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../../Enums/Route'
 import { Util } from '../../../../common/utils/util'
-import { inventoryAction } from './inventory.action'
+import { InventoryAction } from './inventory.action'
 
 export const inventoryColumns = (
   refetch: <TPageData>(
@@ -104,7 +104,7 @@ export const inventoryColumns = (
             {
               type: 'delete',
               onClick: async () => {
-                await inventoryAction.delete(data.id)
+                await InventoryAction.delete(data.id)
                 await refetch()
               },
             },

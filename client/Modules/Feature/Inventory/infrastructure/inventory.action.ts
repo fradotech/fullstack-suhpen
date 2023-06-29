@@ -8,6 +8,7 @@ import {
 import { InventoryResponse } from '@server/modules/feature/inventory/infrastructure/inventory.response'
 import { notification } from 'antd'
 import dayjs from 'dayjs'
+import { UseQueryResult, useQuery } from 'react-query'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
 import { Route } from '../../../../Enums/Route'
 import { API } from '../../../../infrastructure/api.service'
@@ -20,25 +21,26 @@ const dataPrepare = (
   return data
 }
 
-export const inventoryAction = {
-  fetch: async (
+export class InventoryAction {
+  static useIndex(
     req?: InventoryIndexRequest,
     productId?: string,
-  ): Promise<IPaginateResponse<InventoryResponse>> => {
+  ): UseQueryResult<IPaginateResponse<InventoryResponse>> {
     req.productId = productId
-    return await API.get(Route.inventory.index, req)
-  },
+    const fetch = async () => await API.get(Route.inventory.index, req)
+    return useQuery([InventoryAction.useIndex.name, req], fetch)
+  }
 
-  create: async (
+  static async create(
     data: InventoryCreateRequest,
-  ): Promise<IApiRes<InventoryResponse>> => {
+  ): Promise<IApiRes<InventoryResponse>> {
     data = dataPrepare(data) as InventoryCreateRequest
     const res = await API.post(Route.inventory.index, data)
     res.data && notification.success({ message: 'Success create data' })
     return res
-  },
+  }
 
-  findOne: async (id: string): Promise<IApiRes<InventoryResponse>> => {
+  static async findOne(id: string): Promise<IApiRes<InventoryResponse>> {
     const res: IApiRes<InventoryResponse> = await API.get(
       Route.inventory.id(id),
     )
@@ -46,21 +48,21 @@ export const inventoryAction = {
     res.data.expiredDate = res.data.expiredDate && dayjs(res.data.expiredDate)
 
     return res
-  },
+  }
 
-  update: async (
+  static async update(
     id: string,
     data: InventoryUpdateRequest,
-  ): Promise<IApiRes<InventoryResponse>> => {
+  ): Promise<IApiRes<InventoryResponse>> {
     data = dataPrepare(data)
     const res = await API.put(Route.inventory.id(id), data)
     res.data && notification.success({ message: 'Success update data' })
     return res
-  },
+  }
 
-  delete: async (id: string): Promise<IApiRes<InventoryResponse>> => {
+  static async delete(id: string): Promise<IApiRes<InventoryResponse>> {
     const res = await API.delete(Route.inventory.id(id))
     res.data && notification.success({ message: 'Success delete data' })
     return res
-  },
+  }
 }
