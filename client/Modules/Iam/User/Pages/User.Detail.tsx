@@ -9,11 +9,11 @@ import DescriptionItem from '../../../../Components/Organisms/Description/Descri
 import { Route } from '../../../../Enums/Route'
 import { Util } from '../../../../common/utils/util'
 import { roleAction } from '../../Role/infrastructure/role.action'
-import { userAction } from '../infrastructure/user.action'
+import { UserAction } from '../infrastructure/user.action'
 
 const UserDetail: React.FC = () => {
   const { id } = useParams()
-  const fetch = async () => await userAction.findOne(id)
+  const fetch = async () => await UserAction.findOne(id)
   const { isLoading, data } = useQuery([UserDetail.name], fetch)
   const fields = data?.data && Object.keys(data.data)
 

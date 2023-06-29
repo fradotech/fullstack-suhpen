@@ -8,6 +8,7 @@ import {
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { notification } from 'antd'
 import dayjs from 'dayjs'
+import { UseQueryResult, useQuery } from 'react-query'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
 import { Route } from '../../../../Enums/Route'
 import { API } from '../../../../infrastructure/api.service'
@@ -22,41 +23,44 @@ const dataPrepare = (
   return data
 }
 
-export const userAction = {
-  fetch: async (
+export class UserAction {
+  static useIndex(
     req?: UserIndexRequest,
-  ): Promise<IPaginateResponse<UserResponse>> => {
-    return await API.get(Route.user.index, req)
-  },
+  ): UseQueryResult<IPaginateResponse<UserResponse>> {
+    const fetch = async () => await API.get(Route.user.index, req)
 
-  create: async (data: UserCreateRequest): Promise<IApiRes<UserResponse>> => {
+    return useQuery<IPaginateResponse<UserResponse>>(
+      [UserAction.useIndex.name, req],
+      fetch,
+    )
+  }
+
+  static async create(data: UserCreateRequest): Promise<IApiRes<UserResponse>> {
     data = dataPrepare(data) as UserCreateRequest
     const res = await API.post(Route.user.index, data)
     res.data && notification.success({ message: 'Success create data' })
     return res
-  },
+  }
 
-  findOne: async (id: string): Promise<IApiRes<UserResponse>> => {
+  static async findOne(id: string): Promise<IApiRes<UserResponse>> {
     const res: IApiRes<UserResponse> = await API.get(Route.user.id(id))
-
     res.data.birthDate = res.data.birthDate && dayjs(res.data.birthDate)
-
     return res
-  },
+  }
 
-  update: async (
+  static async update(
     id: string,
     data: UserUpdateRequest,
-  ): Promise<IApiRes<UserResponse>> => {
+  ): Promise<IApiRes<UserResponse>> {
     data = dataPrepare(data)
     const res = await API.put(Route.user.id(id), data)
     res.data && notification.success({ message: 'Success update data' })
     return res
-  },
+  }
 
-  delete: async (id: string): Promise<IApiRes<UserResponse>> => {
+  static async delete(id: string): Promise<IApiRes<UserResponse>> {
     const res = await API.delete(Route.user.id(id))
     res.data && notification.success({ message: 'Success delete data' })
     return res
-  },
+  }
 }

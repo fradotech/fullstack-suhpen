@@ -12,7 +12,7 @@ import { RowActionButtons } from '../../../../Components/Molecules/RowActionButt
 import { Route } from '../../../../Enums/Route'
 import { Util } from '../../../../common/utils/util'
 import { roleAction } from '../../Role/infrastructure/role.action'
-import { userAction } from './user.action'
+import { UserAction } from './user.action'
 
 export const userColumns = (
   refetch: <TPageData>(
@@ -61,7 +61,7 @@ export const userColumns = (
             {
               type: 'delete',
               onClick: async () => {
-                await userAction.delete(data.id)
+                await UserAction.delete(data.id)
                 await refetch()
               },
             },

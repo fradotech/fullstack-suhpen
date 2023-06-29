@@ -13,7 +13,7 @@ import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../../Enums/Route'
 import { rule } from '../../../../common/utils/form.rules'
-import { userAction } from '../infrastructure/user.action'
+import { UserAction } from '../infrastructure/user.action'
 
 const UserForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
@@ -26,7 +26,7 @@ const UserForm: React.FC = () => {
     id &&
       (async () => {
         setIsLoading(true)
-        const res = await userAction.findOne(id)
+        const res = await UserAction.findOne(id)
         form.setFieldsValue(res.data)
         setIsLoading(false)
       }),
@@ -37,8 +37,8 @@ const UserForm: React.FC = () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
     let res: IApiRes<UserResponse>
-    if (!id) res = await userAction.create(data)
-    if (id) res = await userAction.update(id, data)
+    if (!id) res = await UserAction.create(data)
+    if (id) res = await UserAction.update(id, data)
     setIsLoading(false)
     res.data && navigate(Route.user.index)
   }
