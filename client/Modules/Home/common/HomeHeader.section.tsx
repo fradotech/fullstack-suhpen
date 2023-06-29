@@ -3,10 +3,10 @@ import React from 'react'
 import CompanyLogo from '../../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { Route } from '../../../Enums/Route'
 import { themeColors } from '../../../Layouts/ThemeProvider/theme'
-import { authAction } from '../../Iam/Auth/infrastructure/auth.action'
+import { AuthAction } from '../../Iam/Auth/infrastructure/auth.action'
 import styles from '../Home.module.css'
 
-const user = authAction.loggedUser()
+const user = AuthAction.loggedUser()
 
 const HomeHeaderSection: React.FC = () => {
   return (

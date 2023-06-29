@@ -9,17 +9,17 @@ import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../../Enums/Route'
 import { rule } from '../../../../common/utils/form.rules'
 import styles from '../Auth.module.css'
-import { authAction } from '../infrastructure/auth.action'
+import { AuthAction } from '../infrastructure/auth.action'
 
 const LoginForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
-  const user = authAction.loggedUser()
+  const user = AuthAction.loggedUser()
   const [form] = Form.useForm<AuthLoginRequest>()
 
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    const user = await authAction.login(data)
+    const user = await AuthAction.login(data)
     user && location.replace(Route.dashboard.index)
     setIsLoading(false)
   }

@@ -9,7 +9,7 @@ import { Avatar, Dropdown, Space, Typography } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Route } from '../../Enums/Route'
-import { authAction } from '../../Modules/Iam/Auth/infrastructure/auth.action'
+import { AuthAction } from '../../Modules/Iam/Auth/infrastructure/auth.action'
 import { themeColors, themeColorsDark } from '../ThemeProvider/theme'
 
 type IProps = {
@@ -22,7 +22,7 @@ type IProps = {
 const LayoutAccount: React.FC<IProps> = (props: IProps) => {
   const handleLogout = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
-    authAction.logout() && location.replace(Route.login)
+    AuthAction.logout() && location.replace(Route.login)
   }
 
   return (

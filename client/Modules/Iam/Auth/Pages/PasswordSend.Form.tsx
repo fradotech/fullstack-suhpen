@@ -8,18 +8,18 @@ import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../../Enums/Route'
 import { rule } from '../../../../common/utils/form.rules'
 import styles from '../Auth.module.css'
-import { authAction } from '../infrastructure/auth.action'
+import { AuthAction } from '../infrastructure/auth.action'
 
 const PasswordSendForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
-  const user = authAction.loggedUser()
+  const user = AuthAction.loggedUser()
   const [form] = Form.useForm<AuthPasswordSendRequest>()
   const [isSuccess, setIsSuccess] = React.useState(false)
 
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    const res = await authAction.passwordSend(data)
+    const res = await AuthAction.passwordSend(data)
     res && setIsSuccess(true)
     setIsLoading(false)
   }

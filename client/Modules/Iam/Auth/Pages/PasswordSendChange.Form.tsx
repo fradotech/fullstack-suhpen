@@ -9,7 +9,7 @@ import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../../Enums/Route'
 import { rule } from '../../../../common/utils/form.rules'
 import styles from '../Auth.module.css'
-import { authAction } from '../infrastructure/auth.action'
+import { AuthAction } from '../infrastructure/auth.action'
 
 const PasswordChangeForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
@@ -18,7 +18,7 @@ const PasswordChangeForm: React.FC = () => {
   const [isSuccess, setIsSuccess] = React.useState(false)
   const [isValid, setIsValid] = React.useState<boolean>()
   const token = searchParams.get('token')
-  const isValidToken = async () => setIsValid(await authAction.password(token))
+  const isValidToken = async () => setIsValid(await AuthAction.password(token))
 
   React.useEffect(() => {
     isValidToken()
@@ -26,7 +26,7 @@ const PasswordChangeForm: React.FC = () => {
 
   const onFinish = async () => {
     const data = form.getFieldsValue()
-    const res = await authAction.passwordChange(data, token)
+    const res = await AuthAction.passwordChange(data, token)
     res && setIsSuccess(true)
     setIsLoading(false)
   }

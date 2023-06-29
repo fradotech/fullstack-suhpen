@@ -15,7 +15,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Util } from '../../common/utils/util'
 import { Route } from '../../Enums/Route'
-import { authAction } from '../../Modules/Iam/Auth/infrastructure/auth.action'
+import { AuthAction } from '../../Modules/Iam/Auth/infrastructure/auth.action'
 
 export type IProps = {
   children: React.ReactNode
@@ -24,7 +24,7 @@ export type IProps = {
 
 type MenuItem = Required<MenuProps>['items'][number]
 
-const user = authAction.loggedUser()
+const user = AuthAction.loggedUser()
 
 const itemsRoleSuperAdmin: MenuItem[] = [RoleEnum.SuperAdmin].includes(
   user?.role,

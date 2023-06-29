@@ -1,17 +1,17 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Route } from '../../../../Enums/Route'
-import { authAction } from '../../Auth/infrastructure/auth.action'
+import { AuthAction } from '../../Auth/infrastructure/auth.action'
 
 const useUser = () => {
   const navigate = useNavigate()
 
   React.useEffect(() => {
-    !authAction.loggedUser() && navigate(Route.login)
-    authAction.loggedUser() && navigate(window.location.pathname)
+    !AuthAction.loggedUser() && navigate(Route.login)
+    AuthAction.loggedUser() && navigate(window.location.pathname)
   }, [navigate])
 
-  return { user: authAction.loggedUser() }
+  return { user: AuthAction.loggedUser() }
 }
 
 export default useUser
