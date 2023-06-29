@@ -11,7 +11,7 @@ import {
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../../Enums/Route'
 import { Util } from '../../../../common/utils/util'
-import { categoryAction } from './category.action'
+import { CategoryAction } from './category.action'
 
 export const categoryColumns = (
   refetch: <TPageData>(
@@ -65,7 +65,7 @@ export const categoryColumns = (
             {
               type: 'delete',
               onClick: async () => {
-                await categoryAction.delete(data.id)
+                await CategoryAction.delete(data.id)
                 await refetch()
               },
             },

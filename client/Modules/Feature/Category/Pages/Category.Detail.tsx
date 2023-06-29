@@ -6,11 +6,11 @@ import { Section } from '../../../../Components/Molecules/Section/Section'
 import DescriptionContainer from '../../../../Components/Organisms/Description/DescriptionContainer'
 import DescriptionItem from '../../../../Components/Organisms/Description/DescriptionItem'
 import { Route } from '../../../../Enums/Route'
-import { categoryAction } from '../infrastructure/category.action'
+import { CategoryAction } from '../infrastructure/category.action'
 
 const CategoryDetail: React.FC = () => {
   const { id } = useParams()
-  const fetch = async () => await categoryAction.findOne(id)
+  const fetch = async () => await CategoryAction.findOne(id)
   const { isLoading, data } = useQuery([CategoryDetail.name], fetch)
   const fields = data?.data && Object.keys(data.data)
 

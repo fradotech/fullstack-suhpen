@@ -1,22 +1,17 @@
 import { CategoryIndexRequest } from '@server/modules/feature/category/infrastructure/category-index.request'
 import React from 'react'
-import { useQuery } from 'react-query'
 import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import DataTable from '../../../../Components/Organisms/DataTable/DataTable'
 import { paginationTransform } from '../../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../../Components/Organisms/DataTable/useDataTable'
 import { Route } from '../../../../Enums/Route'
-import { categoryAction } from '../infrastructure/category.action'
+import { CategoryAction } from '../infrastructure/category.action'
 import { categoryColumns } from '../infrastructure/category.column'
 
 const CategoryIndex: React.FC = () => {
   const { query, setQueryParams } = useDataTable<CategoryIndexRequest>()
-  const fetch = async () => await categoryAction.fetch(query)
-  const { isLoading, data, refetch } = useQuery(
-    [CategoryIndex.name, query],
-    fetch,
-  )
+  const { isLoading, data, refetch } = CategoryAction.useIndex(query)
 
   return (
     <>

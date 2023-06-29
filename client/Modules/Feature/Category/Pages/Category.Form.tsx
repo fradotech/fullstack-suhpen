@@ -11,7 +11,7 @@ import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../../Enums/Route'
 import { rule } from '../../../../common/utils/form.rules'
-import { categoryAction } from '../infrastructure/category.action'
+import { CategoryAction } from '../infrastructure/category.action'
 
 const CategoryForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
@@ -24,7 +24,7 @@ const CategoryForm: React.FC = () => {
     id &&
       (async () => {
         setIsLoading(true)
-        const res = await categoryAction.findOne(id)
+        const res = await CategoryAction.findOne(id)
         form.setFieldsValue(res.data)
         setIsLoading(false)
       }),
@@ -35,8 +35,8 @@ const CategoryForm: React.FC = () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
     let res: IApiRes<CategoryResponse>
-    if (!id) res = await categoryAction.create(data)
-    if (id) res = await categoryAction.update(id, data)
+    if (!id) res = await CategoryAction.create(data)
+    if (id) res = await CategoryAction.update(id, data)
     setIsLoading(false)
     res.data && navigate(Route.category.index)
   }

@@ -7,14 +7,15 @@ import DataTable from '../../../../Components/Organisms/DataTable/DataTable'
 import { paginationTransform } from '../../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../../Components/Organisms/DataTable/useDataTable'
 import { Route } from '../../../../Enums/Route'
-import useCategories from '../../Category/infrastructure/useCategories'
+import { CategoryAction } from '../../Category/infrastructure/category.action'
 import { productAction } from '../infrastructure/product.action'
 import { productColumns } from '../infrastructure/product.column'
 
 const ProductIndex: React.FC = () => {
   const { query, setQueryParams } = useDataTable<ProductIndexRequest>()
   const fetch = async () => await productAction.fetch(query)
-  const { isLoading: isLoadingCategories, data: categories } = useCategories()
+  const { isLoading: isLoadingCategories, data: categories } =
+    CategoryAction.useIndex()
   const { isLoading, data, refetch } = useQuery(
     [ProductIndex.name, query],
     fetch,

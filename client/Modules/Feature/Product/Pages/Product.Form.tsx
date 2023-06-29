@@ -11,7 +11,7 @@ import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../../Enums/Route'
 import { rule } from '../../../../common/utils/form.rules'
-import useCategories from '../../Category/infrastructure/useCategories'
+import { CategoryAction } from '../../Category/infrastructure/category.action'
 import { productAction } from '../infrastructure/product.action'
 
 const ProductForm: React.FC = () => {
@@ -19,7 +19,8 @@ const ProductForm: React.FC = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const [form] = Form.useForm<ProductCreateRequest>()
-  const { isLoading: isLoadingCategories, data: categories } = useCategories()
+  const { isLoading: isLoadingCategories, data: categories } =
+    CategoryAction.useIndex()
 
   useQuery(
     [ProductForm.name],
