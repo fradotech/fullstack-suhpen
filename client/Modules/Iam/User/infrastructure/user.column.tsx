@@ -11,7 +11,7 @@ import { RoleEnum } from '../../../../../@server/modules/iam/role/common/role.en
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../../Enums/Route'
 import { Util } from '../../../../common/utils/util'
-import { roleAction } from '../../Role/infrastructure/role.action'
+import { RoleAction } from '../../Role/infrastructure/role.action'
 import { UserAction } from './user.action'
 
 export const userColumns = (
@@ -29,7 +29,7 @@ export const userColumns = (
     {
       dataIndex: 'role',
       render: (data: RoleEnum) => {
-        return <Tag color={roleAction.colorRole(data)}>{data}</Tag>
+        return <Tag color={RoleAction.colorRole(data)}>{data}</Tag>
       },
       filters: [
         { text: RoleEnum.SuperAdmin, value: RoleEnum.SuperAdmin },

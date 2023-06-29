@@ -28,11 +28,7 @@ export class UserAction {
     req?: UserIndexRequest,
   ): UseQueryResult<IPaginateResponse<UserResponse>> {
     const fetch = async () => await API.get(Route.user.index, req)
-
-    return useQuery<IPaginateResponse<UserResponse>>(
-      [UserAction.useIndex.name, req],
-      fetch,
-    )
+    return useQuery([UserAction.useIndex.name, req], fetch)
   }
 
   static async create(data: UserCreateRequest): Promise<IApiRes<UserResponse>> {
