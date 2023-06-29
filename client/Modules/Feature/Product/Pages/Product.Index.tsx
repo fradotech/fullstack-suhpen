@@ -1,6 +1,5 @@
 import { ProductIndexRequest } from '@server/modules/feature/product/infrastructure/product-index.request'
 import React from 'react'
-import { useQuery } from 'react-query'
 import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import DataTable from '../../../../Components/Organisms/DataTable/DataTable'
@@ -8,18 +7,15 @@ import { paginationTransform } from '../../../../Components/Organisms/DataTable/
 import { useDataTable } from '../../../../Components/Organisms/DataTable/useDataTable'
 import { Route } from '../../../../Enums/Route'
 import { CategoryAction } from '../../Category/infrastructure/category.action'
-import { productAction } from '../infrastructure/product.action'
+import { ProductAction } from '../infrastructure/product.action'
 import { productColumns } from '../infrastructure/product.column'
 
 const ProductIndex: React.FC = () => {
   const { query, setQueryParams } = useDataTable<ProductIndexRequest>()
-  const fetch = async () => await productAction.fetch(query)
+  const { isLoading, data, refetch } = ProductAction.useIndex()
+
   const { isLoading: isLoadingCategories, data: categories } =
     CategoryAction.useIndex()
-  const { isLoading, data, refetch } = useQuery(
-    [ProductIndex.name, query],
-    fetch,
-  )
 
   return (
     <>

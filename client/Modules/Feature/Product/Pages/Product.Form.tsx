@@ -12,7 +12,7 @@ import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../../Enums/Route'
 import { rule } from '../../../../common/utils/form.rules'
 import { CategoryAction } from '../../Category/infrastructure/category.action'
-import { productAction } from '../infrastructure/product.action'
+import { ProductAction } from '../infrastructure/product.action'
 
 const ProductForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
@@ -27,7 +27,7 @@ const ProductForm: React.FC = () => {
     id &&
       (async () => {
         setIsLoading(true)
-        const res = await productAction.findOne(id)
+        const res = await ProductAction.findOne(id)
         form.setFieldsValue(res.data)
         setIsLoading(false)
       }),
@@ -38,8 +38,8 @@ const ProductForm: React.FC = () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
     let res: IApiRes<ProductResponse>
-    if (!id) res = await productAction.create(data)
-    if (id) res = await productAction.update(id, data)
+    if (!id) res = await ProductAction.create(data)
+    if (id) res = await ProductAction.update(id, data)
     setIsLoading(false)
     res.data && navigate(Route.product.index)
   }

@@ -12,7 +12,7 @@ import {
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../../Enums/Route'
 import { Util } from '../../../../common/utils/util'
-import { productAction } from './product.action'
+import { ProductAction } from './product.action'
 
 export const productColumns = (
   optionsCategory: CategoryResponse[],
@@ -80,7 +80,7 @@ export const productColumns = (
             {
               type: 'delete',
               onClick: async () => {
-                await productAction.delete(data.id)
+                await ProductAction.delete(data.id)
                 await refetch()
               },
             },

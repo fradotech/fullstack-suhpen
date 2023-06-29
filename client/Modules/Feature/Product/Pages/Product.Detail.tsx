@@ -7,11 +7,11 @@ import DescriptionContainer from '../../../../Components/Organisms/Description/D
 import DescriptionItem from '../../../../Components/Organisms/Description/DescriptionItem'
 import { Route } from '../../../../Enums/Route'
 import InventoryIndex from '../../Inventory/Pages/Inventory.Index'
-import { productAction } from '../infrastructure/product.action'
+import { ProductAction } from '../infrastructure/product.action'
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams()
-  const fetch = async () => await productAction.findOne(id)
+  const fetch = async () => await ProductAction.findOne(id)
   const { isLoading, data } = useQuery([ProductDetail.name], fetch)
   const fields = data?.data && Object.keys(data.data)
 
