@@ -97,12 +97,18 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
   return isMobile ? (
     <Dropdown
       trigger={['click']}
-      overlay={
-        <Card size="small">
-          <>{actions.slice(0, 3).map((action) => renderButton(action))}</>
-        </Card>
-      }
-      placement="bottomLeft"
+      menu={{
+        items: [
+          {
+            type: 'group',
+            label: (
+              <Card size="small">
+                <>{actions.slice(0, 3).map((action) => renderButton(action))}</>
+              </Card>
+            ),
+          },
+        ],
+      }}
     >
       <Button type="text" icon={<MoreOutlined />} />
     </Dropdown>

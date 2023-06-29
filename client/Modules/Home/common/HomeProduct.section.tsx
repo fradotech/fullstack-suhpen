@@ -1,26 +1,22 @@
 import { Card, Col, Image, Layout, Row } from 'antd'
 import Title from 'antd/es/typography/Title'
 import React from 'react'
-import { useQuery } from 'react-query'
 import { Util } from '../../../common/utils/util'
 import { InventoryAction } from '../../Feature/Inventory/infrastructure/inventory.action'
 import styles from '../Home.module.css'
 
 const HomeProductSection: React.FC = () => {
-  const fetch = async () => {
-    const res = await InventoryAction.fetch({ pageSize: 100 })
-    return res.data
-  }
-  const { isLoading, data } = useQuery([HomeProductSection.name], fetch)
+  const { isLoading, data } = InventoryAction.useIndex({ pageSize: 100 })
 
   return (
     <Layout>
       <Title style={{ textAlign: 'center' }}>Products</Title>
       <Col className={styles.productContainer}>
         <Row className={styles.productRow}>
-          {data?.map((data) => {
+          {data?.data.map((data) => {
             return (
               <Card
+                key={data.id}
                 bordered={false}
                 loading={isLoading}
                 hoverable
