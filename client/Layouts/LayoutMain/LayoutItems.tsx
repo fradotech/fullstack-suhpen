@@ -37,8 +37,8 @@ const itemsRoleSuperAdmin: MenuItem[] = [
         icon: <UsergroupAddOutlined />,
       },
       {
-        key: Route.role,
-        label: <Link to={Route.role}>{Util.titleCase('role')}</Link>,
+        key: Route.role.index,
+        label: <Link to={Route.role.index}>{Util.titleCase('role')}</Link>,
         icon: <UserSwitchOutlined />,
       },
     ],

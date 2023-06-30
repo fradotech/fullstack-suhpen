@@ -1,4 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common'
+import { roleCreateSeeder } from '@server/modules/iam/role/database/role-create.seeder'
 import { categoryCreateSeeder } from '../../modules/feature/category/database/category-create.seeder'
 import { inventoryCreateSeeder } from '../../modules/feature/inventory/database/inventoy-create.seeder'
 import { productCreateSeeder } from '../../modules/feature/product/database/product-create.seeder'
@@ -15,6 +16,7 @@ export class SeederMoodule {
       )
       .catch((error) => Logger.error(error))
 
+    await roleCreateSeeder()
     await userCreateSeeder()
     await categoryCreateSeeder()
     await productCreateSeeder()

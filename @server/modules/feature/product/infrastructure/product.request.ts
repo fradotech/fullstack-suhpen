@@ -37,6 +37,10 @@ export class ProductCreateRequest extends PartialType(ProductRequest) {
   static dto(data: ProductCreateRequest): IProduct {
     return Object.assign(new EntProduct(), data)
   }
+
+  static dtos(data: ProductCreateRequest[]): IProduct[] {
+    return data.map((data) => this.dto(data))
+  }
 }
 
 export class ProductUpdateRequest extends PartialType(ProductRequest) {

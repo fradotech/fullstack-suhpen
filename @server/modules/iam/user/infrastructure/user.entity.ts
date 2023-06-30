@@ -47,7 +47,7 @@ export class EntUser extends BaseEntity implements IUser {
   token?: string
 
   @BeforeInsert()
-  async hashPassword() {
+  async hashPassword?() {
     this.password = await bcrypt.hash(this.password, 10)
   }
 }

@@ -26,9 +26,11 @@ export const userColumns = (
       dataIndex: 'email',
     },
     {
-      dataIndex: 'role',
-      render: (data: IRole) => {
-        return <Tag color={data.labelColor}>{data.name}</Tag>
+      dataIndex: 'roles',
+      render: (data: IRole[]) => {
+        return data.map((data) => {
+          return <Tag color={data.labelColor}>{data.name}</Tag>
+        })
       },
       filters: [
         // TODO: add role

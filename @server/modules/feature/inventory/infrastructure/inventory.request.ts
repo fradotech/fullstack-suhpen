@@ -54,6 +54,10 @@ export class InventoryCreateRequest extends PartialType(InventoryRequest) {
   static dto(data: InventoryCreateRequest): IInventory {
     return Object.assign(new EntInventory(), data)
   }
+
+  static dtos(data: InventoryCreateRequest[]): IInventory[] {
+    return data.map((data) => this.dto(data))
+  }
 }
 
 export class InventoryUpdateRequest extends PartialType(InventoryRequest) {

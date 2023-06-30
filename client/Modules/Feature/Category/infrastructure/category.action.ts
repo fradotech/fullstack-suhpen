@@ -9,15 +9,15 @@ import { CategoryResponse } from '@server/modules/feature/category/infrastructur
 import { notification } from 'antd'
 import { UseQueryResult, useQuery } from 'react-query'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
+import { getColorPicker } from '../../../../Components/Molecules/ColorPicker/ColorPicker.util'
 import { Route } from '../../../../Enums/Route'
-import { themeColors } from '../../../../Layouts/ThemeProvider/theme'
 import { API } from '../../../../infrastructure/api.service'
 
 const dataPrepare = (
   data: CategoryCreateRequest | CategoryUpdateRequest,
 ): CategoryCreateRequest | CategoryUpdateRequest => {
   data.thumbnail = getAttachment(data.thumbnail) as string
-  data.labelColor = data.labelColor?.['hex'] || themeColors.primary
+  data.labelColor = getColorPicker(data.labelColor)
 
   return data
 }

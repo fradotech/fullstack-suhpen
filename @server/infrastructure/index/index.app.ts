@@ -1,3 +1,4 @@
+import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Request } from 'express'
 import { Repository, SelectQueryBuilder } from 'typeorm'
 import { IIndexAppRelation } from './index.interface'
@@ -72,13 +73,16 @@ export abstract class BaseIndexApp extends BaseIndexService {
     }
 
     const isUser = repo.metadata.propertiesMap['user']
-    const userId = request['user']?.['id']
+    const user = request['user'] as IUser
+    const userId = user.id
     const isUserRelation = relations
       .map((data) => data.name)
       .find((data) => data == 'user')
-    const isAdmin = request['user']?.['role']['permissions'].includes(
-      'TODO: Permision Name',
-    )
+    const isAdmin = true
+    // TODO: role
+    // user.roles.includes(
+    //   'TODO: Permision Name',
+    // )
 
     if (isUser && userId && !isAdmin) {
       !isUserRelation && query.leftJoinAndSelect(`${name}.user`, 'user')

@@ -4,10 +4,11 @@ import { EntInventory } from '@server/modules/feature/inventory/infrastructure/i
 import { IInventory } from '@server/modules/feature/inventory/infrastructure/inventory.interface'
 import { EntProduct } from '@server/modules/feature/product/infrastructure/product.entity'
 import { EntityManager } from 'typeorm'
+import { InventoryCreateRequest } from '../infrastructure/inventory.request'
 import { inventoryDummies } from './inventoy.dummy'
 
 export const inventoryCreateSeeder = async (): Promise<boolean> => {
-  const data = inventoryDummies
+  const data = InventoryCreateRequest.dtos(inventoryDummies)
   const entityManager = new EntityManager(dataSource)
   const table = EntInventory.name
 

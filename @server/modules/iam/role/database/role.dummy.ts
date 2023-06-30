@@ -1,28 +1,20 @@
+export const roleDummySuperAdmin = 'super_admin'
+
 // <--- KEY: key --->
 export const roleDummies = [
   {
-    name: 'Earphone',
-    key: 'earphone',
+    name: 'Super Admin',
+    key: roleDummySuperAdmin,
     labelColor: '#f5a623',
   },
   {
-    name: 'Paket Data',
-    key: 'paket_data',
+    name: 'Admin',
+    key: 'admin',
     labelColor: '#1e63b1',
   },
   {
-    name: 'Pulsa',
-    key: 'pulsa',
+    name: 'Member',
+    key: 'member',
     labelColor: '#82df43',
-  },
-  {
-    name: 'Smartphone',
-    key: 'smartphone',
-    labelColor: '#ba9042',
-  },
-  {
-    name: 'Charger',
-    key: 'charger',
-    labelColor: '#f392e2',
   },
 ]

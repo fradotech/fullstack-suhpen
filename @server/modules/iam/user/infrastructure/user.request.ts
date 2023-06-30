@@ -47,10 +47,11 @@ export class UserRequest extends EntUser implements IUser {
   @ApiProperty({ example: 'Admin123' })
   passwordConfirmation: string
 
+  @IsOptional()
   @IsArray()
   @IsString({ each: true })
   @ArrayMinSize(1)
-  roleIds: string[]
+  roleIds?: string[]
 
   @IsOptional()
   @IsEnum(UserGenderEnum)
@@ -105,6 +106,10 @@ export class UserCreateRequest extends OmitType(UserRequest, [
     res.avatar = data.avatar
 
     return res
+  }
+
+  static dtos(data: UserCreateRequest[]): IUser[] {
+    return data.map((data) => this.dto(data))
   }
 }
 

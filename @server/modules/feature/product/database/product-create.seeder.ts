@@ -4,10 +4,11 @@ import { EntCategory } from '@server/modules/feature/category/infrastructure/cat
 import { EntProduct } from '@server/modules/feature/product/infrastructure/product.entity'
 import { IProduct } from '@server/modules/feature/product/infrastructure/product.interface'
 import { EntityManager } from 'typeorm'
+import { ProductCreateRequest } from '../infrastructure/product.request'
 import { productDummies } from './product.dummy'
 
 export const productCreateSeeder = async (): Promise<boolean> => {
-  const data = productDummies
+  const data = ProductCreateRequest.dtos(productDummies)
   const entityManager = new EntityManager(dataSource)
   const table = EntProduct.name
 

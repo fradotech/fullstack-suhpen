@@ -17,6 +17,10 @@ export class CategoryCreateRequest extends PartialType(CategoryRequest) {
   static dto(data: CategoryCreateRequest): ICategory {
     return Object.assign(new EntCategory(), data)
   }
+
+  static dtos(data: CategoryCreateRequest[]): ICategory[] {
+    return data.map((data) => this.dto(data))
+  }
 }
 
 export class CategoryUpdateRequest extends PartialType(CategoryRequest) {
