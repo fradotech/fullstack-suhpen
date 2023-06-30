@@ -1,4 +1,5 @@
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
+import { IRole } from '@server/modules/iam/role/infrastructure/role.interface'
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { Tag } from 'antd'
 import { ColumnsType } from 'antd/es/table'
@@ -7,11 +8,9 @@ import {
   RefetchOptions,
   RefetchQueryFilters,
 } from 'react-query'
-import { RoleEnum } from '../../../../../@server/modules/iam/role/common/role.enum'
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../../Enums/Route'
 import { Util } from '../../../../common/utils/util'
-import { RoleAction } from '../../Role/infrastructure/role.action'
 import { UserAction } from './user.action'
 
 export const userColumns = (
@@ -28,13 +27,12 @@ export const userColumns = (
     },
     {
       dataIndex: 'role',
-      render: (data: RoleEnum) => {
-        return <Tag color={RoleAction.colorRole(data)}>{data}</Tag>
+      render: (data: IRole) => {
+        return <Tag color={data.labelColor}>{data.name}</Tag>
       },
       filters: [
-        { text: RoleEnum.SuperAdmin, value: RoleEnum.SuperAdmin },
-        { text: RoleEnum.Admin, value: RoleEnum.Admin },
-        { text: RoleEnum.User, value: RoleEnum.User },
+        // TODO: add role
+        { text: ' RoleEnum.SuperAdmin', value: ' RoleEnum.SuperAdmin' },
       ],
     },
     {

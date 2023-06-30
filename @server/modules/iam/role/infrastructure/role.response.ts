@@ -1,12 +1,11 @@
-import { RoleEnum } from '@server/modules/iam/role/common/role.enum'
+import { EntRole } from './role.entity'
 import { IRole } from './role.interface'
 
-export class RoleResponse implements IRole {
-  id: string
-  name: RoleEnum
+export class RoleResponse extends EntRole {
   static dto(data: IRole): RoleResponse {
     const res = new RoleResponse()
     Object.assign(res, data)
+
     return res
   }
 

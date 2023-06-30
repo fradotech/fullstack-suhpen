@@ -8,7 +8,6 @@ import DescriptionContainer from '../../../../Components/Organisms/Description/D
 import DescriptionItem from '../../../../Components/Organisms/Description/DescriptionItem'
 import { Route } from '../../../../Enums/Route'
 import { Util } from '../../../../common/utils/util'
-import { RoleAction } from '../../Role/infrastructure/role.action'
 import { UserAction } from '../infrastructure/user.action'
 
 const UserDetail: React.FC = () => {
@@ -32,9 +31,9 @@ const UserDetail: React.FC = () => {
             if (key == 'role') {
               return (
                 <Descriptions.Item label={Util.titleCase(key)}>
-                  <Tag color={RoleAction.colorRole(data?.data[key])}>
-                    {data?.data[key]}
-                  </Tag>
+                  {data?.data.roles.map((role) => {
+                    return <Tag color={role.labelColor}>{role.name}</Tag>
+                  })}
                 </Descriptions.Item>
               )
             } else {

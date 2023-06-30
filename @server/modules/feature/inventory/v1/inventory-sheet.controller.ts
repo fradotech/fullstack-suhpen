@@ -3,7 +3,7 @@ import { Controller, Get, Post, Query, UseGuards } from '@nestjs/common'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.response'
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
-import { AdminGuard } from '@server/modules/iam/auth/common/admin.guard'
+import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
 import { InventoryIndexApp } from '../infrastructure/inventory-index.app'
 import { InventoryIndexRequest } from '../infrastructure/inventory-index.request'
@@ -14,7 +14,7 @@ const THIS_MODULE = Modules.Inventory + '/sheet'
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
-@UseGuards(AdminGuard)
+@UseGuards(LoggedInGuard)
 export class InventorySheetController {
   constructor(private readonly inventoryIndexApp: InventoryIndexApp) {}
 

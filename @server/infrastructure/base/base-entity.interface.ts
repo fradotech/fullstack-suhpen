@@ -1,11 +1,9 @@
-import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
-
 export interface IBaseEntity {
   id: string
   createdAt?: Date
-  createdBy?: IUser
+  createdById?: string
   updatedAt?: Date
-  updatedBy?: IUser
+  updatedById?: string
   deletedAt?: Date
-  deletedBy?: IUser
+  deletedById?: string
 }

@@ -2,7 +2,6 @@ import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { RoleResponse } from '@server/modules/iam/role/infrastructure/role.response'
 import { UseQueryResult, useQuery } from 'react-query'
-import { RoleEnum } from '../../../../../@server/modules/iam/role/common/role.enum'
 import { Route } from '../../../../Enums/Route'
 import { API } from '../../../../infrastructure/api.service'
 
@@ -14,17 +13,5 @@ export class RoleAction {
 
   static async findOne(id: string): Promise<IApiRes<RoleResponse>> {
     return await API.get(`${Route.role}/${id}`)
-  }
-
-  // --- Another --- \\
-
-  static colorRole(status: RoleEnum): string {
-    const color = new Map()
-
-    color.set(RoleEnum.SuperAdmin, 'blue')
-    color.set(RoleEnum.Admin, 'green')
-    color.set(RoleEnum.User, 'yellow')
-
-    return color.get(status)
   }
 }

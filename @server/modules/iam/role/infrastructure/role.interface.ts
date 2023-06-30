@@ -1,6 +1,7 @@
-import { RoleEnum } from '@server/modules/iam/role/common/role.enum'
-import { IBaseEntity } from '../../../../infrastructure/base/base-entity.interface'
+import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.interface'
+import { IPermission } from '../../permission/infrastructure/permission.interface'
 
-export interface IRole extends IBaseEntity {
-  name: RoleEnum
+export interface IRole extends IBaseMasterData {
+  labelColor: string
+  permissions: IPermission[]
 }

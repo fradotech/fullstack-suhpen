@@ -3,7 +3,6 @@ import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate } from 'react-router-dom'
-import { RoleEnum } from '../../../../../@server/modules/iam/role/common/role.enum'
 import { UserGenderEnum } from '../../../../../@server/modules/iam/user/common/user.enum'
 import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
@@ -52,13 +51,14 @@ const AccountForm: React.FC = () => {
           <FormItem name="name" rules={[rule.required]} />
 
           <Row gutter={12}>
-            <Col sm={24} md={12}>
+            {/* TODO: Add role */}
+            {/* <Col sm={24} md={12}>
               <FormItem
                 name="role"
                 input="select"
                 optionsEnum={Object.values(RoleEnum)}
               />
-            </Col>
+            </Col> */}
             <Col sm={24} md={12}>
               <FormItem
                 name="gender"

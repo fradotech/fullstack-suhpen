@@ -13,8 +13,8 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { BaseCrudController } from '@server/infrastructure/base/base-crud.controller'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
-import { AdminGuard } from '@server/modules/iam/auth/common/admin.guard'
 import { Modules } from '@server/modules/modules'
+import { LoggedInGuard } from '../../auth/common/logged-in.guard'
 import { PermissionIndexApp } from '../infrastructure/permission-index.app'
 import { PermissionIndexRequest } from '../infrastructure/permission-index.request'
 import {
@@ -29,7 +29,7 @@ const THIS_MODULE = Modules.Permission
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
-@UseGuards(AdminGuard)
+@UseGuards(LoggedInGuard)
 export class PermissionCrudController implements BaseCrudController {
   constructor(
     private readonly categoryIndexApp: PermissionIndexApp,

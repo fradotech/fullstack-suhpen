@@ -1,3 +1,26 @@
-import { IndexRequest } from '@server/infrastructure/index/index.request'
+import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger'
+import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.interface'
+import { BaseMasterDataRequest } from '@server/infrastructure/base/master-data/base-master-data.request'
+import { EntRole } from './role.entity'
+import { IRole } from './role.interface'
 
-export class RoleIndexRequest extends IndexRequest {}
+export class RoleRequest
+  extends OmitType(BaseMasterDataRequest, ['id'])
+  implements IBaseMasterData
+{
+  id: string
+  @ApiProperty({ example: '#007fd0' })
+  labelColor: string
+}
+
+export class RoleCreateRequest extends PartialType(RoleRequest) {
+  static dto(data: RoleCreateRequest): IRole {
+    return Object.assign(new EntRole(), data)
+  }
+}
+
+export class RoleUpdateRequest extends PartialType(RoleRequest) {
+  static dto(data: IRole, req: RoleUpdateRequest): IRole {
+    return Object.assign(data, req)
+  }
+}
