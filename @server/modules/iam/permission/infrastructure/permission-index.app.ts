@@ -7,6 +7,7 @@ import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
 import {
   IIndexAppRelation,
   IPaginateResponse,
+  IndexSortOderEnum,
 } from '../../../../infrastructure/index/index.interface'
 import { PermissionIndexRequest } from './permission-index.request'
 import { EntPermission } from './permission.entity'
@@ -26,8 +27,18 @@ export class PermissionIndexApp extends BaseIndexApp {
   async fetch(
     req: PermissionIndexRequest,
   ): Promise<IPaginateResponse<IPermission>> {
+    if (!req.sortField) req.sortField = 'module'
+    if (!req.sortOrder) req.sortOrder = IndexSortOderEnum.Asc
+
     const name = 'permissions'
-    const columns = ['name', 'key', 'isActive', 'createdAt']
+    const columns = [
+      'name',
+      'module',
+      'path',
+      'method',
+      'isActive',
+      'createdAt',
+    ]
     const relations: IIndexAppRelation[] = []
     const query = this.createQueryIndex(
       req,

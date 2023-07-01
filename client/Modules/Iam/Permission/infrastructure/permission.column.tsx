@@ -1,6 +1,7 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
-import { CategoryResponse } from '@server/modules/feature/category/infrastructure/category.response'
+import { IPermission } from '@server/modules/iam/permission/infrastructure/permission.interface'
+import { PermissionResponse } from '@server/modules/iam/permission/infrastructure/permission.response'
 import { Tag } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import {
@@ -11,25 +12,25 @@ import {
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Route } from '../../../../Enums/Route'
 import { Util } from '../../../../common/utils/util'
-import { CategoryAction } from './category.action'
+import { PermissionAction } from './permission.action'
 
-export const categoryColumns = (
+export const permissionColumns = (
   refetch: <TPageData>(
     options?: RefetchOptions & RefetchQueryFilters<TPageData>,
   ) => Promise<
-    QueryObserverResult<IPaginateResponse<CategoryResponse>, unknown>
+    QueryObserverResult<IPaginateResponse<PermissionResponse>, unknown>
   >,
-): ColumnsType<CategoryResponse> => {
+): ColumnsType<PermissionResponse> => {
   return [
     {
-      title: 'name',
-      render: (data: CategoryResponse) => {
+      title: 'Name',
+      render: (data: IPermission) => {
         return <Tag color={data.labelColor}>{data.name}</Tag>
       },
     },
-    {
-      dataIndex: 'key',
-    },
+    { dataIndex: 'module' },
+    { dataIndex: 'method' },
+    { dataIndex: 'path' },
     {
       title: 'Active',
       dataIndex: 'isActive',
@@ -51,21 +52,21 @@ export const categoryColumns = (
     {
       title: 'Actions',
       width: '120px',
-      render: (data: CategoryResponse) => (
+      render: (data: PermissionResponse) => (
         <RowActionButtons
           actions={[
             {
               type: 'view',
-              href: Route.category.id(data.id),
+              href: Route.permission.id(data.id),
             },
             {
               type: 'edit',
-              href: Route.category.edit(data.id),
+              href: Route.permission.edit(data.id),
             },
             {
               type: 'delete',
               onClick: async () => {
-                await CategoryAction.delete(data.id)
+                await PermissionAction.delete(data.id)
                 await refetch()
               },
             },

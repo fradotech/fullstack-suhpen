@@ -4,8 +4,8 @@ import { IPermission } from './permission.interface'
 
 @Entity()
 export class EntPermission extends EntBaseMasterData implements IPermission {
-  @Column({ default: '#ffffff' })
-  labelColor: string
+  @Column({ default: null })
+  module: string
 
   @Column()
   path: string

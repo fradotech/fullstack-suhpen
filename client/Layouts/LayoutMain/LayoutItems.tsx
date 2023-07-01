@@ -2,17 +2,15 @@ import {
   ApartmentOutlined,
   DashboardOutlined,
   DropboxOutlined,
-  IdcardOutlined,
   ShoppingCartOutlined,
   TagsOutlined,
-  UsergroupAddOutlined,
-  UserSwitchOutlined,
 } from '@ant-design/icons'
 import { MenuProps } from 'antd'
 import React from 'react'
+import { FaIdCard, FaUser, FaUserCog, FaUserShield } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import { Util } from '../../common/utils/util'
 import { Route } from '../../Enums/Route'
+import { Util } from '../../common/utils/util'
 
 export type IProps = {
   children: React.ReactNode
@@ -24,28 +22,14 @@ type MenuItem = Required<MenuProps>['items'][number]
 // TODO: Role guard
 // const user = AuthAction.loggedUser()
 
-const itemsRoleSuperAdmin: MenuItem[] = [
-  { type: 'divider' },
+const itemsDashboard: MenuItem[] = [
   {
-    key: 'IAM',
-    label: 'IAM',
-    icon: <IdcardOutlined />,
-    children: [
-      {
-        key: Route.user.index,
-        label: <Link to={Route.user.index}>{Util.titleCase('user')}</Link>,
-        icon: <UsergroupAddOutlined />,
-      },
-      {
-        key: Route.role.index,
-        label: <Link to={Route.role.index}>{Util.titleCase('role')}</Link>,
-        icon: <UserSwitchOutlined />,
-      },
-    ],
+    key: Route.dashboard.index,
+    label: <Link to={Route.dashboard.index}>DASHBOARD</Link>,
+    icon: <DashboardOutlined />,
   },
 ]
-
-const itemsRoleAdmin: MenuItem[] = [
+const itemsFeature: MenuItem[] = [
   {
     key: 'SCM',
     label: 'SCM',
@@ -76,16 +60,38 @@ const itemsRoleAdmin: MenuItem[] = [
   },
 ]
 
-const itemsRoleUser: MenuItem[] = [
+const itemsIam: MenuItem[] = [
+  { type: 'divider' },
   {
-    key: Route.dashboard.index,
-    label: <Link to={Route.dashboard.index}>DASHBOARD</Link>,
-    icon: <DashboardOutlined />,
+    key: 'IAM',
+    label: 'IAM',
+    icon: <FaIdCard />,
+    children: [
+      {
+        key: Route.user.index,
+        label: <Link to={Route.user.index}>{Util.titleCase('user')}</Link>,
+        icon: <FaUser />,
+      },
+      {
+        key: Route.role.index,
+        label: <Link to={Route.role.index}>{Util.titleCase('role')}</Link>,
+        icon: <FaUserCog />,
+      },
+      {
+        key: Route.permission.index,
+        label: (
+          <Link to={Route.permission.index}>
+            {Util.titleCase('permission')}
+          </Link>
+        ),
+        icon: <FaUserShield />,
+      },
+    ],
   },
 ]
 
 export const layoutItems: MenuItem[] = [
-  ...itemsRoleUser,
-  ...itemsRoleAdmin,
-  ...itemsRoleSuperAdmin,
+  ...itemsDashboard,
+  ...itemsFeature,
+  ...itemsIam,
 ]

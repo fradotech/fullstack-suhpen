@@ -97,10 +97,11 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
                 filters,
                 {
                   ...sorter,
-                  order:
-                    sorter.order && sorter.order == 'ascend'
+                  order: sorter.order
+                    ? sorter.order == 'ascend'
                       ? IndexSortOderEnum.Asc
-                      : IndexSortOderEnum.Desc,
+                      : IndexSortOderEnum.Desc
+                    : null,
                 },
                 props.dataTableHeader.dateRangeColumn,
               )

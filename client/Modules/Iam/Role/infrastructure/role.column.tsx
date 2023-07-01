@@ -20,13 +20,13 @@ export const roleColumns = (
   ) => Promise<QueryObserverResult<IPaginateResponse<RoleResponse>, unknown>>,
 ): ColumnsType<RoleResponse> => {
   return [
-    { dataIndex: 'key' },
     {
       title: 'Name',
       render: (data: IRole) => {
         return <Tag color={data.labelColor}>{data.name}</Tag>
       },
     },
+    { dataIndex: 'key' },
     {
       title: 'Active',
       dataIndex: 'isActive',

@@ -45,10 +45,12 @@ export class PermissionSyncRequest extends PartialType(PermissionRequest) {
     res.name = Util.titleCase(res.name)
 
     Object.values(Modules).forEach((module) => {
-      res.name = res.name.replace(
-        Util.titleCase(module),
-        `[${Util.titleCase(module)}]`,
-      )
+      const moduleTitle = Util.titleCase(module)
+
+      if (res.name.toLowerCase().includes(module.toLowerCase())) {
+        res.name = res.name.replace(moduleTitle, ` - ${moduleTitle}`)
+        res.module = module
+      }
     })
 
     res.name = res.name.replace('Get', 'READ')
@@ -56,6 +58,12 @@ export class PermissionSyncRequest extends PartialType(PermissionRequest) {
     res.name = res.name.replace('Put', 'EDIT')
     res.name = res.name.replace('Patch', 'MODIFY')
     res.name = res.name.replace('Delete', 'DELETE')
+
+    res.method === 'get' && (res.labelColor = '#00a120')
+    res.method === 'post' && (res.labelColor = '#cf720e')
+    res.method === 'put' && (res.labelColor = '#001fe6')
+    res.method === 'patch' && (res.labelColor = '#45a8ff')
+    res.method === 'delete' && (res.labelColor = '#ff0033')
 
     return res
   }

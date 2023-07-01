@@ -1,4 +1,6 @@
 export enum Modules {
+  Doc = 'docs',
+
   Log = 'logs',
   Auth = 'auth',
   User = 'users',

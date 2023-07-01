@@ -7,6 +7,7 @@ export interface IBaseMasterData extends IBaseEntity {
   isActive: boolean
   description?: string
   thumbnail?: string
+  labelColor?: string
   parent?: IBaseMasterData
   childs?: IBaseMasterData[]
 }

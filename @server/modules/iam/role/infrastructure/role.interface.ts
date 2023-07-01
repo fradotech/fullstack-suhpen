@@ -2,6 +2,5 @@ import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-ma
 import { IPermission } from '../../permission/infrastructure/permission.interface'
 
 export interface IRole extends IBaseMasterData {
-  labelColor: string
   permissions: IPermission[]
 }
