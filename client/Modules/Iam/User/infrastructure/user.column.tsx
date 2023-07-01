@@ -1,5 +1,6 @@
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
 import { IRole } from '@server/modules/iam/role/infrastructure/role.interface'
+import { RoleResponse } from '@server/modules/iam/role/infrastructure/role.response'
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { Tag } from 'antd'
 import { ColumnsType } from 'antd/es/table'
@@ -14,6 +15,7 @@ import { Util } from '../../../../common/utils/util'
 import { UserAction } from './user.action'
 
 export const userColumns = (
+  optionsRole: RoleResponse[],
   refetch: <TPageData>(
     options?: RefetchOptions & RefetchQueryFilters<TPageData>,
   ) => Promise<QueryObserverResult<IPaginateResponse<UserResponse>, unknown>>,
@@ -28,14 +30,16 @@ export const userColumns = (
     {
       dataIndex: 'roles',
       render: (data: IRole[]) => {
-        return data.map((data) => {
+        return data?.map((data) => {
           return <Tag color={data.labelColor}>{data.name}</Tag>
         })
       },
-      filters: [
-        // TODO: add role
-        { text: ' RoleEnum.SuperAdmin', value: ' RoleEnum.SuperAdmin' },
-      ],
+      filters: optionsRole?.map((data) => {
+        return {
+          text: data.name,
+          value: data.name,
+        }
+      }),
     },
     {
       dataIndex: 'phoneNumber',
