@@ -28,7 +28,7 @@ const PermissionIndex: React.FC = () => {
           dataTableHeader={{
             query,
             search: true,
-            hrefCreate: Route.permission.form,
+            // hrefCreate: Route.permission.form,
             hrefExport: Route.permission.export,
           }}
         />

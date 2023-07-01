@@ -1,7 +1,7 @@
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { PermissionCreateRequest } from '@server/modules/iam/permission/infrastructure/permission.request'
 import { PermissionResponse } from '@server/modules/iam/permission/infrastructure/permission.response'
-import { Col, Form, Row } from 'antd'
+import { Form } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -10,7 +10,6 @@ import { Section } from '../../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../../Enums/Route'
-import { rule } from '../../../../common/utils/form.rules'
 import { PermissionAction } from '../infrastructure/permission.action'
 
 const PermissionForm: React.FC = () => {
@@ -55,23 +54,10 @@ const PermissionForm: React.FC = () => {
           centered
           button={{ disabled: isLoading }}
         >
-          <FormItem name="thumbnail" input="attachment" total={1} form={form} />
-          <Row gutter={12}>
-            <Col sm={24} md={20}>
-              <FormItem name="name" rules={[rule.required]} />
-            </Col>
-            <Col sm={24} md={4}>
-              <FormItem
-                name="isActive"
-                input="switch"
-                rules={[rule.required]}
-                form={form}
-              />
-            </Col>
-          </Row>
-          <FormItem name="key" rules={[rule.required]} />
+          <FormItem name="name" disabled={true} />
+          <FormItem name="path" disabled={true} />
           <FormItem name="description" input="textArea" />
-          <FormItem name="labelColor" input="colorPicker" />
+          <FormItem name="thumbnail" input="attachment" total={1} form={form} />
         </FormContainer>
       </Section>
     </>

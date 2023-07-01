@@ -55,7 +55,6 @@ const RoleForm: React.FC = () => {
           centered
           button={{ disabled: isLoading }}
         >
-          <FormItem name="thumbnail" input="attachment" total={1} form={form} />
           <Row gutter={12}>
             <Col sm={24} md={20}>
               <FormItem name="name" rules={[rule.required]} />
@@ -71,7 +70,19 @@ const RoleForm: React.FC = () => {
           </Row>
           <FormItem name="key" rules={[rule.required]} />
           <FormItem name="description" input="textArea" />
-          <FormItem name="labelColor" input="colorPicker" />
+          <Row gutter={12}>
+            <Col sm={24} md={12}>
+              <FormItem
+                name="thumbnail"
+                input="attachment"
+                total={1}
+                form={form}
+              />
+            </Col>
+            <Col sm={24} md={12}>
+              <FormItem name="labelColor" input="colorPicker" />
+            </Col>
+          </Row>
         </FormContainer>
       </Section>
     </>

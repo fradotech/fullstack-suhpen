@@ -25,7 +25,10 @@ export class PermissionCreateRequest extends PartialType(PermissionRequest) {
 
 export class PermissionUpdateRequest extends PartialType(PermissionRequest) {
   static dto(data: IPermission, req: PermissionUpdateRequest): IPermission {
-    return Object.assign(data, req)
+    data.thumbnail = req.thumbnail
+    data.description = req.description
+
+    return data
   }
 }
 
