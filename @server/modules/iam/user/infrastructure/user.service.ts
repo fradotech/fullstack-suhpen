@@ -18,4 +18,8 @@ export class UserService extends UserRepo implements BaseService {
   async findByInIds(ids: string[]): Promise<EntUser[]> {
     return await this.findBy({ id: In(ids) })
   }
+
+  async findOneWithRoles(id: string): Promise<EntUser> {
+    return await this.findOneOrFail({ where: { id }, relations: ['roles'] })
+  }
 }
