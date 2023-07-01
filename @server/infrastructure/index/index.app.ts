@@ -81,7 +81,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
     const isAdmin = true
     // TODO: role
     // user.roles.includes(
-    //   'TODO: Permision Name',
+    //   'Permision Name',
     // )
 
     if (isUser && userId && !isAdmin) {

@@ -36,7 +36,7 @@ export class RoleIndexApp extends BaseIndexApp {
       this.request,
     )
 
-    // TODO: add additional query
+    // CONTINUE: add additional query
 
     const [data, count] = await this.getData(query, req.isExport)
     const meta = this.mapMeta(count, req)
