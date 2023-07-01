@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import CompanyLogo from '../../../../Components/Molecules/CompanyLogo/CompanyLogo'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { rule } from '../../../../common/utils/form.rules'
 import styles from '../Auth.module.css'
 import { AuthAction } from '../infrastructure/auth.action'
@@ -20,12 +20,12 @@ const RegisterForm: React.FC = () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
     const res = await AuthAction.register(data)
-    res.data && location.replace(Route.dashboard.index)
+    res.data && location.replace(Path.dashboard.index)
     setIsLoading(false)
   }
 
   if (user) {
-    location.replace(Route.dashboard.index)
+    location.replace(Path.dashboard.index)
     return undefined
   } else
     return (
@@ -53,7 +53,7 @@ const RegisterForm: React.FC = () => {
               placeholder="Password Confirmation"
             />
           </FormContainer>
-          <Link to={Route.login}>Have an account? Login</Link>
+          <Link to={Path.login}>Have an account? Login</Link>
         </Card>
       </Col>
     )

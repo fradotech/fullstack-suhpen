@@ -5,7 +5,7 @@ import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import DescriptionContainer from '../../../../Components/Organisms/Description/DescriptionContainer'
 import DescriptionItem from '../../../../Components/Organisms/Description/DescriptionItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { RoleAction } from '../infrastructure/role.action'
 
 const RoleDetail: React.FC = () => {
@@ -19,9 +19,9 @@ const RoleDetail: React.FC = () => {
       <PageHeader
         title="Role Detail"
         isLoading={isLoading}
-        hrefIndex={Route.role.index}
-        hrefEdit={Route.role.edit(id)}
-        hrefDelete={Route.role.id(id)}
+        hrefIndex={Path.role.index}
+        hrefEdit={Path.role.edit(id)}
+        hrefDelete={Path.role.id(id)}
       />
       <Section>
         <DescriptionContainer>

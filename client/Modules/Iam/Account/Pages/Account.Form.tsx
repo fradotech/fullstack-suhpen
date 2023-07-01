@@ -8,7 +8,7 @@ import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { rule } from '../../../../common/utils/form.rules'
 import { AccountAction } from '../infrastructure/account.action'
 
@@ -33,7 +33,7 @@ const AccountForm: React.FC = () => {
     const data = form.getFieldsValue()
     const res = await AccountAction.update(data)
     setIsLoading(false)
-    res.data && navigate(Route.account)
+    res.data && navigate(Path.account.index)
   }
 
   return (

@@ -1,11 +1,6 @@
-import AccountModule from './Account/Account.module'
-import PermissionRoute from './Permission/permission.route'
-import RoleRoute from './Role/role.route'
-import UserRoute from './User/user.route'
+import AccountRoute from './Account/Account.route'
+import PermissionRoute from './Permission/Permission.route'
+import RoleRoute from './Role/Role.route'
+import UserRoute from './User/User.route'
 
-export default [
-  ...AccountModule,
-  ...UserRoute,
-  ...RoleRoute,
-  ...PermissionRoute,
-]
+export default [...AccountRoute, ...UserRoute, ...RoleRoute, ...PermissionRoute]

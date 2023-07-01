@@ -10,7 +10,7 @@ import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { rule } from '../../../../common/utils/form.rules'
 import { UserAction } from '../infrastructure/user.action'
 
@@ -39,7 +39,7 @@ const UserForm: React.FC = () => {
     if (!id) res = await UserAction.create(data)
     if (id) res = await UserAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Route.user.index)
+    res.data && navigate(Path.user.index)
   }
 
   return (

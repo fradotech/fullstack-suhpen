@@ -5,7 +5,7 @@ import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import DescriptionContainer from '../../../../Components/Organisms/Description/DescriptionContainer'
 import DescriptionItem from '../../../../Components/Organisms/Description/DescriptionItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { PermissionAction } from '../infrastructure/permission.action'
 
 const PermissionDetail: React.FC = () => {
@@ -19,9 +19,9 @@ const PermissionDetail: React.FC = () => {
       <PageHeader
         title="Permission Detail"
         isLoading={isLoading}
-        hrefIndex={Route.permission.index}
-        hrefEdit={Route.permission.edit(id)}
-        hrefDelete={Route.permission.id(id)}
+        hrefIndex={Path.permission.index}
+        hrefEdit={Path.permission.edit(id)}
+        hrefDelete={Path.permission.id(id)}
       />
       <Section>
         <DescriptionContainer>

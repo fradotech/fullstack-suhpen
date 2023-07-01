@@ -10,7 +10,7 @@ import {
   RefetchQueryFilters,
 } from 'react-query'
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { Util } from '../../../../common/utils/util'
 import { ProductAction } from './product.action'
 
@@ -71,11 +71,11 @@ export const productColumns = (
           actions={[
             {
               type: 'view',
-              href: Route.product.id(data.id),
+              href: Path.product.id(data.id),
             },
             {
               type: 'edit',
-              href: Route.product.edit(data.id),
+              href: Path.product.edit(data.id),
             },
             {
               type: 'delete',

@@ -10,7 +10,7 @@ import {
   RefetchQueryFilters,
 } from 'react-query'
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { Util } from '../../../../common/utils/util'
 import { RoleAction } from './role.action'
 
@@ -53,11 +53,11 @@ export const roleColumns = (
           actions={[
             {
               type: 'view',
-              href: Route.role.id(data.id),
+              href: Path.role.id(data.id),
             },
             {
               type: 'edit',
-              href: Route.role.edit(data.id),
+              href: Path.role.edit(data.id),
             },
             {
               type: 'delete',

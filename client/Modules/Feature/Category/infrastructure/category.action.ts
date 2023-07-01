@@ -10,7 +10,7 @@ import { notification } from 'antd'
 import { UseQueryResult, useQuery } from 'react-query'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
 import { getColorPicker } from '../../../../Components/Molecules/ColorPicker/ColorPicker.util'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { API } from '../../../../infrastructure/api.service'
 
 const dto = (
@@ -26,7 +26,7 @@ export class CategoryAction {
   static useIndex(
     req?: CategoryIndexRequest,
   ): UseQueryResult<IPaginateResponse<CategoryResponse>> {
-    const fetch = async () => await API.get(Route.category.index, req)
+    const fetch = async () => await API.get(Path.category.index, req)
     return useQuery([CategoryAction.useIndex.name, req], fetch)
   }
 
@@ -34,13 +34,13 @@ export class CategoryAction {
     data: CategoryCreateRequest,
   ): Promise<IApiRes<CategoryResponse>> {
     data = dto(data)
-    const res = await API.post(Route.category.index, data)
+    const res = await API.post(Path.category.index, data)
     res.data && notification.success({ message: 'Success create data' })
     return res
   }
 
   static async findOne(id: string): Promise<IApiRes<CategoryResponse>> {
-    const res: IApiRes<CategoryResponse> = await API.get(Route.category.id(id))
+    const res: IApiRes<CategoryResponse> = await API.get(Path.category.id(id))
 
     return res
   }
@@ -50,13 +50,13 @@ export class CategoryAction {
     data: CategoryUpdateRequest,
   ): Promise<IApiRes<CategoryResponse>> {
     data = dto(data)
-    const res = await API.put(Route.category.id(id), data)
+    const res = await API.put(Path.category.id(id), data)
     res.data && notification.success({ message: 'Success update data' })
     return res
   }
 
   static async delete(id: string): Promise<IApiRes<CategoryResponse>> {
-    const res = await API.delete(Route.category.id(id))
+    const res = await API.delete(Path.category.id(id))
     res.data && notification.success({ message: 'Success delete data' })
     return res
   }

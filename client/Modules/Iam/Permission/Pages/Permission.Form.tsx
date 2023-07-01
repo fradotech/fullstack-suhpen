@@ -9,7 +9,7 @@ import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { PermissionAction } from '../infrastructure/permission.action'
 
 const PermissionForm: React.FC = () => {
@@ -37,7 +37,7 @@ const PermissionForm: React.FC = () => {
     if (!id) res = await PermissionAction.create(data)
     if (id) res = await PermissionAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Route.permission.index)
+    res.data && navigate(Path.permission.index)
   }
 
   return (

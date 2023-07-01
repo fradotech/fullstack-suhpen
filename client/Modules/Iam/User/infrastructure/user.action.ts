@@ -10,7 +10,7 @@ import { notification } from 'antd'
 import dayjs from 'dayjs'
 import { UseQueryResult, useQuery } from 'react-query'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { API } from '../../../../infrastructure/api.service'
 
 const dto = (
@@ -27,19 +27,19 @@ export class UserAction {
   static useIndex(
     req?: UserIndexRequest,
   ): UseQueryResult<IPaginateResponse<UserResponse>> {
-    const fetch = async () => await API.get(Route.user.index, req)
+    const fetch = async () => await API.get(Path.user.index, req)
     return useQuery([UserAction.useIndex.name, req], fetch)
   }
 
   static async create(data: UserCreateRequest): Promise<IApiRes<UserResponse>> {
     data = dto(data) as UserCreateRequest
-    const res = await API.post(Route.user.index, data)
+    const res = await API.post(Path.user.index, data)
     res.data && notification.success({ message: 'Success create data' })
     return res
   }
 
   static async findOne(id: string): Promise<IApiRes<UserResponse>> {
-    const res: IApiRes<UserResponse> = await API.get(Route.user.id(id))
+    const res: IApiRes<UserResponse> = await API.get(Path.user.id(id))
     res.data.birthDate = res.data.birthDate && dayjs(res.data.birthDate)
     return res
   }
@@ -49,13 +49,13 @@ export class UserAction {
     data: UserUpdateRequest,
   ): Promise<IApiRes<UserResponse>> {
     data = dto(data)
-    const res = await API.put(Route.user.id(id), data)
+    const res = await API.put(Path.user.id(id), data)
     res.data && notification.success({ message: 'Success update data' })
     return res
   }
 
   static async delete(id: string): Promise<IApiRes<UserResponse>> {
-    const res = await API.delete(Route.user.id(id))
+    const res = await API.delete(Path.user.id(id))
     res.data && notification.success({ message: 'Success delete data' })
     return res
   }

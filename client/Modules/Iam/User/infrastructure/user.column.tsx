@@ -10,7 +10,7 @@ import {
   RefetchQueryFilters,
 } from 'react-query'
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { Util } from '../../../../common/utils/util'
 import { UserAction } from './user.action'
 
@@ -56,11 +56,11 @@ export const userColumns = (
           actions={[
             {
               type: 'view',
-              href: Route.user.id(data.id),
+              href: Path.user.id(data.id),
             },
             {
               type: 'edit',
-              href: Route.user.edit(data.id),
+              href: Path.user.edit(data.id),
             },
             {
               type: 'delete',

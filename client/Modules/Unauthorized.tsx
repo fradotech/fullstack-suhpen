@@ -1,6 +1,6 @@
 import { Button, Result } from 'antd'
 import React from 'react'
-import { Route } from '../Enums/Route'
+import { Path } from '../Enums/Path'
 
 const Unauthorized: React.FC = () => {
   return (
@@ -9,7 +9,7 @@ const Unauthorized: React.FC = () => {
       title="403"
       subTitle="Unauthorized"
       extra={
-        <Button href={Route.login} type="primary">
+        <Button href={Path.login} type="primary">
           Login
         </Button>
       }

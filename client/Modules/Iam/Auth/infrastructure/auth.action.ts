@@ -7,7 +7,7 @@ import {
 } from '@server/modules/iam/auth/infrastructure/auth.request'
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { notification } from 'antd'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { Util } from '../../../../common/utils/util'
 import { API } from '../../../../infrastructure/api.service'
 
@@ -20,7 +20,7 @@ export class AuthAction {
   }
 
   static async login(req: AuthLoginRequest): Promise<UserResponse> {
-    const res: IApiRes<UserResponse> = await API.post(Route.login, req)
+    const res: IApiRes<UserResponse> = await API.post(Path.login, req)
     const user = res?.data
     user && localStorage.setItem('_accessToken', user?._accessToken)
     user && localStorage.setItem('user', JSON.stringify(user))
@@ -30,7 +30,7 @@ export class AuthAction {
   static async register(
     req: AuthRegisterRequest,
   ): Promise<IApiRes<UserResponse>> {
-    return await API.post(Route.register, req)
+    return await API.post(Path.register, req)
   }
 
   static logout(): boolean {
@@ -40,7 +40,7 @@ export class AuthAction {
   }
 
   static async passwordSend(req: AuthPasswordSendRequest): Promise<boolean> {
-    const res: IApiRes<UserResponse> = await API.post(Route.passwordSend, req)
+    const res: IApiRes<UserResponse> = await API.post(Path.passwordSend, req)
     const isSuccess = !!res?.data
     isSuccess &&
       notification.success({
@@ -51,7 +51,7 @@ export class AuthAction {
   }
 
   static async password(token: string): Promise<boolean> {
-    const endpoint = `${Route.password}/${token}`
+    const endpoint = `${Path.password}/${token}`
     const res: IApiRes<UserResponse> = await API.get(endpoint)
     return !!res.data.token
   }
@@ -61,7 +61,7 @@ export class AuthAction {
     token: string,
   ): Promise<boolean> {
     req.token = token
-    const res: IApiRes<string> = await API.patch(Route.passwordChange, req)
+    const res: IApiRes<string> = await API.patch(Path.passwordChange, req)
 
     return !!res.data
   }

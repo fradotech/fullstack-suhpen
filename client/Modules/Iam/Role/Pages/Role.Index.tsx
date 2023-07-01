@@ -5,7 +5,7 @@ import { Section } from '../../../../Components/Molecules/Section/Section'
 import DataTable from '../../../../Components/Organisms/DataTable/DataTable'
 import { paginationTransform } from '../../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../../Components/Organisms/DataTable/useDataTable'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { RoleAction } from '../infrastructure/role.action'
 import { roleColumns } from '../infrastructure/role.column'
 
@@ -28,8 +28,8 @@ const RoleIndex: React.FC = () => {
           dataTableHeader={{
             query,
             search: true,
-            hrefCreate: Route.role.form,
-            hrefExport: Route.role.export,
+            hrefCreate: Path.role.form,
+            hrefExport: Path.role.export,
           }}
         />
       </Section>

@@ -5,7 +5,7 @@ import { Section } from '../../../../Components/Molecules/Section/Section'
 import DataTable from '../../../../Components/Organisms/DataTable/DataTable'
 import { paginationTransform } from '../../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../../Components/Organisms/DataTable/useDataTable'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { RoleAction } from '../../Role/infrastructure/role.action'
 import { UserAction } from '../infrastructure/user.action'
 import { userColumns } from '../infrastructure/user.column'
@@ -32,8 +32,8 @@ const UserIndex: React.FC = () => {
             query,
             search: true,
             dateRangeColumn: 'createdAt',
-            hrefCreate: Route.user.form,
-            hrefExport: Route.user.export,
+            hrefCreate: Path.user.form,
+            hrefExport: Path.user.export,
           }}
         />
       </Section>

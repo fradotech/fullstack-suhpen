@@ -5,7 +5,7 @@ import { Section } from '../../../../Components/Molecules/Section/Section'
 import DataTable from '../../../../Components/Organisms/DataTable/DataTable'
 import { paginationTransform } from '../../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../../Components/Organisms/DataTable/useDataTable'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { PermissionAction } from '../infrastructure/permission.action'
 import { permissionColumns } from '../infrastructure/permission.column'
 
@@ -29,7 +29,7 @@ const PermissionIndex: React.FC = () => {
             query,
             search: true,
             // hrefCreate: Route.permission.form,
-            hrefExport: Route.permission.export,
+            hrefExport: Path.permission.export,
           }}
         />
       </Section>

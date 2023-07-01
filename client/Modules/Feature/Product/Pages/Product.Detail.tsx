@@ -5,7 +5,7 @@ import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import DescriptionContainer from '../../../../Components/Organisms/Description/DescriptionContainer'
 import DescriptionItem from '../../../../Components/Organisms/Description/DescriptionItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import InventoryIndex from '../../Inventory/Pages/Inventory.Index'
 import { ProductAction } from '../infrastructure/product.action'
 
@@ -20,9 +20,9 @@ const ProductDetail: React.FC = () => {
       <PageHeader
         title="Product Detail"
         isLoading={isLoading}
-        hrefIndex={Route.product.index}
-        hrefEdit={Route.product.edit(id)}
-        hrefDelete={Route.product.id(id)}
+        hrefIndex={Path.product.index}
+        hrefEdit={Path.product.edit(id)}
+        hrefDelete={Path.product.id(id)}
       />
       <Section>
         <DescriptionContainer>

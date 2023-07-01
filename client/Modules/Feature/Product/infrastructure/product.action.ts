@@ -9,7 +9,7 @@ import { ProductResponse } from '@server/modules/feature/product/infrastructure/
 import { notification } from 'antd'
 import { UseQueryResult, useQuery } from 'react-query'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { API } from '../../../../infrastructure/api.service'
 
 const dto = (
@@ -24,7 +24,7 @@ export class ProductAction {
   static useIndex(
     req?: ProductIndexRequest,
   ): UseQueryResult<IPaginateResponse<ProductResponse>> {
-    const fetch = async () => await API.get(Route.product.index, req)
+    const fetch = async () => await API.get(Path.product.index, req)
     return useQuery([ProductAction.useIndex.name, req], fetch)
   }
 
@@ -32,13 +32,13 @@ export class ProductAction {
     data: ProductCreateRequest,
   ): Promise<IApiRes<ProductResponse>> {
     data = dto(data)
-    const res = await API.post(Route.product.index, data)
+    const res = await API.post(Path.product.index, data)
     res.data && notification.success({ message: 'Success create data' })
     return res
   }
 
   static async findOne(id: string): Promise<IApiRes<ProductResponse>> {
-    const res: IApiRes<ProductResponse> = await API.get(Route.product.id(id))
+    const res: IApiRes<ProductResponse> = await API.get(Path.product.id(id))
 
     return res
   }
@@ -48,13 +48,13 @@ export class ProductAction {
     data: ProductUpdateRequest,
   ): Promise<IApiRes<ProductResponse>> {
     data = dto(data)
-    const res = await API.put(Route.product.id(id), data)
+    const res = await API.put(Path.product.id(id), data)
     res.data && notification.success({ message: 'Success update data' })
     return res
   }
 
   static async delete(id: string): Promise<IApiRes<ProductResponse>> {
-    const res = await API.delete(Route.product.id(id))
+    const res = await API.delete(Path.product.id(id))
     res.data && notification.success({ message: 'Success delete data' })
     return res
   }

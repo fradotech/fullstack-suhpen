@@ -13,7 +13,7 @@ import {
 } from '../../../../../@server/infrastructure/index/index.interface'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
 import { getColorPicker } from '../../../../Components/Molecules/ColorPicker/ColorPicker.util'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { API } from '../../../../infrastructure/api.service'
 
 const dto = (
@@ -31,7 +31,7 @@ export class PermissionAction {
     if (!req.sortField) req.sortField = 'module'
     if (!req.sortOrder) req.sortOrder = IndexSortOderEnum.Asc
 
-    const fetch = async () => await API.get(Route.permission.index, req)
+    const fetch = async () => await API.get(Path.permission.index, req)
     return useQuery([PermissionAction.useIndex.name, req], fetch)
   }
 
@@ -39,14 +39,14 @@ export class PermissionAction {
     data: PermissionCreateRequest,
   ): Promise<IApiRes<PermissionResponse>> {
     data = dto(data)
-    const res = await API.post(Route.permission.index, data)
+    const res = await API.post(Path.permission.index, data)
     res.data && notification.success({ message: 'Success create data' })
     return res
   }
 
   static async findOne(id: string): Promise<IApiRes<PermissionResponse>> {
     const res: IApiRes<PermissionResponse> = await API.get(
-      Route.permission.id(id),
+      Path.permission.id(id),
     )
 
     return res
@@ -57,13 +57,13 @@ export class PermissionAction {
     data: PermissionUpdateRequest,
   ): Promise<IApiRes<PermissionResponse>> {
     data = dto(data)
-    const res = await API.put(Route.permission.id(id), data)
+    const res = await API.put(Path.permission.id(id), data)
     res.data && notification.success({ message: 'Success update data' })
     return res
   }
 
   static async delete(id: string): Promise<IApiRes<PermissionResponse>> {
-    const res = await API.delete(Route.permission.id(id))
+    const res = await API.delete(Path.permission.id(id))
     res.data && notification.success({ message: 'Success delete data' })
     return res
   }

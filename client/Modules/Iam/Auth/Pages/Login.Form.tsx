@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import CompanyLogo from '../../../../Components/Molecules/CompanyLogo/CompanyLogo'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { rule } from '../../../../common/utils/form.rules'
 import styles from '../Auth.module.css'
 import { AuthAction } from '../infrastructure/auth.action'
@@ -20,12 +20,12 @@ const LoginForm: React.FC = () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
     const user = await AuthAction.login(data)
-    user && location.replace(Route.dashboard.index)
+    user && location.replace(Path.dashboard.index)
     setIsLoading(false)
   }
 
   if (user) {
-    location.replace(Route.dashboard.index)
+    location.replace(Path.dashboard.index)
     return undefined
   } else
     return (
@@ -47,8 +47,8 @@ const LoginForm: React.FC = () => {
             />
           </FormContainer>
           <Row style={{ justifyContent: 'space-between' }}>
-            <Link to={Route.passwordSend}>Forgot password?</Link>
-            <Link to={Route.register}>Don't have an account? Register</Link>
+            <Link to={Path.passwordSend}>Forgot password?</Link>
+            <Link to={Path.register}>Don't have an account? Register</Link>
           </Row>
         </Card>
       </Col>

@@ -9,7 +9,7 @@ import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { rule } from '../../../../common/utils/form.rules'
 import { CategoryAction } from '../infrastructure/category.action'
 
@@ -38,7 +38,7 @@ const CategoryForm: React.FC = () => {
     if (!id) res = await CategoryAction.create(data)
     if (id) res = await CategoryAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Route.category.index)
+    res.data && navigate(Path.category.index)
   }
 
   return (

@@ -6,7 +6,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import CompanyLogo from '../../../../Components/Molecules/CompanyLogo/CompanyLogo'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { rule } from '../../../../common/utils/form.rules'
 import styles from '../Auth.module.css'
 import { AuthAction } from '../infrastructure/auth.action'
@@ -32,7 +32,7 @@ const PasswordChangeForm: React.FC = () => {
   }
 
   if (!isValid) {
-    isValid == false && location.replace(Route.login)
+    isValid == false && location.replace(Path.login)
     return null
   } else
     return (
@@ -49,7 +49,7 @@ const PasswordChangeForm: React.FC = () => {
                 type="success"
                 showIcon
               />
-              <Link to={Route.login}>Login</Link>
+              <Link to={Path.login}>Login</Link>
             </Col>
           ) : (
             <FormContainer

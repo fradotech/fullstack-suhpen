@@ -10,7 +10,7 @@ import {
   RefetchQueryFilters,
 } from 'react-query'
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { Util } from '../../../../common/utils/util'
 import { PermissionAction } from './permission.action'
 
@@ -57,11 +57,11 @@ export const permissionColumns = (
           actions={[
             {
               type: 'view',
-              href: Route.permission.id(data.id),
+              href: Path.permission.id(data.id),
             },
             {
               type: 'edit',
-              href: Route.permission.edit(data.id),
+              href: Path.permission.edit(data.id),
             },
             {
               type: 'delete',

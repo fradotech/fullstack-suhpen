@@ -3,7 +3,7 @@ import { Form, FormInstance, Modal, Upload } from 'antd'
 import type { RcFile, UploadProps } from 'antd/es/upload'
 import type { UploadFile } from 'antd/es/upload/interface'
 import React from 'react'
-import { Route } from '../../../Enums/Route'
+import { Path } from '../../../Enums/Path'
 import { HOST_API } from '../../../infrastructure/api.service'
 import { getBase64 } from './attachment.util'
 
@@ -59,12 +59,12 @@ const Attachment: React.FC<IProps> = (props: IProps) => {
     <>
       <Form.Item name={props.name}>
         <Upload
-          action={`${HOST_API}${Route.Attachment}`}
+          action={`${HOST_API}${Path.Attachment}`}
           listType="picture-card"
           fileList={fileList}
           onPreview={handlePreview}
           onChange={handleChange}
-          name={Route.Attachment.substring(1)}
+          name={Path.Attachment.substring(1)}
         >
           {fileList.length >= props.total ? null : (
             <>

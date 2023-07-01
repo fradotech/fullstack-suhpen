@@ -5,7 +5,7 @@ import { Section } from '../../../../Components/Molecules/Section/Section'
 import DataTable from '../../../../Components/Organisms/DataTable/DataTable'
 import { paginationTransform } from '../../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../../Components/Organisms/DataTable/useDataTable'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../Enums/Path'
 import { InventoryAction } from '../infrastructure/inventory.action'
 import { inventoryColumns } from '../infrastructure/inventory.column'
 
@@ -39,9 +39,8 @@ const InventoryIndex: React.FC<IProps> = (props: IProps) => {
             query,
             search: true,
             dateRangeColumn: 'expiredDate',
-            hrefCreate:
-              props.productId && Route.inventory.form(props.productId),
-            hrefExport: Route.inventory.export,
+            hrefCreate: props.productId && Path.inventory.form(props.productId),
+            hrefExport: Path.inventory.export,
           }}
         />
       </Section>

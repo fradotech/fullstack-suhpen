@@ -9,7 +9,7 @@ import { MenuProps } from 'antd'
 import React from 'react'
 import { FaIdCard, FaUser, FaUserCog, FaUserShield } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import { Route } from '../../Enums/Route'
+import { Path } from '../../Enums/Path'
 import { Util } from '../../common/utils/util'
 
 export type IProps = {
@@ -24,8 +24,8 @@ type MenuItem = Required<MenuProps>['items'][number]
 
 const itemsDashboard: MenuItem[] = [
   {
-    key: Route.dashboard.index,
-    label: <Link to={Route.dashboard.index}>DASHBOARD</Link>,
+    key: Path.dashboard.index,
+    label: <Link to={Path.dashboard.index}>DASHBOARD</Link>,
     icon: <DashboardOutlined />,
   },
 ]
@@ -36,23 +36,21 @@ const itemsFeature: MenuItem[] = [
     icon: <ApartmentOutlined />,
     children: [
       {
-        key: Route.product.index,
-        label: (
-          <Link to={Route.product.index}>{Util.titleCase('product')}</Link>
-        ),
+        key: Path.product.index,
+        label: <Link to={Path.product.index}>{Util.titleCase('product')}</Link>,
         icon: <DropboxOutlined />,
       },
       {
-        key: Route.inventory.index,
+        key: Path.inventory.index,
         label: (
-          <Link to={Route.inventory.index}>{Util.titleCase('inventory')}</Link>
+          <Link to={Path.inventory.index}>{Util.titleCase('inventory')}</Link>
         ),
         icon: <ShoppingCartOutlined />,
       },
       {
-        key: Route.category.index,
+        key: Path.category.index,
         label: (
-          <Link to={Route.category.index}>{Util.titleCase('category')}</Link>
+          <Link to={Path.category.index}>{Util.titleCase('category')}</Link>
         ),
         icon: <TagsOutlined />,
       },
@@ -68,21 +66,19 @@ const itemsIam: MenuItem[] = [
     icon: <FaIdCard />,
     children: [
       {
-        key: Route.user.index,
-        label: <Link to={Route.user.index}>{Util.titleCase('user')}</Link>,
+        key: Path.user.index,
+        label: <Link to={Path.user.index}>{Util.titleCase('user')}</Link>,
         icon: <FaUser />,
       },
       {
-        key: Route.role.index,
-        label: <Link to={Route.role.index}>{Util.titleCase('role')}</Link>,
+        key: Path.role.index,
+        label: <Link to={Path.role.index}>{Util.titleCase('role')}</Link>,
         icon: <FaUserCog />,
       },
       {
-        key: Route.permission.index,
+        key: Path.permission.index,
         label: (
-          <Link to={Route.permission.index}>
-            {Util.titleCase('permission')}
-          </Link>
+          <Link to={Path.permission.index}>{Util.titleCase('permission')}</Link>
         ),
         icon: <FaUserShield />,
       },
