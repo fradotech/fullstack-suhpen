@@ -3,7 +3,7 @@ import { UserUpdateRequest } from '@server/modules/iam/user/infrastructure/user.
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { notification } from 'antd'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
-import { Path } from '../../../../Enums/Path'
+import { Path } from '../../../../common/Path'
 import { API } from '../../../../infrastructure/api.service'
 
 const dto = (data: UserUpdateRequest): UserUpdateRequest => {

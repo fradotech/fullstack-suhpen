@@ -8,8 +8,8 @@ import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Avatar, Dropdown, Space, Typography } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Path } from '../../Enums/Path'
 import { AuthAction } from '../../Modules/Iam/Auth/infrastructure/auth.action'
+import { Path } from '../../common/Path'
 import { themeColors, themeColorsDark } from '../ThemeProvider/theme'
 
 type IProps = {

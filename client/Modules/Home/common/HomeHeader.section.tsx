@@ -1,8 +1,8 @@
 import { Layout } from 'antd'
 import React from 'react'
 import CompanyLogo from '../../../Components/Molecules/CompanyLogo/CompanyLogo'
-import { Path } from '../../../Enums/Path'
 import { themeColors } from '../../../Layouts/ThemeProvider/theme'
+import { Path } from '../../../common/Path'
 import { AuthAction } from '../../Iam/Auth/infrastructure/auth.action'
 import styles from '../Home.module.css'
 

@@ -9,7 +9,7 @@ import { ProductResponse } from '@server/modules/feature/product/infrastructure/
 import { notification } from 'antd'
 import { UseQueryResult, useQuery } from 'react-query'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
-import { Path } from '../../../../Enums/Path'
+import { Path } from '../../../../common/Path'
 import { API } from '../../../../infrastructure/api.service'
 
 const dto = (

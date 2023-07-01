@@ -10,7 +10,7 @@ import {
   RefetchQueryFilters,
 } from 'react-query'
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
-import { Path } from '../../../../Enums/Path'
+import { Path } from '../../../../common/Path'
 import { Util } from '../../../../common/utils/util'
 import { UserAction } from './user.action'
 

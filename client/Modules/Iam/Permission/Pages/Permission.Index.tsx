@@ -5,7 +5,7 @@ import { Section } from '../../../../Components/Molecules/Section/Section'
 import DataTable from '../../../../Components/Organisms/DataTable/DataTable'
 import { paginationTransform } from '../../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../../Components/Organisms/DataTable/useDataTable'
-import { Path } from '../../../../Enums/Path'
+import { Path } from '../../../../common/Path'
 import { PermissionAction } from '../infrastructure/permission.action'
 import { permissionColumns } from '../infrastructure/permission.column'
 

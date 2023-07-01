@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Path } from '../../../../Enums/Path'
+import { Path } from '../../../../common/Path'
 import { AuthAction } from '../../Auth/infrastructure/auth.action'
 
 const useUser = () => {

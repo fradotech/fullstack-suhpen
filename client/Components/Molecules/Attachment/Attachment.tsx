@@ -3,7 +3,7 @@ import { Form, FormInstance, Modal, Upload } from 'antd'
 import type { RcFile, UploadProps } from 'antd/es/upload'
 import type { UploadFile } from 'antd/es/upload/interface'
 import React from 'react'
-import { Path } from '../../../Enums/Path'
+import { Path } from '../../../common/Path'
 import { HOST_API } from '../../../infrastructure/api.service'
 import { getBase64 } from './attachment.util'
 

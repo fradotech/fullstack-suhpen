@@ -5,7 +5,7 @@ import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import DescriptionContainer from '../../../../Components/Organisms/Description/DescriptionContainer'
 import DescriptionItem from '../../../../Components/Organisms/Description/DescriptionItem'
-import { Path } from '../../../../Enums/Path'
+import { Path } from '../../../../common/Path'
 import { RoleAction } from '../infrastructure/role.action'
 
 const RoleDetail: React.FC = () => {

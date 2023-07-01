@@ -11,7 +11,7 @@ import {
 } from 'react-query'
 import { Link } from 'react-router-dom'
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
-import { Path } from '../../../../Enums/Path'
+import { Path } from '../../../../common/Path'
 import { Util } from '../../../../common/utils/util'
 import { InventoryAction } from './inventory.action'
 

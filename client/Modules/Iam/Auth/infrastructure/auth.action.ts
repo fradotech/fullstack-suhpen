@@ -7,7 +7,7 @@ import {
 } from '@server/modules/iam/auth/infrastructure/auth.request'
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { notification } from 'antd'
-import { Path } from '../../../../Enums/Path'
+import { Path } from '../../../../common/Path'
 import { Util } from '../../../../common/utils/util'
 import { API } from '../../../../infrastructure/api.service'
 

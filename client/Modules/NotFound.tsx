@@ -1,6 +1,6 @@
 import { Button, Result } from 'antd'
 import React from 'react'
-import { Path } from '../Enums/Path'
+import { Path } from '../common/Path'
 
 const NotFound: React.FC = () => {
   return (

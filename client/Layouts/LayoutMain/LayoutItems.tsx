@@ -9,7 +9,7 @@ import { MenuProps } from 'antd'
 import React from 'react'
 import { FaIdCard, FaUser, FaUserCog, FaUserShield } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import { Path } from '../../Enums/Path'
+import { Path } from '../../common/Path'
 import { Util } from '../../common/utils/util'
 
 export type IProps = {
