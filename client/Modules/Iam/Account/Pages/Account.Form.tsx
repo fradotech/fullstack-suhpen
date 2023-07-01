@@ -12,11 +12,7 @@ import { Route } from '../../../../Enums/Route'
 import { rule } from '../../../../common/utils/form.rules'
 import { AccountAction } from '../infrastructure/account.action'
 
-interface IProps {
-  accountAction: AccountAction
-}
-
-const AccountForm: React.FC<IProps> = ({ accountAction }) => {
+const AccountForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const [form] = Form.useForm<UserUpdateRequest>()
@@ -25,7 +21,7 @@ const AccountForm: React.FC<IProps> = ({ accountAction }) => {
     [AccountForm.name],
     async () => {
       setIsLoading(true)
-      const res = await accountAction.getUserLogged()
+      const res = await AccountAction.getUserLogged()
       form.setFieldsValue(res.data)
       setIsLoading(false)
     },
@@ -35,7 +31,7 @@ const AccountForm: React.FC<IProps> = ({ accountAction }) => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    const res = await accountAction.update(data)
+    const res = await AccountAction.update(data)
     setIsLoading(false)
     res.data && navigate(Route.account)
   }

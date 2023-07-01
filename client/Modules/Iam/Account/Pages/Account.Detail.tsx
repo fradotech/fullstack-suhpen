@@ -8,12 +8,8 @@ import DescriptionContainer from '../../../../Components/Organisms/Description/D
 import DescriptionItem from '../../../../Components/Organisms/Description/DescriptionItem'
 import { AccountAction } from '../infrastructure/account.action'
 
-interface IProps {
-  accountAction: AccountAction
-}
-
-const AccountDetail: React.FC<IProps> = ({ accountAction }) => {
-  const fetch = async () => await accountAction.getUserLogged()
+const AccountDetail: React.FC = () => {
+  const fetch = async () => await AccountAction.getUserLogged()
   const { isLoading, data } = useQuery([AccountDetail.name], fetch)
   const fields = data?.data && Object.keys(data.data)
 

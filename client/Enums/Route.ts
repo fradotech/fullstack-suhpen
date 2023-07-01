@@ -2,7 +2,7 @@ import { routesDashboard } from '../Modules/Dashboard/Dashboard.route'
 import { routesCategory } from '../Modules/Feature/Category/category.route'
 import { routesInventory } from '../Modules/Feature/Inventory/inventory.route'
 import { routesProduct } from '../Modules/Feature/Product/product.route'
-import { RoutesAccount } from '../Modules/Iam/Account/Account.module'
+import { routesAccount } from '../Modules/Iam/Account/Account.module'
 import { routesAuth } from '../Modules/Iam/Auth/auth.route'
 import { routesPermission } from '../Modules/Iam/Permission/permission.route'
 import { routesRole } from '../Modules/Iam/Role/role.route'
@@ -14,7 +14,7 @@ export const Route = {
 
   ...routesDashboard,
   ...routesAuth,
-  ...RoutesAccount,
+  ...routesAccount,
   ...routesUser,
   ...routesRole,
   ...routesPermission,
