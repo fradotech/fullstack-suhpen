@@ -13,7 +13,7 @@ import { getAttachment } from '../../../../Components/Molecules/Attachment/attac
 import { Route } from '../../../../Enums/Route'
 import { API } from '../../../../infrastructure/api.service'
 
-const dataPrepare = (
+const dto = (
   data: UserCreateRequest | UserUpdateRequest,
 ): UserCreateRequest | UserUpdateRequest => {
   data.birthDate =
@@ -32,7 +32,7 @@ export class UserAction {
   }
 
   static async create(data: UserCreateRequest): Promise<IApiRes<UserResponse>> {
-    data = dataPrepare(data) as UserCreateRequest
+    data = dto(data) as UserCreateRequest
     const res = await API.post(Route.user.index, data)
     res.data && notification.success({ message: 'Success create data' })
     return res
@@ -48,7 +48,7 @@ export class UserAction {
     id: string,
     data: UserUpdateRequest,
   ): Promise<IApiRes<UserResponse>> {
-    data = dataPrepare(data)
+    data = dto(data)
     const res = await API.put(Route.user.id(id), data)
     res.data && notification.success({ message: 'Success update data' })
     return res

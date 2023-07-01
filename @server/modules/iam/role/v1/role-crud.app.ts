@@ -30,7 +30,8 @@ export class RoleCrudApp {
   }
 
   async delete(id: string): Promise<IRole> {
+    const data = await this.roleService.findOneByOrFail({ id })
     await this.roleService.delete(id)
-    return await this.roleService.findOneByOrFail({ id })
+    return data
   }
 }

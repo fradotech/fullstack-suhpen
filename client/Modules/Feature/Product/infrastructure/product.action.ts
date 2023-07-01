@@ -12,7 +12,7 @@ import { getAttachment } from '../../../../Components/Molecules/Attachment/attac
 import { Route } from '../../../../Enums/Route'
 import { API } from '../../../../infrastructure/api.service'
 
-const dataPrepare = (
+const dto = (
   data: ProductCreateRequest | ProductUpdateRequest,
 ): ProductCreateRequest | ProductUpdateRequest => {
   data.thumbnail = getAttachment(data.thumbnail) as string
@@ -31,7 +31,7 @@ export class ProductAction {
   static async create(
     data: ProductCreateRequest,
   ): Promise<IApiRes<ProductResponse>> {
-    data = dataPrepare(data) as ProductCreateRequest
+    data = dto(data)
     const res = await API.post(Route.product.index, data)
     res.data && notification.success({ message: 'Success create data' })
     return res
@@ -47,7 +47,7 @@ export class ProductAction {
     id: string,
     data: ProductUpdateRequest,
   ): Promise<IApiRes<ProductResponse>> {
-    data = dataPrepare(data)
+    data = dto(data)
     const res = await API.put(Route.product.id(id), data)
     res.data && notification.success({ message: 'Success update data' })
     return res

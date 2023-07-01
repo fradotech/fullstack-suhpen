@@ -13,7 +13,7 @@ import { getColorPicker } from '../../../../Components/Molecules/ColorPicker/Col
 import { Route } from '../../../../Enums/Route'
 import { API } from '../../../../infrastructure/api.service'
 
-const dataPrepare = (
+const dto = (
   data: CategoryCreateRequest | CategoryUpdateRequest,
 ): CategoryCreateRequest | CategoryUpdateRequest => {
   data.thumbnail = getAttachment(data.thumbnail) as string
@@ -33,7 +33,7 @@ export class CategoryAction {
   static async create(
     data: CategoryCreateRequest,
   ): Promise<IApiRes<CategoryResponse>> {
-    data = dataPrepare(data) as CategoryCreateRequest
+    data = dto(data)
     const res = await API.post(Route.category.index, data)
     res.data && notification.success({ message: 'Success create data' })
     return res
@@ -49,7 +49,7 @@ export class CategoryAction {
     id: string,
     data: CategoryUpdateRequest,
   ): Promise<IApiRes<CategoryResponse>> {
-    data = dataPrepare(data)
+    data = dto(data)
     const res = await API.put(Route.category.id(id), data)
     res.data && notification.success({ message: 'Success update data' })
     return res

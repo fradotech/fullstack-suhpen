@@ -30,7 +30,8 @@ export class UserCrudApp {
   }
 
   async delete(id: string): Promise<IUser> {
+    const data = await this.userService.findOneByOrFail({ id })
     await this.userService.delete(id)
-    return await this.userService.findOneByOrFail({ id })
+    return data
   }
 }

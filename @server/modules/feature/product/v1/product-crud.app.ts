@@ -46,7 +46,8 @@ export class ProductCrudApp {
   }
 
   async delete(id: string): Promise<IProduct> {
+    const data = await this.productService.findOneByOrFail({ id })
     await this.productService.delete(id)
-    return await this.productService.findOneByOrFail({ id })
+    return data
   }
 }

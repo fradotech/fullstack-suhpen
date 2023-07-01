@@ -30,7 +30,8 @@ export class PermissionCrudApp {
   }
 
   async delete(id: string): Promise<IPermission> {
+    const data = await this.permissionService.findOneByOrFail({ id })
     await this.permissionService.delete(id)
-    return await this.permissionService.findOneByOrFail({ id })
+    return data
   }
 }

@@ -13,7 +13,7 @@ import { getAttachment } from '../../../../Components/Molecules/Attachment/attac
 import { Route } from '../../../../Enums/Route'
 import { API } from '../../../../infrastructure/api.service'
 
-const dataPrepare = (
+const dto = (
   data: InventoryCreateRequest | InventoryUpdateRequest,
 ): InventoryCreateRequest | InventoryUpdateRequest => {
   data.thumbnail = getAttachment(data.thumbnail) as string
@@ -34,7 +34,7 @@ export class InventoryAction {
   static async create(
     data: InventoryCreateRequest,
   ): Promise<IApiRes<InventoryResponse>> {
-    data = dataPrepare(data) as InventoryCreateRequest
+    data = dto(data)
     const res = await API.post(Route.inventory.index, data)
     res.data && notification.success({ message: 'Success create data' })
     return res
@@ -54,7 +54,7 @@ export class InventoryAction {
     id: string,
     data: InventoryUpdateRequest,
   ): Promise<IApiRes<InventoryResponse>> {
-    data = dataPrepare(data)
+    data = dto(data)
     const res = await API.put(Route.inventory.id(id), data)
     res.data && notification.success({ message: 'Success update data' })
     return res

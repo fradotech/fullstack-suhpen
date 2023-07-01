@@ -74,7 +74,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
 
     const isUser = repo.metadata.propertiesMap['user']
     const user = request['user'] as IUser
-    const userId = user.id
+    const userId = user?.id
     const isUserRelation = relations
       .map((data) => data.name)
       .find((data) => data == 'user')

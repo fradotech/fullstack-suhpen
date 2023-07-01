@@ -69,6 +69,7 @@ const CategoryForm: React.FC = () => {
               />
             </Col>
           </Row>
+          <FormItem name="key" rules={[rule.required]} />
           <FormItem name="description" input="textArea" />
           <FormItem name="labelColor" input="colorPicker" />
         </FormContainer>

@@ -13,7 +13,7 @@ import { getColorPicker } from '../../../../Components/Molecules/ColorPicker/Col
 import { Route } from '../../../../Enums/Route'
 import { API } from '../../../../infrastructure/api.service'
 
-const dataPrepare = (
+const dto = (
   data: RoleCreateRequest | RoleUpdateRequest,
 ): RoleCreateRequest | RoleUpdateRequest => {
   data.thumbnail = getAttachment(data.thumbnail) as string
@@ -30,7 +30,7 @@ export class RoleAction {
   }
 
   static async create(data: RoleCreateRequest): Promise<IApiRes<RoleResponse>> {
-    data = dataPrepare(data) as RoleCreateRequest
+    data = dto(data)
     const res = await API.post(Route.role.index, data)
     res.data && notification.success({ message: 'Success create data' })
     return res
@@ -46,7 +46,7 @@ export class RoleAction {
     id: string,
     data: RoleUpdateRequest,
   ): Promise<IApiRes<RoleResponse>> {
-    data = dataPrepare(data)
+    data = dto(data)
     const res = await API.put(Route.role.id(id), data)
     res.data && notification.success({ message: 'Success update data' })
     return res

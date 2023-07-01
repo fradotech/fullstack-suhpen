@@ -6,7 +6,7 @@ import { getAttachment } from '../../../../Components/Molecules/Attachment/attac
 import { Route } from '../../../../Enums/Route'
 import { API } from '../../../../infrastructure/api.service'
 
-const dataPrepare = (data: UserUpdateRequest): UserUpdateRequest => {
+const dto = (data: UserUpdateRequest): UserUpdateRequest => {
   data.avatar = getAttachment(data.avatar) as string
 
   return data
@@ -18,7 +18,7 @@ export const accountAction = {
   },
 
   update: async (data: UserUpdateRequest): Promise<IApiRes<UserResponse>> => {
-    data = dataPrepare(data)
+    data = dto(data)
     const res: IApiRes<UserResponse> = await API.put(Route.account, data)
 
     res.data && notification.success({ message: 'Success update data' })
