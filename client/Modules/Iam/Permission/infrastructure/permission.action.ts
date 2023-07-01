@@ -1,4 +1,3 @@
-import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { PermissionIndexRequest } from '@server/modules/iam/permission/infrastructure/permission-index.request'
 import {
@@ -8,6 +7,10 @@ import {
 import { PermissionResponse } from '@server/modules/iam/permission/infrastructure/permission.response'
 import { notification } from 'antd'
 import { UseQueryResult, useQuery } from 'react-query'
+import {
+  IPaginateResponse,
+  IndexSortOderEnum,
+} from '../../../../../@server/infrastructure/index/index.interface'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
 import { getColorPicker } from '../../../../Components/Molecules/ColorPicker/ColorPicker.util'
 import { Route } from '../../../../Enums/Route'
@@ -25,6 +28,9 @@ export class PermissionAction {
   static useIndex(
     req?: PermissionIndexRequest,
   ): UseQueryResult<IPaginateResponse<PermissionResponse>> {
+    if (!req.sortField) req.sortField = 'module'
+    if (!req.sortOrder) req.sortOrder = IndexSortOderEnum.Asc
+
     const fetch = async () => await API.get(Route.permission.index, req)
     return useQuery([PermissionAction.useIndex.name, req], fetch)
   }
