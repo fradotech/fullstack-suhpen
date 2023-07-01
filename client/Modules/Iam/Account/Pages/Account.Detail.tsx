@@ -6,9 +6,13 @@ import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import DescriptionContainer from '../../../../Components/Organisms/Description/DescriptionContainer'
 import DescriptionItem from '../../../../Components/Organisms/Description/DescriptionItem'
-import { accountAction } from '../infrastructure/account.action'
+import { AccountAction } from '../infrastructure/account.action'
 
-const AccountDetail: React.FC = () => {
+interface IProps {
+  accountAction: AccountAction
+}
+
+const AccountDetail: React.FC<IProps> = ({ accountAction }) => {
   const fetch = async () => await accountAction.getUserLogged()
   const { isLoading, data } = useQuery([AccountDetail.name], fetch)
   const fields = data?.data && Object.keys(data.data)

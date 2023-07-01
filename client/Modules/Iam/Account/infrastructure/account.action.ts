@@ -3,8 +3,8 @@ import { UserUpdateRequest } from '@server/modules/iam/user/infrastructure/user.
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { notification } from 'antd'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
-import { Route } from '../../../../Enums/Route'
 import { API } from '../../../../infrastructure/api.service'
+import { RoutesAccount } from './../Account.module'
 
 const dto = (data: UserUpdateRequest): UserUpdateRequest => {
   data.avatar = getAttachment(data.avatar) as string
@@ -12,17 +12,19 @@ const dto = (data: UserUpdateRequest): UserUpdateRequest => {
   return data
 }
 
-export const accountAction = {
-  getUserLogged: async (): Promise<IApiRes<UserResponse>> => {
-    return await API.get(Route.account)
-  },
+export class AccountAction {
+  constructor(private readonly route: typeof RoutesAccount) {}
 
-  update: async (data: UserUpdateRequest): Promise<IApiRes<UserResponse>> => {
+  async getUserLogged(): Promise<IApiRes<UserResponse>> {
+    return await API.get(this.route.account)
+  }
+
+  async update(data: UserUpdateRequest): Promise<IApiRes<UserResponse>> {
     data = dto(data)
-    const res: IApiRes<UserResponse> = await API.put(Route.account, data)
+    const res: IApiRes<UserResponse> = await API.put(this.route.account, data)
 
     res.data && notification.success({ message: 'Success update data' })
 
     return res
-  },
+  }
 }

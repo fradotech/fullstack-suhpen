@@ -10,9 +10,13 @@ import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { Route } from '../../../../Enums/Route'
 import { rule } from '../../../../common/utils/form.rules'
-import { accountAction } from '../infrastructure/account.action'
+import { AccountAction } from '../infrastructure/account.action'
 
-const AccountForm: React.FC = () => {
+interface IProps {
+  accountAction: AccountAction
+}
+
+const AccountForm: React.FC<IProps> = ({ accountAction }) => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const [form] = Form.useForm<UserUpdateRequest>()
