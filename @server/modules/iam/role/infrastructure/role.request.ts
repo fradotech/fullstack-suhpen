@@ -1,6 +1,7 @@
 import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger'
 import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.interface'
 import { BaseMasterDataRequest } from '@server/infrastructure/base/master-data/base-master-data.request'
+import { EntPermission } from '../../permission/infrastructure/permission.entity'
 import { EntRole } from './role.entity'
 import { IRole } from './role.interface'
 
@@ -22,5 +23,13 @@ export class RoleCreateRequest extends PartialType(RoleRequest) {
 export class RoleUpdateRequest extends PartialType(RoleRequest) {
   static dto(data: IRole, req: RoleUpdateRequest): IRole {
     return Object.assign(data, req)
+  }
+}
+
+export class RoleSyncRequest extends PartialType(RoleRequest) {
+  static dto(data: RoleCreateRequest, permissions: EntPermission[]): IRole {
+    const res = RoleCreateRequest.dto(data)
+    res.permissions = permissions
+    return res
   }
 }

@@ -7,8 +7,8 @@ import { ProductCreateRequest } from '../infrastructure/product.request'
 import { productDummies } from './product.dummy'
 
 export const productCreateSeeder = async (): Promise<boolean> => {
-  const data = ProductCreateRequest.dtos(productDummies)
   const entityManager = new EntityManager(dataSource)
+  const data = ProductCreateRequest.dtos(productDummies)
   const table = EntProduct.name
 
   const productExist = await entityManager

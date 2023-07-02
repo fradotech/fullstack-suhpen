@@ -32,7 +32,6 @@ export class InventoryIndexApp extends BaseIndexApp {
       {
         name: 'product',
         columns: ['name'],
-        relations: [{ name: 'categories', columns: ['name'] }],
       },
     ]
 

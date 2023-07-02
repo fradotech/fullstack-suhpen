@@ -6,8 +6,8 @@ import { CategoryCreateRequest } from '../infrastructure/category.request'
 import { categoryDummies } from './category.dummy'
 
 export const categoryCreateSeeder = async (): Promise<boolean> => {
-  const data = CategoryCreateRequest.dtos(categoryDummies)
   const entityManager = new EntityManager(dataSource)
+  const data = CategoryCreateRequest.dtos(categoryDummies)
   const table = EntCategory.name
 
   const categoryExist = await entityManager

@@ -9,9 +9,16 @@ import { Path } from '../../../../common/Path'
 import { PermissionAction } from '../infrastructure/permission.action'
 import { permissionColumns } from '../infrastructure/permission.column'
 
-const PermissionIndex: React.FC = () => {
+interface IProps {
+  roleId?: string
+}
+
+const PermissionIndex: React.FC<IProps> = (props: IProps) => {
   const { query, setQueryParams } = useDataTable<PermissionIndexRequest>()
-  const { isLoading, data, refetch } = PermissionAction.useIndex(query)
+  const { isLoading, data, refetch } = PermissionAction.useIndex(
+    query,
+    props.roleId,
+  )
 
   return (
     <>

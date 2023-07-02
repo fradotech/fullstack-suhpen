@@ -9,11 +9,11 @@ import { PermissionService } from '../infrastructure/permission.service'
 export const permissionSyncSeeder = async (
   app: NestExpressApplication,
 ): Promise<boolean> => {
-  const data = PermissionService.findFromApp(app)
   const entityManager = new EntityManager(dataSource)
+  const data = PermissionService.findFromApp(app)
 
   const permissionsDelete = await entityManager.find(EntPermission)
-  const permissionsCreate: EntPermission[] = []
+  const permissionsSave: EntPermission[] = []
 
   data.forEach((data) => {
     const permission = PermissionCreateRequest.dto(data)
@@ -25,11 +25,11 @@ export const permissionSyncSeeder = async (
     })
 
     permission.id = exist?.id
-    permissionsCreate.push(permission)
+    permissionsSave.push(permission)
   })
 
   await Promise.all([
-    entityManager.save(permissionsCreate),
+    entityManager.save(permissionsSave),
     entityManager.remove(permissionsDelete),
   ])
 

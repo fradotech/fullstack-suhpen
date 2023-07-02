@@ -77,7 +77,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
     const userId = user?.id
     const isUserRelation = relations
       .map((data) => data.name)
-      .find((data) => data == 'user')
+      .find((data) => data === 'user')
     const isAdmin = true
     // TODO: role
     // user.roles.includes(

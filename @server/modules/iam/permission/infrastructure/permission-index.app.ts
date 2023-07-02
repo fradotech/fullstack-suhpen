@@ -36,6 +36,13 @@ export class PermissionIndexApp extends BaseIndexApp {
       'createdAt',
     ]
     const relations: IIndexAppRelation[] = []
+
+    if (req.roleId) {
+      relations.push({
+        name: 'roles',
+      })
+    }
+
     const query = this.createQueryIndex(
       req,
       name,
@@ -45,7 +52,9 @@ export class PermissionIndexApp extends BaseIndexApp {
       this.request,
     )
 
-    // CONTINUE: add additional query
+    if (req.roleId) {
+      query.andWhere('roles.id = :roleId', { roleId: req.roleId })
+    }
 
     const [data, count] = await this.getData(query, req.isExport)
     const meta = this.mapMeta(count, req)

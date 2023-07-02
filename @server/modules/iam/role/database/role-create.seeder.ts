@@ -5,8 +5,8 @@ import { EntRole } from '../infrastructure/role.entity'
 import { roleDummies } from './role.dummy'
 
 export const roleCreateSeeder = async (): Promise<boolean> => {
-  const data = roleDummies
   const entityManager = new EntityManager(dataSource)
+  const data = roleDummies
   const table = EntRole.name
 
   const roleExist = await entityManager

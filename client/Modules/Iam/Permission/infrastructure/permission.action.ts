@@ -27,7 +27,9 @@ const dto = (
 export class PermissionAction {
   static useIndex(
     req?: PermissionIndexRequest,
+    roleId?: string,
   ): UseQueryResult<IPaginateResponse<PermissionResponse>> {
+    req.roleId = roleId
     if (!req.sortField) req.sortField = 'module'
     if (!req.sortOrder) req.sortOrder = IndexSortOderEnum.Asc
 

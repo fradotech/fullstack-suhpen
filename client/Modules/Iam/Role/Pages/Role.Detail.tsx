@@ -6,6 +6,7 @@ import { Section } from '../../../../Components/Molecules/Section/Section'
 import DescriptionContainer from '../../../../Components/Organisms/Description/DescriptionContainer'
 import DescriptionItem from '../../../../Components/Organisms/Description/DescriptionItem'
 import { Path } from '../../../../common/Path'
+import PermissionIndex from '../../Permission/Pages/Permission.Index'
 import { RoleAction } from '../infrastructure/role.action'
 
 const RoleDetail: React.FC = () => {
@@ -28,6 +29,7 @@ const RoleDetail: React.FC = () => {
           {fields?.map((key) => DescriptionItem(data?.data, key))}
         </DescriptionContainer>
       </Section>
+      <PermissionIndex roleId={id} />
     </>
   )
 }
