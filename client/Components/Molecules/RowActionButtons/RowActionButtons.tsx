@@ -94,6 +94,12 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
     )
   }
 
+  const renderButtons = actions.map((action) => {
+    // TODO: Add role
+    // return isHasPermission([action.href]) && renderButton(action)
+    return renderButton(action)
+  })
+
   return isMobile ? (
     <Dropdown
       trigger={['click']}
@@ -103,7 +109,7 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
             type: 'group',
             label: (
               <Card size="small">
-                <>{actions.slice(0, 3).map((action) => renderButton(action))}</>
+                <>{renderButtons}</>
               </Card>
             ),
           },
@@ -113,6 +119,6 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
       <Button type="text" icon={<MoreOutlined />} />
     </Dropdown>
   ) : (
-    <>{actions.map((action) => renderButton(action))}</>
+    <>{renderButtons}</>
   )
 }
