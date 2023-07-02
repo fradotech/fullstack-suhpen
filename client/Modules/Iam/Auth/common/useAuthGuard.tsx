@@ -9,7 +9,7 @@ const useAuthGuard = () => {
   React.useEffect(() => {
     !AuthAction.loggedUser() && navigate(Path.login)
     AuthAction.loggedUser() && navigate(window.location.pathname)
-  }, [navigate])
+  }, [])
 
   return { user: AuthAction.loggedUser() }
 }

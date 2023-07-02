@@ -2,7 +2,7 @@ import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
 import { CategoryResponse } from '@server/modules/feature/category/infrastructure/category.response'
 import { ProductResponse } from '@server/modules/feature/product/infrastructure/product.response'
-import { Row, Tag } from 'antd'
+import { Tag } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import {
   QueryObserverResult,
@@ -28,13 +28,15 @@ export const productColumns = (
     },
     {
       dataIndex: 'categories',
-      render: (data: CategoryResponse[]) => (
-        <Row>
-          {data?.map((data) => (
-            <Tag color={data.labelColor}>{data.name}</Tag>
-          ))}
-        </Row>
-      ),
+      render: (data: CategoryResponse[]) => {
+        return data?.map((data) => {
+          return (
+            <Tag key={data.id} color={data.labelColor}>
+              {data.name}
+            </Tag>
+          )
+        })
+      },
       filters: optionsCategory?.map((data) => {
         return {
           text: data.name,

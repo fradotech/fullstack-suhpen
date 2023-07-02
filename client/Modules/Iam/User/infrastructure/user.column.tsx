@@ -31,7 +31,11 @@ export const userColumns = (
       dataIndex: 'roles',
       render: (data: IRole[]) => {
         return data?.map((data) => {
-          return <Tag color={data.labelColor}>{data.name}</Tag>
+          return (
+            <Tag key={data.id} color={data.labelColor}>
+              {data.name}
+            </Tag>
+          )
         })
       },
       filters: optionsRole?.map((data) => {
