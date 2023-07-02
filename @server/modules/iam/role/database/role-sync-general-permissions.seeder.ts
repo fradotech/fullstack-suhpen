@@ -2,7 +2,7 @@ import { Logger } from '@nestjs/common'
 import dataSource from '@server/database/data-source'
 import { EntRole } from '@server/modules/iam/role/infrastructure/role.entity'
 import { Modules } from '@server/modules/modules'
-import { EntityManager } from 'typeorm'
+import { EntityManager, In } from 'typeorm'
 import { EntPermission } from '../../permission/infrastructure/permission.entity'
 import { RoleSyncRequest } from '../infrastructure/role.request'
 
@@ -14,7 +14,7 @@ export const roleSyncGeneralPermissionsSeeder = async (): Promise<boolean> => {
   const rolesSave: EntRole[] = []
 
   const permissionsAuth = await entityManager.find(EntPermission, {
-    where: { module: Modules.Auth },
+    where: { module: In[(Modules.Auth, Modules.Account, Modules.Attachment)] },
   })
 
   data.forEach((data) => {
