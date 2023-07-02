@@ -1,4 +1,6 @@
-const root = '/users'
+import { Modules } from '../../../../../@server/modules/modules'
+
+const root = `/${Modules.User}`
 
 export const userPath = {
   index: root,

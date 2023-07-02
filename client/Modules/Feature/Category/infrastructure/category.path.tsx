@@ -1,4 +1,6 @@
-const root = '/categories'
+import { Modules } from '../../../../../@server/modules/modules'
+
+const root = `/${Modules.Category}`
 
 export const categoryPath = {
   index: root,

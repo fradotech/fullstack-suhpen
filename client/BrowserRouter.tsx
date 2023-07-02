@@ -17,7 +17,7 @@ const Home = React.lazy(() => import('./Modules/Home/Home'))
 const NotFound = React.lazy(() => import('./Modules/NotFound'))
 const Unauthorized = React.lazy(() => import('./Modules/Unauthorized'))
 
-const user = AuthAction.loggedUser()
+const user = AuthAction.userLoggedLocal()
 const noGuardRoutes = [ERoute.Home]
 const noGuardRouters = [
   <Route key={ERoute.Home} path={ERoute.Home} element={<Home />} />,

@@ -1,4 +1,6 @@
-const root = '/permissions'
+import { Modules } from '../../../../../@server/modules/modules'
+
+const root = `/${Modules.Permission}`
 
 export const permissionPath = {
   index: root,

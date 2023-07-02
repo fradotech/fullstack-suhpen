@@ -6,7 +6,7 @@ import { Path } from '../../../common/Path'
 import { AuthAction } from '../../Iam/Auth/infrastructure/auth.action'
 import styles from '../Home.module.css'
 
-const user = AuthAction.loggedUser()
+const user = AuthAction.userLoggedLocal()
 
 const HomeHeaderSection: React.FC = () => {
   return (

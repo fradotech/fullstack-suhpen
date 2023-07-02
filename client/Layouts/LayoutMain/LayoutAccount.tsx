@@ -86,7 +86,7 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
           }}
         >
           <Space>
-            <Avatar icon={<UserOutlined />} src={props?.user.avatar} />
+            <Avatar icon={<UserOutlined />} src={props?.user?.avatar} />
             <Typography.Text>{props?.user?.name}</Typography.Text>
             <DownOutlined />
           </Space>

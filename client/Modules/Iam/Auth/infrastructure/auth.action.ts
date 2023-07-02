@@ -12,7 +12,7 @@ import { Util } from '../../../../common/utils/util'
 import { API } from '../../../../infrastructure/api.service'
 
 export class AuthAction {
-  static loggedUser(): UserResponse {
+  static userLoggedLocal(): UserResponse {
     return (
       Util.isValidJSON(localStorage.getItem('user')) &&
       JSON.parse(localStorage.getItem('user') || null)

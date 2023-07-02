@@ -13,7 +13,7 @@ import { AuthAction } from '../infrastructure/auth.action'
 
 const LoginForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
-  const user = AuthAction.loggedUser()
+  const user = AuthAction.userLoggedLocal()
   const [form] = Form.useForm<AuthLoginRequest>()
 
   const onFinish = async () => {

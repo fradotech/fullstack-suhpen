@@ -25,4 +25,11 @@ export class UserService extends UserRepo implements BaseService {
       relations: ['roles.permissions'],
     })
   }
+
+  async findOneByEmailWithRoles(email: string): Promise<EntUser> {
+    return await this.findOne({
+      where: { email },
+      relations: ['roles.permissions'],
+    })
+  }
 }

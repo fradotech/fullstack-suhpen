@@ -32,7 +32,11 @@ const UserDetail: React.FC = () => {
               return (
                 <Descriptions.Item label={Util.titleCase(key)}>
                   {data?.data.roles.map((role) => {
-                    return <Tag color={role.labelColor}>{role.name}</Tag>
+                    return (
+                      <Tag key={role.key} color={role.labelColor}>
+                        {role.name}
+                      </Tag>
+                    )
                   })}
                 </Descriptions.Item>
               )

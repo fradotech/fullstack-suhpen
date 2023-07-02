@@ -1,4 +1,6 @@
-const root = '/products'
+import { Modules } from '../../../../../@server/modules/modules'
+
+const root = `/${Modules.Product}`
 
 export const productPath = {
   index: root,

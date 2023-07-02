@@ -1,4 +1,6 @@
-const root = '/inventories'
+import { Modules } from '../../../../../@server/modules/modules'
+
+const root = `/${Modules.Inventory}`
 
 export const inventoryPath = {
   index: root,

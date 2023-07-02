@@ -18,7 +18,12 @@ export const roleSyncGeneralPermissionsSeeder = async (): Promise<boolean> => {
   const permissionsGeneral = await entityManager
     .createQueryBuilder(EntPermission, 'permissions')
     .andWhere(`permissions.module IN (:module)`, {
-      module: [Modules.Auth, Modules.Account, Modules.Attachment],
+      module: [
+        Modules.Auth,
+        Modules.Account,
+        Modules.Attachment,
+        Modules.Dashboard,
+      ],
     })
     .getMany()
 

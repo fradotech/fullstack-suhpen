@@ -13,7 +13,7 @@ const dto = (data: UserUpdateRequest): UserUpdateRequest => {
 }
 
 export class AccountAction {
-  static async getUserLogged(): Promise<IApiRes<UserResponse>> {
+  static async userLoggedServer(): Promise<IApiRes<UserResponse>> {
     return await API.get(Path.account.index)
   }
 

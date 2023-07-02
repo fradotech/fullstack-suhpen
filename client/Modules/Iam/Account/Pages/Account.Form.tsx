@@ -21,7 +21,7 @@ const AccountForm: React.FC = () => {
     [AccountForm.name],
     async () => {
       setIsLoading(true)
-      const res = await AccountAction.getUserLogged()
+      const res = await AccountAction.userLoggedServer()
       form.setFieldsValue(res.data)
       setIsLoading(false)
     },

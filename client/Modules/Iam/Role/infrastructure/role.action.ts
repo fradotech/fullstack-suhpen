@@ -6,6 +6,7 @@ import {
   RoleUpdateRequest,
 } from '@server/modules/iam/role/infrastructure/role.request'
 import { RoleResponse } from '@server/modules/iam/role/infrastructure/role.response'
+import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { notification } from 'antd'
 import { UseQueryResult, useQuery } from 'react-query'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
@@ -56,5 +57,15 @@ export class RoleAction {
     const res = await API.delete(Path.role.id(id))
     res.data && notification.success({ message: 'Success delete data' })
     return res
+  }
+
+  /// --- Utils --- \\\
+
+  static validatePermission(user: IUser, path: string): boolean {
+    return user.roles.some((role) => {
+      return role.permissions.some((permission) => {
+        return path === permission.path
+      })
+    })
   }
 }

@@ -1,4 +1,6 @@
-const root = '/roles'
+import { Modules } from '../../../../../@server/modules/modules'
+
+const root = `/${Modules.Role}`
 
 export const rolePath = {
   index: root,
