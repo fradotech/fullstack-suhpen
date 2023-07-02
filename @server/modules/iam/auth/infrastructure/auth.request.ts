@@ -11,6 +11,16 @@ export class AuthRegisterRequest extends PickType(UserRequest, [
 ]) {
   @IsMatch('password')
   passwordConfirmation!: string
+
+  static dto(data: AuthRegisterRequest): AuthRegisterRequest {
+    const res = new AuthRegisterRequest()
+
+    res.name = data.name
+    res.email = data.email
+    res.password = data.password
+
+    return res
+  }
 }
 
 export class AuthLoginRequest extends PickType(UserRequest, ['email']) {
