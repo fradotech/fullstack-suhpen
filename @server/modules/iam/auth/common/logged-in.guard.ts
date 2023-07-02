@@ -17,10 +17,7 @@ export class LoggedInGuard extends AuthGuard('jwt') {
       context.switchToHttp().getRequest().route.path,
     )
 
-    if (!isHasPermission) {
-      // TODO: enable
-      // throw Exception.forbidden()
-    }
+    if (!isHasPermission) throw Exception.forbidden()
 
     return user
   }

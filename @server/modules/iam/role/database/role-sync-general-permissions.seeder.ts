@@ -2,9 +2,10 @@ import { Logger } from '@nestjs/common'
 import dataSource from '@server/database/data-source'
 import { EntRole } from '@server/modules/iam/role/infrastructure/role.entity'
 import { Modules } from '@server/modules/modules'
-import { EntityManager, In } from 'typeorm'
+import { EntityManager } from 'typeorm'
 import { EntPermission } from '../../permission/infrastructure/permission.entity'
 import { RoleSyncRequest } from '../infrastructure/role.request'
+import { roleDummySuperAdminKey } from './role.dummy'
 
 export const roleSyncGeneralPermissionsSeeder = async (): Promise<boolean> => {
   const entityManager = new EntityManager(dataSource)
@@ -13,12 +14,19 @@ export const roleSyncGeneralPermissionsSeeder = async (): Promise<boolean> => {
   const rolesDelete = await entityManager.find(EntRole)
   const rolesSave: EntRole[] = []
 
-  const permissionsAuth = await entityManager.find(EntPermission, {
-    where: { module: In[(Modules.Auth, Modules.Account, Modules.Attachment)] },
-  })
+  const permissions = await entityManager.find(EntPermission)
+  const permissionsGeneral = await entityManager
+    .createQueryBuilder(EntPermission, 'permissions')
+    .andWhere(`permissions.module IN (:module)`, {
+      module: [Modules.Auth, Modules.Account, Modules.Attachment],
+    })
+    .getMany()
 
   data.forEach((data) => {
-    const role = RoleSyncRequest.dto(data, permissionsAuth)
+    const dataPermissions =
+      data.key === roleDummySuperAdminKey ? permissions : permissionsGeneral
+
+    const role = RoleSyncRequest.dto(data, dataPermissions)
 
     const exist = rolesDelete.find((data) => {
       if (data?.key !== role?.key) return null
