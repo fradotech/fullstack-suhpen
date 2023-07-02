@@ -3,7 +3,7 @@ import { Button, Col, Layout, Row } from 'antd'
 import React, { useContext } from 'react'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
-import useUserLogged from '../../Modules/Iam/Auth/common/useUserLogged'
+import useAuthGuard from '../../Modules/Iam/Auth/common/useAuthGuard'
 import { ThemeContext } from '../ThemeProvider/ThemeProvider'
 import { themeColors, themeColorsDark } from '../ThemeProvider/theme'
 import LayoutAccount from './LayoutAccount'
@@ -16,7 +16,7 @@ type IProps = {
 }
 
 const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
-  const { user } = useUserLogged()
+  const { user } = useAuthGuard()
   const [isCollapsed, setIsCollapsed] = React.useState(
     localStorage.getItem('isSidebarCollapsed') == 'false' ? true : false,
   )

@@ -64,7 +64,7 @@ export class RoleAction {
   static validatePermission(user: IUser, path: string): boolean {
     return user.roles.some((role) => {
       return role.permissions.some((permission) => {
-        return path === permission.path
+        return permission.path.includes(path)
       })
     })
   }
