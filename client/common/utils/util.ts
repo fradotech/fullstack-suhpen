@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common'
 import dayjs from 'dayjs'
 
 export class Util {
@@ -5,6 +6,8 @@ export class Util {
     try {
       JSON.parse(str)
     } catch (e) {
+      if (str == '') return false
+      Logger.error(e, this.name)
       return false
     }
     return true
@@ -24,6 +27,11 @@ export class Util {
 
   static camelToSnake = (str: string) => {
     return str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`)
+  }
+
+  static camelToTitle = (str: string) => {
+    const result = str.replace(/([A-Z])/g, ' $1')
+    return result.charAt(0).toUpperCase() + result.slice(1)
   }
 
   static formatDate = (date: Date | string | dayjs.Dayjs) => {

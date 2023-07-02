@@ -1,29 +1,7 @@
 import { Logger } from '@nestjs/common'
-import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface'
-import { config } from '@server/config'
-import { diskStorage } from 'multer'
-import { Exception } from '../exceptions/index.exception'
+import dayjs from 'dayjs'
 
 export class Util {
-  static fileFilter = (req: Request, file: any, callback: any) => {
-    if (!file.originalname.match(/\.(jpg|jpeg|png|pdf)$/)) {
-      Exception.badRequest('This file type is not allowed!')
-    }
-    callback(null, true)
-  }
-
-  static multerOptions = (): MulterOptions => {
-    return {
-      fileFilter: this.fileFilter,
-      storage: diskStorage({
-        destination: `.${config.attachment.storage}`,
-        filename: (req, file, callback) => {
-          callback(null, `${Date.now() + '-'}${file.originalname}`)
-        },
-      }),
-    }
-  }
-
   static isValidJSON = (str: string): boolean => {
     try {
       JSON.parse(str)
@@ -43,10 +21,8 @@ export class Util {
   }
 
   static titleCase = (str: string) => {
-    return str
-      .split(' ')
-      .map((w) => w[0].toUpperCase() + w.substring(1).toLowerCase())
-      .join(' ')
+    const res = str.replace(/([A-Z])/g, ' $1')
+    return res.charAt(0).toUpperCase() + res.slice(1)
   }
 
   static camelToSnake = (str: string) => {
@@ -56,5 +32,26 @@ export class Util {
   static camelToTitle = (str: string) => {
     const result = str.replace(/([A-Z])/g, ' $1')
     return result.charAt(0).toUpperCase() + result.slice(1)
+  }
+
+  static formatDate = (date: Date | string | dayjs.Dayjs) => {
+    const newDate = dayjs(date).format('YYYY-MM-DD')
+    return newDate == 'Invalid Date' ? '-' : newDate
+  }
+
+  static formatDatetime = (date: Date | string | dayjs.Dayjs) => {
+    const newDate = dayjs(date).format('YYYY-MM-DD HH:mm')
+    return newDate == 'Invalid Date' ? '-' : newDate
+  }
+
+  static formatCurrency = (str: number | string) => {
+    const formatter = new Intl.NumberFormat('in-ID', {
+      style: 'currency',
+      currency: 'IDR',
+    })
+
+    const currency = formatter.format(+str)
+
+    return currency.substring(0, currency.length - 3)
   }
 }

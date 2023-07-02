@@ -1,9 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Path } from '../../../../common/Path'
-import { AuthAction } from '../../Auth/infrastructure/auth.action'
+import { AuthAction } from '../infrastructure/auth.action'
 
-const useUser = () => {
+const useAuthGuard = () => {
   const navigate = useNavigate()
 
   React.useEffect(() => {
@@ -14,4 +14,4 @@ const useUser = () => {
   return { user: AuthAction.loggedUser() }
 }
 
-export default useUser
+export default useAuthGuard
