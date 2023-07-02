@@ -1,7 +1,7 @@
 import { IBaseEntity } from '@server/infrastructure/base/base-entity.interface'
 import dayjs from 'dayjs'
 import { IProduct } from '../../product/infrastructure/product.interface'
-import { EInventorySupplyType } from './inventory.enum'
+import { EInventorySupplyType } from '../common/inventory.enum'
 
 export interface IInventory extends IBaseEntity {
   sku?: string

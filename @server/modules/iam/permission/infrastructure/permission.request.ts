@@ -4,6 +4,7 @@ import { config } from '@server/config'
 import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.interface'
 import { BaseMasterDataRequest } from '@server/infrastructure/base/master-data/base-master-data.request'
 import { Modules } from '@server/modules/modules'
+import { PermissionMethodEnum } from '../common/permission.enum'
 import { EntPermission } from './permission.entity'
 import { IPermission } from './permission.interface'
 
@@ -56,17 +57,28 @@ export class PermissionSyncRequest extends PartialType(PermissionRequest) {
       }
     })
 
-    res.name = res.name.replace('Get', 'READ')
-    res.name = res.name.replace('Post', 'WRITE')
-    res.name = res.name.replace('Put', 'EDIT')
-    res.name = res.name.replace('Patch', 'MODIFY')
-    res.name = res.name.replace('Delete', 'DELETE')
+    res.name = res.name.replace(
+      Util.titleCase(PermissionMethodEnum.get.name),
+      PermissionMethodEnum.get.accessName,
+    )
+    res.name = res.name.replace(
+      Util.titleCase(PermissionMethodEnum.post.name),
+      PermissionMethodEnum.post.accessName,
+    )
+    res.name = res.name.replace(
+      Util.titleCase(PermissionMethodEnum.put.name),
+      PermissionMethodEnum.put.accessName,
+    )
+    res.name = res.name.replace(
+      Util.titleCase(PermissionMethodEnum.patch.name),
+      PermissionMethodEnum.patch.accessName,
+    )
+    res.name = res.name.replace(
+      Util.titleCase(PermissionMethodEnum.delete.name),
+      PermissionMethodEnum.delete.accessName,
+    )
 
-    res.method === 'get' && (res.labelColor = '#00a120')
-    res.method === 'post' && (res.labelColor = '#cf720e')
-    res.method === 'put' && (res.labelColor = '#001fe6')
-    res.method === 'patch' && (res.labelColor = '#45a8ff')
-    res.method === 'delete' && (res.labelColor = '#ff0033')
+    res.labelColor = PermissionMethodEnum[res.method].color
 
     return res
   }

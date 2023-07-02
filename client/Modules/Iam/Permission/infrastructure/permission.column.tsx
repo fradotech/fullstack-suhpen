@@ -9,6 +9,8 @@ import {
   RefetchOptions,
   RefetchQueryFilters,
 } from 'react-query'
+import { PermissionMethodEnum } from '../../../../../@server/modules/iam/permission/common/permission.enum'
+import { Modules } from '../../../../../@server/modules/modules'
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Path } from '../../../../common/Path'
 import { Util } from '../../../../common/utils/util'
@@ -28,8 +30,25 @@ export const permissionColumns = (
         return <Tag color={data.labelColor}>{data.name}</Tag>
       },
     },
-    { dataIndex: 'module' },
-    { dataIndex: 'method' },
+    {
+      dataIndex: 'module',
+      filters: Object.values(Modules).map((modules) => {
+        return {
+          text: modules,
+          value: modules,
+        }
+      }),
+    },
+
+    {
+      dataIndex: 'method',
+      filters: Object.values(PermissionMethodEnum).map((method) => {
+        return {
+          text: method.name,
+          value: method.name,
+        }
+      }),
+    },
     { dataIndex: 'path' },
     {
       title: 'Active',
