@@ -10,6 +10,7 @@ import {
 import { Button, Card, Dropdown, Popconfirm, Tooltip } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import isHasPermission from '../../../Modules/Iam/Role/common/isHasPermission'
 import { isMobileScreen } from '../../../common/utils/is-mobile'
 
 type ButtonType = 'view' | 'edit' | 'delete' | 'approve' | 'reject' | 'submit'
@@ -95,9 +96,7 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
   }
 
   const renderButtons = actions.map((action) => {
-    // TODO: Add role
-    // return isHasPermission([action.href]) && renderButton(action)
-    return renderButton(action)
+    return isHasPermission([action.href], true) && renderButton(action)
   })
 
   return isMobile ? (

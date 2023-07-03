@@ -15,10 +15,7 @@ interface IProps {
 
 const PermissionIndex: React.FC<IProps> = (props: IProps) => {
   const { query, setQueryParams } = useDataTable<PermissionIndexRequest>()
-  const { isLoading, data, refetch } = PermissionAction.useIndex(
-    query,
-    props.roleId,
-  )
+  const { isLoading, data } = PermissionAction.useIndex(query, props.roleId)
 
   return (
     <>
@@ -26,7 +23,7 @@ const PermissionIndex: React.FC<IProps> = (props: IProps) => {
       <Section>
         <DataTable
           rowKey="id"
-          columns={permissionColumns(refetch)}
+          columns={permissionColumns()}
           dataSource={data?.data}
           search={query.search}
           pagination={paginationTransform(data?.meta)}
@@ -35,7 +32,6 @@ const PermissionIndex: React.FC<IProps> = (props: IProps) => {
           dataTableHeader={{
             query,
             search: true,
-            // hrefCreate: Route.permission.form,
             hrefExport: Path.permission.export,
           }}
         />

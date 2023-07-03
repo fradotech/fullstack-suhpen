@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
+import { config } from '@server/config'
 import { BaseService } from '@server/infrastructure/base/base.service'
 import { In, Repository } from 'typeorm'
 import { IUser } from '../../user/infrastructure/user.interface'
@@ -20,10 +21,15 @@ export class RoleService extends RoleRepo implements BaseService {
     return await this.findBy({ id: In(ids) })
   }
 
-  static validatePermission(user: IUser, path: string): boolean {
+  static validatePermission(
+    user: IUser,
+    method: string,
+    path: string,
+  ): boolean {
+    const key = path.replace(config.app.prefix, method.toLowerCase())
     return user.roles.some((role) => {
       return role.permissions.some((permission) => {
-        return path === permission.path
+        return key === permission.key
       })
     })
   }

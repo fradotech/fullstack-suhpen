@@ -14,6 +14,7 @@ export class LoggedInGuard extends AuthGuard('jwt') {
 
     const isHasPermission = RoleService.validatePermission(
       user,
+      context.switchToHttp().getRequest().method,
       context.switchToHttp().getRequest().route.path,
     )
 

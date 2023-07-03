@@ -3,6 +3,7 @@ import { Button, Popconfirm, Row } from 'antd'
 import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import isHasPermission from '../../../Modules/Iam/Role/common/isHasPermission'
 import { API } from '../../../infrastructure/api.service'
 import Loading from '../Loading/Loading'
 import styles from './PageHeader.module.css'
@@ -23,14 +24,14 @@ export const PageHeader: React.FC<IProps> = (props: IProps) => {
       <Row className={styles.container}>
         {props.title && <Title className={styles.title}>{props.title}</Title>}
         <Row>
-          {props.hrefEdit && (
+          {props.hrefEdit && isHasPermission([props.hrefEdit], true) && (
             <Link to={props.hrefEdit}>
               <Button type="primary" className={styles.actionButton}>
                 <EditOutlined />
               </Button>
             </Link>
           )}
-          {props.hrefDelete && (
+          {props.hrefDelete && isHasPermission([props.hrefDelete], true) && (
             <Popconfirm
               title={'Are you sure want to delete?'}
               onConfirm={async () => {

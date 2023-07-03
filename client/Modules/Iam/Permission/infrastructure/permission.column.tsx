@@ -1,28 +1,16 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
-import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
 import { IPermission } from '@server/modules/iam/permission/infrastructure/permission.interface'
 import { PermissionResponse } from '@server/modules/iam/permission/infrastructure/permission.response'
 import { Tag } from 'antd'
 import { ColumnsType } from 'antd/es/table'
-import {
-  QueryObserverResult,
-  RefetchOptions,
-  RefetchQueryFilters,
-} from 'react-query'
+
 import { PermissionMethodEnum } from '../../../../../@server/modules/iam/permission/common/permission.enum'
 import { Modules } from '../../../../../@server/modules/modules'
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Path } from '../../../../common/Path'
 import { Util } from '../../../../common/utils/util'
-import { PermissionAction } from './permission.action'
 
-export const permissionColumns = (
-  refetch: <TPageData>(
-    options?: RefetchOptions & RefetchQueryFilters<TPageData>,
-  ) => Promise<
-    QueryObserverResult<IPaginateResponse<PermissionResponse>, unknown>
-  >,
-): ColumnsType<PermissionResponse> => {
+export const permissionColumns = (): ColumnsType<PermissionResponse> => {
   return [
     {
       title: 'Name',
@@ -81,13 +69,6 @@ export const permissionColumns = (
             {
               type: 'edit',
               href: Path.permission.edit(data.id),
-            },
-            {
-              type: 'delete',
-              onClick: async () => {
-                await PermissionAction.delete(data.id)
-                await refetch()
-              },
             },
           ]}
         />

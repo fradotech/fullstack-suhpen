@@ -27,48 +27,6 @@ export const roleSyncGeneralPermissionsSeeder = async (): Promise<boolean> => {
     })
     .getMany()
 
-  // TODO: Add role
-  // const a = {
-  //   id: 'a24c33cc-7058-435b-9c38-d8d9651fc78e',
-  //   createdById: null,
-  //   updatedById: null,
-  //   deletedAt: null,
-  //   deletedById: null,
-  //   name: 'READ roles',
-  //   key: 'get/roles',
-  //   isActive: true,
-  //   description: null,
-  //   thumbnail: null,
-  //   labelColor: '#00a120',
-  //   module: 'roles',
-  //   path: '/api/v1/roles',
-  //   method: 'get',
-  //   roles: [],
-  // }
-
-  // const b = {
-  //   id: '14f68638-7a43-4a26-b51c-aeba5a1ecde3',
-  //   createdById: null,
-  //   updatedById: null,
-  //   deletedAt: null,
-  //   deletedById: null,
-  //   name: 'DELETE roles id',
-  //   key: 'delete/roles/:id',
-  //   isActive: true,
-  //   description: null,
-  //   thumbnail: null,
-  //   labelColor: '#ff0033',
-  //   module: 'roles',
-  //   path: '/api/v1/roles/:id',
-  //   method: 'delete',
-  //   roles: [],
-  // }
-
-  // delete a.roles
-  // delete b.roles
-
-  // permissionsGeneral.push(a, b)
-
   data.forEach((data) => {
     const dataPermissions =
       data.key === roleDummySuperAdminKey ? permissions : permissionsGeneral
