@@ -1,4 +1,3 @@
-import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { IPermission } from '@server/modules/iam/permission/infrastructure/permission.interface'
 import { PermissionResponse } from '@server/modules/iam/permission/infrastructure/permission.response'
 import { Tag } from 'antd'
@@ -18,6 +17,7 @@ export const permissionColumns = (): ColumnsType<PermissionResponse> => {
         return <Tag color={data.labelColor}>{data.name}</Tag>
       },
     },
+    { dataIndex: 'key' },
     {
       dataIndex: 'module',
       filters: Object.values(Modules).map((modules) => {
@@ -38,20 +38,6 @@ export const permissionColumns = (): ColumnsType<PermissionResponse> => {
       }),
     },
     { dataIndex: 'path' },
-    {
-      title: 'Active',
-      dataIndex: 'isActive',
-      width: '1px',
-      render: (data: boolean) =>
-        data ? (
-          <CheckCircleOutlined style={{ color: 'green' }} />
-        ) : (
-          <CloseCircleOutlined style={{ color: 'red' }} />
-        ),
-      filters: [
-        { text: <CheckCircleOutlined style={{ color: 'green' }} />, value: 1 },
-      ],
-    },
     {
       dataIndex: 'createdAt',
       render: (data: Date) => Util.formatDate(data),
