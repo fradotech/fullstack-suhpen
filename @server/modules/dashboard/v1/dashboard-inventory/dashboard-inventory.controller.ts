@@ -7,7 +7,7 @@ import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
 import { DashboardInventoryApp } from './dashboard-inventory.app'
 
-const THIS_MODULE = Modules.Dashboard + '/' + Modules.Inventory
+const THIS_MODULE = Modules.DashboardInventory
 
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)

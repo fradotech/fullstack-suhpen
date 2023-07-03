@@ -31,7 +31,7 @@ export const PageHeader: React.FC<IProps> = (props: IProps) => {
               </Button>
             </Link>
           )}
-          {props.hrefDelete && isHasPermission([props.hrefDelete], true) && (
+          {props.hrefDelete && isHasPermission([undefined], true) && (
             <Popconfirm
               title={'Are you sure want to delete?'}
               onConfirm={async () => {

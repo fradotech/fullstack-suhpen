@@ -8,9 +8,13 @@ export enum Modules {
   Permission = 'permissions',
   Account = 'account',
   Attachment = 'attachments',
-  Dashboard = 'dashboard',
 
-  // --- Feature Modules --- \\
+  // --- Dashboard --- \\
+
+  Dashboard = 'dashboard',
+  DashboardInventory = `dashboard/inventories`,
+
+  // --- Feature --- \\
 
   Category = 'categories',
   Product = 'products',

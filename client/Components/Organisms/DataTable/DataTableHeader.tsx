@@ -11,6 +11,7 @@ import dayjs from 'dayjs'
 import FileDownload from 'js-file-download'
 import React from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import isHasPermission from '../../../Modules/Iam/Role/common/isHasPermission'
 import { Util } from '../../../common/utils/util'
 import { HOST_API } from '../../../infrastructure/api.service'
 import Loading from '../../Molecules/Loading/Loading'
@@ -95,7 +96,7 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
           )}
         </Row>
         <Row>
-          {props.hrefExport && (
+          {props.hrefExport && isHasPermission([props.hrefExport]) && (
             <Col className={styles.headerItem}>
               <Button
                 type="primary"
@@ -107,7 +108,7 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
               </Button>
             </Col>
           )}
-          {props.hrefCreate && (
+          {props.hrefCreate && isHasPermission([props.hrefCreate], true) && (
             <Col className={styles.headerItem}>
               <Button
                 type="primary"
