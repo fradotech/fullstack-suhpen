@@ -26,7 +26,7 @@ export const roleColumns = (
         return <Tag color={data.labelColor}>{data.name}</Tag>
       },
     },
-    { dataIndex: 'key' },
+    { dataIndex: 'description' },
     {
       title: 'Active',
       dataIndex: 'isActive',
