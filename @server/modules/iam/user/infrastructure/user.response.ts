@@ -6,6 +6,7 @@ export class UserResponse extends EntUser {
   otpExpiredAt?: Date
   _accessToken?: string
   dateRange?: [dayjs.Dayjs, dayjs.Dayjs]
+  roleIds?: string[]
 
   static dto(data: IUser): UserResponse {
     const res = new UserResponse()
@@ -15,6 +16,7 @@ export class UserResponse extends EntUser {
     delete res.token
 
     res._accessToken = data.token
+    res.roleIds = data.roles?.map((data) => data.id)
 
     return res
   }
@@ -35,6 +37,8 @@ export class UserStrictResponse extends UserResponse {
     delete res.password
     delete res.token
     delete res._accessToken
+
+    res.roleIds = data.roles?.map((data) => data.id)
 
     return res
   }

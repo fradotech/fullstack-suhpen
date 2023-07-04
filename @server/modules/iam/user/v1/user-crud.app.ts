@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { RoleService } from '../../role/infrastructure/role.service'
 import { IUser } from '../infrastructure/user.interface'
 import {
   UserCreateRequest,
@@ -8,7 +9,10 @@ import { UserService } from '../infrastructure/user.service'
 
 @Injectable()
 export class UserCrudApp {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly roleService: RoleService,
+  ) {}
 
   async find(): Promise<IUser[]> {
     return await this.userService.find()
@@ -16,16 +20,26 @@ export class UserCrudApp {
 
   async create(req: UserCreateRequest): Promise<IUser> {
     const data = UserCreateRequest.dto(req)
+
+    if (req.roleIds) {
+      data.roles = await this.roleService.findByInIds(req.roleIds)
+    }
+
     return await this.userService.save(data)
   }
 
   async findOneOrFail(id: string): Promise<IUser> {
-    return await this.userService.findOneByOrFail({ id })
+    return await this.userService.findOneRelationRoles(id)
   }
 
   async update(id: string, req: UserUpdateRequest): Promise<IUser> {
     const data = await this.userService.findOneByOrFail({ id })
     const dataUpdate = UserUpdateRequest.dto(data, req)
+
+    if (req.roleIds) {
+      dataUpdate.roles = await this.roleService.findByInIds(req.roleIds)
+    }
+
     return await this.userService.save(dataUpdate)
   }
 

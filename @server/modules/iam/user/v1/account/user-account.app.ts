@@ -7,6 +7,6 @@ export class UserAccountApp {
   constructor(private readonly userService: UserService) {}
 
   async findOneWithRoles(id: string): Promise<IUser> {
-    return await this.userService.findOneWithRoles(id)
+    return await this.userService.findOneRelationRoles(id)
   }
 }

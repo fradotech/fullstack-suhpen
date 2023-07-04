@@ -10,12 +10,15 @@ import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { Path } from '../../../../common/Path'
 import { rule } from '../../../../common/utils/form.rules'
+import { RoleAction } from '../../Role/infrastructure/role.action'
 import { AccountAction } from '../infrastructure/account.action'
 
 const AccountForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const [form] = Form.useForm<UserUpdateRequest>()
+
+  const { isLoading: isLoadingRoles, data: roles } = RoleAction.useIndex()
 
   useQuery(
     [AccountForm.name],
@@ -38,7 +41,10 @@ const AccountForm: React.FC = () => {
 
   return (
     <>
-      <PageHeader title="Account Edit" isLoading={isLoading} />
+      <PageHeader
+        title="Account Edit"
+        isLoading={isLoading || isLoadingRoles}
+      />
       <Section>
         <FormContainer
           onFinish={onFinish}
@@ -51,14 +57,16 @@ const AccountForm: React.FC = () => {
           <FormItem name="name" rules={[rule.required]} />
 
           <Row gutter={12}>
-            {/* TODO: Add role */}
-            {/* <Col sm={24} md={12}>
+            <Col sm={24} md={12}>
               <FormItem
-                name="role"
-                input="select"
-                optionsEnum={Object.values(RoleEnum)}
+                name="roleIds"
+                label="Roles"
+                input="selectMultiple"
+                options={roles?.data}
+                form={form}
+                disabled
               />
-            </Col> */}
+            </Col>
             <Col sm={24} md={12}>
               <FormItem
                 name="gender"
@@ -74,7 +82,7 @@ const AccountForm: React.FC = () => {
             </Col>
           </Row>
 
-          <FormItem name="address" />
+          <FormItem name="address" input="textArea" />
         </FormContainer>
       </Section>
     </>

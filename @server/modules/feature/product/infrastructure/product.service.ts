@@ -19,4 +19,11 @@ export class ProductService extends ProductRepo implements BaseService {
   async findByInIds(ids: string[]): Promise<IProduct[]> {
     return await this.findBy({ id: In(ids) })
   }
+
+  async findByRelationCategories(id: string): Promise<IProduct> {
+    return await this.findOneOrFail({
+      where: { id },
+      relations: ['categories'],
+    })
+  }
 }
