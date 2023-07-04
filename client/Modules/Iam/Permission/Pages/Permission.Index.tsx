@@ -1,4 +1,6 @@
 import { PermissionIndexRequest } from '@server/modules/iam/permission/infrastructure/permission-index.request'
+import { IPermission } from '@server/modules/iam/permission/infrastructure/permission.interface'
+import { TableRowSelection } from 'antd/es/table/interface'
 import React from 'react'
 import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
@@ -11,6 +13,7 @@ import { permissionColumns } from '../infrastructure/permission.column'
 
 interface IProps {
   roleId?: string
+  rowSelection?: TableRowSelection<IPermission>
 }
 
 const PermissionIndex: React.FC<IProps> = (props: IProps) => {
@@ -34,6 +37,7 @@ const PermissionIndex: React.FC<IProps> = (props: IProps) => {
             search: true,
             hrefExport: Path.permission.export,
           }}
+          rowSelection={props.rowSelection}
         />
       </Section>
     </>

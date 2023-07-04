@@ -19,7 +19,7 @@ export class ProductRequest
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
-  @ApiProperty({ example: ['categoryId1', 'categoryId2'] })
+  @ApiProperty({ example: ['id1', 'id2', 'id3'] })
   categoryIds: string[]
   categories?: ICategory[]
 

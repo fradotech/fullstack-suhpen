@@ -1,3 +1,4 @@
+import { roleDummySuperAdminKey } from '@server/modules/iam/role/database/role.dummy'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Request } from 'express'
 import { Repository, SelectQueryBuilder } from 'typeorm'
@@ -78,11 +79,9 @@ export abstract class BaseIndexApp extends BaseIndexService {
     const isUserRelation = relations
       .map((data) => data.name)
       .find((data) => data === 'user')
-    const isAdmin = true
-    // TODO: role
-    // user.roles.includes(
-    //   'Permision Name',
-    // )
+    const isAdmin = user?.roles?.find((role) => {
+      return role.key === roleDummySuperAdminKey
+    })
 
     if (isUser && userId && !isAdmin) {
       !isUserRelation && query.leftJoinAndSelect(`${name}.user`, 'user')

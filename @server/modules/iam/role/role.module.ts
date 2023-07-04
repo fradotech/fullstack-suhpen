@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
+import { PermissionModule } from '../permission/permission.module'
 import { RoleIndexApp } from './infrastructure/role-index.app'
 import { EntRole } from './infrastructure/role.entity'
 import { RoleService } from './infrastructure/role.service'
@@ -8,7 +9,7 @@ import { RoleCrudController } from './v1/role-crud.controller'
 import { RoleSheetController } from './v1/role-sheet.controller'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([EntRole])],
+  imports: [TypeOrmModule.forFeature([EntRole]), PermissionModule],
   controllers: [RoleSheetController, RoleCrudController],
   providers: [RoleService, RoleCrudApp, RoleIndexApp],
   exports: [RoleService],

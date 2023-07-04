@@ -14,7 +14,6 @@ import {
   MinLength,
 } from 'class-validator'
 import dayjs from 'dayjs'
-import { IRole } from '../../role/infrastructure/role.interface'
 import { REGEX_PASSWORD } from '../common/character.constant'
 import { IUser } from '../infrastructure/user.interface'
 import { EntUser } from './user.entity'
@@ -52,9 +51,8 @@ export class UserRequest extends EntUser implements IUser {
   @IsArray()
   @IsString({ each: true })
   @ArrayMinSize(1)
-  @ApiProperty({ example: ['categoryId1', 'categoryId2'] })
+  @ApiProperty({ example: ['id1', 'id2', 'id3'] })
   roleIds?: string[]
-  roles: IRole[]
 
   @IsOptional()
   @IsEnum(UserGenderEnum)

@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { PermissionService } from '../../permission/infrastructure/permission.service'
 import { IRole } from '../infrastructure/role.interface'
 import {
   RoleCreateRequest,
@@ -8,7 +9,10 @@ import { RoleService } from '../infrastructure/role.service'
 
 @Injectable()
 export class RoleCrudApp {
-  constructor(private readonly roleService: RoleService) {}
+  constructor(
+    private readonly roleService: RoleService,
+    private readonly permissionService: PermissionService,
+  ) {}
 
   async find(): Promise<IRole[]> {
     return await this.roleService.find()
@@ -16,16 +20,31 @@ export class RoleCrudApp {
 
   async create(req: RoleCreateRequest): Promise<IRole> {
     const data = RoleCreateRequest.dto(req)
+
+    if (req.permissionIds) {
+      data.permissions = await this.permissionService.findByInIds(
+        req.permissionIds,
+      )
+    }
+
     return await this.roleService.save(data)
   }
 
   async findOneOrFail(id: string): Promise<IRole> {
-    return await this.roleService.findOneByOrFail({ id })
+    return await this.roleService.findOneRelationPermissions(id)
   }
 
   async update(id: string, req: RoleUpdateRequest): Promise<IRole> {
     const data = await this.roleService.findOneByOrFail({ id })
     const dataUpdate = RoleUpdateRequest.dto(data, req)
+
+    console.log(req.permissionIds)
+    if (req.permissionIds) {
+      dataUpdate.permissions = await this.permissionService.findByInIds(
+        req.permissionIds,
+      )
+    }
+
     return await this.roleService.save(dataUpdate)
   }
 

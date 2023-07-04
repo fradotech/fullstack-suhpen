@@ -21,6 +21,13 @@ export class RoleService extends RoleRepo implements BaseService {
     return await this.findBy({ id: In(ids) })
   }
 
+  async findOneRelationPermissions(id: string): Promise<EntRole> {
+    return await this.findOneOrFail({
+      where: { id },
+      relations: ['permissions'],
+    })
+  }
+
   static validatePermission(
     user: IUser,
     method: string,
