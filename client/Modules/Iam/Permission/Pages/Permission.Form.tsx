@@ -1,7 +1,7 @@
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { PermissionCreateRequest } from '@server/modules/iam/permission/infrastructure/permission.request'
 import { PermissionResponse } from '@server/modules/iam/permission/infrastructure/permission.response'
-import { Form } from 'antd'
+import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -51,13 +51,23 @@ const PermissionForm: React.FC = () => {
           onFinish={onFinish}
           form={form}
           layout="vertical"
-          centered
           button={{ disabled: isLoading }}
         >
-          <FormItem name="name" disabled={true} />
-          <FormItem name="path" disabled={true} />
-          <FormItem name="description" input="textArea" />
-          <FormItem name="thumbnail" input="attachment" total={1} form={form} />
+          <Row gutter={12}>
+            <Col sm={24} md={6}>
+              <FormItem
+                name="thumbnail"
+                input="attachment"
+                total={1}
+                form={form}
+              />
+            </Col>
+            <Col sm={24} md={18}>
+              <FormItem name="name" disabled={true} />
+              <FormItem name="path" disabled={true} />
+              <FormItem name="description" input="textArea" />
+            </Col>
+          </Row>
         </FormContainer>
       </Section>
     </>

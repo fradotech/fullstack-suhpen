@@ -43,6 +43,7 @@ interface IProps {
   showTime?: boolean | SharedTimeProps<dayjs.Dayjs> | any
   format?: string
   total?: number
+  rows?: number
 }
 
 const FormItem: React.FC<IProps> = (props: IProps) => {
@@ -167,6 +168,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'textArea':
       input = (
         <AntdInput.TextArea
+          rows={props.rows}
           disabled={props.disabled}
           placeholder={props.placeholder || Util.titleCase(props.name)}
         />
