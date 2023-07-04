@@ -31,7 +31,7 @@ const RoleFieldsSelectPermissions: React.FC<IProps> = (props: IProps) => {
   }
 
   // TODO: Add role
-  console.log(props.form.getFieldValue('permissionIds'))
+  // console.log(props.form.getFieldValue('permissionIds'))
 
   return <PermissionIndex rowSelection={rowSelection} />
 }
