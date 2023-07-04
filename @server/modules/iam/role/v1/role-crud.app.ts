@@ -38,7 +38,6 @@ export class RoleCrudApp {
     const data = await this.roleService.findOneByOrFail({ id })
     const dataUpdate = RoleUpdateRequest.dto(data, req)
 
-    console.log(req.permissionIds)
     if (req.permissionIds) {
       dataUpdate.permissions = await this.permissionService.findByInIds(
         req.permissionIds,
