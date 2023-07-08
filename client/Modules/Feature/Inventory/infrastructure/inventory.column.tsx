@@ -11,7 +11,7 @@ import {
 } from 'react-query'
 import { Link } from 'react-router-dom'
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../common/Path'
 import { Util } from '../../../../common/utils/util'
 import { InventoryAction } from './inventory.action'
 
@@ -30,7 +30,7 @@ export const inventoryColumns = (
     {
       dataIndex: 'product',
       render: (data: IProduct) => (
-        <Link to={Route.product.id(data?.id)}>{data?.name}</Link>
+        <Link to={Path.product.id(data?.id)}>{data?.name}</Link>
       ),
     },
     {
@@ -95,11 +95,11 @@ export const inventoryColumns = (
           actions={[
             {
               type: 'view',
-              href: Route.inventory.id(data.id),
+              href: Path.inventory.id(data.id),
             },
             {
               type: 'edit',
-              href: Route.inventory.edit(data.id),
+              href: Path.inventory.edit(data.id),
             },
             {
               type: 'delete',

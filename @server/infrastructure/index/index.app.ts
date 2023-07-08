@@ -1,4 +1,5 @@
-import { RoleEnum } from '@server/modules/iam/role/common/role.enum'
+import { roleDummySuperAdminKey } from '@server/modules/iam/role/database/role.dummy'
+import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Request } from 'express'
 import { Repository, SelectQueryBuilder } from 'typeorm'
 import { IIndexAppRelation } from './index.interface'
@@ -73,13 +74,14 @@ export abstract class BaseIndexApp extends BaseIndexService {
     }
 
     const isUser = repo.metadata.propertiesMap['user']
-    const userId = request['user']?.['id']
+    const user = request['user'] as IUser
+    const userId = user?.id
     const isUserRelation = relations
       .map((data) => data.name)
-      .find((data) => data == 'user')
-    const isAdmin = [RoleEnum.SuperAdmin, RoleEnum.Admin].includes(
-      request['user']?.['role'],
-    )
+      .find((data) => data === 'user')
+    const isAdmin = user?.roles?.find((role) => {
+      return role.key === roleDummySuperAdminKey
+    })
 
     if (isUser && userId && !isAdmin) {
       !isUserRelation && query.leftJoinAndSelect(`${name}.user`, 'user')

@@ -5,14 +5,14 @@ import { Col, Divider, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
-import { RoleEnum } from '../../../../../@server/modules/iam/role/common/role.enum'
 import { UserGenderEnum } from '../../../../../@server/modules/iam/user/common/user.enum'
 import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../common/Path'
 import { rule } from '../../../../common/utils/form.rules'
+import { RoleAction } from '../../Role/infrastructure/role.action'
 import { UserAction } from '../infrastructure/user.action'
 
 const UserForm: React.FC = () => {
@@ -20,6 +20,8 @@ const UserForm: React.FC = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const [form] = Form.useForm<UserCreateRequest>()
+
+  const { isLoading: isLoadingRoles, data: roles } = RoleAction.useIndex()
 
   useQuery(
     [UserForm.name],
@@ -40,14 +42,14 @@ const UserForm: React.FC = () => {
     if (!id) res = await UserAction.create(data)
     if (id) res = await UserAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Route.user.index)
+    res.data && navigate(Path.user.index)
   }
 
   return (
     <>
       <PageHeader
         title={id ? 'User Edit' : 'User Create'}
-        isLoading={isLoading}
+        isLoading={isLoading || isLoadingRoles}
       />
       <Section>
         <FormContainer
@@ -82,9 +84,11 @@ const UserForm: React.FC = () => {
           <Row gutter={12}>
             <Col sm={24} md={12}>
               <FormItem
-                name="role"
-                input="select"
-                optionsEnum={Object.values(RoleEnum)}
+                name="roleIds"
+                label="Roles"
+                input="selectMultiple"
+                options={roles?.data}
+                form={form}
               />
             </Col>
             <Col sm={24} md={12}>
@@ -102,7 +106,7 @@ const UserForm: React.FC = () => {
             </Col>
           </Row>
 
-          <FormItem name="address" />
+          <FormItem name="address" input="textArea" />
         </FormContainer>
       </Section>
     </>

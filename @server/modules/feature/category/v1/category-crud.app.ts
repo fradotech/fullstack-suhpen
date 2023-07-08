@@ -30,7 +30,8 @@ export class CategoryCrudApp {
   }
 
   async delete(id: string): Promise<ICategory> {
+    const data = await this.categoryService.findOneByOrFail({ id })
     await this.categoryService.delete(id)
-    return await this.categoryService.findOneByOrFail({ id })
+    return data
   }
 }

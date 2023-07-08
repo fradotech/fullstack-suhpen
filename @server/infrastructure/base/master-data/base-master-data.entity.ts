@@ -2,10 +2,7 @@ import { BaseEntity } from '@server/infrastructure/base/base.entity'
 import { Column } from 'typeorm'
 import { IBaseMasterData } from './base-master-data.interface'
 
-export abstract class EntBaseMasterData
-  extends BaseEntity
-  implements IBaseMasterData
-{
+export class EntBaseMasterData extends BaseEntity implements IBaseMasterData {
   @Column()
   name: string
 
@@ -20,4 +17,7 @@ export abstract class EntBaseMasterData
 
   @Column({ default: null })
   thumbnail?: string
+
+  @Column({ default: '#007fd0' })
+  labelColor?: string
 }

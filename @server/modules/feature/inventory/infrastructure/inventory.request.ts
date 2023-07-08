@@ -1,8 +1,8 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty } from 'class-validator'
 import { IProduct } from '../../product/infrastructure/product.interface'
+import { EInventorySupplyType } from '../common/inventory.enum'
 import { EntInventory } from './inventory.entity'
-import { EInventorySupplyType } from './inventory.enum'
 import { IInventory } from './inventory.interface'
 
 export class InventoryRequest extends EntInventory implements IInventory {
@@ -53,6 +53,10 @@ export class InventoryRequest extends EntInventory implements IInventory {
 export class InventoryCreateRequest extends PartialType(InventoryRequest) {
   static dto(data: InventoryCreateRequest): IInventory {
     return Object.assign(new EntInventory(), data)
+  }
+
+  static dtos(data: InventoryCreateRequest[]): IInventory[] {
+    return data.map((data) => this.dto(data))
   }
 }
 

@@ -5,17 +5,17 @@ import { Section } from '../../../../Components/Molecules/Section/Section'
 import DataTable from '../../../../Components/Organisms/DataTable/DataTable'
 import { paginationTransform } from '../../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../../Components/Organisms/DataTable/useDataTable'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../common/Path'
 import { CategoryAction } from '../../Category/infrastructure/category.action'
 import { ProductAction } from '../infrastructure/product.action'
 import { productColumns } from '../infrastructure/product.column'
 
 const ProductIndex: React.FC = () => {
   const { query, setQueryParams } = useDataTable<ProductIndexRequest>()
-  const { isLoading, data, refetch } = ProductAction.useIndex()
+  const { isLoading, data, refetch } = ProductAction.useIndex(query)
 
   const { isLoading: isLoadingCategories, data: categories } =
-    CategoryAction.useIndex()
+    CategoryAction.useIndex({ pageSize: 100000 })
 
   return (
     <>
@@ -32,8 +32,9 @@ const ProductIndex: React.FC = () => {
           dataTableHeader={{
             query,
             search: true,
-            hrefCreate: Route.product.form,
-            hrefExport: Route.product.export,
+            dateRangeColumn: 'createdAt',
+            hrefCreate: Path.product.form,
+            hrefExport: Path.product.export,
           }}
         />
       </Section>

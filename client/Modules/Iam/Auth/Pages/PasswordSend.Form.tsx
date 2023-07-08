@@ -5,14 +5,14 @@ import React from 'react'
 import CompanyLogo from '../../../../Components/Molecules/CompanyLogo/CompanyLogo'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../common/Path'
 import { rule } from '../../../../common/utils/form.rules'
 import styles from '../Auth.module.css'
 import { AuthAction } from '../infrastructure/auth.action'
 
 const PasswordSendForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
-  const user = AuthAction.loggedUser()
+  const user = AuthAction.userLoggedLocal()
   const [form] = Form.useForm<AuthPasswordSendRequest>()
   const [isSuccess, setIsSuccess] = React.useState(false)
 
@@ -25,7 +25,7 @@ const PasswordSendForm: React.FC = () => {
   }
 
   if (user) {
-    location.replace(Route.dashboard.index)
+    location.replace(Path.dashboard.index)
     return undefined
   } else
     return (

@@ -9,7 +9,7 @@ import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../common/Path'
 import { rule } from '../../../../common/utils/form.rules'
 import { CategoryAction } from '../infrastructure/category.action'
 
@@ -38,7 +38,7 @@ const CategoryForm: React.FC = () => {
     if (!id) res = await CategoryAction.create(data)
     if (id) res = await CategoryAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Route.category.index)
+    res.data && navigate(Path.category.index)
   }
 
   return (
@@ -55,7 +55,6 @@ const CategoryForm: React.FC = () => {
           centered
           button={{ disabled: isLoading }}
         >
-          <FormItem name="thumbnail" input="attachment" total={1} form={form} />
           <Row gutter={12}>
             <Col sm={24} md={20}>
               <FormItem name="name" rules={[rule.required]} />
@@ -70,7 +69,19 @@ const CategoryForm: React.FC = () => {
             </Col>
           </Row>
           <FormItem name="description" input="textArea" />
-          <FormItem name="labelColor" input="colorPicker" />
+          <Row gutter={12}>
+            <Col sm={24} md={12}>
+              <FormItem
+                name="thumbnail"
+                input="attachment"
+                total={1}
+                form={form}
+              />
+            </Col>
+            <Col sm={24} md={12}>
+              <FormItem name="labelColor" input="colorPicker" />
+            </Col>
+          </Row>
         </FormContainer>
       </Section>
     </>

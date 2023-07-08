@@ -9,7 +9,7 @@ import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../common/Path'
 import { rule } from '../../../../common/utils/form.rules'
 import { CategoryAction } from '../../Category/infrastructure/category.action'
 import { ProductAction } from '../infrastructure/product.action'
@@ -41,7 +41,7 @@ const ProductForm: React.FC = () => {
     if (!id) res = await ProductAction.create(data)
     if (id) res = await ProductAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Route.product.index)
+    res.data && navigate(Path.product.index)
   }
 
   return (
@@ -75,7 +75,7 @@ const ProductForm: React.FC = () => {
           <FormItem name="name" rules={[rule.required]} />
           <FormItem
             name="categoryIds"
-            label="Categories"
+            label="Categoryies"
             input="selectMultiple"
             options={categories?.data}
             form={form}

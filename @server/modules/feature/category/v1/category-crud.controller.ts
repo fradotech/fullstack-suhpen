@@ -13,7 +13,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { BaseCrudController } from '@server/infrastructure/base/base-crud.controller'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
-import { AdminGuard } from '@server/modules/iam/auth/common/admin.guard'
+import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
 import { CategoryIndexApp } from '../infrastructure/category-index.app'
 import { CategoryIndexRequest } from '../infrastructure/category-index.request'
@@ -29,7 +29,7 @@ const THIS_MODULE = Modules.Category
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
-@UseGuards(AdminGuard)
+@UseGuards(LoggedInGuard)
 export class CategoryCrudController implements BaseCrudController {
   constructor(
     private readonly categoryIndexApp: CategoryIndexApp,

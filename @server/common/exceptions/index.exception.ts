@@ -39,7 +39,7 @@ export class Exception {
 
         throw new UnprocessableEntityException(message)
 
-      // TODO: another case
+      // CONTINUE: another case
       // case 'ER_DUP_ENTRY':
     }
 

@@ -1,7 +1,8 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger'
-import { RoleEnum } from '@server/modules/iam/role/common/role.enum'
 import { UserGenderEnum } from '@server/modules/iam/user/common/user.enum'
 import {
+  ArrayMinSize,
+  IsArray,
   IsEmail,
   IsEnum,
   IsNotEmpty,
@@ -47,9 +48,11 @@ export class UserRequest extends EntUser implements IUser {
   passwordConfirmation: string
 
   @IsOptional()
-  @IsEnum(RoleEnum)
-  @ApiProperty({ example: RoleEnum.User })
-  role: RoleEnum
+  @IsArray()
+  @IsString({ each: true })
+  @ArrayMinSize(1)
+  @ApiProperty({ example: ['id1', 'id2', 'id3'] })
+  roleIds?: string[]
 
   @IsOptional()
   @IsEnum(UserGenderEnum)
@@ -96,7 +99,7 @@ export class UserCreateRequest extends OmitType(UserRequest, [
     res.name = data.name
     res.email = data.email
     res.password = data.password
-    res.role = data.role
+    res.roles = data.roles
     res.gender = data.gender
     res.phoneNumber = data.phoneNumber
     res.address = data.address
@@ -105,13 +108,17 @@ export class UserCreateRequest extends OmitType(UserRequest, [
 
     return res
   }
+
+  static dtos(data: UserCreateRequest[]): IUser[] {
+    return data.map((data) => this.dto(data))
+  }
 }
 
 export class UserUpdateRequest extends OmitType(UserRequest, [
   'email',
   'password',
   'passwordConfirmation',
-  'role',
+  'roles',
   'otp',
   'isVerified',
   'token',

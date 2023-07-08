@@ -1,4 +1,7 @@
-import { REGEX_EMAIL, REGEX_PASSWORD } from './character.constant'
+import {
+  REGEX_EMAIL,
+  REGEX_PASSWORD,
+} from '../../../@server/modules/iam/user/common/character.constant'
 
 export const rule = {
   required: { required: true },

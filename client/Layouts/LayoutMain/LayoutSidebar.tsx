@@ -10,8 +10,8 @@ interface IProps {
 
 const LayoutSidebar: React.FC<IProps> = (props: IProps) => {
   const activeMenuKey = React.useMemo(
-    () => window.location.pathname,
-    [window.location.pathname],
+    () => location.pathname,
+    [location.pathname],
   )
 
   const defaultOpenedKey = React.useMemo(

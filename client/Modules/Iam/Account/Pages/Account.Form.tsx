@@ -3,26 +3,28 @@ import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate } from 'react-router-dom'
-import { RoleEnum } from '../../../../../@server/modules/iam/role/common/role.enum'
 import { UserGenderEnum } from '../../../../../@server/modules/iam/user/common/user.enum'
 import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../common/Path'
 import { rule } from '../../../../common/utils/form.rules'
-import { accountAction } from '../infrastructure/account.action'
+import { RoleAction } from '../../Role/infrastructure/role.action'
+import { AccountAction } from '../infrastructure/account.action'
 
 const AccountForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const [form] = Form.useForm<UserUpdateRequest>()
 
+  const { isLoading: isLoadingRoles, data: roles } = RoleAction.useIndex()
+
   useQuery(
     [AccountForm.name],
     async () => {
       setIsLoading(true)
-      const res = await accountAction.getUserLogged()
+      const res = await AccountAction.userLoggedServer()
       form.setFieldsValue(res.data)
       setIsLoading(false)
     },
@@ -32,14 +34,17 @@ const AccountForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    const res = await accountAction.update(data)
+    const res = await AccountAction.update(data)
     setIsLoading(false)
-    res.data && navigate(Route.account)
+    res.data && navigate(Path.account.index)
   }
 
   return (
     <>
-      <PageHeader title="Account Edit" isLoading={isLoading} />
+      <PageHeader
+        title="Account Edit"
+        isLoading={isLoading || isLoadingRoles}
+      />
       <Section>
         <FormContainer
           onFinish={onFinish}
@@ -54,9 +59,12 @@ const AccountForm: React.FC = () => {
           <Row gutter={12}>
             <Col sm={24} md={12}>
               <FormItem
-                name="role"
-                input="select"
-                optionsEnum={Object.values(RoleEnum)}
+                name="roleIds"
+                label="Roles"
+                input="selectMultiple"
+                options={roles?.data}
+                form={form}
+                disabled
               />
             </Col>
             <Col sm={24} md={12}>
@@ -74,7 +82,7 @@ const AccountForm: React.FC = () => {
             </Col>
           </Row>
 
-          <FormItem name="address" />
+          <FormItem name="address" input="textArea" />
         </FormContainer>
       </Section>
     </>

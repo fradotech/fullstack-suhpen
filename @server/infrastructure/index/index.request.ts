@@ -43,7 +43,6 @@ export class IndexRequest implements ISortRequest, IPaginateRequest {
   @IsString()
   @IsOptional()
   @ApiProperty({
-    example: '',
     description: 'Search all entity column value',
     required: false,
   })
@@ -52,7 +51,6 @@ export class IndexRequest implements ISortRequest, IPaginateRequest {
   @IsOptional()
   @IsString()
   @ApiProperty({
-    example: '',
     description: 'Column name for filter startAt and endAt',
     required: false,
   })
@@ -61,7 +59,6 @@ export class IndexRequest implements ISortRequest, IPaginateRequest {
   @IsString()
   @IsOptional()
   @ApiProperty({
-    example: '',
     description: 'Filter startAt by dateRangeColumn',
     required: false,
   })
@@ -70,7 +67,6 @@ export class IndexRequest implements ISortRequest, IPaginateRequest {
   @IsString()
   @IsOptional()
   @ApiProperty({
-    example: '',
     description: 'Filter endAt by dateRangeColumn',
     required: false,
   })

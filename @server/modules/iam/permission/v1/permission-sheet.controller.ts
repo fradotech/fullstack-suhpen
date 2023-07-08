@@ -3,8 +3,8 @@ import { Controller, Get, Post, Query, UseGuards } from '@nestjs/common'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.response'
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
-import { AdminGuard } from '@server/modules/iam/auth/common/admin.guard'
 import { Modules } from '@server/modules/modules'
+import { LoggedInGuard } from '../../auth/common/logged-in.guard'
 import { PermissionIndexApp } from '../infrastructure/permission-index.app'
 import { PermissionIndexRequest } from '../infrastructure/permission-index.request'
 import { PermissionResponse } from '../infrastructure/permission.response'
@@ -14,7 +14,7 @@ const THIS_MODULE = Modules.Permission + '/sheet'
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
-@UseGuards(AdminGuard)
+@UseGuards(LoggedInGuard)
 export class PermissionSheetController {
   constructor(private readonly permissionIndexApp: PermissionIndexApp) {}
 

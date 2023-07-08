@@ -25,8 +25,13 @@ export class UserIndexApp extends BaseIndexApp {
 
   async fetch(req: UserIndexRequest): Promise<IPaginateResponse<IUser>> {
     const name = 'users'
-    const columns = ['name', 'email', 'role', 'phoneNumber', 'createdAt']
-    const relations: IIndexAppRelation[] = []
+    const columns = ['name', 'email', 'phoneNumber', 'createdAt']
+    const relations: IIndexAppRelation[] = [
+      {
+        name: 'roles',
+        columns: ['name'],
+      },
+    ]
     const query = this.createQueryIndex(
       req,
       name,
@@ -36,7 +41,7 @@ export class UserIndexApp extends BaseIndexApp {
       this.request,
     )
 
-    // TODO: add additional query
+    // CONTINUE: add additional query
 
     const [data, count] = await this.getData(query, req.isExport)
     const meta = this.mapMeta(count, req)

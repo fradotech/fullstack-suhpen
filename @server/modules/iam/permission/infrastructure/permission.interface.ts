@@ -1,7 +1,9 @@
 import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.interface'
+import { EntRole } from '../../role/infrastructure/role.entity'
 
 export interface IPermission extends IBaseMasterData {
-  labelColor: string
+  roles: EntRole[]
+  module: string
   path: string
   method: string
 }

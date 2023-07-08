@@ -5,7 +5,7 @@ import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import DescriptionContainer from '../../../../Components/Organisms/Description/DescriptionContainer'
 import DescriptionItem from '../../../../Components/Organisms/Description/DescriptionItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../common/Path'
 import { CategoryAction } from '../infrastructure/category.action'
 
 const CategoryDetail: React.FC = () => {
@@ -19,9 +19,9 @@ const CategoryDetail: React.FC = () => {
       <PageHeader
         title="Category Detail"
         isLoading={isLoading}
-        hrefIndex={Route.category.index}
-        hrefEdit={Route.category.edit(id)}
-        hrefDelete={Route.category.id(id)}
+        hrefIndex={Path.category.index}
+        hrefEdit={Path.category.edit(id)}
+        hrefDelete={Path.category.id(id)}
       />
       <Section>
         <DescriptionContainer>

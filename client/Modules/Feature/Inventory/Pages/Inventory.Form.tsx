@@ -9,7 +9,7 @@ import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../common/Path'
 import { rule } from '../../../../common/utils/form.rules'
 import { InventoryAction } from '../infrastructure/inventory.action'
 
@@ -39,7 +39,7 @@ const InventoryForm: React.FC = () => {
     if (!id) res = await InventoryAction.create(data)
     if (id) res = await InventoryAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Route.product.index)
+    res.data && navigate(Path.product.index)
   }
 
   return (

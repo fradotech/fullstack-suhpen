@@ -5,7 +5,7 @@ import { Section } from '../../../../Components/Molecules/Section/Section'
 import DataTable from '../../../../Components/Organisms/DataTable/DataTable'
 import { paginationTransform } from '../../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../../Components/Organisms/DataTable/useDataTable'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../common/Path'
 import { CategoryAction } from '../infrastructure/category.action'
 import { categoryColumns } from '../infrastructure/category.column'
 
@@ -28,8 +28,9 @@ const CategoryIndex: React.FC = () => {
           dataTableHeader={{
             query,
             search: true,
-            hrefCreate: Route.category.form,
-            hrefExport: Route.category.export,
+            dateRangeColumn: 'createdAt',
+            hrefCreate: Path.category.form,
+            hrefExport: Path.category.export,
           }}
         />
       </Section>

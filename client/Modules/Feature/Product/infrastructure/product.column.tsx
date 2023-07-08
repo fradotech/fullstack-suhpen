@@ -2,7 +2,7 @@ import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
 import { CategoryResponse } from '@server/modules/feature/category/infrastructure/category.response'
 import { ProductResponse } from '@server/modules/feature/product/infrastructure/product.response'
-import { Row, Tag } from 'antd'
+import { Tag } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import {
   QueryObserverResult,
@@ -10,7 +10,7 @@ import {
   RefetchQueryFilters,
 } from 'react-query'
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../common/Path'
 import { Util } from '../../../../common/utils/util'
 import { ProductAction } from './product.action'
 
@@ -28,13 +28,15 @@ export const productColumns = (
     },
     {
       dataIndex: 'categories',
-      render: (data: CategoryResponse[]) => (
-        <Row>
-          {data?.map((data) => (
-            <Tag color={data.labelColor}>{data.name}</Tag>
-          ))}
-        </Row>
-      ),
+      render: (data: CategoryResponse[]) => {
+        return data?.map((data) => {
+          return (
+            <Tag key={data.id} color={data.labelColor}>
+              {data.name}
+            </Tag>
+          )
+        })
+      },
       filters: optionsCategory?.map((data) => {
         return {
           text: data.name,
@@ -71,11 +73,11 @@ export const productColumns = (
           actions={[
             {
               type: 'view',
-              href: Route.product.id(data.id),
+              href: Path.product.id(data.id),
             },
             {
               type: 'edit',
-              href: Route.product.edit(data.id),
+              href: Path.product.edit(data.id),
             },
             {
               type: 'delete',

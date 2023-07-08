@@ -27,8 +27,22 @@ export class PermissionIndexApp extends BaseIndexApp {
     req: PermissionIndexRequest,
   ): Promise<IPaginateResponse<IPermission>> {
     const name = 'permissions'
-    const columns = ['name', 'key', 'isActive', 'createdAt']
+    const columns = [
+      'name',
+      'module',
+      'path',
+      'method',
+      'isActive',
+      'createdAt',
+    ]
     const relations: IIndexAppRelation[] = []
+
+    if (req.roleId) {
+      relations.push({
+        name: 'roles',
+      })
+    }
+
     const query = this.createQueryIndex(
       req,
       name,
@@ -38,7 +52,9 @@ export class PermissionIndexApp extends BaseIndexApp {
       this.request,
     )
 
-    // TODO: add additional query
+    if (req.roleId) {
+      query.andWhere('roles.id = :roleId', { roleId: req.roleId })
+    }
 
     const [data, count] = await this.getData(query, req.isExport)
     const meta = this.mapMeta(count, req)

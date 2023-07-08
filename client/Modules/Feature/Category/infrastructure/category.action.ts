@@ -9,15 +9,15 @@ import { CategoryResponse } from '@server/modules/feature/category/infrastructur
 import { notification } from 'antd'
 import { UseQueryResult, useQuery } from 'react-query'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
-import { Route } from '../../../../Enums/Route'
-import { themeColors } from '../../../../Layouts/ThemeProvider/theme'
+import { getColorPicker } from '../../../../Components/Molecules/ColorPicker/ColorPicker.util'
+import { Path } from '../../../../common/Path'
 import { API } from '../../../../infrastructure/api.service'
 
-const dataPrepare = (
+const dto = (
   data: CategoryCreateRequest | CategoryUpdateRequest,
 ): CategoryCreateRequest | CategoryUpdateRequest => {
   data.thumbnail = getAttachment(data.thumbnail) as string
-  data.labelColor = data.labelColor?.['hex'] || themeColors.primary
+  data.labelColor = getColorPicker(data.labelColor)
 
   return data
 }
@@ -26,21 +26,21 @@ export class CategoryAction {
   static useIndex(
     req?: CategoryIndexRequest,
   ): UseQueryResult<IPaginateResponse<CategoryResponse>> {
-    const fetch = async () => await API.get(Route.category.index, req)
+    const fetch = async () => await API.get(Path.category.index, req)
     return useQuery([CategoryAction.useIndex.name, req], fetch)
   }
 
   static async create(
     data: CategoryCreateRequest,
   ): Promise<IApiRes<CategoryResponse>> {
-    data = dataPrepare(data) as CategoryCreateRequest
-    const res = await API.post(Route.category.index, data)
+    data = dto(data)
+    const res = await API.post(Path.category.index, data)
     res.data && notification.success({ message: 'Success create data' })
     return res
   }
 
   static async findOne(id: string): Promise<IApiRes<CategoryResponse>> {
-    const res: IApiRes<CategoryResponse> = await API.get(Route.category.id(id))
+    const res: IApiRes<CategoryResponse> = await API.get(Path.category.id(id))
 
     return res
   }
@@ -49,14 +49,14 @@ export class CategoryAction {
     id: string,
     data: CategoryUpdateRequest,
   ): Promise<IApiRes<CategoryResponse>> {
-    data = dataPrepare(data)
-    const res = await API.put(Route.category.id(id), data)
+    data = dto(data)
+    const res = await API.put(Path.category.id(id), data)
     res.data && notification.success({ message: 'Success update data' })
     return res
   }
 
   static async delete(id: string): Promise<IApiRes<CategoryResponse>> {
-    const res = await API.delete(Route.category.id(id))
+    const res = await API.delete(Path.category.id(id))
     res.data && notification.success({ message: 'Success delete data' })
     return res
   }

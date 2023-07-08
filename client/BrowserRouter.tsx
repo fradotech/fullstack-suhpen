@@ -5,19 +5,19 @@ import {
   Routes,
 } from 'react-router-dom'
 import Loading from './Components/Molecules/Loading/Loading'
-import { Route as ERoute } from './Enums/Route'
 import DashboardRoute from './Modules/Dashboard/Dashboard.route'
 import FeatureRoute from './Modules/Feature/Feature.route'
-import AuthRoute from './Modules/Iam/Auth/auth.route'
+import AuthRoute from './Modules/Iam/Auth/Auth.route'
 import { AuthAction } from './Modules/Iam/Auth/infrastructure/auth.action'
 import IamRoute from './Modules/Iam/Iam.route'
+import { Path as ERoute } from './common/Path'
 
 const LayoutMain = React.lazy(() => import('./Layouts/LayoutMain/LayoutMain'))
 const Home = React.lazy(() => import('./Modules/Home/Home'))
 const NotFound = React.lazy(() => import('./Modules/NotFound'))
 const Unauthorized = React.lazy(() => import('./Modules/Unauthorized'))
 
-const user = AuthAction.loggedUser()
+const user = AuthAction.userLoggedLocal()
 const noGuardRoutes = [ERoute.Home]
 const noGuardRouters = [
   <Route key={ERoute.Home} path={ERoute.Home} element={<Home />} />,

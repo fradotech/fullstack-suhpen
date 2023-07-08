@@ -40,6 +40,8 @@ export class InventoryCrudApp {
   }
 
   async delete(id: string): Promise<IInventory> {
-    return await this.inventoryService.findOneByOrFail({ id })
+    const data = await this.inventoryService.findOneByOrFail({ id })
+    await this.inventoryService.delete(id)
+    return data
   }
 }

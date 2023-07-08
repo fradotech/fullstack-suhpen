@@ -1,21 +1,9 @@
 import { Route } from 'react-router-dom'
 import Dashboard from './Pages/Dashboard'
+import { dashboardPath } from './infrastructure/dashboard.path'
 
-const path = '/dashboard'
-
-export const routesDashboard = {
-  dashboard: {
-    index: path,
-    inventory: {
-      aggregate: (field: string) => `${path}/inventories/aggregate/${field}`,
-    },
-  },
-}
+const path = dashboardPath
 
 export default [
-  <Route
-    key={routesDashboard.dashboard.index}
-    path={routesDashboard.dashboard.index}
-    element={<Dashboard />}
-  />,
+  <Route key={path.index} path={path.index} element={<Dashboard />} />,
 ]

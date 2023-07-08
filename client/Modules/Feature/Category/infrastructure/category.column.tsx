@@ -9,7 +9,7 @@ import {
   RefetchQueryFilters,
 } from 'react-query'
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../common/Path'
 import { Util } from '../../../../common/utils/util'
 import { CategoryAction } from './category.action'
 
@@ -22,14 +22,12 @@ export const categoryColumns = (
 ): ColumnsType<CategoryResponse> => {
   return [
     {
-      dataIndex: 'key',
-    },
-    {
       title: 'name',
       render: (data: CategoryResponse) => {
         return <Tag color={data.labelColor}>{data.name}</Tag>
       },
     },
+    { dataIndex: 'description' },
     {
       title: 'Active',
       dataIndex: 'isActive',
@@ -56,11 +54,11 @@ export const categoryColumns = (
           actions={[
             {
               type: 'view',
-              href: Route.category.id(data.id),
+              href: Path.category.id(data.id),
             },
             {
               type: 'edit',
-              href: Route.category.edit(data.id),
+              href: Path.category.edit(data.id),
             },
             {
               type: 'delete',

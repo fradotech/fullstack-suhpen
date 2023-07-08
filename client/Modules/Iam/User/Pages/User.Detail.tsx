@@ -6,9 +6,8 @@ import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import DescriptionContainer from '../../../../Components/Organisms/Description/DescriptionContainer'
 import DescriptionItem from '../../../../Components/Organisms/Description/DescriptionItem'
-import { Route } from '../../../../Enums/Route'
+import { Path } from '../../../../common/Path'
 import { Util } from '../../../../common/utils/util'
-import { RoleAction } from '../../Role/infrastructure/role.action'
 import { UserAction } from '../infrastructure/user.action'
 
 const UserDetail: React.FC = () => {
@@ -22,9 +21,9 @@ const UserDetail: React.FC = () => {
       <PageHeader
         title="User Detail"
         isLoading={isLoading}
-        hrefIndex={Route.user.index}
-        hrefEdit={Route.user.edit(id)}
-        hrefDelete={Route.user.id(id)}
+        hrefIndex={Path.user.index}
+        hrefEdit={Path.user.edit(id)}
+        hrefDelete={Path.user.id(id)}
       />
       <Section>
         <DescriptionContainer>
@@ -32,9 +31,13 @@ const UserDetail: React.FC = () => {
             if (key == 'role') {
               return (
                 <Descriptions.Item label={Util.titleCase(key)}>
-                  <Tag color={RoleAction.colorRole(data?.data[key])}>
-                    {data?.data[key]}
-                  </Tag>
+                  {data?.data.roles.map((role) => {
+                    return (
+                      <Tag key={role.key} color={role.labelColor}>
+                        {role.name}
+                      </Tag>
+                    )
+                  })}
                 </Descriptions.Item>
               )
             } else {
