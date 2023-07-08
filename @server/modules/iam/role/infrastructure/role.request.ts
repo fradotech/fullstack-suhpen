@@ -11,8 +11,6 @@ export class RoleRequest
   implements IBaseMasterData
 {
   id: string
-  @ApiProperty({ example: '#007fd0' })
-  labelColor: string
 
   @IsOptional()
   @IsArray()

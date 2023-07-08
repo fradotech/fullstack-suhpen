@@ -1,4 +1,4 @@
-import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger'
+import { OmitType, PartialType } from '@nestjs/swagger'
 import { Util } from '@server/common/utils/util'
 import { config } from '@server/config'
 import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.interface'
@@ -13,8 +13,6 @@ export class PermissionRequest
   implements IBaseMasterData
 {
   id: string
-  @ApiProperty({ example: '#007fd0' })
-  labelColor: string
 }
 
 export class PermissionCreateRequest extends PartialType(PermissionRequest) {

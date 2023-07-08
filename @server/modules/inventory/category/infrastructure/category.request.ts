@@ -1,4 +1,4 @@
-import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger'
+import { OmitType, PartialType } from '@nestjs/swagger'
 import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.interface'
 import { BaseMasterDataRequest } from '@server/infrastructure/base/master-data/base-master-data.request'
 import { EntCategory } from './category.entity'
@@ -9,8 +9,6 @@ export class CategoryRequest
   implements IBaseMasterData
 {
   id: string
-  @ApiProperty({ example: '#007fd0' })
-  labelColor: string
 }
 
 export class CategoryCreateRequest extends PartialType(CategoryRequest) {

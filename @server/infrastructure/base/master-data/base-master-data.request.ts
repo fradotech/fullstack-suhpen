@@ -21,6 +21,6 @@ export class BaseMasterDataRequest implements IBaseMasterData {
   @ApiProperty()
   thumbnail?: string
 
-  @ApiProperty()
+  @ApiProperty({ example: '#007fd0' })
   labelColor?: string
 }
