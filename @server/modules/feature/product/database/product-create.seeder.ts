@@ -13,7 +13,7 @@ export const productCreateSeeder = async (): Promise<boolean> => {
 
   const productExist = await entityManager
     .createQueryBuilder(EntProduct, table)
-    .where(`${table}.key IN (:key)`, { key: data.map((data) => data.key) })
+    .where(`${table}.key IN (:...key)`, { key: data.map((data) => data.key) })
     .getOne()
 
   if (productExist) return false

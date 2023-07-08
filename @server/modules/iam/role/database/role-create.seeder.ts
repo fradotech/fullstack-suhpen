@@ -11,7 +11,7 @@ export const roleCreateSeeder = async (): Promise<boolean> => {
 
   const roleExist = await entityManager
     .createQueryBuilder(EntRole, table)
-    .where(`${table}.key IN (:key)`, { key: data.map((data) => data.key) })
+    .where(`${table}.key IN (:...key)`, { key: data.map((data) => data.key) })
     .getOne()
 
   if (roleExist) return false

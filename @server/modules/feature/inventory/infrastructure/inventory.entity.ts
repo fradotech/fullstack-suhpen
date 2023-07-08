@@ -38,7 +38,7 @@ export class EntInventory extends BaseEntity implements IInventory {
   @Column({ default: 0 })
   discountPercentage?: number
 
-  @Column({ default: null, type: 'datetime' })
+  @Column({ default: null, type: 'timestamp' })
   expiredDate?: Date | dayjs.Dayjs
 
   @Column({ default: true })

@@ -13,7 +13,7 @@ export const inventoryCreateSeeder = async (): Promise<boolean> => {
 
   const inventoryExist = await entityManager
     .createQueryBuilder(EntInventory, table)
-    .where(`${table}.buyPrice IN (:buyPrice)`, {
+    .where(`${table}.buyPrice IN (:...buyPrice)`, {
       buyPrice: data.map((data) => data.buyPrice),
     })
     .getOne()

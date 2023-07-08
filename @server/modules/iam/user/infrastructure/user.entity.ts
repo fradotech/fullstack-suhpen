@@ -31,7 +31,7 @@ export class EntUser extends BaseEntity implements IUser {
   @Column({ default: null })
   address?: string
 
-  @Column({ default: null, type: 'datetime' })
+  @Column({ default: null, type: 'timestamp' })
   birthDate?: Date | dayjs.Dayjs
 
   @Column({ default: null })

@@ -12,7 +12,7 @@ export const categoryCreateSeeder = async (): Promise<boolean> => {
 
   const categoryExist = await entityManager
     .createQueryBuilder(EntCategory, table)
-    .where(`${table}.key IN (:key)`, { key: data.map((data) => data.key) })
+    .where(`${table}.key IN (:...key)`, { key: data.map((data) => data.key) })
     .getOne()
 
   if (categoryExist) return false

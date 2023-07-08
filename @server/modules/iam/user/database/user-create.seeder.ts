@@ -14,7 +14,7 @@ export const userCreateSeeder = async (): Promise<boolean> => {
 
   const userExist = await entityManager
     .createQueryBuilder(EntUser, table)
-    .where(`${table}.email IN (:email)`, {
+    .where(`${table}.email IN (:...email)`, {
       email: data.map((data) => data.email),
     })
     .getOne()

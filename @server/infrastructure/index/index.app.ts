@@ -50,7 +50,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
       Object.keys(req.filters)?.forEach((column) => {
         if (!column.includes('_')) {
           if (columns.includes(column)) {
-            query.andWhere(`${name}.${column} IN (:value)`, {
+            query.andWhere(`${name}.${column} IN (:...value)`, {
               value: req.filters[column],
             })
           } else {
@@ -58,7 +58,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
               relations.forEach((relation) => {
                 relation.columns?.forEach((key) => {
                   if (relation.name.includes(column)) {
-                    query.andWhere(`${relation.name}.${key} IN (:value)`, {
+                    query.andWhere(`${relation.name}.${key} IN (:...value)`, {
                       value: req.filters[column],
                     })
                   }
