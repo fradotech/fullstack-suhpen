@@ -13,8 +13,8 @@ export const roleDummies = [
     labelColor: '#1e63b1',
   },
   {
-    name: 'Member',
-    key: 'member',
+    name: 'Customer',
+    key: 'customer',
     labelColor: '#82df43',
   },
 ]

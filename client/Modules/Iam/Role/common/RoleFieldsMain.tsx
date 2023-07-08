@@ -38,7 +38,9 @@ const RoleFieldsMain: React.FC<IProps> = (props: IProps) => {
               <FormItem name="description" input="textArea" />
             </Col>
 
-            <FormItem name="permissionIds" />
+            <Col sm={24} md={24} style={{ display: 'none' }}>
+              <FormItem name="permissionIds" />
+            </Col>
           </Row>
         </Col>
         <Col sm={24} md={6}>
