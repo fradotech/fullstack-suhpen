@@ -32,6 +32,7 @@ const ProductIndex: React.FC = () => {
           dataTableHeader={{
             query,
             search: true,
+            dateRangeColumn: 'createdAt',
             hrefCreate: Path.product.form,
             hrefExport: Path.product.export,
           }}

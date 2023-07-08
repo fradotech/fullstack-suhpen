@@ -28,6 +28,7 @@ const CategoryIndex: React.FC = () => {
           dataTableHeader={{
             query,
             search: true,
+            dateRangeColumn: 'createdAt',
             hrefCreate: Path.category.form,
             hrefExport: Path.category.export,
           }}

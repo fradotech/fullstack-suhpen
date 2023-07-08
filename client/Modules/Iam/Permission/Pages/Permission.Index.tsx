@@ -35,6 +35,7 @@ const PermissionIndex: React.FC<IProps> = (props: IProps) => {
           dataTableHeader={{
             query,
             search: true,
+            dateRangeColumn: 'createdAt',
             hrefExport: Path.permission.export,
           }}
           rowSelection={props.rowSelection}
