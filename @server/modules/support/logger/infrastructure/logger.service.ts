@@ -29,9 +29,12 @@ export class LoggerService {
       logFile.push(logNew)
 
       const logFileUpdate = JSON.stringify(logFile)
-      fs.writeFile(this.logPath, logFileUpdate, (e) => {
-        e && Logger.error(e)
-      })
+
+      try {
+        fs.writeFileSync(this.logPath, logFileUpdate)
+      } catch (e) {
+        e && Logger.error(e, this.constructor.name)
+      }
     }
   }
 }

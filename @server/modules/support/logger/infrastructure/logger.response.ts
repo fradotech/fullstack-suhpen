@@ -13,6 +13,8 @@ export class LoggerResponse {
   static dto(executeTime: number, request: Request): LoggerResponse {
     const res = new LoggerResponse()
 
+    delete request['user']['roles']
+
     res.createdAt = Date.now()
     res.executeTime = executeTime
     res.method = request.method
