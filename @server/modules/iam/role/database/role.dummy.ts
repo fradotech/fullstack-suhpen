@@ -5,16 +5,16 @@ export const roleDummies = [
   {
     name: 'Super Admin',
     key: roleDummySuperAdminKey,
-    labelColor: '#f5a623',
+    labelColor: '#001fe6',
   },
   {
     name: 'Admin',
     key: 'admin',
-    labelColor: '#1e63b1',
+    labelColor: '#cf720e',
   },
   {
     name: 'Customer',
     key: 'customer',
-    labelColor: '#82df43',
+    labelColor: '#00a120',
   },
 ]
