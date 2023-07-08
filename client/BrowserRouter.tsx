@@ -6,10 +6,10 @@ import {
 } from 'react-router-dom'
 import Loading from './Components/Molecules/Loading/Loading'
 import DashboardRoute from './Modules/Dashboard/Dashboard.route'
-import FeatureRoute from './Modules/Feature/Feature.route'
 import AuthRoute from './Modules/Iam/Auth/Auth.route'
 import { AuthAction } from './Modules/Iam/Auth/infrastructure/auth.action'
 import IamRoute from './Modules/Iam/Iam.route'
+import FeatureRoute from './Modules/Inventory/Inventory.route'
 import { Path as ERoute } from './common/Path'
 
 const LayoutMain = React.lazy(() => import('./Layouts/LayoutMain/LayoutMain'))

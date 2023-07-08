@@ -10,8 +10,8 @@ import { ValidationPipe } from './common/pipes/validation.pipe'
 import { config } from './config'
 import { DatabaseModule } from './database/database.module'
 import { DashboardModule } from './modules/dashboard/dashboard.module'
-import { FeatureModule } from './modules/feature/feature.module'
 import { IamModule } from './modules/iam/iam.module'
+import { InventoryModule } from './modules/inventory/inventory.module'
 import { SentryModule } from './modules/support/sentry/sentry.module'
 import { SupportModule } from './modules/support/support.module'
 
@@ -19,11 +19,13 @@ import { SupportModule } from './modules/support/support.module'
   imports: [
     SentryModule.forRoot(config.sentry),
     RavenModule,
+
     DatabaseModule,
     SupportModule,
-    IamModule,
+
     DashboardModule,
-    FeatureModule,
+    IamModule,
+    InventoryModule,
   ],
   controllers: [],
   providers: [

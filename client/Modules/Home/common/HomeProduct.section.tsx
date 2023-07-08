@@ -2,7 +2,7 @@ import { Card, Col, Image, Layout, Row } from 'antd'
 import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { Util } from '../../../common/utils/util'
-import { VariantAction } from '../../Feature/Variant/infrastructure/variant.action'
+import { VariantAction } from '../../Inventory/Variant/infrastructure/variant.action'
 import styles from '../Home.module.css'
 
 const HomeProductSection: React.FC = () => {

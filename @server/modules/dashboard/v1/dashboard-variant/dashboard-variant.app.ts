@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { IAggreate } from '@server/modules/dashboard/infrastructure/dashboard.interface'
-import { EntVariant } from '@server/modules/feature/variant/infrastructure/variant.entity'
-import { IVariant } from '@server/modules/feature/variant/infrastructure/variant.interface'
+import { EntVariant } from '@server/modules/inventory/variant/infrastructure/variant.entity'
+import { IVariant } from '@server/modules/inventory/variant/infrastructure/variant.interface'
 import { Repository } from 'typeorm'
 
 @Injectable()

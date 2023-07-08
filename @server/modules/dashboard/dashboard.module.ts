@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { EntVariant } from '../feature/variant/infrastructure/variant.entity'
+import { EntVariant } from '../inventory/variant/infrastructure/variant.entity'
 import { DashboardVariantApp } from './v1/dashboard-variant/dashboard-variant.app'
 import { DashboardVariantController } from './v1/dashboard-variant/dashboard-variant.controller'
 
