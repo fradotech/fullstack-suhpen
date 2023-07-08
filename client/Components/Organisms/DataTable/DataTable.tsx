@@ -5,7 +5,7 @@ import { ColumnsType, FilterValue, SorterResult } from 'antd/es/table/interface'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import Loading from '../../Molecules/Loading/Loading'
+import { IndexSortOderEnum } from '../../../../@server/infrastructure/index/index.interface'
 import { FilterState, IDataTableProps, TOnSort } from './DataTable.interface'
 import styles from './DataTable.module.css'
 import { formatColumns } from './DataTable.util'
@@ -71,7 +71,6 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
 
   return (
     <>
-      <Loading isLoading={props.loading} />
       <DataTableHeader
         {...props.dataTableHeader}
         onSearch={handleSearch}
@@ -98,8 +97,11 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
                 filters,
                 {
                   ...sorter,
-                  order:
-                    sorter.order && sorter.order == 'ascend' ? 'ASC' : 'DESC',
+                  order: sorter.order
+                    ? sorter.order == 'ascend'
+                      ? IndexSortOderEnum.Asc
+                      : IndexSortOderEnum.Desc
+                    : null,
                 },
                 props.dataTableHeader.dateRangeColumn,
               )

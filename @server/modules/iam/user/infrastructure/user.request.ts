@@ -1,7 +1,8 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger'
-import { RoleEnum } from '@server/modules/iam/role/common/role.enum'
 import { UserGenderEnum } from '@server/modules/iam/user/common/user.enum'
 import {
+  ArrayMinSize,
+  IsArray,
   IsEmail,
   IsEnum,
   IsNotEmpty,
@@ -15,8 +16,9 @@ import {
 import dayjs from 'dayjs'
 import { REGEX_PASSWORD } from '../common/character.constant'
 import { IUser } from '../infrastructure/user.interface'
+import { EntUser } from './user.entity'
 
-export class UserRequest implements IUser {
+export class UserRequest extends EntUser implements IUser {
   id: string
 
   @ApiProperty({ example: 'Frado' })
@@ -46,9 +48,11 @@ export class UserRequest implements IUser {
   passwordConfirmation: string
 
   @IsOptional()
-  @IsEnum(RoleEnum)
-  @ApiProperty({ example: RoleEnum.User })
-  role: RoleEnum
+  @IsArray()
+  @IsString({ each: true })
+  @ArrayMinSize(1)
+  @ApiProperty({ example: ['id1', 'id2', 'id3'] })
+  roleIds?: string[]
 
   @IsOptional()
   @IsEnum(UserGenderEnum)
@@ -85,18 +89,48 @@ export class UserRequest implements IUser {
 
 export class UserCreateRequest extends OmitType(UserRequest, [
   'passwordConfirmation',
-  'role',
   'otp',
   'isVerified',
   'token',
-]) {}
+]) {
+  static dto(data: UserCreateRequest): IUser {
+    const res = new UserCreateRequest()
+
+    res.name = data.name
+    res.email = data.email
+    res.password = data.password
+    res.roles = data.roles
+    res.gender = data.gender
+    res.phoneNumber = data.phoneNumber
+    res.address = data.address
+    res.birthDate = data.birthDate
+    res.avatar = data.avatar
+
+    return res
+  }
+
+  static dtos(data: UserCreateRequest[]): IUser[] {
+    return data.map((data) => this.dto(data))
+  }
+}
 
 export class UserUpdateRequest extends OmitType(UserRequest, [
   'email',
   'password',
   'passwordConfirmation',
-  'role',
+  'roles',
   'otp',
   'isVerified',
   'token',
-]) {}
+]) {
+  static dto(res: IUser, data: UserUpdateRequest): IUser {
+    res.name = data.name
+    res.gender = data.gender
+    res.phoneNumber = data.phoneNumber
+    res.avatar = data.avatar
+    res.address = data.address
+    res.birthDate = data.birthDate
+
+    return res
+  }
+}

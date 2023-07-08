@@ -1,9 +1,9 @@
 import { Parser } from '@json2csv/plainjs'
-import { Controller, Post, Query, UseGuards } from '@nestjs/common'
+import { Controller, Get, Post, Query, UseGuards } from '@nestjs/common'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.response'
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
-import { AdminGuard } from '@server/modules/iam/auth/common/admin.guard'
+import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
 import { InventoryIndexApp } from '../infrastructure/inventory-index.app'
 import { InventoryIndexRequest } from '../infrastructure/inventory-index.request'
@@ -14,29 +14,29 @@ const THIS_MODULE = Modules.Inventory + '/sheet'
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
-@UseGuards(AdminGuard)
+@UseGuards(LoggedInGuard)
 export class InventorySheetController {
   constructor(private readonly inventoryIndexApp: InventoryIndexApp) {}
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
-    return ApiExportRes.fromEntity(true)
+    return ApiExportRes.dto(true)
   }
 
-  @Post('export')
+  @Get('export')
   async fetch(
     @Query() req: InventoryIndexRequest,
   ): Promise<IApiExportRes<InventoryResponse[]>> {
     req.isExport = true
     const response = await this.inventoryIndexApp.fetch(req)
 
-    const data = InventoryResponse.fromEntities(response.data)
+    const data = InventoryResponse.dtos(response.data)
     const parser = new Parser()
     const dataExport = parser.parse(data)
     const fileName = `Data - ${
       Modules.Inventory
     } - ${new Date().toISOString()}.xlsx`
 
-    return ApiExportRes.fromEntity(dataExport, fileName)
+    return ApiExportRes.dto(dataExport, fileName)
   }
 }

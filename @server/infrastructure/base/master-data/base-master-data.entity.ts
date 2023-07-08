@@ -17,4 +17,7 @@ export class EntBaseMasterData extends BaseEntity implements IBaseMasterData {
 
   @Column({ default: null })
   thumbnail?: string
+
+  @Column({ default: '#007fd0' })
+  labelColor?: string
 }

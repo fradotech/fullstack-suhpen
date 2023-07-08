@@ -6,7 +6,7 @@ export class ApiExportRes implements IApiExportRes<any> {
   data: any
   fileName?: string
 
-  static fromEntity(
+  static dto(
     data?: IBaseEntity | IBaseEntity[] | any,
     fileName?: string,
     message?: string,

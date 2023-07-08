@@ -5,7 +5,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
 const isRunning = process.argv[2]
 
 export const dataSourceOptions: DataSourceOptions = {
-  type: 'mysql',
+  type: 'postgres',
   host: config.database.host,
   port: +config.database.port,
   username: config.database.username,

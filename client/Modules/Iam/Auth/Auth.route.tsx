@@ -1,41 +1,23 @@
-import React from 'react'
 import { Route } from 'react-router-dom'
-import PasswordSendForm from './PasswordSend.Form'
-import PasswordChangeForm from './PasswordSendChange.Form'
+import LoginForm from './Pages/Login.Form'
+import PasswordSendForm from './Pages/PasswordSend.Form'
+import PasswordChangeForm from './Pages/PasswordSendChange.Form'
+import RegisterForm from './Pages/Register.Form'
+import { authPath } from './infrastructure/auth.path'
 
-const LoginForm = React.lazy(() => import('./Login.Form'))
-const RegisterForm = React.lazy(() => import('./Register.Form'))
-
-const path = '/auth'
-
-export const routesAuth = {
-  login: `${path}/login`,
-  register: `${path}/register`,
-  logout: `${path}/logout`,
-  password: `${path}/password`,
-  passwordSend: `${path}/password/send`,
-  passwordChange: `${path}/password/change`,
-}
+const path = authPath
 
 export default [
+  <Route key={path.login} path={path.login} element={<LoginForm />} />,
+  <Route key={path.register} path={path.register} element={<RegisterForm />} />,
   <Route
-    key={routesAuth.login}
-    path={routesAuth.login}
-    element={<LoginForm />}
-  />,
-  <Route
-    key={routesAuth.register}
-    path={routesAuth.register}
-    element={<RegisterForm />}
-  />,
-  <Route
-    key={routesAuth.passwordSend}
-    path={routesAuth.passwordSend}
+    key={path.passwordSend}
+    path={path.passwordSend}
     element={<PasswordSendForm />}
   />,
   <Route
-    key={routesAuth.password}
-    path={routesAuth.password}
+    key={path.password}
+    path={path.password}
     element={<PasswordChangeForm />}
   />,
 ]

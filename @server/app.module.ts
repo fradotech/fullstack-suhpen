@@ -7,6 +7,7 @@ import {
   QueryErrorFilter,
 } from './common/exceptions/http-exeception.filter'
 import { ValidationPipe } from './common/pipes/validation.pipe'
+import { config } from './config'
 import { DatabaseModule } from './database/database.module'
 import { DashboardModule } from './modules/dashboard/dashboard.module'
 import { FeatureModule } from './modules/feature/feature.module'
@@ -16,7 +17,7 @@ import { SupportModule } from './modules/support/support.module'
 
 @Module({
   imports: [
-    SentryModule.forRoot(),
+    SentryModule.forRoot(config.sentry),
     RavenModule,
     DatabaseModule,
     SupportModule,

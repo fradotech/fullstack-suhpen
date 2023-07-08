@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common'
 import { ProductService } from '../../product/infrastructure/product.service'
-import { EntInventory } from '../infrastructure/inventory.entity'
 import { IInventory } from '../infrastructure/inventory.interface'
 import {
   InventoryCreateRequest,
@@ -20,26 +19,29 @@ export class InventoryCrudApp {
   }
 
   async create(req: InventoryCreateRequest): Promise<IInventory> {
-    const data = new EntInventory()
-    Object.assign(data, req)
+    const data = InventoryCreateRequest.dto(req)
 
-    data.product = await this.productService.findNoRelation(req.productId)
+    data.product = await this.productService.findOneByOrFail({
+      id: req.productId,
+    })
 
     return await this.inventoryService.save(data)
   }
 
   async findOneOrFail(id: string): Promise<IInventory> {
-    return await this.inventoryService.findOneOrFail(id)
+    return await this.inventoryService.findOneByOrFail({ id })
   }
 
   async update(id: string, req: InventoryUpdateRequest): Promise<IInventory> {
-    const data = await this.inventoryService.findNoRelation(id)
-    Object.assign(data, req)
+    const data = await this.inventoryService.findOneByOrFail({ id })
+    const dataUpdate = InventoryUpdateRequest.dto(data, req)
 
-    return await this.inventoryService.update(data)
+    return await this.inventoryService.save(dataUpdate)
   }
 
   async delete(id: string): Promise<IInventory> {
-    return await this.inventoryService.delete(id)
+    const data = await this.inventoryService.findOneByOrFail({ id })
+    await this.inventoryService.delete(id)
+    return data
   }
 }

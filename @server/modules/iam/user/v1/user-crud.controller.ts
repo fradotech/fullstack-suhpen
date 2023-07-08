@@ -14,7 +14,7 @@ import { BaseCrudController } from '@server/infrastructure/base/base-crud.contro
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { Modules } from '@server/modules/modules'
-import { SuperAdminGuard } from '../../auth/common/super-admin.guard'
+import { LoggedInGuard } from '../../auth/common/logged-in.guard'
 import { UserIndexApp } from '../infrastructure/user-index.app'
 import { UserIndexRequest } from '../infrastructure/user-index.request'
 import {
@@ -29,7 +29,7 @@ const THIS_MODULE = Modules.User
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
-@UseGuards(SuperAdminGuard)
+@UseGuards(LoggedInGuard)
 export class UserCrudController implements BaseCrudController {
   constructor(
     private readonly userIndexApp: UserIndexApp,
@@ -41,10 +41,7 @@ export class UserCrudController implements BaseCrudController {
     @Query() req: UserIndexRequest,
   ): Promise<IApiRes<UserStrictResponse[]>> {
     const res = await this.userIndexApp.fetch(req)
-    return ApiRes.fromEntity(
-      UserStrictResponse.fromEntities(res.data),
-      res.meta,
-    )
+    return ApiRes.dto(UserStrictResponse.dtos(res.data), res.meta)
   }
 
   @Post()
@@ -52,7 +49,7 @@ export class UserCrudController implements BaseCrudController {
     @Body() req: UserCreateRequest,
   ): Promise<IApiRes<UserStrictResponse>> {
     const data = await this.userCrudApp.create(req)
-    return ApiRes.fromEntity(UserStrictResponse.fromEntity(data))
+    return ApiRes.dto(UserStrictResponse.dto(data))
   }
 
   @Get(':id')
@@ -60,7 +57,7 @@ export class UserCrudController implements BaseCrudController {
     @Param('id') id: string,
   ): Promise<IApiRes<UserStrictResponse>> {
     const data = await this.userCrudApp.findOneOrFail(id)
-    return ApiRes.fromEntity(UserStrictResponse.fromEntity(data))
+    return ApiRes.dto(UserStrictResponse.dto(data))
   }
 
   @Put(':id')
@@ -69,12 +66,12 @@ export class UserCrudController implements BaseCrudController {
     @Body() req: UserUpdateRequest,
   ): Promise<IApiRes<UserStrictResponse>> {
     const data = await this.userCrudApp.update(id, req)
-    return ApiRes.fromEntity(UserStrictResponse.fromEntity(data))
+    return ApiRes.dto(UserStrictResponse.dto(data))
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<UserStrictResponse>> {
     const data = await this.userCrudApp.delete(id)
-    return ApiRes.fromEntity(UserStrictResponse.fromEntity(data))
+    return ApiRes.dto(UserStrictResponse.dto(data))
   }
 }

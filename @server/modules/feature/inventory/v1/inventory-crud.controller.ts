@@ -13,7 +13,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { BaseCrudController } from '@server/infrastructure/base/base-crud.controller'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
-import { AdminGuard } from '@server/modules/iam/auth/common/admin.guard'
+import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
 import { InventoryIndexApp } from '../infrastructure/inventory-index.app'
 import { InventoryIndexRequest } from '../infrastructure/inventory-index.request'
@@ -40,41 +40,41 @@ export class InventoryCrudController implements BaseCrudController {
     @Query() req: InventoryIndexRequest,
   ): Promise<IApiRes<InventoryResponse[]>> {
     const res = await this.inventoryIndexApp.fetch(req)
-    return ApiRes.fromEntity(InventoryResponse.fromEntities(res.data), res.meta)
+    return ApiRes.dto(InventoryResponse.dtos(res.data), res.meta)
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(LoggedInGuard)
   @Post()
   async create(
     @Body() req: InventoryCreateRequest,
   ): Promise<IApiRes<InventoryResponse>> {
     const data = await this.inventoryCrudApp.create(req)
-    return ApiRes.fromEntity(InventoryResponse.fromEntity(data))
+    return ApiRes.dto(InventoryResponse.dto(data))
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(LoggedInGuard)
   @Get(':id')
   async findOneOrFail(
     @Param('id') id: string,
   ): Promise<IApiRes<InventoryResponse>> {
     const data = await this.inventoryCrudApp.findOneOrFail(id)
-    return ApiRes.fromEntity(InventoryResponse.fromEntity(data))
+    return ApiRes.dto(InventoryResponse.dto(data))
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(LoggedInGuard)
   @Put(':id')
   async update(
     @Param('id') id: string,
     @Body() req: InventoryUpdateRequest,
   ): Promise<IApiRes<InventoryResponse>> {
     const data = await this.inventoryCrudApp.update(id, req)
-    return ApiRes.fromEntity(InventoryResponse.fromEntity(data))
+    return ApiRes.dto(InventoryResponse.dto(data))
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(LoggedInGuard)
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<InventoryResponse>> {
     const data = await this.inventoryCrudApp.delete(id)
-    return ApiRes.fromEntity(InventoryResponse.fromEntity(data))
+    return ApiRes.dto(InventoryResponse.dto(data))
   }
 }

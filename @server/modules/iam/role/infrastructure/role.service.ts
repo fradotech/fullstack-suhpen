@@ -1,32 +1,43 @@
 import { Injectable } from '@nestjs/common'
-import { RoleEnum } from '@server/modules/iam/role/common/role.enum'
-import { Exception } from '../../../../common/exceptions/index.exception'
-import { IRole } from './role.interface'
+import { InjectRepository } from '@nestjs/typeorm'
+import { config } from '@server/config'
+import { BaseService } from '@server/infrastructure/base/base.service'
+import { In, Repository } from 'typeorm'
+import { IUser } from '../../user/infrastructure/user.interface'
+import { EntRole } from './role.entity'
 
-const roles: IRole[] = [
-  {
-    id: '1',
-    name: RoleEnum.SuperAdmin,
-  },
-  {
-    id: '2',
-    name: RoleEnum.Admin,
-  },
-  {
-    id: '3',
-    name: RoleEnum.User,
-  },
-]
+class RoleRepo extends Repository<EntRole> {
+  constructor(
+    @InjectRepository(EntRole)
+    private readonly roleRepo: Repository<EntRole>,
+  ) {
+    super(roleRepo.target, roleRepo.manager, roleRepo.queryRunner)
+  }
+}
 
 @Injectable()
-export class RoleService {
-  async find(): Promise<IRole[]> {
-    return roles
+export class RoleService extends RoleRepo implements BaseService {
+  async findByInIds(ids: string[]): Promise<EntRole[]> {
+    return await this.findBy({ id: In(ids) })
   }
 
-  async findOne(name: string): Promise<IRole | undefined> {
-    const data = roles.find((role) => role.name == name)
-    if (!data) Exception.entityNotFound('name', name)
-    return data
+  async findOneRelationPermissions(id: string): Promise<EntRole> {
+    return await this.findOneOrFail({
+      where: { id },
+      relations: ['permissions'],
+    })
+  }
+
+  static validatePermission(
+    user: IUser,
+    method: string,
+    path: string,
+  ): boolean {
+    const key = path.replace(config.app.prefix, method.toLowerCase())
+    return user.roles.some((role) => {
+      return role.permissions.some((permission) => {
+        return key === permission.key
+      })
+    })
   }
 }

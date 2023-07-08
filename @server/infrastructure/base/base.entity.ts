@@ -1,9 +1,7 @@
-import { EntUser } from '@server/modules/iam/user/infrastructure/user.entity'
-import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import {
+  Column,
   CreateDateColumn,
   DeleteDateColumn,
-  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
@@ -14,20 +12,20 @@ export class BaseEntity implements IBaseEntity {
   id: string
 
   @CreateDateColumn()
-  createdAt: Date
+  createdAt?: Date
 
-  @ManyToOne(() => EntUser)
-  createdBy: IUser
+  @Column({ type: 'uuid', default: null })
+  createdById?: string
 
   @UpdateDateColumn()
-  updatedAt: Date
+  updatedAt?: Date
 
-  @ManyToOne(() => EntUser)
-  updatedBy: IUser
+  @Column({ type: 'uuid', default: null })
+  updatedById?: string
 
   @DeleteDateColumn()
-  deletedAt: Date
+  deletedAt?: Date
 
-  @ManyToOne(() => EntUser)
-  deletedBy: IUser
+  @Column({ type: 'uuid', default: null })
+  deletedById?: string
 }

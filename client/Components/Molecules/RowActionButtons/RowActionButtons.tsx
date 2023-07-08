@@ -10,7 +10,10 @@ import {
 import { Button, Card, Dropdown, Popconfirm, Tooltip } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useIsMobileScreen } from '../../../utils/is-mobile'
+import { PermissionMethodEnum } from '../../../../@server/modules/iam/permission/common/permission.enum'
+import isHasPermission from '../../../Modules/Iam/Role/common/isHasPermission'
+import { useMobileScreen } from '../../../common/useMobileScreen'
+import useModules from '../../../common/useModules'
 
 type ButtonType = 'view' | 'edit' | 'delete' | 'approve' | 'reject' | 'submit'
 
@@ -27,7 +30,8 @@ interface IRowActionProps {
 }
 
 export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
-  const isMobile = useIsMobileScreen()
+  const { isMobile } = useMobileScreen()
+  const { modules } = useModules()
 
   const renderButton = (action: IRowActionButtonsProps) => {
     if (!action) return null
@@ -94,19 +98,39 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
     )
   }
 
+  const renderIfHasPermission = actions.map((action) => {
+    let permissionKey: string
+
+    if (!action.href) {
+      permissionKey = `${PermissionMethodEnum.delete.name}/${modules}/:id`
+    } else if (action.href.includes('save')) {
+      permissionKey = `${PermissionMethodEnum.put.name}/${modules}/:id`
+    } else {
+      permissionKey = `${PermissionMethodEnum.get.name}/${modules}/:id`
+    }
+
+    return isHasPermission([permissionKey]) && renderButton(action)
+  })
+
   return isMobile ? (
     <Dropdown
       trigger={['click']}
-      overlay={
-        <Card size="small">
-          <>{actions.slice(0, 3).map((action) => renderButton(action))}</>
-        </Card>
-      }
-      placement="bottomLeft"
+      menu={{
+        items: [
+          {
+            type: 'group',
+            label: (
+              <Card size="small">
+                <>{renderIfHasPermission}</>
+              </Card>
+            ),
+          },
+        ],
+      }}
     >
       <Button type="text" icon={<MoreOutlined />} />
     </Dropdown>
   ) : (
-    <>{actions.map((action) => renderButton(action))}</>
+    <>{renderIfHasPermission}</>
   )
 }

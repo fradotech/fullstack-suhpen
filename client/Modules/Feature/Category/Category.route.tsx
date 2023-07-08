@@ -1,42 +1,14 @@
-import React from 'react'
 import { Route } from 'react-router-dom'
+import CategoryDetail from './Pages/Category.Detail'
+import CategoryForm from './Pages/Category.Form'
+import CategoryIndex from './Pages/Category.Index'
+import { categoryPath } from './infrastructure/category.path'
 
-const CategoryDetail = React.lazy(() => import('./Category.Detail'))
-const CategoryForm = React.lazy(() => import('./Category.Form'))
-const CategoryS = React.lazy(() => import('./Category.Index'))
-
-const path = '/categories'
-
-export const routesCategory = {
-  category: {
-    index: path,
-    form: `${path}/save`,
-    edit: (id?: string) => `${path}/save/${id || ':id'}`,
-    id: (id?: string) => `${path}/${id || ':id'}`,
-    import: `${path}/sheet/import`,
-    export: `${path}/sheet/export`,
-  },
-}
+const path = categoryPath
 
 export default [
-  <Route
-    key={routesCategory.category.index}
-    path={routesCategory.category.index}
-    element={<CategoryS />}
-  />,
-  <Route
-    key={routesCategory.category.form}
-    path={routesCategory.category.form}
-    element={<CategoryForm />}
-  />,
-  <Route
-    key={routesCategory.category.id()}
-    path={routesCategory.category.id()}
-    element={<CategoryDetail />}
-  />,
-  <Route
-    key={routesCategory.category.edit()}
-    path={routesCategory.category.edit()}
-    element={<CategoryForm />}
-  />,
+  <Route key={path.index} path={path.index} element={<CategoryIndex />} />,
+  <Route key={path.form} path={path.form} element={<CategoryForm />} />,
+  <Route key={path.id()} path={path.id()} element={<CategoryDetail />} />,
+  <Route key={path.edit()} path={path.edit()} element={<CategoryForm />} />,
 ]

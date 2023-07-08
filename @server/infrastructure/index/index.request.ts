@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger'
-import {
-  OrderDirectionEnum,
-  OrderDirectionType,
-} from '@server/infrastructure/index/index.enum'
 import { IsEnum, IsNumber, IsOptional, IsString, Min } from 'class-validator'
-import { IPaginateRequest, ISortRequest } from './index.interface'
+import {
+  IPaginateRequest,
+  ISortRequest,
+  IndexSortOderEnum,
+} from './index.interface'
 
 export class IndexRequest implements ISortRequest, IPaginateRequest {
   isExport?: boolean
@@ -21,12 +21,12 @@ export class IndexRequest implements ISortRequest, IPaginateRequest {
   sortField?: string
 
   @IsOptional()
-  @IsEnum(OrderDirectionEnum)
+  @IsEnum(IndexSortOderEnum)
   @ApiProperty({
-    example: OrderDirectionEnum.Desc,
-    description: `${OrderDirectionEnum.Asc} || ${OrderDirectionEnum.Desc}`,
+    example: 'DESC',
+    description: 'ASC || DESC',
   })
-  sortOrder?: OrderDirectionType
+  sortOrder?: IndexSortOderEnum
 
   @IsOptional()
   @IsNumber()
@@ -43,7 +43,6 @@ export class IndexRequest implements ISortRequest, IPaginateRequest {
   @IsString()
   @IsOptional()
   @ApiProperty({
-    example: '',
     description: 'Search all entity column value',
     required: false,
   })
@@ -52,7 +51,6 @@ export class IndexRequest implements ISortRequest, IPaginateRequest {
   @IsOptional()
   @IsString()
   @ApiProperty({
-    example: '',
     description: 'Column name for filter startAt and endAt',
     required: false,
   })
@@ -61,7 +59,6 @@ export class IndexRequest implements ISortRequest, IPaginateRequest {
   @IsString()
   @IsOptional()
   @ApiProperty({
-    example: '',
     description: 'Filter startAt by dateRangeColumn',
     required: false,
   })
@@ -70,7 +67,6 @@ export class IndexRequest implements ISortRequest, IPaginateRequest {
   @IsString()
   @IsOptional()
   @ApiProperty({
-    example: '',
     description: 'Filter endAt by dateRangeColumn',
     required: false,
   })

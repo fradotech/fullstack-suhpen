@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common'
 import { CategoryService } from '../../category/infrastructure/category.service'
-import { EntProduct } from '../infrastructure/product.entity'
 import { IProduct } from '../infrastructure/product.interface'
 import {
   ProductCreateRequest,
@@ -20,30 +19,35 @@ export class ProductCrudApp {
   }
 
   async create(req: ProductCreateRequest): Promise<IProduct> {
-    const data = new EntProduct()
-    Object.assign(data, req)
+    const data = ProductCreateRequest.dto(req)
 
-    req.categoryIds &&
-      (data.categories = await this.categoryService.findByIds(req.categoryIds))
+    if (req.categoryIds) {
+      data.categories = await this.categoryService.findByInIds(req.categoryIds)
+    }
 
     return await this.productService.save(data)
   }
 
   async findOneOrFail(id: string): Promise<IProduct> {
-    return await this.productService.findOneOrFail(id)
+    return await this.productService.findByRelationCategories(id)
   }
 
   async update(id: string, req: ProductUpdateRequest): Promise<IProduct> {
-    const data = await this.productService.findOneOrFail(id)
-    Object.assign(data, req)
+    const data = await this.productService.findOneByOrFail({ id })
+    const dataUpdate = ProductUpdateRequest.dto(data, req)
 
-    req.categoryIds &&
-      (data.categories = await this.categoryService.findByIds(req.categoryIds))
+    if (req.categoryIds) {
+      dataUpdate.categories = await this.categoryService.findByInIds(
+        req.categoryIds,
+      )
+    }
 
-    return await this.productService.save(data)
+    return await this.productService.save(dataUpdate)
   }
 
   async delete(id: string): Promise<IProduct> {
-    return await this.productService.delete(id)
+    const data = await this.productService.findOneByOrFail({ id })
+    await this.productService.delete(id)
+    return data
   }
 }

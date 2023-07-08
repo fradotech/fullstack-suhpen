@@ -1,15 +1,11 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { dataSourceOptions } from './data-source'
-import { seeders } from './seeds/seed.module'
+import { SeederMoodule } from './seeder/seeder.module'
 
 @Module({
-  imports: [TypeOrmModule.forRoot(dataSourceOptions)],
+  imports: [TypeOrmModule.forRoot(dataSourceOptions), SeederMoodule.forRoot()],
   controllers: [],
   providers: [],
 })
-export class DatabaseModule {
-  constructor() {
-    seeders()
-  }
-}
+export class DatabaseModule {}

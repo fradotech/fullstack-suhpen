@@ -3,7 +3,6 @@ import { JwtService } from '@nestjs/jwt'
 import { config } from '@server/config'
 import * as bcrypt from 'bcrypt'
 import { Exception } from '../../../../common/exceptions/index.exception'
-import { EntUser } from '../../user/infrastructure/user.entity'
 import { IUser } from '../../user/infrastructure/user.interface'
 import { UserService } from '../../user/infrastructure/user.service'
 import { authMessages } from '../common/auth.message'
@@ -20,45 +19,41 @@ export class AuthApp {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
-    private readonly authPasswordService: AuthService,
+    private readonly authService: AuthService,
   ) {}
 
   async register(req: AuthRegisterRequest): Promise<IUser> {
-    const user = new EntUser()
-    Object.assign(user, req)
-
+    const user = AuthRegisterRequest.dto(req)
     return await this.userService.save(user)
   }
 
   async login(req: AuthLoginRequest): Promise<IUser> {
     const { email, password } = req
-    const user = await this.userService.findOneByEmail(email)
-
-    !user && Exception.unauthorized(authMessages.wrongCredential)
-    const isValid = await bcrypt.compare(password, user?.password || '')
-    !isValid && Exception.unauthorized(authMessages.wrongCredential)
-    !user && Exception.unauthorized()
-
+    const user = await this.userService.findOneByEmailRelationRoles(email)
+    await this.authService.validateLogin(user, password)
     user.token = await this.jwtService.signAsync({ id: user.id })
 
     return user
   }
 
   async passwordSendLink(req: AuthPasswordSendRequest): Promise<string> {
-    const user = await this.userService.findOneByEmail(req.email)
+    const { email } = req
+    const user = await this.userService.findOneBy({ email })
     if (!user) return 'Failed'
 
     user.token = await this.jwtService.signAsync({ id: user.id })
     const link = `${config.server.hostClient}/auth/password?token=${user.token}`
 
-    await this.userService.update(user)
-    await this.authPasswordService.passwordResetLink(user, link)
+    await Promise.all([
+      this.userService.update(user.id, user),
+      this.authService.passwordResetLink(user, link),
+    ])
 
     return link
   }
 
   async passwordGetLink(token: string): Promise<IUser | string> {
-    const user = await this.userService.findOneByToken(token)
+    const user = await this.userService.findOneBy({ token })
     if (!user) return authMessages.tokenInvalid
     return user
   }
@@ -66,7 +61,8 @@ export class AuthApp {
   async passwordChange(
     req: AuthPasswordChangeRequest,
   ): Promise<IUser | string> {
-    const user = await this.userService.findOneByToken(req.token)
+    const { token } = req
+    const user = await this.userService.findOneBy({ token })
     if (!user) return authMessages.tokenInvalid
 
     user.token != req.token &&
@@ -74,8 +70,10 @@ export class AuthApp {
     user.password = await bcrypt.hash(req.password, 10)
     user.token = null
 
-    await this.userService.update(user)
-    await this.authPasswordService.passwordResetSuccess(user)
+    await Promise.all([
+      this.userService.update(user.id, user),
+      this.authService.passwordResetSuccess(user),
+    ])
 
     return user
   }

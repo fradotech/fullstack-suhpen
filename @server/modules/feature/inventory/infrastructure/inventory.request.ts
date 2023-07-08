@@ -1,10 +1,11 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty } from 'class-validator'
-import { EInventorySupplyType } from 'client/Modules/Feature/Inventory/Inventory.enum'
 import { IProduct } from '../../product/infrastructure/product.interface'
+import { EInventorySupplyType } from '../common/inventory.enum'
+import { EntInventory } from './inventory.entity'
 import { IInventory } from './inventory.interface'
 
-export class InventoryRequest implements IInventory {
+export class InventoryRequest extends EntInventory implements IInventory {
   id: string
   marginPrice: number
 
@@ -49,6 +50,18 @@ export class InventoryRequest implements IInventory {
   thumbnail?: string
 }
 
-export class InventoryCreateRequest extends PartialType(InventoryRequest) {}
+export class InventoryCreateRequest extends PartialType(InventoryRequest) {
+  static dto(data: InventoryCreateRequest): IInventory {
+    return Object.assign(new EntInventory(), data)
+  }
 
-export class InventoryUpdateRequest extends PartialType(InventoryRequest) {}
+  static dtos(data: InventoryCreateRequest[]): IInventory[] {
+    return data.map((data) => this.dto(data))
+  }
+}
+
+export class InventoryUpdateRequest extends PartialType(InventoryRequest) {
+  static dto(data: IInventory, req: InventoryUpdateRequest): IInventory {
+    return Object.assign(data, req)
+  }
+}

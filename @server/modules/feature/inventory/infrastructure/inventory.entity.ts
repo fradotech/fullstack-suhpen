@@ -1,9 +1,9 @@
 import { BaseEntity } from '@server/infrastructure/base/base.entity'
-import { EInventorySupplyType } from 'client/Modules/Feature/Inventory/Inventory.enum'
 import dayjs from 'dayjs'
 import { BeforeInsert, BeforeUpdate, Column, Entity, ManyToOne } from 'typeorm'
 import { EntProduct } from '../../product/infrastructure/product.entity'
 import { IProduct } from '../../product/infrastructure/product.interface'
+import { EInventorySupplyType } from '../common/inventory.enum'
 import { IInventory } from './inventory.interface'
 
 @Entity()
@@ -38,7 +38,7 @@ export class EntInventory extends BaseEntity implements IInventory {
   @Column({ default: 0 })
   discountPercentage?: number
 
-  @Column({ default: null, type: 'datetime' })
+  @Column({ default: null, type: 'timestamp' })
   expiredDate?: Date | dayjs.Dayjs
 
   @Column({ default: true })

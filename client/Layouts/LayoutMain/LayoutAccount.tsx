@@ -8,8 +8,8 @@ import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Avatar, Dropdown, Space, Typography } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Route } from '../../Enums/Route'
-import { authAction } from '../../Modules/Iam/Auth/auth.action'
+import { AuthAction } from '../../Modules/Iam/Auth/infrastructure/auth.action'
+import { Path } from '../../common/Path'
 import { themeColors, themeColorsDark } from '../ThemeProvider/theme'
 
 type IProps = {
@@ -22,7 +22,7 @@ type IProps = {
 const LayoutAccount: React.FC<IProps> = (props: IProps) => {
   const handleLogout = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
-    authAction.logout() && location.replace(Route.login)
+    AuthAction.logout() && location.replace(Path.login)
   }
 
   return (
@@ -51,7 +51,7 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
             {
               key: 'My Account',
               label: (
-                <Link to={Route.account} style={{ width: '6rem' }}>
+                <Link to={Path.account.index} style={{ width: '6rem' }}>
                   <UserOutlined style={{ margin: '6px' }} /> My Account
                 </Link>
               ),
@@ -59,7 +59,7 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
             {
               key: 'Settings',
               label: (
-                <Link to={Route.accountEdit} style={{ width: '6rem' }}>
+                <Link to={Path.account.edit} style={{ width: '6rem' }}>
                   <SettingOutlined style={{ margin: '6px' }} /> Settings
                 </Link>
               ),
@@ -86,7 +86,7 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
           }}
         >
           <Space>
-            <Avatar icon={<UserOutlined />} src={props?.user.avatar} />
+            <Avatar icon={<UserOutlined />} src={props?.user?.avatar} />
             <Typography.Text>{props?.user?.name}</Typography.Text>
             <DownOutlined />
           </Space>

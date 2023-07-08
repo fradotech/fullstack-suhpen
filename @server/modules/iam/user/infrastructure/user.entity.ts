@@ -1,44 +1,14 @@
-import { RoleEnum } from '@server/modules/iam/role/common/role.enum'
+import { BaseEntity } from '@server/infrastructure/base/base.entity'
 import { UserGenderEnum } from '@server/modules/iam/user/common/user.enum'
 import * as bcrypt from 'bcrypt'
 import dayjs from 'dayjs'
-import {
-  BeforeInsert,
-  Column,
-  CreateDateColumn,
-  DeleteDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm'
+import { BeforeInsert, Column, Entity, JoinTable, ManyToMany } from 'typeorm'
+import { EntRole } from '../../role/infrastructure/role.entity'
+import { IRole } from '../../role/infrastructure/role.interface'
 import { IUser } from '../infrastructure/user.interface'
 
 @Entity()
-export class EntUser implements IUser {
-  @PrimaryGeneratedColumn('uuid')
-  id: string
-
-  @CreateDateColumn()
-  createdAt: Date
-
-  @ManyToOne(() => EntUser)
-  createdBy: IUser
-
-  @UpdateDateColumn()
-  updatedAt: Date
-
-  @ManyToOne(() => EntUser)
-  updatedBy: IUser
-
-  @DeleteDateColumn()
-  deletedAt: Date
-
-  @ManyToOne(() => EntUser)
-  deletedBy: IUser
-
-  // --- Regular attributs --- \\
-
+export class EntUser extends BaseEntity implements IUser {
   @Column()
   name: string
 
@@ -48,8 +18,9 @@ export class EntUser implements IUser {
   @Column()
   password: string
 
-  @Column({ default: RoleEnum.User })
-  role: RoleEnum
+  @ManyToMany(() => EntRole)
+  @JoinTable({ name: 'ent_user_roles' })
+  roles: IRole[]
 
   @Column({ default: null })
   gender?: UserGenderEnum
@@ -60,7 +31,7 @@ export class EntUser implements IUser {
   @Column({ default: null })
   address?: string
 
-  @Column({ default: null, type: 'datetime' })
+  @Column({ default: null, type: 'timestamp' })
   birthDate?: Date | dayjs.Dayjs
 
   @Column({ default: null })
@@ -70,13 +41,13 @@ export class EntUser implements IUser {
   otp?: number
 
   @Column({ default: false })
-  isVerified: boolean
+  isVerified?: boolean
 
   @Column({ default: null })
   token?: string
 
   @BeforeInsert()
-  async hashPassword() {
+  async hashPassword?() {
     this.password = await bcrypt.hash(this.password, 10)
   }
 }

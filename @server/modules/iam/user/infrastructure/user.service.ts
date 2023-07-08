@@ -3,69 +3,33 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { BaseService } from '@server/infrastructure/base/base.service'
 import { In, Repository } from 'typeorm'
 import { EntUser } from '../infrastructure/user.entity'
-import { IUser } from '../infrastructure/user.interface'
 
-@Injectable()
-export class UserService implements BaseService {
+class UserRepo extends Repository<EntUser> {
   constructor(
     @InjectRepository(EntUser)
-    private readonly userRepo: Repository<IUser>,
-  ) {}
+    private readonly userRepo: Repository<EntUser>,
+  ) {
+    super(userRepo.target, userRepo.manager, userRepo.queryRunner)
+  }
+}
 
-  async save(req: IUser): Promise<IUser> {
-    const data = this.userRepo.create(req)
-    return await this.userRepo.save(data)
+@Injectable()
+export class UserService extends UserRepo implements BaseService {
+  async findByInIds(ids: string[]): Promise<EntUser[]> {
+    return await this.findBy({ id: In(ids) })
   }
 
-  async find(): Promise<IUser[]> {
-    return await this.userRepo.find()
+  async findOneRelationRoles(id: string): Promise<EntUser> {
+    return await this.findOne({
+      where: { id },
+      relations: ['roles.permissions'],
+    })
   }
 
-  async findByIds(ids: string[]): Promise<IUser[]> {
-    return await this.userRepo.findBy({ id: In(ids) })
-  }
-
-  async findOne(id: string): Promise<IUser> {
-    return await this.userRepo.findOne({ where: { id } })
-  }
-
-  async findOneOrFail(id: string): Promise<IUser> {
-    return await this.userRepo.findOneOrFail({ where: { id } })
-  }
-
-  async update(req: IUser): Promise<IUser> {
-    const data = this.userRepo.create(req)
-    await this.userRepo.update(data.id, data)
-    return await this.findNoRelation(req.id)
-  }
-
-  async delete(id: string): Promise<IUser> {
-    const data = await this.findNoRelation(id)
-    await this.userRepo.delete(id)
-    return data
-  }
-
-  async softDelete(id: string): Promise<IUser> {
-    const data = await this.findNoRelation(id)
-    await this.userRepo.softDelete(id)
-    return data
-  }
-
-  async findNoRelation(id: string): Promise<IUser> {
-    return await this.userRepo.findOneOrFail({ where: { id } })
-  }
-
-  // --- Another findOneBy() --- \\
-
-  async findOneByEmail(email: string): Promise<IUser> {
-    return await this.userRepo.findOneOrFail({ where: { email } })
-  }
-
-  async findOneByPhoneNumber(phoneNumber: string): Promise<IUser> {
-    return await this.userRepo.findOneOrFail({ where: { phoneNumber } })
-  }
-
-  async findOneByToken(token: string): Promise<IUser> {
-    return await this.userRepo.findOne({ where: { token } })
+  async findOneByEmailRelationRoles(email: string): Promise<EntUser> {
+    return await this.findOne({
+      where: { email },
+      relations: ['roles.permissions'],
+    })
   }
 }

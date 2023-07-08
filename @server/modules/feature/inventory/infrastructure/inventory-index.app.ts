@@ -26,27 +26,19 @@ export class InventoryIndexApp extends BaseIndexApp {
   async fetch(
     req: InventoryIndexRequest,
   ): Promise<IPaginateResponse<IInventory>> {
-    const tableName = 'inventory'
-    const tableColumns = [
-      'sku',
-      'stock',
-      'buyPrice',
-      'sellPrice',
-      'marginPrice',
-    ]
+    const name = 'inventories'
+    const columns = ['sku', 'stock', 'buyPrice', 'sellPrice', 'marginPrice']
     const relations: IIndexAppRelation[] = [
       {
         name: 'product',
         columns: ['name'],
-        relations: [{ name: 'categories', columns: ['name'] }],
       },
     ]
 
     const query = this.createQueryIndex(
       req,
-      this.inventoryRepo.createQueryBuilder(tableName),
-      tableName,
-      tableColumns,
+      name,
+      columns,
       relations,
       this.inventoryRepo,
       this.request,

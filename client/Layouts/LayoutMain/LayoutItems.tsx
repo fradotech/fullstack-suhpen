@@ -2,111 +2,106 @@ import {
   ApartmentOutlined,
   DashboardOutlined,
   DropboxOutlined,
-  IdcardOutlined,
   ShoppingCartOutlined,
   TagsOutlined,
-  UsergroupAddOutlined,
-  UserSwitchOutlined,
 } from '@ant-design/icons'
 import { MenuProps } from 'antd'
-import { RoleEnum } from '../../../@server/modules/iam/role/common/role.enum'
-
-import React from 'react'
+import { FaIdCard, FaUser, FaUserCog, FaUserShield } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import { Route } from '../../Enums/Route'
-import { authAction } from '../../Modules/Iam/Auth/auth.action'
-import { Util } from '../../utils/util'
+import isHasPermission from '../../Modules/Iam/Role/common/isHasPermission'
+import { Path } from '../../common/Path'
+import { Util } from '../../common/utils/util'
 
-export type IProps = {
-  children: React.ReactNode
-  headerRightMenu?: React.FC
+type MenuItem = Required<MenuProps>['items'][number] & {
+  permissions: string[]
+  children?: MenuItem[]
 }
 
-type MenuItem = Required<MenuProps>['items'][number]
+const titleCase = Util.titleCase
 
-const user = authAction.loggedUser()
+const itemsDashboard: MenuItem[] = [
+  {
+    key: Path.dashboard.index,
+    label: <Link to={Path.dashboard.index}>DASHBOARD</Link>,
+    icon: <DashboardOutlined />,
+    permissions: [
+      Path.dashboard.index,
+      Path.inventory.index,
+      Path.dashboard.inventory.aggregate(),
+    ],
+  },
+]
 
-const itemsRoleSuperAdmin: MenuItem[] = [RoleEnum.SuperAdmin].includes(
-  user?.role,
-)
-  ? [
-      { type: 'divider' },
+const itemsFeature: MenuItem[] = [
+  {
+    key: 'SCM',
+    label: 'SCM',
+    icon: <ApartmentOutlined />,
+    permissions: [
+      Path.dashboard.index,
+      Path.inventory.index,
+      Path.dashboard.index,
+    ],
+    children: [
       {
-        key: 'IAM',
-        label: 'IAM',
-        icon: <IdcardOutlined />,
-        children: [
-          {
-            key: Route.user.index,
-            label: <Link to={Route.user.index}>{Util.titleCase('user')}</Link>,
-            icon: <UsergroupAddOutlined />,
-          },
-          {
-            key: Route.role,
-            label: <Link to={Route.role}>{Util.titleCase('role')}</Link>,
-            icon: <UserSwitchOutlined />,
-          },
-        ],
+        key: Path.product.index,
+        label: <Link to={Path.product.index}>{titleCase('product')}</Link>,
+        icon: <DropboxOutlined />,
+        permissions: [Path.product.index],
       },
-    ]
-  : []
-
-const itemsRoleAdmin: MenuItem[] = [
-  RoleEnum.SuperAdmin,
-  RoleEnum.Admin,
-].includes(user?.role)
-  ? [
       {
-        key: 'SCM',
-        label: 'SCM',
-        icon: <ApartmentOutlined />,
-        children: [
-          {
-            key: Route.product.index,
-            label: (
-              <Link to={Route.product.index}>{Util.titleCase('product')}</Link>
-            ),
-            icon: <DropboxOutlined />,
-          },
-          {
-            key: Route.inventory.index,
-            label: (
-              <Link to={Route.inventory.index}>
-                {Util.titleCase('inventory')}
-              </Link>
-            ),
-            icon: <ShoppingCartOutlined />,
-          },
-          {
-            key: Route.category.index,
-            label: (
-              <Link to={Route.category.index}>
-                {Util.titleCase('category')}
-              </Link>
-            ),
-            icon: <TagsOutlined />,
-          },
-        ],
+        key: Path.inventory.index,
+        label: <Link to={Path.inventory.index}>{titleCase('inventory')}</Link>,
+        icon: <ShoppingCartOutlined />,
+        permissions: [Path.inventory.index],
       },
-    ]
-  : []
-
-const itemsRoleUser: MenuItem[] = [
-  RoleEnum.SuperAdmin,
-  RoleEnum.Admin,
-  RoleEnum.User,
-].includes(user?.role)
-  ? [
       {
-        key: Route.dashboard.index,
-        label: <Link to={Route.dashboard.index}>DASHBOARD</Link>,
-        icon: <DashboardOutlined />,
+        key: Path.category.index,
+        label: <Link to={Path.category.index}>{titleCase('category')}</Link>,
+        icon: <TagsOutlined />,
+        permissions: [Path.category.index],
       },
-    ]
-  : []
+    ].filter((item) => isHasPermission(item.permissions)),
+  },
+]
+
+const itemsIam: MenuItem[] = [
+  {
+    type: 'divider',
+    permissions: [Path.user.index, Path.role.index, Path.permission.index],
+  },
+  {
+    key: 'IAM',
+    label: 'IAM',
+    icon: <FaIdCard />,
+    permissions: [Path.user.index, Path.role.index, Path.permission.index],
+    children: [
+      {
+        key: Path.user.index,
+        label: <Link to={Path.user.index}>{titleCase('user')}</Link>,
+        icon: <FaUser />,
+        permissions: [Path.user.index],
+      },
+      {
+        key: Path.role.index,
+        label: <Link to={Path.role.index}>{titleCase('role')}</Link>,
+        icon: <FaUserCog />,
+        permissions: [Path.role.index],
+      },
+      {
+        key: Path.permission.index,
+        label: (
+          <Link to={Path.permission.index}>{titleCase('permissions')}</Link>
+        ),
+        icon: <FaUserShield />,
+        permissions: [Path.permission.index],
+      },
+    ].filter((item) => isHasPermission(item.permissions)),
+  },
+]
 
 export const layoutItems: MenuItem[] = [
-  ...itemsRoleUser,
-  ...itemsRoleAdmin,
-  ...itemsRoleSuperAdmin,
-]
+  ...itemsDashboard,
+  ...itemsFeature,
+  ...itemsIam,
+].filter((item) => isHasPermission(item.permissions))

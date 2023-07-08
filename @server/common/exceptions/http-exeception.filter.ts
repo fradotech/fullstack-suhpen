@@ -43,7 +43,7 @@ export class EntityNotFoundExceptionFilter implements ExceptionFilter {
     const status = 404
 
     const indexValue = exception.message.indexOf('{')
-    const { where } = JSON.parse(exception.message.slice(indexValue, -1) + '}')
+    const where = JSON.parse(exception.message.slice(indexValue, -1) + '}')
     const message = `Data ${Object.keys(where)[0]} = '${
       Object.values(where)[0]
     }' not found`

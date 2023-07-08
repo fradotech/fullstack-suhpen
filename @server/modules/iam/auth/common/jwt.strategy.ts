@@ -5,7 +5,10 @@ import { config } from '@server/config'
 import { ExtractJwt, Strategy } from 'passport-jwt'
 import { IUser } from '../../user/infrastructure/user.interface'
 import { UserService } from '../../user/infrastructure/user.service'
-import { IJwtPayload } from './jwt-payload-interface'
+
+interface IJwtPayload {
+  id: string
+}
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -17,11 +20,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: IJwtPayload): Promise<IUser> {
-    const { id } = payload
-    const member = await this.userService.findOneOrFail(id)
-
-    !member && Exception.unauthorized()
-
-    return member
+    const user = await this.userService.findOneRelationRoles(payload.id)
+    !user && Exception.unauthorized()
+    return user
   }
 }

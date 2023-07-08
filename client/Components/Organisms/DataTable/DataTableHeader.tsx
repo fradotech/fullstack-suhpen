@@ -11,8 +11,11 @@ import dayjs from 'dayjs'
 import FileDownload from 'js-file-download'
 import React from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { HOST_API } from '../../../services/api.service'
-import { Util } from '../../../utils/util'
+import { PermissionMethodEnum } from '../../../../@server/modules/iam/permission/common/permission.enum'
+import isHasPermission from '../../../Modules/Iam/Role/common/isHasPermission'
+import useModules from '../../../common/useModules'
+import { Util } from '../../../common/utils/util'
+import { HOST_API } from '../../../infrastructure/api.service'
 import Loading from '../../Molecules/Loading/Loading'
 import { IDataTableHeader } from './DataTable.interface'
 import styles from './DataTable.module.css'
@@ -24,6 +27,7 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
   const navigate = useNavigate()
   const [value, setValue] = React.useState(props.searchValue)
   const [params] = useSearchParams()
+  const { modules } = useModules()
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
@@ -32,19 +36,29 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
     return () => clearTimeout(timeout)
   }, [value])
 
+  const renderIfHasPermission = (href: string): boolean => {
+    if (!href) return false
+
+    let permissionKey: string
+
+    if (href.includes('save')) {
+      permissionKey = `${PermissionMethodEnum.post.name}/${modules}`
+    } else {
+      return isHasPermission([href])
+    }
+
+    return isHasPermission([permissionKey], true)
+  }
+
   const handleExport = async () => {
     setIsLoading(true)
     await axios
-      .post(
-        `${HOST_API}${props.hrefExport}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('_accessToken')}`,
-          },
-          params: props.query,
+      .get(`${HOST_API}${props.hrefExport}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('_accessToken')}`,
         },
-      )
+        params: props.query,
+      })
       .then((response: any) =>
         FileDownload(response.data.data, response.data.fileName),
       )
@@ -99,7 +113,7 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
           )}
         </Row>
         <Row>
-          {props.hrefExport && (
+          {renderIfHasPermission(props.hrefExport) && (
             <Col className={styles.headerItem}>
               <Button
                 type="primary"
@@ -111,7 +125,7 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
               </Button>
             </Col>
           )}
-          {props.hrefCreate && (
+          {renderIfHasPermission(props.hrefCreate) && (
             <Col className={styles.headerItem}>
               <Button
                 type="primary"

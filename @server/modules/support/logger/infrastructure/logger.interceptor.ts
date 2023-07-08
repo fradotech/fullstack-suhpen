@@ -25,7 +25,7 @@ export class LoggerInterceptor implements NestInterceptor {
 
     return next.handle().pipe(
       tap(() => {
-        const logRes = LoggerResponse.fromEntity(Date.now() - dateNow, req)
+        const logRes = LoggerResponse.dto(Date.now() - dateNow, req)
         this.loggerService.setFile(file, logRes)
       }),
     )

@@ -1,7 +1,3 @@
-import {
-  OrderDirectionEnum,
-  OrderDirectionType,
-} from '@server/infrastructure/index/index.enum'
 import { SelectQueryBuilder } from 'typeorm'
 import { IBaseEntity } from '../base/base-entity.interface'
 import {
@@ -9,13 +5,14 @@ import {
   IPaginateRequest,
   IPaginateResponse,
   IPaginationMeta,
+  IndexSortOderEnum,
 } from './index.interface'
 
 export abstract class BaseIndexService {
   readonly DefaultPerPage: number = 10
   readonly DefaultPage: number = 1
   readonly DefaultSort: string = 'created_at'
-  readonly DefaultOrder: OrderDirectionType = 'DESC'
+  readonly DefaultOrder = 'DESC'
 
   abstract fetch(arg0: any, arg1: any): Promise<IPaginateResponse<IBaseEntity>>
 
@@ -29,10 +26,8 @@ export abstract class BaseIndexService {
     return (page - 1) * perPage
   }
 
-  protected getOrder(order: string): OrderDirectionEnum {
-    return order == OrderDirectionEnum.Asc
-      ? OrderDirectionEnum.Asc
-      : OrderDirectionEnum.Desc
+  protected getOrder(order: string): IndexSortOderEnum {
+    return order == 'ASC' ? IndexSortOderEnum.Asc : IndexSortOderEnum.Desc
   }
 
   protected take(amount: number): number {
