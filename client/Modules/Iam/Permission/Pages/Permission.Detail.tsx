@@ -21,7 +21,6 @@ const PermissionDetail: React.FC = () => {
         isLoading={isLoading}
         hrefIndex={Path.permission.index}
         hrefEdit={Path.permission.edit(id)}
-        hrefDelete={Path.permission.id(id)}
       />
       <Section>
         <DescriptionContainer>

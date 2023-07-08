@@ -10,8 +10,10 @@ import {
 import { Button, Card, Dropdown, Popconfirm, Tooltip } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { PermissionMethodEnum } from '../../../../@server/modules/iam/permission/common/permission.enum'
 import isHasPermission from '../../../Modules/Iam/Role/common/isHasPermission'
-import { isMobileScreen } from '../../../common/utils/is-mobile'
+import { useMobileScreen } from '../../../common/useMobileScreen'
+import useModules from '../../../common/useModules'
 
 type ButtonType = 'view' | 'edit' | 'delete' | 'approve' | 'reject' | 'submit'
 
@@ -28,7 +30,8 @@ interface IRowActionProps {
 }
 
 export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
-  const isMobile = isMobileScreen()
+  const { isMobile } = useMobileScreen()
+  const { modules } = useModules()
 
   const renderButton = (action: IRowActionButtonsProps) => {
     if (!action) return null
@@ -95,8 +98,18 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
     )
   }
 
-  const renderButtons = actions.map((action) => {
-    return isHasPermission([action.href], true) && renderButton(action)
+  const renderIfHasPermission = actions.map((action) => {
+    let permissionKey: string
+
+    if (!action.href) {
+      permissionKey = `${PermissionMethodEnum.delete.name}/${modules}/:id`
+    } else if (action.href.includes('save')) {
+      permissionKey = `${PermissionMethodEnum.put.name}/${modules}/:id`
+    } else {
+      permissionKey = `${PermissionMethodEnum.get.name}/${modules}/:id`
+    }
+
+    return isHasPermission([permissionKey]) && renderButton(action)
   })
 
   return isMobile ? (
@@ -108,7 +121,7 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
             type: 'group',
             label: (
               <Card size="small">
-                <>{renderButtons}</>
+                <>{renderIfHasPermission}</>
               </Card>
             ),
           },
@@ -118,6 +131,6 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
       <Button type="text" icon={<MoreOutlined />} />
     </Dropdown>
   ) : (
-    <>{renderButtons}</>
+    <>{renderIfHasPermission}</>
   )
 }
