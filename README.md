@@ -13,13 +13,13 @@ $ yarn
 - Run server
 
 ```bash
-$ yarn server:dev
+$ yarn server
 ```
 
 - Run client
 
 ```bash
-$ yarn client:dev
+$ yarn client
 ```
 
 ## Database
@@ -40,6 +40,6 @@ $ yarn migrate:generate <MigrationName>
 
 - Server url http://localhost:3000
 
-- Client url http://localhost:8080
+- Client url http://localhost:3001
 
-- API Documentation by Swagger UI http://localhost:3000/api/v1/docs
+- API Documentation by Swagger UI http://localhost:3000/docs
