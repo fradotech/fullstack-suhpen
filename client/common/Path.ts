@@ -1,7 +1,7 @@
 import { dashboardPath } from '../Modules/Dashboard/infrastructure/dashboard.path'
 import { categoryPath } from '../Modules/Feature/Category/infrastructure/category.path'
-import { inventoryPath } from '../Modules/Feature/Inventory/infrastructure/inventory.path'
 import { productPath } from '../Modules/Feature/Product/infrastructure/product.path'
+import { variantPath } from '../Modules/Feature/Variant/infrastructure/variant.path'
 import { accountPath } from '../Modules/Iam/Account/infrastructure/account.path'
 import { authPath } from '../Modules/Iam/Auth/infrastructure/auth.path'
 import { permissionPath } from '../Modules/Iam/Permission/infrastructure/permission.path'
@@ -23,5 +23,5 @@ export const Path = {
 
   product: productPath,
   category: categoryPath,
-  inventory: inventoryPath,
+  variant: variantPath,
 }

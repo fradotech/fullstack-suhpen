@@ -1,5 +1,5 @@
 import CategoryRoute from './Category/Category.route'
-import InventoryRoute from './Inventory/Inventory.route'
 import ProductRoute from './Product/Product.route'
+import VariantRoute from './Variant/Variant.route'
 
-export default [...ProductRoute, ...CategoryRoute, ...InventoryRoute]
+export default [...ProductRoute, ...CategoryRoute, ...VariantRoute]

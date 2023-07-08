@@ -1,11 +1,14 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { IBaseEntity } from '@server/infrastructure/base/base-entity.interface'
+import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.interface'
 import { Descriptions, Image, Tag } from 'antd'
 import { themeColors } from '../../../Layouts/ThemeProvider/theme'
 import { Util } from '../../../common/utils/util'
 
 const DescriptionItem = (data: IBaseEntity, key: string) => {
-  if (['avatar', 'image', 'thumbnail', 'attachment'].includes(key)) {
+  if (key.includes('Ids')) {
+    return null
+  } else if (['avatar', 'image', 'thumbnail', 'attachment'].includes(key)) {
     return (
       <Descriptions.Item key={key} label={Util.titleCase(key)}>
         <Image style={{ width: '50px' }} src={data[key]} />
@@ -42,10 +45,10 @@ const DescriptionItem = (data: IBaseEntity, key: string) => {
   } else if (Array.isArray(data[key])) {
     return (
       <Descriptions.Item key={key} label={Util.titleCase(key)}>
-        {data[key].map((data: IBaseEntity) => {
+        {data[key].map((data: IBaseMasterData) => {
           return (
-            <Tag color={data['labelColor'] || themeColors.primary}>
-              {data['name']}
+            <Tag color={data.labelColor || themeColors.primary}>
+              {data.name}
             </Tag>
           )
         })}

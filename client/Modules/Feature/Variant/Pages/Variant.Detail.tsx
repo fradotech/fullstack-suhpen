@@ -6,32 +6,30 @@ import { Section } from '../../../../Components/Molecules/Section/Section'
 import DescriptionContainer from '../../../../Components/Organisms/Description/DescriptionContainer'
 import DescriptionItem from '../../../../Components/Organisms/Description/DescriptionItem'
 import { Path } from '../../../../common/Path'
-import VariantIndex from '../../Variant/Pages/Variant.Index'
-import { ProductAction } from '../infrastructure/product.action'
+import { VariantAction } from '../infrastructure/variant.action'
 
-const ProductDetail: React.FC = () => {
+const VariantDetail: React.FC = () => {
   const { id } = useParams()
-  const fetch = async () => await ProductAction.findOne(id)
-  const { isLoading, data } = useQuery([ProductDetail.name], fetch)
+  const fetch = async () => await VariantAction.findOne(id)
+  const { isLoading, data } = useQuery([VariantDetail.name], fetch)
   const fields = data?.data && Object.keys(data.data)
 
   return (
     <>
       <PageHeader
-        title="Product Detail"
+        title="Variant Detail"
         isLoading={isLoading}
-        hrefIndex={Path.product.index}
-        hrefEdit={Path.product.edit(id)}
-        hrefDelete={Path.product.id(id)}
+        hrefIndex={Path.variant.index}
+        hrefEdit={Path.variant.edit(id)}
+        hrefDelete={Path.variant.id(id)}
       />
       <Section>
         <DescriptionContainer>
           {fields?.map((key) => DescriptionItem(data?.data, key))}
         </DescriptionContainer>
       </Section>
-      <VariantIndex productId={id} />
     </>
   )
 }
 
-export default ProductDetail
+export default VariantDetail

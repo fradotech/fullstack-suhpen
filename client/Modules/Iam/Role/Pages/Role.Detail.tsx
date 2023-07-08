@@ -13,7 +13,11 @@ const RoleDetail: React.FC = () => {
   const { id } = useParams()
   const fetch = async () => await RoleAction.findOne(id)
   const { isLoading, data } = useQuery([RoleDetail.name], fetch)
-  const fields = data?.data && Object.keys(data.data)
+
+  const fields = React.useMemo(() => {
+    delete data?.data.permissions
+    return data?.data && Object.keys(data.data)
+  }, [data])
 
   return (
     <>

@@ -2,11 +2,11 @@ import { Card, Col, Image, Layout, Row } from 'antd'
 import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { Util } from '../../../common/utils/util'
-import { InventoryAction } from '../../Feature/Inventory/infrastructure/inventory.action'
+import { VariantAction } from '../../Feature/Variant/infrastructure/variant.action'
 import styles from '../Home.module.css'
 
 const HomeProductSection: React.FC = () => {
-  const { isLoading, data } = InventoryAction.useIndex({ pageSize: 100 })
+  const { isLoading, data } = VariantAction.useIndex({ pageSize: 100 })
 
   return (
     <Layout>

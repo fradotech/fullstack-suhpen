@@ -1,10 +1,10 @@
 import React from 'react'
-import DashboardProduct from '../common/DashboardInventory.section'
+import DashboardVariant from '../common/DashboardVariant.section'
 
 const Dashboard: React.FC = () => {
   return (
     <>
-      <DashboardProduct />
+      <DashboardVariant />
     </>
   )
 }

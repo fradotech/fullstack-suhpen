@@ -9,8 +9,8 @@ import {
 } from 'typeorm'
 import { EntCategory } from '../../category/infrastructure/category.entity'
 import { ICategory } from '../../category/infrastructure/category.interface'
-import { EntInventory } from '../../inventory/infrastructure/inventory.entity'
-import { IInventory } from '../../inventory/infrastructure/inventory.interface'
+import { EntVariant } from '../../variant/infrastructure/variant.entity'
+import { IVariant } from '../../variant/infrastructure/variant.interface'
 import { IProduct } from './product.interface'
 
 @Entity()
@@ -34,6 +34,6 @@ export class EntProduct extends EntBaseMasterData implements IProduct {
   @OneToMany(() => EntProduct, (product) => product.parent)
   childs?: IProduct[]
 
-  @OneToMany(() => EntInventory, (inventory) => inventory.product)
-  inventories: IInventory[]
+  @OneToMany(() => EntVariant, (variant) => variant.product)
+  variant: IVariant[]
 }

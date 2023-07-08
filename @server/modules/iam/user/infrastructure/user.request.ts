@@ -56,7 +56,7 @@ export class UserRequest extends EntUser implements IUser {
 
   @IsOptional()
   @IsEnum(UserGenderEnum)
-  @ApiProperty({ example: UserGenderEnum.Man })
+  @ApiProperty({ example: UserGenderEnum.Male })
   gender?: UserGenderEnum
 
   @IsOptional()

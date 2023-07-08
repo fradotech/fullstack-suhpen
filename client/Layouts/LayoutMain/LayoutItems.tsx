@@ -1,12 +1,17 @@
 import {
-  ApartmentOutlined,
   DashboardOutlined,
   DropboxOutlined,
-  ShoppingCartOutlined,
+  KeyOutlined,
   TagsOutlined,
 } from '@ant-design/icons'
 import { MenuProps } from 'antd'
-import { FaIdCard, FaUser, FaUserCog, FaUserShield } from 'react-icons/fa'
+import {
+  FaBoxes,
+  FaDrawPolygon,
+  FaIdCard,
+  FaUser,
+  FaUserCog,
+} from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import isHasPermission from '../../Modules/Iam/Role/common/isHasPermission'
 import { Path } from '../../common/Path'
@@ -26,20 +31,20 @@ const itemsDashboard: MenuItem[] = [
     icon: <DashboardOutlined />,
     permissions: [
       Path.dashboard.index,
-      Path.inventory.index,
-      Path.dashboard.inventory.aggregate(),
+      Path.variant.index,
+      Path.dashboard.variant.aggregate(),
     ],
   },
 ]
 
 const itemsFeature: MenuItem[] = [
   {
-    key: 'SCM',
-    label: 'SCM',
-    icon: <ApartmentOutlined />,
+    key: 'INVENTORY',
+    label: 'INVENTORY',
+    icon: <FaBoxes />,
     permissions: [
       Path.dashboard.index,
-      Path.inventory.index,
+      Path.variant.index,
       Path.dashboard.index,
     ],
     children: [
@@ -50,10 +55,10 @@ const itemsFeature: MenuItem[] = [
         permissions: [Path.product.index],
       },
       {
-        key: Path.inventory.index,
-        label: <Link to={Path.inventory.index}>{titleCase('inventory')}</Link>,
-        icon: <ShoppingCartOutlined />,
-        permissions: [Path.inventory.index],
+        key: Path.variant.index,
+        label: <Link to={Path.variant.index}>{titleCase('variant')}</Link>,
+        icon: <FaDrawPolygon />,
+        permissions: [Path.variant.index],
       },
       {
         key: Path.category.index,
@@ -93,7 +98,7 @@ const itemsIam: MenuItem[] = [
         label: (
           <Link to={Path.permission.index}>{titleCase('permissions')}</Link>
         ),
-        icon: <FaUserShield />,
+        icon: <KeyOutlined />,
         permissions: [Path.permission.index],
       },
     ].filter((item) => isHasPermission(item.permissions)),
