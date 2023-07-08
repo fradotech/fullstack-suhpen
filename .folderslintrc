@@ -13,7 +13,6 @@
     "@server/infrastructure/index",
     "@server/infrastructure/interfaces",
     "@server/infrastructure/swagger/*",
-    "___DASHBOARD___",
     "@server/modules/dashboard/database",
     "@server/modules/dashboard/common",
     "@server/modules/dashboard/infrastructure",
