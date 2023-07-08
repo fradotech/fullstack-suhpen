@@ -39,13 +39,19 @@ export abstract class BaseIndexService {
   }
 
   protected querySearch(relations: IIndexAppRelation[]): string {
+    const nonLowerColumns = ['isActive', 'createdAt']
+
     let querySearch = `CONCAT_WS(''`
 
     const nestedRelation = (relations: IIndexAppRelation[]) => {
       for (const relation of relations) {
         if (relation.columns) {
           for (const key of relation.columns) {
-            querySearch += `, lower(${relation.name}.${key})`
+            if (!nonLowerColumns.includes(key)) {
+              querySearch += `, lower(${relation.name}.${key})`
+            } else {
+              querySearch += `, ${relation.name}.${key}`
+            }
           }
         }
 
