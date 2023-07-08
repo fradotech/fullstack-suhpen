@@ -15,7 +15,7 @@ const ProductIndex: React.FC = () => {
   const { isLoading, data, refetch } = ProductAction.useIndex(query)
 
   const { isLoading: isLoadingCategories, data: categories } =
-    CategoryAction.useIndex({ pageSize: 1000 })
+    CategoryAction.useIndex({ pageSize: 100000 })
 
   return (
     <>

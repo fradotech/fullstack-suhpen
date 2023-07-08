@@ -15,7 +15,7 @@ const UserIndex: React.FC = () => {
   const { isLoading, data, refetch } = UserAction.useIndex(query)
 
   const { isLoading: isLoadingRoles, data: roles } = RoleAction.useIndex({
-    pageSize: 1000,
+    pageSize: 100000,
   })
 
   return (

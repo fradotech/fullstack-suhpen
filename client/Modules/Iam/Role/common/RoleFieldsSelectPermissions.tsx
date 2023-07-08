@@ -20,18 +20,16 @@ const RoleFieldsSelectPermissions: React.FC<IProps> = (props: IProps) => {
       : [...selectedRowKeys]
 
     setSelectedRowKeys(permissionIdsUnique)
-  }, [props])
+  }, [props.form.getFieldValue('permissions')])
 
   const rowSelection: TableRowSelection<IPermission> = {
     selectedRowKeys,
     onChange: (keys: React.Key[]) => {
-      setSelectedRowKeys(keys)
-      props.form.setFieldValue('permissionIds', selectedRowKeys)
+      const permissionIdsUnique = [...new Set([...keys, ...selectedRowKeys])]
+      setSelectedRowKeys(permissionIdsUnique)
+      props.form.setFieldValue('permissionIds', permissionIdsUnique)
     },
   }
-
-  // TODO: Add role
-  // console.log(props.form.getFieldValue('permissionIds'))
 
   return <PermissionIndex rowSelection={rowSelection} />
 }
