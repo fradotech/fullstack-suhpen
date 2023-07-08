@@ -12,10 +12,10 @@ import { productColumns } from '../infrastructure/product.column'
 
 const ProductIndex: React.FC = () => {
   const { query, setQueryParams } = useDataTable<ProductIndexRequest>()
-  const { isLoading, data, refetch } = ProductAction.useIndex()
+  const { isLoading, data, refetch } = ProductAction.useIndex(query)
 
   const { isLoading: isLoadingCategories, data: categories } =
-    CategoryAction.useIndex()
+    CategoryAction.useIndex({ pageSize: 1000 })
 
   return (
     <>

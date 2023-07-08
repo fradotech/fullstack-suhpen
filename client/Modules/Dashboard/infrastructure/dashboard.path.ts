@@ -6,6 +6,6 @@ const rootInvenory = `/${Modules.DashboardInventory}`
 export const dashboardPath = {
   index: root,
   inventory: {
-    aggregate: (field: string) => `${rootInvenory}/aggregate/${field}`,
+    aggregate: (field?: string) => `${rootInvenory}/aggregate/${field || ''}`,
   },
 }

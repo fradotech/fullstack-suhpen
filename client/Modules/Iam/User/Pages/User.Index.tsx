@@ -14,7 +14,9 @@ const UserIndex: React.FC = () => {
   const { query, setQueryParams } = useDataTable<UserIndexRequest>()
   const { isLoading, data, refetch } = UserAction.useIndex(query)
 
-  const { isLoading: isLoadingRoles, data: roles } = RoleAction.useIndex()
+  const { isLoading: isLoadingRoles, data: roles } = RoleAction.useIndex({
+    pageSize: 1000,
+  })
 
   return (
     <>

@@ -24,7 +24,11 @@ const itemsDashboard: MenuItem[] = [
     key: Path.dashboard.index,
     label: <Link to={Path.dashboard.index}>DASHBOARD</Link>,
     icon: <DashboardOutlined />,
-    permissions: [Path.dashboard.index],
+    permissions: [
+      Path.dashboard.index,
+      Path.inventory.index,
+      Path.dashboard.inventory.aggregate(),
+    ],
   },
 ]
 

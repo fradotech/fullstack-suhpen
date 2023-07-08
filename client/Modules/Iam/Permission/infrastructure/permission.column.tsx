@@ -44,7 +44,7 @@ export const permissionColumns = (): ColumnsType<PermissionResponse> => {
     },
     {
       title: 'Actions',
-      width: '120px',
+      width: '80px',
       render: (data: PermissionResponse) => (
         <RowActionButtons
           actions={[
