@@ -1,8 +1,8 @@
-import { UserUpdateRequest } from '@server/modules/iam/user/infrastructure/user.request'
 import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate } from 'react-router-dom'
+import { AccountUpdateRequest } from '../../../../../@server/modules/iam/account/infrastructure/account.request'
 import { UserGenderEnum } from '../../../../../@server/modules/iam/user/common/user.enum'
 import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
@@ -16,7 +16,7 @@ import { AccountAction } from '../infrastructure/account.action'
 const AccountForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
-  const [form] = Form.useForm<UserUpdateRequest>()
+  const [form] = Form.useForm<AccountUpdateRequest>()
 
   const { isLoading: isLoadingRoles, data: roles } = RoleAction.useIndex()
 
