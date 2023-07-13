@@ -1,12 +1,10 @@
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
-import { Button, Col, Layout, Row } from 'antd'
+import { Col, Layout } from 'antd'
 import React, { useContext } from 'react'
-import { FaMoon, FaSun } from 'react-icons/fa'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
 import useAuthGuard from '../../Modules/Iam/Auth/common/useAuthGuard'
 import { ThemeContext } from '../ThemeProvider/ThemeProvider'
 import { themeColors, themeColorsDark } from '../ThemeProvider/theme'
-import LayoutAccount from './LayoutAccount'
+import LayoutHeader from './LayoutHeader'
 import styles from './LayoutMain.module.css'
 import LayoutSidebar from './LayoutSidebar'
 
@@ -53,31 +51,14 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
       </Layout.Sider>
       <Layout>
         <Layout.Content className={styles.contentContainer}>
-          <Layout.Header
-            className={styles.header}
-            style={{ background: bgLayoutColor }}
-          >
-            <Row className={styles.headerContainer}>
-              <a onClick={handleSidebarCollapse}>
-                {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              </a>
-
-              <Row>
-                <Button
-                  type="ghost"
-                  shape="circle"
-                  size="large"
-                  icon={isDarkMode ? <FaSun /> : <FaMoon />}
-                  onClick={() => {
-                    handleSwitchTheme && handleSwitchTheme(isDarkMode ?? false)
-                  }}
-                  className={styles.themeButton}
-                />
-
-                <LayoutAccount user={user} isDarkMode={isDarkMode ?? false} />
-              </Row>
-            </Row>
-          </Layout.Header>
+          <LayoutHeader
+            bgLayoutColor={bgLayoutColor}
+            handleSidebarCollapse={handleSidebarCollapse}
+            isCollapsed={isCollapsed}
+            isDarkMode={isDarkMode}
+            handleSwitchTheme={handleSwitchTheme}
+            user={user}
+          />
           <Col
             className={styles.content}
             style={{
