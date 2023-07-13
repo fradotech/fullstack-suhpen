@@ -82,7 +82,7 @@ export class QueryErrorFilter extends BaseExceptionFilter {
         break
 
       default:
-        Logger.error(`\n${exception}\n\n`, QueryFailedError.name)
+        Logger.error(exception, QueryFailedError.name)
 
         response.status(422).json({
           message: String(exception),
