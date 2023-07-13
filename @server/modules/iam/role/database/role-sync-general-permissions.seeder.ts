@@ -40,7 +40,7 @@ export const roleSyncGeneralPermissionsSeeder = async (): Promise<boolean> => {
       return data
     })
 
-    role.id = exist?.id
+    exist?.id && (role.id = exist.id)
     rolesSave.push(role)
   })
 

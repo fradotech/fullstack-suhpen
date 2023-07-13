@@ -11,7 +11,7 @@ import dayjs from 'dayjs'
 import React from 'react'
 
 export type TOrder = {
-  order: IndexSortOderEnum
+  order: IndexSortOderEnum | undefined
 }
 
 export type TOnSort<T> = Omit<SorterResult<T>, 'order'> & TOrder
@@ -58,7 +58,7 @@ export interface IDataTableHeader {
   dateRangeColumn?: string
   showCard?: boolean
   setShowCard?: React.Dispatch<React.SetStateAction<boolean>>
-  onSearch?: (value: string) => void
+  onSearch?: (value: string | undefined) => void
   onDateRange?: (dateRange: [dayjs.Dayjs, dayjs.Dayjs]) => void
   searchValue?: string
   query?: Record<string, any>
@@ -71,5 +71,5 @@ export interface IDataTableProps<T> extends Omit<TableProps<T>, 'onChange'> {
   batchActionMenus?: ItemType[]
   dataTableHeader?: IDataTableHeader
   search?: string
-  onChange?: (filters: FilterState<T>) => void
+  onChange: (filters: FilterState<T>) => void
 }

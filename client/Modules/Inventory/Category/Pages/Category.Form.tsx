@@ -21,24 +21,25 @@ const CategoryForm: React.FC = () => {
 
   useQuery(
     [CategoryForm.name],
-    id &&
-      (async () => {
-        setIsLoading(true)
-        const res = await CategoryAction.findOne(id)
-        form.setFieldsValue(res.data)
-        setIsLoading(false)
-      }),
+    id
+      ? async () => {
+          setIsLoading(true)
+          const res = await CategoryAction.findOne(id)
+          form.setFieldsValue(res.data)
+          setIsLoading(false)
+        }
+      : () => undefined,
     { refetchOnWindowFocus: false },
   )
 
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    let res: IApiRes<CategoryResponse>
+    let res: IApiRes<CategoryResponse> | undefined
     if (!id) res = await CategoryAction.create(data)
     if (id) res = await CategoryAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Path.category.index)
+    res?.data && navigate(Path.category.index)
   }
 
   return (

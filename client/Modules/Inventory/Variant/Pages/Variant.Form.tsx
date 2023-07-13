@@ -21,13 +21,14 @@ const VariantForm: React.FC = () => {
 
   useQuery(
     [VariantForm.name],
-    id &&
-      (async () => {
-        setIsLoading(true)
-        const res = await VariantAction.findOne(id)
-        form.setFieldsValue(res.data)
-        setIsLoading(false)
-      }),
+    id
+      ? async () => {
+          setIsLoading(true)
+          const res = await VariantAction.findOne(id)
+          form.setFieldsValue(res.data)
+          setIsLoading(false)
+        }
+      : () => undefined,
     { refetchOnWindowFocus: false },
   )
 
@@ -35,11 +36,11 @@ const VariantForm: React.FC = () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
     productId && (data.productId = productId)
-    let res: IApiRes<VariantResponse>
+    let res: IApiRes<VariantResponse> | undefined
     if (!id) res = await VariantAction.create(data)
     if (id) res = await VariantAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Path.product.index)
+    res?.data && navigate(Path.product.index)
   }
 
   return (

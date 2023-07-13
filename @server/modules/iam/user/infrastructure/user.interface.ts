@@ -6,7 +6,7 @@ import { IRole } from '../../role/infrastructure/role.interface'
 export interface IUser extends IBaseEntity {
   name: string
   email: string
-  password: string
+  password: string | undefined
   roles: IRole[]
   gender?: UserGenderEnum
   phoneNumber?: string

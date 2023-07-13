@@ -28,7 +28,7 @@ const UserDetail: React.FC = () => {
       <Section>
         <DescriptionContainer>
           {fields?.map((key) => {
-            if (key == 'role') {
+            if (key === 'role') {
               return (
                 <Descriptions.Item label={Util.titleCase(key)}>
                   {data?.data.roles.map((role) => {

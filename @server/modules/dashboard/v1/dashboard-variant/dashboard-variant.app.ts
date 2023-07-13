@@ -12,7 +12,7 @@ export class DashboardVariantApp {
     private readonly variantRepo: Repository<IVariant>,
   ) {}
 
-  async aggregate(column: string): Promise<IAggreate> {
+  async aggregate(column: string): Promise<IAggreate | undefined> {
     return await this.variantRepo
       .createQueryBuilder('variant')
       .select(`SUM(variant.${column})`, 'sum')

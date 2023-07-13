@@ -15,7 +15,7 @@ import { Util } from '../../../../common/utils/util'
 import { UserAction } from './user.action'
 
 export const userColumns = (
-  optionsRole: RoleResponse[],
+  optionsRole: RoleResponse[] | undefined,
   refetch: <TPageData>(
     options?: RefetchOptions & RefetchQueryFilters<TPageData>,
   ) => Promise<QueryObserverResult<IPaginateResponse<UserResponse>, unknown>>,

@@ -2,7 +2,7 @@ import React from 'react'
 
 const useDarkMode = () => {
   const [isDarkMode, setIsDarkMode] = React.useState<boolean>(
-    localStorage.getItem('isDarkMode') == 'false' ? true : false,
+    localStorage.getItem('isDarkMode') === 'false' ? true : false,
   )
 
   const handleSwitchTheme = (isDarkMode: boolean) => {

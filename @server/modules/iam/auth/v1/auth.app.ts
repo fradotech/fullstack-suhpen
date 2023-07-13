@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt'
 import { config } from '@server/config'
 import * as bcrypt from 'bcrypt'
 import { Exception } from '../../../../common/exceptions/index.exception'
+import { EntUser } from '../../user/infrastructure/user.entity'
 import { IUser } from '../../user/infrastructure/user.interface'
 import { UserService } from '../../user/infrastructure/user.service'
 import { authMessages } from '../common/auth.message'
@@ -31,9 +32,9 @@ export class AuthApp {
     const { email, password } = req
     const user = await this.userService.findOneByEmailRelationRoles(email)
     await this.authService.validateLogin(user, password)
-    user.token = await this.jwtService.signAsync({ id: user.id })
+    user && (user.token = await this.jwtService.signAsync({ id: user?.id }))
 
-    return user
+    return user || new EntUser()
   }
 
   async passwordSendLink(req: AuthPasswordSendRequest): Promise<string> {
@@ -68,7 +69,7 @@ export class AuthApp {
     user.token != req.token &&
       Exception.unprocessable(authMessages.tokenInvalid)
     user.password = await bcrypt.hash(req.password, 10)
-    user.token = null
+    user.token = undefined
 
     await Promise.all([
       this.userService.update(user.id, user),

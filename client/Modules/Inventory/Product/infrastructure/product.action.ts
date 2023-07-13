@@ -37,7 +37,9 @@ export class ProductAction {
     return res
   }
 
-  static async findOne(id: string): Promise<IApiRes<ProductResponse>> {
+  static async findOne(
+    id: string | undefined,
+  ): Promise<IApiRes<ProductResponse>> {
     const res: IApiRes<ProductResponse> = await API.get(Path.product.id(id))
 
     return res

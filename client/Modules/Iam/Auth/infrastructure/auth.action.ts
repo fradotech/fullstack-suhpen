@@ -14,15 +14,16 @@ import { API } from '../../../../infrastructure/api.service'
 export class AuthAction {
   static userLoggedLocal(): UserResponse {
     return (
-      Util.isValidJSON(localStorage.getItem('user')) &&
-      JSON.parse(localStorage.getItem('user') || null)
+      Util.isValidJSON(localStorage.getItem('user') || '') &&
+      JSON.parse(localStorage.getItem('user') || '')
     )
   }
 
   static async login(req: AuthLoginRequest): Promise<UserResponse> {
     const res: IApiRes<UserResponse> = await API.post(Path.login, req)
     const user = res?.data
-    user && localStorage.setItem('_accessToken', user?._accessToken)
+    user._accessToken &&
+      localStorage.setItem('_accessToken', user?._accessToken)
     user && localStorage.setItem('user', JSON.stringify(user))
     return user
   }

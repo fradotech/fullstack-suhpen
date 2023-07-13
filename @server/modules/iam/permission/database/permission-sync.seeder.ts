@@ -24,7 +24,7 @@ export const permissionSyncSeeder = async (
       return data
     })
 
-    permission.id = exist?.id
+    exist?.id && (permission.id = exist.id)
     permissionsSave.push(permission)
   })
 

@@ -25,24 +25,25 @@ const UserForm: React.FC = () => {
 
   useQuery(
     [UserForm.name],
-    id &&
-      (async () => {
-        setIsLoading(true)
-        const res = await UserAction.findOne(id)
-        form.setFieldsValue(res.data)
-        setIsLoading(false)
-      }),
+    id
+      ? async () => {
+          setIsLoading(true)
+          const res = await UserAction.findOne(id)
+          form.setFieldsValue(res.data)
+          setIsLoading(false)
+        }
+      : () => undefined,
     { refetchOnWindowFocus: false },
   )
 
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    let res: IApiRes<UserResponse>
+    let res: IApiRes<UserResponse> | undefined
     if (!id) res = await UserAction.create(data)
     if (id) res = await UserAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Path.user.index)
+    res?.data && navigate(Path.user.index)
   }
 
   return (

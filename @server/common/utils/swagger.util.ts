@@ -2,11 +2,11 @@ import { applyDecorators, Type } from '@nestjs/common'
 import { ApiOkResponse, getSchemaPath } from '@nestjs/swagger'
 
 export const ApiSuccessResponse = <TModel extends Type<unknown>>(
-  model: TModel = null,
+  model: TModel,
   isArray = false,
 ): any => {
   let ref: { $ref?: string; type?: string; items?: { $ref: string } }
-  ref = model ? { $ref: getSchemaPath(model) } : null
+  ref = model && { $ref: getSchemaPath(model) }
   if (isArray) {
     ref = {
       type: 'array',
@@ -34,7 +34,7 @@ export const ApiSuccessResponse = <TModel extends Type<unknown>>(
 }
 
 export const PaginationSuccessResponse = <TModel extends Type<unknown>>(
-  model: TModel = null,
+  model: TModel,
 ): any => {
   return applyDecorators(
     ApiOkResponse({

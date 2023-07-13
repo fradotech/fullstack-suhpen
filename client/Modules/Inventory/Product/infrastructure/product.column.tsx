@@ -15,7 +15,7 @@ import { Util } from '../../../../common/utils/util'
 import { ProductAction } from './product.action'
 
 export const productColumns = (
-  optionsCategory: CategoryResponse[],
+  optionsCategory: CategoryResponse[] | undefined,
   refetch: <TPageData>(
     options?: RefetchOptions & RefetchQueryFilters<TPageData>,
   ) => Promise<
