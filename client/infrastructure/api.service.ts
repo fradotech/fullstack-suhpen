@@ -89,7 +89,7 @@ export const API = {
     }
   },
 
-  delete: async (endpoint?: string): Promise<any> => {
+  delete: async (endpoint: string | undefined): Promise<any> => {
     try {
       const { data } = await axios.delete(`${HOST_API}${endpoint}`, {
         headers,

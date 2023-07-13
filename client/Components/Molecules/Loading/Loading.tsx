@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './Loading.module.css'
 
 interface IProps {
-  isLoading?: boolean | SpinProps
+  isLoading: boolean | SpinProps | undefined
 }
 
 const Loading: React.FC<IProps> = (props: IProps) => {

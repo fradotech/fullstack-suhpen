@@ -58,7 +58,7 @@ export interface IDataTableHeader {
   dateRangeColumn?: string
   showCard?: boolean
   setShowCard?: React.Dispatch<React.SetStateAction<boolean>>
-  onSearch?: (value?: string) => void
+  onSearch?: (value: string | undefined) => void
   onDateRange?: (dateRange: [dayjs.Dayjs, dayjs.Dayjs]) => void
   searchValue?: string
   query?: Record<string, any>

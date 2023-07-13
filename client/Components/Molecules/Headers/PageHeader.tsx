@@ -22,7 +22,7 @@ export const PageHeader: React.FC<IProps> = (props: IProps) => {
   const navigate = useNavigate()
   const { modules } = useModules()
 
-  const renderIfHasPermission = (href?: string): boolean => {
+  const renderIfHasPermission = (href: string | undefined): boolean => {
     if (!href) return false
 
     let permissionKey: string

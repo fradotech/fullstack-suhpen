@@ -14,7 +14,7 @@ export const paginationTransform = (
   }
 }
 
-export const formatColumns = <T>(columns?: ColumnsType<T>) => {
+export const formatColumns = <T>(columns: ColumnsType<T> | undefined) => {
   return columns?.map((data) => {
     return {
       ...data,

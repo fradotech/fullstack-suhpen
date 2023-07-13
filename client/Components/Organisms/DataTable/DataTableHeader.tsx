@@ -36,7 +36,7 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
     return () => clearTimeout(timeout)
   }, [value])
 
-  const renderIfHasPermission = (href?: string): boolean => {
+  const renderIfHasPermission = (href: string | undefined): boolean => {
     if (!href) return false
 
     let permissionKey: string
