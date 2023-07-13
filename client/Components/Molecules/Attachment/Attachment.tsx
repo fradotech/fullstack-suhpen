@@ -8,7 +8,7 @@ import { HOST_API } from '../../../infrastructure/api.service'
 import { getBase64 } from './attachment.util'
 
 interface IProps {
-  form?: FormInstance
+  form: FormInstance | undefined
   total?: number
   name: string
 }

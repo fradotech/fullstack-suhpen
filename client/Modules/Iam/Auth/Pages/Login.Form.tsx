@@ -11,7 +11,7 @@ import { rule } from '../../../../common/utils/form.rules'
 import styles from '../Auth.module.css'
 import { AuthAction } from '../infrastructure/auth.action'
 
-const LoginForm: React.FC = () => {
+const LoginForm: React.FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = React.useState(false)
   const user = AuthAction.userLoggedLocal()
   const [form] = Form.useForm<AuthLoginRequest>()
@@ -26,7 +26,7 @@ const LoginForm: React.FC = () => {
 
   if (user) {
     location.replace(Path.dashboard.index)
-    return undefined
+    return <></>
   } else
     return (
       <Col className={styles.container}>

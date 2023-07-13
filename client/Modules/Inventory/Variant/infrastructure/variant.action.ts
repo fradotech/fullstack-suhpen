@@ -26,7 +26,7 @@ export class VariantAction {
     req?: VariantIndexRequest,
     productId?: string,
   ): UseQueryResult<IPaginateResponse<VariantResponse>> {
-    req.productId = productId
+    req && (req.productId = productId)
     const fetch = async () => await API.get(Path.variant.index, req)
     return useQuery([VariantAction.useIndex.name, req], fetch)
   }
@@ -40,7 +40,9 @@ export class VariantAction {
     return res
   }
 
-  static async findOne(id: string): Promise<IApiRes<VariantResponse>> {
+  static async findOne(
+    id: string | undefined,
+  ): Promise<IApiRes<VariantResponse>> {
     const res: IApiRes<VariantResponse> = await API.get(Path.variant.id(id))
 
     res.data.expiredDate = res.data.expiredDate && dayjs(res.data.expiredDate)

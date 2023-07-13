@@ -8,7 +8,7 @@ export class RoleResponse extends EntRole {
     const res = new RoleResponse()
     Object.assign(res, data)
 
-    res.permissionIds = data.permissions?.map((data) => data.id)
+    res.permissionIds = data.permissions?.map((data) => data.id) || []
 
     return res
   }

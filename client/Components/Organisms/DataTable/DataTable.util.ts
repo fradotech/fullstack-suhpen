@@ -5,7 +5,7 @@ import { SortOrder } from 'antd/es/table/interface'
 import { Util } from '../../../common/utils/util'
 
 export const paginationTransform = (
-  meta: IPaginationMeta,
+  meta: IPaginationMeta | undefined,
 ): TablePaginationConfig => {
   return {
     current: meta?.page,
