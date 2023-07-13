@@ -27,7 +27,7 @@ export const ThemeProvider: React.FunctionComponent<IThemeProviderProps> = (
         controlItemBgActive: undefined,
         controlItemBgActiveHover: undefined,
       }
-    : globalThemeConfig['components']['Table']
+    : globalThemeConfig?.['components']?.['Table']
 
   const customThemeConfig: ThemeConfig = {
     ...globalThemeConfig,

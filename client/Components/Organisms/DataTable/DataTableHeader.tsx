@@ -36,7 +36,7 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
     return () => clearTimeout(timeout)
   }, [value])
 
-  const renderIfHasPermission = (href: string): boolean => {
+  const renderIfHasPermission = (href?: string): boolean => {
     if (!href) return false
 
     let permissionKey: string
@@ -76,7 +76,11 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
         <Row>
           {props.setShowCard && (
             <Col className={styles.headerItem}>
-              <Button onClick={() => props.setShowCard(!props.showCard)}>
+              <Button
+                onClick={() => {
+                  props.setShowCard && props.setShowCard(!props.showCard)
+                }}
+              >
                 {props.showCard ? (
                   <UnorderedListOutlined />
                 ) : (
@@ -104,10 +108,12 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
                   `${Util.titleCase(props.dateRangeColumn)} Start`,
                   `${Util.titleCase(props.dateRangeColumn)} End`,
                 ]}
-                defaultValue={[
-                  params.get('startAt') && dayjs(params.get('startAt')),
-                  params.get('endAt') && dayjs(params.get('endAt')),
-                ]}
+                defaultValue={
+                  [
+                    params.get('startAt') && dayjs(params.get('startAt')),
+                    params.get('endAt') && dayjs(params.get('endAt')),
+                  ] as any
+                }
               />
             </Col>
           )}
@@ -129,7 +135,7 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
             <Col className={styles.headerItem}>
               <Button
                 type="primary"
-                onClick={() => navigate(props.hrefCreate)}
+                onClick={() => props.hrefCreate && navigate(props.hrefCreate)}
                 icon={<PlusCircleFilled />}
               >
                 New

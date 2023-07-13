@@ -14,8 +14,8 @@ export const paginationTransform = (
   }
 }
 
-export const formatColumns = <T>(columns: ColumnsType<T>) => {
-  return columns.map((data) => {
+export const formatColumns = <T>(columns?: ColumnsType<T>) => {
+  return columns?.map((data) => {
     return {
       ...data,
       key: data['dataIndex'] || data.title,

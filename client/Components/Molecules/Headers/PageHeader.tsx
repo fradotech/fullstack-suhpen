@@ -22,7 +22,7 @@ export const PageHeader: React.FC<IProps> = (props: IProps) => {
   const navigate = useNavigate()
   const { modules } = useModules()
 
-  const renderIfHasPermission = (href: string): boolean => {
+  const renderIfHasPermission = (href?: string): boolean => {
     if (!href) return false
 
     let permissionKey: string
@@ -43,7 +43,7 @@ export const PageHeader: React.FC<IProps> = (props: IProps) => {
         {props.title && <Title className={styles.title}>{props.title}</Title>}
         <Row>
           {renderIfHasPermission(props.hrefEdit) && (
-            <Link to={props.hrefEdit}>
+            <Link to={props.hrefEdit || location.pathname}>
               <Button type="primary" className={styles.actionButton}>
                 <EditOutlined />
               </Button>
@@ -54,7 +54,7 @@ export const PageHeader: React.FC<IProps> = (props: IProps) => {
               title={'Are you sure want to delete?'}
               onConfirm={async () => {
                 await API.delete(props.hrefDelete)
-                navigate(props.hrefIndex)
+                props.hrefIndex && navigate(props.hrefIndex)
               }}
             >
               <Button type="primary" className={styles.actionButton} danger>

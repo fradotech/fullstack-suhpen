@@ -12,7 +12,7 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
@@ -28,6 +28,7 @@
     "inlineSources": true,
     "sourceRoot": "/",
     "resolveJsonModule": true,
+    "isolatedModules": true,
     "paths": {}
   },
   "exclude": ["node_modules", "dist"]

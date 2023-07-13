@@ -48,7 +48,7 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
           className={styles.sidebarContainer}
           style={{ background: bgLayoutColor }}
         >
-          <LayoutSidebar isDarkMode={isDarkMode} />
+          <LayoutSidebar isDarkMode={isDarkMode ?? false} />
         </Col>
       </Layout.Sider>
       <Layout>
@@ -68,11 +68,13 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
                   shape="circle"
                   size="large"
                   icon={isDarkMode ? <FaSun /> : <FaMoon />}
-                  onClick={() => handleSwitchTheme(isDarkMode)}
+                  onClick={() => {
+                    handleSwitchTheme && handleSwitchTheme(isDarkMode ?? false)
+                  }}
                   className={styles.themeButton}
                 />
 
-                <LayoutAccount user={user} isDarkMode={isDarkMode} />
+                <LayoutAccount user={user} isDarkMode={isDarkMode ?? false} />
               </Row>
             </Row>
           </Layout.Header>

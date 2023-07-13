@@ -20,7 +20,7 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
   const [params] = useSearchParams()
   const [state, setState] = useState<FilterState<T>>({ search: props.search })
   const [showCard, setShowCard] = useState(false)
-  const columns: ColumnsType<T> = formatColumns<T>(props.columns)
+  const columns: ColumnsType<T> | undefined = formatColumns<T>(props.columns)
   const { onChange } = props
 
   const handlePageChange: PaginationProps['onChange'] = (page, pageSize) => {
@@ -31,7 +31,7 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
   }
 
   const handleSearch = (search: string) => {
-    const page = search ? 1 : +params.get('page') || 1
+    const page = search ? 1 : +(params.get('page') || 1)
     const pageSize = search ? 100000 : 10
     const newQuery = { ...state, page, pageSize, search }
 
@@ -50,9 +50,9 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
   }
 
   const handleTableChange = (
-    filters: Record<string, FilterValue>,
+    filters: Record<string, FilterValue | null>,
     sorter: TOnSort<T>,
-    dateRangeColumn: string,
+    dateRangeColumn: string | undefined,
   ) => {
     const sortField = String(sorter.field)
     const sortOrder = sorter.order
@@ -101,9 +101,9 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
                     ? sorter.order === 'ascend'
                       ? IndexSortOderEnum.Asc
                       : IndexSortOderEnum.Desc
-                    : null,
+                    : undefined,
                 },
-                props.dataTableHeader.dateRangeColumn,
+                props.dataTableHeader?.dateRangeColumn,
               )
             }}
           />
