@@ -32,11 +32,7 @@ const DataTableCard: React.FC<IProps> = (props: IProps) => {
                 />
               }
             >
-              {data['name'] ||
-                data['title'] ||
-                data['key'] ||
-                data['variant'] ||
-                String(data)}
+              {data['name'] || data['title'] || data['key'] || String(data)}
             </Card>
           </Link>
         )
