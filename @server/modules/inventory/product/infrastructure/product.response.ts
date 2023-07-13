@@ -8,7 +8,7 @@ export class ProductResponse extends EntProduct {
     const res = new ProductResponse()
     Object.assign(res, data)
 
-    res.categoryIds = data.categories?.map((data) => data.id)
+    res.categoryIds = data.categories?.map((data) => data.id) || []
 
     return res
   }

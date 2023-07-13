@@ -32,7 +32,7 @@ const PasswordChangeForm: React.FC = () => {
   }
 
   if (!isValid) {
-    isValid == false && location.replace(Path.login)
+    isValid === false && location.replace(Path.login)
     return null
   } else
     return (

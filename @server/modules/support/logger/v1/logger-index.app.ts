@@ -15,7 +15,7 @@ export class LoggerIndexApp {
     const res = await this.loggerService.fetch()
     return {
       data: res,
-      meta: null,
+      meta: undefined,
     }
   }
 }

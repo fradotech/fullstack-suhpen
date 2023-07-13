@@ -10,7 +10,7 @@ export const getBase64 = (file: RcFile): Promise<string> =>
 
 export const getAttachment = (attachments: any): string | string[] => {
   if (!attachments) return undefined
-  if (typeof attachments == typeof '') return attachments
+  if (typeof attachments === typeof '') return attachments
   const fileUrls: string[] = attachments.fileList.map(
     (data: any) => data.response.data.fileUrl,
   )

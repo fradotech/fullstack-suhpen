@@ -32,7 +32,7 @@ export const userCreateSeeder = async (): Promise<boolean> => {
 
     if (data[i].name.replaceAll(' ', '_').toLowerCase() === roleSuperAdmin) {
       const roleAdmin = roles.find((role) => role.key === roleSuperAdmin)
-      data[i].roles.push(roleAdmin)
+      roleAdmin && data[i].roles.push(roleAdmin)
     } else {
       data[i].roles = [...new Set(randomRoles)]
     }

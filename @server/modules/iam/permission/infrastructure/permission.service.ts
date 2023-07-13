@@ -33,9 +33,7 @@ export class PermissionService extends PermissionRepo implements BaseService {
 
     const routes = router.stack
       .map((layer): IPermission => {
-        if (!layer.route) return null
-
-        return PermissionSyncRequest.dto(layer)
+        return layer.route && PermissionSyncRequest.dto(layer)
       })
       .filter((item) => item)
 

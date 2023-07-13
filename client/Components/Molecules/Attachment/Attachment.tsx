@@ -24,7 +24,7 @@ const Attachment: React.FC<IProps> = (props: IProps) => {
   React.useMemo(() => {
     const fieldValue = props?.form.getFieldValue(props.name)
     const defaultValues: string[] =
-      isInit && typeof fieldValue == typeof ''
+      isInit && typeof fieldValue === typeof ''
         ? [fieldValue]
         : fieldValue
         ? fieldValue
@@ -33,13 +33,13 @@ const Attachment: React.FC<IProps> = (props: IProps) => {
     const attachments: UploadFile[] = Array.isArray(defaultValues)
       ? defaultValues?.map((data: any) => {
           isInit && setIsInit(false)
-          if (data.status == 'uploading') return null
+          if (data.status === 'uploading') return null
           if (data.file) return data.file
           return { uid: data, name: data, url: data }
         })
       : [defaultValues]
 
-    typeof attachments[0]?.url == typeof '' && setFileList(attachments)
+    typeof attachments[0]?.url === typeof '' && setFileList(attachments)
   }, [fileList, isInit, props])
 
   const handlePreview = async (file: UploadFile) => {

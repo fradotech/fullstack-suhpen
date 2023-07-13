@@ -12,13 +12,13 @@ const DescriptionContainer: React.FC<React.PropsWithChildren> = ({
       bordered
       size={size}
       labelStyle={
-        props.layout == 'horizontal' && {
+        props.layout === 'horizontal' && {
           ...props.labelStyle,
           width: md && '15%',
         }
       }
       contentStyle={
-        props.layout == 'horizontal' && {
+        props.layout === 'horizontal' && {
           ...props.contentStyle,
           width: md && '30%',
         }

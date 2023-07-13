@@ -18,7 +18,7 @@ type IProps = {
 const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
   const { user } = useAuthGuard()
   const [isCollapsed, setIsCollapsed] = React.useState(
-    localStorage.getItem('isSidebarCollapsed') == 'false' ? true : false,
+    localStorage.getItem('isSidebarCollapsed') === 'false' ? true : false,
   )
 
   const handleSidebarCollapse = () => {

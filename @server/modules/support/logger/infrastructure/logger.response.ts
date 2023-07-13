@@ -8,7 +8,7 @@ export class LoggerResponse {
   headers: Headers
   remoteAddress: string
   user: IUser
-  body: ReadableStream<Uint8Array>
+  body: ReadableStream<Uint8Array> | null
 
   static dto(executeTime: number, request: Request): LoggerResponse {
     const res = new LoggerResponse()

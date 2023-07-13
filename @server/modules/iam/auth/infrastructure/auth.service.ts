@@ -11,7 +11,7 @@ import { MailTemplatePasswordResetSuccess } from '../templates/password-reset-su
 export class AuthService {
   constructor(private readonly mailService: MailService) {}
 
-  async validateLogin(user: IUser, password: string): Promise<boolean> {
+  async validateLogin(user?: IUser, password?: string): Promise<boolean> {
     !user && Exception.unauthorized(authMessages.wrongCredential)
     const isValid = await bcrypt.compare(password, user?.password || '')
     !isValid && Exception.unauthorized(authMessages.wrongCredential)

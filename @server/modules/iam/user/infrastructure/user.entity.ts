@@ -16,7 +16,7 @@ export class EntUser extends BaseEntity implements IUser {
   email: string
 
   @Column()
-  password: string
+  password?: string
 
   @ManyToMany(() => EntRole)
   @JoinTable({ name: 'ent_user_roles' })

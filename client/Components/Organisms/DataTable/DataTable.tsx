@@ -98,7 +98,7 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
                 {
                   ...sorter,
                   order: sorter.order
-                    ? sorter.order == 'ascend'
+                    ? sorter.order === 'ascend'
                       ? IndexSortOderEnum.Asc
                       : IndexSortOderEnum.Desc
                     : null,

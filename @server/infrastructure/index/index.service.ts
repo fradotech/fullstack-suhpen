@@ -1,4 +1,4 @@
-import { SelectQueryBuilder } from 'typeorm'
+import { ObjectLiteral, SelectQueryBuilder } from 'typeorm'
 import { IBaseEntity } from '../base/base-entity.interface'
 import {
   IIndexAppRelation,
@@ -26,16 +26,18 @@ export abstract class BaseIndexService {
     return (page - 1) * perPage
   }
 
-  protected getOrder(order: string): IndexSortOderEnum {
-    return order == 'ASC' ? IndexSortOderEnum.Asc : IndexSortOderEnum.Desc
+  protected getOrder(order?: string): IndexSortOderEnum {
+    return order === 'ASC' ? IndexSortOderEnum.Asc : IndexSortOderEnum.Desc
   }
 
-  protected take(amount: number): number {
+  protected take(amount?: number): number {
     return amount ?? 10
   }
 
-  protected orderByKey(table: string, keys: string[], sort: string): string {
-    return keys.includes(sort) ? `${table}.${sort}` : `${table}.updatedAt`
+  protected orderByKey(table: string, keys: string[], sort?: string): string {
+    return keys.includes(sort || 'updatedAt')
+      ? `${table}.${sort}`
+      : `${table}.updatedAt`
   }
 
   protected querySearch(relations: IIndexAppRelation[]): string {
@@ -79,11 +81,11 @@ export abstract class BaseIndexService {
     }
   }
 
-  protected async getData<T>(
+  protected async getData<T extends ObjectLiteral>(
     query: SelectQueryBuilder<T>,
     isExport?: boolean,
   ): Promise<[T[], number]> {
-    if (isExport) return [await query.getMany(), null]
+    if (isExport) return [await query.getMany(), 0]
     return await query.getManyAndCount()
   }
 }

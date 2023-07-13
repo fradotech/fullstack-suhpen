@@ -21,7 +21,7 @@ export interface IPaginationMeta {
 }
 
 export interface IPaginateResponse<T> {
-  meta: IPaginationMeta
+  meta: IPaginationMeta | undefined
   data: Array<T>
 }
 
