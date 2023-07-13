@@ -1,8 +1,9 @@
 import { BaseEntity } from '@server/infrastructure/base/base.entity'
-import { Column } from 'typeorm'
+import { Column, Index } from 'typeorm'
 import { IBaseMasterData } from './base-master-data.interface'
 
 export class EntBaseMasterData extends BaseEntity implements IBaseMasterData {
+  @Index()
   @Column()
   name: string
 

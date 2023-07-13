@@ -4,7 +4,7 @@ import { ColumnsType } from 'antd/es/table'
 import { SortOrder } from 'antd/es/table/interface'
 import { Util } from '../../../common/utils/util'
 
-export const paginationTransform = (
+export const formatPagination = (
   meta: IPaginationMeta | undefined,
 ): TablePaginationConfig => {
   return {

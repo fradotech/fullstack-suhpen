@@ -11,6 +11,7 @@ import styles from './DataTable.module.css'
 import { formatColumns } from './DataTable.util'
 import DataTableCard from './DataTableCard'
 import DataTableHeader from './DataTableHeader'
+import { paramDefaultValue } from './useDataTable'
 
 const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
   T extends IBaseEntity,
@@ -31,8 +32,8 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
   }
 
   const handleSearch = (search: string) => {
-    const page = search ? 1 : +(params.get('page') || 1)
-    const pageSize = search ? 100000 : 10
+    const page = search ? 1 : +(params.get('page') || paramDefaultValue.page)
+    const pageSize = +(params.get('pageSize') || paramDefaultValue.pageSize)
     const newQuery = { ...state, page, pageSize, search }
 
     setState(newQuery)
@@ -88,6 +89,7 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
         ) : (
           <Table<T>
             {...props}
+            rowKey="id"
             columns={columns}
             className={styles.tableLayout}
             size="small"
@@ -117,6 +119,13 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
               }
               defaultCurrent={props.defaultCurrent || 1}
               showSizeChanger
+              showLessItems
+              pageSizeOptions={[
+                '10',
+                '50',
+                '100',
+                String(props.pagination.total),
+              ]}
               onChange={handlePageChange}
               {...props.pagination}
             />
