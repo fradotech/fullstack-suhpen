@@ -3,7 +3,7 @@ import React from 'react'
 import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import DataTable from '../../../../Components/Organisms/DataTable/DataTable'
-import { paginationTransform } from '../../../../Components/Organisms/DataTable/DataTable.util'
+import { formatPagination } from '../../../../Components/Organisms/DataTable/DataTable.util'
 import { useDataTable } from '../../../../Components/Organisms/DataTable/useDataTable'
 import { Path } from '../../../../common/Path'
 import { CategoryAction } from '../infrastructure/category.action'
@@ -18,11 +18,10 @@ const CategoryIndex: React.FC = () => {
       <PageHeader title="Category" />
       <Section>
         <DataTable
-          rowKey="id"
           columns={categoryColumns(refetch)}
           dataSource={data?.data}
           search={query.search}
-          pagination={paginationTransform(data?.meta)}
+          pagination={formatPagination(data?.meta)}
           loading={isLoading}
           onChange={(filtersState) => setQueryParams(filtersState)}
           dataTableHeader={{
