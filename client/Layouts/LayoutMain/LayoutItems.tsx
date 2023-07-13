@@ -1,7 +1,6 @@
 import {
   DashboardOutlined,
   DropboxOutlined,
-  KeyOutlined,
   TagsOutlined,
 } from '@ant-design/icons'
 import { MenuProps } from 'antd'
@@ -9,6 +8,7 @@ import {
   FaBoxes,
   FaDrawPolygon,
   FaIdCard,
+  FaKey,
   FaUser,
   FaUserCog,
 } from 'react-icons/fa'
@@ -98,7 +98,7 @@ const itemsIam: MenuItem[] = [
         label: (
           <Link to={Path.permission.index}>{titleCase('permissions')}</Link>
         ),
-        icon: <KeyOutlined />,
+        icon: <FaKey />,
         permissions: [Path.permission.index],
       },
     ].filter((item) => isHasPermission(item.permissions)),

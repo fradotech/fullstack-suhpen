@@ -11,7 +11,6 @@ import {
 export abstract class BaseIndexService {
   readonly DefaultPerPage: number = 10
   readonly DefaultPage: number = 1
-  readonly DefaultSort: string = 'created_at'
   readonly DefaultOrder = 'DESC'
 
   abstract fetch(arg0: any, arg1: any): Promise<IPaginateResponse<IBaseEntity>>
@@ -41,7 +40,9 @@ export abstract class BaseIndexService {
   }
 
   protected querySearch(relations: IIndexAppRelation[]): string {
-    const nonLowerColumns = ['isActive', 'createdAt']
+    // CONTINUE: add more nonLowerStrings
+    const nonLowerStrings = ['At', 'isActive', 'Price', 'stock']
+    const nonLowerColumns: string[] = []
 
     let querySearch = `CONCAT_WS(''`
 
@@ -49,6 +50,10 @@ export abstract class BaseIndexService {
       for (const relation of relations) {
         if (relation.columns) {
           for (const key of relation.columns) {
+            nonLowerStrings.forEach((data) => {
+              key.includes(data) && nonLowerColumns.push(key)
+            })
+
             if (!nonLowerColumns.includes(key)) {
               querySearch += `, lower(${relation.name}.${key})`
             } else {
