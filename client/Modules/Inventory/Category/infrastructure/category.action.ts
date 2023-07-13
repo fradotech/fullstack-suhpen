@@ -39,7 +39,9 @@ export class CategoryAction {
     return res
   }
 
-  static async findOne(id: string): Promise<IApiRes<CategoryResponse>> {
+  static async findOne(
+    id: string | undefined,
+  ): Promise<IApiRes<CategoryResponse>> {
     const res: IApiRes<CategoryResponse> = await API.get(Path.category.id(id))
 
     return res

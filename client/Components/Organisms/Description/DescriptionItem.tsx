@@ -5,7 +5,9 @@ import { Descriptions, Image, Tag } from 'antd'
 import { themeColors } from '../../../Layouts/ThemeProvider/theme'
 import { Util } from '../../../common/utils/util'
 
-const DescriptionItem = (data: IBaseEntity, key: string) => {
+const DescriptionItem = (data: IBaseEntity | undefined, key: string) => {
+  if (!data) return null
+
   if (key.includes('Ids')) {
     return null
   } else if (['avatar', 'image', 'thumbnail', 'attachment'].includes(key)) {

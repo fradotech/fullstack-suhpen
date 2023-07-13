@@ -1,7 +1,7 @@
 import { roleDummySuperAdminKey } from '@server/modules/iam/role/database/role.dummy'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Request } from 'express'
-import { Repository, SelectQueryBuilder } from 'typeorm'
+import { ObjectLiteral, Repository, SelectQueryBuilder } from 'typeorm'
 import { IIndexAppRelation } from './index.interface'
 import { IndexRequest } from './index.request'
 import { BaseIndexService } from './index.service'
@@ -11,7 +11,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
     super()
   }
 
-  protected createQueryIndex<T>(
+  protected createQueryIndex<T extends ObjectLiteral>(
     req: IndexRequest,
     name: string,
     columns: string[],
@@ -51,7 +51,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
         if (!column.includes('_')) {
           if (columns.includes(column)) {
             query.andWhere(`${name}.${column} IN (:...value)`, {
-              value: req.filters[column],
+              value: req.filters?.[column],
             })
           } else {
             const filterRelation = (relations: IIndexAppRelation[]) => {
@@ -59,7 +59,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
                 relation.columns?.forEach((key) => {
                   if (relation.name.includes(column)) {
                     query.andWhere(`${relation.name}.${key} IN (:...value)`, {
-                      value: req.filters[column],
+                      value: req.filters?.[column],
                     })
                   }
                   relation.relations && filterRelation(relation.relations)

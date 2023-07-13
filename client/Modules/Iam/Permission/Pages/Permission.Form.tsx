@@ -20,24 +20,25 @@ const PermissionForm: React.FC = () => {
 
   useQuery(
     [PermissionForm.name],
-    id &&
-      (async () => {
-        setIsLoading(true)
-        const res = await PermissionAction.findOne(id)
-        form.setFieldsValue(res.data)
-        setIsLoading(false)
-      }),
+    id
+      ? async () => {
+          setIsLoading(true)
+          const res = await PermissionAction.findOne(id)
+          form.setFieldsValue(res.data)
+          setIsLoading(false)
+        }
+      : () => undefined,
     { refetchOnWindowFocus: false },
   )
 
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    let res: IApiRes<PermissionResponse>
+    let res: IApiRes<PermissionResponse> | undefined = undefined
     if (!id) res = await PermissionAction.create(data)
     if (id) res = await PermissionAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Path.permission.index)
+    res?.data && navigate(Path.permission.index)
   }
 
   return (

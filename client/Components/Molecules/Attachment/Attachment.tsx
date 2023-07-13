@@ -8,8 +8,8 @@ import { HOST_API } from '../../../infrastructure/api.service'
 import { getBase64 } from './attachment.util'
 
 interface IProps {
-  form: FormInstance
-  total: number
+  form: FormInstance | undefined
+  total?: number
   name: string
 }
 
@@ -22,9 +22,9 @@ const Attachment: React.FC<IProps> = (props: IProps) => {
   const handleCancel = () => setPreviewOpen(false)
 
   React.useMemo(() => {
-    const fieldValue = props?.form.getFieldValue(props.name)
+    const fieldValue = props?.form?.getFieldValue(props.name)
     const defaultValues: string[] =
-      isInit && typeof fieldValue == typeof ''
+      isInit && typeof fieldValue === typeof ''
         ? [fieldValue]
         : fieldValue
         ? fieldValue
@@ -33,13 +33,13 @@ const Attachment: React.FC<IProps> = (props: IProps) => {
     const attachments: UploadFile[] = Array.isArray(defaultValues)
       ? defaultValues?.map((data: any) => {
           isInit && setIsInit(false)
-          if (data.status == 'uploading') return null
+          if (data.status === 'uploading') return null
           if (data.file) return data.file
           return { uid: data, name: data, url: data }
         })
       : [defaultValues]
 
-    typeof attachments[0]?.url == typeof '' && setFileList(attachments)
+    typeof attachments[0]?.url === typeof '' && setFileList(attachments)
   }, [fileList, isInit, props])
 
   const handlePreview = async (file: UploadFile) => {
@@ -49,7 +49,7 @@ const Attachment: React.FC<IProps> = (props: IProps) => {
 
     setPreviewImage(file.url || (file.preview as string))
     setPreviewOpen(true)
-    setPreviewTitle(file.name || file.url)
+    setPreviewTitle(file.name || (file.url as string))
   }
 
   const handleChange: UploadProps['onChange'] = ({ fileList }) =>
@@ -66,7 +66,7 @@ const Attachment: React.FC<IProps> = (props: IProps) => {
           onChange={handleChange}
           name={Path.Attachment.substring(1)}
         >
-          {fileList.length >= props.total ? null : (
+          {fileList.length >= (props.total || 1) ? null : (
             <>
               <PlusOutlined style={{ margin: '4px' }} />
               <div> Upload</div>

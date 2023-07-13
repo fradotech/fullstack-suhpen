@@ -1,5 +1,4 @@
 import { Col, Form, FormProps, Grid, Row } from 'antd'
-import React from 'react'
 import FormActionButton, { IFormActionButtonProps } from './FormActionButton'
 
 interface IFormProps extends FormProps {
@@ -22,15 +21,17 @@ const FormContainer = (props: IFormProps): JSX.Element => {
           {...rest}
           layout={isFieldCentered ? 'horizontal' : props.layout}
           labelCol={
-            isFieldCentered && {
-              span: 8,
-              style: isFieldCentered && {
-                position: 'absolute',
-                transform: 'translateX(-100%)',
-              },
-            }
+            isFieldCentered
+              ? {
+                  span: 8,
+                  style: isFieldCentered && {
+                    position: 'absolute',
+                    transform: 'translateX(-100%)',
+                  },
+                }
+              : undefined
           }
-          wrapperCol={isFieldCentered && { span: 18 }}
+          wrapperCol={isFieldCentered ? { span: 18 } : undefined}
           style={{ ...props.style }}
         >
           <>

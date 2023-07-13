@@ -37,7 +37,7 @@ export class RoleAction {
     return res
   }
 
-  static async findOne(id: string): Promise<IApiRes<RoleResponse>> {
+  static async findOne(id: string | undefined): Promise<IApiRes<RoleResponse>> {
     const res: IApiRes<RoleResponse> = await API.get(Path.role.id(id))
 
     return res
@@ -63,7 +63,7 @@ export class RoleAction {
 
   static validatePermission(user: IUser, key: string): boolean {
     return user.roles.some((role) => {
-      return role.permissions.some((permission) => {
+      return role.permissions?.some((permission) => {
         return key === permission.key
       })
     })

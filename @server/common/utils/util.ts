@@ -6,7 +6,7 @@ export class Util {
     try {
       JSON.parse(str)
     } catch (e) {
-      if (str == '') return false
+      if (str === '') return false
       Logger.error(e, this.name)
       return false
     }
@@ -36,12 +36,12 @@ export class Util {
 
   static formatDate = (date: Date | string | dayjs.Dayjs) => {
     const newDate = dayjs(date).format('YYYY-MM-DD')
-    return newDate == 'Invalid Date' ? '-' : newDate
+    return newDate === 'Invalid Date' ? '-' : newDate
   }
 
   static formatDatetime = (date: Date | string | dayjs.Dayjs) => {
     const newDate = dayjs(date).format('YYYY-MM-DD HH:mm')
-    return newDate == 'Invalid Date' ? '-' : newDate
+    return newDate === 'Invalid Date' ? '-' : newDate
   }
 
   static formatCurrency = (str: number | string) => {

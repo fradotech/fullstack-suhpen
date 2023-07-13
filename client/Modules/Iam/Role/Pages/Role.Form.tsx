@@ -20,24 +20,25 @@ const RoleForm: React.FC = () => {
 
   useQuery(
     [RoleForm.name],
-    id &&
-      (async () => {
-        setIsLoading(true)
-        const res = await RoleAction.findOne(id)
-        form.setFieldsValue(res.data)
-        setIsLoading(false)
-      }),
+    id
+      ? async () => {
+          setIsLoading(true)
+          const res = await RoleAction.findOne(id)
+          form.setFieldsValue(res.data)
+          setIsLoading(false)
+        }
+      : () => undefined,
     { refetchOnWindowFocus: false },
   )
 
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    let res: IApiRes<RoleResponse>
+    let res: IApiRes<RoleResponse> | undefined
     if (!id) res = await RoleAction.create(data)
     if (id) res = await RoleAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Path.role.index)
+    res?.data && navigate(Path.role.index)
   }
 
   return (

@@ -35,7 +35,7 @@ export class RoleService extends RoleRepo implements BaseService {
   ): boolean {
     const key = path.replace(config.app.prefix, method.toLowerCase())
     return user.roles.some((role) => {
-      return role.permissions.some((permission) => {
+      return role.permissions?.some((permission) => {
         return key === permission.key
       })
     })

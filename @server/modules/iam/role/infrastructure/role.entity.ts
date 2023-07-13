@@ -8,5 +8,5 @@ import { IRole } from './role.interface'
 export class EntRole extends EntBaseMasterData implements IRole {
   @ManyToMany(() => EntPermission)
   @JoinTable({ name: 'ent_role_permissions' })
-  permissions: IPermission[]
+  permissions: IPermission[] | undefined
 }

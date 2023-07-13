@@ -38,7 +38,7 @@ export class UserAction {
     return res
   }
 
-  static async findOne(id: string): Promise<IApiRes<UserResponse>> {
+  static async findOne(id: string | undefined): Promise<IApiRes<UserResponse>> {
     const res: IApiRes<UserResponse> = await API.get(Path.user.id(id))
     res.data.birthDate = res.data.birthDate && dayjs(res.data.birthDate)
     return res

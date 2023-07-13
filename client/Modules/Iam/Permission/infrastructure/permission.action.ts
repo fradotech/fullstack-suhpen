@@ -29,9 +29,9 @@ export class PermissionAction {
     req?: PermissionIndexRequest,
     roleId?: string,
   ): UseQueryResult<IPaginateResponse<PermissionResponse>> {
-    req.roleId = roleId
-    if (!req.sortField) req.sortField = 'module'
-    if (!req.sortOrder) req.sortOrder = IndexSortOderEnum.Asc
+    req && (req.roleId = roleId)
+    if (req && !req?.sortField) req.sortField = 'module'
+    if (req && !req?.sortOrder) req.sortOrder = IndexSortOderEnum.Asc
 
     const fetch = async () => await API.get(Path.permission.index, req)
     return useQuery([PermissionAction.useIndex.name, req], fetch)
@@ -46,7 +46,9 @@ export class PermissionAction {
     return res
   }
 
-  static async findOne(id: string): Promise<IApiRes<PermissionResponse>> {
+  static async findOne(
+    id: string | undefined,
+  ): Promise<IApiRes<PermissionResponse>> {
     const res: IApiRes<PermissionResponse> = await API.get(
       Path.permission.id(id),
     )

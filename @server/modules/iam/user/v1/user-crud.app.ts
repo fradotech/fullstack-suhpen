@@ -29,7 +29,7 @@ export class UserCrudApp {
   }
 
   async findOneOrFail(id: string): Promise<IUser> {
-    return await this.userService.findOneRelationRoles(id)
+    return await this.userService.findOneOrFailRelationRoles(id)
   }
 
   async update(id: string, req: UserUpdateRequest): Promise<IUser> {

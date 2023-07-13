@@ -19,7 +19,7 @@ export const SENTRY_OPTIONS = 'SENTRY_OPTIONS'
 })
 export class SentryModule {
   static forRoot(options: Sentry.NodeOptions) {
-    Sentry.init(config.sentry.dsn && options)
+    config.sentry.dsn && Sentry.init(options)
     return { module: SentryModule }
   }
 }

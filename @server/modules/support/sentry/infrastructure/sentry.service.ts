@@ -9,6 +9,8 @@ import { Request } from 'express'
 export class SentryService {
   constructor(@Inject(REQUEST) private request?: Request) {
     const { method, headers, url } = this.request
+      ? this.request
+      : { method: undefined, headers: undefined, url: 'undefined' }
 
     const transaction = Sentry.startTransaction({
       name: url,
@@ -21,11 +23,11 @@ export class SentryService {
     })
   }
 
-  get span(): Span {
+  get span(): Span | undefined {
     return Sentry.getCurrentHub().getScope().getSpan()
   }
 
-  startChild(spanContext: SpanContext): Span {
-    return this.span.startChild(spanContext)
+  startChild(spanContext: SpanContext): Span | undefined {
+    return this.span?.startChild(spanContext)
   }
 }

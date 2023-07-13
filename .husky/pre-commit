@@ -4,4 +4,6 @@
 yarn lint
 yarn folderslint
 # yarn format
+# yarn server:build
+# yarn client:build
 git add .

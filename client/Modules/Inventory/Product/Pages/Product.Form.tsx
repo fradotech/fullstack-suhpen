@@ -24,24 +24,25 @@ const ProductForm: React.FC = () => {
 
   useQuery(
     [ProductForm.name],
-    id &&
-      (async () => {
-        setIsLoading(true)
-        const res = await ProductAction.findOne(id)
-        form.setFieldsValue(res.data)
-        setIsLoading(false)
-      }),
+    id
+      ? async () => {
+          setIsLoading(true)
+          const res = await ProductAction.findOne(id)
+          form.setFieldsValue(res.data)
+          setIsLoading(false)
+        }
+      : () => undefined,
     { refetchOnWindowFocus: false },
   )
 
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    let res: IApiRes<ProductResponse>
+    let res: IApiRes<ProductResponse> | undefined
     if (!id) res = await ProductAction.create(data)
     if (id) res = await ProductAction.update(id, data)
     setIsLoading(false)
-    res.data && navigate(Path.product.index)
+    res?.data && navigate(Path.product.index)
   }
 
   return (

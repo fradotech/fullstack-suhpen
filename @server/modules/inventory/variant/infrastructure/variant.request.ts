@@ -1,5 +1,6 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty } from 'class-validator'
+import dayjs from 'dayjs'
 import { IProduct } from '../../product/infrastructure/product.interface'
 import { VariantSupplyTypeEnum } from '../common/variant.enum'
 import { EntVariant } from './variant.entity'
@@ -41,7 +42,7 @@ export class VariantRequest extends EntVariant implements IVariant {
   discountPercentage?: number
 
   @ApiProperty()
-  expiredDate?: Date
+  expiredDate?: Date | dayjs.Dayjs
 
   @ApiProperty({ example: false })
   isActive: boolean

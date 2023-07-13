@@ -71,7 +71,7 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
 
     return (
       <Tooltip title={action.type} key={action.type}>
-        {action.type == 'view' || action.type == 'edit' ? (
+        {action.type === 'view' || action.type === 'edit' ? (
           <Link to={action.href || '#'}>
             <Button
               type="text"
