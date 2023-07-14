@@ -1,6 +1,4 @@
-import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { VariantCreateRequest } from '@server/modules/inventory/variant/infrastructure/variant.request'
-import { VariantResponse } from '@server/modules/inventory/variant/infrastructure/variant.response'
 import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
@@ -19,34 +17,30 @@ const VariantForm: React.FC = () => {
   const [form] = Form.useForm<VariantCreateRequest>()
   const { id, productId } = useParams()
 
-  useQuery(
-    [VariantForm.name],
-    id
-      ? async () => {
-          setIsLoading(true)
-          const res = await VariantAction.findOne(id)
-          form.setFieldsValue(res.data)
-          setIsLoading(false)
-        }
-      : () => undefined,
-    { refetchOnWindowFocus: false },
-  )
+  const fetch = async () => {
+    setIsLoading(true)
+    const res = await VariantAction.findOne(id)
+    form.setFieldsValue(res.data)
+    setIsLoading(false)
+  }
+
+  useQuery([VariantForm.name], id ? fetch : () => undefined, {
+    refetchOnWindowFocus: false,
+  })
 
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
     productId && (data.productId = productId)
-    let res: IApiRes<VariantResponse> | undefined
-    if (!id) res = await VariantAction.create(data)
-    if (id) res = await VariantAction.update(id, data)
+    if (id) await VariantAction.update(id, data)
+    else (await VariantAction.create(data)) && navigate(Path.product.index)
     setIsLoading(false)
-    res?.data && navigate(Path.product.index)
   }
 
   return (
     <>
       <PageHeader
-        title={id ? 'Variant Edit' : 'Variant Create'}
+        title={id ? 'Variant' : 'New Variant'}
         isLoading={isLoading}
       />
       <Section>
@@ -71,7 +65,7 @@ const VariantForm: React.FC = () => {
               />
             </Col>
           </Row>
-          <FormItem name="variant" />
+          <FormItem name="name" />
           <Row gutter={12}>
             <Col sm={24} md={12}>
               <FormItem

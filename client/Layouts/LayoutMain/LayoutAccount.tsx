@@ -1,9 +1,4 @@
-import {
-  DownOutlined,
-  LogoutOutlined,
-  SettingOutlined,
-  UserOutlined,
-} from '@ant-design/icons'
+import { DownOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Avatar, Dropdown, Space, Typography } from 'antd'
 import React from 'react'
@@ -53,14 +48,6 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
               label: (
                 <Link to={Path.account.index} style={{ width: '6rem' }}>
                   <UserOutlined style={{ margin: '6px' }} /> My Account
-                </Link>
-              ),
-            },
-            {
-              key: 'Settings',
-              label: (
-                <Link to={Path.account.edit} style={{ width: '6rem' }}>
-                  <SettingOutlined style={{ margin: '6px' }} /> Settings
                 </Link>
               ),
             },

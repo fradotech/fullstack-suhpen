@@ -1,6 +1,4 @@
-import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { UserCreateRequest } from '@server/modules/iam/user/infrastructure/user.request'
-import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { Col, Divider, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
@@ -20,36 +18,31 @@ const UserForm: React.FC = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const [form] = Form.useForm<UserCreateRequest>()
-
   const { isLoading: isLoadingRoles, data: roles } = RoleAction.useIndex()
 
-  useQuery(
-    [UserForm.name],
-    id
-      ? async () => {
-          setIsLoading(true)
-          const res = await UserAction.findOne(id)
-          form.setFieldsValue(res.data)
-          setIsLoading(false)
-        }
-      : () => undefined,
-    { refetchOnWindowFocus: false },
-  )
+  const fetch = async () => {
+    setIsLoading(true)
+    const res = await UserAction.findOne(id)
+    form.setFieldsValue(res.data)
+    setIsLoading(false)
+  }
+
+  useQuery([UserForm.name], id ? fetch : () => undefined, {
+    refetchOnWindowFocus: false,
+  })
 
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    let res: IApiRes<UserResponse> | undefined
-    if (!id) res = await UserAction.create(data)
-    if (id) res = await UserAction.update(id, data)
+    if (id) await UserAction.update(id, data)
+    else (await UserAction.create(data)) && navigate(Path.user.index)
     setIsLoading(false)
-    res?.data && navigate(Path.user.index)
   }
 
   return (
     <>
       <PageHeader
-        title={id ? 'User Edit' : 'User Create'}
+        title={id ? 'User' : 'New User'}
         isLoading={isLoading || isLoadingRoles}
       />
       <Section>
@@ -60,25 +53,41 @@ const UserForm: React.FC = () => {
           centered
           button={{ disabled: isLoading }}
         >
-          <FormItem name="avatar" input="attachment" total={1} form={form} />
-          <FormItem name="name" rules={[rule.required]} />
+          <Row gutter={12}>
+            <Col sm={24} md={6}>
+              <FormItem
+                name="avatar"
+                input="attachment"
+                total={1}
+                form={form}
+              />
+            </Col>
+            <Col sm={24} md={18}>
+              <FormItem name="name" rules={[rule.required]} />
+              <FormItem
+                name="email"
+                rules={[rule.email]}
+                type="email"
+                disabled={!!id}
+              />
+            </Col>
 
-          {!id && (
-            <>
-              <FormItem name="email" rules={[rule.email]} type="email" />
-              <FormItem
-                name="password"
-                rules={[rule.password]}
-                input="inputPassword"
-              />
-              <FormItem
-                name="passwordConfirmation"
-                rules={[rule.password]}
-                input="inputPassword"
-                placeholder="Password Confirmation"
-              />
-            </>
-          )}
+            {!id && (
+              <Col sm={24} md={24}>
+                <FormItem
+                  name="password"
+                  rules={[rule.password]}
+                  input="inputPassword"
+                />
+                <FormItem
+                  name="passwordConfirmation"
+                  rules={[rule.password]}
+                  input="inputPassword"
+                  placeholder="Password Confirmation"
+                />
+              </Col>
+            )}
+          </Row>
 
           <Divider />
 

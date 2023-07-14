@@ -4,5 +4,4 @@ const root = `/${Modules.Account}`
 
 export const accountPath = {
   index: root,
-  edit: `${root}/edit`,
 }

@@ -44,17 +44,13 @@ export const permissionColumns = (): ColumnsType<PermissionResponse> => {
     },
     {
       title: 'Actions',
-      width: '80px',
+      width: '40px',
       render: (data: PermissionResponse) => (
         <RowActionButtons
           actions={[
             {
               type: 'view',
               href: Path.permission.id(data.id),
-            },
-            {
-              type: 'edit',
-              href: Path.permission.edit(data.id),
             },
           ]}
         />

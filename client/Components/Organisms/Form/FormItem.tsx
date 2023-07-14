@@ -5,6 +5,7 @@ import {
   InputNumber,
   Select,
   Switch,
+  Tag,
 } from 'antd'
 import { Colorpicker } from 'antd-colorpicker'
 import { FormInstance, Rule } from 'antd/es/form'
@@ -16,9 +17,9 @@ import { Util } from '../../../common/utils/util'
 import Attachment from '../../Molecules/Attachment/Attachment'
 
 interface IProps {
+  name: string
   form?: FormInstance
   label?: string
-  name: string
   disabled?: boolean
   input?:
     | 'input'
@@ -44,6 +45,7 @@ interface IProps {
   format?: string
   total?: number
   rows?: number
+  style?: React.CSSProperties
 }
 
 const FormItem: React.FC<IProps> = (props: IProps) => {
@@ -61,7 +63,10 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
         return { label: data, value: data }
       }) as DefaultOptionType[])
     : (props.options?.map((data: Record<string, any>) => {
-        return { label: data['name'], value: data['id'] }
+        return {
+          label: <Tag color={data['labelColor']}>{data['name']}</Tag>,
+          value: data['id'],
+        }
       }) as unknown as DefaultOptionType[])
 
   React.useMemo(() => {
@@ -75,6 +80,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           disabled={props.disabled}
           type="password"
           placeholder={props.placeholder || Util.titleCase(props.name)}
+          style={props.style}
         />
       )
       break
@@ -82,10 +88,10 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'inputNumber':
       input = (
         <InputNumber
-          placeholder={props.placeholder || Util.titleCase(props.name)}
           disabled={props.disabled}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
           parser={(value: string) => +value}
-          style={{ width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -93,11 +99,11 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'inputPercentage':
       input = (
         <InputNumber
-          placeholder={props.placeholder || Util.titleCase(props.name)}
           disabled={props.disabled}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
           addonAfter="%"
           parser={(value: string) => +value}
-          style={{ width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -105,11 +111,11 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'inputRupiah':
       input = (
         <InputNumber
-          placeholder={props.placeholder || Util.titleCase(props.name)}
           disabled={props.disabled}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
           addonBefore="Rp"
           parser={(value: string) => +value}
-          style={{ width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -122,7 +128,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           filterOption={filterOption}
           options={selectOption}
           placeholder={props.placeholder || Util.titleCase(props.name)}
-          style={{ width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -137,7 +143,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           filterOption={filterOption}
           options={selectOption}
           placeholder={props.placeholder || Util.titleCase(props.name)}
-          style={{ width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -149,7 +155,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           showTime={props.showTime}
           format={props.format}
           placeholder={props.placeholder || Util.titleCase(props.name)}
-          style={{ width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -160,7 +166,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           disabled={props.disabled}
           showTime={props.showTime}
           format={props.format}
-          style={{ width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -168,9 +174,10 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'textArea':
       input = (
         <AntdInput.TextArea
-          rows={props.rows}
           disabled={props.disabled}
+          rows={props.rows}
           placeholder={props.placeholder || Util.titleCase(props.name)}
+          style={props.style}
         />
       )
       break
@@ -199,6 +206,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
       input = (
         <AntdInput
           disabled={props.disabled}
+          style={props.style}
           type={props.type}
           placeholder={props.placeholder || Util.titleCase(props.name)}
         />

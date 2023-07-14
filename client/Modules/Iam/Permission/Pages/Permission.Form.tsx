@@ -1,6 +1,4 @@
-import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { PermissionCreateRequest } from '@server/modules/iam/permission/infrastructure/permission.request'
-import { PermissionResponse } from '@server/modules/iam/permission/infrastructure/permission.response'
 import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
@@ -18,33 +16,30 @@ const PermissionForm: React.FC = () => {
   const { id } = useParams()
   const [form] = Form.useForm<PermissionCreateRequest>()
 
-  useQuery(
-    [PermissionForm.name],
-    id
-      ? async () => {
-          setIsLoading(true)
-          const res = await PermissionAction.findOne(id)
-          form.setFieldsValue(res.data)
-          setIsLoading(false)
-        }
-      : () => undefined,
-    { refetchOnWindowFocus: false },
-  )
+  const fetch = async () => {
+    setIsLoading(true)
+    const res = await PermissionAction.findOne(id)
+    form.setFieldsValue(res.data)
+    setIsLoading(false)
+  }
+
+  useQuery([PermissionForm.name], id ? fetch : () => undefined, {
+    refetchOnWindowFocus: false,
+  })
 
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    let res: IApiRes<PermissionResponse> | undefined = undefined
-    if (!id) res = await PermissionAction.create(data)
-    if (id) res = await PermissionAction.update(id, data)
+    if (id) await PermissionAction.update(id, data)
+    else
+      (await PermissionAction.create(data)) && navigate(Path.permission.index)
     setIsLoading(false)
-    res?.data && navigate(Path.permission.index)
   }
 
   return (
     <>
       <PageHeader
-        title={id ? 'Permission Edit' : 'Permission Create'}
+        title={id ? 'Permission' : 'New Permission'}
         isLoading={isLoading}
       />
       <Section>
@@ -52,6 +47,7 @@ const PermissionForm: React.FC = () => {
           onFinish={onFinish}
           form={form}
           layout="vertical"
+          centered
           button={{ disabled: isLoading }}
         >
           <Row gutter={12}>
@@ -66,6 +62,8 @@ const PermissionForm: React.FC = () => {
             <Col sm={24} md={18}>
               <FormItem name="name" disabled={true} />
               <FormItem name="path" disabled={true} />
+            </Col>
+            <Col sm={24} md={24}>
               <FormItem name="description" input="textArea" />
             </Col>
           </Row>

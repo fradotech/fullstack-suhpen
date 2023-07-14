@@ -1,7 +1,19 @@
-import { Button, Row } from 'antd'
+import { DeleteFilled, SaveFilled } from '@ant-design/icons'
+import { Button, FormInstance, Popconfirm, Row } from 'antd'
 import React from 'react'
+import { FaPaperPlane } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
+import { Util } from '../../../../@server/common/utils/util'
+import {
+  PermissionMethodEnum,
+  TMethod,
+} from '../../../../@server/modules/iam/permission/common/permission.enum'
+import isHasPermission from '../../../Modules/Iam/Role/common/isHasPermission'
+import useModules from '../../../common/useModules'
+import { API } from '../../../infrastructure/api.service'
 
 export interface IFormActionButtonProps {
+  form?: FormInstance<any>
   buttonActions?: React.ReactNode[]
   justify?: 'start' | 'end'
   style?: React.CSSProperties
@@ -10,6 +22,19 @@ export interface IFormActionButtonProps {
 }
 
 const FormActionButton = (props: IFormActionButtonProps) => {
+  const navigate = useNavigate()
+  const { modules } = useModules()
+
+  const isHasValue = React.useMemo(() => {
+    return Util.objectIsEmpty(props.form?.getFieldsValue())
+  }, [props.form?.getFieldsValue()])
+
+  const renderIfHasPermission = (method: TMethod): boolean => {
+    if (!method || !modules) return false
+    const permissionKey = `${method}/${modules}/:id`
+    return isHasPermission([permissionKey], true)
+  }
+
   return (
     <Row
       justify={props.justify || 'end'}
@@ -26,14 +51,36 @@ const FormActionButton = (props: IFormActionButtonProps) => {
           ))
         ) : (
           <React.Fragment>
-            <Button
-              type="primary"
-              htmlType="submit"
-              disabled={props.disabled}
-              style={{ width: '100%' }}
-            >
-              {props.singleSubmitText || 'Save'}
-            </Button>
+            {renderIfHasPermission(PermissionMethodEnum.put.name) && (
+              <Button
+                type="primary"
+                htmlType="submit"
+                disabled={props.disabled}
+                style={{ float: 'right' }}
+                icon={isHasValue ? <FaPaperPlane /> : <SaveFilled />}
+              >
+                {props.singleSubmitText || isHasValue ? 'Submit' : 'Update'}
+              </Button>
+            )}
+
+            {renderIfHasPermission(PermissionMethodEnum.delete.name) && (
+              <Popconfirm
+                title={'Are you sure want to delete?'}
+                onConfirm={async () => {
+                  await API.delete(location.pathname)
+                  modules && navigate(`/${modules}`)
+                }}
+              >
+                <Button
+                  type="primary"
+                  icon={<DeleteFilled />}
+                  danger
+                  style={{ float: 'right', marginRight: '6px' }}
+                >
+                  Delete
+                </Button>
+              </Popconfirm>
+            )}
           </React.Fragment>
         )}
       </div>

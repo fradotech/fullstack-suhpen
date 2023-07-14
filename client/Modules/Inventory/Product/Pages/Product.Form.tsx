@@ -1,6 +1,4 @@
-import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { ProductCreateRequest } from '@server/modules/inventory/product/infrastructure/product.request'
-import { ProductResponse } from '@server/modules/inventory/product/infrastructure/product.response'
 import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
@@ -12,6 +10,7 @@ import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { Path } from '../../../../common/Path'
 import { rule } from '../../../../common/utils/form.rules'
 import { CategoryAction } from '../../Category/infrastructure/category.action'
+import VariantIndex from '../../Variant/Pages/Variant.Index'
 import { ProductAction } from '../infrastructure/product.action'
 
 const ProductForm: React.FC = () => {
@@ -22,33 +21,29 @@ const ProductForm: React.FC = () => {
   const { isLoading: isLoadingCategories, data: categories } =
     CategoryAction.useIndex()
 
-  useQuery(
-    [ProductForm.name],
-    id
-      ? async () => {
-          setIsLoading(true)
-          const res = await ProductAction.findOne(id)
-          form.setFieldsValue(res.data)
-          setIsLoading(false)
-        }
-      : () => undefined,
-    { refetchOnWindowFocus: false },
-  )
+  const fetch = async () => {
+    setIsLoading(true)
+    const res = await ProductAction.findOne(id)
+    form.setFieldsValue(res.data)
+    setIsLoading(false)
+  }
+
+  useQuery([ProductForm.name], id ? fetch : () => undefined, {
+    refetchOnWindowFocus: false,
+  })
 
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    let res: IApiRes<ProductResponse> | undefined
-    if (!id) res = await ProductAction.create(data)
-    if (id) res = await ProductAction.update(id, data)
+    if (id) await ProductAction.update(id, data)
+    else (await ProductAction.create(data)) && navigate(Path.product.index)
     setIsLoading(false)
-    res?.data && navigate(Path.product.index)
   }
 
   return (
     <>
       <PageHeader
-        title={id ? 'Product Edit' : 'Product Create'}
+        title={id ? 'Product' : 'New Product'}
         isLoading={isLoading || isLoadingCategories}
       />
       <Section>
@@ -92,6 +87,8 @@ const ProductForm: React.FC = () => {
           </Row>
         </FormContainer>
       </Section>
+
+      <VariantIndex productId={id} />
     </>
   )
 }

@@ -45,7 +45,7 @@ const itemsFeature: MenuItem[] = [
     permissions: [
       Path.dashboard.index,
       Path.variant.index,
-      Path.dashboard.index,
+      Path.category.index,
     ],
     children: [
       {

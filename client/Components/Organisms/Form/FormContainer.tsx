@@ -4,17 +4,17 @@ import FormActionButton, { IFormActionButtonProps } from './FormActionButton'
 interface IFormProps extends FormProps {
   isFieldCentered?: boolean
   centered?: boolean
-  button: IFormActionButtonProps
+  button?: IFormActionButtonProps
 }
 
 const FormContainer = (props: IFormProps): JSX.Element => {
-  const { isFieldCentered, centered: centered, children, ...rest } = props
+  const { isFieldCentered, centered, children, ...rest } = props
   const { lg } = Grid.useBreakpoint()
 
   return (
     <Row justify={centered && !isFieldCentered ? 'center' : 'start'}>
       <Col
-        span={centered ? (lg ? 10 : isFieldCentered ? 16 : 24) : 24}
+        span={centered ? (lg ? 14 : isFieldCentered ? 16 : 24) : 24}
         offset={isFieldCentered ? (lg ? 8 : 6) : 0}
       >
         <Form
@@ -36,7 +36,7 @@ const FormContainer = (props: IFormProps): JSX.Element => {
         >
           <>
             {children}
-            <FormActionButton {...props.button} />
+            <FormActionButton {...props.button} form={props.form} />
           </>
         </Form>
       </Col>

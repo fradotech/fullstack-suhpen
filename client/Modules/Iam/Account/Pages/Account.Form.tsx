@@ -1,5 +1,6 @@
-import { Col, Form, Row } from 'antd'
+import { Button, Col, Divider, Form, Row } from 'antd'
 import React from 'react'
+import { FaSave } from 'react-icons/fa'
 import { useQuery } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { AccountUpdateRequest } from '../../../../../@server/modules/iam/account/infrastructure/account.request'
@@ -41,20 +42,48 @@ const AccountForm: React.FC = () => {
 
   return (
     <>
-      <PageHeader
-        title="Account Edit"
-        isLoading={isLoading || isLoadingRoles}
-      />
+      <PageHeader title="Account" isLoading={isLoading || isLoadingRoles} />
       <Section>
         <FormContainer
           onFinish={onFinish}
           form={form}
           layout="vertical"
           centered
-          button={{ disabled: isLoading }}
+          button={{
+            disabled: isLoading,
+            buttonActions: [
+              <Button
+                type="primary"
+                htmlType="submit"
+                style={{ float: 'right' }}
+                icon={<FaSave />}
+              >
+                Update
+              </Button>,
+            ],
+          }}
         >
-          <FormItem name="avatar" input="attachment" total={1} form={form} />
-          <FormItem name="name" rules={[rule.required]} />
+          <Row gutter={12}>
+            <Col sm={24} md={6}>
+              <FormItem
+                name="avatar"
+                input="attachment"
+                total={1}
+                form={form}
+              />
+            </Col>
+            <Col sm={24} md={18}>
+              <FormItem name="name" rules={[rule.required]} />
+              <FormItem
+                name="email"
+                rules={[rule.email]}
+                type="email"
+                disabled
+              />
+            </Col>
+          </Row>
+
+          <Divider />
 
           <Row gutter={12}>
             <Col sm={24} md={12}>
