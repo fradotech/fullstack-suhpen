@@ -53,25 +53,41 @@ const UserForm: React.FC = () => {
           centered
           button={{ disabled: isLoading }}
         >
-          <FormItem name="avatar" input="attachment" total={1} form={form} />
-          <FormItem name="name" rules={[rule.required]} />
+          <Row gutter={12}>
+            <Col sm={24} md={6}>
+              <FormItem
+                name="avatar"
+                input="attachment"
+                total={1}
+                form={form}
+              />
+            </Col>
+            <Col sm={24} md={18}>
+              <FormItem name="name" rules={[rule.required]} />
+              <FormItem
+                name="email"
+                rules={[rule.email]}
+                type="email"
+                disabled={!!id}
+              />
+            </Col>
 
-          {!id && (
-            <>
-              <FormItem name="email" rules={[rule.email]} type="email" />
-              <FormItem
-                name="password"
-                rules={[rule.password]}
-                input="inputPassword"
-              />
-              <FormItem
-                name="passwordConfirmation"
-                rules={[rule.password]}
-                input="inputPassword"
-                placeholder="Password Confirmation"
-              />
-            </>
-          )}
+            {!id && (
+              <Col sm={24} md={24}>
+                <FormItem
+                  name="password"
+                  rules={[rule.password]}
+                  input="inputPassword"
+                />
+                <FormItem
+                  name="passwordConfirmation"
+                  rules={[rule.password]}
+                  input="inputPassword"
+                  placeholder="Password Confirmation"
+                />
+              </Col>
+            )}
+          </Row>
 
           <Divider />
 

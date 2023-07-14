@@ -2,7 +2,6 @@ import {
   CheckCircleOutlined,
   CloseCircleOutlined,
   DeleteOutlined,
-  EditOutlined,
   EyeOutlined,
   MoreOutlined,
   SendOutlined,
@@ -42,10 +41,6 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
       switch (action.type) {
         case 'view':
           icon = <EyeOutlined style={{ color: 'green' }} />
-          break
-
-        case 'edit':
-          icon = <EditOutlined style={{ color: 'blue' }} />
           break
 
         case 'delete':

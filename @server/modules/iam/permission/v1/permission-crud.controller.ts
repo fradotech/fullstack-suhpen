@@ -1,7 +1,6 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
   Param,
   Post,
@@ -69,7 +68,7 @@ export class PermissionCrudController implements BaseCrudController {
     return ApiRes.dto(PermissionResponse.dto(data))
   }
 
-  @Delete(':id')
+  // @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<PermissionResponse>> {
     const data = await this.categoryCrudApp.delete(id)
     return ApiRes.dto(PermissionResponse.dto(data))

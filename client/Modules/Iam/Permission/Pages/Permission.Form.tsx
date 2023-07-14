@@ -47,6 +47,7 @@ const PermissionForm: React.FC = () => {
           onFinish={onFinish}
           form={form}
           layout="vertical"
+          centered
           button={{ disabled: isLoading }}
         >
           <Row gutter={12}>
@@ -61,6 +62,8 @@ const PermissionForm: React.FC = () => {
             <Col sm={24} md={18}>
               <FormItem name="name" disabled={true} />
               <FormItem name="path" disabled={true} />
+            </Col>
+            <Col sm={24} md={24}>
               <FormItem name="description" input="textArea" />
             </Col>
           </Row>
