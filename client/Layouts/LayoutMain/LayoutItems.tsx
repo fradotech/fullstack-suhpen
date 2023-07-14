@@ -96,7 +96,7 @@ const itemsIam: MenuItem[] = [
       {
         key: Path.permission.index,
         label: (
-          <Link to={Path.permission.index}>{titleCase('permissions')}</Link>
+          <Link to={Path.permission.index}>{titleCase('permission')}</Link>
         ),
         icon: <FaKey />,
         permissions: [Path.permission.index],
