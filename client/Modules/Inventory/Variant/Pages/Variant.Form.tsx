@@ -65,7 +65,7 @@ const VariantForm: React.FC = () => {
               />
             </Col>
           </Row>
-          <FormItem name="variant" />
+          <FormItem name="name" />
           <Row gutter={12}>
             <Col sm={24} md={12}>
               <FormItem
