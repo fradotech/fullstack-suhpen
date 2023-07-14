@@ -1,6 +1,4 @@
-import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { PermissionCreateRequest } from '@server/modules/iam/permission/infrastructure/permission.request'
-import { PermissionResponse } from '@server/modules/iam/permission/infrastructure/permission.response'
 import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
@@ -32,11 +30,10 @@ const PermissionForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    let res: IApiRes<PermissionResponse> | undefined = undefined
-    if (!id) res = await PermissionAction.create(data)
-    if (id) res = await PermissionAction.update(id, data)
+    if (id) await PermissionAction.update(id, data)
+    else
+      (await PermissionAction.create(data)) && navigate(Path.permission.index)
     setIsLoading(false)
-    res?.data && navigate(Path.permission.index)
   }
 
   return (

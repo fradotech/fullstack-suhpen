@@ -1,6 +1,4 @@
-import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { CategoryCreateRequest } from '@server/modules/inventory/category/infrastructure/category.request'
-import { CategoryResponse } from '@server/modules/inventory/category/infrastructure/category.response'
 import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
@@ -33,11 +31,9 @@ const CategoryForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    let res: IApiRes<CategoryResponse> | undefined
-    if (!id) res = await CategoryAction.create(data)
-    if (id) res = await CategoryAction.update(id, data)
+    if (id) await CategoryAction.update(id, data)
+    else (await CategoryAction.create(data)) && navigate(Path.category.index)
     setIsLoading(false)
-    res?.data && navigate(Path.category.index)
   }
 
   return (

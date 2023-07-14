@@ -1,6 +1,4 @@
-import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { VariantCreateRequest } from '@server/modules/inventory/variant/infrastructure/variant.request'
-import { VariantResponse } from '@server/modules/inventory/variant/infrastructure/variant.response'
 import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
@@ -34,11 +32,9 @@ const VariantForm: React.FC = () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
     productId && (data.productId = productId)
-    let res: IApiRes<VariantResponse> | undefined
-    if (!id) res = await VariantAction.create(data)
-    if (id) res = await VariantAction.update(id, data)
+    if (id) await VariantAction.update(id, data)
+    else (await VariantAction.create(data)) && navigate(Path.product.index)
     setIsLoading(false)
-    res?.data && navigate(Path.product.index)
   }
 
   return (

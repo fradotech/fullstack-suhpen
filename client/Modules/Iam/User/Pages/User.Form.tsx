@@ -1,6 +1,4 @@
-import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { UserCreateRequest } from '@server/modules/iam/user/infrastructure/user.request'
-import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { Col, Divider, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
@@ -36,11 +34,9 @@ const UserForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    let res: IApiRes<UserResponse> | undefined
-    if (!id) res = await UserAction.create(data)
-    if (id) res = await UserAction.update(id, data)
+    if (id) await UserAction.update(id, data)
+    else (await UserAction.create(data)) && navigate(Path.user.index)
     setIsLoading(false)
-    res?.data && navigate(Path.user.index)
   }
 
   return (

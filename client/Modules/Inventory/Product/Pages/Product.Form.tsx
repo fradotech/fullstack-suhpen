@@ -1,6 +1,4 @@
-import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { ProductCreateRequest } from '@server/modules/inventory/product/infrastructure/product.request'
-import { ProductResponse } from '@server/modules/inventory/product/infrastructure/product.response'
 import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
@@ -37,11 +35,9 @@ const ProductForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    let res: IApiRes<ProductResponse> | undefined
-    if (!id) res = await ProductAction.create(data)
-    if (id) res = await ProductAction.update(id, data)
+    if (id) await ProductAction.update(id, data)
+    else (await ProductAction.create(data)) && navigate(Path.product.index)
     setIsLoading(false)
-    res?.data && navigate(Path.product.index)
   }
 
   return (
