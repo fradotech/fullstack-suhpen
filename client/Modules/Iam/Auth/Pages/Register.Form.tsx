@@ -1,5 +1,5 @@
 import { AuthRegisterRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
-import { Card, Col, Form } from 'antd'
+import { Button, Card, Col, Form } from 'antd'
 import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -37,7 +37,18 @@ const RegisterForm: React.FC = (): JSX.Element => {
             onFinish={onFinish}
             form={form}
             layout="vertical"
-            button={{ singleSubmitText: 'Register', disabled: isLoading }}
+            button={{
+              disabled: isLoading,
+              buttonActions: [
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  style={{ width: '100%' }}
+                >
+                  Register
+                </Button>,
+              ],
+            }}
           >
             <FormItem name="name" rules={[rule.required]} />
             <FormItem name="email" rules={[rule.email]} type="email" />

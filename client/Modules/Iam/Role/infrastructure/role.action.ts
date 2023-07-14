@@ -62,7 +62,7 @@ export class RoleAction {
   /// --- Utils --- \\\
 
   static validatePermission(user: IUser, key: string): boolean {
-    return user.roles.some((role) => {
+    return user.roles?.some((role) => {
       return role.permissions?.some((permission) => {
         return key === permission.key
       })

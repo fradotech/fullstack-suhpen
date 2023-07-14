@@ -1,5 +1,5 @@
 import { AuthPasswordSendRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
-import { Alert, Card, Col, Form } from 'antd'
+import { Alert, Button, Card, Col, Form } from 'antd'
 import Title from 'antd/es/typography/Title'
 import React from 'react'
 import CompanyLogo from '../../../../Components/Molecules/CompanyLogo/CompanyLogo'
@@ -48,7 +48,18 @@ const PasswordSendForm: React.FC = (): JSX.Element => {
               onFinish={onFinish}
               form={form}
               layout="vertical"
-              button={{ singleSubmitText: 'Submit', disabled: isLoading }}
+              button={{
+                disabled: isLoading,
+                buttonActions: [
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    style={{ width: '100%' }}
+                  >
+                    Submit
+                  </Button>,
+                ],
+              }}
             >
               <FormItem name="email" rules={[rule.email]} type="email" />
             </FormContainer>

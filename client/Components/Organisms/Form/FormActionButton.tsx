@@ -28,7 +28,7 @@ const FormActionButton = (props: IFormActionButtonProps) => {
   }, [props.form?.getFieldsValue()])
 
   const renderIfHasPermission = (href: string | undefined): boolean => {
-    if (!href) return false
+    if (!href || !modules) return false
     // TODO: validate custom props.hrefDelete
     const permissionKey = `${PermissionMethodEnum.delete.name}/${modules}/:id`
     return isHasPermission([permissionKey], true)

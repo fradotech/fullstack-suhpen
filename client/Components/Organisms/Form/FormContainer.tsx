@@ -4,7 +4,7 @@ import FormActionButton, { IFormActionButtonProps } from './FormActionButton'
 interface IFormProps extends FormProps {
   isFieldCentered?: boolean
   centered?: boolean
-  button: IFormActionButtonProps
+  button?: IFormActionButtonProps
 }
 
 const FormContainer = (props: IFormProps): JSX.Element => {
