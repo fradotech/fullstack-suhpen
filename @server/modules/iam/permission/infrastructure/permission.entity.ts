@@ -1,6 +1,7 @@
 import { EntBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.entity'
 import { Column, Entity, JoinTable, ManyToMany } from 'typeorm'
 import { EntRole } from '../../role/infrastructure/role.entity'
+import { TMethod } from '../common/permission.enum'
 import { IPermission } from './permission.interface'
 
 @Entity()
@@ -16,5 +17,5 @@ export class EntPermission extends EntBaseMasterData implements IPermission {
   path: string
 
   @Column()
-  method: string
+  method: TMethod
 }
