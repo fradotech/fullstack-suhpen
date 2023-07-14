@@ -44,6 +44,7 @@ interface IProps {
   format?: string
   total?: number
   rows?: number
+  style?: React.CSSProperties
 }
 
 const FormItem: React.FC<IProps> = (props: IProps) => {
@@ -75,6 +76,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           disabled={props.disabled}
           type="password"
           placeholder={props.placeholder || Util.titleCase(props.name)}
+          style={props.style}
         />
       )
       break
@@ -85,7 +87,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           placeholder={props.placeholder || Util.titleCase(props.name)}
           disabled={props.disabled}
           parser={(value: string) => +value}
-          style={{ width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -97,7 +99,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           disabled={props.disabled}
           addonAfter="%"
           parser={(value: string) => +value}
-          style={{ width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -109,7 +111,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           disabled={props.disabled}
           addonBefore="Rp"
           parser={(value: string) => +value}
-          style={{ width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -122,7 +124,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           filterOption={filterOption}
           options={selectOption}
           placeholder={props.placeholder || Util.titleCase(props.name)}
-          style={{ width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -137,7 +139,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           filterOption={filterOption}
           options={selectOption}
           placeholder={props.placeholder || Util.titleCase(props.name)}
-          style={{ width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -149,7 +151,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           showTime={props.showTime}
           format={props.format}
           placeholder={props.placeholder || Util.titleCase(props.name)}
-          style={{ width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -160,7 +162,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           disabled={props.disabled}
           showTime={props.showTime}
           format={props.format}
-          style={{ width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -171,6 +173,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           rows={props.rows}
           disabled={props.disabled}
           placeholder={props.placeholder || Util.titleCase(props.name)}
+          style={props.style}
         />
       )
       break
@@ -198,6 +201,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     default:
       input = (
         <AntdInput
+          style={props.style}
           disabled={props.disabled}
           type={props.type}
           placeholder={props.placeholder || Util.titleCase(props.name)}
