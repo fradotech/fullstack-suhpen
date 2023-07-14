@@ -48,17 +48,13 @@ export const categoryColumns = (
     },
     {
       title: 'Actions',
-      width: '120px',
+      width: '80px',
       render: (data: CategoryResponse) => (
         <RowActionButtons
           actions={[
             {
               type: 'view',
               href: Path.category.id(data.id),
-            },
-            {
-              type: 'edit',
-              href: Path.category.edit(data.id),
             },
             {
               type: 'delete',

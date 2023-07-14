@@ -18,7 +18,6 @@ import Attachment from '../../Molecules/Attachment/Attachment'
 
 interface IProps {
   name: string
-  isDetail: boolean | undefined
   form?: FormInstance
   label?: string
   disabled?: boolean
@@ -52,13 +51,6 @@ interface IProps {
 const FormItem: React.FC<IProps> = (props: IProps) => {
   let input: React.ReactNode
   const [isChecked, setIsChecked] = React.useState(false)
-  const [style, setStyle] = React.useState(props.style)
-
-  React.useMemo(() => {
-    const isDarkMode =
-      localStorage.getItem('isDarkMode') === 'false' ? true : false
-    setStyle({ ...props.style, color: isDarkMode ? 'white' : 'black' })
-  }, [localStorage.getItem('isDarkMode')])
 
   const filterOption = (input: string, option: DefaultOptionType) => {
     return String(option?.label ?? '')
@@ -85,14 +77,10 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'inputPassword':
       input = (
         <AntdInput.Password
-          disabled={props.disabled || props.isDetail}
+          disabled={props.disabled}
           type="password"
-          placeholder={
-            props.isDetail
-              ? ''
-              : props.placeholder || Util.titleCase(props.name)
-          }
-          style={style}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
+          style={props.style}
         />
       )
       break
@@ -100,14 +88,10 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'inputNumber':
       input = (
         <InputNumber
-          disabled={props.disabled || props.isDetail}
-          placeholder={
-            props.isDetail
-              ? ''
-              : props.placeholder || Util.titleCase(props.name)
-          }
+          disabled={props.disabled}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
           parser={(value: string) => +value}
-          style={{ ...style, width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -115,15 +99,11 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'inputPercentage':
       input = (
         <InputNumber
-          disabled={props.disabled || props.isDetail}
-          placeholder={
-            props.isDetail
-              ? ''
-              : props.placeholder || Util.titleCase(props.name)
-          }
+          disabled={props.disabled}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
           addonAfter="%"
           parser={(value: string) => +value}
-          style={{ ...style, width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -131,15 +111,11 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'inputRupiah':
       input = (
         <InputNumber
-          disabled={props.disabled || props.isDetail}
-          placeholder={
-            props.isDetail
-              ? ''
-              : props.placeholder || Util.titleCase(props.name)
-          }
+          disabled={props.disabled}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
           addonBefore="Rp"
           parser={(value: string) => +value}
-          style={{ ...style, width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -147,16 +123,12 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'select':
       input = (
         <Select
-          disabled={props.disabled || props.isDetail}
+          disabled={props.disabled}
           showSearch
           filterOption={filterOption}
           options={selectOption}
-          placeholder={
-            props.isDetail
-              ? ''
-              : props.placeholder || Util.titleCase(props.name)
-          }
-          style={{ ...style, width: '100%' }}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -164,18 +136,14 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'selectMultiple':
       input = (
         <Select
-          disabled={props.disabled || props.isDetail}
+          disabled={props.disabled}
           allowClear
           mode="multiple"
           showSearch
           filterOption={filterOption}
           options={selectOption}
-          placeholder={
-            props.isDetail
-              ? ''
-              : props.placeholder || Util.titleCase(props.name)
-          }
-          style={{ ...style, width: '100%' }}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -183,15 +151,11 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'datePicker':
       input = (
         <DatePicker
-          disabled={props.disabled || props.isDetail}
+          disabled={props.disabled}
           showTime={props.showTime}
           format={props.format}
-          placeholder={
-            props.isDetail
-              ? ''
-              : props.placeholder || Util.titleCase(props.name)
-          }
-          style={{ ...style, width: '100%' }}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -199,10 +163,10 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'rangePicker':
       input = (
         <DatePicker.RangePicker
-          disabled={props.disabled || props.isDetail}
+          disabled={props.disabled}
           showTime={props.showTime}
           format={props.format}
-          style={{ ...style, width: '100%' }}
+          style={{ ...props.style, width: '100%' }}
         />
       )
       break
@@ -210,14 +174,10 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'textArea':
       input = (
         <AntdInput.TextArea
-          disabled={props.disabled || props.isDetail}
+          disabled={props.disabled}
           rows={props.rows}
-          placeholder={
-            props.isDetail
-              ? ''
-              : props.placeholder || Util.titleCase(props.name)
-          }
-          style={style}
+          placeholder={props.placeholder || Util.titleCase(props.name)}
+          style={props.style}
         />
       )
       break
@@ -231,7 +191,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     case 'switch':
       input = (
         <Switch
-          disabled={props.disabled || props.isDetail}
+          disabled={props.disabled}
           checked={isChecked}
           onClick={() => setIsChecked(!isChecked)}
         />
@@ -245,14 +205,10 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
     default:
       input = (
         <AntdInput
-          disabled={props.disabled || props.isDetail}
-          style={style}
+          disabled={props.disabled}
+          style={props.style}
           type={props.type}
-          placeholder={
-            props.isDetail
-              ? ''
-              : props.placeholder || Util.titleCase(props.name)
-          }
+          placeholder={props.placeholder || Util.titleCase(props.name)}
         />
       )
       break

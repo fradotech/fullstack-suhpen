@@ -12,11 +12,7 @@ import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { Path } from '../../../../common/Path'
 import { PermissionAction } from '../infrastructure/permission.action'
 
-interface IProps {
-  isDetail?: boolean
-}
-
-const PermissionForm: React.FC<IProps> = (props: IProps) => {
+const PermissionForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const { id } = useParams()
@@ -48,7 +44,7 @@ const PermissionForm: React.FC<IProps> = (props: IProps) => {
   return (
     <>
       <PageHeader
-        title={id ? 'Permission Edit' : 'Permission Create'}
+        title={id ? 'Permission' : 'New Permission'}
         isLoading={isLoading}
       />
       <Section>
@@ -61,7 +57,6 @@ const PermissionForm: React.FC<IProps> = (props: IProps) => {
           <Row gutter={12}>
             <Col sm={24} md={6}>
               <FormItem
-                isDetail={props.isDetail}
                 name="thumbnail"
                 input="attachment"
                 total={1}
@@ -69,13 +64,9 @@ const PermissionForm: React.FC<IProps> = (props: IProps) => {
               />
             </Col>
             <Col sm={24} md={18}>
-              <FormItem isDetail={props.isDetail} name="name" disabled={true} />
-              <FormItem isDetail={props.isDetail} name="path" disabled={true} />
-              <FormItem
-                isDetail={props.isDetail}
-                name="description"
-                input="textArea"
-              />
+              <FormItem name="name" disabled={true} />
+              <FormItem name="path" disabled={true} />
+              <FormItem name="description" input="textArea" />
             </Col>
           </Row>
         </FormContainer>

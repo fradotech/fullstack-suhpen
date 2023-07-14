@@ -60,13 +60,11 @@ const PasswordChangeForm: React.FC = () => {
               button={{ singleSubmitText: 'Submit', disabled: isLoading }}
             >
               <FormItem
-                isDetail={props.isDetail}
                 name="password"
                 rules={[rule.password]}
                 input="inputPassword"
               />
               <FormItem
-                isDetail={props.isDetail}
                 name="passwordConfirmation"
                 rules={[rule.password]}
                 input="inputPassword"

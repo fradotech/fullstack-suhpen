@@ -50,12 +50,7 @@ const PasswordSendForm: React.FC = (): JSX.Element => {
               layout="vertical"
               button={{ singleSubmitText: 'Submit', disabled: isLoading }}
             >
-              <FormItem
-                isDetail={props.isDetail}
-                name="email"
-                rules={[rule.email]}
-                type="email"
-              />
+              <FormItem name="email" rules={[rule.email]} type="email" />
             </FormContainer>
           )}
         </Card>

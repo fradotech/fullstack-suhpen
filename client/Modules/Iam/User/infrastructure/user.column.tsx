@@ -54,17 +54,13 @@ export const userColumns = (
     },
     {
       title: 'Actions',
-      width: '120px',
+      width: '80px',
       render: (data: UserResponse) => (
         <RowActionButtons
           actions={[
             {
               type: 'view',
               href: Path.user.id(data.id),
-            },
-            {
-              type: 'edit',
-              href: Path.user.edit(data.id),
             },
             {
               type: 'delete',

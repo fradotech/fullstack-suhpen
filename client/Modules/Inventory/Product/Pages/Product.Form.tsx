@@ -12,13 +12,10 @@ import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { Path } from '../../../../common/Path'
 import { rule } from '../../../../common/utils/form.rules'
 import { CategoryAction } from '../../Category/infrastructure/category.action'
+import VariantIndex from '../../Variant/Pages/Variant.Index'
 import { ProductAction } from '../infrastructure/product.action'
 
-interface IProps {
-  isDetail?: boolean
-}
-
-const ProductForm: React.FC<IProps> = (props: IProps) => {
+const ProductForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const { id } = useParams()
@@ -52,7 +49,7 @@ const ProductForm: React.FC<IProps> = (props: IProps) => {
   return (
     <>
       <PageHeader
-        title={id ? 'Product Edit' : 'Product Create'}
+        title={id ? 'Product' : 'New Product'}
         isLoading={isLoading || isLoadingCategories}
       />
       <Section>
@@ -63,20 +60,13 @@ const ProductForm: React.FC<IProps> = (props: IProps) => {
           centered
           button={{ disabled: isLoading }}
         >
-          <FormItem
-            isDetail={props.isDetail}
-            name="thumbnail"
-            input="attachment"
-            total={1}
-            form={form}
-          />
+          <FormItem name="thumbnail" input="attachment" total={1} form={form} />
           <Row gutter={12}>
             <Col sm={24} md={20}>
-              <FormItem isDetail={props.isDetail} name="upc" label="UPC" />
+              <FormItem name="upc" label="UPC" />
             </Col>
             <Col sm={24} md={4}>
               <FormItem
-                isDetail={props.isDetail}
                 name="isActive"
                 input="switch"
                 rules={[rule.required]}
@@ -84,34 +74,27 @@ const ProductForm: React.FC<IProps> = (props: IProps) => {
               />
             </Col>
           </Row>
+          <FormItem name="name" rules={[rule.required]} />
           <FormItem
-            isDetail={props.isDetail}
-            name="name"
-            rules={[rule.required]}
-          />
-          <FormItem
-            isDetail={props.isDetail}
             name="categoryIds"
             label="Categoryies"
             input="selectMultiple"
             options={categories?.data}
             form={form}
           />
-          <FormItem
-            isDetail={props.isDetail}
-            name="description"
-            input="textArea"
-          />
+          <FormItem name="description" input="textArea" />
           <Row gutter={12}>
             <Col sm={24} md={12}>
-              <FormItem isDetail={props.isDetail} name="rating" />
+              <FormItem name="rating" />
             </Col>
             <Col sm={24} md={12}>
-              <FormItem isDetail={props.isDetail} name="brand" />
+              <FormItem name="brand" />
             </Col>
           </Row>
         </FormContainer>
       </Section>
+
+      <VariantIndex productId={id} />
     </>
   )
 }

@@ -39,17 +39,8 @@ const RegisterForm: React.FC = (): JSX.Element => {
             layout="vertical"
             button={{ singleSubmitText: 'Register', disabled: isLoading }}
           >
-            <FormItem
-              isDetail={props.isDetail}
-              name="name"
-              rules={[rule.required]}
-            />
-            <FormItem
-              isDetail={props.isDetail}
-              name="email"
-              rules={[rule.email]}
-              type="email"
-            />
+            <FormItem name="name" rules={[rule.required]} />
+            <FormItem name="email" rules={[rule.email]} type="email" />
             <FormItem
               name="password"
               rules={[rule.password]}

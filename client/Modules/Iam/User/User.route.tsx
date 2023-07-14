@@ -8,6 +8,5 @@ const path = userPath
 export default [
   <Route key={path.index} path={path.index} element={<UserIndex />} />,
   <Route key={path.form} path={path.form} element={<UserForm />} />,
-  <Route key={path.id()} path={path.id()} element={<UserForm isDetail />} />,
-  <Route key={path.edit()} path={path.edit()} element={<UserForm />} />,
+  <Route key={path.id()} path={path.id()} element={<UserForm />} />,
 ]

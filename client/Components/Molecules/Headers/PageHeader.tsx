@@ -1,8 +1,8 @@
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
+import { DeleteOutlined } from '@ant-design/icons'
 import { Button, Popconfirm, Row } from 'antd'
 import Title from 'antd/es/typography/Title'
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { PermissionMethodEnum } from '../../../../@server/modules/iam/permission/common/permission.enum'
 import isHasPermission from '../../../Modules/Iam/Role/common/isHasPermission'
 import useModules from '../../../common/useModules'
@@ -14,7 +14,6 @@ interface IProps {
   title?: string
   isLoading?: boolean
   hrefIndex?: string
-  hrefEdit?: string
   hrefDelete?: string
 }
 
@@ -42,13 +41,6 @@ export const PageHeader: React.FC<IProps> = (props: IProps) => {
       <Row className={styles.container}>
         {props.title && <Title className={styles.title}>{props.title}</Title>}
         <Row>
-          {renderIfHasPermission(props.hrefEdit) && (
-            <Link to={props.hrefEdit || location.pathname}>
-              <Button type="primary" className={styles.actionButton}>
-                <EditOutlined />
-              </Button>
-            </Link>
-          )}
           {renderIfHasPermission(props.hrefDelete) && (
             <Popconfirm
               title={'Are you sure want to delete?'}

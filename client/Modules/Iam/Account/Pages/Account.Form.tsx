@@ -13,7 +13,7 @@ import { rule } from '../../../../common/utils/form.rules'
 import { RoleAction } from '../../Role/infrastructure/role.action'
 import { AccountAction } from '../infrastructure/account.action'
 
-const AccountForm: React.FC<IProps> = (props: IProps) => {
+const AccountForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const [form] = Form.useForm<AccountUpdateRequest>()
@@ -53,23 +53,12 @@ const AccountForm: React.FC<IProps> = (props: IProps) => {
           centered
           button={{ disabled: isLoading }}
         >
-          <FormItem
-            isDetail={props.isDetail}
-            name="avatar"
-            input="attachment"
-            total={1}
-            form={form}
-          />
-          <FormItem
-            isDetail={props.isDetail}
-            name="name"
-            rules={[rule.required]}
-          />
+          <FormItem name="avatar" input="attachment" total={1} form={form} />
+          <FormItem name="name" rules={[rule.required]} />
 
           <Row gutter={12}>
             <Col sm={24} md={12}>
               <FormItem
-                isDetail={props.isDetail}
                 name="roleIds"
                 label="Roles"
                 input="selectMultiple"
@@ -80,25 +69,20 @@ const AccountForm: React.FC<IProps> = (props: IProps) => {
             </Col>
             <Col sm={24} md={12}>
               <FormItem
-                isDetail={props.isDetail}
                 name="gender"
                 input="select"
                 optionsEnum={Object.values(UserGenderEnum)}
               />
             </Col>
             <Col sm={24} md={12}>
-              <FormItem isDetail={props.isDetail} name="phoneNumber" />
+              <FormItem name="phoneNumber" />
             </Col>
             <Col sm={24} md={12}>
-              <FormItem
-                isDetail={props.isDetail}
-                name="birthDate"
-                input="datePicker"
-              />
+              <FormItem name="birthDate" input="datePicker" />
             </Col>
           </Row>
 
-          <FormItem isDetail={props.isDetail} name="address" input="textArea" />
+          <FormItem name="address" input="textArea" />
         </FormContainer>
       </Section>
     </>

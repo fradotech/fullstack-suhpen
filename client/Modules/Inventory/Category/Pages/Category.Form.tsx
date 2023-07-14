@@ -13,11 +13,7 @@ import { Path } from '../../../../common/Path'
 import { rule } from '../../../../common/utils/form.rules'
 import { CategoryAction } from '../infrastructure/category.action'
 
-interface IProps {
-  isDetail?: boolean
-}
-
-const CategoryForm: React.FC<IProps> = (props: IProps) => {
+const CategoryForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const { id } = useParams()
@@ -49,7 +45,7 @@ const CategoryForm: React.FC<IProps> = (props: IProps) => {
   return (
     <>
       <PageHeader
-        title={id ? 'Category Edit' : 'Category Create'}
+        title={id ? 'Category' : 'New Category'}
         isLoading={isLoading}
       />
       <Section>
@@ -62,15 +58,10 @@ const CategoryForm: React.FC<IProps> = (props: IProps) => {
         >
           <Row gutter={12}>
             <Col sm={24} md={20}>
-              <FormItem
-                isDetail={props.isDetail}
-                name="name"
-                rules={[rule.required]}
-              />
+              <FormItem name="name" rules={[rule.required]} />
             </Col>
             <Col sm={24} md={4}>
               <FormItem
-                isDetail={props.isDetail}
                 name="isActive"
                 input="switch"
                 rules={[rule.required]}
@@ -78,15 +69,10 @@ const CategoryForm: React.FC<IProps> = (props: IProps) => {
               />
             </Col>
           </Row>
-          <FormItem
-            isDetail={props.isDetail}
-            name="description"
-            input="textArea"
-          />
+          <FormItem name="description" input="textArea" />
           <Row gutter={12}>
             <Col sm={24} md={12}>
               <FormItem
-                isDetail={props.isDetail}
                 name="thumbnail"
                 input="attachment"
                 total={1}
@@ -94,11 +80,7 @@ const CategoryForm: React.FC<IProps> = (props: IProps) => {
               />
             </Col>
             <Col sm={24} md={12}>
-              <FormItem
-                isDetail={props.isDetail}
-                name="labelColor"
-                input="colorPicker"
-              />
+              <FormItem name="labelColor" input="colorPicker" />
             </Col>
           </Row>
         </FormContainer>

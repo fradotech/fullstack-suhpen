@@ -47,17 +47,13 @@ export const roleColumns = (
     },
     {
       title: 'Actions',
-      width: '120px',
+      width: '80px',
       render: (data: RoleResponse) => (
         <RowActionButtons
           actions={[
             {
               type: 'view',
               href: Path.role.id(data.id),
-            },
-            {
-              type: 'edit',
-              href: Path.role.edit(data.id),
             },
             {
               type: 'delete',
