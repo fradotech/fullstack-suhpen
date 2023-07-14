@@ -13,6 +13,13 @@ export class Util {
     return true
   }
 
+  static objectIsEmpty(obj: Record<string, any>) {
+    const values = Object.values(obj).filter((data) => data)
+    return values.length === 0
+  }
+
+  // --- Wordings --- \\
+
   static fieldCamelToSnake = (model: object): object => {
     const camelKeys = Object.keys(model)
     const snakeKeys = camelKeys.map((key) => this.camelToSnake(key))

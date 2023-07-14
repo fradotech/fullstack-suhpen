@@ -36,7 +36,7 @@ const FormContainer = (props: IFormProps): JSX.Element => {
         >
           <>
             {children}
-            <FormActionButton {...props.button} />
+            <FormActionButton {...props.button} form={props.form} />
           </>
         </Form>
       </Col>

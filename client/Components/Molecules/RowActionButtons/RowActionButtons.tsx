@@ -103,8 +103,6 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
 
     if (!action.href) {
       permissionKey = `${PermissionMethodEnum.delete.name}/${modules}/:id`
-    } else if (action.href.includes('save')) {
-      permissionKey = `${PermissionMethodEnum.put.name}/${modules}/:id`
     } else {
       permissionKey = `${PermissionMethodEnum.get.name}/${modules}/:id`
     }

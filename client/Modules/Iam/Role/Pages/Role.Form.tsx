@@ -18,18 +18,16 @@ const RoleForm: React.FC = () => {
   const { id } = useParams()
   const [form] = Form.useForm<RoleCreateRequest>()
 
-  useQuery(
-    [RoleForm.name],
-    id
-      ? async () => {
-          setIsLoading(true)
-          const res = await RoleAction.findOne(id)
-          form.setFieldsValue(res.data)
-          setIsLoading(false)
-        }
-      : () => undefined,
-    { refetchOnWindowFocus: false },
-  )
+  const fetch = async () => {
+    setIsLoading(true)
+    const res = await RoleAction.findOne(id)
+    form.setFieldsValue(res.data)
+    setIsLoading(false)
+  }
+
+  useQuery([RoleForm.name], id ? fetch : () => undefined, {
+    refetchOnWindowFocus: false,
+  })
 
   const onFinish = async () => {
     setIsLoading(true)
@@ -51,8 +49,8 @@ const RoleForm: React.FC = () => {
         button={{ disabled: isLoading }}
       >
         <RoleFieldsMain form={form} />
-        <RoleFieldsSelectPermissions form={form} />
       </FormContainer>
+      <RoleFieldsSelectPermissions form={form} />
     </>
   )
 }

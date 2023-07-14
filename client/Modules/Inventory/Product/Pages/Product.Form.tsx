@@ -23,18 +23,16 @@ const ProductForm: React.FC = () => {
   const { isLoading: isLoadingCategories, data: categories } =
     CategoryAction.useIndex()
 
-  useQuery(
-    [ProductForm.name],
-    id
-      ? async () => {
-          setIsLoading(true)
-          const res = await ProductAction.findOne(id)
-          form.setFieldsValue(res.data)
-          setIsLoading(false)
-        }
-      : () => undefined,
-    { refetchOnWindowFocus: false },
-  )
+  const fetch = async () => {
+    setIsLoading(true)
+    const res = await ProductAction.findOne(id)
+    form.setFieldsValue(res.data)
+    setIsLoading(false)
+  }
+
+  useQuery([ProductForm.name], id ? fetch : () => undefined, {
+    refetchOnWindowFocus: false,
+  })
 
   const onFinish = async () => {
     setIsLoading(true)

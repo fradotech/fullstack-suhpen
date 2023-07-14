@@ -20,21 +20,18 @@ const UserForm: React.FC = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const [form] = Form.useForm<UserCreateRequest>()
-
   const { isLoading: isLoadingRoles, data: roles } = RoleAction.useIndex()
 
-  useQuery(
-    [UserForm.name],
-    id
-      ? async () => {
-          setIsLoading(true)
-          const res = await UserAction.findOne(id)
-          form.setFieldsValue(res.data)
-          setIsLoading(false)
-        }
-      : () => undefined,
-    { refetchOnWindowFocus: false },
-  )
+  const fetch = async () => {
+    setIsLoading(true)
+    const res = await UserAction.findOne(id)
+    form.setFieldsValue(res.data)
+    setIsLoading(false)
+  }
+
+  useQuery([UserForm.name], id ? fetch : () => undefined, {
+    refetchOnWindowFocus: false,
+  })
 
   const onFinish = async () => {
     setIsLoading(true)
@@ -51,8 +48,6 @@ const UserForm: React.FC = () => {
       <PageHeader
         title={id ? 'User' : 'New User'}
         isLoading={isLoading || isLoadingRoles}
-        hrefIndex={Path.user.index}
-        hrefDelete={Path.user.id(id)}
       />
       <Section>
         <FormContainer

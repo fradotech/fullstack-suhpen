@@ -19,18 +19,16 @@ const VariantForm: React.FC = () => {
   const [form] = Form.useForm<VariantCreateRequest>()
   const { id, productId } = useParams()
 
-  useQuery(
-    [VariantForm.name],
-    id
-      ? async () => {
-          setIsLoading(true)
-          const res = await VariantAction.findOne(id)
-          form.setFieldsValue(res.data)
-          setIsLoading(false)
-        }
-      : () => undefined,
-    { refetchOnWindowFocus: false },
-  )
+  const fetch = async () => {
+    setIsLoading(true)
+    const res = await VariantAction.findOne(id)
+    form.setFieldsValue(res.data)
+    setIsLoading(false)
+  }
+
+  useQuery([VariantForm.name], id ? fetch : () => undefined, {
+    refetchOnWindowFocus: false,
+  })
 
   const onFinish = async () => {
     setIsLoading(true)

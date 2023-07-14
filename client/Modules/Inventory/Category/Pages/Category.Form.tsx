@@ -19,18 +19,16 @@ const CategoryForm: React.FC = () => {
   const { id } = useParams()
   const [form] = Form.useForm<CategoryCreateRequest>()
 
-  useQuery(
-    [CategoryForm.name],
-    id
-      ? async () => {
-          setIsLoading(true)
-          const res = await CategoryAction.findOne(id)
-          form.setFieldsValue(res.data)
-          setIsLoading(false)
-        }
-      : () => undefined,
-    { refetchOnWindowFocus: false },
-  )
+  const fetch = async () => {
+    setIsLoading(true)
+    const res = await CategoryAction.findOne(id)
+    form.setFieldsValue(res.data)
+    setIsLoading(false)
+  }
+
+  useQuery([CategoryForm.name], id ? fetch : () => undefined, {
+    refetchOnWindowFocus: false,
+  })
 
   const onFinish = async () => {
     setIsLoading(true)

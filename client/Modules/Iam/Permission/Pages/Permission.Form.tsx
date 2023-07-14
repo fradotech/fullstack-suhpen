@@ -18,18 +18,16 @@ const PermissionForm: React.FC = () => {
   const { id } = useParams()
   const [form] = Form.useForm<PermissionCreateRequest>()
 
-  useQuery(
-    [PermissionForm.name],
-    id
-      ? async () => {
-          setIsLoading(true)
-          const res = await PermissionAction.findOne(id)
-          form.setFieldsValue(res.data)
-          setIsLoading(false)
-        }
-      : () => undefined,
-    { refetchOnWindowFocus: false },
-  )
+  const fetch = async () => {
+    setIsLoading(true)
+    const res = await PermissionAction.findOne(id)
+    form.setFieldsValue(res.data)
+    setIsLoading(false)
+  }
+
+  useQuery([PermissionForm.name], id ? fetch : () => undefined, {
+    refetchOnWindowFocus: false,
+  })
 
   const onFinish = async () => {
     setIsLoading(true)
