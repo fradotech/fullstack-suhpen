@@ -13,7 +13,11 @@ import { Path } from '../../../../common/Path'
 import { rule } from '../../../../common/utils/form.rules'
 import { VariantAction } from '../infrastructure/variant.action'
 
-const VariantForm: React.FC = () => {
+interface IProps {
+  isDetail?: boolean
+}
+
+const VariantForm: React.FC<IProps> = (props: IProps) => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const [form] = Form.useForm<VariantCreateRequest>()
@@ -57,13 +61,20 @@ const VariantForm: React.FC = () => {
           centered
           button={{ disabled: isLoading }}
         >
-          <FormItem name="thumbnail" input="attachment" total={1} form={form} />
+          <FormItem
+            isDetail={props.isDetail}
+            name="thumbnail"
+            input="attachment"
+            total={1}
+            form={form}
+          />
           <Row gutter={12}>
             <Col sm={24} md={20}>
-              <FormItem name="sku" label="SKU" />
+              <FormItem isDetail={props.isDetail} name="sku" label="SKU" />
             </Col>
             <Col sm={24} md={4}>
               <FormItem
+                isDetail={props.isDetail}
                 name="isActive"
                 input="switch"
                 rules={[rule.required]}
@@ -71,10 +82,11 @@ const VariantForm: React.FC = () => {
               />
             </Col>
           </Row>
-          <FormItem name="variant" />
+          <FormItem isDetail={props.isDetail} name="variant" />
           <Row gutter={12}>
             <Col sm={24} md={12}>
               <FormItem
+                isDetail={props.isDetail}
                 name="buyPrice"
                 rules={[rule.required]}
                 input="inputRupiah"
@@ -82,6 +94,7 @@ const VariantForm: React.FC = () => {
             </Col>
             <Col sm={24} md={12}>
               <FormItem
+                isDetail={props.isDetail}
                 name="sellPrice"
                 rules={[rule.required]}
                 input="inputRupiah"
@@ -89,19 +102,32 @@ const VariantForm: React.FC = () => {
             </Col>
             <Col sm={24} md={12}>
               <FormItem
+                isDetail={props.isDetail}
                 name="stock"
                 rules={[rule.required]}
                 input="inputRupiah"
               />
             </Col>
             <Col sm={24} md={12}>
-              <FormItem name="stockMinimum" input="inputNumber" />
+              <FormItem
+                isDetail={props.isDetail}
+                name="stockMinimum"
+                input="inputNumber"
+              />
             </Col>
             <Col sm={24} md={12}>
-              <FormItem name="discountPercentage" input="inputPercentage" />
+              <FormItem
+                isDetail={props.isDetail}
+                name="discountPercentage"
+                input="inputPercentage"
+              />
             </Col>
             <Col sm={24} md={12}>
-              <FormItem name="expiredDate" input="datePicker" />
+              <FormItem
+                isDetail={props.isDetail}
+                name="expiredDate"
+                input="datePicker"
+              />
             </Col>
           </Row>
         </FormContainer>

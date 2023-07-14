@@ -12,7 +12,11 @@ import RoleFieldsMain from '../common/RoleFieldsMain'
 import RoleFieldsSelectPermissions from '../common/RoleFieldsSelectPermissions'
 import { RoleAction } from '../infrastructure/role.action'
 
-const RoleForm: React.FC = () => {
+interface IProps {
+  isDetail?: boolean
+}
+
+const RoleForm: React.FC<IProps> = (props: IProps) => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const { id } = useParams()
@@ -53,7 +57,7 @@ const RoleForm: React.FC = () => {
         layout="vertical"
         button={{ disabled: isLoading }}
       >
-        <RoleFieldsMain form={form} />
+        <RoleFieldsMain form={form} isDetail={props.isDetail} />
         <RoleFieldsSelectPermissions form={form} />
       </FormContainer>
     </>

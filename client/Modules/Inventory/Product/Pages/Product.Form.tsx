@@ -14,7 +14,11 @@ import { rule } from '../../../../common/utils/form.rules'
 import { CategoryAction } from '../../Category/infrastructure/category.action'
 import { ProductAction } from '../infrastructure/product.action'
 
-const ProductForm: React.FC = () => {
+interface IProps {
+  isDetail?: boolean
+}
+
+const ProductForm: React.FC<IProps> = (props: IProps) => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const { id } = useParams()
@@ -59,13 +63,20 @@ const ProductForm: React.FC = () => {
           centered
           button={{ disabled: isLoading }}
         >
-          <FormItem name="thumbnail" input="attachment" total={1} form={form} />
+          <FormItem
+            isDetail={props.isDetail}
+            name="thumbnail"
+            input="attachment"
+            total={1}
+            form={form}
+          />
           <Row gutter={12}>
             <Col sm={24} md={20}>
-              <FormItem name="upc" label="UPC" />
+              <FormItem isDetail={props.isDetail} name="upc" label="UPC" />
             </Col>
             <Col sm={24} md={4}>
               <FormItem
+                isDetail={props.isDetail}
                 name="isActive"
                 input="switch"
                 rules={[rule.required]}
@@ -73,21 +84,30 @@ const ProductForm: React.FC = () => {
               />
             </Col>
           </Row>
-          <FormItem name="name" rules={[rule.required]} />
           <FormItem
+            isDetail={props.isDetail}
+            name="name"
+            rules={[rule.required]}
+          />
+          <FormItem
+            isDetail={props.isDetail}
             name="categoryIds"
             label="Categoryies"
             input="selectMultiple"
             options={categories?.data}
             form={form}
           />
-          <FormItem name="description" input="textArea" />
+          <FormItem
+            isDetail={props.isDetail}
+            name="description"
+            input="textArea"
+          />
           <Row gutter={12}>
             <Col sm={24} md={12}>
-              <FormItem name="rating" />
+              <FormItem isDetail={props.isDetail} name="rating" />
             </Col>
             <Col sm={24} md={12}>
-              <FormItem name="brand" />
+              <FormItem isDetail={props.isDetail} name="brand" />
             </Col>
           </Row>
         </FormContainer>

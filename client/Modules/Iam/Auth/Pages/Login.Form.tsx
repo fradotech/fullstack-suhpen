@@ -39,7 +39,12 @@ const LoginForm: React.FC = (): JSX.Element => {
             layout="vertical"
             button={{ singleSubmitText: 'Login', disabled: isLoading }}
           >
-            <FormItem name="email" rules={[rule.email]} type="email" />
+            <FormItem
+              isDetail={props.isDetail}
+              name="email"
+              rules={[rule.email]}
+              type="email"
+            />
             <FormItem
               name="password"
               input="inputPassword"

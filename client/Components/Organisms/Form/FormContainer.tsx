@@ -4,7 +4,7 @@ import FormActionButton, { IFormActionButtonProps } from './FormActionButton'
 interface IFormProps extends FormProps {
   isFieldCentered?: boolean
   centered?: boolean
-  button: IFormActionButtonProps
+  button?: IFormActionButtonProps | false
 }
 
 const FormContainer = (props: IFormProps): JSX.Element => {
@@ -36,7 +36,7 @@ const FormContainer = (props: IFormProps): JSX.Element => {
         >
           <>
             {children}
-            <FormActionButton {...props.button} />
+            {props.button && <FormActionButton {...props.button} />}
           </>
         </Form>
       </Col>

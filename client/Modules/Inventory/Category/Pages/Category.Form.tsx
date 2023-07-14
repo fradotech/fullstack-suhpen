@@ -13,7 +13,11 @@ import { Path } from '../../../../common/Path'
 import { rule } from '../../../../common/utils/form.rules'
 import { CategoryAction } from '../infrastructure/category.action'
 
-const CategoryForm: React.FC = () => {
+interface IProps {
+  isDetail?: boolean
+}
+
+const CategoryForm: React.FC<IProps> = (props: IProps) => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const { id } = useParams()
@@ -58,10 +62,15 @@ const CategoryForm: React.FC = () => {
         >
           <Row gutter={12}>
             <Col sm={24} md={20}>
-              <FormItem name="name" rules={[rule.required]} />
+              <FormItem
+                isDetail={props.isDetail}
+                name="name"
+                rules={[rule.required]}
+              />
             </Col>
             <Col sm={24} md={4}>
               <FormItem
+                isDetail={props.isDetail}
                 name="isActive"
                 input="switch"
                 rules={[rule.required]}
@@ -69,10 +78,15 @@ const CategoryForm: React.FC = () => {
               />
             </Col>
           </Row>
-          <FormItem name="description" input="textArea" />
+          <FormItem
+            isDetail={props.isDetail}
+            name="description"
+            input="textArea"
+          />
           <Row gutter={12}>
             <Col sm={24} md={12}>
               <FormItem
+                isDetail={props.isDetail}
                 name="thumbnail"
                 input="attachment"
                 total={1}
@@ -80,7 +94,11 @@ const CategoryForm: React.FC = () => {
               />
             </Col>
             <Col sm={24} md={12}>
-              <FormItem name="labelColor" input="colorPicker" />
+              <FormItem
+                isDetail={props.isDetail}
+                name="labelColor"
+                input="colorPicker"
+              />
             </Col>
           </Row>
         </FormContainer>

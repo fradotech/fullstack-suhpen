@@ -6,6 +6,7 @@ import { rule } from '../../../../common/utils/form.rules'
 
 interface IProps {
   form: FormInstance
+  isDetail: boolean | undefined
 }
 
 const RoleFieldsMain: React.FC<IProps> = (props: IProps) => {
@@ -14,6 +15,7 @@ const RoleFieldsMain: React.FC<IProps> = (props: IProps) => {
       <Row gutter={12}>
         <Col sm={24} md={6}>
           <FormItem
+            isDetail={props.isDetail}
             name="thumbnail"
             input="attachment"
             total={1}
@@ -24,10 +26,15 @@ const RoleFieldsMain: React.FC<IProps> = (props: IProps) => {
         <Col sm={24} md={12}>
           <Row gutter={12}>
             <Col sm={24} md={20}>
-              <FormItem name="name" rules={[rule.required]} />
+              <FormItem
+                isDetail={props.isDetail}
+                name="name"
+                rules={[rule.required]}
+              />
             </Col>
             <Col sm={24} md={4}>
               <FormItem
+                isDetail={props.isDetail}
                 name="isActive"
                 input="switch"
                 rules={[rule.required]}
@@ -35,16 +42,24 @@ const RoleFieldsMain: React.FC<IProps> = (props: IProps) => {
               />
             </Col>
             <Col sm={24} md={24}>
-              <FormItem name="description" input="textArea" />
+              <FormItem
+                isDetail={props.isDetail}
+                name="description"
+                input="textArea"
+              />
             </Col>
 
             <Col sm={24} md={24} style={{ display: 'none' }}>
-              <FormItem name="permissionIds" />
+              <FormItem isDetail={props.isDetail} name="permissionIds" />
             </Col>
           </Row>
         </Col>
         <Col sm={24} md={6}>
-          <FormItem name="labelColor" input="colorPicker" />
+          <FormItem
+            isDetail={props.isDetail}
+            name="labelColor"
+            input="colorPicker"
+          />
         </Col>
       </Row>
     </Section>
