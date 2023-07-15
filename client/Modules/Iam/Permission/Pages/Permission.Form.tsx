@@ -30,9 +30,13 @@ const PermissionForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
+
     if (id) await PermissionAction.update(id, data)
-    else
-      (await PermissionAction.create(data)) && navigate(Path.permission.index)
+    else {
+      const res = await PermissionAction.create(data)
+      res.data && navigate(Path.permission.index)
+    }
+
     setIsLoading(false)
   }
 

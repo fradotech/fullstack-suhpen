@@ -1,7 +1,7 @@
 import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger'
 import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.interface'
 import { BaseMasterDataRequest } from '@server/infrastructure/base/master-data/base-master-data.request'
-import { ArrayMinSize, IsArray, IsOptional, IsString } from 'class-validator'
+import { IsArray, IsOptional, IsString } from 'class-validator'
 import { EntPermission } from '../../permission/infrastructure/permission.entity'
 import { EntRole } from './role.entity'
 import { IRole } from './role.interface'
@@ -15,7 +15,6 @@ export class RoleRequest
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
-  @ArrayMinSize(1)
   @ApiProperty({ example: ['id1', 'id2', 'id3'] })
   permissionIds?: string[]
 }
