@@ -30,8 +30,13 @@ const RoleForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
+
     if (id) await RoleAction.update(id, data)
-    else (await RoleAction.create(data)) && navigate(Path.role.index)
+    else {
+      const res = await RoleAction.create(data)
+      res.data && navigate(Path.role.index)
+    }
+
     setIsLoading(false)
   }
 

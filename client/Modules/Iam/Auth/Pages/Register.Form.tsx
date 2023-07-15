@@ -38,9 +38,9 @@ const RegisterForm: React.FC = (): JSX.Element => {
             form={form}
             layout="vertical"
             button={{
-              disabled: isLoading,
               buttonActions: [
                 <Button
+                  disabled={isLoading}
                   type="primary"
                   htmlType="submit"
                   style={{ width: '100%' }}
