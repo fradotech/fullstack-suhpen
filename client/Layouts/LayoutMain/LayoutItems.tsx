@@ -1,17 +1,6 @@
-import {
-  DashboardOutlined,
-  DropboxOutlined,
-  TagsOutlined,
-} from '@ant-design/icons'
+import { DashboardOutlined } from '@ant-design/icons'
 import { MenuProps } from 'antd'
-import {
-  FaBoxes,
-  FaDrawPolygon,
-  FaIdCard,
-  FaKey,
-  FaUser,
-  FaUserCog,
-} from 'react-icons/fa'
+import { FaIdCard, FaKey, FaUser, FaUserCog } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import isHasPermission from '../../Modules/Iam/Role/common/isHasPermission'
 import { Path } from '../../common/Path'
@@ -29,44 +18,7 @@ const itemsDashboard: MenuItem[] = [
     key: Path.dashboard.index,
     label: <Link to={Path.dashboard.index}>DASHBOARD</Link>,
     icon: <DashboardOutlined />,
-    permissions: [
-      Path.dashboard.index,
-      Path.variant.index,
-      Path.dashboard.variant.aggregate(),
-    ],
-  },
-]
-
-const itemsFeature: MenuItem[] = [
-  {
-    key: 'INVENTORY',
-    label: 'INVENTORY',
-    icon: <FaBoxes />,
-    permissions: [
-      Path.dashboard.index,
-      Path.variant.index,
-      Path.category.index,
-    ],
-    children: [
-      {
-        key: Path.product.index,
-        label: <Link to={Path.product.index}>{titleCase('product')}</Link>,
-        icon: <DropboxOutlined />,
-        permissions: [Path.product.index],
-      },
-      {
-        key: Path.variant.index,
-        label: <Link to={Path.variant.index}>{titleCase('variant')}</Link>,
-        icon: <FaDrawPolygon />,
-        permissions: [Path.variant.index],
-      },
-      {
-        key: Path.category.index,
-        label: <Link to={Path.category.index}>{titleCase('category')}</Link>,
-        icon: <TagsOutlined />,
-        permissions: [Path.category.index],
-      },
-    ].filter((item) => isHasPermission(item.permissions)),
+    permissions: [Path.account.index],
   },
 ]
 
@@ -105,8 +57,6 @@ const itemsIam: MenuItem[] = [
   },
 ]
 
-export const layoutItems: MenuItem[] = [
-  ...itemsDashboard,
-  ...itemsFeature,
-  ...itemsIam,
-].filter((item) => isHasPermission(item.permissions))
+export const layoutItems: MenuItem[] = [...itemsDashboard, ...itemsIam].filter(
+  (item) => isHasPermission(item.permissions),
+)

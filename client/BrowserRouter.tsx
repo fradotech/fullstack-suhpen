@@ -9,7 +9,6 @@ import DashboardRoute from './Modules/Dashboard/Dashboard.route'
 import AuthRoute from './Modules/Iam/Auth/Auth.route'
 import { AuthAction } from './Modules/Iam/Auth/infrastructure/auth.action'
 import IamRoute from './Modules/Iam/Iam.route'
-import FeatureRoute from './Modules/Inventory/Inventory.route'
 import { Path as ERoute } from './common/Path'
 
 const LayoutMain = React.lazy(() => import('./Layouts/LayoutMain/LayoutMain'))
@@ -45,7 +44,6 @@ const BrowserRouter: React.FC = () => (
             <Routes>
               {DashboardRoute}
               {IamRoute}
-              {FeatureRoute}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </LayoutMain>

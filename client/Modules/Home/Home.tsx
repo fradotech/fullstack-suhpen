@@ -6,7 +6,6 @@ import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { themeColors } from '../../Layouts/ThemeProvider/theme'
 import { useMobileScreen } from '../../common/useMobileScreen'
 import HomeHeaderSection from './common/HomeHeader.section'
-import HomeProductSection from './common/HomeProduct.section'
 
 const Home: React.FC = () => {
   const navigate = useNavigate()
@@ -37,9 +36,6 @@ const Home: React.FC = () => {
               )}
             </Col>
           </Row>
-        </section>
-        <section id="product">
-          <HomeProductSection />
         </section>
       </Layout.Content>
     </Layout>
