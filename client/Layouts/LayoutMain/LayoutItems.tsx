@@ -1,26 +1,17 @@
-import { DashboardOutlined } from '@ant-design/icons'
 import { MenuProps } from 'antd'
 import { FaIdCard, FaKey, FaUser, FaUserCog } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import { DashboardModule } from '../../Modules/Dashboard/Dashboard.Module'
 import isHasPermission from '../../Modules/Iam/Role/common/isHasPermission'
 import { Path } from '../../common/Path'
 import { Util } from '../../common/utils/util'
 
-type MenuItem = Required<MenuProps>['items'][number] & {
+export type MenuItem = Required<MenuProps>['items'][number] & {
   permissions: string[]
   children?: MenuItem[]
 }
 
 const titleCase = Util.titleCase
-
-const itemsDashboard: MenuItem[] = [
-  {
-    key: Path.dashboard.index,
-    label: <Link to={Path.dashboard.index}>DASHBOARD</Link>,
-    icon: <DashboardOutlined />,
-    permissions: [Path.account.index],
-  },
-]
 
 const itemsIam: MenuItem[] = [
   {
@@ -57,6 +48,7 @@ const itemsIam: MenuItem[] = [
   },
 ]
 
-export const layoutItems: MenuItem[] = [...itemsDashboard, ...itemsIam].filter(
-  (item) => isHasPermission(item.permissions),
-)
+export const layoutItems: MenuItem[] = [
+  ...DashboardModule.menuItems,
+  ...itemsIam,
+].filter((item) => isHasPermission(item.permissions))

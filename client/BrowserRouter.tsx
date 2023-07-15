@@ -5,7 +5,7 @@ import {
   Routes,
 } from 'react-router-dom'
 import Loading from './Components/Molecules/Loading/Loading'
-import DashboardRoute from './Modules/Dashboard/Dashboard.route'
+import DashboardModule from './Modules/Dashboard/Dashboard.Module'
 import AuthRoute from './Modules/Iam/Auth/Auth.route'
 import { AuthAction } from './Modules/Iam/Auth/infrastructure/auth.action'
 import IamRoute from './Modules/Iam/Iam.route'
@@ -42,7 +42,7 @@ const BrowserRouter: React.FC = () => (
         {!noGuardRoutes.includes(location.pathname) && (
           <LayoutMain>
             <Routes>
-              {DashboardRoute}
+              {DashboardModule.routes}
               {IamRoute}
               <Route path="*" element={<NotFound />} />
             </Routes>

@@ -2,9 +2,9 @@ import { Col, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import CardData from '../../../Components/Molecules/CardData/CardData'
+import { DashboardUserAction } from '../infrastructure/dashboardUser.action'
 import DemoLine from './DemoLine'
 import DemoPie from './DemoPie'
-import { DashboardUserAction } from './dashboardUser.action'
 
 const DashboardVariant: React.FC = () => {
   const otp = async () => await DashboardUserAction.otp()
