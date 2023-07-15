@@ -1,35 +1,22 @@
 import { DashboardOutlined } from '@ant-design/icons'
 import { Link, Route } from 'react-router-dom'
-import { Modules } from '../../../@server/modules/modules'
 import { MenuItem } from '../../Layouts/LayoutMain/LayoutItems'
 import Dashboard from './Pages/Dashboard'
+import { dashboardPath } from './common/dashboard.path'
 
-const root = `/${Modules.Dashboard}`
-const rootUser = `/${Modules.DashboardUser}`
-
+const path = dashboardPath
 export class DashboardModule {
-  static path = {
-    index: root,
-    user: {
-      aggregate: (field?: string) => `${rootUser}/aggregate/${field || ''}`,
-    },
-  }
-
   static menuItems: MenuItem[] = [
     {
-      key: this.path.index,
-      label: <Link to={this.path.index}>DASHBOARD</Link>,
+      key: path.index,
+      label: <Link to={path.index}>DASHBOARD</Link>,
       icon: <DashboardOutlined />,
-      permissions: [this.path.index],
+      permissions: [path.index],
     },
   ]
 
   static routes = [
-    <Route
-      key={this.path.index}
-      path={this.path.index}
-      element={<Dashboard />}
-    />,
+    <Route key={path.index} path={path.index} element={<Dashboard />} />,
   ]
 }
 

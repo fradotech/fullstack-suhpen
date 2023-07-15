@@ -1,4 +1,4 @@
-import { DashboardModule } from '../Modules/Dashboard/Dashboard.Module'
+import { dashboardPath } from '../Modules/Dashboard/common/dashboard.path'
 import { accountPath } from '../Modules/Iam/Account/infrastructure/account.path'
 import { authPath } from '../Modules/Iam/Auth/infrastructure/auth.path'
 import { permissionPath } from '../Modules/Iam/Permission/infrastructure/permission.path'
@@ -10,7 +10,7 @@ export const Path = {
   Attachment: '/attachments',
 
   ...authPath,
-  dashboard: DashboardModule.path,
+  dashboard: dashboardPath,
   account: accountPath,
   user: userPath,
   role: rolePath,
