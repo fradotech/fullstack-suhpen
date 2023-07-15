@@ -6,9 +6,9 @@ import {
 } from 'react-router-dom'
 import Loading from './Components/Molecules/Loading/Loading'
 import DashboardModule from './Modules/Dashboard/Dashboard.Module'
-import AuthRoute from './Modules/Iam/Auth/Auth.route'
+import AuthModule from './Modules/Iam/Auth/Auth.Module'
 import { AuthAction } from './Modules/Iam/Auth/infrastructure/auth.action'
-import IamRoute from './Modules/Iam/Iam.route'
+import { IamModule } from './Modules/Iam/Iam.route'
 import { Path as ERoute } from './common/Path'
 
 const LayoutMain = React.lazy(() => import('./Layouts/LayoutMain/LayoutMain'))
@@ -20,7 +20,7 @@ const user = AuthAction.userLoggedLocal()
 const noGuardRoutes = [ERoute.Home]
 const noGuardRouters = [
   <Route key={ERoute.Home} path={ERoute.Home} element={<Home />} />,
-  ...AuthRoute,
+  ...AuthModule.routes,
 ]
 
 const BrowserRouter: React.FC = () => (
@@ -43,7 +43,7 @@ const BrowserRouter: React.FC = () => (
           <LayoutMain>
             <Routes>
               {DashboardModule.routes}
-              {IamRoute}
+              {IamModule.routes}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </LayoutMain>

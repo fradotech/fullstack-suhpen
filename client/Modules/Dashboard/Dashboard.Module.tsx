@@ -5,6 +5,7 @@ import Dashboard from './Pages/Dashboard'
 import { dashboardPath } from './common/dashboard.path'
 
 const path = dashboardPath
+
 export class DashboardModule {
   static menuItems: MenuItem[] = [
     {
