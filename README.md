@@ -1,4 +1,4 @@
-## Install & Preparationn
+## Install & Preparation
 
 1. Copy `.env.example` and rename to `.env`
 2. Fill DB variable
