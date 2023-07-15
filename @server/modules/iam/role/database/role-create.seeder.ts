@@ -19,7 +19,7 @@ export const roleCreateSeeder = async (): Promise<boolean> => {
   const dataCreate = entityManager.create(EntRole, data)
   await entityManager.save(dataCreate)
 
-  Logger.log(String(data.map((data) => data.key)), 'SeederCreate:Role')
+  Logger.log(String(data.map((data) => data.key)), 'AutomaticSeeder:RoleCreate')
 
   return true
 }

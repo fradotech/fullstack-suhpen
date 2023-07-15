@@ -41,7 +41,10 @@ export const userCreateSeeder = async (): Promise<boolean> => {
   const dataCreate = entityManager.create(EntUser, data)
   await entityManager.save(dataCreate)
 
-  Logger.log(String(data.map((data) => data.email)), 'SeederCreate:User')
+  Logger.log(
+    String(data.map((data) => data.email)),
+    'AutomaticSeeder:UserCreate',
+  )
 
   return true
 }
