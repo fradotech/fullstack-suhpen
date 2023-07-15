@@ -26,7 +26,7 @@ export class UserRequest extends EntUser implements IUser {
 
   @IsNotEmpty()
   @IsEmail()
-  @ApiProperty({ example: 'Admin@admin.com' })
+  @ApiProperty({ example: 'admin@admin.com' })
   email: string
 
   @IsNotEmpty()

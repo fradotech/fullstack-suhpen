@@ -30,7 +30,7 @@ export class AuthApp {
 
   async login(req: AuthLoginRequest): Promise<IUser> {
     const { email, password } = req
-    const user = await this.userService.findOneByEmailRelationRoles(email)
+    const user = await this.userService.findOneBy({ email })
     await this.authService.validateLogin(user, password)
     user && (user.token = await this.jwtService.signAsync({ id: user?.id }))
 

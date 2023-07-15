@@ -34,8 +34,13 @@ const UserForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
+
     if (id) await UserAction.update(id, data)
-    else (await UserAction.create(data)) && navigate(Path.user.index)
+    else {
+      const res = await UserAction.create(data)
+      res.data && navigate(Path.user.index)
+    }
+
     setIsLoading(false)
   }
 
