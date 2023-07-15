@@ -8,7 +8,7 @@ import Loading from './Components/Molecules/Loading/Loading'
 import DashboardModule from './Modules/Dashboard/Dashboard.Module'
 import AuthModule from './Modules/Iam/Auth/Auth.Module'
 import { AuthAction } from './Modules/Iam/Auth/infrastructure/auth.action'
-import { IamModule } from './Modules/Iam/Iam.route'
+import { IamModule } from './Modules/Iam/Iam.Module'
 import { Path as ERoute } from './common/Path'
 
 const LayoutMain = React.lazy(() => import('./Layouts/LayoutMain/LayoutMain'))

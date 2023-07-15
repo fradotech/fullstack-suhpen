@@ -1,6 +1,6 @@
 import { MenuProps } from 'antd'
 import { DashboardModule } from '../../Modules/Dashboard/Dashboard.Module'
-import IamModule from '../../Modules/Iam/Iam.route'
+import IamModule from '../../Modules/Iam/Iam.Module'
 import isHasPermission from '../../Modules/Iam/Role/common/isHasPermission'
 
 export type MenuItem = Required<MenuProps>['items'][number] & {
