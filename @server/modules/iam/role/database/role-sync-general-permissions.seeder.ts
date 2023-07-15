@@ -23,7 +23,7 @@ export const roleSyncGeneralPermissionsSeeder = async (): Promise<boolean> => {
         Modules.Account,
         Modules.Attachment,
         Modules.Dashboard,
-        Modules.DashboardVariant,
+        Modules.DashboardUser,
       ],
     })
     .getMany()

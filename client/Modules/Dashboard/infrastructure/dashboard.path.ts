@@ -1,11 +1,11 @@
 import { Modules } from '../../../../@server/modules/modules'
 
 const root = `/${Modules.Dashboard}`
-const rootInvenory = `/${Modules.DashboardVariant}`
+const rootUser = `/${Modules.DashboardUser}`
 
 export const dashboardPath = {
   index: root,
-  variant: {
-    aggregate: (field?: string) => `${rootInvenory}/aggregate/${field || ''}`,
+  user: {
+    aggregate: (field?: string) => `${rootUser}/aggregate/${field || ''}`,
   },
 }

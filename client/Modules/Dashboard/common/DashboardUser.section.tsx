@@ -4,18 +4,14 @@ import { useQuery } from 'react-query'
 import CardData from '../../../Components/Molecules/CardData/CardData'
 import DemoLine from './DemoLine'
 import DemoPie from './DemoPie'
-import { dashboardVariantAction } from './dashboardVariant.action'
+import { DashboardUserAction } from './dashboardUser.action'
 
 const DashboardVariant: React.FC = () => {
-  const buyPrice = async () => await dashboardVariantAction.buyPrice()
-  const sellPrice = async () => await dashboardVariantAction.sellPrice()
-  const marginPrice = async () => await dashboardVariantAction.marginPrice()
+  const otp = async () => await DashboardUserAction.otp()
 
   const fetch = async () => {
     return {
-      buyPrice: await buyPrice(),
-      sellPrice: await sellPrice(),
-      marginPrice: await marginPrice(),
+      otp: await otp(),
     }
   }
 
@@ -26,16 +22,16 @@ const DashboardVariant: React.FC = () => {
       <Col>
         <Row gutter={12}>
           <Col sm={24} md={6}>
-            <CardData title="Buy Price Total" price={data?.buyPrice?.sum} />
+            <CardData title="User OTP Total" value={data?.otp?.sum || 8723} />
           </Col>
           <Col sm={24} md={6}>
-            <CardData title="Sell Price Total" price={data?.sellPrice?.sum} />
+            <CardData title="User Total" price={7000} />
           </Col>
           <Col sm={24} md={6}>
-            <CardData title="Buy Price Average" price={data?.buyPrice?.avg} />
+            <CardData title="User OTP Average" value={data?.otp?.avg || 3779} />
           </Col>
           <Col sm={24} md={6}>
-            <CardData title="Sell Price Average" price={data?.sellPrice?.avg} />
+            <CardData title="User Average" price={3463} />
           </Col>
         </Row>
         <Row gutter={12}>

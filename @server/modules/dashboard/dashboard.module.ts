@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { EntVariant } from '../inventory/variant/infrastructure/variant.entity'
-import { DashboardVariantApp } from './v1/dashboard-variant/dashboard-variant.app'
-import { DashboardVariantController } from './v1/dashboard-variant/dashboard-variant.controller'
+import { EntUser } from '../iam/user/infrastructure/user.entity'
+import { DashboardUserApp } from './v1/dashboard-user/dashboard-user.app'
+import { DashboardUserController } from './v1/dashboard-user/dashboard-user.controller'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([EntVariant])],
-  controllers: [DashboardVariantController],
-  providers: [DashboardVariantApp],
+  imports: [TypeOrmModule.forFeature([EntUser])],
+  controllers: [DashboardUserController],
+  providers: [DashboardUserApp],
   exports: [],
 })
 export class DashboardModule {}
