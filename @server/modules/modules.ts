@@ -12,11 +12,5 @@ export enum Modules {
   // --- Dashboard --- \\
 
   Dashboard = 'dashboard',
-  DashboardVariant = `dashboard/variants`,
-
-  // --- Inventory --- \\
-
-  Category = 'categories',
-  Product = 'products',
-  Variant = 'variants',
+  DashboardUser = `dashboard/users`,
 }

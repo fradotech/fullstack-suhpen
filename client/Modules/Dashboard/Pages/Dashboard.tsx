@@ -1,10 +1,10 @@
 import React from 'react'
-import DashboardVariant from '../common/DashboardVariant.section'
+import DashboardUser from '../common/DashboardUser.section'
 
 const Dashboard: React.FC = () => {
   return (
     <>
-      <DashboardVariant />
+      <DashboardUser />
     </>
   )
 }
