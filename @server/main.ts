@@ -10,8 +10,8 @@ import {
 import { AppModule } from './app.module'
 import { serverStartAtPort } from './common/utils/server-start-at-port.util'
 import { config } from './config'
+import { SeederMoodule } from './database/seeder/seeder.module'
 import { swaggerConfig } from './infrastructure/swagger/swagger.config'
-import { permissionSyncSeeder } from './modules/iam/permission/database/permission-sync.seeder'
 
 async function bootstrap() {
   initializeTransactionalContext()
@@ -30,8 +30,10 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerConfig)
   SwaggerModule.setup(docs, app, document)
 
-  const port = await serverStartAtPort(app, +config.server.port)
-  await permissionSyncSeeder(app)
+  const [port] = await Promise.all([
+    serverStartAtPort(app, +config.server.port),
+    SeederMoodule.forRoot(app),
+  ])
 
   Logger.verbose(`🚀 App running at ${host}:${port}`, 'NestApplication')
   Logger.verbose(`🚀 API Docs Swagger at ${host}:${port}/${docs}`, 'Swagger UI')

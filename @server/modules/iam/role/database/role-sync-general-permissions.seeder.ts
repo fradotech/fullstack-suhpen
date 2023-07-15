@@ -49,7 +49,7 @@ export const roleSyncGeneralPermissionsSeeder = async (): Promise<boolean> => {
     entityManager.remove(rolesDelete),
   ])
 
-  Logger.log('', 'SeederSync:Role')
+  Logger.log('', 'AutomaticSeeder:RoleSync')
 
   return true
 }

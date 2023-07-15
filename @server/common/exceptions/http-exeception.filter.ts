@@ -43,9 +43,9 @@ export class EntityNotFoundExceptionFilter implements ExceptionFilter {
     const status = 404
 
     const indexValue = exception.message.indexOf('{')
-    const where = JSON.parse(exception.message.slice(indexValue, -1) + '}')
-    const message = `Data ${Object.keys(where)[0]} = '${
-      Object.values(where)[0]
+    const query = JSON.parse(exception.message.slice(indexValue, -1) + '}')
+    const message = `Data ${Object.keys(query.where)[0]} = '${
+      Object.values(query.where)[0]
     }' not found`
 
     response.status(status).json({ message, data: exception })
@@ -58,26 +58,16 @@ export class QueryErrorFilter extends BaseExceptionFilter {
     const ctx = host.switchToHttp()
     const response = ctx.getResponse<Response>()
 
-    let sqlMessage: string
-    let indexValue: number
     let message: string
 
     switch (exception.code) {
-      case 'ER_NO_DEFAULT_FOR_FIELD':
-        sqlMessage = 'Field '
-        sqlMessage = exception.sqlMessage.replace(sqlMessage, '')
-        indexValue = sqlMessage.indexOf(' ') - 1
-        message = sqlMessage.slice(1, indexValue) + ' should not be empty'
-
+      case '23502':
+        message = `${exception.column} should not be empty`
         response.status(409).json({ message, data: exception })
         break
 
-      case 'ER_DUP_ENTRY':
-        sqlMessage = 'Duplicate entry '
-        sqlMessage = exception.sqlMessage.replace(sqlMessage, '')
-        indexValue = sqlMessage.indexOf(' ') - 1
-        message = sqlMessage.slice(1, indexValue) + ' has been used'
-
+      case '23505':
+        message = exception.detail
         response.status(409).json({ message, data: exception })
         break
 
