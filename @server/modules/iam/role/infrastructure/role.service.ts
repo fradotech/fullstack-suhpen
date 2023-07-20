@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { config } from '@server/config'
-import { BaseService } from '@server/infrastructure/base/base.service'
 import { In, Repository } from 'typeorm'
 import { IUser } from '../../user/infrastructure/user.interface'
 import { EntRole } from './role.entity'
@@ -13,10 +12,7 @@ class RoleRepo extends Repository<EntRole> {
   ) {
     super(roleRepo.target, roleRepo.manager, roleRepo.queryRunner)
   }
-}
 
-@Injectable()
-export class RoleService extends RoleRepo implements BaseService {
   async findByInIds(ids: string[]): Promise<EntRole[]> {
     return await this.findBy({ id: In(ids) })
   }
@@ -27,7 +23,10 @@ export class RoleService extends RoleRepo implements BaseService {
       relations: ['permissions'],
     })
   }
+}
 
+@Injectable()
+export class RoleService extends RoleRepo {
   static validatePermission(
     user: IUser,
     method: string,

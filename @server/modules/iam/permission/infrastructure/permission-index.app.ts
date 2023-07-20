@@ -1,24 +1,21 @@
 import { Inject, Injectable, Scope } from '@nestjs/common'
 import { REQUEST } from '@nestjs/core'
-import { InjectRepository } from '@nestjs/typeorm'
 import { Request } from 'express'
-import { Repository } from 'typeorm'
 import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
 import {
   IIndexAppRelation,
   IPaginateResponse,
 } from '../../../../infrastructure/index/index.interface'
 import { PermissionIndexRequest } from './permission-index.request'
-import { EntPermission } from './permission.entity'
 import { IPermission } from './permission.interface'
+import { PermissionService } from './permission.service'
 
 @Injectable({ scope: Scope.REQUEST })
 export class PermissionIndexApp extends BaseIndexApp {
   constructor(
     @Inject(REQUEST)
     private readonly request: Request,
-    @InjectRepository(EntPermission)
-    private readonly permissionRepo: Repository<IPermission>,
+    private readonly permissionService: PermissionService,
   ) {
     super()
   }
@@ -48,7 +45,7 @@ export class PermissionIndexApp extends BaseIndexApp {
       name,
       columns,
       relations,
-      this.permissionRepo,
+      this.permissionService,
       this.request,
     )
 
