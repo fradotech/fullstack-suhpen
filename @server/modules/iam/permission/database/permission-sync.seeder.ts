@@ -1,6 +1,5 @@
 import { Logger } from '@nestjs/common'
 import { NestExpressApplication } from '@nestjs/platform-express'
-import dataSource from '@server/database/data-source'
 import { EntPermission } from '@server/modules/iam/permission/infrastructure/permission.entity'
 import { EntityManager } from 'typeorm'
 import { PermissionCreateRequest } from '../infrastructure/permission.request'
@@ -8,11 +7,10 @@ import { PermissionService } from '../infrastructure/permission.service'
 import { permissionDummies } from './permission-sync-additional.dummy'
 
 export const permissionSyncSeeder = async (
+  entityManager: EntityManager,
   app: NestExpressApplication,
 ): Promise<boolean> => {
-  const entityManager = new EntityManager(dataSource)
   const data = [...PermissionService.findFromApp(app), ...permissionDummies]
-
   const permissionsDelete = await entityManager.find(EntPermission)
   const permissionsSave: EntPermission[] = []
 

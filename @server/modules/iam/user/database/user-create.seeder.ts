@@ -1,5 +1,4 @@
 import { Logger } from '@nestjs/common'
-import dataSource from '@server/database/data-source'
 import { EntUser } from '@server/modules/iam/user/infrastructure/user.entity'
 import { EntityManager } from 'typeorm'
 import { roleDummySuperAdminKey as roleSuperAdmin } from '../../role/database/role.dummy'
@@ -7,8 +6,9 @@ import { EntRole } from '../../role/infrastructure/role.entity'
 import { UserCreateRequest } from '../infrastructure/user.request'
 import { userDummies } from './user.dummy'
 
-export const userCreateSeeder = async (): Promise<boolean> => {
-  const entityManager = new EntityManager(dataSource)
+export const userCreateSeeder = async (
+  entityManager: EntityManager,
+): Promise<boolean> => {
   const data = UserCreateRequest.dtos(userDummies as UserCreateRequest[])
   const table = EntUser.name
 

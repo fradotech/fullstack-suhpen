@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { InjectRepository } from '@nestjs/typeorm'
-import { BaseService } from '@server/infrastructure/base/base.service'
 import { Router } from 'express'
 import { In, Repository } from 'typeorm'
 import { EntPermission } from './permission.entity'
@@ -19,14 +18,14 @@ class PermissionRepo extends Repository<EntPermission> {
       permissionRepo.queryRunner,
     )
   }
-}
 
-@Injectable()
-export class PermissionService extends PermissionRepo implements BaseService {
   async findByInIds(ids: string[]): Promise<EntPermission[]> {
     return await this.findBy({ id: In(ids) })
   }
+}
 
+@Injectable()
+export class PermissionService extends PermissionRepo {
   static findFromApp(app: NestExpressApplication): EntPermission[] {
     const server = app.getHttpServer()
     const router: Router = server._events.request._router

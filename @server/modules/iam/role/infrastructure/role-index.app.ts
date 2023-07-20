@@ -1,24 +1,21 @@
 import { Inject, Injectable, Scope } from '@nestjs/common'
 import { REQUEST } from '@nestjs/core'
-import { InjectRepository } from '@nestjs/typeorm'
 import { Request } from 'express'
-import { Repository } from 'typeorm'
 import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
 import {
   IIndexAppRelation,
   IPaginateResponse,
 } from '../../../../infrastructure/index/index.interface'
 import { RoleIndexRequest } from './role-index.request'
-import { EntRole } from './role.entity'
 import { IRole } from './role.interface'
+import { RoleService } from './role.service'
 
 @Injectable({ scope: Scope.REQUEST })
 export class RoleIndexApp extends BaseIndexApp {
   constructor(
     @Inject(REQUEST)
     private readonly request: Request,
-    @InjectRepository(EntRole)
-    private readonly roleRepo: Repository<IRole>,
+    private readonly roleService: RoleService,
   ) {
     super()
   }
@@ -32,7 +29,7 @@ export class RoleIndexApp extends BaseIndexApp {
       name,
       columns,
       relations,
-      this.roleRepo,
+      this.roleService,
       this.request,
     )
 

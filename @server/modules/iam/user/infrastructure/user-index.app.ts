@@ -1,24 +1,21 @@
 import { Inject, Injectable, Scope } from '@nestjs/common'
 import { REQUEST } from '@nestjs/core'
-import { InjectRepository } from '@nestjs/typeorm'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Request } from 'express'
-import { Repository } from 'typeorm'
 import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
 import {
   IIndexAppRelation,
   IPaginateResponse,
 } from '../../../../infrastructure/index/index.interface'
 import { UserIndexRequest } from './user-index.request'
-import { EntUser } from './user.entity'
+import { UserService } from './user.service'
 
 @Injectable({ scope: Scope.REQUEST })
 export class UserIndexApp extends BaseIndexApp {
   constructor(
     @Inject(REQUEST)
     private readonly request: Request,
-    @InjectRepository(EntUser)
-    private readonly userRepo: Repository<IUser>,
+    private readonly userService: UserService,
   ) {
     super()
   }
@@ -37,7 +34,7 @@ export class UserIndexApp extends BaseIndexApp {
       name,
       columns,
       relations,
-      this.userRepo,
+      this.userService,
       this.request,
     )
 

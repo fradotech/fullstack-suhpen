@@ -1,11 +1,11 @@
 import { Logger } from '@nestjs/common'
-import dataSource from '@server/database/data-source'
 import { EntityManager } from 'typeorm'
 import { EntRole } from '../infrastructure/role.entity'
 import { roleDummies } from './role.dummy'
 
-export const roleCreateSeeder = async (): Promise<boolean> => {
-  const entityManager = new EntityManager(dataSource)
+export const roleCreateSeeder = async (
+  entityManager: EntityManager,
+): Promise<boolean> => {
   const data = roleDummies
   const table = EntRole.name
 
