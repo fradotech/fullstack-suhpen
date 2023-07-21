@@ -17,6 +17,7 @@ export const dataSourceOptions: DataSourceOptions = {
     ? ['@server/database/migrations/*.ts']
     : ['dist/@server/database/migrations/*.js'],
   logging: config.server.nodeEnv === 'local',
+  cache: true,
 }
 
 const dataSource = new DataSource(dataSourceOptions)
