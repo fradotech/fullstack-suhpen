@@ -10,7 +10,7 @@ const redis = {
 export const CACHE_CONFIG = {
   register: {
     isGlobal: true,
-    ttl: 2 * 1000,
+    ttl: +(process.env.CACHE_REDIS_TTL_IN_SECONDS || 2) * 1000,
     useFactory: async () => ({ store: redisStore, ...redis }),
   },
   redis,
