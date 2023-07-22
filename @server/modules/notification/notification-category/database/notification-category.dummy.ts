@@ -23,6 +23,6 @@ export const notificationCategoryDummies = [
   {
     name: 'Transaction',
     key: 'transaction',
-    labelColor: '#d6d304',
+    labelColor: '#00003b',
   },
 ]
