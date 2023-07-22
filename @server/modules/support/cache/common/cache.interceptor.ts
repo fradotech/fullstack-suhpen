@@ -6,6 +6,7 @@ import {
   Injectable,
 } from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
+import { PermissionMethodEnum } from '@server/modules/iam/permission/common/permission.enum'
 import { Request } from 'express'
 import { Observable, tap } from 'rxjs'
 import { CacheService } from '../infrastructure/cache.service'
@@ -21,18 +22,19 @@ export class CacheClearInterceptor extends CacheInterceptor {
     next: CallHandler,
   ): Promise<Observable<any> | any> {
     const request = context.switchToHttp().getRequest<Request>()
-    // const method = request.method.toLowerCase()
-    // if (method === PermissionMethodEnum.get.name) return next.handle()
+    const method = request.method.toLowerCase()
+
+    if (method === PermissionMethodEnum.get.name) return next.handle()
 
     const userId = request.user?.['id']
     const path = request['_parsedOriginalUrl'].path
     const key = [userId, path]
 
-    // const value = await this.cacheService.get(key)
+    // TODO: Clear cache
 
     return next.handle().pipe(
       tap(async (data) => {
-        await this.cacheService.set(key, data)
+        this.cacheService.set(key, data)
         return data
       }),
     )
