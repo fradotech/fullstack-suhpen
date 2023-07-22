@@ -8,7 +8,7 @@ import { userPath } from './infrastructure/user.path'
 
 const path = userPath
 
-export class UserModule {
+class UserModule {
   static menuItems: MenuItem[] = [
     {
       key: path.index,

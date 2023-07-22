@@ -8,7 +8,7 @@ import { permissionPath } from './infrastructure/permission.path'
 
 const path = permissionPath
 
-export class PermissionModule {
+class PermissionModule {
   static menuItems: MenuItem[] = [
     {
       key: path.index,

@@ -1,13 +1,13 @@
 import { FaIdCard } from 'react-icons/fa'
 import { MenuItem } from '../../Layouts/LayoutMain/LayoutItems'
 import { Path } from '../../common/Path'
-import { AccountModule } from './Account/Account.Module'
-import { PermissionModule } from './Permission/Permission.Module'
-import { RoleModule } from './Role/Role.Module'
+import AccountModule from './Account/Account.Module'
+import PermissionModule from './Permission/Permission.Module'
+import RoleModule from './Role/Role.Module'
 import isHasPermission from './Role/common/isHasPermission'
-import { UserModule } from './User/User.Module'
+import UserModule from './User/User.Module'
 
-export class IamModule {
+class IamModule {
   static menuItems: MenuItem[] = [
     {
       key: 'IAM',

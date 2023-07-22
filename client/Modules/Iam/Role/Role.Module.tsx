@@ -8,7 +8,7 @@ import { rolePath } from './infrastructure/role.path'
 
 const path = rolePath
 
-export class RoleModule {
+class RoleModule {
   static menuItems: MenuItem[] = [
     {
       key: path.index,

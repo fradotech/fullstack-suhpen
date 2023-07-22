@@ -8,12 +8,12 @@ export const notificationCategoryDummies = [
   {
     name: 'Security',
     key: 'security',
-    labelColor: '#0f1fe6',
+    labelColor: '#ff0400',
   },
   {
     name: 'Promo',
     key: 'promo',
-    labelColor: '#cf720e',
+    labelColor: '#ff5100',
   },
   {
     name: 'Announcement',
@@ -23,6 +23,6 @@ export const notificationCategoryDummies = [
   {
     name: 'Transaction',
     key: 'transaction',
-    labelColor: '#00a120',
+    labelColor: '#d6d304',
   },
 ]
