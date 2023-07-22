@@ -12,12 +12,16 @@ export const dataSourceOptions: DataSourceOptions = {
   password: config.database.password,
   database: config.database.database,
   namingStrategy: new SnakeNamingStrategy(),
+  logging: config.server.nodeEnv === 'local',
   entities: isRunning ? ['@server/**/*.entity.ts'] : ['dist/**/*.entity.js'],
   migrations: isRunning
     ? ['@server/database/migrations/*.ts']
     : ['dist/@server/database/migrations/*.js'],
-  logging: config.server.nodeEnv === 'local',
-  cache: true,
+  cache: {
+    duration: config.cache.register.ttl,
+    type: config.cache.redis.host ? 'redis' : undefined,
+    options: config.cache.redis,
+  },
 }
 
 const dataSource = new DataSource(dataSourceOptions)

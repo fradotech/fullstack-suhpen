@@ -5,7 +5,7 @@ import { config } from '@server/config'
 import { CacheService } from './infrastructure/cache.service'
 
 @Module({
-  imports: [CacheModule.register(config.cache.redis)],
+  imports: [CacheModule.register(config.cache.register)],
   controllers: [],
   providers: [
     CacheService,
