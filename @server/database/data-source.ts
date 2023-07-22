@@ -19,8 +19,8 @@ export const dataSourceOptions: DataSourceOptions = {
     : ['dist/@server/database/migrations/*.js'],
   cache: {
     duration: config.cache.register.ttl,
-    type: config.cache.redis.host ? 'redis' : undefined,
-    options: config.cache.redis,
+    type: config.cache.redis.host && !isRunning ? 'redis' : undefined,
+    options: !isRunning ? config.cache.redis : undefined,
   },
 }
 

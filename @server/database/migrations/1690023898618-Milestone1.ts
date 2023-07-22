@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class Milestone11690017278316 implements MigrationInterface {
-    name = 'Milestone11690017278316'
+export class Milestone11690023898618 implements MigrationInterface {
+    name = 'Milestone11690023898618'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "ent_role" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "created_by_id" uuid, "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_by_id" uuid, "deleted_at" TIMESTAMP, "deleted_by_id" uuid, "name" character varying NOT NULL, "key" character varying, "is_active" boolean NOT NULL DEFAULT true, "description" text, "thumbnail" character varying, "label_color" character varying NOT NULL DEFAULT '#007fd0', CONSTRAINT "UQ_789f01960a1f8a14787d40dd006" UNIQUE ("key"), CONSTRAINT "PK_0e9fcb03233811bb72fbe362ee7" PRIMARY KEY ("id"))`);
@@ -10,6 +10,8 @@ export class Milestone11690017278316 implements MigrationInterface {
         await queryRunner.query(`CREATE INDEX "IDX_a4eda1a807235b70e913db573b" ON "ent_permission" ("name") `);
         await queryRunner.query(`CREATE TABLE "ent_user" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "created_by_id" uuid, "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_by_id" uuid, "deleted_at" TIMESTAMP, "deleted_by_id" uuid, "name" character varying NOT NULL, "email" character varying NOT NULL, "password" character varying NOT NULL, "gender" character varying, "phone_number" character varying, "address" character varying, "birth_date" TIMESTAMP, "avatar" character varying, "otp" integer, "is_verified" boolean NOT NULL DEFAULT false, "token" character varying, CONSTRAINT "UQ_bb1fa9f7df3299e82ef270c91f6" UNIQUE ("email"), CONSTRAINT "PK_31554b950f0d538a9f15e10422e" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "ent_attachment" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "created_by_id" uuid, "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_by_id" uuid, "deleted_at" TIMESTAMP, "deleted_by_id" uuid, "file_url" character varying NOT NULL, "module" character varying, CONSTRAINT "PK_f2f540d480454bc574bbee67766" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "ent_message_category" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "created_by_id" uuid, "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_by_id" uuid, "deleted_at" TIMESTAMP, "deleted_by_id" uuid, "name" character varying NOT NULL, "key" character varying, "is_active" boolean NOT NULL DEFAULT true, "description" text, "thumbnail" character varying, "label_color" character varying NOT NULL DEFAULT '#007fd0', CONSTRAINT "UQ_6057d645ecd01be4f38d8643ff1" UNIQUE ("key"), CONSTRAINT "PK_de0d8a63e4ad41baf75e421cfe9" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE INDEX "IDX_b301c1ac0bc20019eccb960a0d" ON "ent_message_category" ("name") `);
         await queryRunner.query(`CREATE TABLE "ent_role_permissions" ("ent_role_id" uuid NOT NULL, "ent_permission_id" uuid NOT NULL, CONSTRAINT "PK_b22215faed5521d3efd191274c0" PRIMARY KEY ("ent_role_id", "ent_permission_id"))`);
         await queryRunner.query(`CREATE INDEX "IDX_6ecf96fe4954b21b1cee75fe5b" ON "ent_role_permissions" ("ent_role_id") `);
         await queryRunner.query(`CREATE INDEX "IDX_d07ee46e98cdf492a606fc7cc3" ON "ent_role_permissions" ("ent_permission_id") `);
@@ -35,6 +37,8 @@ export class Milestone11690017278316 implements MigrationInterface {
         await queryRunner.query(`DROP INDEX "public"."IDX_d07ee46e98cdf492a606fc7cc3"`);
         await queryRunner.query(`DROP INDEX "public"."IDX_6ecf96fe4954b21b1cee75fe5b"`);
         await queryRunner.query(`DROP TABLE "ent_role_permissions"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_b301c1ac0bc20019eccb960a0d"`);
+        await queryRunner.query(`DROP TABLE "ent_message_category"`);
         await queryRunner.query(`DROP TABLE "ent_attachment"`);
         await queryRunner.query(`DROP TABLE "ent_user"`);
         await queryRunner.query(`DROP INDEX "public"."IDX_a4eda1a807235b70e913db573b"`);
