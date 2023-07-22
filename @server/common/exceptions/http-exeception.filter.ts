@@ -44,8 +44,9 @@ export class EntityNotFoundExceptionFilter implements ExceptionFilter {
 
     const indexValue = exception.message.indexOf('{')
     const query = JSON.parse(exception.message.slice(indexValue, -1) + '}')
-    const message = `Data ${Object.keys(query)[0]} = '${
-      Object.values(query)[0]
+    const where = query.where || query
+    const message = `Data ${Object.keys(where)[0]} = '${
+      Object.values(where)[0]
     }' not found`
 
     response.status(status).json({ message, data: exception })
