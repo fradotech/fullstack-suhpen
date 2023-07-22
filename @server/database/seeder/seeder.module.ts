@@ -3,7 +3,7 @@ import { NestExpressApplication } from '@nestjs/platform-express'
 import { permissionSyncSeeder } from '@server/modules/iam/permission/database/permission-sync.seeder'
 import { roleCreateSeeder } from '@server/modules/iam/role/database/role-create.seeder'
 import { roleSyncGeneralPermissionsSeeder } from '@server/modules/iam/role/database/role-sync-general-permissions.seeder'
-import { messageCategoryCreateSeeder } from '@server/modules/notification/message-category/database/message-category-create.seeder'
+import { notificationCategoryCreateSeeder } from '@server/modules/notification/notification-category/database/notification-category-create.seeder'
 import { EntityManager } from 'typeorm'
 import { userCreateSeeder } from '../../modules/iam/user/database/user-create.seeder'
 import dataSource from '../data-source'
@@ -29,7 +29,7 @@ export class SeederMoodule {
 
     // --- Message --- \\
 
-    await messageCategoryCreateSeeder(entityManager)
+    await notificationCategoryCreateSeeder(entityManager)
 
     return { module: SeederMoodule }
   }

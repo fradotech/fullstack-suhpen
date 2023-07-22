@@ -5,18 +5,20 @@ import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.respo
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
-import { MessageCategoryIndexApp } from '../infrastructure/message-category-index.app'
-import { MessageCategoryIndexRequest } from '../infrastructure/message-category-index.request'
-import { MessageCategoryResponse } from '../infrastructure/message-category.response'
+import { NotificationCategoryIndexApp } from '../infrastructure/notification-category-index.app'
+import { NotificationCategoryIndexRequest } from '../infrastructure/notification-category-index.request'
+import { NotificationCategoryResponse } from '../infrastructure/notification-category.response'
 
-const THIS_MODULE = Modules.MessageCategory + '/sheet'
+const THIS_MODULE = Modules.NotificationCategory + '/sheet'
 
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
 @UseGuards(LoggedInGuard)
-export class MessageCategorySheetController {
-  constructor(private readonly categoryIndexApp: MessageCategoryIndexApp) {}
+export class NotificationCategorySheetController {
+  constructor(
+    private readonly notificationCategoryIndexApp: NotificationCategoryIndexApp,
+  ) {}
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
@@ -25,16 +27,16 @@ export class MessageCategorySheetController {
 
   @Get('export')
   async fetch(
-    @Query() req: MessageCategoryIndexRequest,
-  ): Promise<IApiExportRes<MessageCategoryResponse[]>> {
+    @Query() req: NotificationCategoryIndexRequest,
+  ): Promise<IApiExportRes<NotificationCategoryResponse[]>> {
     req.isExport = true
-    const response = await this.categoryIndexApp.fetch(req)
+    const response = await this.notificationCategoryIndexApp.fetch(req)
 
-    const data = MessageCategoryResponse.dtos(response.data)
+    const data = NotificationCategoryResponse.dtos(response.data)
     const parser = new Parser()
     const dataExport = parser.parse(data)
     const fileName = `Data - ${
-      Modules.MessageCategory
+      Modules.NotificationCategory
     } - ${new Date().toISOString()}.xlsx`
 
     return ApiExportRes.dto(dataExport, fileName)

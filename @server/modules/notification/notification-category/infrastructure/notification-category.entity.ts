@@ -1,8 +1,8 @@
 import { EntBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.entity'
 import { Entity } from 'typeorm'
-import { IMessageCategory } from './message-category.interface'
+import { INotificationCategory } from './notification-category.interface'
 
 @Entity()
-export class EntMessageCategory
+export class EntNotificationCategory
   extends EntBaseMasterData
-  implements IMessageCategory {}
+  implements INotificationCategory {}

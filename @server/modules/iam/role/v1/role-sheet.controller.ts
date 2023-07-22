@@ -16,7 +16,7 @@ const THIS_MODULE = Modules.Role + '/sheet'
 @ApiBearerAuth()
 @UseGuards(LoggedInGuard)
 export class RoleSheetController {
-  constructor(private readonly categoryIndexApp: RoleIndexApp) {}
+  constructor(private readonly roleIndexApp: RoleIndexApp) {}
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
@@ -28,7 +28,7 @@ export class RoleSheetController {
     @Query() req: RoleIndexRequest,
   ): Promise<IApiExportRes<RoleResponse[]>> {
     req.isExport = true
-    const response = await this.categoryIndexApp.fetch(req)
+    const response = await this.roleIndexApp.fetch(req)
 
     const data = RoleResponse.dtos(response.data)
     const parser = new Parser()

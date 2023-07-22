@@ -1,5 +1,5 @@
 // <--- KEY: key --->
-export const messageCategoryDummies = [
+export const notificationCategoryDummies = [
   {
     name: 'Info',
     key: 'info',

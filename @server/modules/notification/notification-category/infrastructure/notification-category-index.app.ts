@@ -6,24 +6,24 @@ import {
   IIndexAppRelation,
   IPaginateResponse,
 } from '../../../../infrastructure/index/index.interface'
-import { MessageCategoryIndexRequest } from './message-category-index.request'
-import { IMessageCategory } from './message-category.interface'
-import { MessageCategoryService } from './message-category.service'
+import { NotificationCategoryIndexRequest } from './notification-category-index.request'
+import { INotificationCategory } from './notification-category.interface'
+import { NotificationCategoryService } from './notification-category.service'
 
 @Injectable({ scope: Scope.REQUEST })
-export class MessageCategoryIndexApp extends BaseIndexApp {
+export class NotificationCategoryIndexApp extends BaseIndexApp {
   constructor(
     @Inject(REQUEST)
     private readonly request: Request,
-    private readonly messageCategoryService: MessageCategoryService,
+    private readonly notificationCategoryService: NotificationCategoryService,
   ) {
     super()
   }
 
   async fetch(
-    req: MessageCategoryIndexRequest,
-  ): Promise<IPaginateResponse<IMessageCategory>> {
-    const name = 'messageCategories'
+    req: NotificationCategoryIndexRequest,
+  ): Promise<IPaginateResponse<INotificationCategory>> {
+    const name = 'notificationCategories'
     const columns = ['name', 'key', 'isActive', 'createdAt']
     const relations: IIndexAppRelation[] = []
     const query = this.createQueryIndex(
@@ -31,7 +31,7 @@ export class MessageCategoryIndexApp extends BaseIndexApp {
       name,
       columns,
       relations,
-      this.messageCategoryService,
+      this.notificationCategoryService,
       this.request,
     )
 

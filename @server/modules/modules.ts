@@ -16,7 +16,7 @@ export enum Modules {
   Permission = 'permissions',
   Account = 'account',
 
-  // --- Message --- \\
+  // --- Notification --- \\
 
-  MessageCategory = 'message-categories',
+  NotificationCategory = 'notification-categories',
 }
