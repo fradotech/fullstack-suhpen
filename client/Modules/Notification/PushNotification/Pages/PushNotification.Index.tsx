@@ -36,7 +36,7 @@ const PushNotificationIndex: React.FC = () => {
           dataTableHeader={{
             query,
             search: true,
-            dateRangeColumn: 'createdAt',
+            dateRangeColumn: 'pushAt',
             hrefCreate: Path.pushNotification.form,
             hrefExport: Path.pushNotification.export,
           }}

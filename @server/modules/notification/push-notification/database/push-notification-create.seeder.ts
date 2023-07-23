@@ -2,7 +2,7 @@ import { Logger } from '@nestjs/common'
 import { RoleDefaultSuperAdminKey } from '@server/modules/iam/role/database/role.dummy'
 import { EntUser } from '@server/modules/iam/user/infrastructure/user.entity'
 import { EntityManager, In } from 'typeorm'
-import { NotificationCategoryDefaultSystemKey } from '../../notification-category/database/notification-category.dummy'
+import { NotificationCategoryDefaultKeyEnum } from '../../common/notification-category.enum'
 import { EntNotificationCategory } from '../../notification-category/infrastructure/notification-category.entity'
 import { EntPushNotification } from '../infrastructure/push-notification.entity'
 import { pushNotificationDummies } from './push-notification.dummy'
@@ -23,7 +23,7 @@ export const pushNotificationCreateSeeder = async (
   })
 
   const categoryInfo = await entityManager.findOne(EntNotificationCategory, {
-    where: { key: NotificationCategoryDefaultSystemKey },
+    where: { key: NotificationCategoryDefaultKeyEnum.System },
   })
 
   data.forEach((data) => {

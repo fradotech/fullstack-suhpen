@@ -1,15 +1,15 @@
-export const NotificationCategoryDefaultSystemKey = 'system'
+import { NotificationCategoryDefaultKeyEnum } from '../../common/notification-category.enum'
 
 // <--- KEY: key --->
 export const notificationCategoryDummies = [
   {
     name: 'System',
-    key: NotificationCategoryDefaultSystemKey,
+    key: NotificationCategoryDefaultKeyEnum.System,
     labelColor: '#595959',
   },
   {
     name: 'Info',
-    key: 'info',
+    key: NotificationCategoryDefaultKeyEnum.Info,
     labelColor: '#0a1fe6',
   },
   {
