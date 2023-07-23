@@ -9,6 +9,7 @@ import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { Path } from '../../../../common/Path'
 import { rule } from '../../../../common/utils/form.rules'
+import { NotificationCategoryAction } from '../../NotificationCategory/infrastructure/notification-category.action'
 import { PushNotificationAction } from '../infrastructure/push-notification.action'
 
 const PushNotificationForm: React.FC = () => {
@@ -28,6 +29,14 @@ const PushNotificationForm: React.FC = () => {
     refetchOnWindowFocus: false,
   })
 
+  const {
+    isLoading: isLoadingNotificationCategory,
+    data: notificationCategories,
+  } = NotificationCategoryAction.useIndex(
+    { pageSize: 100000 },
+    { refetchOnWindowFocus: false },
+  )
+
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
@@ -45,7 +54,7 @@ const PushNotificationForm: React.FC = () => {
     <>
       <PageHeader
         title={id ? 'PushNotification' : 'New PushNotification'}
-        isLoading={isLoading}
+        isLoading={isLoading || isLoadingNotificationCategory}
       />
       <Section>
         <FormContainer
@@ -60,10 +69,16 @@ const PushNotificationForm: React.FC = () => {
               <FormItem name="title" rules={[rule.required]} />
             </Col>
             <Col sm={24} md={4}>
-              <FormItem name="isBroadcast" input="switch" form={form} />
+              <FormItem
+                label="Broadcast"
+                name="isBroadcast"
+                input="switch"
+                form={form}
+                disabled={!!id}
+              />
             </Col>
           </Row>
-          <FormItem name="message" input="textArea" />
+          <FormItem name="message" input="textArea" rules={[rule.required]} />
           <Row gutter={12}>
             <Col sm={24} md={12}>
               <FormItem
@@ -71,6 +86,15 @@ const PushNotificationForm: React.FC = () => {
                 input="attachment"
                 total={1}
                 form={form}
+              />
+            </Col>
+            <Col sm={24} md={12}>
+              <FormItem
+                label="Category"
+                name="categoryId"
+                input="select"
+                form={form}
+                options={notificationCategories?.data}
               />
             </Col>
           </Row>

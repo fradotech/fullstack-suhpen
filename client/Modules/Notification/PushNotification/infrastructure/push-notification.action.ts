@@ -48,7 +48,7 @@ export class PushNotificationAction {
 
   static async update(
     id: string,
-    data: PushNotificationUpdateRequest,
+    data: PushNotificationUpdateRequest | PushNotificationCreateRequest,
   ): Promise<IApiRes<PushNotificationResponse>> {
     data = dto(data)
     const res = await API.put(Path.pushNotification.id(id), data)

@@ -7,7 +7,7 @@ import {
 } from '@server/modules/notification/notification-category/infrastructure/notification-category.request'
 import { NotificationCategoryResponse } from '@server/modules/notification/notification-category/infrastructure/notification-category.response'
 import { notification } from 'antd'
-import { UseQueryResult, useQuery } from 'react-query'
+import { UseQueryOptions, UseQueryResult, useQuery } from 'react-query'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
 import { getColorPicker } from '../../../../Components/Molecules/ColorPicker/ColorPicker.util'
 import { Path } from '../../../../common/Path'
@@ -24,10 +24,17 @@ const dto = (
 export class NotificationCategoryAction {
   static useIndex(
     req?: NotificationCategoryIndexRequest,
+    options?:
+      | UseQueryOptions<IPaginateResponse<NotificationCategoryResponse>>
+      | undefined,
   ): UseQueryResult<IPaginateResponse<NotificationCategoryResponse>> {
     const fetch = async () =>
       await API.get(Path.notificationCategory.index, req)
-    return useQuery([NotificationCategoryAction.useIndex.name, req], fetch)
+    return useQuery(
+      [NotificationCategoryAction.useIndex.name, req],
+      fetch,
+      options,
+    )
   }
 
   static async create(

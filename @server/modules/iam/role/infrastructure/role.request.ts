@@ -25,9 +25,9 @@ export class RoleCreateRequest extends PartialType(RoleRequest) {
   }
 }
 
-export class RoleUpdateRequest extends PartialType(RoleRequest) {
-  static dto(data: IRole, req: RoleUpdateRequest): IRole {
-    return Object.assign(data, req)
+export class RoleUpdateRequest extends OmitType(RoleRequest, ['id']) {
+  static dto(res: IRole, data: RoleUpdateRequest): IRole {
+    return Object.assign(res, data)
   }
 }
 

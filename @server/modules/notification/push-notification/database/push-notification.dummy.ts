@@ -2,12 +2,12 @@ import { PushNotificationCreateRequest } from '../infrastructure/push-notificati
 
 export const pushNotificationDummies: PushNotificationCreateRequest[] = [
   {
-    title: 'Application has been deploy!',
+    title: 'Application has been deploy',
     message: 'This is very beginning of the application setup',
     pushAt: new Date(),
   },
   {
-    title: 'Database has been reset!',
+    title: 'Database has been reset',
     message: 'Database has been reset, get started',
     pushAt: new Date(),
   },

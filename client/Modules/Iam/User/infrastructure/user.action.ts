@@ -8,7 +8,7 @@ import {
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { notification } from 'antd'
 import dayjs from 'dayjs'
-import { UseQueryResult, useQuery } from 'react-query'
+import { UseQueryOptions, UseQueryResult, useQuery } from 'react-query'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
 import { Path } from '../../../../common/Path'
 import { API } from '../../../../infrastructure/api.service'
@@ -26,9 +26,10 @@ const dto = (
 export class UserAction {
   static useIndex(
     req?: UserIndexRequest,
+    options?: UseQueryOptions<IPaginateResponse<UserResponse>> | undefined,
   ): UseQueryResult<IPaginateResponse<UserResponse>> {
     const fetch = async () => await API.get(Path.user.index, req)
-    return useQuery([UserAction.useIndex.name, req], fetch)
+    return useQuery([UserAction.useIndex.name, req], fetch, options)
   }
 
   static async create(data: UserCreateRequest): Promise<IApiRes<UserResponse>> {

@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
+import { NotificationCategoryModule } from '../notification-category/notification-category.module'
 import { PushNotificationIndexApp } from './infrastructure/push-notification-index.app'
 import { EntPushNotification } from './infrastructure/push-notification.entity'
 import { PushNotificationService } from './infrastructure/push-notification.service'
@@ -8,7 +9,10 @@ import { PushNotificationCrudController } from './v1/push-notification-crud.cont
 import { PushNotificationSheetController } from './v1/push-notification-sheet.controller'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([EntPushNotification])],
+  imports: [
+    TypeOrmModule.forFeature([EntPushNotification]),
+    NotificationCategoryModule,
+  ],
   controllers: [
     PushNotificationSheetController,
     PushNotificationCrudController,

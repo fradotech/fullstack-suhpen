@@ -116,6 +116,7 @@ export class UserCreateRequest extends OmitType(UserRequest, [
 }
 
 export class UserUpdateRequest extends OmitType(UserRequest, [
+  'id',
   'email',
   'password',
   'passwordConfirmation',

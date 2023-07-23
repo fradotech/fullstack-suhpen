@@ -58,7 +58,7 @@ export class PermissionAction {
 
   static async update(
     id: string,
-    data: PermissionUpdateRequest,
+    data: PermissionUpdateRequest | PermissionCreateRequest,
   ): Promise<IApiRes<PermissionResponse>> {
     data = dto(data)
     const res = await API.put(Path.permission.id(id), data)

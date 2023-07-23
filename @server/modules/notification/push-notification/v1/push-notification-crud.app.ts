@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { NotificationCategoryService } from '../../notification-category/infrastructure/notification-category.service'
 import { IPushNotification } from '../infrastructure/push-notification.interface'
 import {
   PushNotificationCreateRequest,
@@ -10,6 +11,7 @@ import { PushNotificationService } from '../infrastructure/push-notification.ser
 export class PushNotificationCrudApp {
   constructor(
     private readonly pushNotificationService: PushNotificationService,
+    private readonly notificationCategoryService: NotificationCategoryService,
   ) {}
 
   async find(): Promise<IPushNotification[]> {
@@ -19,11 +21,17 @@ export class PushNotificationCrudApp {
   async create(req: PushNotificationCreateRequest): Promise<IPushNotification> {
     const data = PushNotificationCreateRequest.dto(req)
 
+    if (req.categoryId) {
+      data.category = await this.notificationCategoryService.findOneByOrFail({
+        id: req.categoryId,
+      })
+    }
+
     return await this.pushNotificationService.save(data)
   }
 
   async findOneOrFail(id: string): Promise<IPushNotification> {
-    return await this.pushNotificationService.findOneByOrFail({ id })
+    return await this.pushNotificationService.findOneWithCategory(id)
   }
 
   async update(
@@ -32,6 +40,12 @@ export class PushNotificationCrudApp {
   ): Promise<IPushNotification> {
     const data = await this.pushNotificationService.findOneByOrFail({ id })
     const dataUpdate = PushNotificationUpdateRequest.dto(data, req)
+
+    if (req.categoryId) {
+      data.category = await this.notificationCategoryService.findOneByOrFail({
+        id: req.categoryId,
+      })
+    }
 
     return await this.pushNotificationService.save(dataUpdate)
   }

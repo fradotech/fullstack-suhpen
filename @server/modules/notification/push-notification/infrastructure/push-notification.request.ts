@@ -1,4 +1,4 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger'
+import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger'
 import { IsUUID } from 'class-validator'
 import { IPushNotification } from '../../push-notification/infrastructure/push-notification.interface'
 import { EntPushNotification } from './push-notification.entity'
@@ -11,17 +11,20 @@ export class PushNotificationRequest
   title: string
 
   @ApiProperty()
-  thumbnail?: string
+  isBroadcast: boolean
 
   @ApiProperty()
+  thumbnail?: string
+
   @IsUUID()
+  @ApiProperty()
   categoryId: string
 
   @ApiProperty({ example: 'Test create notification message' })
   message: string
 
-  @ApiProperty()
   @IsUUID()
+  @ApiProperty()
   userId?: string
 }
 
@@ -33,13 +36,18 @@ export class PushNotificationCreateRequest extends PartialType(
   }
 }
 
-export class PushNotificationUpdateRequest extends PartialType(
+export class PushNotificationUpdateRequest extends OmitType(
   PushNotificationRequest,
+  ['id', 'isBroadcast', 'userId'],
 ) {
   static dto(
-    data: IPushNotification,
-    req: PushNotificationUpdateRequest,
+    res: IPushNotification,
+    data: PushNotificationUpdateRequest,
   ): IPushNotification {
-    return Object.assign(data, req)
+    res.title = data.title
+    res.message = data.message
+    res.thumbnail = data.thumbnail
+
+    return res
   }
 }

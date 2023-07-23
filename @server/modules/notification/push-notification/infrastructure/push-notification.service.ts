@@ -18,6 +18,10 @@ class PushNotificationRepo extends Repository<EntPushNotification> {
   async findByInIds(ids: string[]): Promise<EntPushNotification[]> {
     return await this.findBy({ id: In(ids) })
   }
+
+  async findOneWithCategory(id: string): Promise<EntPushNotification> {
+    return await this.findOneOrFail({ where: { id }, relations: ['category'] })
+  }
 }
 
 @Injectable()

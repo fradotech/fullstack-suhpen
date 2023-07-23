@@ -1,17 +1,19 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class Milestone11690085639506 implements MigrationInterface {
-    name = 'Milestone11690085639506'
+export class Milestone11690087344187 implements MigrationInterface {
+    name = 'Milestone11690087344187'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "ent_role" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "created_by_id" uuid, "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_by_id" uuid, "deleted_at" TIMESTAMP, "deleted_by_id" uuid, "name" character varying NOT NULL, "key" character varying, "is_active" boolean NOT NULL DEFAULT true, "description" text, "thumbnail" character varying, "label_color" character varying NOT NULL DEFAULT '#007fd0', CONSTRAINT "UQ_789f01960a1f8a14787d40dd006" UNIQUE ("key"), CONSTRAINT "PK_0e9fcb03233811bb72fbe362ee7" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE INDEX "IDX_cd5ae51468329747e172efaf88" ON "ent_role" ("name") `);
         await queryRunner.query(`CREATE TABLE "ent_permission" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "created_by_id" uuid, "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_by_id" uuid, "deleted_at" TIMESTAMP, "deleted_by_id" uuid, "name" character varying NOT NULL, "key" character varying, "is_active" boolean NOT NULL DEFAULT true, "description" text, "thumbnail" character varying, "label_color" character varying NOT NULL DEFAULT '#007fd0', "module" character varying, "path" character varying NOT NULL, "method" character varying NOT NULL, CONSTRAINT "UQ_7354474dc2190753628409bcbfd" UNIQUE ("key"), CONSTRAINT "PK_8871af6236545bb6220756a9231" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE INDEX "IDX_a4eda1a807235b70e913db573b" ON "ent_permission" ("name") `);
-        await queryRunner.query(`CREATE TABLE "ent_user" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "created_by_id" uuid, "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_by_id" uuid, "deleted_at" TIMESTAMP, "deleted_by_id" uuid, "name" character varying NOT NULL, "email" character varying NOT NULL, "password" character varying NOT NULL, "gender" character varying, "phone_number" character varying, "address" character varying, "birth_date" TIMESTAMP, "avatar" character varying, "otp" integer, "is_verified" boolean NOT NULL DEFAULT false, "token" character varying, CONSTRAINT "UQ_bb1fa9f7df3299e82ef270c91f6" UNIQUE ("email"), CONSTRAINT "PK_31554b950f0d538a9f15e10422e" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "ent_notification_category" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "created_by_id" uuid, "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_by_id" uuid, "deleted_at" TIMESTAMP, "deleted_by_id" uuid, "name" character varying NOT NULL, "key" character varying, "is_active" boolean NOT NULL DEFAULT true, "description" text, "thumbnail" character varying, "label_color" character varying NOT NULL DEFAULT '#007fd0', CONSTRAINT "UQ_b09be5cc9e5a823e5089852bdf2" UNIQUE ("key"), CONSTRAINT "PK_ca06fa338071a23be1d852d7538" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE INDEX "IDX_06483357b47bfba6f546fa7cd6" ON "ent_notification_category" ("name") `);
-        await queryRunner.query(`CREATE TABLE "ent_push_notification" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "created_by_id" uuid, "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_by_id" uuid, "deleted_at" TIMESTAMP, "deleted_by_id" uuid, "title" character varying NOT NULL, "is_broadcast" boolean NOT NULL DEFAULT false, "thumbnail" character varying, "message" text NOT NULL, "read_at" TIMESTAMP, "push_at" TIMESTAMP, "category_id" uuid, "user_id" uuid, CONSTRAINT "PK_697601c707b508402e179188f0c" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "ent_user" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "created_by_id" uuid, "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_by_id" uuid, "deleted_at" TIMESTAMP, "deleted_by_id" uuid, "name" character varying NOT NULL, "email" character varying NOT NULL, "password" character varying NOT NULL, "gender" character varying, "phone_number" character varying, "address" character varying, "birth_date" TIMESTAMP, "avatar" character varying, "otp" integer, "is_verified" boolean NOT NULL DEFAULT false, "token" character varying, CONSTRAINT "UQ_bb1fa9f7df3299e82ef270c91f6" UNIQUE ("email"), CONSTRAINT "PK_31554b950f0d538a9f15e10422e" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "ent_push_notification" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "created_by_id" uuid, "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_by_id" uuid, "deleted_at" TIMESTAMP, "deleted_by_id" uuid, "title" character varying NOT NULL, "is_broadcast" boolean NOT NULL DEFAULT true, "thumbnail" character varying, "message" text NOT NULL, "read_at" TIMESTAMP, "push_at" TIMESTAMP, "category_id" uuid, "user_id" uuid, CONSTRAINT "PK_697601c707b508402e179188f0c" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE INDEX "IDX_cfd3c067a22580c13afe9f6037" ON "ent_push_notification" ("title") `);
+        await queryRunner.query(`CREATE INDEX "IDX_84c5875ac16856236be4aed2f3" ON "ent_push_notification" ("push_at") `);
         await queryRunner.query(`CREATE TABLE "ent_attachment" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "created_by_id" uuid, "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_by_id" uuid, "deleted_at" TIMESTAMP, "deleted_by_id" uuid, "file_url" character varying NOT NULL, "module" character varying, CONSTRAINT "PK_f2f540d480454bc574bbee67766" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "ent_role_permissions" ("ent_role_id" uuid NOT NULL, "ent_permission_id" uuid NOT NULL, CONSTRAINT "PK_b22215faed5521d3efd191274c0" PRIMARY KEY ("ent_role_id", "ent_permission_id"))`);
         await queryRunner.query(`CREATE INDEX "IDX_6ecf96fe4954b21b1cee75fe5b" ON "ent_role_permissions" ("ent_role_id") `);
@@ -43,10 +45,12 @@ export class Milestone11690085639506 implements MigrationInterface {
         await queryRunner.query(`DROP INDEX "public"."IDX_6ecf96fe4954b21b1cee75fe5b"`);
         await queryRunner.query(`DROP TABLE "ent_role_permissions"`);
         await queryRunner.query(`DROP TABLE "ent_attachment"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_84c5875ac16856236be4aed2f3"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_cfd3c067a22580c13afe9f6037"`);
         await queryRunner.query(`DROP TABLE "ent_push_notification"`);
+        await queryRunner.query(`DROP TABLE "ent_user"`);
         await queryRunner.query(`DROP INDEX "public"."IDX_06483357b47bfba6f546fa7cd6"`);
         await queryRunner.query(`DROP TABLE "ent_notification_category"`);
-        await queryRunner.query(`DROP TABLE "ent_user"`);
         await queryRunner.query(`DROP INDEX "public"."IDX_a4eda1a807235b70e913db573b"`);
         await queryRunner.query(`DROP TABLE "ent_permission"`);
         await queryRunner.query(`DROP INDEX "public"."IDX_cd5ae51468329747e172efaf88"`);

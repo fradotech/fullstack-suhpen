@@ -22,12 +22,14 @@ export class PermissionCreateRequest extends PartialType(PermissionRequest) {
   }
 }
 
-export class PermissionUpdateRequest extends PartialType(PermissionRequest) {
-  static dto(data: IPermission, req: PermissionUpdateRequest): IPermission {
-    data.thumbnail = req.thumbnail
-    data.description = req.description
+export class PermissionUpdateRequest extends OmitType(PermissionRequest, [
+  'id',
+]) {
+  static dto(res: IPermission, data: PermissionUpdateRequest): IPermission {
+    res.thumbnail = data.thumbnail
+    res.description = data.description
 
-    return data
+    return res
   }
 }
 
