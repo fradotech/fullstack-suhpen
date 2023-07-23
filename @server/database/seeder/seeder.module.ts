@@ -4,6 +4,7 @@ import { permissionSyncSeeder } from '@server/modules/iam/permission/database/pe
 import { roleCreateSeeder } from '@server/modules/iam/role/database/role-create.seeder'
 import { roleSyncGeneralPermissionsSeeder } from '@server/modules/iam/role/database/role-sync-general-permissions.seeder'
 import { notificationCategoryCreateSeeder } from '@server/modules/notification/notification-category/database/notification-category-create.seeder'
+import { pushNotificationCreateSeeder } from '@server/modules/notification/push-notification/database/push-notification-create.seeder'
 import { EntityManager } from 'typeorm'
 import { userCreateSeeder } from '../../modules/iam/user/database/user-create.seeder'
 import dataSource from '../data-source'
@@ -27,9 +28,10 @@ export class SeederMoodule {
     await roleSyncGeneralPermissionsSeeder(entityManager)
     await userCreateSeeder(entityManager)
 
-    // --- Message --- \\
+    // --- Notification --- \\
 
     await notificationCategoryCreateSeeder(entityManager)
+    await pushNotificationCreateSeeder(entityManager)
 
     return { module: SeederMoodule }
   }

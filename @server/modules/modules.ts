@@ -19,4 +19,5 @@ export enum Modules {
   // --- Notification --- \\
 
   NotificationCategory = 'notification-categories',
+  PushNotification = 'push-notifications',
 }

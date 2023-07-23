@@ -10,6 +10,7 @@ import {
   IsOptional,
   IsPhoneNumber,
   IsString,
+  IsUUID,
   Matches,
   MinLength,
 } from 'class-validator'
@@ -49,7 +50,7 @@ export class UserRequest extends EntUser implements IUser {
 
   @IsOptional()
   @IsArray()
-  @IsString({ each: true })
+  @IsUUID(4, { each: true })
   @ArrayMinSize(1)
   @ApiProperty({ example: ['id1', 'id2', 'id3'] })
   roleIds?: string[]
