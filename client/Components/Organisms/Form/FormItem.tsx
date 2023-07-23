@@ -70,7 +70,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
       }) as unknown as DefaultOptionType[])
 
   React.useMemo(() => {
-    setIsChecked(props.form?.getFieldValue(props.name))
+    setIsChecked(props.form?.getFieldValue(props.name) ?? true)
   }, [props.form?.getFieldValue(props.name)])
 
   switch (props.input) {

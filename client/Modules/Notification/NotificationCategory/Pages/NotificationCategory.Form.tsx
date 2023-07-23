@@ -60,12 +60,7 @@ const NotificationCategoryForm: React.FC = () => {
               <FormItem name="name" rules={[rule.required]} />
             </Col>
             <Col sm={24} md={4}>
-              <FormItem
-                name="isActive"
-                input="switch"
-                rules={[rule.required]}
-                form={form}
-              />
+              <FormItem name="isActive" input="switch" form={form} />
             </Col>
           </Row>
           <FormItem name="description" input="textArea" />
