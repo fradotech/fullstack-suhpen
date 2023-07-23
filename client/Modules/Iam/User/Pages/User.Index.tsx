@@ -23,7 +23,7 @@ const UserIndex: React.FC = () => {
       <PageHeader title="User" />
       <Section>
         <DataTable
-          columns={userColumns(roles?.data, refetch)}
+          columns={userColumns(refetch, roles?.data)}
           dataSource={data?.data}
           search={query.search}
           pagination={formatPagination(data?.meta)}

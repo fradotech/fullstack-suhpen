@@ -1,5 +1,12 @@
+export const NotificationCategoryDefaultSystemKey = 'system'
+
 // <--- KEY: key --->
 export const notificationCategoryDummies = [
+  {
+    name: 'System',
+    key: NotificationCategoryDefaultSystemKey,
+    labelColor: '#595959',
+  },
   {
     name: 'Info',
     key: 'info',

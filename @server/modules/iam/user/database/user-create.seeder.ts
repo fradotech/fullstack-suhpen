@@ -1,7 +1,7 @@
 import { Logger } from '@nestjs/common'
 import { EntUser } from '@server/modules/iam/user/infrastructure/user.entity'
 import { EntityManager } from 'typeorm'
-import { roleDummySuperAdminKey as roleSuperAdmin } from '../../role/database/role.dummy'
+import { RoleDefaultSuperAdminKey as roleSuperAdmin } from '../../role/database/role.dummy'
 import { EntRole } from '../../role/infrastructure/role.entity'
 import { UserCreateRequest } from '../infrastructure/user.request'
 import { userDummies } from './user.dummy'

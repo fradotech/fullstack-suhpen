@@ -5,6 +5,7 @@ import { permissionPath } from '../Modules/Iam/Permission/infrastructure/permiss
 import { rolePath } from '../Modules/Iam/Role/infrastructure/role.path'
 import { userPath } from '../Modules/Iam/User/infrastructure/user.path'
 import { notificationCategoryPath } from '../Modules/Notification/NotificationCategory/infrastructure/notification-category.path'
+import { pushNotificationPath } from '../Modules/Notification/PushNotification/infrastructure/push-notification.path'
 
 export const Path = {
   Home: '/',
@@ -22,4 +23,5 @@ export const Path = {
   // --- Notification --- \\
 
   notificationCategory: notificationCategoryPath,
+  pushNotification: pushNotificationPath,
 }

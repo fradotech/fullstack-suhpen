@@ -1,7 +1,9 @@
 import { Logger } from '@nestjs/common'
-import { roleDummySuperAdminKey } from '@server/modules/iam/role/database/role.dummy'
+import { RoleDefaultSuperAdminKey } from '@server/modules/iam/role/database/role.dummy'
 import { EntUser } from '@server/modules/iam/user/infrastructure/user.entity'
 import { EntityManager, In } from 'typeorm'
+import { NotificationCategoryDefaultSystemKey } from '../../notification-category/database/notification-category.dummy'
+import { EntNotificationCategory } from '../../notification-category/infrastructure/notification-category.entity'
 import { EntPushNotification } from '../infrastructure/push-notification.entity'
 import { pushNotificationDummies } from './push-notification.dummy'
 
@@ -17,10 +19,17 @@ export const pushNotificationCreateSeeder = async (
   if (notificationNotificationExist.length > 0) return false
 
   const superAdmin = await entityManager.findOne(EntUser, {
-    where: { roles: In[roleDummySuperAdminKey] },
+    where: { roles: In[RoleDefaultSuperAdminKey] },
   })
 
-  superAdmin && data.forEach((data) => (data.user = superAdmin))
+  const categoryInfo = await entityManager.findOne(EntNotificationCategory, {
+    where: { key: NotificationCategoryDefaultSystemKey },
+  })
+
+  data.forEach((data) => {
+    superAdmin && (data.user = superAdmin)
+    categoryInfo && (data.category = categoryInfo)
+  })
 
   const dataCreate = entityManager.create(EntPushNotification, data)
   await entityManager.save(dataCreate)

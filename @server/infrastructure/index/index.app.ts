@@ -1,4 +1,4 @@
-import { roleDummySuperAdminKey } from '@server/modules/iam/role/database/role.dummy'
+import { RoleDefaultSuperAdminKey } from '@server/modules/iam/role/database/role.dummy'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Request } from 'express'
 import { ObjectLiteral, Repository, SelectQueryBuilder } from 'typeorm'
@@ -80,7 +80,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
       .map((data) => data.name)
       .find((data) => data === 'user')
     const isAdmin = user?.roles?.find((role) => {
-      return role.key === roleDummySuperAdminKey
+      return role.key === RoleDefaultSuperAdminKey
     })
 
     if (isUser && userId && !isAdmin) {

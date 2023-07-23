@@ -1,10 +1,10 @@
-export const roleDummySuperAdminKey = 'super_admin'
+export const RoleDefaultSuperAdminKey = 'super_admin'
 
 // <--- KEY: key --->
 export const roleDummies = [
   {
     name: 'Super Admin',
-    key: roleDummySuperAdminKey,
+    key: RoleDefaultSuperAdminKey,
     labelColor: '#001fe6',
   },
   {

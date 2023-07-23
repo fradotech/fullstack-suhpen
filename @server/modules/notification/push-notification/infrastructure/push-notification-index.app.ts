@@ -30,6 +30,10 @@ export class PushNotificationIndexApp extends BaseIndexApp {
         name: 'user',
         columns: ['name'],
       },
+      {
+        name: 'category',
+        columns: ['name'],
+      },
     ]
     const query = this.createQueryIndex(
       req,
