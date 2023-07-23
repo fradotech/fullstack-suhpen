@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { MailModule } from './mail/mail.module'
-import { NotificationCategoryModule } from './notification-category/message-category.module'
+import { NotificationCategoryModule } from './notification-category/notification-category.module'
 
 @Module({
   imports: [NotificationCategoryModule, MailModule],
