@@ -19,10 +19,7 @@ export const notificationCategoryCreateSeeder = async (
   const dataCreate = entityManager.create(EntNotificationCategory, data)
   await entityManager.save(dataCreate)
 
-  Logger.log(
-    String(data.map((data) => data.key)),
-    'AutomaticSeeder:NotificationNotificationCreate',
-  )
+  Logger.log(String(data.map((data) => data.key)), 'AutomaticSeeder')
 
   return true
 }

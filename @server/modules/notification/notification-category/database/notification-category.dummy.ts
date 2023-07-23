@@ -16,13 +16,8 @@ export const notificationCategoryDummies = [
     labelColor: '#ff5100',
   },
   {
-    name: 'Announcement',
-    key: 'announcement',
-    labelColor: '#00a120',
-  },
-  {
     name: 'Transaction',
     key: 'transaction',
-    labelColor: '#00003b',
+    labelColor: '#00a120',
   },
 ]

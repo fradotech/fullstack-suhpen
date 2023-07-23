@@ -32,7 +32,7 @@ export const permissionSyncSeeder = async (
     entityManager.remove(permissionsDelete),
   ])
 
-  Logger.log('', 'AutomaticSeeder:PermissionSync')
+  Logger.log('PermissionSync', 'AutomaticSeeder')
 
   return true
 }

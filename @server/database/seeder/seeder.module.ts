@@ -14,7 +14,7 @@ export class SeederMoodule {
     await dataSource
       .initialize()
       .then(async () => {
-        Logger.log('Success connect automatic seeder', 'SeederConnect')
+        Logger.log('Success connect automatic seeder', 'AutomaticSeeder')
       })
       .catch((error) => Logger.error(error))
 
