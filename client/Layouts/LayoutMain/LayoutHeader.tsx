@@ -2,9 +2,10 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Button, Layout, Row } from 'antd'
 import React from 'react'
-import { FaBell, FaMoon, FaSun } from 'react-icons/fa'
+import { FaMoon, FaSun } from 'react-icons/fa'
 import LayoutAccount from './LayoutAccount'
 import styles from './LayoutMain.module.css'
+import LayoutNotification from './LayoutNotification'
 
 type IProps = {
   bgLayoutColor: string
@@ -45,15 +46,11 @@ const LayoutHeader: React.FC<IProps> = ({
             className={styles.themeButton}
           />
 
-          <Button
-            type="ghost"
-            shape="circle"
-            size="large"
-            icon={<FaBell />}
-            className={styles.themeButton}
-          />
+          <div style={{ marginTop: '4px' }}>
+            <LayoutNotification />{' '}
+          </div>
 
-          <div style={{ margin: '6px' }}></div>
+          <div style={{ margin: '10px' }}></div>
 
           <LayoutAccount user={user} isDarkMode={isDarkMode ?? false} />
         </Row>
