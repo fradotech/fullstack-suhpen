@@ -11,4 +11,5 @@ export interface IPushNotification extends IBaseEntity {
   readAt?: Date
   user?: IUser
   pushAt?: Date
+  notificationUserRead?: IUser[]
 }

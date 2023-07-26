@@ -1,7 +1,14 @@
 import { BaseEntity } from '@server/infrastructure/base/base.entity'
 import { EntUser } from '@server/modules/iam/user/infrastructure/user.entity'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
-import { Column, Entity, Index, ManyToOne } from 'typeorm'
+import {
+  Column,
+  Entity,
+  Index,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+} from 'typeorm'
 import { EntNotificationCategory } from '../../notification-category/infrastructure/notification-category.entity'
 import { INotificationCategory } from '../../notification-category/infrastructure/notification-category.interface'
 import { IPushNotification } from './push-notification.interface'
@@ -36,4 +43,8 @@ export class EntPushNotification
   @Index()
   @Column({ default: null })
   pushAt?: Date
+
+  @ManyToMany(() => EntUser)
+  @JoinTable({ name: 'ent_notification_user_read' })
+  notificationUserRead: IUser[]
 }

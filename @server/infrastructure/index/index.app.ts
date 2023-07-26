@@ -18,6 +18,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
     relations: IIndexAppRelation[],
     repo: Repository<T>,
     request: Request,
+    isNotFilterColumnUser?: boolean,
   ): SelectQueryBuilder<T> {
     const query = repo.createQueryBuilder(name)
 
@@ -83,7 +84,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
       return role.key === RoleDefaultSuperAdminKey
     })
 
-    if (isUser && userId && !isAdmin) {
+    if (!isNotFilterColumnUser && isUser && userId && !isAdmin) {
       !isUserRelation && query.leftJoinAndSelect(`${name}.user`, 'user')
       query.andWhere('user.id = :userId', { userId })
     }

@@ -24,7 +24,7 @@ export class PushNotificationReadApp {
     query.sortField = 'createdAt'
     query.sortOrder = IndexSortOderEnum.Desc
 
-    const res = await this.pushNotificationIndexApp.fetch(query)
+    const res = await this.pushNotificationIndexApp.fetch(query, true)
     return res.data
   }
 

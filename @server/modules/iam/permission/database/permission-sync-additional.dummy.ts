@@ -2,7 +2,7 @@ import { PermissionMethodEnum } from '../common/permission.enum'
 
 export const permissionDummies = [
   {
-    key: 'public/get/dashboard',
+    key: 'get/dashboard',
     path: '/api/v1/dashboard',
     method: 'get',
     name: 'READ dashboard',
