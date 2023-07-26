@@ -17,7 +17,11 @@ const LayoutNotification: React.FC = () => {
     pageSize: 100000,
   })
 
-  const count = 10
+  const count = React.useMemo(() => {
+    return pushNotifications?.data.filter((data) => {
+      return !data.readAt
+    }).length
+  }, [pushNotifications])
 
   const categoriesDisplay: TabsProps['items'] = React.useMemo(() => {
     const data = [
@@ -84,7 +88,7 @@ const LayoutNotification: React.FC = () => {
       <Badge
         color={themeColors.primary}
         count={count}
-        offset={[-5, 10]}
+        offset={[-12, 10]}
         size="small"
       >
         <Button type="ghost" shape="circle" size="large" icon={<FaBell />} />

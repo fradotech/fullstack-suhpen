@@ -35,22 +35,21 @@ const LayoutHeader: React.FC<IProps> = ({
         </a>
 
         <Row>
-          <Button
-            type="ghost"
-            shape="circle"
-            size="large"
-            icon={isDarkMode ? <FaSun /> : <FaMoon />}
-            onClick={() => {
-              handleSwitchTheme && handleSwitchTheme(isDarkMode ?? false)
-            }}
-            className={styles.themeButton}
-          />
-
-          <div style={{ marginTop: '4px' }}>
-            <LayoutNotification />{' '}
+          <div className={styles.headerButton}>
+            <Button
+              type="ghost"
+              shape="circle"
+              size="large"
+              icon={isDarkMode ? <FaSun /> : <FaMoon />}
+              onClick={() => {
+                handleSwitchTheme && handleSwitchTheme(isDarkMode ?? false)
+              }}
+            />
           </div>
 
-          <div style={{ margin: '10px' }}></div>
+          <div className={styles.headerButton}>
+            <LayoutNotification />
+          </div>
 
           <LayoutAccount user={user} isDarkMode={isDarkMode ?? false} />
         </Row>

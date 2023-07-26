@@ -16,62 +16,64 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
   const handleLogout = () => AuthAction.logout() && location.replace(Path.login)
 
   return (
-    <Dropdown
-      trigger={['click']}
-      menu={{
-        items: [
-          {
-            type: 'group',
-            label: (
-              <Link to="#" style={{ width: '6rem', margin: '6px' }}>
-                <Space size="small">
-                  <Space.Compact direction="vertical" size="small">
-                    <Typography.Text style={{ opacity: '80%' }}>
-                      {props?.user?.email}
-                    </Typography.Text>
-                  </Space.Compact>
-                </Space>
-              </Link>
-            ),
-          },
-          {
-            type: 'divider',
-          },
-          {
-            key: 'My Account',
-            label: (
-              <Link to={Path.account.index} style={{ width: '6rem' }}>
-                <UserOutlined style={{ margin: '6px' }} /> My Account
-              </Link>
-            ),
-          },
-          {
-            type: 'divider',
-          },
-          {
-            key: 'Logout',
-            label: (
-              <a onClick={handleLogout}>
-                <LogoutOutlined style={{ color: 'red', margin: '6px' }} />
-                Logout
-              </a>
-            ),
-          },
-        ],
-      }}
-    >
-      <a
-        style={{
-          color: props.isDarkMode ? themeColors.solid : themeColorsDark.solid,
+    <div style={{ marginLeft: '12px' }}>
+      <Dropdown
+        trigger={['click']}
+        menu={{
+          items: [
+            {
+              type: 'group',
+              label: (
+                <Link to="#" style={{ width: '6rem', margin: '6px' }}>
+                  <Space size="small">
+                    <Space.Compact direction="vertical" size="small">
+                      <Typography.Text style={{ opacity: '80%' }}>
+                        {props?.user?.email}
+                      </Typography.Text>
+                    </Space.Compact>
+                  </Space>
+                </Link>
+              ),
+            },
+            {
+              type: 'divider',
+            },
+            {
+              key: 'My Account',
+              label: (
+                <Link to={Path.account.index} style={{ width: '6rem' }}>
+                  <UserOutlined style={{ margin: '6px' }} /> My Account
+                </Link>
+              ),
+            },
+            {
+              type: 'divider',
+            },
+            {
+              key: 'Logout',
+              label: (
+                <a onClick={handleLogout}>
+                  <LogoutOutlined style={{ color: 'red', margin: '6px' }} />
+                  Logout
+                </a>
+              ),
+            },
+          ],
         }}
       >
-        <Space>
-          <Avatar icon={<UserOutlined />} src={props.user.avatar} />
-          <Typography.Text>{props.user.name}</Typography.Text>
-          <DownOutlined />
-        </Space>
-      </a>
-    </Dropdown>
+        <a
+          style={{
+            color: props.isDarkMode ? themeColors.solid : themeColorsDark.solid,
+          }}
+        >
+          <Space>
+            <Avatar icon={<UserOutlined />} src={props.user.avatar} />
+            <Typography.Text>{props.user.name}</Typography.Text>
+            <DownOutlined />
+          </Space>
+        </a>
+      </Dropdown>
+    </div>
   )
 }
 
