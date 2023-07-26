@@ -1,4 +1,4 @@
-import { NotificationCategoryCreateRequest } from '@server/modules/notification/notification-category/infrastructure/notification-category.request'
+import { NotificationCategoryCreateRequest } from '@server/modules/notification/notification-category/v1/notification-category.request'
 import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'

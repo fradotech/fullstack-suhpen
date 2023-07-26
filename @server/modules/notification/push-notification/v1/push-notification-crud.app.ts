@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common'
 import { NotificationCategoryService } from '../../notification-category/infrastructure/notification-category.service'
 import { IPushNotification } from '../infrastructure/push-notification.interface'
+import { PushNotificationService } from '../infrastructure/push-notification.service'
 import {
   PushNotificationCreateRequest,
   PushNotificationUpdateRequest,
-} from '../infrastructure/push-notification.request'
-import { PushNotificationService } from '../infrastructure/push-notification.service'
+} from './push-notification.request'
 
 @Injectable()
 export class PushNotificationCrudApp {

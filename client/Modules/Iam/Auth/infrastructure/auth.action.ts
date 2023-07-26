@@ -4,7 +4,7 @@ import {
   AuthPasswordChangeRequest,
   AuthPasswordSendRequest,
   AuthRegisterRequest,
-} from '@server/modules/iam/auth/infrastructure/auth.request'
+} from '@server/modules/iam/auth/v1/auth.request'
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { notification } from 'antd'
 import { Path } from '../../../../common/Path'

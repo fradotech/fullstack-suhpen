@@ -5,11 +5,11 @@ import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.respo
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
-import { PushNotificationIndexApp } from '../infrastructure/push-notification-index.app'
-import { PushNotificationIndexRequest } from '../infrastructure/push-notification-index.request'
-import { PushNotificationResponse } from '../infrastructure/push-notification.response'
+import { PushNotificationIndexApp } from '../../infrastructure/push-notification-index.app'
+import { PushNotificationIndexRequest } from '../../infrastructure/push-notification-index.request'
+import { PushNotificationResponse } from '../../infrastructure/push-notification.response'
 
-const THIS_MODULE = Modules.PushNotification + '/sheet'
+const THIS_MODULE = Modules.PushNotificationSheet
 
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)

@@ -3,7 +3,7 @@ import { EntRole } from '@server/modules/iam/role/infrastructure/role.entity'
 import { Modules } from '@server/modules/modules'
 import { EntityManager } from 'typeorm'
 import { EntPermission } from '../../permission/infrastructure/permission.entity'
-import { RoleSyncRequest } from '../infrastructure/role.request'
+import { RoleSyncRequest } from '../v1/role.request'
 import { RoleDefaultSuperAdminKey } from './role.dummy'
 
 export const roleSyncGeneralPermissionsSeeder = async (
@@ -23,6 +23,7 @@ export const roleSyncGeneralPermissionsSeeder = async (
         Modules.Attachment,
         Modules.Dashboard,
         Modules.DashboardUser,
+        Modules.PushNotificationRead,
       ],
     })
     .getMany()

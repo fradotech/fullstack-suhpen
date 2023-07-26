@@ -1,21 +1,30 @@
+import { IPushNotification } from '@server/modules/notification/push-notification/infrastructure/push-notification.interface'
 import { Badge, Button, Dropdown, Row, Tabs, TabsProps, Typography } from 'antd'
 import React from 'react'
 import { FaBell } from 'react-icons/fa'
 import { VscCheckAll } from 'react-icons/vsc'
+import { IndexSortOderEnum } from '../../../@server/infrastructure/index/index.interface'
 import { NotificationCategoryAction } from '../../Modules/Notification/NotificationCategory/infrastructure/notification-category.action'
+import { PushNotificationReadAction } from '../../Modules/Notification/PushNotification/infrastructure/push-notification-read.action'
 import { PushNotificationAction } from '../../Modules/Notification/PushNotification/infrastructure/push-notification.action'
 import { themeColors } from '../ThemeProvider/theme'
 import LayoutNotificationContent from './LayoutNotificationContent'
 
 const LayoutNotification: React.FC = () => {
-  const { data: pushNotifications } = PushNotificationAction.useIndex({
-    pageSize: 100000,
+  const { data: pushNotifications, refetch } = PushNotificationAction.useIndex({
+    pageSize: 1000,
+    sortField: 'createdAt',
+    sortOrder: IndexSortOderEnum.Desc,
   })
 
-  const markReadAll = () => undefined
+  const handleReadAll = async (data: IPushNotification[] | undefined) => {
+    const ids = data?.map((data) => data.id)
+    ids && (await PushNotificationReadAction.readMany({ ids }))
+    refetch()
+  }
 
   const { data: notificationCategories } = NotificationCategoryAction.useIndex({
-    pageSize: 100000,
+    pageSize: 1000,
   })
 
   const count = React.useMemo(() => {
@@ -32,6 +41,7 @@ const LayoutNotification: React.FC = () => {
         children: (
           <LayoutNotificationContent
             pushNotifications={pushNotifications?.data}
+            refetch={refetch}
           />
         ),
       },
@@ -45,6 +55,7 @@ const LayoutNotification: React.FC = () => {
           pushNotifications={pushNotifications?.data.filter((notification) => {
             return notification.category.key === data.key
           })}
+          refetch={refetch}
         />
       ),
     }))
@@ -68,7 +79,7 @@ const LayoutNotification: React.FC = () => {
                 <Typography.Title level={5} style={{ margin: 0 }}>
                   Notifications
                 </Typography.Title>
-                <a onClick={markReadAll}>
+                <a onClick={() => handleReadAll(pushNotifications?.data)}>
                   <VscCheckAll style={{ marginRight: 6 }} />
                   Mark Read All
                 </a>

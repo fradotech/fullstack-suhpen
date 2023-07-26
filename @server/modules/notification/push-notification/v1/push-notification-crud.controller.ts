@@ -17,12 +17,12 @@ import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
 import { PushNotificationIndexApp } from '../infrastructure/push-notification-index.app'
 import { PushNotificationIndexRequest } from '../infrastructure/push-notification-index.request'
+import { PushNotificationResponse } from '../infrastructure/push-notification.response'
+import { PushNotificationCrudApp } from './push-notification-crud.app'
 import {
   PushNotificationCreateRequest,
   PushNotificationUpdateRequest,
-} from '../infrastructure/push-notification.request'
-import { PushNotificationResponse } from '../infrastructure/push-notification.response'
-import { PushNotificationCrudApp } from './push-notification-crud.app'
+} from './push-notification.request'
 
 const THIS_MODULE = Modules.PushNotification
 

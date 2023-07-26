@@ -7,9 +7,9 @@ import { EntUser } from '../infrastructure/user.entity'
 class UserRepo extends Repository<EntUser> {
   constructor(
     @InjectRepository(EntUser)
-    private readonly userRepo: Repository<EntUser>,
+    private readonly repo: Repository<EntUser>,
   ) {
-    super(userRepo.target, userRepo.manager, userRepo.queryRunner)
+    super(repo.target, repo.manager, repo.queryRunner)
   }
 
   async findByInIds(ids: string[]): Promise<EntUser[]> {

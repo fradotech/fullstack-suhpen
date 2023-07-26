@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common'
 import { IPermission } from '../infrastructure/permission.interface'
+import { PermissionService } from '../infrastructure/permission.service'
 import {
   PermissionCreateRequest,
   PermissionUpdateRequest,
-} from '../infrastructure/permission.request'
-import { PermissionService } from '../infrastructure/permission.service'
+} from './permission.request'
 
 @Injectable()
 export class PermissionCrudApp {

@@ -6,13 +6,9 @@ import { EntPushNotification } from './push-notification.entity'
 class PushNotificationRepo extends Repository<EntPushNotification> {
   constructor(
     @InjectRepository(EntPushNotification)
-    private readonly pushNotificationRepo: Repository<EntPushNotification>,
+    private readonly repo: Repository<EntPushNotification>,
   ) {
-    super(
-      pushNotificationRepo.target,
-      pushNotificationRepo.manager,
-      pushNotificationRepo.queryRunner,
-    )
+    super(repo.target, repo.manager, repo.queryRunner)
   }
 
   async findByInIds(ids: string[]): Promise<EntPushNotification[]> {
@@ -25,4 +21,10 @@ class PushNotificationRepo extends Repository<EntPushNotification> {
 }
 
 @Injectable()
-export class PushNotificationService extends PushNotificationRepo {}
+export class PushNotificationService extends PushNotificationRepo {
+  async updateReadAtNow(ids: string[]): Promise<EntPushNotification[]> {
+    const data = await this.findByInIds(ids)
+    data.forEach((item) => (item.readAt = new Date()))
+    return await this.save(data)
+  }
+}

@@ -17,7 +17,7 @@ const PushNotificationIndex: React.FC = () => {
   const {
     isLoading: isLoadingNotificationCategory,
     data: notificationCategories,
-  } = NotificationCategoryAction.useIndex({ pageSize: 100000 })
+  } = NotificationCategoryAction.useIndex({ pageSize: 1000 })
 
   return (
     <>
@@ -38,7 +38,7 @@ const PushNotificationIndex: React.FC = () => {
             search: true,
             dateRangeColumn: 'pushAt',
             hrefCreate: Path.pushNotification.form,
-            hrefExport: Path.pushNotification.export,
+            hrefExport: Path.pushNotification.sheet.export,
           }}
         />
       </Section>

@@ -1,4 +1,4 @@
-import { PushNotificationCreateRequest } from '../infrastructure/push-notification.request'
+import { PushNotificationCreateRequest } from '../v1/push-notification.request'
 
 export const pushNotificationDummies: PushNotificationCreateRequest[] = [
   {

@@ -17,12 +17,9 @@ import { Modules } from '@server/modules/modules'
 import { LoggedInGuard } from '../../auth/common/logged-in.guard'
 import { RoleIndexApp } from '../infrastructure/role-index.app'
 import { RoleIndexRequest } from '../infrastructure/role-index.request'
-import {
-  RoleCreateRequest,
-  RoleUpdateRequest,
-} from '../infrastructure/role.request'
 import { RoleResponse } from '../infrastructure/role.response'
 import { RoleCrudApp } from './role-crud.app'
+import { RoleCreateRequest, RoleUpdateRequest } from './role.request'
 
 const THIS_MODULE = Modules.Role
 

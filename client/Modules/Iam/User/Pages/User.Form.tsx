@@ -1,4 +1,4 @@
-import { UserCreateRequest } from '@server/modules/iam/user/infrastructure/user.request'
+import { UserCreateRequest } from '@server/modules/iam/user/v1/user.request'
 import { Col, Divider, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
@@ -32,7 +32,7 @@ const UserForm: React.FC = () => {
 
   const { isLoading: isLoadingRoles, data: roles } = RoleAction.useIndex(
     {
-      pageSize: 100000,
+      pageSize: 1000,
     },
     { refetchOnWindowFocus: false },
   )

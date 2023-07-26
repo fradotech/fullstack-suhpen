@@ -6,13 +6,9 @@ import { EntNotificationCategory } from './notification-category.entity'
 class NotificationCategoryRepo extends Repository<EntNotificationCategory> {
   constructor(
     @InjectRepository(EntNotificationCategory)
-    private readonly notificationCategoryRepo: Repository<EntNotificationCategory>,
+    private readonly repo: Repository<EntNotificationCategory>,
   ) {
-    super(
-      notificationCategoryRepo.target,
-      notificationCategoryRepo.manager,
-      notificationCategoryRepo.queryRunner,
-    )
+    super(repo.target, repo.manager, repo.queryRunner)
   }
 
   async findByInIds(ids: string[]): Promise<EntNotificationCategory[]> {

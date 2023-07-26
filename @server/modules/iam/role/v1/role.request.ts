@@ -3,8 +3,8 @@ import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-ma
 import { BaseMasterDataRequest } from '@server/infrastructure/base/master-data/base-master-data.request'
 import { IsArray, IsOptional, IsUUID } from 'class-validator'
 import { EntPermission } from '../../permission/infrastructure/permission.entity'
-import { EntRole } from './role.entity'
-import { IRole } from './role.interface'
+import { EntRole } from '../infrastructure/role.entity'
+import { IRole } from '../infrastructure/role.interface'
 
 export class RoleRequest
   extends OmitType(BaseMasterDataRequest, ['id'])

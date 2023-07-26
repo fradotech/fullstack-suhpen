@@ -1,8 +1,8 @@
 import { OmitType, PartialType } from '@nestjs/swagger'
 import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.interface'
 import { BaseMasterDataRequest } from '@server/infrastructure/base/master-data/base-master-data.request'
-import { EntNotificationCategory } from './notification-category.entity'
-import { INotificationCategory } from './notification-category.interface'
+import { EntNotificationCategory } from '../infrastructure/notification-category.entity'
+import { INotificationCategory } from '../infrastructure/notification-category.interface'
 
 export class NotificationCategoryRequest
   extends OmitType(BaseMasterDataRequest, ['id'])

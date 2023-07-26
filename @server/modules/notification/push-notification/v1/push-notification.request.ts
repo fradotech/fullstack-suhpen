@@ -1,7 +1,7 @@
 import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger'
 import { IsUUID } from 'class-validator'
-import { IPushNotification } from '../../push-notification/infrastructure/push-notification.interface'
-import { EntPushNotification } from './push-notification.entity'
+import { EntPushNotification } from '../infrastructure/push-notification.entity'
+import { IPushNotification } from '../infrastructure/push-notification.interface'
 
 export class PushNotificationRequest
   extends EntPushNotification

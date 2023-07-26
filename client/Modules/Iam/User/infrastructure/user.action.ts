@@ -1,11 +1,11 @@
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { UserIndexRequest } from '@server/modules/iam/user/infrastructure/user-index.request'
+import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import {
   UserCreateRequest,
   UserUpdateRequest,
-} from '@server/modules/iam/user/infrastructure/user.request'
-import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
+} from '@server/modules/iam/user/v1/user.request'
 import { notification } from 'antd'
 import dayjs from 'dayjs'
 import { UseQueryOptions, UseQueryResult, useQuery } from 'react-query'

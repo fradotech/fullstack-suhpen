@@ -16,12 +16,12 @@ import { Modules } from '@server/modules/modules'
 import { LoggedInGuard } from '../../auth/common/logged-in.guard'
 import { PermissionIndexApp } from '../infrastructure/permission-index.app'
 import { PermissionIndexRequest } from '../infrastructure/permission-index.request'
+import { PermissionResponse } from '../infrastructure/permission.response'
+import { PermissionCrudApp } from './permission-crud.app'
 import {
   PermissionCreateRequest,
   PermissionUpdateRequest,
-} from '../infrastructure/permission.request'
-import { PermissionResponse } from '../infrastructure/permission.response'
-import { PermissionCrudApp } from './permission-crud.app'
+} from './permission.request'
 
 const THIS_MODULE = Modules.Permission
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { IUser } from '../../user/infrastructure/user.interface'
 import { UserService } from '../../user/infrastructure/user.service'
-import { AccountUpdateRequest } from '../infrastructure/account.request'
+import { AccountUpdateRequest } from './account.request'
 
 @Injectable()
 export class AccountApp {

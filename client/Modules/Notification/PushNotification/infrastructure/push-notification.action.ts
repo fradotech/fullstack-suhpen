@@ -1,11 +1,11 @@
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { PushNotificationIndexRequest } from '@server/modules/notification/push-notification/infrastructure/push-notification-index.request'
+import { PushNotificationResponse } from '@server/modules/notification/push-notification/infrastructure/push-notification.response'
 import {
   PushNotificationCreateRequest,
   PushNotificationUpdateRequest,
-} from '@server/modules/notification/push-notification/infrastructure/push-notification.request'
-import { PushNotificationResponse } from '@server/modules/notification/push-notification/infrastructure/push-notification.response'
+} from '@server/modules/notification/push-notification/v1/push-notification.request'
 import { notification } from 'antd'
 import { UseQueryResult, useQuery } from 'react-query'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'

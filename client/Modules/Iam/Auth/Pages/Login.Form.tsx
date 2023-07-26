@@ -1,4 +1,4 @@
-import { AuthLoginRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
+import { AuthLoginRequest } from '@server/modules/iam/auth/v1/auth.request'
 import { Button, Card, Col, Form, Row } from 'antd'
 import Title from 'antd/es/typography/Title'
 import React from 'react'

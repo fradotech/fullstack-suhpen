@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common'
 import { INotificationCategory } from '../infrastructure/notification-category.interface'
+import { NotificationCategoryService } from '../infrastructure/notification-category.service'
 import {
   NotificationCategoryCreateRequest,
   NotificationCategoryUpdateRequest,
-} from '../infrastructure/notification-category.request'
-import { NotificationCategoryService } from '../infrastructure/notification-category.service'
+} from './notification-category.request'
 
 @Injectable()
 export class NotificationCategoryCrudApp {

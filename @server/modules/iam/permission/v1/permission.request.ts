@@ -5,8 +5,8 @@ import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-ma
 import { BaseMasterDataRequest } from '@server/infrastructure/base/master-data/base-master-data.request'
 import { Modules } from '@server/modules/modules'
 import { PermissionMethodEnum } from '../common/permission.enum'
-import { EntPermission } from './permission.entity'
-import { IPermission } from './permission.interface'
+import { EntPermission } from '../infrastructure/permission.entity'
+import { IPermission } from '../infrastructure/permission.interface'
 
 export class PermissionRequest
   extends OmitType(BaseMasterDataRequest, ['id'])

@@ -1,4 +1,4 @@
-import { PushNotificationCreateRequest } from '@server/modules/notification/push-notification/infrastructure/push-notification.request'
+import { PushNotificationCreateRequest } from '@server/modules/notification/push-notification/v1/push-notification.request'
 import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
@@ -33,7 +33,7 @@ const PushNotificationForm: React.FC = () => {
     isLoading: isLoadingNotificationCategory,
     data: notificationCategories,
   } = NotificationCategoryAction.useIndex(
-    { pageSize: 100000 },
+    { pageSize: 1000 },
     { refetchOnWindowFocus: false },
   )
 

@@ -1,11 +1,11 @@
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { RoleIndexRequest } from '@server/modules/iam/role/infrastructure/role-index.request'
+import { RoleResponse } from '@server/modules/iam/role/infrastructure/role.response'
 import {
   RoleCreateRequest,
   RoleUpdateRequest,
-} from '@server/modules/iam/role/infrastructure/role.request'
-import { RoleResponse } from '@server/modules/iam/role/infrastructure/role.response'
+} from '@server/modules/iam/role/v1/role.request'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { notification } from 'antd'
 import { UseQueryOptions, UseQueryResult, useQuery } from 'react-query'

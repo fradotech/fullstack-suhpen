@@ -17,12 +17,12 @@ import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
 import { NotificationCategoryIndexApp } from '../infrastructure/notification-category-index.app'
 import { NotificationCategoryIndexRequest } from '../infrastructure/notification-category-index.request'
+import { NotificationCategoryResponse } from '../infrastructure/notification-category.response'
+import { NotificationCategoryCrudApp } from './notification-category-crud.app'
 import {
   NotificationCategoryCreateRequest,
   NotificationCategoryUpdateRequest,
-} from '../infrastructure/notification-category.request'
-import { NotificationCategoryResponse } from '../infrastructure/notification-category.response'
-import { NotificationCategoryCrudApp } from './notification-category-crud.app'
+} from './notification-category.request'
 
 const THIS_MODULE = Modules.NotificationCategory
 

@@ -64,11 +64,11 @@ export const pushNotificationColumns = (
     },
     {
       dataIndex: 'pushAt',
-      render: (data: Date) => Util.formatDate(data),
+      render: (data: Date) => Util.formatDatetime(data),
     },
     {
       dataIndex: 'readAt',
-      render: (data: Date) => Util.formatDate(data),
+      render: (data: Date) => Util.formatDatetime(data),
     },
     {
       dataIndex: 'createdAt',

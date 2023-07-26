@@ -3,7 +3,7 @@ import { EntUser } from '@server/modules/iam/user/infrastructure/user.entity'
 import { EntityManager } from 'typeorm'
 import { RoleDefaultSuperAdminKey as roleSuperAdmin } from '../../role/database/role.dummy'
 import { EntRole } from '../../role/infrastructure/role.entity'
-import { UserCreateRequest } from '../infrastructure/user.request'
+import { UserCreateRequest } from '../v1/user.request'
 import { userDummies } from './user.dummy'
 
 export const userCreateSeeder = async (

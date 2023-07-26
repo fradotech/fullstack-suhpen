@@ -16,8 +16,8 @@ import {
 } from 'class-validator'
 import dayjs from 'dayjs'
 import { REGEX_PASSWORD } from '../common/character.constant'
+import { EntUser } from '../infrastructure/user.entity'
 import { IUser } from '../infrastructure/user.interface'
-import { EntUser } from './user.entity'
 
 export class UserRequest extends EntUser implements IUser {
   id: string

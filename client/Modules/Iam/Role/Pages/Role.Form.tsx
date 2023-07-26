@@ -1,4 +1,4 @@
-import { RoleCreateRequest } from '@server/modules/iam/role/infrastructure/role.request'
+import { RoleCreateRequest } from '@server/modules/iam/role/v1/role.request'
 import { Form } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'

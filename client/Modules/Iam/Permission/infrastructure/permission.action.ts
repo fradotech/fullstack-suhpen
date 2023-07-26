@@ -1,10 +1,10 @@
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { PermissionIndexRequest } from '@server/modules/iam/permission/infrastructure/permission-index.request'
+import { PermissionResponse } from '@server/modules/iam/permission/infrastructure/permission.response'
 import {
   PermissionCreateRequest,
   PermissionUpdateRequest,
-} from '@server/modules/iam/permission/infrastructure/permission.request'
-import { PermissionResponse } from '@server/modules/iam/permission/infrastructure/permission.response'
+} from '@server/modules/iam/permission/v1/permission.request'
 import { notification } from 'antd'
 import { UseQueryResult, useQuery } from 'react-query'
 import {

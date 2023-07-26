@@ -1,4 +1,4 @@
-import { PermissionCreateRequest } from '@server/modules/iam/permission/infrastructure/permission.request'
+import { PermissionCreateRequest } from '@server/modules/iam/permission/v1/permission.request'
 import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
