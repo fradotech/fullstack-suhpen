@@ -1,4 +1,4 @@
-import { Inject, Injectable, Scope } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
 import { REQUEST } from '@nestjs/core'
 import { Request } from 'express'
 import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
@@ -10,7 +10,7 @@ import { RoleIndexRequest } from './role-index.request'
 import { IRole } from './role.interface'
 import { RoleService } from './role.service'
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class RoleIndexApp extends BaseIndexApp {
   constructor(
     @Inject(REQUEST)

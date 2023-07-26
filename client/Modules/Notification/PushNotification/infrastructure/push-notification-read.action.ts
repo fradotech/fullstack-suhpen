@@ -18,7 +18,7 @@ export class PushNotificationReadAction {
     id: string | undefined,
   ): Promise<IApiRes<PushNotificationResponse>> {
     const res: IApiRes<PushNotificationResponse> = await API.get(
-      Path.pushNotification.id(id),
+      Path.pushNotification.read.id(id),
     )
 
     return res

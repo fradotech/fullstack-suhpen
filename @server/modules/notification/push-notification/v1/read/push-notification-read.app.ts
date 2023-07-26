@@ -1,20 +1,20 @@
-import { Get, Injectable, Param } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
+import { REQUEST } from '@nestjs/core'
 import { IndexSortOderEnum } from '@server/infrastructure/index/index.interface'
-import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
-import { ApiRes } from '@server/infrastructure/interfaces/api.response'
+import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { Request } from 'express'
 import { PushNotificationIndexApp } from '../../infrastructure/push-notification-index.app'
 import { PushNotificationIndexRequest } from '../../infrastructure/push-notification-index.request'
 import { IPushNotification } from '../../infrastructure/push-notification.interface'
-import { PushNotificationResponse } from '../../infrastructure/push-notification.response'
 import { PushNotificationService } from '../../infrastructure/push-notification.service'
-import { PushNotificationCrudApp } from '../push-notification-crud.app'
 
 @Injectable()
 export class PushNotificationReadApp {
   constructor(
+    @Inject(REQUEST)
+    private readonly request: Request,
     private readonly pushNotificationIndexApp: PushNotificationIndexApp,
     private readonly pushNotificationService: PushNotificationService,
-    private readonly pushNotificationCrudApp: PushNotificationCrudApp,
   ) {}
 
   async fetch(): Promise<IPushNotification[]> {
@@ -28,20 +28,18 @@ export class PushNotificationReadApp {
     return res.data
   }
 
-  @Get(':id')
-  async findOneOrFail(
-    @Param('id') id: string,
-  ): Promise<IApiRes<PushNotificationResponse>> {
-    const data = await this.pushNotificationCrudApp.findOneOrFail(id)
-    return ApiRes.dto(PushNotificationResponse.dto(data))
-  }
-
   async readOne(id: string): Promise<IPushNotification> {
-    const data = await this.pushNotificationService.updateReadAtNow([id])
+    const data = await this.pushNotificationService.updateReadAtNow(
+      [id],
+      this.request.user as IUser,
+    )
     return data[0]
   }
 
   async readMany(ids: string[]): Promise<IPushNotification[]> {
-    return await this.pushNotificationService.updateReadAtNow(ids)
+    return await this.pushNotificationService.updateReadAtNow(
+      ids,
+      this.request.user as IUser,
+    )
   }
 }

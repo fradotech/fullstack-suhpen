@@ -1,4 +1,4 @@
-import { Inject, Injectable, Scope } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
 import { REQUEST } from '@nestjs/core'
 import { config } from '@server/config'
 import { RoleService } from '@server/modules/iam/role/infrastructure/role.service'
@@ -14,7 +14,7 @@ import { PushNotificationIndexRequest } from './push-notification-index.request'
 import { IPushNotification } from './push-notification.interface'
 import { PushNotificationService } from './push-notification.service'
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class PushNotificationIndexApp extends BaseIndexApp {
   constructor(
     @Inject(REQUEST)
@@ -39,6 +39,9 @@ export class PushNotificationIndexApp extends BaseIndexApp {
       {
         name: 'category',
         columns: ['name'],
+      },
+      {
+        name: 'readUsers',
       },
     ]
     const query = this.createQueryIndex(

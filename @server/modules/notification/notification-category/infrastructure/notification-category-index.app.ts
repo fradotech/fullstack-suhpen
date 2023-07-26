@@ -1,4 +1,4 @@
-import { Inject, Injectable, Scope } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
 import { REQUEST } from '@nestjs/core'
 import { Request } from 'express'
 import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
@@ -10,7 +10,7 @@ import { NotificationCategoryIndexRequest } from './notification-category-index.
 import { INotificationCategory } from './notification-category.interface'
 import { NotificationCategoryService } from './notification-category.service'
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class NotificationCategoryIndexApp extends BaseIndexApp {
   constructor(
     @Inject(REQUEST)

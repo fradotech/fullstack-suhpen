@@ -1,4 +1,4 @@
-import { Inject, Injectable, Scope } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
 import { REQUEST } from '@nestjs/core'
 import { Request } from 'express'
 import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
@@ -10,7 +10,7 @@ import { PermissionIndexRequest } from './permission-index.request'
 import { IPermission } from './permission.interface'
 import { PermissionService } from './permission.service'
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class PermissionIndexApp extends BaseIndexApp {
   constructor(
     @Inject(REQUEST)
