@@ -3,19 +3,14 @@ import { Badge, Button, Dropdown, Row, Tabs, TabsProps, Typography } from 'antd'
 import React from 'react'
 import { FaBell } from 'react-icons/fa'
 import { VscCheckAll } from 'react-icons/vsc'
-import { IndexSortOderEnum } from '../../../@server/infrastructure/index/index.interface'
 import { NotificationCategoryAction } from '../../Modules/Notification/NotificationCategory/infrastructure/notification-category.action'
 import { PushNotificationReadAction } from '../../Modules/Notification/PushNotification/infrastructure/push-notification-read.action'
-import { PushNotificationAction } from '../../Modules/Notification/PushNotification/infrastructure/push-notification.action'
 import { themeColors } from '../ThemeProvider/theme'
 import LayoutNotificationContent from './LayoutNotificationContent'
 
 const LayoutNotification: React.FC = () => {
-  const { data: pushNotifications, refetch } = PushNotificationAction.useIndex({
-    pageSize: 1000,
-    sortField: 'createdAt',
-    sortOrder: IndexSortOderEnum.Desc,
-  })
+  const { data: pushNotifications, refetch } =
+    PushNotificationReadAction.useIndex()
 
   const handleReadAll = async (data: IPushNotification[] | undefined) => {
     const ids = data?.map((data) => data.id)

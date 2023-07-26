@@ -1,10 +1,10 @@
 import { Modules } from '../../../../@server/modules/modules'
 
-const root = `/${Modules.Dashboard}`
+const index = `/${Modules.Dashboard}`
 const rootUser = `/${Modules.DashboardUser}`
 
 export const dashboardPath = {
-  index: root,
+  index,
   user: {
     aggregate: (field?: string) => `${rootUser}/aggregate/${field || ''}`,
   },

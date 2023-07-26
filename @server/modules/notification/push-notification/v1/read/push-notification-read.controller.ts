@@ -1,4 +1,4 @@
-import { Body, Controller, Patch, UseGuards } from '@nestjs/common'
+import { Body, Controller, Get, Patch, UseGuards } from '@nestjs/common'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
@@ -21,6 +21,12 @@ export class PushNotificationReadController {
   constructor(
     private readonly pushNotificationReadApp: PushNotificationReadApp,
   ) {}
+
+  @Get()
+  async fetch(): Promise<IApiRes<PushNotificationResponse[]>> {
+    const data = await this.pushNotificationReadApp.fetch()
+    return ApiRes.dto(PushNotificationResponse.dtos(data))
+  }
 
   @Patch('one')
   async readOne(

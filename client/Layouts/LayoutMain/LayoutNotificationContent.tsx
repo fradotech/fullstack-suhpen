@@ -1,4 +1,4 @@
-import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
+import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { IPushNotification } from '@server/modules/notification/push-notification/infrastructure/push-notification.interface'
 import { PushNotificationResponse } from '@server/modules/notification/push-notification/infrastructure/push-notification.response'
 import { Col, List } from 'antd'
@@ -19,7 +19,7 @@ interface IProps {
   refetch: <TPageData>(
     options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined,
   ) => Promise<
-    QueryObserverResult<IPaginateResponse<PushNotificationResponse>, unknown>
+    QueryObserverResult<IApiRes<PushNotificationResponse[]>, unknown>
   >
 }
 
@@ -35,10 +35,7 @@ const LayoutNotificationContent: React.FC<IProps> = (props: IProps) => {
       dataSource={props.pushNotifications}
       style={{ overflowY: 'scroll', height: '360px' }}
       renderItem={(data) => (
-        <Link
-          onClick={() => handleReadOne(data.id)}
-          to={data.title && data.title}
-        >
+        <Link onClick={() => handleReadOne(data.id)} to={'#'}>
           <List.Item
             style={{
               backgroundColor: !data.readAt

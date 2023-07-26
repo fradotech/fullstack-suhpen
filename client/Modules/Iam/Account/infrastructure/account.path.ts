@@ -1,7 +1,7 @@
 import { Modules } from '../../../../../@server/modules/modules'
 
-const root = `/${Modules.Account}`
+const index = `/${Modules.Account}`
 
 export const accountPath = {
-  index: root,
+  index,
 }
