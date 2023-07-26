@@ -4,19 +4,19 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.response'
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { Modules } from '@server/modules/modules'
-import { LoggedInGuard } from '../../auth/common/logged-in.guard'
-import { RoleIndexApp } from '../infrastructure/role-index.app'
-import { RoleIndexRequest } from '../infrastructure/role-index.request'
-import { RoleResponse } from '../infrastructure/role.response'
+import { LoggedInGuard } from '../../../auth/common/logged-in.guard'
+import { UserIndexApp } from '../../infrastructure/user-index.app'
+import { UserIndexRequest } from '../../infrastructure/user-index.request'
+import { UserStrictResponse } from '../../infrastructure/user.response'
 
-const THIS_MODULE = Modules.Role + '/sheet'
+const THIS_MODULE = Modules.UserSheet
 
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
 @UseGuards(LoggedInGuard)
-export class RoleSheetController {
-  constructor(private readonly roleIndexApp: RoleIndexApp) {}
+export class UserSheetController {
+  constructor(private readonly userIndexApp: UserIndexApp) {}
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
@@ -25,15 +25,15 @@ export class RoleSheetController {
 
   @Get('export')
   async fetch(
-    @Query() req: RoleIndexRequest,
-  ): Promise<IApiExportRes<RoleResponse[]>> {
+    @Query() req: UserIndexRequest,
+  ): Promise<IApiExportRes<UserStrictResponse[]>> {
     req.isExport = true
-    const response = await this.roleIndexApp.fetch(req)
+    const response = await this.userIndexApp.fetch(req)
 
-    const data = RoleResponse.dtos(response.data)
+    const data = UserStrictResponse.dtos(response.data)
     const parser = new Parser()
     const dataExport = parser.parse(data)
-    const fileName = `Data - ${Modules.Role} - ${new Date().toISOString()}.xlsx`
+    const fileName = `Data - ${Modules.User} - ${new Date().toISOString()}.xlsx`
 
     return ApiExportRes.dto(dataExport, fileName)
   }

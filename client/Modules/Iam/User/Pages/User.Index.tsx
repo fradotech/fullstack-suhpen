@@ -34,7 +34,7 @@ const UserIndex: React.FC = () => {
             search: true,
             dateRangeColumn: 'createdAt',
             hrefCreate: Path.user.form,
-            hrefExport: Path.user.export,
+            hrefExport: Path.user.sheet.export,
           }}
         />
       </Section>

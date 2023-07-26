@@ -1,11 +1,11 @@
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { NotificationCategoryIndexRequest } from '@server/modules/notification/notification-category/infrastructure/notification-category-index.request'
+import { NotificationCategoryResponse } from '@server/modules/notification/notification-category/infrastructure/notification-category.response'
 import {
   NotificationCategoryCreateRequest,
   NotificationCategoryUpdateRequest,
-} from '@server/modules/notification/notification-category/infrastructure/notification-category.request'
-import { NotificationCategoryResponse } from '@server/modules/notification/notification-category/infrastructure/notification-category.response'
+} from '@server/modules/notification/notification-category/v1/notification-category.request'
 import { notification } from 'antd'
 import { UseQueryOptions, UseQueryResult, useQuery } from 'react-query'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'

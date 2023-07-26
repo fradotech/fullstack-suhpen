@@ -5,7 +5,7 @@ import { EntNotificationCategory } from './infrastructure/notification-category.
 import { NotificationCategoryService } from './infrastructure/notification-category.service'
 import { NotificationCategoryCrudApp } from './v1/notification-category-crud.app'
 import { NotificationCategoryCrudController } from './v1/notification-category-crud.controller'
-import { NotificationCategorySheetController } from './v1/notification-category-sheet.controller'
+import { NotificationCategorySheetController } from './v1/sheet/notification-category-sheet.controller'
 
 @Module({
   imports: [TypeOrmModule.forFeature([EntNotificationCategory])],

@@ -31,7 +31,7 @@ const NotificationCategoryIndex: React.FC = () => {
             search: true,
             dateRangeColumn: 'createdAt',
             hrefCreate: Path.notificationCategory.form,
-            hrefExport: Path.notificationCategory.export,
+            hrefExport: Path.notificationCategory.sheet.export,
           }}
         />
       </Section>

@@ -4,19 +4,19 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.response'
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { Modules } from '@server/modules/modules'
-import { LoggedInGuard } from '../../auth/common/logged-in.guard'
-import { UserIndexApp } from '../infrastructure/user-index.app'
-import { UserIndexRequest } from '../infrastructure/user-index.request'
-import { UserStrictResponse } from '../infrastructure/user.response'
+import { LoggedInGuard } from '../../../auth/common/logged-in.guard'
+import { PermissionIndexApp } from '../../infrastructure/permission-index.app'
+import { PermissionIndexRequest } from '../../infrastructure/permission-index.request'
+import { PermissionResponse } from '../../infrastructure/permission.response'
 
-const THIS_MODULE = Modules.User + '/sheet'
+const THIS_MODULE = Modules.PermissionSheet
 
 @Controller(THIS_MODULE)
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
 @UseGuards(LoggedInGuard)
-export class UserSheetController {
-  constructor(private readonly userIndexApp: UserIndexApp) {}
+export class PermissionSheetController {
+  constructor(private readonly permissionIndexApp: PermissionIndexApp) {}
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
@@ -25,15 +25,17 @@ export class UserSheetController {
 
   @Get('export')
   async fetch(
-    @Query() req: UserIndexRequest,
-  ): Promise<IApiExportRes<UserStrictResponse[]>> {
+    @Query() req: PermissionIndexRequest,
+  ): Promise<IApiExportRes<PermissionResponse[]>> {
     req.isExport = true
-    const response = await this.userIndexApp.fetch(req)
+    const response = await this.permissionIndexApp.fetch(req)
 
-    const data = UserStrictResponse.dtos(response.data)
+    const data = PermissionResponse.dtos(response.data)
     const parser = new Parser()
     const dataExport = parser.parse(data)
-    const fileName = `Data - ${Modules.User} - ${new Date().toISOString()}.xlsx`
+    const fileName = `Data - ${
+      Modules.Permission
+    } - ${new Date().toISOString()}.xlsx`
 
     return ApiExportRes.dto(dataExport, fileName)
   }
