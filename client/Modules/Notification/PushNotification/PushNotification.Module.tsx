@@ -2,6 +2,7 @@ import { BellFilled } from '@ant-design/icons'
 import { Link, Route } from 'react-router-dom'
 import { MenuItem } from '../../../Layouts/LayoutMain/LayoutItems'
 import { Util } from '../../../common/utils/util'
+import PushNotificationDetail from './Pages/PushNotification.Detail'
 import PushNotificationForm from './Pages/PushNotification.Form'
 import PushNotificationIndex from './Pages/PushNotification.Index'
 import { pushNotificationPath } from './infrastructure/push-notification.path'
@@ -33,6 +34,11 @@ class PushNotificationModule {
       key={path.id()}
       path={path.id()}
       element={<PushNotificationForm />}
+    />,
+    <Route
+      key={path.read.id()}
+      path={path.read.id()}
+      element={<PushNotificationDetail />}
     />,
   ]
 }

@@ -14,6 +14,7 @@ export const pushNotificationPath = {
   },
   read: {
     index: read,
+    id: (id?: string) => `${read}/${id || ':id'}`,
     one: `${read}/one`,
     many: `${read}/many`,
   },

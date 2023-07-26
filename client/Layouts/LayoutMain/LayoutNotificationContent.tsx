@@ -11,6 +11,7 @@ import {
 } from 'react-query'
 import { Link } from 'react-router-dom'
 import { PushNotificationReadAction } from '../../Modules/Notification/PushNotification/infrastructure/push-notification-read.action'
+import { Path } from '../../common/Path'
 import { Util } from '../../common/utils/util'
 import { themeColors } from '../ThemeProvider/theme'
 
@@ -35,7 +36,10 @@ const LayoutNotificationContent: React.FC<IProps> = (props: IProps) => {
       dataSource={props.pushNotifications}
       style={{ overflowY: 'scroll', height: '360px' }}
       renderItem={(data) => (
-        <Link onClick={() => handleReadOne(data.id)} to={'#'}>
+        <Link
+          onClick={() => handleReadOne(data.id)}
+          to={Path.pushNotification.read.id(data.id)}
+        >
           <List.Item
             style={{
               backgroundColor: !data.readAt

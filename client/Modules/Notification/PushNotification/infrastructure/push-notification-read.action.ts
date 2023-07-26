@@ -14,6 +14,16 @@ export class PushNotificationReadAction {
     return useQuery([Path.pushNotification.read.index], fetch)
   }
 
+  static async findOne(
+    id: string | undefined,
+  ): Promise<IApiRes<PushNotificationResponse>> {
+    const res: IApiRes<PushNotificationResponse> = await API.get(
+      Path.pushNotification.id(id),
+    )
+
+    return res
+  }
+
   static async readOne(
     req: PushNotificationReadOneRequest,
   ): Promise<IApiRes<PushNotificationResponse>> {

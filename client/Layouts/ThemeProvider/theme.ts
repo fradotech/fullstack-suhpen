@@ -67,8 +67,8 @@ export const globalThemeConfig: ThemeConfig = {
       colorPrimaryHover: themeColors.primary,
     },
     Table: {
-      controlItemBgActive: '#eeeeee',
-      controlItemBgActiveHover: '#eeeeee',
+      controlItemBgActive: themeColors.primaryOpacity,
+      controlItemBgActiveHover: themeColors.primaryOpacity,
     },
     Steps: {
       colorPrimary: themeColors.primary,

@@ -54,7 +54,7 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
               label: (
                 <a onClick={handleLogout}>
                   <LogoutOutlined
-                    style={{ color: 'red', margin: '0 10 0 6' }}
+                    style={{ color: 'red', margin: '0px 10px 0px 6px' }}
                   />
                   Logout
                 </a>

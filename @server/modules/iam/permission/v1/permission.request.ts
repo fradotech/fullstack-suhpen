@@ -51,7 +51,7 @@ export class PermissionSyncRequest extends PartialType(PermissionRequest) {
     Object.values(Modules).forEach((module) => {
       const moduleTitle = Util.titleCase(module)
 
-      if (res.name.toLowerCase().includes(module.toLowerCase())) {
+      if (res.key.toLowerCase().includes(module.toLowerCase())) {
         res.name = res.name.replace(moduleTitle, ` - ${moduleTitle}`)
         res.module = module
       }
