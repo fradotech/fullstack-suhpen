@@ -15,7 +15,7 @@ export class EntPushNotification
   @Column()
   title: string
 
-  @Column({ default: true })
+  @Column({ default: false })
   isBroadcast: boolean
 
   @Column({ default: null })

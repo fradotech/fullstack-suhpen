@@ -22,13 +22,13 @@ export const pushNotificationCreateSeeder = async (
     where: { roles: In[RoleDefaultSuperAdminKey] },
   })
 
-  const categoryInfo = await entityManager.findOne(EntNotificationCategory, {
+  const categorySystem = await entityManager.findOne(EntNotificationCategory, {
     where: { key: NotificationCategoryDefaultKeyEnum.System },
   })
 
   data.forEach((data) => {
     superAdmin && (data.user = superAdmin)
-    categoryInfo && (data.category = categoryInfo)
+    categorySystem && (data.category = categorySystem)
   })
 
   const dataCreate = entityManager.create(EntPushNotification, data)
