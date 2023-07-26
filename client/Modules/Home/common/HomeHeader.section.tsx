@@ -17,10 +17,10 @@ const HomeHeaderSection: React.FC = () => {
         <a href={Path.Home}>
           <CompanyLogo
             style={{
-              padding: '4px',
-              width: '46px',
+              padding: 4,
+              width: 46,
               backgroundColor: 'white',
-              borderRadius: '28px',
+              borderRadius: 28,
             }}
           />
         </a>

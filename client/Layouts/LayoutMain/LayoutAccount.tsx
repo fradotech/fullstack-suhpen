@@ -24,7 +24,7 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
             {
               type: 'group',
               label: (
-                <Link to="#" style={{ width: '6rem', margin: '6px' }}>
+                <Link to="#" style={{ width: '6rem', margin: 6 }}>
                   <Space size="small">
                     <Space.Compact direction="vertical" size="small">
                       <Typography.Text style={{ opacity: '80%' }}>
@@ -42,7 +42,7 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
               key: 'My Account',
               label: (
                 <Link to={Path.account.index} style={{ width: '6rem' }}>
-                  <UserOutlined style={{ margin: '6px' }} /> My Account
+                  <UserOutlined style={{ margin: 6 }} /> My Account
                 </Link>
               ),
             },
@@ -53,7 +53,9 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
               key: 'Logout',
               label: (
                 <a onClick={handleLogout}>
-                  <LogoutOutlined style={{ color: 'red', margin: '6px' }} />
+                  <LogoutOutlined
+                    style={{ color: 'red', margin: '0 10 0 6' }}
+                  />
                   Logout
                 </a>
               ),

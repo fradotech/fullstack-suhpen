@@ -1,6 +1,7 @@
-import { Badge, Button, Dropdown, Tabs, TabsProps } from 'antd'
+import { Badge, Button, Dropdown, Row, Tabs, TabsProps, Typography } from 'antd'
 import React from 'react'
 import { FaBell } from 'react-icons/fa'
+import { VscCheckAll } from 'react-icons/vsc'
 import { NotificationCategoryAction } from '../../Modules/Notification/NotificationCategory/infrastructure/notification-category.action'
 import { PushNotificationAction } from '../../Modules/Notification/PushNotification/infrastructure/push-notification.action'
 import { themeColors } from '../ThemeProvider/theme'
@@ -60,26 +61,29 @@ const LayoutNotification: React.FC = () => {
       menu={{
         items: [
           {
+            key: 'Mark Read All',
+            type: 'group',
+            label: (
+              <Row style={{ marginTop: 10, justifyContent: 'space-between' }}>
+                <Typography.Title level={5} style={{ margin: 0 }}>
+                  Notifications
+                </Typography.Title>
+                <a onClick={markReadAll}>
+                  <VscCheckAll style={{ marginRight: 6 }} />
+                  Mark Read All
+                </a>
+              </Row>
+            ),
+          },
+          {
             type: 'group',
             label: (
               <Tabs
-                tabBarStyle={{ margin: '4px' }}
+                tabBarStyle={{ margin: 4 }}
                 defaultActiveKey="All"
                 items={categoriesDisplay}
                 size="small"
               />
-            ),
-          },
-          {
-            type: 'divider',
-          },
-          {
-            key: 'Mark Read All',
-            type: 'group',
-            label: (
-              <Button type="ghost" onClick={markReadAll} size="small">
-                {`Mark Read All (${count})`}
-              </Button>
             ),
           },
         ],
