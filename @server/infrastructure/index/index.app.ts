@@ -91,7 +91,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
     const sort = this.orderByKey(name, columns, req.sortField)
     const order = this.getOrder(req.sortOrder)
 
-    query.cache(true)
+    query.cache(String([userId, query.getQuery()]))
     query.orderBy(sort, order)
     query.take(this.take(req.pageSize))
     query.skip(this.countOffset(req))
