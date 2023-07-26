@@ -30,11 +30,7 @@ export class NotificationCategoryAction {
   ): UseQueryResult<IPaginateResponse<NotificationCategoryResponse>> {
     const fetch = async () =>
       await API.get(Path.notificationCategory.index, req)
-    return useQuery(
-      [NotificationCategoryAction.useIndex.name, req],
-      fetch,
-      options,
-    )
+    return useQuery([Path.notificationCategory.index, req], fetch, options)
   }
 
   static async create(

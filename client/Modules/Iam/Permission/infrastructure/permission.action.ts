@@ -34,7 +34,7 @@ export class PermissionAction {
     if (req && !req?.sortOrder) req.sortOrder = IndexSortOderEnum.Asc
 
     const fetch = async () => await API.get(Path.permission.index, req)
-    return useQuery([PermissionAction.useIndex.name, req], fetch)
+    return useQuery([Path.permission.index, req], fetch)
   }
 
   static async create(

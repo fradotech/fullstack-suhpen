@@ -28,7 +28,7 @@ export class RoleAction {
     options?: UseQueryOptions<IPaginateResponse<RoleResponse>> | undefined,
   ): UseQueryResult<IPaginateResponse<RoleResponse>> {
     const fetch = async () => await API.get(Path.role.index, req)
-    return useQuery([RoleAction.useIndex.name, req], fetch, options)
+    return useQuery([Path.role.index, req], fetch, options)
   }
 
   static async create(data: RoleCreateRequest): Promise<IApiRes<RoleResponse>> {

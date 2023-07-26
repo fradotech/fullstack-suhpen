@@ -24,7 +24,7 @@ export class PushNotificationAction {
     req?: PushNotificationIndexRequest,
   ): UseQueryResult<IPaginateResponse<PushNotificationResponse>> {
     const fetch = async () => await API.get(Path.pushNotification.index, req)
-    return useQuery([PushNotificationAction.useIndex.name, req], fetch)
+    return useQuery([Path.pushNotification.index, req], fetch)
   }
 
   static async create(

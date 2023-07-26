@@ -2,35 +2,52 @@ import { Badge, Button, Dropdown, Tabs, TabsProps } from 'antd'
 import React from 'react'
 import { FaBell } from 'react-icons/fa'
 import { NotificationCategoryAction } from '../../Modules/Notification/NotificationCategory/infrastructure/notification-category.action'
+import { PushNotificationAction } from '../../Modules/Notification/PushNotification/infrastructure/push-notification.action'
 import { themeColors } from '../ThemeProvider/theme'
 import LayoutNotificationContent from './LayoutNotificationContent'
 
-const notificationCategories: TabsProps['items'] = [
-  {
-    key: 'All',
-    label: 'All',
-    children: <LayoutNotificationContent notificationCategoryKey="All" />,
-  },
-]
-
 const LayoutNotification: React.FC = () => {
-  const { data } = NotificationCategoryAction.useIndex({ pageSize: 100000 })
+  const { data: pushNotifications } = PushNotificationAction.useIndex({
+    pageSize: 100000,
+  })
+
+  const markReadAll = () => undefined
+
+  const { data: notificationCategories } = NotificationCategoryAction.useIndex({
+    pageSize: 100000,
+  })
 
   const count = 10
 
-  React.useMemo(() => {
-    const categories = data?.data.map((data) => ({
+  const categoriesDisplay: TabsProps['items'] = React.useMemo(() => {
+    const data = [
+      {
+        key: 'All',
+        label: 'All',
+        children: (
+          <LayoutNotificationContent
+            pushNotifications={pushNotifications?.data}
+          />
+        ),
+      },
+    ]
+
+    const categories = notificationCategories?.data.map((data) => ({
       key: data.id,
       label: data.name,
       children: (
-        <LayoutNotificationContent notificationCategoryKey={data.key} />
+        <LayoutNotificationContent
+          pushNotifications={pushNotifications?.data.filter((notification) => {
+            return notification.category.key === data.key
+          })}
+        />
       ),
     }))
 
-    categories && notificationCategories.push(...categories)
-  }, [data])
+    categories && data.push(...categories)
 
-  const markReadAll = () => undefined
+    return data
+  }, [pushNotifications])
 
   return (
     <Dropdown
@@ -44,7 +61,7 @@ const LayoutNotification: React.FC = () => {
               <Tabs
                 tabBarStyle={{ margin: '4px' }}
                 defaultActiveKey="All"
-                items={notificationCategories}
+                items={categoriesDisplay}
                 size="small"
               />
             ),

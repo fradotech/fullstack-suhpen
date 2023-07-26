@@ -29,7 +29,7 @@ export class UserAction {
     options?: UseQueryOptions<IPaginateResponse<UserResponse>> | undefined,
   ): UseQueryResult<IPaginateResponse<UserResponse>> {
     const fetch = async () => await API.get(Path.user.index, req)
-    return useQuery([UserAction.useIndex.name, req], fetch, options)
+    return useQuery([Path.user.index, req], fetch, options)
   }
 
   static async create(data: UserCreateRequest): Promise<IApiRes<UserResponse>> {
