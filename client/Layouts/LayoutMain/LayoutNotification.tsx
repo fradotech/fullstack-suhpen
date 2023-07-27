@@ -97,8 +97,8 @@ const LayoutNotification: React.FC = () => {
     >
       <Badge
         color={themeColors.primary}
-        count={count}
-        offset={[-12, 10]}
+        count={count && count > 10 ? '9+' : count}
+        offset={[-12, 6]}
         size="small"
       >
         <Button type="ghost" shape="circle" size="large" icon={<FaBell />} />

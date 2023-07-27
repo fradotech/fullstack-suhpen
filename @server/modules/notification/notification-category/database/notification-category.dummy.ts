@@ -1,4 +1,4 @@
-import { NotificationCategoryDefaultKeyEnum } from '../../common/notification-category.enum'
+import { NotificationCategoryDefaultKeyEnum } from '../common/notification-category.enum'
 
 // <--- KEY: key --->
 export const notificationCategoryDummies = [
