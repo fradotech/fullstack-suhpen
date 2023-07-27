@@ -45,7 +45,6 @@ const NotificationCategoryForm: React.FC = () => {
     <>
       <PageHeader
         title={id ? 'NotificationCategory' : 'New NotificationCategory'}
-        isLoading={isLoading}
       />
       <Section>
         <FormContainer

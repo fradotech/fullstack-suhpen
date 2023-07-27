@@ -42,10 +42,7 @@ const PermissionForm: React.FC = () => {
 
   return (
     <>
-      <PageHeader
-        title={id ? 'Permission' : 'New Permission'}
-        isLoading={isLoading}
-      />
+      <PageHeader title={id ? 'Permission' : 'New Permission'} />
       <Section>
         <FormContainer
           onFinish={onFinish}

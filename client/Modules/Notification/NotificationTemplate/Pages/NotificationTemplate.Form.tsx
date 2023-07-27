@@ -29,10 +29,7 @@ const NotificationTemplateForm: React.FC = () => {
     refetchOnWindowFocus: false,
   })
 
-  const {
-    isLoading: isLoadingNotificationCategory,
-    data: notificationCategories,
-  } = NotificationCategoryAction.useIndex(
+  const { data: notificationCategories } = NotificationCategoryAction.useIndex(
     { pageSize: 1000 },
     { refetchOnWindowFocus: false },
   )
@@ -54,7 +51,6 @@ const NotificationTemplateForm: React.FC = () => {
     <>
       <PageHeader
         title={id ? 'NotificationTemplate' : 'New NotificationTemplate'}
-        isLoading={isLoading || isLoadingNotificationCategory}
       />
       <Section>
         <FormContainer

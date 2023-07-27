@@ -30,7 +30,7 @@ const UserForm: React.FC = () => {
     refetchOnWindowFocus: false,
   })
 
-  const { isLoading: isLoadingRoles, data: roles } = RoleAction.useIndex(
+  const { data: roles } = RoleAction.useIndex(
     {
       pageSize: 1000,
     },
@@ -52,10 +52,7 @@ const UserForm: React.FC = () => {
 
   return (
     <>
-      <PageHeader
-        title={id ? 'User' : 'New User'}
-        isLoading={isLoading || isLoadingRoles}
-      />
+      <PageHeader title={id ? 'User' : 'New User'} />
       <Section>
         <FormContainer
           onFinish={onFinish}

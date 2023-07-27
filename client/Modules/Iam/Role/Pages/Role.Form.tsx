@@ -42,7 +42,7 @@ const RoleForm: React.FC = () => {
 
   return (
     <>
-      <PageHeader title={id ? 'Role' : 'New Role'} isLoading={isLoading} />
+      <PageHeader title={id ? 'Role' : 'New Role'} />
       <FormContainer
         onFinish={onFinish}
         form={form}

@@ -29,10 +29,7 @@ const PushNotificationForm: React.FC = () => {
     refetchOnWindowFocus: false,
   })
 
-  const {
-    isLoading: isLoadingNotificationCategory,
-    data: notificationCategories,
-  } = NotificationCategoryAction.useIndex(
+  const { data: notificationCategories } = NotificationCategoryAction.useIndex(
     { pageSize: 1000 },
     { refetchOnWindowFocus: false },
   )
@@ -52,10 +49,7 @@ const PushNotificationForm: React.FC = () => {
 
   return (
     <>
-      <PageHeader
-        title={id ? 'PushNotification' : 'New PushNotification'}
-        isLoading={isLoading || isLoadingNotificationCategory}
-      />
+      <PageHeader title={id ? 'PushNotification' : 'New PushNotification'} />
       <Section>
         <FormContainer
           onFinish={onFinish}
