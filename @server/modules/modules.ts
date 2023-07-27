@@ -25,13 +25,13 @@ export enum Modules {
 
   // --- Notification --- \\
 
-  NotificationCategory = 'notification-categories',
-  NotificationCategorySheet = 'notification-categories/sheet',
-
   PushNotification = 'push-notifications',
   PushNotificationSheet = 'push-notifications/sheet',
   PushNotificationRead = 'push-notifications/read',
 
   NotificationTemplate = 'notification-templates',
   NotificationTemplateSheet = 'notification-templates/sheet',
+
+  NotificationCategory = 'notification-categories',
+  NotificationCategorySheet = 'notification-categories/sheet',
 }

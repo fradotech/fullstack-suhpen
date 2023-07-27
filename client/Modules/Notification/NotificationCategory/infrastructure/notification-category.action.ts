@@ -24,9 +24,7 @@ const dto = (
 export class NotificationCategoryAction {
   static useIndex(
     req?: NotificationCategoryIndexRequest,
-    options?:
-      | UseQueryOptions<IPaginateResponse<NotificationCategoryResponse>>
-      | undefined,
+    options?: UseQueryOptions<IPaginateResponse<NotificationCategoryResponse>>,
   ): UseQueryResult<IPaginateResponse<NotificationCategoryResponse>> {
     const fetch = async () =>
       await API.get(Path.notificationCategory.index, req)

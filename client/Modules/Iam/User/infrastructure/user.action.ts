@@ -26,7 +26,7 @@ const dto = (
 export class UserAction {
   static useIndex(
     req?: UserIndexRequest,
-    options?: UseQueryOptions<IPaginateResponse<UserResponse>> | undefined,
+    options?: UseQueryOptions<IPaginateResponse<UserResponse>>,
   ): UseQueryResult<IPaginateResponse<UserResponse>> {
     const fetch = async () => await API.get(Path.user.index, req)
     return useQuery([Path.user.index, req], fetch, options)

@@ -25,7 +25,9 @@ export class NotificationTemplateIndexApp extends BaseIndexApp {
   ): Promise<IPaginateResponse<INotificationTemplate>> {
     const name = 'notificationTemplates'
     const columns = ['variables', 'message', 'createdAt']
-    const relations: IIndexAppRelation[] = []
+    const relations: IIndexAppRelation[] = [
+      { name: 'category', columns: ['name'] },
+    ]
     const query = this.createQueryIndex(
       req,
       name,

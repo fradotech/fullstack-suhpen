@@ -25,7 +25,7 @@ const dto = (
 export class RoleAction {
   static useIndex(
     req?: RoleIndexRequest,
-    options?: UseQueryOptions<IPaginateResponse<RoleResponse>> | undefined,
+    options?: UseQueryOptions<IPaginateResponse<RoleResponse>>,
   ): UseQueryResult<IPaginateResponse<RoleResponse>> {
     const fetch = async () => await API.get(Path.role.index, req)
     return useQuery([Path.role.index, req], fetch, options)

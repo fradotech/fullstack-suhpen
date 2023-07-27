@@ -14,6 +14,10 @@ class NotificationTemplateRepo extends Repository<EntNotificationTemplate> {
   async findByInIds(ids: string[]): Promise<EntNotificationTemplate[]> {
     return await this.findBy({ id: In(ids) })
   }
+
+  async findOneWithCategory(id: string): Promise<EntNotificationTemplate> {
+    return await this.findOneOrFail({ where: { id }, relations: ['category'] })
+  }
 }
 
 @Injectable()
