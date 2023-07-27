@@ -13,7 +13,7 @@ export class NotificationTemplateRequest
   message: string
 
   @ApiProperty()
-  categoryId: string
+  categoryKey: string
 
   @ApiProperty()
   thumbnail?: string

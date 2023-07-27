@@ -1,4 +1,4 @@
-import { RoleDefaultSuperAdminKey } from '@server/modules/iam/role/database/role.dummy'
+import { RoleDefaultKeyEnum } from '@server/modules/iam/role/common/role.enum'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Request } from 'express'
 import { ObjectLiteral, Repository, SelectQueryBuilder } from 'typeorm'
@@ -81,7 +81,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
       .map((data) => data.name)
       .find((data) => data === 'user')
     const isAdmin = user?.roles?.find((role) => {
-      return role.key === RoleDefaultSuperAdminKey
+      return role.key === RoleDefaultKeyEnum.SuperAdmin
     })
 
     if (!isNotFilterColumnUser && isUser && userId && !isAdmin) {

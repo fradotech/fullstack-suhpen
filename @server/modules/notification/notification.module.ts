@@ -13,6 +13,11 @@ import { PushNotificationModule } from './push-notification/push-notification.mo
   ],
   controllers: [],
   providers: [],
-  exports: [],
+  exports: [
+    NotificationCategoryModule,
+    PushNotificationModule,
+    NotificationTemplateModule,
+    MailModule,
+  ],
 })
 export class NotificationModule {}

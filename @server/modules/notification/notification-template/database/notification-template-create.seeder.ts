@@ -16,7 +16,7 @@ export const notificationTemplateCreateSeeder = async (
 
   for (let i = 0; i < data.length; i++) {
     data[i].category = notificationCategories.find((category) => {
-      return data[i].categoryId === category.key
+      return data[i].categoryKey === category.key
     })
   }
 

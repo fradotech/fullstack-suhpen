@@ -3,8 +3,8 @@ import { EntRole } from '@server/modules/iam/role/infrastructure/role.entity'
 import { Modules } from '@server/modules/modules'
 import { EntityManager } from 'typeorm'
 import { EntPermission } from '../../permission/infrastructure/permission.entity'
+import { RoleDefaultKeyEnum } from '../common/role.enum'
 import { RoleSyncRequest } from '../v1/role.request'
-import { RoleDefaultSuperAdminKey } from './role.dummy'
 
 export const roleSyncGeneralPermissionsSeeder = async (
   entityManager: EntityManager,
@@ -28,7 +28,9 @@ export const roleSyncGeneralPermissionsSeeder = async (
 
   const dataSave = data.map((data) => {
     const dataPermissions =
-      data.key === RoleDefaultSuperAdminKey ? permissions : permissionsGeneral
+      data.key === RoleDefaultKeyEnum.SuperAdmin
+        ? permissions
+        : permissionsGeneral
 
     return RoleSyncRequest.dto(data, dataPermissions)
   })

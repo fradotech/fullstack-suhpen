@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
+import { KeyValueRequest } from '@server/infrastructure/interfaces/key-value.request'
 import { In, Repository } from 'typeorm'
 import { EntNotificationTemplate } from './notification-template.entity'
+import { INotificationTemplate } from './notification-template.interface'
 
 class NotificationTemplateRepo extends Repository<EntNotificationTemplate> {
   constructor(
@@ -21,4 +23,18 @@ class NotificationTemplateRepo extends Repository<EntNotificationTemplate> {
 }
 
 @Injectable()
-export class NotificationTemplateService extends NotificationTemplateRepo {}
+export class NotificationTemplateService extends NotificationTemplateRepo {
+  replaceVariable(
+    template: INotificationTemplate,
+    variables: KeyValueRequest[],
+  ): INotificationTemplate {
+    variables.forEach((variable) => {
+      template.message = template.message.replace(
+        `{{${variable.key}}}`,
+        variable.value,
+      )
+    })
+
+    return template
+  }
+}

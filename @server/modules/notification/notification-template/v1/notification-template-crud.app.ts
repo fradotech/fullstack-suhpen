@@ -23,9 +23,9 @@ export class NotificationTemplateCrudApp {
   ): Promise<INotificationTemplate> {
     const data = NotificationTemplateCreateRequest.dto(req)
 
-    if (req.categoryId) {
+    if (req.categoryKey) {
       data.category = await this.notificationCategoryService.findOneByOrFail({
-        id: req.categoryId,
+        id: req.categoryKey,
       })
     }
 
@@ -43,9 +43,9 @@ export class NotificationTemplateCrudApp {
     const data = await this.notificationTemplateService.findOneByOrFail({ id })
     const dataUpdate = NotificationTemplateUpdateRequest.dto(data, req)
 
-    if (req.categoryId) {
+    if (req.categoryKey) {
       data.category = await this.notificationCategoryService.findOneByOrFail({
-        id: req.categoryId,
+        id: req.categoryKey,
       })
     }
 

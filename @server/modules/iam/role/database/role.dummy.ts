@@ -1,10 +1,10 @@
-export const RoleDefaultSuperAdminKey = 'super_admin'
+import { RoleDefaultKeyEnum } from '../common/role.enum'
 
 // <--- KEY: key --->
 export const roleDummies = [
   {
     name: 'Super Admin',
-    key: RoleDefaultSuperAdminKey,
+    key: RoleDefaultKeyEnum.SuperAdmin,
     labelColor: '#001fe6',
   },
   {
@@ -14,7 +14,7 @@ export const roleDummies = [
   },
   {
     name: 'Customer',
-    key: 'customer',
+    key: RoleDefaultKeyEnum.Customer,
     labelColor: '#00a120',
   },
 ]

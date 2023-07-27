@@ -1,5 +1,5 @@
 import { Logger } from '@nestjs/common'
-import { RoleDefaultSuperAdminKey } from '@server/modules/iam/role/database/role.dummy'
+import { RoleDefaultKeyEnum } from '@server/modules/iam/role/common/role.enum'
 import { EntUser } from '@server/modules/iam/user/infrastructure/user.entity'
 import { EntityManager, In } from 'typeorm'
 import { NotificationCategoryDefaultKeyEnum } from '../../notification-category/common/notification-category.enum'
@@ -19,7 +19,7 @@ export const pushNotificationCreateSeeder = async (
   if (notificationNotificationExist.length > 0) return false
 
   const superAdmin = await entityManager.findOne(EntUser, {
-    where: { roles: In[RoleDefaultSuperAdminKey] },
+    where: { roles: In[RoleDefaultKeyEnum.SuperAdmin] },
   })
 
   const categorySystem = await entityManager.findOne(EntNotificationCategory, {
