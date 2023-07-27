@@ -3,6 +3,7 @@ import { INotificationCategory } from '../../notification-category/infrastructur
 
 export interface INotificationTemplate extends IBaseEntity {
   title: string
+  key: string
   message: string
   category: INotificationCategory
   thumbnail?: string

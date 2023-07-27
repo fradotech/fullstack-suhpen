@@ -13,6 +13,9 @@ export class EntNotificationTemplate
   @Column()
   title: string
 
+  @Column({ default: null, unique: true })
+  key: string
+
   @Column({ type: 'text' })
   message: string
 
