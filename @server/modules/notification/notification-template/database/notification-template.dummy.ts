@@ -8,7 +8,7 @@ export const notificationTemplateDummies: NotificationTemplateCreateRequest[] =
     {
       title: 'Successfull Register',
       key: NotificationTemplateDefaultKeyEnum.auth.Register,
-      message: `Thanks {{userName}}! Thank you for filling out our sign up form. We are glad that you joined us.`,
+      message: `Hello {{userName}}! Thank you for filling out our sign up form. We are glad that you joined us.`,
       categoryKey: NotificationCategoryDefaultKeyEnum.Info,
     },
   ]
