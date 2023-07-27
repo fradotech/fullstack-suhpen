@@ -1,5 +1,4 @@
 import { BaseEntity } from '@server/infrastructure/base/base.entity'
-import { KeyValueType } from '@server/infrastructure/interfaces/key-value.interface'
 import { Column, Entity, Index, ManyToOne } from 'typeorm'
 import { EntNotificationCategory } from '../../notification-category/infrastructure/notification-category.entity'
 import { INotificationCategory } from '../../notification-category/infrastructure/notification-category.interface'
@@ -16,9 +15,6 @@ export class EntNotificationTemplate
 
   @Column({ type: 'text' })
   message: string
-
-  @Column({ type: 'jsonb', default: [] })
-  variables: KeyValueType[]
 
   @ManyToOne(() => EntNotificationCategory)
   category: INotificationCategory

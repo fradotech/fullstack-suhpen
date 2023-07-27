@@ -32,7 +32,7 @@ export const notificationTemplateCreateSeeder = async (
   const dataCreate = entityManager.create(EntNotificationTemplate, data)
   await entityManager.save(dataCreate)
 
-  Logger.log(String(data.map((data) => data.variables)), 'AutomaticSeeder')
+  Logger.log(String(data.map((data) => data.title)), 'AutomaticSeeder')
 
   return true
 }
