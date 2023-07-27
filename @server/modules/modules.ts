@@ -31,4 +31,7 @@ export enum Modules {
   PushNotification = 'push-notifications',
   PushNotificationSheet = 'push-notifications/sheet',
   PushNotificationRead = 'push-notifications/read',
+
+  NotificationTemplate = 'notification-templates',
+  NotificationTemplateSheet = 'notification-templates/sheet',
 }
