@@ -17,7 +17,7 @@ export class EntNotificationTemplate
   @Column({ type: 'text' })
   message: string
 
-  @Column({ type: 'jsonb' })
+  @Column({ type: 'jsonb', default: [] })
   variables: KeyValueType[]
 
   @ManyToOne(() => EntNotificationCategory)

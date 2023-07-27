@@ -84,9 +84,7 @@ const NotificationTemplateForm: React.FC = () => {
               />
             </Col>
           </Row>
-
           <FormItem name="message" input="textArea" />
-          <FormItem name="variables" input="textArea" />
         </FormContainer>
       </Section>
     </>
