@@ -4,7 +4,7 @@ import {
   AuthPasswordChangeRequest,
   AuthPasswordSendRequest,
   AuthRegisterRequest,
-} from '@server/modules/iam/auth/infrastructure/auth.request'
+} from '@server/modules/iam/auth/v1/auth.request'
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { notification } from 'antd'
 import { Path } from '../../../../common/Path'
@@ -19,9 +19,10 @@ export class AuthAction {
     )
   }
 
-  static async login(req: AuthLoginRequest): Promise<UserResponse> {
+  static async login(req: AuthLoginRequest): Promise<UserResponse | undefined> {
     const res: IApiRes<UserResponse> = await API.post(Path.login, req)
     const user = res?.data
+    if (!user) return undefined
     user._accessToken &&
       localStorage.setItem('_accessToken', user?._accessToken)
     user && localStorage.setItem('user', JSON.stringify(user))
@@ -30,8 +31,16 @@ export class AuthAction {
 
   static async register(
     req: AuthRegisterRequest,
-  ): Promise<IApiRes<UserResponse>> {
-    return await API.post(Path.register, req)
+  ): Promise<UserResponse | undefined> {
+    const res: IApiRes<UserResponse> = await API.post(Path.register, req)
+    if (!res.data) return undefined
+
+    const login: AuthLoginRequest = {
+      email: req.email,
+      password: req.password,
+    }
+
+    return await this.login(login)
   }
 
   static logout(): boolean {

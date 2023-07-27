@@ -1,4 +1,4 @@
-import { AuthRegisterRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
+import { AuthRegisterRequest } from '@server/modules/iam/auth/v1/auth.request'
 import { Button, Card, Col, Form } from 'antd'
 import Title from 'antd/es/typography/Title'
 import React from 'react'
@@ -19,8 +19,8 @@ const RegisterForm: React.FC = (): JSX.Element => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    const res = await AuthAction.register(data)
-    res.data && location.replace(Path.dashboard.index)
+    const user = await AuthAction.register(data)
+    user && location.replace(Path.dashboard.index)
     setIsLoading(false)
   }
 

@@ -1,4 +1,4 @@
-import { UserCreateRequest } from '@server/modules/iam/user/infrastructure/user.request'
+import { UserCreateRequest } from '@server/modules/iam/user/v1/user.request'
 import { Col, Divider, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
@@ -18,7 +18,6 @@ const UserForm: React.FC = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const [form] = Form.useForm<UserCreateRequest>()
-  const { isLoading: isLoadingRoles, data: roles } = RoleAction.useIndex()
 
   const fetch = async () => {
     setIsLoading(true)
@@ -30,6 +29,11 @@ const UserForm: React.FC = () => {
   useQuery([UserForm.name], id ? fetch : () => undefined, {
     refetchOnWindowFocus: false,
   })
+
+  const { data: roles } = RoleAction.useIndex(
+    { pageSize: 1000 },
+    { refetchOnWindowFocus: false },
+  )
 
   const onFinish = async () => {
     setIsLoading(true)
@@ -46,10 +50,7 @@ const UserForm: React.FC = () => {
 
   return (
     <>
-      <PageHeader
-        title={id ? 'User' : 'New User'}
-        isLoading={isLoading || isLoadingRoles}
-      />
+      <PageHeader title={id ? 'User' : 'New User'} />
       <Section>
         <FormContainer
           onFinish={onFinish}

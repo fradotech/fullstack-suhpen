@@ -8,9 +8,9 @@ import { EntRole } from './role.entity'
 class RoleRepo extends Repository<EntRole> {
   constructor(
     @InjectRepository(EntRole)
-    private readonly roleRepo: Repository<EntRole>,
+    private readonly repo: Repository<EntRole>,
   ) {
-    super(roleRepo.target, roleRepo.manager, roleRepo.queryRunner)
+    super(repo.target, repo.manager, repo.queryRunner)
   }
 
   async findByInIds(ids: string[]): Promise<EntRole[]> {

@@ -15,7 +15,7 @@ const UserIndex: React.FC = () => {
   const { isLoading, data, refetch } = UserAction.useIndex(query)
 
   const { isLoading: isLoadingRoles, data: roles } = RoleAction.useIndex({
-    pageSize: 100000,
+    pageSize: 1000,
   })
 
   return (
@@ -23,7 +23,7 @@ const UserIndex: React.FC = () => {
       <PageHeader title="User" />
       <Section>
         <DataTable
-          columns={userColumns(roles?.data, refetch)}
+          columns={userColumns(refetch, roles?.data)}
           dataSource={data?.data}
           search={query.search}
           pagination={formatPagination(data?.meta)}
@@ -34,7 +34,7 @@ const UserIndex: React.FC = () => {
             search: true,
             dateRangeColumn: 'createdAt',
             hrefCreate: Path.user.form,
-            hrefExport: Path.user.export,
+            hrefExport: Path.user.sheet.export,
           }}
         />
       </Section>

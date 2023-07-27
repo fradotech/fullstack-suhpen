@@ -1,5 +1,5 @@
-import { AccountUpdateRequest } from '@server/modules/iam/account/infrastructure/account.request'
 import { AccountResponse } from '@server/modules/iam/account/infrastructure/account.response'
+import { AccountUpdateRequest } from '@server/modules/iam/account/v1/account.request'
 import { notification } from 'antd'
 import dayjs from 'dayjs'
 import { IApiRes } from '../../../../../@server/infrastructure/interfaces/api-responses.interface'

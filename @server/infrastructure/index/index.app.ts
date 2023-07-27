@@ -1,4 +1,4 @@
-import { roleDummySuperAdminKey } from '@server/modules/iam/role/database/role.dummy'
+import { RoleDefaultKeyEnum } from '@server/modules/iam/role/common/role.enum'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Request } from 'express'
 import { ObjectLiteral, Repository, SelectQueryBuilder } from 'typeorm'
@@ -18,6 +18,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
     relations: IIndexAppRelation[],
     repo: Repository<T>,
     request: Request,
+    isNotFilterColumnUser?: boolean,
   ): SelectQueryBuilder<T> {
     const query = repo.createQueryBuilder(name)
 
@@ -80,10 +81,10 @@ export abstract class BaseIndexApp extends BaseIndexService {
       .map((data) => data.name)
       .find((data) => data === 'user')
     const isAdmin = user?.roles?.find((role) => {
-      return role.key === roleDummySuperAdminKey
+      return role.key === RoleDefaultKeyEnum.SuperAdmin
     })
 
-    if (isUser && userId && !isAdmin) {
+    if (!isNotFilterColumnUser && isUser && userId && !isAdmin) {
       !isUserRelation && query.leftJoinAndSelect(`${name}.user`, 'user')
       query.andWhere('user.id = :userId', { userId })
     }
@@ -91,7 +92,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
     const sort = this.orderByKey(name, columns, req.sortField)
     const order = this.getOrder(req.sortOrder)
 
-    query.cache(true)
+    query.cache(String([userId, query.getQuery()]))
     query.orderBy(sort, order)
     query.take(this.take(req.pageSize))
     query.skip(this.countOffset(req))

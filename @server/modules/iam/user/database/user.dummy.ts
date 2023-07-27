@@ -1,9 +1,12 @@
+import { RoleDefaultKeyEnum } from '../../role/common/role.enum'
+
 // --- KEY: email --- \\
 export const userDummies = [
   {
     name: 'Super Admin',
     email: 'admin@admin.com',
     password: 'Admin123',
+    roleKey: RoleDefaultKeyEnum.SuperAdmin,
   },
   {
     name: 'Admin 2',

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { Exception } from '@server/common/exceptions/index.exception'
-import { MailService } from '@server/modules/support/mail/infrastructure/mail.service'
+import { MailService } from '@server/modules/notification/mail/infrastructure/mail.service'
 import * as bcrypt from 'bcrypt'
 import { IUser } from '../../user/infrastructure/user.interface'
 import { authMessages } from '../common/auth.message'

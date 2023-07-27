@@ -2,9 +2,9 @@ import dotenv from 'dotenv'
 import { APP_CONFIG } from './common/app.config'
 import { DATABASE_CONFIG } from './database/common/database.config'
 import { AUTH_CONFIG } from './modules/iam/auth/common/auth.config'
+import { MAIL_CONFIG } from './modules/notification/mail/common/mail.config'
 import { ATTACHMENT_CONFIG } from './modules/support/attachment/common/attachment.config'
 import { CACHE_CONFIG } from './modules/support/cache/common/cache.config'
-import { MAIL_CONFIG } from './modules/support/mail/common/mail.config'
 import { SENTRY_CONFIG } from './modules/support/sentry/common/sentry.config'
 
 dotenv.config()

@@ -16,12 +16,12 @@ import { Modules } from '@server/modules/modules'
 import { LoggedInGuard } from '../../auth/common/logged-in.guard'
 import { PermissionIndexApp } from '../infrastructure/permission-index.app'
 import { PermissionIndexRequest } from '../infrastructure/permission-index.request'
+import { PermissionResponse } from '../infrastructure/permission.response'
+import { PermissionCrudApp } from './permission-crud.app'
 import {
   PermissionCreateRequest,
   PermissionUpdateRequest,
-} from '../infrastructure/permission.request'
-import { PermissionResponse } from '../infrastructure/permission.response'
-import { PermissionCrudApp } from './permission-crud.app'
+} from './permission.request'
 
 const THIS_MODULE = Modules.Permission
 
@@ -31,15 +31,15 @@ const THIS_MODULE = Modules.Permission
 @UseGuards(LoggedInGuard)
 export class PermissionCrudController implements BaseCrudController {
   constructor(
-    private readonly categoryIndexApp: PermissionIndexApp,
-    private readonly categoryCrudApp: PermissionCrudApp,
+    private readonly permissionIndexApp: PermissionIndexApp,
+    private readonly permissionCrudApp: PermissionCrudApp,
   ) {}
 
   @Get()
   async fetch(
     @Query() req: PermissionIndexRequest,
   ): Promise<IApiRes<PermissionResponse[]>> {
-    const res = await this.categoryIndexApp.fetch(req)
+    const res = await this.permissionIndexApp.fetch(req)
     return ApiRes.dto(PermissionResponse.dtos(res.data), res.meta)
   }
 
@@ -47,7 +47,7 @@ export class PermissionCrudController implements BaseCrudController {
   async create(
     @Body() req: PermissionCreateRequest,
   ): Promise<IApiRes<PermissionResponse>> {
-    const data = await this.categoryCrudApp.create(req)
+    const data = await this.permissionCrudApp.create(req)
     return ApiRes.dto(PermissionResponse.dto(data))
   }
 
@@ -55,7 +55,7 @@ export class PermissionCrudController implements BaseCrudController {
   async findOneOrFail(
     @Param('id') id: string,
   ): Promise<IApiRes<PermissionResponse>> {
-    const data = await this.categoryCrudApp.findOneOrFail(id)
+    const data = await this.permissionCrudApp.findOneOrFail(id)
     return ApiRes.dto(PermissionResponse.dto(data))
   }
 
@@ -64,13 +64,13 @@ export class PermissionCrudController implements BaseCrudController {
     @Param('id') id: string,
     @Body() req: PermissionUpdateRequest,
   ): Promise<IApiRes<PermissionResponse>> {
-    const data = await this.categoryCrudApp.update(id, req)
+    const data = await this.permissionCrudApp.update(id, req)
     return ApiRes.dto(PermissionResponse.dto(data))
   }
 
   // @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<PermissionResponse>> {
-    const data = await this.categoryCrudApp.delete(id)
+    const data = await this.permissionCrudApp.delete(id)
     return ApiRes.dto(PermissionResponse.dto(data))
   }
 }

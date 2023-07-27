@@ -35,7 +35,7 @@ const PermissionIndex: React.FC<IProps> = (props: IProps) => {
             query,
             search: true,
             dateRangeColumn: 'createdAt',
-            hrefExport: Path.permission.export,
+            hrefExport: Path.permission.sheet.export,
           }}
           rowSelection={props.rowSelection}
         />

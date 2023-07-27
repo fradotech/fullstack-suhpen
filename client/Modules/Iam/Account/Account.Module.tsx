@@ -5,7 +5,7 @@ import { accountPath } from './infrastructure/account.path'
 
 const path = accountPath
 
-export class AccountModule {
+class AccountModule {
   static menuItems: MenuItem[]
 
   static routes = [

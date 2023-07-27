@@ -2,8 +2,8 @@ import { Logger } from '@nestjs/common'
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { EntPermission } from '@server/modules/iam/permission/infrastructure/permission.entity'
 import { EntityManager } from 'typeorm'
-import { PermissionCreateRequest } from '../infrastructure/permission.request'
 import { PermissionService } from '../infrastructure/permission.service'
+import { PermissionCreateRequest } from '../v1/permission.request'
 import { permissionDummies } from './permission-sync-additional.dummy'
 
 export const permissionSyncSeeder = async (
@@ -32,7 +32,7 @@ export const permissionSyncSeeder = async (
     entityManager.remove(permissionsDelete),
   ])
 
-  Logger.log('', 'AutomaticSeeder:PermissionSync')
+  Logger.log('PermissionSync', 'AutomaticSeeder')
 
   return true
 }

@@ -1,9 +1,9 @@
 import { Logger } from '@nestjs/common'
 import { EntUser } from '@server/modules/iam/user/infrastructure/user.entity'
 import { EntityManager } from 'typeorm'
-import { roleDummySuperAdminKey as roleSuperAdmin } from '../../role/database/role.dummy'
+import { RoleDefaultKeyEnum } from '../../role/common/role.enum'
 import { EntRole } from '../../role/infrastructure/role.entity'
-import { UserCreateRequest } from '../infrastructure/user.request'
+import { UserCreateRequest } from '../v1/user.request'
 import { userDummies } from './user.dummy'
 
 export const userCreateSeeder = async (
@@ -30,8 +30,11 @@ export const userCreateSeeder = async (
 
     data[i].roles = []
 
-    if (data[i].name.replaceAll(' ', '_').toLowerCase() === roleSuperAdmin) {
-      const roleAdmin = roles.find((role) => role.key === roleSuperAdmin)
+    if (data[i]['roleKey'] === RoleDefaultKeyEnum.SuperAdmin) {
+      const roleAdmin = roles.find((role) => {
+        return role.key === RoleDefaultKeyEnum.SuperAdmin
+      })
+
       roleAdmin && data[i].roles.push(roleAdmin)
     } else {
       data[i].roles = [...new Set(randomRoles)]
@@ -41,10 +44,7 @@ export const userCreateSeeder = async (
   const dataCreate = entityManager.create(EntUser, data)
   await entityManager.save(dataCreate)
 
-  Logger.log(
-    String(data.map((data) => data.email)),
-    'AutomaticSeeder:UserCreate',
-  )
+  Logger.log(String(data.map((data) => data.email)), 'AutomaticSeeder')
 
   return true
 }

@@ -68,7 +68,7 @@ const Attachment: React.FC<IProps> = (props: IProps) => {
         >
           {fileList.length >= (props.total || 1) ? null : (
             <>
-              <PlusOutlined style={{ margin: '4px' }} />
+              <PlusOutlined style={{ margin: 4 }} />
               <div> Upload</div>
             </>
           )}

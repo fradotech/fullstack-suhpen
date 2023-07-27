@@ -70,7 +70,7 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
       }) as unknown as DefaultOptionType[])
 
   React.useMemo(() => {
-    setIsChecked(props.form?.getFieldValue(props.name))
+    setIsChecked(props.form?.getFieldValue(props.name) ?? true)
   }, [props.form?.getFieldValue(props.name)])
 
   switch (props.input) {
@@ -79,7 +79,9 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
         <AntdInput.Password
           disabled={props.disabled}
           type="password"
-          placeholder={props.placeholder || Util.titleCase(props.name)}
+          placeholder={
+            props.placeholder || Util.titleCase(props.label || props.name)
+          }
           style={props.style}
         />
       )
@@ -89,7 +91,9 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
       input = (
         <InputNumber
           disabled={props.disabled}
-          placeholder={props.placeholder || Util.titleCase(props.name)}
+          placeholder={
+            props.placeholder || Util.titleCase(props.label || props.name)
+          }
           parser={(value: string) => +value}
           style={{ ...props.style, width: '100%' }}
         />
@@ -100,7 +104,9 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
       input = (
         <InputNumber
           disabled={props.disabled}
-          placeholder={props.placeholder || Util.titleCase(props.name)}
+          placeholder={
+            props.placeholder || Util.titleCase(props.label || props.name)
+          }
           addonAfter="%"
           parser={(value: string) => +value}
           style={{ ...props.style, width: '100%' }}
@@ -112,7 +118,9 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
       input = (
         <InputNumber
           disabled={props.disabled}
-          placeholder={props.placeholder || Util.titleCase(props.name)}
+          placeholder={
+            props.placeholder || Util.titleCase(props.label || props.name)
+          }
           addonBefore="Rp"
           parser={(value: string) => +value}
           style={{ ...props.style, width: '100%' }}
@@ -127,7 +135,9 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           showSearch
           filterOption={filterOption}
           options={selectOption}
-          placeholder={props.placeholder || Util.titleCase(props.name)}
+          placeholder={
+            props.placeholder || Util.titleCase(props.label || props.name)
+          }
           style={{ ...props.style, width: '100%' }}
         />
       )
@@ -142,7 +152,9 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           showSearch
           filterOption={filterOption}
           options={selectOption}
-          placeholder={props.placeholder || Util.titleCase(props.name)}
+          placeholder={
+            props.placeholder || Util.titleCase(props.label || props.name)
+          }
           style={{ ...props.style, width: '100%' }}
         />
       )
@@ -154,7 +166,9 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           disabled={props.disabled}
           showTime={props.showTime}
           format={props.format}
-          placeholder={props.placeholder || Util.titleCase(props.name)}
+          placeholder={
+            props.placeholder || Util.titleCase(props.label || props.name)
+          }
           style={{ ...props.style, width: '100%' }}
         />
       )
@@ -176,7 +190,9 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
         <AntdInput.TextArea
           disabled={props.disabled}
           rows={props.rows}
-          placeholder={props.placeholder || Util.titleCase(props.name)}
+          placeholder={
+            props.placeholder || Util.titleCase(props.label || props.name)
+          }
           style={props.style}
         />
       )
@@ -208,7 +224,9 @@ const FormItem: React.FC<IProps> = (props: IProps) => {
           disabled={props.disabled}
           style={props.style}
           type={props.type}
-          placeholder={props.placeholder || Util.titleCase(props.name)}
+          placeholder={
+            props.placeholder || Util.titleCase(props.label || props.name)
+          }
         />
       )
       break

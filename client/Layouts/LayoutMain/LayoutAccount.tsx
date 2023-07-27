@@ -8,20 +8,15 @@ import { Path } from '../../common/Path'
 import { themeColors, themeColorsDark } from '../ThemeProvider/theme'
 
 type IProps = {
-  children?: React.ReactNode
-  headerRightMenu?: React.FC
   user: IUser
   isDarkMode: boolean
 }
 
 const LayoutAccount: React.FC<IProps> = (props: IProps) => {
-  const handleLogout = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault()
-    AuthAction.logout() && location.replace(Path.login)
-  }
+  const handleLogout = () => AuthAction.logout() && location.replace(Path.login)
 
   return (
-    <>
+    <div style={{ marginLeft: '12px' }}>
       <Dropdown
         trigger={['click']}
         menu={{
@@ -29,7 +24,7 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
             {
               type: 'group',
               label: (
-                <Link to="#" style={{ width: '6rem', margin: '6px' }}>
+                <Link to="#" style={{ width: '6rem', margin: 6 }}>
                   <Space size="small">
                     <Space.Compact direction="vertical" size="small">
                       <Typography.Text style={{ opacity: '80%' }}>
@@ -47,7 +42,7 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
               key: 'My Account',
               label: (
                 <Link to={Path.account.index} style={{ width: '6rem' }}>
-                  <UserOutlined style={{ margin: '6px' }} /> My Account
+                  <UserOutlined style={{ margin: 6 }} /> My Account
                 </Link>
               ),
             },
@@ -58,7 +53,9 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
               key: 'Logout',
               label: (
                 <a onClick={handleLogout}>
-                  <LogoutOutlined style={{ color: 'red', margin: '6px' }} />{' '}
+                  <LogoutOutlined
+                    style={{ color: 'red', margin: '0px 10px 0px 6px' }}
+                  />
                   Logout
                 </a>
               ),
@@ -67,7 +64,6 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
         }}
       >
         <a
-          onClick={(e) => e.preventDefault()}
           style={{
             color: props.isDarkMode ? themeColors.solid : themeColorsDark.solid,
           }}
@@ -79,7 +75,7 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
           </Space>
         </a>
       </Dropdown>
-    </>
+    </div>
   )
 }
 

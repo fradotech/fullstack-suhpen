@@ -72,7 +72,6 @@ const FormActionButton = (props: IFormActionButtonProps) => {
                 }}
               >
                 <Button
-                  type="primary"
                   icon={<DeleteFilled />}
                   danger
                   style={{ float: 'right', marginRight: '6px' }}

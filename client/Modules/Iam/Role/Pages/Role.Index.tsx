@@ -29,7 +29,7 @@ const RoleIndex: React.FC = () => {
             search: true,
             dateRangeColumn: 'createdAt',
             hrefCreate: Path.role.form,
-            hrefExport: Path.role.export,
+            hrefExport: Path.role.sheet.export,
           }}
         />
       </Section>
