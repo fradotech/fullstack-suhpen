@@ -6,6 +6,7 @@ export const themeColors = {
   solid: '#ffffff',
   background: '#fafafa',
   primary: '#007fd0',
+  primaryOpacity: '#daf1ff',
   secondary: '',
   success: '',
   warning: '',
@@ -17,6 +18,7 @@ export const themeColorsDark = {
   solid: '#141414',
   background: '#1d1d1d',
   primary: '#007fd0',
+  primaryOpacity: '#daf1ff',
   secondary: '',
   success: '',
   warning: '',
@@ -36,11 +38,15 @@ export const sidebarThemeConfig = (isDarkMode: boolean): ThemeConfig => {
         colorItemTextSelected: isDarkMode
           ? themeColors.solid
           : themeColorsDark.primary,
-        colorItemBgSelected: isDarkMode ? themeColorsDark.primary : '#daf1ff',
+        colorItemBgSelected: isDarkMode
+          ? themeColorsDark.primary
+          : themeColors.primaryOpacity,
         colorItemTextHover: isDarkMode
           ? themeColors.solid
           : themeColors.primary,
-        colorItemBgHover: isDarkMode ? themeColorsDark.primary : '#daf1ff',
+        colorItemBgHover: isDarkMode
+          ? themeColorsDark.primary
+          : themeColors.primaryOpacity,
         fontSize: 14,
         colorItemBg: isDarkMode ? themeColorsDark.solid : themeColors.solid,
         colorSubItemBg: isDarkMode ? themeColorsDark.solid : themeColors.solid,
@@ -61,8 +67,8 @@ export const globalThemeConfig: ThemeConfig = {
       colorPrimaryHover: themeColors.primary,
     },
     Table: {
-      controlItemBgActive: '#eeeeee',
-      controlItemBgActiveHover: '#eeeeee',
+      controlItemBgActive: themeColors.primaryOpacity,
+      controlItemBgActiveHover: themeColors.primaryOpacity,
     },
     Steps: {
       colorPrimary: themeColors.primary,

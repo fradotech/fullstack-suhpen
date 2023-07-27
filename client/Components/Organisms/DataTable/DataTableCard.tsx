@@ -17,7 +17,7 @@ const DataTableCard: React.FC<IProps> = (props: IProps) => {
             <Card
               hoverable
               className={styles.card}
-              bodyStyle={{ padding: '12px 6px' }}
+              bodyStyle={{ padding: '12 6' }}
               cover={
                 <Image
                   preview={false}

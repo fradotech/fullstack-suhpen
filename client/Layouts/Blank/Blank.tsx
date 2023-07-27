@@ -11,7 +11,7 @@ const { Content } = Layout
 const Blank: React.FC<IProps> = ({ children }: IProps) => {
   return (
     <Layout>
-      <Content style={{ padding: '150px' }}>{children}</Content>
+      <Content style={{ padding: 150 }}>{children}</Content>
     </Layout>
   )
 }

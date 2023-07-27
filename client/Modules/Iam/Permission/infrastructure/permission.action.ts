@@ -1,10 +1,10 @@
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { PermissionIndexRequest } from '@server/modules/iam/permission/infrastructure/permission-index.request'
+import { PermissionResponse } from '@server/modules/iam/permission/infrastructure/permission.response'
 import {
   PermissionCreateRequest,
   PermissionUpdateRequest,
-} from '@server/modules/iam/permission/infrastructure/permission.request'
-import { PermissionResponse } from '@server/modules/iam/permission/infrastructure/permission.response'
+} from '@server/modules/iam/permission/v1/permission.request'
 import { notification } from 'antd'
 import { UseQueryResult, useQuery } from 'react-query'
 import {
@@ -34,7 +34,7 @@ export class PermissionAction {
     if (req && !req?.sortOrder) req.sortOrder = IndexSortOderEnum.Asc
 
     const fetch = async () => await API.get(Path.permission.index, req)
-    return useQuery([PermissionAction.useIndex.name, req], fetch)
+    return useQuery([Path.permission.index, req], fetch)
   }
 
   static async create(
@@ -58,7 +58,7 @@ export class PermissionAction {
 
   static async update(
     id: string,
-    data: PermissionUpdateRequest,
+    data: PermissionUpdateRequest | PermissionCreateRequest,
   ): Promise<IApiRes<PermissionResponse>> {
     data = dto(data)
     const res = await API.put(Path.permission.id(id), data)

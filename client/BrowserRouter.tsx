@@ -8,7 +8,8 @@ import Loading from './Components/Molecules/Loading/Loading'
 import DashboardModule from './Modules/Dashboard/Dashboard.Module'
 import AuthModule from './Modules/Iam/Auth/Auth.Module'
 import { AuthAction } from './Modules/Iam/Auth/infrastructure/auth.action'
-import { IamModule } from './Modules/Iam/Iam.Module'
+import IamModule from './Modules/Iam/Iam.Module'
+import NotificationModule from './Modules/Notification/Notification.Module'
 import { Path as ERoute } from './common/Path'
 
 const LayoutMain = React.lazy(() => import('./Layouts/LayoutMain/LayoutMain'))
@@ -44,6 +45,7 @@ const BrowserRouter: React.FC = () => (
             <Routes>
               {DashboardModule.routes}
               {IamModule.routes}
+              {NotificationModule.routes}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </LayoutMain>

@@ -1,4 +1,4 @@
-import { AuthPasswordChangeRequest } from '@server/modules/iam/auth/infrastructure/auth.request'
+import { AuthPasswordChangeRequest } from '@server/modules/iam/auth/v1/auth.request'
 import { Alert, Button, Card, Col, Form } from 'antd'
 import Title from 'antd/es/typography/Title'
 import React from 'react'

@@ -39,7 +39,7 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
         className={styles.sider}
         style={{ background: bgLayoutColor }}
       >
-        <Col style={{ padding: '8px', textAlign: 'center' }}>
+        <Col style={{ padding: 8, textAlign: 'center' }}>
           <CompanyLogo />
         </Col>
         <Col

@@ -5,7 +5,7 @@ import { EntPermission } from './infrastructure/permission.entity'
 import { PermissionService } from './infrastructure/permission.service'
 import { PermissionCrudApp } from './v1/permission-crud.app'
 import { PermissionCrudController } from './v1/permission-crud.controller'
-import { PermissionSheetController } from './v1/permission-sheet.controller'
+import { PermissionSheetController } from './v1/sheet/permission-sheet.controller'
 
 @Module({
   imports: [TypeOrmModule.forFeature([EntPermission])],

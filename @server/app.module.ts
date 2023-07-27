@@ -11,6 +11,7 @@ import { config } from './config'
 import { DatabaseModule } from './database/database.module'
 import { DashboardModule } from './modules/dashboard/dashboard.module'
 import { IamModule } from './modules/iam/iam.module'
+import { NotificationModule } from './modules/notification/notification.module'
 import { SentryModule } from './modules/support/sentry/sentry.module'
 import { SupportModule } from './modules/support/support.module'
 
@@ -24,6 +25,7 @@ import { SupportModule } from './modules/support/support.module'
 
     DashboardModule,
     IamModule,
+    NotificationModule,
   ],
   controllers: [],
   providers: [

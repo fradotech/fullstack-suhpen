@@ -3,16 +3,13 @@ import { EntRole } from '@server/modules/iam/role/infrastructure/role.entity'
 import { Modules } from '@server/modules/modules'
 import { EntityManager } from 'typeorm'
 import { EntPermission } from '../../permission/infrastructure/permission.entity'
-import { RoleSyncRequest } from '../infrastructure/role.request'
-import { roleDummySuperAdminKey } from './role.dummy'
+import { RoleDefaultKeyEnum } from '../common/role.enum'
+import { RoleSyncRequest } from '../v1/role.request'
 
 export const roleSyncGeneralPermissionsSeeder = async (
   entityManager: EntityManager,
 ): Promise<boolean> => {
   const data = await entityManager.find(EntRole)
-  const rolesDelete = await entityManager.find(EntRole)
-  const rolesSave: EntRole[] = []
-
   const permissions = await entityManager.find(EntPermission)
   const permissionsGeneral = await entityManager
     .createQueryBuilder(EntPermission, 'permissions')
@@ -23,32 +20,24 @@ export const roleSyncGeneralPermissionsSeeder = async (
         Modules.Attachment,
         Modules.Dashboard,
         Modules.DashboardUser,
+        Modules.NotificationCategory,
+        Modules.PushNotificationRead,
       ],
     })
     .getMany()
 
-  data.forEach((data) => {
+  const dataSave = data.map((data) => {
     const dataPermissions =
-      data.key === roleDummySuperAdminKey ? permissions : permissionsGeneral
+      data.key === RoleDefaultKeyEnum.SuperAdmin
+        ? permissions
+        : permissionsGeneral
 
-    const role = RoleSyncRequest.dto(data, dataPermissions)
-
-    const exist = rolesDelete.find((data) => {
-      if (data?.key !== role?.key) return null
-      rolesDelete.splice(rolesDelete.indexOf(data), 1)
-      return data
-    })
-
-    exist?.id && (role.id = exist.id)
-    rolesSave.push(role)
+    return RoleSyncRequest.dto(data, dataPermissions)
   })
 
-  await Promise.all([
-    entityManager.save(rolesSave),
-    entityManager.remove(rolesDelete),
-  ])
+  await entityManager.save(dataSave)
 
-  Logger.log('', 'AutomaticSeeder:RoleSync')
+  Logger.log('RoleSync', 'AutomaticSeeder')
 
   return true
 }

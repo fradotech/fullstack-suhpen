@@ -1,11 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { RoleService } from '../../role/infrastructure/role.service'
 import { IUser } from '../infrastructure/user.interface'
-import {
-  UserCreateRequest,
-  UserUpdateRequest,
-} from '../infrastructure/user.request'
 import { UserService } from '../infrastructure/user.service'
+import { UserCreateRequest, UserUpdateRequest } from './user.request'
 
 @Injectable()
 export class UserCrudApp {

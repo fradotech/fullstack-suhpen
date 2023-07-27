@@ -1,14 +1,14 @@
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { RoleIndexRequest } from '@server/modules/iam/role/infrastructure/role-index.request'
+import { RoleResponse } from '@server/modules/iam/role/infrastructure/role.response'
 import {
   RoleCreateRequest,
   RoleUpdateRequest,
-} from '@server/modules/iam/role/infrastructure/role.request'
-import { RoleResponse } from '@server/modules/iam/role/infrastructure/role.response'
+} from '@server/modules/iam/role/v1/role.request'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { notification } from 'antd'
-import { UseQueryResult, useQuery } from 'react-query'
+import { UseQueryOptions, UseQueryResult, useQuery } from 'react-query'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
 import { getColorPicker } from '../../../../Components/Molecules/ColorPicker/ColorPicker.util'
 import { Path } from '../../../../common/Path'
@@ -25,9 +25,10 @@ const dto = (
 export class RoleAction {
   static useIndex(
     req?: RoleIndexRequest,
+    options?: UseQueryOptions<IPaginateResponse<RoleResponse>>,
   ): UseQueryResult<IPaginateResponse<RoleResponse>> {
     const fetch = async () => await API.get(Path.role.index, req)
-    return useQuery([RoleAction.useIndex.name, req], fetch)
+    return useQuery([Path.role.index, req], fetch, options)
   }
 
   static async create(data: RoleCreateRequest): Promise<IApiRes<RoleResponse>> {
@@ -45,7 +46,7 @@ export class RoleAction {
 
   static async update(
     id: string,
-    data: RoleUpdateRequest,
+    data: RoleUpdateRequest | RoleCreateRequest,
   ): Promise<IApiRes<RoleResponse>> {
     data = dto(data)
     const res = await API.put(Path.role.id(id), data)

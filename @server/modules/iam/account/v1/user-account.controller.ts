@@ -6,8 +6,8 @@ import { Modules } from '@server/modules/modules'
 import { LoggedInGuard } from '../../auth/common/logged-in.guard'
 import { UserLogged } from '../../user/common/get-user-logged.decorator'
 import { IUser } from '../../user/infrastructure/user.interface'
-import { AccountUpdateRequest } from '../infrastructure/account.request'
 import { AccountResponse } from '../infrastructure/account.response'
+import { AccountUpdateRequest } from './account.request'
 import { AccountApp } from './user-account.app'
 
 const THIS_MODULE = Modules.Account

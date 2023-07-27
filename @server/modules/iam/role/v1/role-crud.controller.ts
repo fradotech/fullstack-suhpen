@@ -17,12 +17,9 @@ import { Modules } from '@server/modules/modules'
 import { LoggedInGuard } from '../../auth/common/logged-in.guard'
 import { RoleIndexApp } from '../infrastructure/role-index.app'
 import { RoleIndexRequest } from '../infrastructure/role-index.request'
-import {
-  RoleCreateRequest,
-  RoleUpdateRequest,
-} from '../infrastructure/role.request'
 import { RoleResponse } from '../infrastructure/role.response'
 import { RoleCrudApp } from './role-crud.app'
+import { RoleCreateRequest, RoleUpdateRequest } from './role.request'
 
 const THIS_MODULE = Modules.Role
 
@@ -32,27 +29,27 @@ const THIS_MODULE = Modules.Role
 @UseGuards(LoggedInGuard)
 export class RoleCrudController implements BaseCrudController {
   constructor(
-    private readonly categoryIndexApp: RoleIndexApp,
-    private readonly categoryCrudApp: RoleCrudApp,
+    private readonly roleIndexApp: RoleIndexApp,
+    private readonly roleCrudApp: RoleCrudApp,
   ) {}
 
   @Get()
   async fetch(
     @Query() req: RoleIndexRequest,
   ): Promise<IApiRes<RoleResponse[]>> {
-    const res = await this.categoryIndexApp.fetch(req)
+    const res = await this.roleIndexApp.fetch(req)
     return ApiRes.dto(RoleResponse.dtos(res.data), res.meta)
   }
 
   @Post()
   async create(@Body() req: RoleCreateRequest): Promise<IApiRes<RoleResponse>> {
-    const data = await this.categoryCrudApp.create(req)
+    const data = await this.roleCrudApp.create(req)
     return ApiRes.dto(RoleResponse.dto(data))
   }
 
   @Get(':id')
   async findOneOrFail(@Param('id') id: string): Promise<IApiRes<RoleResponse>> {
-    const data = await this.categoryCrudApp.findOneOrFail(id)
+    const data = await this.roleCrudApp.findOneOrFail(id)
     return ApiRes.dto(RoleResponse.dto(data))
   }
 
@@ -61,13 +58,13 @@ export class RoleCrudController implements BaseCrudController {
     @Param('id') id: string,
     @Body() req: RoleUpdateRequest,
   ): Promise<IApiRes<RoleResponse>> {
-    const data = await this.categoryCrudApp.update(id, req)
+    const data = await this.roleCrudApp.update(id, req)
     return ApiRes.dto(RoleResponse.dto(data))
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<RoleResponse>> {
-    const data = await this.categoryCrudApp.delete(id)
+    const data = await this.roleCrudApp.delete(id)
     return ApiRes.dto(RoleResponse.dto(data))
   }
 }

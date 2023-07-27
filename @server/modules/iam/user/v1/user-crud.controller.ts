@@ -17,12 +17,9 @@ import { Modules } from '@server/modules/modules'
 import { LoggedInGuard } from '../../auth/common/logged-in.guard'
 import { UserIndexApp } from '../infrastructure/user-index.app'
 import { UserIndexRequest } from '../infrastructure/user-index.request'
-import {
-  UserCreateRequest,
-  UserUpdateRequest,
-} from '../infrastructure/user.request'
 import { UserStrictResponse } from '../infrastructure/user.response'
 import { UserCrudApp } from './user-crud.app'
+import { UserCreateRequest, UserUpdateRequest } from './user.request'
 
 const THIS_MODULE = Modules.User
 

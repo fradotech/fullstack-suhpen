@@ -6,7 +6,7 @@ import { dashboardPath } from './common/dashboard.path'
 
 const path = dashboardPath
 
-export class DashboardModule {
+class DashboardModule {
   static menuItems: MenuItem[] = [
     {
       key: path.index,

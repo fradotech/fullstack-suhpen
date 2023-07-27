@@ -27,12 +27,7 @@ const RoleFieldsMain: React.FC<IProps> = (props: IProps) => {
               <FormItem name="name" rules={[rule.required]} />
             </Col>
             <Col sm={24} md={4}>
-              <FormItem
-                name="isActive"
-                input="switch"
-                rules={[rule.required]}
-                form={props.form}
-              />
+              <FormItem name="isActive" input="switch" form={props.form} />
             </Col>
             <Col sm={24} md={24}>
               <FormItem name="description" input="textArea" />

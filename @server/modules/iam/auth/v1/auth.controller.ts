@@ -4,11 +4,8 @@ import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interfa
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { Modules } from '@server/modules/modules'
 import { UserResponse } from '../../user/infrastructure/user.response'
-import {
-  AuthLoginRequest,
-  AuthRegisterRequest,
-} from '../infrastructure/auth.request'
 import { AuthApp } from './auth.app'
+import { AuthLoginRequest, AuthRegisterRequest } from './auth.request'
 
 const THIS_MODULE = Modules.Auth
 

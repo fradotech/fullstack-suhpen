@@ -6,7 +6,7 @@ import { EntRole } from './infrastructure/role.entity'
 import { RoleService } from './infrastructure/role.service'
 import { RoleCrudApp } from './v1/role-crud.app'
 import { RoleCrudController } from './v1/role-crud.controller'
-import { RoleSheetController } from './v1/role-sheet.controller'
+import { RoleSheetController } from './v1/sheet/role-sheet.controller'
 
 @Module({
   imports: [TypeOrmModule.forFeature([EntRole]), PermissionModule],

@@ -19,7 +19,7 @@ export const PermissionMethodEnum = {
   patch: {
     name: 'patch' as TMethod,
     accessName: 'MODIFY',
-    color: '#45a8ff',
+    color: '#6b00a8',
   },
   delete: {
     name: 'delete' as TMethod,
