@@ -31,9 +31,7 @@ const UserForm: React.FC = () => {
   })
 
   const { data: roles } = RoleAction.useIndex(
-    {
-      pageSize: 1000,
-    },
+    { pageSize: 1000 },
     { refetchOnWindowFocus: false },
   )
 
