@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { KeyValueRequest } from '@server/infrastructure/interfaces/key-value.request'
+import { IKeyValue } from '@server/infrastructure/interfaces/key-value.interface'
 import { NotificationCategoryDefaultKeyEnum } from '@server/modules/notification/notification-category/common/notification-category.enum'
 import { NotificationCategoryService } from '@server/modules/notification/notification-category/infrastructure/notification-category.service'
 import { NotificationTemplateService } from '@server/modules/notification/notification-template/infrastructure/notification-template.service'
@@ -22,7 +22,7 @@ export class AuthNotificationService {
         key: AuthNotificationKeyEnum.Register,
       })
 
-    const variables: KeyValueRequest[] = [
+    const variables: IKeyValue[] = [
       {
         key: 'userName',
         value: user.name,
