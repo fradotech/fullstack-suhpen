@@ -3,12 +3,12 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { Modules } from '@server/modules/modules'
-import { UserResponse } from '../../user/infrastructure/user.response'
-import { AuthApp } from './auth.app'
+import { UserResponse } from '../../../user/infrastructure/user.response'
+import { AuthApp } from '../auth.app'
 import {
   AuthPasswordChangeRequest,
   AuthPasswordSendRequest,
-} from './auth.request'
+} from '../auth.request'
 
 const THIS_MODULE = Modules.Auth + '/password'
 

@@ -1,44 +1,18 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger'
-import { UserGenderEnum } from '@server/modules/iam/user/common/user.enum'
 import {
   ArrayMinSize,
   IsArray,
-  IsEmail,
-  IsEnum,
   IsNotEmpty,
-  IsNumber,
   IsOptional,
-  IsPhoneNumber,
-  IsString,
   IsUUID,
   Matches,
   MinLength,
 } from 'class-validator'
-import dayjs from 'dayjs'
 import { REGEX_PASSWORD } from '../common/character.constant'
 import { EntUser } from '../infrastructure/user.entity'
 import { IUser } from '../infrastructure/user.interface'
 
 export class UserRequest extends EntUser implements IUser {
-  id: string
-
-  @ApiProperty({ example: 'Frado' })
-  name: string
-
-  @IsNotEmpty()
-  @IsEmail()
-  @ApiProperty({ example: 'admin@admin.com' })
-  email: string
-
-  @IsNotEmpty()
-  @MinLength(6)
-  @Matches(REGEX_PASSWORD, {
-    message:
-      'password should contain number, under case, and upper case character',
-  })
-  @ApiProperty({ example: 'Admin123' })
-  password: string
-
   @IsNotEmpty()
   @MinLength(6)
   @Matches(REGEX_PASSWORD, {
@@ -48,6 +22,12 @@ export class UserRequest extends EntUser implements IUser {
   @ApiProperty({ example: 'Admin123' })
   passwordConfirmation: string
 
+  @IsNotEmpty()
+  email: string
+
+  @IsNotEmpty()
+  password: string
+
   @IsOptional()
   @IsArray()
   @IsUUID(4, { each: true })
@@ -55,37 +35,11 @@ export class UserRequest extends EntUser implements IUser {
   @ApiProperty({ example: ['id1', 'id2', 'id3'] })
   roleIds?: string[]
 
-  @IsOptional()
-  @IsEnum(UserGenderEnum)
-  @ApiProperty({ example: UserGenderEnum.Male })
-  gender?: UserGenderEnum
-
-  @IsOptional()
-  @IsPhoneNumber('ID')
-  @ApiProperty({ example: '085704816007' })
-  phoneNumber?: string
-
-  @ApiProperty()
-  address?: string
-
-  @ApiProperty({ example: new Date() })
-  birthDate?: Date | dayjs.Dayjs
-
-  @ApiProperty()
-  avatar?: string
-
   @IsNotEmpty()
-  @IsNumber()
-  @ApiProperty()
   otp: number
 
   @IsNotEmpty()
-  @IsString()
-  @ApiProperty()
   token: string
-
-  dateRange?: [dayjs.Dayjs, dayjs.Dayjs]
-  isVerified: boolean
 }
 
 export class UserCreateRequest extends OmitType(UserRequest, [

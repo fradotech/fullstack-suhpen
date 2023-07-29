@@ -1,11 +1,9 @@
-import dayjs from 'dayjs'
 import { IUser } from '../infrastructure/user.interface'
 import { EntUser } from './user.entity'
 
 export class UserResponse extends EntUser {
   otpExpiredAt?: Date
   _accessToken?: string
-  dateRange?: [dayjs.Dayjs, dayjs.Dayjs]
   roleIds?: string[]
 
   static dto(data: IUser): UserResponse {
@@ -28,7 +26,6 @@ export class UserResponse extends EntUser {
 
 export class UserStrictResponse extends UserResponse {
   otpExpiredAt?: Date
-  dateRange?: [dayjs.Dayjs, dayjs.Dayjs]
 
   static dto(data: IUser): UserStrictResponse {
     const res = new UserStrictResponse()

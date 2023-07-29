@@ -10,9 +10,9 @@ import { JwtModuleOption } from './common/jwt-module.config'
 import { JwtStrategy } from './common/jwt.strategy'
 import { AuthNotificationService } from './infrastructure/auth-notification.service'
 import { AuthService } from './infrastructure/auth.service'
-import { AuthPasswordController } from './v1/auth-password.controller'
 import { AuthApp } from './v1/auth.app'
 import { AuthController } from './v1/auth.controller'
+import { AuthPasswordController } from './v1/password/auth-password.controller'
 
 @Module({
   imports: [
