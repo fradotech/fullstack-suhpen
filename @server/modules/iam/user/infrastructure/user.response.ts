@@ -1,8 +1,7 @@
 import { IUser } from '../infrastructure/user.interface'
 import { EntUser } from './user.entity'
 
-export class UserResponse extends EntUser {
-  otpExpiredAt?: Date
+export class UserResponse extends EntUser implements IUser {
   _accessToken?: string
   roleIds?: string[]
 
@@ -25,8 +24,6 @@ export class UserResponse extends EntUser {
 }
 
 export class UserStrictResponse extends UserResponse {
-  otpExpiredAt?: Date
-
   static dto(data: IUser): UserStrictResponse {
     const res = new UserStrictResponse()
     Object.assign(res, data)

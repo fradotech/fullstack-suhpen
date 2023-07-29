@@ -1,17 +1,10 @@
 import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger'
-import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.interface'
-import { BaseMasterDataRequest } from '@server/infrastructure/base/master-data/base-master-data.request'
 import { IsArray, IsOptional, IsUUID } from 'class-validator'
 import { EntPermission } from '../../permission/infrastructure/permission.entity'
 import { EntRole } from '../infrastructure/role.entity'
 import { IRole } from '../infrastructure/role.interface'
 
-export class RoleRequest
-  extends OmitType(BaseMasterDataRequest, ['id'])
-  implements IBaseMasterData
-{
-  id: string
-
+export class RoleRequest extends EntRole implements IRole {
   @IsOptional()
   @IsArray()
   @IsUUID(4, { each: true })
