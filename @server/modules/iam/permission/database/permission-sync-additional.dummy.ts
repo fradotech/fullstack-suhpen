@@ -1,6 +1,7 @@
 import { PermissionMethodEnum } from '../common/permission.enum'
+import { PermissionCreateRequest } from '../v1/permission.request'
 
-export const permissionDummies = [
+export const permissionDummies: PermissionCreateRequest[] = [
   {
     key: 'get/dashboard',
     path: '/api/v1/dashboard',

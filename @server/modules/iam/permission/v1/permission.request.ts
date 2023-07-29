@@ -1,19 +1,12 @@
 import { OmitType, PartialType } from '@nestjs/swagger'
 import { Util } from '@server/common/utils/util'
 import { config } from '@server/config'
-import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.interface'
-import { BaseMasterDataRequest } from '@server/infrastructure/base/master-data/base-master-data.request'
 import { Modules } from '@server/modules/modules'
 import { PermissionMethodEnum } from '../common/permission.enum'
 import { EntPermission } from '../infrastructure/permission.entity'
 import { IPermission } from '../infrastructure/permission.interface'
 
-export class PermissionRequest
-  extends OmitType(BaseMasterDataRequest, ['id'])
-  implements IBaseMasterData
-{
-  id: string
-}
+export class PermissionRequest extends EntPermission implements IPermission {}
 
 export class PermissionCreateRequest extends PartialType(PermissionRequest) {
   static dto(req: PermissionCreateRequest): IPermission {
