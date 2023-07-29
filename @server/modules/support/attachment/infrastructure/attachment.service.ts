@@ -5,11 +5,11 @@ import { Exception } from '@server/common/exceptions/index.exception'
 import { config } from '@server/config'
 import { diskStorage } from 'multer'
 import { Repository } from 'typeorm'
-import { EntAttachment } from './attachment.entity'
 import {
   AttachmentFindRequest,
   AttachmentUploadRequest,
-} from './attachment.request'
+} from '../v1/attachment.request'
+import { EntAttachment } from './attachment.entity'
 
 @Injectable()
 export class AttachmentService {

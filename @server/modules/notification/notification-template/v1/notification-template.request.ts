@@ -1,4 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger'
+import { IsUUID } from 'class-validator'
 import { EntNotificationTemplate } from '../infrastructure/notification-template.entity'
 import { INotificationTemplate } from '../infrastructure/notification-template.interface'
 
@@ -6,17 +7,10 @@ export class NotificationTemplateRequest
   extends EntNotificationTemplate
   implements INotificationTemplate
 {
+  @IsUUID()
   @ApiProperty()
-  title: string
-
-  @ApiProperty()
-  message: string
-
-  @ApiProperty()
+  categoryId: string
   categoryKey: string
-
-  @ApiProperty()
-  thumbnail?: string
 }
 
 export class NotificationTemplateCreateRequest extends PartialType(

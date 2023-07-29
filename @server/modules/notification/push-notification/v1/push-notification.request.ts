@@ -11,22 +11,10 @@ export class PushNotificationRequest
   extends EntPushNotification
   implements IPushNotification
 {
-  @ApiProperty({ example: 'Test Create Notification' })
-  title: string
-
-  @ApiProperty()
-  isBroadcast: boolean
-
-  @ApiProperty()
-  thumbnail?: string
-
   @IsUUID()
   @ApiProperty()
   categoryId: string
   categoryKey: NotificationCategoryDefaultKeyEnum
-
-  @ApiProperty({ example: 'Test create notification message' })
-  message: string
 
   @IsUUID()
   @ApiProperty()

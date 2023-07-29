@@ -1,7 +1,8 @@
 import { RoleDefaultKeyEnum } from '../common/role.enum'
+import { RoleCreateRequest } from '../v1/role.request'
 
 // <--- KEY: key --->
-export const roleDummies = [
+export const roleDummies: RoleCreateRequest[] = [
   {
     name: 'Super Admin',
     key: RoleDefaultKeyEnum.SuperAdmin,

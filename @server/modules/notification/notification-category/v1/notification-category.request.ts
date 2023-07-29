@@ -1,15 +1,10 @@
-import { OmitType, PartialType } from '@nestjs/swagger'
-import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.interface'
-import { BaseMasterDataRequest } from '@server/infrastructure/base/master-data/base-master-data.request'
+import { PartialType } from '@nestjs/swagger'
 import { EntNotificationCategory } from '../infrastructure/notification-category.entity'
 import { INotificationCategory } from '../infrastructure/notification-category.interface'
 
 export class NotificationCategoryRequest
-  extends OmitType(BaseMasterDataRequest, ['id'])
-  implements IBaseMasterData
-{
-  id: string
-}
+  extends EntNotificationCategory
+  implements INotificationCategory {}
 
 export class NotificationCategoryCreateRequest extends PartialType(
   NotificationCategoryRequest,

@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger'
 import { BaseEntity } from '@server/infrastructure/base/base.entity'
 import { EntUser } from '@server/modules/iam/user/infrastructure/user.entity'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
@@ -18,19 +19,23 @@ export class EntPushNotification
   extends BaseEntity
   implements IPushNotification
 {
+  @ApiProperty({ example: 'Test Create Notification' })
   @Index()
   @Column()
   title: string
 
+  @ApiProperty()
   @Column({ default: false })
   isBroadcast: boolean
 
+  @ApiProperty()
   @Column({ default: null })
   thumbnail?: string
 
   @ManyToOne(() => EntNotificationCategory)
   category: INotificationCategory
 
+  @ApiProperty({ example: 'Test create notification message' })
   @Column({ type: 'text' })
   message: string
 

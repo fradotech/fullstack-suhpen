@@ -16,12 +16,12 @@ import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interfa
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { Modules } from '@server/modules/modules'
 import * as path from 'path'
+import { AttachmentUploadResponse } from '../infrastructure/attachment.response'
+import { AttachmentService } from '../infrastructure/attachment.service'
 import {
   AttachmentFindRequest,
   AttachmentUploadRequest,
-} from '../infrastructure/attachment.request'
-import { AttachmentUploadResponse } from '../infrastructure/attachment.response'
-import { AttachmentService } from '../infrastructure/attachment.service'
+} from './attachment.request'
 
 const THIS_MODULE = Modules.Attachment
 
