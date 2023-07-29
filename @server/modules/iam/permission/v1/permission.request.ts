@@ -2,7 +2,7 @@ import { OmitType, PartialType } from '@nestjs/swagger'
 import { Util } from '@server/common/utils/util'
 import { config } from '@server/config'
 import { Modules } from '@server/modules/modules'
-import { PermissionMethodEnum } from '../common/permission.enum'
+import { PermissionMethodValue } from '../common/permission.enum'
 import { EntPermission } from '../infrastructure/permission.entity'
 import { IPermission } from '../infrastructure/permission.interface'
 
@@ -51,27 +51,11 @@ export class PermissionSyncRequest extends PartialType(PermissionRequest) {
     })
 
     res.name = res.name.replace(
-      Util.titleCase(PermissionMethodEnum.get.name),
-      PermissionMethodEnum.get.accessName,
-    )
-    res.name = res.name.replace(
-      Util.titleCase(PermissionMethodEnum.post.name),
-      PermissionMethodEnum.post.accessName,
-    )
-    res.name = res.name.replace(
-      Util.titleCase(PermissionMethodEnum.put.name),
-      PermissionMethodEnum.put.accessName,
-    )
-    res.name = res.name.replace(
-      Util.titleCase(PermissionMethodEnum.patch.name),
-      PermissionMethodEnum.patch.accessName,
-    )
-    res.name = res.name.replace(
-      Util.titleCase(PermissionMethodEnum.delete.name),
-      PermissionMethodEnum.delete.accessName,
+      Util.titleCase(res.method),
+      PermissionMethodValue[res.method].accessName,
     )
 
-    res.labelColor = PermissionMethodEnum[res.method].color
+    res.labelColor = PermissionMethodValue[res.method].color
 
     return res
   }

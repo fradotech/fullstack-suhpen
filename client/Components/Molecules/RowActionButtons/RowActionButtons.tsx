@@ -97,9 +97,9 @@ export const RowActionButtons: React.FC<IRowActionProps> = ({ actions }) => {
     let permissionKey: string
 
     if (!action.href) {
-      permissionKey = `${PermissionMethodEnum.delete.name}/${modules}/:id`
+      permissionKey = `${PermissionMethodEnum.Delete}/${modules}/:id`
     } else {
-      permissionKey = `${PermissionMethodEnum.get.name}/${modules}/:id`
+      permissionKey = `${PermissionMethodEnum.Get}/${modules}/:id`
     }
 
     return isHasPermission([permissionKey]) && renderButton(action)

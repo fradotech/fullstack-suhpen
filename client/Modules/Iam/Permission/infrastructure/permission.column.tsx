@@ -30,10 +30,10 @@ export const permissionColumns = (): ColumnsType<PermissionResponse> => {
 
     {
       dataIndex: 'method',
-      filters: Object.values(PermissionMethodEnum).map((method) => {
+      filters: Object.values(PermissionMethodEnum).map((data) => {
         return {
-          text: method.name,
-          value: method.name,
+          text: data,
+          value: data,
         }
       }),
     },

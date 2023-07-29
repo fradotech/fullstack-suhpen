@@ -4,10 +4,7 @@ import React from 'react'
 import { FaPaperPlane } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { Util } from '../../../../@server/common/utils/util'
-import {
-  PermissionMethodEnum,
-  TMethod,
-} from '../../../../@server/modules/iam/permission/common/permission.enum'
+import { PermissionMethodEnum } from '../../../../@server/modules/iam/permission/common/permission.enum'
 import isHasPermission from '../../../Modules/Iam/Role/common/isHasPermission'
 import useModules from '../../../common/useModules'
 import { API } from '../../../infrastructure/api.service'
@@ -29,7 +26,7 @@ const FormActionButton = (props: IFormActionButtonProps) => {
     return Util.objectIsEmpty(props.form?.getFieldsValue())
   }, [props.form?.getFieldsValue()])
 
-  const renderIfHasPermission = (method: TMethod): boolean => {
+  const renderIfHasPermission = (method: PermissionMethodEnum): boolean => {
     if (!method || !modules) return false
     const permissionKey = `${method}/${modules}/:id`
     return isHasPermission([permissionKey], true)
@@ -51,7 +48,7 @@ const FormActionButton = (props: IFormActionButtonProps) => {
           ))
         ) : (
           <React.Fragment>
-            {renderIfHasPermission(PermissionMethodEnum.put.name) && (
+            {renderIfHasPermission(PermissionMethodEnum.Put) && (
               <Button
                 type="primary"
                 htmlType="submit"
@@ -63,7 +60,7 @@ const FormActionButton = (props: IFormActionButtonProps) => {
               </Button>
             )}
 
-            {renderIfHasPermission(PermissionMethodEnum.delete.name) && (
+            {renderIfHasPermission(PermissionMethodEnum.Delete) && (
               <Popconfirm
                 title={'Are you sure want to delete?'}
                 onConfirm={async () => {

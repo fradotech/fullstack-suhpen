@@ -42,7 +42,7 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
     let permissionKey: string
 
     if (href.includes('new')) {
-      permissionKey = `${PermissionMethodEnum.post.name}/${modules}`
+      permissionKey = `${PermissionMethodEnum.Post}/${modules}`
     } else {
       return isHasPermission([href])
     }

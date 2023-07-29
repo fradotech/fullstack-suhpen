@@ -24,7 +24,7 @@ export class CacheClearInterceptor extends CacheInterceptor {
     const request = context.switchToHttp().getRequest<Request>()
     const method = request.method.toLowerCase()
 
-    if (method === PermissionMethodEnum.get.name) return next.handle()
+    if (method === PermissionMethodEnum.Get) return next.handle()
 
     const userId = request.user?.['id']
     const path = request['_parsedOriginalUrl'].path

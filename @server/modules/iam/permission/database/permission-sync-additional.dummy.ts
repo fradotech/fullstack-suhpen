@@ -5,17 +5,17 @@ export const permissionDummies: PermissionCreateRequest[] = [
   {
     key: 'get/dashboard',
     path: '/api/v1/dashboard',
-    method: 'get',
+    method: PermissionMethodEnum.Get,
     name: 'READ dashboard',
     module: 'dashboard',
-    labelColor: PermissionMethodEnum.get.color,
+    labelColor: PermissionMethodEnum.Get,
   },
   {
     key: 'public/get/notification-categories',
     path: '/api/v1/notification-categories',
-    method: 'get',
+    method: PermissionMethodEnum.Get,
     name: 'READ notification-categories',
     module: 'notification-categories',
-    labelColor: PermissionMethodEnum.get.color,
+    labelColor: PermissionMethodEnum.Get,
   },
 ]
