@@ -28,8 +28,6 @@ const LayoutSearch: React.FC = () => {
       return label.includes(value?.toLocaleLowerCase())
     })
 
-    // console.log(items)
-
     return items
   }, [value])
 
