@@ -1,7 +1,8 @@
-import { Col, Row } from 'antd'
+import { UserOutlined } from '@ant-design/icons'
+import { Card, Col, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
-import CardData from '../../../Components/Molecules/CardData/CardData'
+import CardStatistic from '../../../Components/Molecules/CardStatistic/CardStatistic'
 import { DashboardUserAction } from '../infrastructure/dashboardUser.action'
 import DemoLine from './DemoLine'
 import DemoPie from './DemoPie'
@@ -22,28 +23,35 @@ const DashboardVariant: React.FC = () => {
       <Col>
         <Row gutter={12}>
           <Col sm={24} md={6}>
-            <CardData title="User OTP Total" value={data?.otp?.sum || 8723} />
+            <CardStatistic
+              title="User OTP Total"
+              value={data?.otp?.sum || 8723}
+              prefix={<UserOutlined />}
+            />
           </Col>
           <Col sm={24} md={6}>
-            <CardData title="User Total" price={7000} />
+            <CardStatistic title="User Total" value={7000} />
           </Col>
           <Col sm={24} md={6}>
-            <CardData title="User OTP Average" value={data?.otp?.avg || 3779} />
+            <CardStatistic
+              title="User OTP Average"
+              value={data?.otp?.avg || 3779}
+            />
           </Col>
           <Col sm={24} md={6}>
-            <CardData title="User Average" price={3463} />
+            <CardStatistic title="User Average" value={3463} />
           </Col>
         </Row>
         <Row gutter={12}>
           <Col sm={24} md={14}>
-            <CardData title="Penjualan">
+            <Card title="Penjualan" bordered={false}>
               <DemoLine />
-            </CardData>
+            </Card>
           </Col>
           <Col sm={24} md={10}>
-            <CardData title="Categories">
+            <Card title="Categories" bordered={false}>
               <DemoPie />
-            </CardData>
+            </Card>
           </Col>
         </Row>
       </Col>
