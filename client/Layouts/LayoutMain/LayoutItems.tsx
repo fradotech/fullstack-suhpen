@@ -5,6 +5,7 @@ import isHasPermission from '../../Modules/Iam/Role/common/isHasPermission'
 import NotificationModule from '../../Modules/Notification/Notification.Module'
 
 export type MenuItem = Required<MenuProps>['items'][number] & {
+  label: React.ReactNode | string
   permissions: string[]
   children?: MenuItem[]
 }

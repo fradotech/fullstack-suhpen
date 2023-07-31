@@ -13,7 +13,7 @@ class PushNotificationModule {
   static menuItems: MenuItem[] = [
     {
       key: path.index,
-      label: <Link to={path.index}>{Util.titleCase('PushNotification')}</Link>,
+      label: <Link to={path.index}>{Util.titleCase('pushNotification')}</Link>,
       icon: <BellFilled />,
       permissions: [path.index],
     },

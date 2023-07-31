@@ -12,7 +12,7 @@ class NotificationTemplateModule {
   static menuItems: MenuItem[] = [
     {
       key: path.index,
-      label: <Link to={path.index}>{Util.titleCase('Template')}</Link>,
+      label: <Link to={path.index}>{Util.titleCase('template')}</Link>,
       icon: <FaPager />,
       permissions: [path.index],
     },

@@ -16,7 +16,7 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
   const handleLogout = () => AuthAction.logout() && location.replace(Path.login)
 
   return (
-    <div style={{ marginLeft: '12px' }}>
+    <div style={{ marginLeft: 12 }}>
       <Dropdown
         trigger={['click']}
         menu={{

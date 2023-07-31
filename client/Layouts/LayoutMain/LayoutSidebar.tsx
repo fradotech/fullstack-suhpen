@@ -9,39 +9,34 @@ interface IProps {
 }
 
 const LayoutSidebar: React.FC<IProps> = (props: IProps) => {
-  const activeMenuKey = React.useMemo(
-    () => location.pathname,
-    [location.pathname],
-  )
+  const activeMenuKey = React.useMemo(() => {
+    return location.pathname
+  }, [location.pathname])
 
-  const defaultOpenedKey = React.useMemo(
-    () =>
-      layoutItems.find((item) => {
-        if ('children' in item) {
-          const openedMenuItem = item.children?.find((chil) => {
-            return chil.key === activeMenuKey
-          })
-          return openedMenuItem !== undefined
-        }
-        return null
-      })?.key as string,
-    [layoutItems, activeMenuKey],
-  )
+  const defaultOpenedKey = React.useMemo(() => {
+    return layoutItems.find((item) => {
+      if ('children' in item) {
+        const openedMenuItem = item.children?.find((chil) => {
+          return chil.key === activeMenuKey
+        })
+        return openedMenuItem !== undefined
+      }
+      return null
+    })?.key as string
+  }, [layoutItems, activeMenuKey])
 
   return (
-    <>
-      <ConfigProvider theme={sidebarThemeConfig(props.isDarkMode)}>
-        <Col className={styles.sidebar}>
-          <Menu
-            theme={props.isDarkMode ? 'dark' : 'light'}
-            mode="inline"
-            items={layoutItems}
-            defaultOpenKeys={[defaultOpenedKey]}
-            selectedKeys={[activeMenuKey]}
-          />
-        </Col>
-      </ConfigProvider>
-    </>
+    <ConfigProvider theme={sidebarThemeConfig(props.isDarkMode)}>
+      <Col className={styles.sidebar}>
+        <Menu
+          theme={props.isDarkMode ? 'dark' : 'light'}
+          mode="inline"
+          items={layoutItems}
+          defaultOpenKeys={[defaultOpenedKey]}
+          selectedKeys={[activeMenuKey]}
+        />
+      </Col>
+    </ConfigProvider>
   )
 }
 

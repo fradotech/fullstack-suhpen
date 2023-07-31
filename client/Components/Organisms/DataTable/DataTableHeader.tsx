@@ -93,7 +93,7 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
             <Col className={styles.headerItem}>
               <Input
                 prefix={<SearchOutlined />}
-                placeholder="Search"
+                placeholder="Search..."
                 onChange={(e) => setValue(e.target.value)}
                 value={value}
                 allowClear

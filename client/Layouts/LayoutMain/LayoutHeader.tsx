@@ -6,6 +6,7 @@ import { FaMoon, FaSun } from 'react-icons/fa'
 import LayoutAccount from './LayoutAccount'
 import styles from './LayoutMain.module.css'
 import LayoutNotification from './LayoutNotification'
+import LayoutSearch from './LayoutSearch'
 
 type IProps = {
   bgLayoutColor: string
@@ -35,22 +36,25 @@ const LayoutHeader: React.FC<IProps> = ({
         </a>
 
         <Row>
-          <div className={styles.headerButton}>
-            <Button
-              type="ghost"
-              shape="circle"
-              size="large"
-              icon={isDarkMode ? <FaSun /> : <FaMoon />}
-              onClick={() => {
-                handleSwitchTheme && handleSwitchTheme(isDarkMode ?? false)
-              }}
-            />
-          </div>
+          <Row>
+            <LayoutSearch />
 
-          <div className={styles.headerButton}>
-            <LayoutNotification />
-          </div>
+            <div className={styles.headerButton}>
+              <Button
+                type="ghost"
+                shape="circle"
+                size="large"
+                icon={isDarkMode ? <FaSun /> : <FaMoon />}
+                onClick={() => {
+                  handleSwitchTheme && handleSwitchTheme(isDarkMode ?? false)
+                }}
+              />
+            </div>
 
+            <div className={styles.headerButton}>
+              <LayoutNotification />
+            </div>
+          </Row>
           <LayoutAccount user={user} isDarkMode={isDarkMode ?? false} />
         </Row>
       </Row>

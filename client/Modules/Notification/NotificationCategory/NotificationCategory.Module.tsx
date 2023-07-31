@@ -12,7 +12,7 @@ class NotificationCategoryModule {
   static menuItems: MenuItem[] = [
     {
       key: path.index,
-      label: <Link to={path.index}>{Util.titleCase('Category')}</Link>,
+      label: <Link to={path.index}>{Util.titleCase('category')}</Link>,
       icon: <FaTag />,
       permissions: [path.index],
     },
