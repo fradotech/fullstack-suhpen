@@ -25,9 +25,9 @@ export enum Modules {
 
   // --- Notification --- \\
 
-  PushNotification = 'push-notifications',
-  PushNotificationSheet = 'push-notifications/sheet',
-  PushNotificationRead = 'push-notifications/read',
+  NotificationPush = 'notification-pushs',
+  NotificationPushSheet = 'notification-pushs/sheet',
+  NotificationPushRead = 'notification-pushs/read',
 
   NotificationTemplate = 'notification-templates',
   NotificationTemplateSheet = 'notification-templates/sheet',

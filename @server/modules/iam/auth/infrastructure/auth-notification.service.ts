@@ -2,16 +2,16 @@ import { Injectable } from '@nestjs/common'
 import { IKeyValue } from '@server/infrastructure/interfaces/key-value.interface'
 import { NotificationCategoryDefaultKeyEnum } from '@server/modules/notification/notification-category/common/notification-category.enum'
 import { NotificationCategoryService } from '@server/modules/notification/notification-category/infrastructure/notification-category.service'
+import { NotificationPushService } from '@server/modules/notification/notification-push/infrastructure/notification-push.service'
+import { NotificationPushCreateRequest } from '@server/modules/notification/notification-push/v1/notification-push.request'
 import { NotificationTemplateService } from '@server/modules/notification/notification-template/infrastructure/notification-template.service'
-import { PushNotificationService } from '@server/modules/notification/push-notification/infrastructure/push-notification.service'
-import { PushNotificationCreateRequest } from '@server/modules/notification/push-notification/v1/push-notification.request'
 import { IUser } from '../../user/infrastructure/user.interface'
 import { AuthNotificationKeyEnum } from '../common/auth.enum'
 
 @Injectable()
 export class AuthNotificationService {
   constructor(
-    private readonly pushNotificationService: PushNotificationService,
+    private readonly notificationPushService: NotificationPushService,
     private readonly notificationTemplateService: NotificationTemplateService,
     private readonly notificationCategoryService: NotificationCategoryService,
   ) {}
@@ -38,13 +38,13 @@ export class AuthNotificationService {
       key: NotificationCategoryDefaultKeyEnum.Info,
     })
 
-    const pushNotification =
-      PushNotificationCreateRequest.dtoNotificationTemplate(
+    const notificationPush =
+      NotificationPushCreateRequest.dtoNotificationTemplate(
         template,
         category,
         user,
       )
 
-    await this.pushNotificationService.save(pushNotification)
+    await this.notificationPushService.save(notificationPush)
   }
 }

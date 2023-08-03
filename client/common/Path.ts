@@ -5,8 +5,8 @@ import { permissionPath } from '../Modules/Iam/Permission/infrastructure/permiss
 import { rolePath } from '../Modules/Iam/Role/infrastructure/role.path'
 import { userPath } from '../Modules/Iam/User/infrastructure/user.path'
 import { notificationCategoryPath } from '../Modules/Notification/NotificationCategory/infrastructure/notification-category.path'
+import { notificationPushPath } from '../Modules/Notification/NotificationPush/infrastructure/notification-push.path'
 import { notificationTemplatePath } from '../Modules/Notification/NotificationTemplate/infrastructure/notification-template.path'
-import { pushNotificationPath } from '../Modules/Notification/PushNotification/infrastructure/push-notification.path'
 
 export const Path = {
   Home: '/',
@@ -23,7 +23,7 @@ export const Path = {
 
   // --- Notification --- \\
 
-  pushNotification: pushNotificationPath,
+  notificationPush: notificationPushPath,
   notificationCategory: notificationCategoryPath,
   notificationTemplate: notificationTemplatePath,
 }
