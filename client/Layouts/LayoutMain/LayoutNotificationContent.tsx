@@ -3,7 +3,7 @@ import { INotificationPush } from '@server/modules/notification/notification-pus
 import { NotificationPushResponse } from '@server/modules/notification/notification-push/infrastructure/notification-push.response'
 import { Col, List } from 'antd'
 import Paragraph from 'antd/es/typography/Paragraph'
-import React from 'react'
+import React, { useContext } from 'react'
 import {
   QueryObserverResult,
   RefetchOptions,
@@ -13,7 +13,8 @@ import { Link } from 'react-router-dom'
 import { NotificationPushReadAction } from '../../Modules/Notification/NotificationPush/infrastructure/notification-push-read.action'
 import { Path } from '../../common/Path'
 import { Util } from '../../common/utils/util'
-import { themeColors } from '../ThemeProvider/theme'
+import { ThemeContext } from '../ThemeProvider/ThemeProvider'
+import { themeColors, themeColorsDark } from '../ThemeProvider/theme'
 
 interface IProps {
   notificationPushs: INotificationPush[] | undefined
@@ -25,6 +26,8 @@ interface IProps {
 }
 
 const LayoutNotificationContent: React.FC<IProps> = (props: IProps) => {
+  const { isDarkMode } = useContext(ThemeContext)
+
   const handleReadOne = async (id: string) => {
     await NotificationPushReadAction.readOne({ id })
     props.refetch()
@@ -43,7 +46,9 @@ const LayoutNotificationContent: React.FC<IProps> = (props: IProps) => {
           <List.Item
             style={{
               backgroundColor: !data.readAt
-                ? themeColors.primaryOpacity
+                ? isDarkMode
+                  ? themeColorsDark.primaryOpacity
+                  : themeColors.primaryOpacity
                 : undefined,
               padding: 10,
               margin: 1,

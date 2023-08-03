@@ -18,7 +18,7 @@ export const themeColorsDark = {
   solid: '#141414',
   background: '#1d1d1d',
   primary: '#007fd0',
-  primaryOpacity: '#daf1ff',
+  primaryOpacity: '#031838',
   secondary: '',
   success: '',
   warning: '',
@@ -36,16 +36,16 @@ export const sidebarThemeConfig = (isDarkMode: boolean): ThemeConfig => {
       Menu: {
         colorItemText: '#777777',
         colorItemTextSelected: isDarkMode
-          ? themeColors.solid
+          ? themeColors.primary
           : themeColorsDark.primary,
         colorItemBgSelected: isDarkMode
-          ? themeColorsDark.primary
+          ? themeColorsDark.primaryOpacity
           : themeColors.primaryOpacity,
         colorItemTextHover: isDarkMode
-          ? themeColors.solid
+          ? themeColors.primary
           : themeColors.primary,
         colorItemBgHover: isDarkMode
-          ? themeColorsDark.primary
+          ? themeColorsDark.primaryOpacity
           : themeColors.primaryOpacity,
         fontSize: 14,
         colorItemBg: isDarkMode ? themeColorsDark.solid : themeColors.solid,
