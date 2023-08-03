@@ -1,49 +1,51 @@
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
-import { IPushNotification } from '@server/modules/notification/push-notification/infrastructure/push-notification.interface'
-import { PushNotificationResponse } from '@server/modules/notification/push-notification/infrastructure/push-notification.response'
+import { INotificationPush } from '@server/modules/notification/notification-push/infrastructure/notification-push.interface'
+import { NotificationPushResponse } from '@server/modules/notification/notification-push/infrastructure/notification-push.response'
 import { Col, List } from 'antd'
 import Paragraph from 'antd/es/typography/Paragraph'
-import React from 'react'
+import React, { useContext } from 'react'
 import {
   QueryObserverResult,
   RefetchOptions,
   RefetchQueryFilters,
 } from 'react-query'
 import { Link } from 'react-router-dom'
-import { PushNotificationReadAction } from '../../Modules/Notification/PushNotification/infrastructure/push-notification-read.action'
+import { NotificationPushReadAction } from '../../Modules/Notification/NotificationPush/infrastructure/notification-push-read.action'
 import { Path } from '../../common/Path'
 import { Util } from '../../common/utils/util'
-import { themeColors } from '../ThemeProvider/theme'
+import { ThemeContext } from '../ThemeProvider/ThemeProvider'
 
 interface IProps {
-  pushNotifications: IPushNotification[] | undefined
+  notificationPushs: INotificationPush[] | undefined
   refetch: <TPageData>(
     options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined,
   ) => Promise<
-    QueryObserverResult<IApiRes<PushNotificationResponse[]>, unknown>
+    QueryObserverResult<IApiRes<NotificationPushResponse[]>, unknown>
   >
 }
 
 const LayoutNotificationContent: React.FC<IProps> = (props: IProps) => {
+  const { themeColors } = useContext(ThemeContext)
+
   const handleReadOne = async (id: string) => {
-    await PushNotificationReadAction.readOne({ id })
+    await NotificationPushReadAction.readOne({ id })
     props.refetch()
   }
 
   return (
     <List
       size="small"
-      dataSource={props.pushNotifications}
+      dataSource={props.notificationPushs}
       style={{ overflowY: 'scroll', height: '360px' }}
       renderItem={(data) => (
         <Link
           onClick={() => handleReadOne(data.id)}
-          to={Path.pushNotification.read.id(data.id)}
+          to={Path.notificationPush.read.id(data.id)}
         >
           <List.Item
             style={{
               backgroundColor: !data.readAt
-                ? themeColors.primaryOpacity
+                ? themeColors?.primaryOpacity
                 : undefined,
               padding: 10,
               margin: 1,

@@ -2,7 +2,19 @@ import { theme } from 'antd'
 import type { ThemeConfig } from 'antd/es/config-provider/context'
 import type { CSSProperties } from 'react'
 
-export const themeColors = {
+export type TThemeColor = {
+  solid: string
+  background: string
+  primary: string
+  primaryOpacity: string
+  secondary: string
+  success: string
+  warning: string
+  error: string
+  info: string
+}
+
+export const themeColorsLight: TThemeColor = {
   solid: '#ffffff',
   background: '#fafafa',
   primary: '#007fd0',
@@ -14,11 +26,11 @@ export const themeColors = {
   info: '',
 }
 
-export const themeColorsDark = {
+export const themeColorsDark: TThemeColor = {
   solid: '#141414',
   background: '#1d1d1d',
   primary: '#007fd0',
-  primaryOpacity: '#daf1ff',
+  primaryOpacity: '#0b2740',
   secondary: '',
   success: '',
   warning: '',
@@ -27,7 +39,7 @@ export const themeColorsDark = {
 }
 
 export const iconActionTableStyle: CSSProperties = {
-  color: themeColors.primary,
+  color: themeColorsLight.primary,
 }
 
 export const sidebarThemeConfig = (isDarkMode: boolean): ThemeConfig => {
@@ -36,57 +48,69 @@ export const sidebarThemeConfig = (isDarkMode: boolean): ThemeConfig => {
       Menu: {
         colorItemText: '#777777',
         colorItemTextSelected: isDarkMode
-          ? themeColors.solid
+          ? themeColorsLight.primary
           : themeColorsDark.primary,
         colorItemBgSelected: isDarkMode
-          ? themeColorsDark.primary
-          : themeColors.primaryOpacity,
+          ? themeColorsDark.primaryOpacity
+          : themeColorsLight.primaryOpacity,
         colorItemTextHover: isDarkMode
-          ? themeColors.solid
-          : themeColors.primary,
+          ? themeColorsLight.primary
+          : themeColorsLight.primary,
         colorItemBgHover: isDarkMode
-          ? themeColorsDark.primary
-          : themeColors.primaryOpacity,
+          ? themeColorsDark.primaryOpacity
+          : themeColorsLight.primaryOpacity,
         fontSize: 14,
-        colorItemBg: isDarkMode ? themeColorsDark.solid : themeColors.solid,
-        colorSubItemBg: isDarkMode ? themeColorsDark.solid : themeColors.solid,
+        colorItemBg: isDarkMode
+          ? themeColorsDark.solid
+          : themeColorsLight.solid,
+        colorSubItemBg: isDarkMode
+          ? themeColorsDark.solid
+          : themeColorsLight.solid,
       },
     },
   }
 }
 
-export const globalThemeConfig: ThemeConfig = {
-  algorithm: theme.defaultAlgorithm,
-  components: {
-    Button: {
-      colorPrimary: themeColors.primary,
-      colorPrimaryHover: themeColors.primary,
+export const globalThemeConfig = (
+  isDarkMode: boolean | undefined,
+): ThemeConfig => {
+  return {
+    algorithm: theme.defaultAlgorithm,
+    components: {
+      Button: {
+        colorPrimary: themeColorsLight.primary,
+        colorPrimaryHover: themeColorsLight.primary,
+      },
+      Checkbox: {
+        colorPrimary: themeColorsLight.primary,
+        colorPrimaryHover: themeColorsLight.primary,
+      },
+      Table: {
+        controlItemBgActive: isDarkMode
+          ? themeColorsDark.primaryOpacity
+          : themeColorsLight.primaryOpacity,
+        controlItemBgActiveHover: isDarkMode
+          ? themeColorsDark.primaryOpacity
+          : themeColorsLight.primaryOpacity,
+      },
+      Steps: {
+        colorPrimary: themeColorsLight.primary,
+      },
+      Tabs: {
+        colorPrimary: themeColorsLight.primary,
+      },
+      Upload: {
+        colorPrimary: themeColorsLight.primary,
+      },
+      Radio: {
+        colorPrimary: themeColorsLight.primary,
+      },
+      Switch: {
+        colorPrimary: themeColorsLight.primary,
+      },
+      Timeline: {
+        colorPrimary: themeColorsLight.primary,
+      },
     },
-    Checkbox: {
-      colorPrimary: themeColors.primary,
-      colorPrimaryHover: themeColors.primary,
-    },
-    Table: {
-      controlItemBgActive: themeColors.primaryOpacity,
-      controlItemBgActiveHover: themeColors.primaryOpacity,
-    },
-    Steps: {
-      colorPrimary: themeColors.primary,
-    },
-    Tabs: {
-      colorPrimary: themeColors.primary,
-    },
-    Upload: {
-      colorPrimary: themeColors.primary,
-    },
-    Radio: {
-      colorPrimary: themeColors.primary,
-    },
-    Switch: {
-      colorPrimary: themeColors.primary,
-    },
-    Timeline: {
-      colorPrimary: themeColors.primary,
-    },
-  },
+  }
 }

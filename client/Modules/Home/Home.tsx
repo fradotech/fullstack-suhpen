@@ -3,7 +3,7 @@ import Title from 'antd/es/typography/Title'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
-import { themeColors } from '../../Layouts/ThemeProvider/theme'
+import { themeColorsLight } from '../../Layouts/ThemeProvider/theme'
 import { useMobileScreen } from '../../common/useMobileScreen'
 import HomeHeaderSection from './common/HomeHeader.section'
 
@@ -18,7 +18,9 @@ const Home: React.FC = () => {
         <section id="home">
           <Row style={{ justifyContent: 'space-between' }}>
             <Col style={{ padding: '10%' }}>
-              <Title style={{ color: themeColors.primary }}>Fradotech</Title>
+              <Title style={{ color: themeColorsLight.primary }}>
+                Fradotech
+              </Title>
               <Title level={4} style={{ opacity: '80%' }}>
                 Uvuefe nyevfe onyete nyevwe ugwem ugwem osas, hura
               </Title>

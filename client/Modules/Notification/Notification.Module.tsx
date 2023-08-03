@@ -3,8 +3,8 @@ import { MenuItem } from '../../Layouts/LayoutMain/LayoutItems'
 import { Path } from '../../common/Path'
 import isHasPermission from '../Iam/Role/common/isHasPermission'
 import NotificationCategoryModule from './NotificationCategory/NotificationCategory.Module'
+import NotificationPushModule from './NotificationPush/NotificationPush.Module'
 import NotificationTemplateModule from './NotificationTemplate/NotificationTemplate.Module'
-import PushNotificationModule from './PushNotification/PushNotification.Module'
 
 export class NotificationModule {
   static menuItems: MenuItem[] = [
@@ -14,7 +14,7 @@ export class NotificationModule {
       icon: <NotificationFilled />,
       permissions: [Path.user.index],
       children: [
-        ...PushNotificationModule.menuItems,
+        ...NotificationPushModule.menuItems,
         ...NotificationTemplateModule.menuItems,
         ...NotificationCategoryModule.menuItems,
       ].filter((item) => isHasPermission(item.permissions)),
@@ -22,7 +22,7 @@ export class NotificationModule {
   ]
 
   static routes = [
-    ...PushNotificationModule.routes,
+    ...NotificationPushModule.routes,
     ...NotificationTemplateModule.routes,
     ...NotificationCategoryModule.routes,
   ]

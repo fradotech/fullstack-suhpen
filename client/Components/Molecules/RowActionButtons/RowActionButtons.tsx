@@ -14,10 +14,10 @@ import isHasPermission from '../../../Modules/Iam/Role/common/isHasPermission'
 import { useMobileScreen } from '../../../common/useMobileScreen'
 import useModules from '../../../common/useModules'
 
-type ButtonType = 'view' | 'edit' | 'delete' | 'approve' | 'reject' | 'submit'
+type TButton = 'view' | 'edit' | 'delete' | 'approve' | 'reject' | 'submit'
 
 interface IRowActionButtonsProps {
-  type?: ButtonType
+  type?: TButton
   href?: string
   onClick?: () => void
   icon?: React.ReactNode

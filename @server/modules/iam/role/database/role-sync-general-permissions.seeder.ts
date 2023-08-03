@@ -21,7 +21,7 @@ export const roleSyncGeneralPermissionsSeeder = async (
         Modules.Dashboard,
         Modules.DashboardUser,
         Modules.NotificationCategory,
-        Modules.PushNotificationRead,
+        Modules.NotificationPushRead,
       ],
     })
     .getMany()

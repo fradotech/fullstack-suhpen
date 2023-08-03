@@ -3,7 +3,6 @@ import React, { useContext } from 'react'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
 import useAuthGuard from '../../Modules/Iam/Auth/common/useAuthGuard'
 import { ThemeContext } from '../ThemeProvider/ThemeProvider'
-import { themeColors, themeColorsDark } from '../ThemeProvider/theme'
 import LayoutHeader from './LayoutHeader'
 import styles from './LayoutMain.module.css'
 import LayoutSidebar from './LayoutSidebar'
@@ -24,11 +23,8 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
     localStorage.setItem('isSidebarCollapsed', isCollapsed ? 'true' : 'false')
   }
 
-  const { isDarkMode, handleSwitchTheme } = useContext(ThemeContext)
-
-  const bgLayoutColor = React.useMemo(() => {
-    return isDarkMode ? themeColorsDark?.solid : themeColors.solid
-  }, [isDarkMode])
+  const { isDarkMode, handleSwitchTheme, themeColors } =
+    useContext(ThemeContext)
 
   return (
     <Layout style={{ height: '100vh' }}>
@@ -37,14 +33,14 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
         collapsible
         collapsed={isCollapsed}
         className={styles.sider}
-        style={{ background: bgLayoutColor }}
+        style={{ background: themeColors?.solid }}
       >
         <Col style={{ padding: 8, textAlign: 'center' }}>
           <CompanyLogo />
         </Col>
         <Col
           className={styles.sidebarContainer}
-          style={{ background: bgLayoutColor }}
+          style={{ background: themeColors?.solid }}
         >
           <LayoutSidebar isDarkMode={isDarkMode ?? false} />
         </Col>
@@ -52,7 +48,7 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
       <Layout>
         <Layout.Content className={styles.contentContainer}>
           <LayoutHeader
-            bgLayoutColor={bgLayoutColor}
+            bgLayoutColor={themeColors?.solid}
             handleSidebarCollapse={handleSidebarCollapse}
             isCollapsed={isCollapsed}
             isDarkMode={isDarkMode}
@@ -62,9 +58,7 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
           <Col
             className={styles.content}
             style={{
-              background: isDarkMode
-                ? themeColorsDark.background
-                : themeColors.background,
+              background: themeColors?.background,
             }}
           >
             {children}

@@ -1,20 +1,20 @@
-import { IPushNotification } from '@server/modules/notification/push-notification/infrastructure/push-notification.interface'
+import { INotificationPush } from '@server/modules/notification/notification-push/infrastructure/notification-push.interface'
 import { Badge, Button, Dropdown, Row, Tabs, TabsProps, Typography } from 'antd'
 import React from 'react'
 import { FaBell } from 'react-icons/fa'
 import { VscCheckAll } from 'react-icons/vsc'
 import { NotificationCategoryAction } from '../../Modules/Notification/NotificationCategory/infrastructure/notification-category.action'
-import { PushNotificationReadAction } from '../../Modules/Notification/PushNotification/infrastructure/push-notification-read.action'
-import { themeColors } from '../ThemeProvider/theme'
+import { NotificationPushReadAction } from '../../Modules/Notification/NotificationPush/infrastructure/notification-push-read.action'
+import { themeColorsLight } from '../ThemeProvider/theme'
 import LayoutNotificationContent from './LayoutNotificationContent'
 
 const LayoutNotification: React.FC = () => {
-  const { data: pushNotifications, refetch } =
-    PushNotificationReadAction.useIndex()
+  const { data: notificationPushs, refetch } =
+    NotificationPushReadAction.useIndex()
 
-  const handleReadAll = async (data: IPushNotification[] | undefined) => {
+  const handleReadAll = async (data: INotificationPush[] | undefined) => {
     const ids = data?.map((data) => data.id)
-    ids && (await PushNotificationReadAction.readMany({ ids }))
+    ids && (await NotificationPushReadAction.readMany({ ids }))
     refetch()
   }
 
@@ -23,10 +23,10 @@ const LayoutNotification: React.FC = () => {
   })
 
   const count = React.useMemo(() => {
-    return pushNotifications?.data.filter((data) => {
+    return notificationPushs?.data.filter((data) => {
       return !data.readAt
     }).length
-  }, [pushNotifications])
+  }, [notificationPushs])
 
   const categoriesDisplay: TabsProps['items'] = React.useMemo(() => {
     const data = [
@@ -35,7 +35,7 @@ const LayoutNotification: React.FC = () => {
         label: 'All',
         children: (
           <LayoutNotificationContent
-            pushNotifications={pushNotifications?.data}
+            notificationPushs={notificationPushs?.data}
             refetch={refetch}
           />
         ),
@@ -47,7 +47,7 @@ const LayoutNotification: React.FC = () => {
       label: data.name,
       children: (
         <LayoutNotificationContent
-          pushNotifications={pushNotifications?.data.filter((notification) => {
+          notificationPushs={notificationPushs?.data.filter((notification) => {
             return notification.category.key === data.key
           })}
           refetch={refetch}
@@ -58,7 +58,7 @@ const LayoutNotification: React.FC = () => {
     categories && data.push(...categories)
 
     return data
-  }, [pushNotifications])
+  }, [notificationPushs])
 
   return (
     <Dropdown
@@ -74,7 +74,7 @@ const LayoutNotification: React.FC = () => {
                 <Typography.Title level={5} style={{ margin: 0 }}>
                   Notifications
                 </Typography.Title>
-                <a onClick={() => handleReadAll(pushNotifications?.data)}>
+                <a onClick={() => handleReadAll(notificationPushs?.data)}>
                   <VscCheckAll style={{ marginRight: 6 }} />
                   Mark Read All
                 </a>
@@ -96,7 +96,7 @@ const LayoutNotification: React.FC = () => {
       }}
     >
       <Badge
-        color={themeColors.primary}
+        color={themeColorsLight.primary}
         count={count && count > 10 ? '9+' : count}
         offset={[-12, 6]}
         size="small"

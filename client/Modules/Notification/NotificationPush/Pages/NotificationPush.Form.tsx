@@ -1,4 +1,4 @@
-import { NotificationTemplateCreateRequest } from '@server/modules/notification/notification-template/v1/notification-template.request'
+import { NotificationPushCreateRequest } from '@server/modules/notification/notification-push/v1/notification-push.request'
 import { Col, Form, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
@@ -10,22 +10,22 @@ import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { Path } from '../../../../common/Path'
 import { rule } from '../../../../common/utils/form.rules'
 import { NotificationCategoryAction } from '../../NotificationCategory/infrastructure/notification-category.action'
-import { NotificationTemplateAction } from '../infrastructure/notification-template.action'
+import { NotificationPushAction } from '../infrastructure/notification-push.action'
 
-const NotificationTemplateForm: React.FC = () => {
+const NotificationPushForm: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false)
   const navigate = useNavigate()
   const { id } = useParams()
-  const [form] = Form.useForm<NotificationTemplateCreateRequest>()
+  const [form] = Form.useForm<NotificationPushCreateRequest>()
 
   const fetch = async () => {
     setIsLoading(true)
-    const res = await NotificationTemplateAction.findOne(id)
+    const res = await NotificationPushAction.findOne(id)
     form.setFieldsValue(res.data)
     setIsLoading(false)
   }
 
-  useQuery([NotificationTemplateForm.name], id ? fetch : () => undefined, {
+  useQuery([NotificationPushForm.name], id ? fetch : () => undefined, {
     refetchOnWindowFocus: false,
   })
 
@@ -38,10 +38,10 @@ const NotificationTemplateForm: React.FC = () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
 
-    if (id) await NotificationTemplateAction.update(id, data)
+    if (id) await NotificationPushAction.update(id, data)
     else {
-      const res = await NotificationTemplateAction.create(data)
-      res.data && navigate(Path.notificationTemplate.index)
+      const res = await NotificationPushAction.create(data)
+      res.data && navigate(Path.notificationPush.index)
     }
 
     setIsLoading(false)
@@ -49,9 +49,7 @@ const NotificationTemplateForm: React.FC = () => {
 
   return (
     <>
-      <PageHeader
-        title={id ? 'NotificationTemplate' : 'New NotificationTemplate'}
-      />
+      <PageHeader title={id ? 'NotificationPush' : 'New NotificationPush'} />
       <Section>
         <FormContainer
           onFinish={onFinish}
@@ -71,20 +69,34 @@ const NotificationTemplateForm: React.FC = () => {
             </Col>
             <Col sm={24} md={18}>
               <FormItem name="title" rules={[rule.required]} />
-              <FormItem
-                label="Category"
-                name="categoryId"
-                input="select"
-                form={form}
-                options={notificationCategories?.data}
-              />
+              <Row gutter={12}>
+                <Col sm={24} md={20}>
+                  <FormItem
+                    label="Category"
+                    name="categoryId"
+                    input="select"
+                    form={form}
+                    options={notificationCategories?.data}
+                  />{' '}
+                </Col>
+                <Col sm={24} md={4}>
+                  <FormItem
+                    label="Broadcast"
+                    name="isBroadcast"
+                    input="switch"
+                    form={form}
+                    disabled={!!id}
+                  />
+                </Col>
+              </Row>
             </Col>
           </Row>
-          <FormItem name="message" input="textArea" rules={[rule.required]} />
+
+          <FormItem name="message" input="textArea" />
         </FormContainer>
       </Section>
     </>
   )
 }
 
-export default NotificationTemplateForm
+export default NotificationPushForm

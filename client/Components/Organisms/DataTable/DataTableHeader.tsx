@@ -89,17 +89,6 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
               </Button>
             </Col>
           )}
-          {props.search && (
-            <Col className={styles.headerItem}>
-              <Input
-                prefix={<SearchOutlined />}
-                placeholder="Search..."
-                onChange={(e) => setValue(e.target.value)}
-                value={value}
-                allowClear
-              />
-            </Col>
-          )}
           {props.dateRangeColumn && (
             <Col className={styles.headerItem}>
               <DatePicker.RangePicker
@@ -119,6 +108,17 @@ const DataTableHeader: React.FC<IDataTableHeader> = (
           )}
         </Row>
         <Row>
+          {props.search && (
+            <Col className={styles.headerItem}>
+              <Input
+                prefix={<SearchOutlined />}
+                placeholder="Search..."
+                onChange={(e) => setValue(e.target.value)}
+                value={value}
+                allowClear
+              />
+            </Col>
+          )}
           {renderIfHasPermission(props.hrefExport) && (
             <Col className={styles.headerItem}>
               <Button
