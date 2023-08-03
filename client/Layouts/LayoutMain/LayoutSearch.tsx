@@ -36,7 +36,7 @@ const LayoutSearch: React.FC = () => {
       <Dropdown trigger={['click']} open={!!value} menu={{ items }}>
         <Input
           prefix={<SearchOutlined />}
-          placeholder="Search..."
+          placeholder="Search for menus..."
           onChange={(e) => setValue(e.target.value)}
           value={value}
           allowClear
