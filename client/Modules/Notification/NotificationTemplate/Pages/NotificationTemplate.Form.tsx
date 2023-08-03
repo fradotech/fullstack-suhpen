@@ -80,7 +80,7 @@ const NotificationTemplateForm: React.FC = () => {
               />
             </Col>
           </Row>
-          <FormItem name="message" input="textArea" />
+          <FormItem name="message" input="textArea" rules={[rule.required]} />
         </FormContainer>
       </Section>
     </>
