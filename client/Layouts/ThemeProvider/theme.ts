@@ -18,7 +18,7 @@ export const themeColorsDark = {
   solid: '#141414',
   background: '#1d1d1d',
   primary: '#007fd0',
-  primaryOpacity: '#031838',
+  primaryOpacity: '#0b2740',
   secondary: '',
   success: '',
   warning: '',
