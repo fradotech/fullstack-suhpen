@@ -2,7 +2,7 @@ import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { IBaseEntity } from '@server/infrastructure/base/base-entity.interface'
 import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.interface'
 import { Descriptions, Image, Tag } from 'antd'
-import { themeColors } from '../../../Layouts/ThemeProvider/theme'
+import { themeColorsLight } from '../../../Layouts/ThemeProvider/theme'
 import { Util } from '../../../common/utils/util'
 
 const DescriptionItem = (data: IBaseEntity | undefined, key: string) => {
@@ -49,7 +49,7 @@ const DescriptionItem = (data: IBaseEntity | undefined, key: string) => {
       <Descriptions.Item key={key} label={Util.titleCase(key)}>
         {data[key].map((data: IBaseMasterData) => {
           return (
-            <Tag color={data.labelColor || themeColors.primary}>
+            <Tag color={data.labelColor || themeColorsLight.primary}>
               {data.name}
             </Tag>
           )

@@ -9,7 +9,7 @@ import LayoutNotification from './LayoutNotification'
 import LayoutSearch from './LayoutSearch'
 
 type IProps = {
-  bgLayoutColor: string
+  bgLayoutColor?: string
   handleSidebarCollapse: () => void
   isCollapsed: boolean
   isDarkMode: boolean | undefined
@@ -55,7 +55,7 @@ const LayoutHeader: React.FC<IProps> = ({
               <LayoutNotification />
             </div>
           </Row>
-          <LayoutAccount user={user} isDarkMode={isDarkMode ?? false} />
+          <LayoutAccount user={user} />
         </Row>
       </Row>
     </Layout.Header>

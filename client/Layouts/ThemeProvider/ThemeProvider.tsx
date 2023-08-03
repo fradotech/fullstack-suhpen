@@ -1,12 +1,18 @@
 import { ConfigProvider, theme } from 'antd'
 import { ThemeConfig } from 'antd/es/config-provider/context'
 import React, { createContext } from 'react'
-import { globalThemeConfig } from './theme'
+import {
+  TThemeColor,
+  globalThemeConfig,
+  themeColorsDark,
+  themeColorsLight,
+} from './theme'
 import useDarkMode from './useDarkMode'
 
 export interface IThemeContext {
   isDarkMode: boolean
   handleSwitchTheme: (boolean: boolean) => void
+  themeColors: TThemeColor
 }
 
 interface IThemeProviderProps {
@@ -21,22 +27,18 @@ export const ThemeProvider: React.FunctionComponent<IThemeProviderProps> = (
   const { isDarkMode, handleSwitchTheme } = useDarkMode()
   const { darkAlgorithm, defaultAlgorithm } = theme
   const themeAlgorithm = isDarkMode ? darkAlgorithm : defaultAlgorithm
-
-  const tableComponentStyle = isDarkMode
-    ? {
-        controlItemBgActive: undefined,
-        controlItemBgActiveHover: undefined,
-      }
-    : globalThemeConfig?.['components']?.['Table']
+  const themeColors = isDarkMode ? themeColorsDark : themeColorsLight
 
   const customThemeConfig: ThemeConfig = {
-    ...globalThemeConfig,
+    ...globalThemeConfig(isDarkMode),
     algorithm: themeAlgorithm,
-    components: { Table: tableComponentStyle },
   }
 
   return (
-    <ThemeContext.Provider {...props} value={{ isDarkMode, handleSwitchTheme }}>
+    <ThemeContext.Provider
+      {...props}
+      value={{ isDarkMode, themeColors, handleSwitchTheme }}
+    >
       <ConfigProvider theme={customThemeConfig}>
         {props.children}
       </ConfigProvider>

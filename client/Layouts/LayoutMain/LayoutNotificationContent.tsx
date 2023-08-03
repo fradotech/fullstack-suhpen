@@ -14,7 +14,6 @@ import { NotificationPushReadAction } from '../../Modules/Notification/Notificat
 import { Path } from '../../common/Path'
 import { Util } from '../../common/utils/util'
 import { ThemeContext } from '../ThemeProvider/ThemeProvider'
-import { themeColors, themeColorsDark } from '../ThemeProvider/theme'
 
 interface IProps {
   notificationPushs: INotificationPush[] | undefined
@@ -26,7 +25,7 @@ interface IProps {
 }
 
 const LayoutNotificationContent: React.FC<IProps> = (props: IProps) => {
-  const { isDarkMode } = useContext(ThemeContext)
+  const { themeColors } = useContext(ThemeContext)
 
   const handleReadOne = async (id: string) => {
     await NotificationPushReadAction.readOne({ id })
@@ -46,9 +45,7 @@ const LayoutNotificationContent: React.FC<IProps> = (props: IProps) => {
           <List.Item
             style={{
               backgroundColor: !data.readAt
-                ? isDarkMode
-                  ? themeColorsDark.primaryOpacity
-                  : themeColors.primaryOpacity
+                ? themeColors?.primaryOpacity
                 : undefined,
               padding: 10,
               margin: 1,

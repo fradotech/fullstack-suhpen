@@ -1,19 +1,20 @@
 import { DownOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Avatar, Dropdown, Space, Typography } from 'antd'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthAction } from '../../Modules/Iam/Auth/infrastructure/auth.action'
 import { Path } from '../../common/Path'
-import { themeColors, themeColorsDark } from '../ThemeProvider/theme'
+import { ThemeContext } from '../ThemeProvider/ThemeProvider'
+import { themeColorsDark, themeColorsLight } from '../ThemeProvider/theme'
 
 type IProps = {
   user: IUser
-  isDarkMode: boolean
 }
 
 const LayoutAccount: React.FC<IProps> = (props: IProps) => {
   const handleLogout = () => AuthAction.logout() && location.replace(Path.login)
+  const { isDarkMode } = useContext(ThemeContext)
 
   return (
     <div style={{ marginLeft: 12 }}>
@@ -65,7 +66,7 @@ const LayoutAccount: React.FC<IProps> = (props: IProps) => {
       >
         <a
           style={{
-            color: props.isDarkMode ? themeColors.solid : themeColorsDark.solid,
+            color: isDarkMode ? themeColorsLight.solid : themeColorsDark.solid,
           }}
         >
           <Space>

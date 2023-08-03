@@ -5,7 +5,7 @@ import { FaBell } from 'react-icons/fa'
 import { VscCheckAll } from 'react-icons/vsc'
 import { NotificationCategoryAction } from '../../Modules/Notification/NotificationCategory/infrastructure/notification-category.action'
 import { NotificationPushReadAction } from '../../Modules/Notification/NotificationPush/infrastructure/notification-push-read.action'
-import { themeColors } from '../ThemeProvider/theme'
+import { themeColorsLight } from '../ThemeProvider/theme'
 import LayoutNotificationContent from './LayoutNotificationContent'
 
 const LayoutNotification: React.FC = () => {
@@ -96,7 +96,7 @@ const LayoutNotification: React.FC = () => {
       }}
     >
       <Badge
-        color={themeColors.primary}
+        color={themeColorsLight.primary}
         count={count && count > 10 ? '9+' : count}
         offset={[-12, 6]}
         size="small"
