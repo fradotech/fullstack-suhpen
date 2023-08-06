@@ -1,4 +1,7 @@
-import { PermissionMethodEnum } from '../common/permission.enum'
+import {
+  PermissionMethodEnum,
+  PermissionMethodValue,
+} from '../common/permission.enum'
 import { PermissionCreateRequest } from '../v1/permission.request'
 
 export const permissionDummies: PermissionCreateRequest[] = [
@@ -8,7 +11,7 @@ export const permissionDummies: PermissionCreateRequest[] = [
     method: PermissionMethodEnum.Get,
     name: 'READ dashboard',
     module: 'dashboard',
-    labelColor: PermissionMethodEnum.Get,
+    labelColor: PermissionMethodValue.get.color,
   },
   {
     key: 'public/get/notification-categories',
@@ -16,6 +19,6 @@ export const permissionDummies: PermissionCreateRequest[] = [
     method: PermissionMethodEnum.Get,
     name: 'READ notification-categories',
     module: 'notification-categories',
-    labelColor: PermissionMethodEnum.Get,
+    labelColor: PermissionMethodValue.get.color,
   },
 ]
