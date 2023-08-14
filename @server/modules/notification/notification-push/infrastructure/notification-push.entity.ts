@@ -50,6 +50,6 @@ export class EntNotificationPush
   pushAt?: Date
 
   @ManyToMany(() => EntUser)
-  @JoinTable({ name: 'ent_notification_read_users' })
-  readUsers: IUser[]
+  @JoinTable()
+  readUsers: EntUser[]
 }

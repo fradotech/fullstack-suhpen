@@ -15,7 +15,6 @@ import {
 import dayjs from 'dayjs'
 import { BeforeInsert, Column, Entity, JoinTable, ManyToMany } from 'typeorm'
 import { EntRole } from '../../role/infrastructure/role.entity'
-import { IRole } from '../../role/infrastructure/role.interface'
 import { REGEX_PASSWORD } from '../common/character.constant'
 import { IUser } from '../infrastructure/user.interface'
 
@@ -43,7 +42,7 @@ export class EntUser extends BaseEntity implements IUser {
 
   @ManyToMany(() => EntRole)
   @JoinTable({ name: 'ent_user_roles' })
-  roles: IRole[]
+  roles: EntRole[]
 
   @IsOptional()
   @IsEnum(UserGenderEnum)
