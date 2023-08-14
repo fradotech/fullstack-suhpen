@@ -14,7 +14,7 @@ const FormContainer = (props: IFormProps): JSX.Element => {
   return (
     <Row justify={centered && !isFieldCentered ? 'center' : 'start'}>
       <Col
-        span={centered ? (lg ? 14 : isFieldCentered ? 16 : 24) : 24}
+        span={centered ? (lg ? 18 : isFieldCentered ? 16 : 24) : 24}
         offset={isFieldCentered ? (lg ? 8 : 6) : 0}
       >
         <Form

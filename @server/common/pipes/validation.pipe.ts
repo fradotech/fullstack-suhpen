@@ -1,11 +1,11 @@
 import {
   ArgumentMetadata,
+  BadRequestException,
   Injectable,
   PipeTransform,
-  UnprocessableEntityException,
 } from '@nestjs/common'
 import { plainToClass } from 'class-transformer'
-import { validate, ValidationError } from 'class-validator'
+import { ValidationError, validate } from 'class-validator'
 
 @Injectable()
 export class ValidationPipe implements PipeTransform {
@@ -20,7 +20,7 @@ export class ValidationPipe implements PipeTransform {
 
     const errors = await validate(object)
     if (errors.length > 0) {
-      throw new UnprocessableEntityException({
+      throw new BadRequestException({
         message: JSON.stringify(this.flattenValidation(errors)[0].constraints),
         data: this.flattenValidation(errors).map(
           (data: {
