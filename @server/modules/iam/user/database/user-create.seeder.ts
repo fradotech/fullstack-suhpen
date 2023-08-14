@@ -9,7 +9,7 @@ import { userDummies } from './user.dummy'
 export const userCreateSeeder = async (
   entityManager: EntityManager,
 ): Promise<boolean> => {
-  const data = UserCreateRequest.dtos(userDummies as UserCreateRequest[])
+  const data = UserCreateRequest.dtos(userDummies)
   const table = EntUser.name
 
   const userExist = await entityManager
@@ -30,7 +30,7 @@ export const userCreateSeeder = async (
 
     data[i].roles = []
 
-    if (data[i]['roleKey'] === RoleDefaultKeyEnum.SuperAdmin) {
+    if (data[i].roleKey === RoleDefaultKeyEnum.SuperAdmin) {
       const roleAdmin = roles.find((role) => {
         return role.key === RoleDefaultKeyEnum.SuperAdmin
       })

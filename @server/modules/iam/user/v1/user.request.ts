@@ -8,6 +8,7 @@ import {
   Matches,
   MinLength,
 } from 'class-validator'
+import { RoleDefaultKeyEnum } from '../../role/common/role.enum'
 import { REGEX_PASSWORD } from '../common/character.constant'
 import { EntUser } from '../infrastructure/user.entity'
 import { IUser } from '../infrastructure/user.interface'
@@ -43,12 +44,15 @@ export class UserRequest extends EntUser implements IUser {
 }
 
 export class UserCreateRequest extends OmitType(UserRequest, [
+  'id',
   'passwordConfirmation',
   'otp',
   'isVerified',
   'token',
 ]) {
-  static dto(data: UserCreateRequest): IUser {
+  roleKey?: RoleDefaultKeyEnum
+
+  static dto(data: UserCreateRequest): UserCreateRequest {
     const res = new UserCreateRequest()
 
     res.name = data.name
@@ -60,11 +64,12 @@ export class UserCreateRequest extends OmitType(UserRequest, [
     res.address = data.address
     res.birthDate = data.birthDate
     res.avatar = data.avatar
+    res.roleKey = data.roleKey
 
     return res
   }
 
-  static dtos(data: UserCreateRequest[]): IUser[] {
+  static dtos(data: UserCreateRequest[]): UserCreateRequest[] {
     return data.map((data) => this.dto(data))
   }
 }
