@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   ForbiddenException,
+  Logger,
   NotFoundException,
   UnauthorizedException,
   UnprocessableEntityException,
@@ -43,6 +44,7 @@ export class Exception {
       // case 'ER_DUP_ENTRY':
     }
 
+    Logger.error(exception, this.name)
     // eslint-disable-next-line
     console.log(exception)
 

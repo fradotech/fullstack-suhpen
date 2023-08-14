@@ -74,6 +74,8 @@ export class QueryErrorFilter extends BaseExceptionFilter {
 
       default:
         Logger.error(exception, QueryFailedError.name)
+        // eslint-disable-next-line
+        console.log(exception)
 
         response.status(422).json({
           message: String(exception),
