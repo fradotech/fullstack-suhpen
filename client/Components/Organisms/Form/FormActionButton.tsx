@@ -5,7 +5,7 @@ import { FaPaperPlane } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { Util } from '../../../../@server/common/utils/util'
 import { PermissionMethodEnum } from '../../../../@server/modules/iam/permission/common/permission.enum'
-import isHasPermission from '../../../Modules/Iam/Role/common/isHasPermission'
+import isHasPermission from '../../../Modules/Iam/Role/Components/isHasPermission'
 import useModules from '../../../common/useModules'
 import { API } from '../../../infrastructure/api.service'
 

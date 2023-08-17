@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
 import { themeColorsLight } from '../../Layouts/ThemeProvider/theme'
 import { useMobileScreen } from '../../common/useMobileScreen'
-import HomeHeaderSection from './common/HomeHeader.section'
+import HomeHeaderSection from './Components/HomeHeader.section'
 
 const Home: React.FC = () => {
   const navigate = useNavigate()

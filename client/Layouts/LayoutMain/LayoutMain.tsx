@@ -1,7 +1,7 @@
 import { Col, Layout } from 'antd'
 import React, { useContext } from 'react'
 import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
-import useAuthGuard from '../../Modules/Iam/Auth/common/useAuthGuard'
+import useAuthGuard from '../../Modules/Iam/Auth/Components/useAuthGuard'
 import { ThemeContext } from '../ThemeProvider/ThemeProvider'
 import LayoutHeader from './LayoutHeader'
 import styles from './LayoutMain.module.css'

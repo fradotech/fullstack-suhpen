@@ -6,8 +6,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import { Path } from '../../../../common/Path'
-import RoleFieldsMain from '../common/RoleFieldsMain'
-import RoleFieldsSelectPermissions from '../common/RoleFieldsSelectPermissions'
+import RoleFieldsMain from '../Components/RoleFieldsMain'
+import RoleFieldsSelectPermissions from '../Components/RoleFieldsSelectPermissions'
 import { RoleAction } from '../infrastructure/role.action'
 
 const RoleForm: React.FC = () => {

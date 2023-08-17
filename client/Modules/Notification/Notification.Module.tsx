@@ -1,7 +1,7 @@
 import { NotificationFilled } from '@ant-design/icons'
 import { MenuItem } from '../../Layouts/LayoutMain/LayoutItems'
 import { Path } from '../../common/Path'
-import isHasPermission from '../Iam/Role/common/isHasPermission'
+import isHasPermission from '../Iam/Role/Components/isHasPermission'
 import NotificationCategoryModule from './NotificationCategory/NotificationCategory.Module'
 import NotificationPushModule from './NotificationPush/NotificationPush.Module'
 import NotificationTemplateModule from './NotificationTemplate/NotificationTemplate.Module'

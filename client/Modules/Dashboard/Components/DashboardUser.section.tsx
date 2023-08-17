@@ -3,7 +3,7 @@ import { Card, Col, Row } from 'antd'
 import React from 'react'
 import { useQuery } from 'react-query'
 import CardStatistic from '../../../Components/Molecules/CardStatistic/CardStatistic'
-import { DashboardUserAction } from '../infrastructure/dashboardUser.action'
+import { DashboardUserAction } from '../infrastructure/dashboard-user.action'
 import DemoLine from './DemoLine'
 import DemoPie from './DemoPie'
 

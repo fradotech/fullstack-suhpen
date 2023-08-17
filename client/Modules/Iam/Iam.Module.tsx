@@ -3,8 +3,8 @@ import { MenuItem } from '../../Layouts/LayoutMain/LayoutItems'
 import { Path } from '../../common/Path'
 import AccountModule from './Account/Account.Module'
 import PermissionModule from './Permission/Permission.Module'
+import isHasPermission from './Role/Components/isHasPermission'
 import RoleModule from './Role/Role.Module'
-import isHasPermission from './Role/common/isHasPermission'
 import UserModule from './User/User.Module'
 
 class IamModule {

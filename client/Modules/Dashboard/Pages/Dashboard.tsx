@@ -1,5 +1,5 @@
 import React from 'react'
-import DashboardUser from '../common/DashboardUser.section'
+import DashboardUser from '../Components/DashboardUser.section'
 
 const Dashboard: React.FC = () => {
   return (

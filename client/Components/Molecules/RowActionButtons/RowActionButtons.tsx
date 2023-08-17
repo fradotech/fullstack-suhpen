@@ -10,7 +10,7 @@ import { Button, Card, Dropdown, Popconfirm, Tooltip } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { PermissionMethodEnum } from '../../../../@server/modules/iam/permission/common/permission.enum'
-import isHasPermission from '../../../Modules/Iam/Role/common/isHasPermission'
+import isHasPermission from '../../../Modules/Iam/Role/Components/isHasPermission'
 import { useMobileScreen } from '../../../common/useMobileScreen'
 import useModules from '../../../common/useModules'
 

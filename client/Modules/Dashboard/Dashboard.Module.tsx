@@ -2,7 +2,7 @@ import { DashboardOutlined } from '@ant-design/icons'
 import { Link, Route } from 'react-router-dom'
 import { MenuItem } from '../../Layouts/LayoutMain/LayoutItems'
 import Dashboard from './Pages/Dashboard'
-import { dashboardPath } from './common/dashboard.path'
+import { dashboardPath } from './infrastructure/dashboard.path'
 
 const path = dashboardPath
 

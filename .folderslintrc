@@ -37,7 +37,7 @@
     "client/Layouts/LayoutMain",
     "client/Layouts/ThemeProvider",
     "client/infrastructure",
-    "client/Modules/*/*/common",
+    "client/Modules/*/*/Components",
     "client/Modules/*/*/infrastructure",
     "client/Modules/*/*/Pages/*"
   ]

@@ -22,6 +22,7 @@ const dto = (
 
   return data
 }
+
 export class RoleAction {
   static useIndex(
     req?: RoleIndexRequest,
@@ -60,7 +61,7 @@ export class RoleAction {
     return res
   }
 
-  /// --- Utils --- \\\
+  // --- Utils --- \\
 
   static validatePermission(user: IUser, key: string): boolean {
     return user.roles?.some((role) => {

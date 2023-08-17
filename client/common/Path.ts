@@ -1,4 +1,4 @@
-import { dashboardPath } from '../Modules/Dashboard/common/dashboard.path'
+import { dashboardPath } from '../Modules/Dashboard/infrastructure/dashboard.path'
 import { accountPath } from '../Modules/Iam/Account/infrastructure/account.path'
 import { authPath } from '../Modules/Iam/Auth/infrastructure/auth.path'
 import { permissionPath } from '../Modules/Iam/Permission/infrastructure/permission.path'
