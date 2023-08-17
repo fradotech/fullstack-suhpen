@@ -11,5 +11,5 @@ export interface INotificationPush extends IBaseEntity {
   readAt?: Date
   user?: IUser
   pushAt?: Date
-  readUsers?: IUser[]
+  users?: IUser[]
 }

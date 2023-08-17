@@ -41,7 +41,7 @@ export class NotificationPushIndexApp extends BaseIndexApp {
         columns: ['name'],
       },
       {
-        name: 'readUsers',
+        name: 'users',
       },
     ]
     const query = this.createQueryIndex(

@@ -16,7 +16,7 @@ class NotificationPushRepo extends Repository<EntNotificationPush> {
   }
 
   async findByInIdsWithUserRead(ids: string[]): Promise<EntNotificationPush[]> {
-    return await this.find({ where: { id: In(ids) }, relations: ['readUsers'] })
+    return await this.find({ where: { id: In(ids) }, relations: ['users'] })
   }
 
   async findOneWithCategory(id: string): Promise<EntNotificationPush> {
@@ -34,7 +34,7 @@ export class NotificationPushService extends NotificationPushRepo {
 
     data.forEach((data) => {
       if (!data.isBroadcast) data.readAt = new Date()
-      else if (user) data.readUsers.push(user)
+      else if (user) data.users.push(user)
     })
 
     return await this.save(data)

@@ -12,14 +12,14 @@ export class NotificationPushResponse extends EntNotificationPush {
     const res = new NotificationPushResponse()
     Object.assign(res, data)
 
-    const readUsers =
+    const users =
       userLogged &&
-      data.readUsers?.find((readUser) => {
+      data.users?.find((readUser) => {
         return readUser.id === userLogged.id
       })
 
     res.categoryId = data.category?.id
-    res.readAt = data.readAt || (readUsers && new Date())
+    res.readAt = data.readAt || (users && new Date())
 
     return res
   }
