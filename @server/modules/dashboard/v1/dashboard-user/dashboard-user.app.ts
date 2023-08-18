@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { IAggreate } from '@server/modules/dashboard/infrastructure/dashboard.interface'
-import { EntUser } from '@server/modules/iam/user/infrastructure/user.entity'
+import { IamUser } from '@server/modules/iam/user/infrastructure/user.entity'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Repository } from 'typeorm'
 
 @Injectable()
 export class DashboardUserApp {
   constructor(
-    @InjectRepository(EntUser)
+    @InjectRepository(IamUser)
     private readonly userRepo: Repository<IUser>,
   ) {}
 

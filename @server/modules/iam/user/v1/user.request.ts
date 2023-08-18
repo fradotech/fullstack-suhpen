@@ -10,10 +10,10 @@ import {
 } from 'class-validator'
 import { RoleDefaultKeyEnum } from '../../role/common/role.enum'
 import { REGEX_PASSWORD } from '../common/character.constant'
-import { EntUser } from '../infrastructure/user.entity'
+import { IamUser } from '../infrastructure/user.entity'
 import { IUser } from '../infrastructure/user.interface'
 
-export class UserRequest extends EntUser implements IUser {
+export class UserRequest extends IamUser implements IUser {
   @IsNotEmpty()
   @MinLength(6)
   @Matches(REGEX_PASSWORD, {

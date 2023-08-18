@@ -2,7 +2,7 @@ import { ApiProperty, PickType } from '@nestjs/swagger'
 import { IsNotEmpty } from 'class-validator'
 import { IsMatch } from '../../../../infrastructure/swagger/decorators/is-match.decorator'
 import { IRole } from '../../role/infrastructure/role.interface'
-import { EntUser } from '../../user/infrastructure/user.entity'
+import { IamUser } from '../../user/infrastructure/user.entity'
 import { IUser } from '../../user/infrastructure/user.interface'
 import { UserRequest } from '../../user/v1/user.request'
 
@@ -16,7 +16,7 @@ export class AuthRegisterRequest extends PickType(UserRequest, [
   passwordConfirmation!: string
 
   static dto(data: AuthRegisterRequest, roleCustomer: IRole): IUser {
-    const res = new EntUser()
+    const res = new IamUser()
 
     res.name = data.name
     res.email = data.email

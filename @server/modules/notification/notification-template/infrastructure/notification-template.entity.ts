@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { BaseEntity } from '@server/infrastructure/base/base.entity'
 import { Column, Entity, Index, ManyToOne } from 'typeorm'
-import { EntNotificationCategory } from '../../notification-category/infrastructure/notification-category.entity'
+import { NotificationCategory } from '../../notification-category/infrastructure/notification-category.entity'
 import { INotificationCategory } from '../../notification-category/infrastructure/notification-category.interface'
 import { INotificationTemplate } from './notification-template.interface'
 
 @Entity()
-export class EntNotificationTemplate
+export class NotificationTemplate
   extends BaseEntity
   implements INotificationTemplate
 {
@@ -22,7 +22,7 @@ export class EntNotificationTemplate
   @Column({ type: 'text' })
   message: string
 
-  @ManyToOne(() => EntNotificationCategory)
+  @ManyToOne(() => NotificationCategory)
   category: INotificationCategory
 
   @ApiProperty()

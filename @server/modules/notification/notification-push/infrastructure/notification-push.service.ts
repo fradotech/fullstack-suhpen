@@ -2,24 +2,24 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { In, Repository } from 'typeorm'
-import { EntNotificationPush } from './notification-push.entity'
-class NotificationPushRepo extends Repository<EntNotificationPush> {
+import { NotificationPush } from './notification-push.entity'
+class NotificationPushRepo extends Repository<NotificationPush> {
   constructor(
-    @InjectRepository(EntNotificationPush)
-    private readonly repo: Repository<EntNotificationPush>,
+    @InjectRepository(NotificationPush)
+    private readonly repo: Repository<NotificationPush>,
   ) {
     super(repo.target, repo.manager, repo.queryRunner)
   }
 
-  async findByInIds(ids: string[]): Promise<EntNotificationPush[]> {
+  async findByInIds(ids: string[]): Promise<NotificationPush[]> {
     return await this.findBy({ id: In(ids) })
   }
 
-  async findByInIdsWithUserRead(ids: string[]): Promise<EntNotificationPush[]> {
+  async findByInIdsWithUserRead(ids: string[]): Promise<NotificationPush[]> {
     return await this.find({ where: { id: In(ids) }, relations: ['users'] })
   }
 
-  async findOneWithCategory(id: string): Promise<EntNotificationPush> {
+  async findOneWithCategory(id: string): Promise<NotificationPush> {
     return await this.findOneOrFail({ where: { id }, relations: ['category'] })
   }
 }
@@ -29,7 +29,7 @@ export class NotificationPushService extends NotificationPushRepo {
   async updateReadAtNow(
     ids: string[],
     user?: IUser,
-  ): Promise<EntNotificationPush[]> {
+  ): Promise<NotificationPush[]> {
     const data = await this.findByInIdsWithUserRead(ids)
 
     data.forEach((data) => {

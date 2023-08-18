@@ -2,9 +2,9 @@ import { OmitType } from '@nestjs/swagger'
 import { IndexRequest } from '@server/infrastructure/index/index.request'
 import { Type } from 'class-transformer'
 import { ValidateNested } from 'class-validator'
-import { EntUser } from './user.entity'
+import { IamUser } from './user.entity'
 
-export class UserIndexFilterRequest extends OmitType(EntUser, ['roles']) {
+export class UserIndexFilterRequest extends OmitType(IamUser, ['roles']) {
   roles?: string[]
 }
 

@@ -4,7 +4,7 @@ import { Column, Entity } from 'typeorm'
 import { IAttachment } from './attachment.interface'
 
 @Entity()
-export class EntAttachment extends BaseEntity implements IAttachment {
+export class Attachment extends BaseEntity implements IAttachment {
   @ApiProperty()
   @Column()
   fileUrl: string

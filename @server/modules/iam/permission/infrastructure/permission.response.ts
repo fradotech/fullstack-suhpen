@@ -1,7 +1,7 @@
-import { EntPermission } from './permission.entity'
+import { IamPermission } from './permission.entity'
 import { IPermission } from './permission.interface'
 
-export class PermissionResponse extends EntPermission {
+export class PermissionResponse extends IamPermission {
   static dto(data: IPermission): PermissionResponse {
     const res = new PermissionResponse()
     Object.assign(res, data)

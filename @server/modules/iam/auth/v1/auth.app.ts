@@ -5,7 +5,7 @@ import * as bcrypt from 'bcrypt'
 import { Exception } from '../../../../common/exceptions/index.exception'
 import { RoleDefaultKeyEnum } from '../../role/common/role.enum'
 import { RoleService } from '../../role/infrastructure/role.service'
-import { EntUser } from '../../user/infrastructure/user.entity'
+import { IamUser } from '../../user/infrastructure/user.entity'
 import { IUser } from '../../user/infrastructure/user.interface'
 import { UserService } from '../../user/infrastructure/user.service'
 import { authMessages } from '../common/auth.message'
@@ -48,7 +48,7 @@ export class AuthApp {
     await this.authService.validateLogin(user, password)
     user && (user.token = await this.jwtService.signAsync({ id: user?.id }))
 
-    return user || new EntUser()
+    return user || new IamUser()
   }
 
   async passwordSendLink(req: AuthPasswordSendRequest): Promise<string> {

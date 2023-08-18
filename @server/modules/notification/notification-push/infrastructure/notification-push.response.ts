@@ -1,8 +1,8 @@
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
-import { EntNotificationPush } from './notification-push.entity'
+import { NotificationPush } from './notification-push.entity'
 import { INotificationPush } from './notification-push.interface'
 
-export class NotificationPushResponse extends EntNotificationPush {
+export class NotificationPushResponse extends NotificationPush {
   categoryId: string
 
   static dto(

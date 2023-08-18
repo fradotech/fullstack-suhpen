@@ -1,7 +1,7 @@
 import { IUser } from '../infrastructure/user.interface'
-import { EntUser } from './user.entity'
+import { IamUser } from './user.entity'
 
-export class UserResponse extends EntUser implements IUser {
+export class UserResponse extends IamUser implements IUser {
   _accessToken?: string
   roleIds?: string[]
 

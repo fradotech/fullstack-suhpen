@@ -4,25 +4,25 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Router } from 'express'
 import { In, Repository } from 'typeorm'
 import { PermissionSyncRequest } from '../v1/permission.request'
-import { EntPermission } from './permission.entity'
+import { IamPermission } from './permission.entity'
 import { IPermission } from './permission.interface'
 
-class PermissionRepo extends Repository<EntPermission> {
+class PermissionRepo extends Repository<IamPermission> {
   constructor(
-    @InjectRepository(EntPermission)
-    private readonly repo: Repository<EntPermission>,
+    @InjectRepository(IamPermission)
+    private readonly repo: Repository<IamPermission>,
   ) {
     super(repo.target, repo.manager, repo.queryRunner)
   }
 
-  async findByInIds(ids: string[]): Promise<EntPermission[]> {
+  async findByInIds(ids: string[]): Promise<IamPermission[]> {
     return await this.findBy({ id: In(ids) })
   }
 }
 
 @Injectable()
 export class PermissionService extends PermissionRepo {
-  static findFromApp(app: NestExpressApplication): EntPermission[] {
+  static findFromApp(app: NestExpressApplication): IamPermission[] {
     const server = app.getHttpServer()
     const router: Router = server._events.request._router
 

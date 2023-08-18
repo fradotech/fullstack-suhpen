@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { NotificationCategoryModule } from '../notification-category/notification-category.module'
 import { NotificationPushIndexApp } from './infrastructure/notification-push-index.app'
-import { EntNotificationPush } from './infrastructure/notification-push.entity'
+import { NotificationPush } from './infrastructure/notification-push.entity'
 import { NotificationPushService } from './infrastructure/notification-push.service'
 import { NotificationPushCrudApp } from './v1/notification-push-crud.app'
 import { NotificationPushCrudController } from './v1/notification-push-crud.controller'
@@ -12,7 +12,7 @@ import { NotificationPushSheetController } from './v1/sheet/notification-push-sh
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([EntNotificationPush]),
+    TypeOrmModule.forFeature([NotificationPush]),
     NotificationCategoryModule,
   ],
   controllers: [

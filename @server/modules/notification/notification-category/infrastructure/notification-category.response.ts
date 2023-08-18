@@ -1,7 +1,7 @@
-import { EntNotificationCategory } from './notification-category.entity'
+import { NotificationCategory } from './notification-category.entity'
 import { INotificationCategory } from './notification-category.interface'
 
-export class NotificationCategoryResponse extends EntNotificationCategory {
+export class NotificationCategoryResponse extends NotificationCategory {
   static dto(data: INotificationCategory): NotificationCategoryResponse {
     const res = new NotificationCategoryResponse()
     Object.assign(res, data)

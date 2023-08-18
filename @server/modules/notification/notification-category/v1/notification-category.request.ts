@@ -1,16 +1,16 @@
 import { PartialType } from '@nestjs/swagger'
-import { EntNotificationCategory } from '../infrastructure/notification-category.entity'
+import { NotificationCategory } from '../infrastructure/notification-category.entity'
 import { INotificationCategory } from '../infrastructure/notification-category.interface'
 
 export class NotificationCategoryRequest
-  extends EntNotificationCategory
+  extends NotificationCategory
   implements INotificationCategory {}
 
 export class NotificationCategoryCreateRequest extends PartialType(
   NotificationCategoryRequest,
 ) {
   static dto(data: NotificationCategoryCreateRequest): INotificationCategory {
-    return Object.assign(new EntNotificationCategory(), data)
+    return Object.assign(new NotificationCategory(), data)
   }
 }
 

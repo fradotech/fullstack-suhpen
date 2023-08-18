@@ -14,12 +14,12 @@ import {
 } from 'class-validator'
 import dayjs from 'dayjs'
 import { BeforeInsert, Column, Entity, JoinTable, ManyToMany } from 'typeorm'
-import { EntRole } from '../../role/infrastructure/role.entity'
+import { IamRole } from '../../role/infrastructure/role.entity'
 import { REGEX_PASSWORD } from '../common/character.constant'
 import { IUser } from '../infrastructure/user.interface'
 
 @Entity()
-export class EntUser extends BaseEntity implements IUser {
+export class IamUser extends BaseEntity implements IUser {
   @ApiProperty({ example: 'Frado' })
   @Column()
   name: string
@@ -40,9 +40,9 @@ export class EntUser extends BaseEntity implements IUser {
   @Column({ type: 'varchar' })
   password: string | undefined
 
-  @ManyToMany(() => EntRole)
-  @JoinTable({ name: 'ent_user_roles' })
-  roles: EntRole[]
+  @ManyToMany(() => IamRole)
+  @JoinTable({ name: 'iam_user_roles' })
+  roles: IamRole[]
 
   @IsOptional()
   @IsEnum(UserGenderEnum)

@@ -3,21 +3,21 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { config } from '@server/config'
 import { In, Repository } from 'typeorm'
 import { IUser } from '../../user/infrastructure/user.interface'
-import { EntRole } from './role.entity'
+import { IamRole } from './role.entity'
 
-class RoleRepo extends Repository<EntRole> {
+class RoleRepo extends Repository<IamRole> {
   constructor(
-    @InjectRepository(EntRole)
-    private readonly repo: Repository<EntRole>,
+    @InjectRepository(IamRole)
+    private readonly repo: Repository<IamRole>,
   ) {
     super(repo.target, repo.manager, repo.queryRunner)
   }
 
-  async findByInIds(ids: string[]): Promise<EntRole[]> {
+  async findByInIds(ids: string[]): Promise<IamRole[]> {
     return await this.findBy({ id: In(ids) })
   }
 
-  async findOneRelationPermissions(id: string): Promise<EntRole> {
+  async findOneRelationPermissions(id: string): Promise<IamRole> {
     return await this.findOneOrFail({
       where: { id },
       relations: ['permissions'],

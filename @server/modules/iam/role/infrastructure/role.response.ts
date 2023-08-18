@@ -1,7 +1,7 @@
-import { EntRole } from './role.entity'
+import { IamRole } from './role.entity'
 import { IRole } from './role.interface'
 
-export class RoleResponse extends EntRole {
+export class RoleResponse extends IamRole {
   permissionIds: string[]
 
   static dto(data: IRole): RoleResponse {

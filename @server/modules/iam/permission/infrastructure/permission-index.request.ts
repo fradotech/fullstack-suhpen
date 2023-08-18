@@ -2,9 +2,9 @@ import { ApiProperty } from '@nestjs/swagger'
 import { IndexRequest } from '@server/infrastructure/index/index.request'
 import { Type } from 'class-transformer'
 import { IsOptional, IsString, ValidateNested } from 'class-validator'
-import { EntPermission } from './permission.entity'
+import { IamPermission } from './permission.entity'
 
-class PermissionIndexFilterRequest extends EntPermission {}
+class PermissionIndexFilterRequest extends IamPermission {}
 
 export class PermissionIndexRequest extends IndexRequest {
   @IsOptional()

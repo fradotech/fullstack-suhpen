@@ -1,7 +1,7 @@
-import { EntNotificationTemplate } from './notification-template.entity'
+import { NotificationTemplate } from './notification-template.entity'
 import { INotificationTemplate } from './notification-template.interface'
 
-export class NotificationTemplateResponse extends EntNotificationTemplate {
+export class NotificationTemplateResponse extends NotificationTemplate {
   categoryId: string
   static dto(data: INotificationTemplate): NotificationTemplateResponse {
     const res = new NotificationTemplateResponse()

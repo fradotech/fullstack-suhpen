@@ -1,8 +1,8 @@
 import { Logger } from '@nestjs/common'
-import { EntUser } from '@server/modules/iam/user/infrastructure/user.entity'
+import { IamUser } from '@server/modules/iam/user/infrastructure/user.entity'
 import { EntityManager } from 'typeorm'
 import { RoleDefaultKeyEnum } from '../../role/common/role.enum'
-import { EntRole } from '../../role/infrastructure/role.entity'
+import { IamRole } from '../../role/infrastructure/role.entity'
 import { UserCreateRequest } from '../v1/user.request'
 import { userDummies } from './user.dummy'
 
@@ -10,10 +10,10 @@ export const userCreateSeeder = async (
   entityManager: EntityManager,
 ): Promise<boolean> => {
   const data = UserCreateRequest.dtos(userDummies)
-  const table = EntUser.name
+  const table = IamUser.name
 
   const userExist = await entityManager
-    .createQueryBuilder(EntUser, table)
+    .createQueryBuilder(IamUser, table)
     .where(`${table}.email IN (:...email)`, {
       email: data.map((data) => data.email),
     })
@@ -21,7 +21,7 @@ export const userCreateSeeder = async (
 
   if (userExist) return false
 
-  const roles = await entityManager.find(EntRole)
+  const roles = await entityManager.find(IamRole)
 
   for (let i = 0; i < data.length; i++) {
     const iRoles = () => Math.floor(Math.random() * roles.length)
@@ -41,7 +41,7 @@ export const userCreateSeeder = async (
     }
   }
 
-  const dataCreate = entityManager.create(EntUser, data)
+  const dataCreate = entityManager.create(IamUser, data)
   await entityManager.save(dataCreate)
 
   Logger.log(String(data.map((data) => data.email)), 'AutomaticSeeder')

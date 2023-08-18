@@ -1,18 +1,18 @@
 import { Logger } from '@nestjs/common'
-import { EntRole } from '@server/modules/iam/role/infrastructure/role.entity'
+import { IamRole } from '@server/modules/iam/role/infrastructure/role.entity'
 import { Modules } from '@server/modules/modules'
 import { EntityManager } from 'typeorm'
-import { EntPermission } from '../../permission/infrastructure/permission.entity'
+import { IamPermission } from '../../permission/infrastructure/permission.entity'
 import { RoleDefaultKeyEnum } from '../common/role.enum'
 import { RoleSyncRequest } from '../v1/role.request'
 
 export const roleSyncGeneralPermissionsSeeder = async (
   entityManager: EntityManager,
 ): Promise<boolean> => {
-  const data = await entityManager.find(EntRole)
-  const permissions = await entityManager.find(EntPermission)
+  const data = await entityManager.find(IamRole)
+  const permissions = await entityManager.find(IamPermission)
   const permissionsGeneral = await entityManager
-    .createQueryBuilder(EntPermission, 'permissions')
+    .createQueryBuilder(IamPermission, 'permissions')
     .andWhere(`permissions.module IN (:...module)`, {
       module: [
         Modules.Auth,

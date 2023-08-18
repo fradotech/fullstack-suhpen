@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { BaseEntity } from '@server/infrastructure/base/base.entity'
-import { EntUser } from '@server/modules/iam/user/infrastructure/user.entity'
+import { IamUser } from '@server/modules/iam/user/infrastructure/user.entity'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import {
   Column,
@@ -10,15 +10,12 @@ import {
   ManyToMany,
   ManyToOne,
 } from 'typeorm'
-import { EntNotificationCategory } from '../../notification-category/infrastructure/notification-category.entity'
+import { NotificationCategory } from '../../notification-category/infrastructure/notification-category.entity'
 import { INotificationCategory } from '../../notification-category/infrastructure/notification-category.interface'
 import { INotificationPush } from './notification-push.interface'
 
 @Entity()
-export class EntNotificationPush
-  extends BaseEntity
-  implements INotificationPush
-{
+export class NotificationPush extends BaseEntity implements INotificationPush {
   @ApiProperty({ example: 'Test Create Notification' })
   @Index()
   @Column()
@@ -32,7 +29,7 @@ export class EntNotificationPush
   @Column({ default: null })
   thumbnail?: string
 
-  @ManyToOne(() => EntNotificationCategory)
+  @ManyToOne(() => NotificationCategory)
   category: INotificationCategory
 
   @ApiProperty({ example: 'Test create notification message' })
@@ -42,14 +39,13 @@ export class EntNotificationPush
   @Column({ default: null })
   readAt?: Date
 
-  @ManyToOne(() => EntUser)
+  @ManyToOne(() => IamUser)
   user?: IUser
 
-  @Index()
   @Column({ default: null })
   pushAt?: Date
 
-  @ManyToMany(() => EntUser)
-  @JoinTable({ name: 'ent_notification_users' })
-  users: EntUser[]
+  @ManyToMany(() => IamUser)
+  @JoinTable({ name: 'notification_push_users' })
+  users: IamUser[]
 }

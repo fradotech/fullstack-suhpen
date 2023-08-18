@@ -3,6 +3,6 @@ import { Entity } from 'typeorm'
 import { INotificationCategory } from './notification-category.interface'
 
 @Entity()
-export class EntNotificationCategory
+export class NotificationCategory
   extends EntBaseMasterData
   implements INotificationCategory {}

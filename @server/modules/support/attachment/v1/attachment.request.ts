@@ -1,7 +1,7 @@
 import { PickType } from '@nestjs/swagger'
-import { EntAttachment } from '../infrastructure/attachment.entity'
+import { Attachment } from '../infrastructure/attachment.entity'
 
-export class AttachmentFindRequest extends EntAttachment {}
+export class AttachmentFindRequest extends Attachment {}
 
 export class AttachmentUploadRequest extends PickType(AttachmentFindRequest, [
   'module',

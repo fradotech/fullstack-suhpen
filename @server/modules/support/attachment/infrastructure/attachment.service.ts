@@ -9,19 +9,19 @@ import {
   AttachmentFindRequest,
   AttachmentUploadRequest,
 } from '../v1/attachment.request'
-import { EntAttachment } from './attachment.entity'
+import { Attachment } from './attachment.entity'
 
 @Injectable()
 export class AttachmentService {
   constructor(
-    @InjectRepository(EntAttachment)
-    private readonly attachmentRepo: Repository<EntAttachment>,
+    @InjectRepository(Attachment)
+    private readonly attachmentRepo: Repository<Attachment>,
   ) {}
 
   async upload(
     fileUrl: string,
     req: AttachmentUploadRequest,
-  ): Promise<EntAttachment> {
+  ): Promise<Attachment> {
     const attachment = this.attachmentRepo.create({
       fileUrl,
       module: req.module,
@@ -30,7 +30,7 @@ export class AttachmentService {
     return await this.attachmentRepo.save(attachment)
   }
 
-  async findOne(req: AttachmentFindRequest): Promise<EntAttachment> {
+  async findOne(req: AttachmentFindRequest): Promise<Attachment> {
     return await this.attachmentRepo.findOneOrFail({
       where: [{ fileUrl: req.fileUrl }, { module: req.module }],
     })

@@ -2,35 +2,35 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 
 import { In, Repository } from 'typeorm'
-import { EntUser } from '../infrastructure/user.entity'
+import { IamUser } from '../infrastructure/user.entity'
 
-class UserRepo extends Repository<EntUser> {
+class UserRepo extends Repository<IamUser> {
   constructor(
-    @InjectRepository(EntUser)
-    private readonly repo: Repository<EntUser>,
+    @InjectRepository(IamUser)
+    private readonly repo: Repository<IamUser>,
   ) {
     super(repo.target, repo.manager, repo.queryRunner)
   }
 
-  async findByInIds(ids: string[]): Promise<EntUser[]> {
+  async findByInIds(ids: string[]): Promise<IamUser[]> {
     return await this.findBy({ id: In(ids) })
   }
 
-  async findOneRelationRoles(id: string): Promise<EntUser | null> {
+  async findOneRelationRoles(id: string): Promise<IamUser | null> {
     return await this.findOne({
       where: { id },
       relations: ['roles.permissions'],
     })
   }
 
-  async findOneOrFailRelationRoles(id: string): Promise<EntUser> {
+  async findOneOrFailRelationRoles(id: string): Promise<IamUser> {
     return await this.findOneOrFail({
       where: { id },
       relations: ['roles.permissions'],
     })
   }
 
-  async findOneByEmailRelationRoles(email: string): Promise<EntUser | null> {
+  async findOneByEmailRelationRoles(email: string): Promise<IamUser | null> {
     return await this.findOne({
       where: { email },
       relations: ['roles.permissions'],

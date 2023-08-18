@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { In, Repository } from 'typeorm'
-import { EntNotificationCategory } from './notification-category.entity'
+import { NotificationCategory } from './notification-category.entity'
 
-class NotificationCategoryRepo extends Repository<EntNotificationCategory> {
+class NotificationCategoryRepo extends Repository<NotificationCategory> {
   constructor(
-    @InjectRepository(EntNotificationCategory)
-    private readonly repo: Repository<EntNotificationCategory>,
+    @InjectRepository(NotificationCategory)
+    private readonly repo: Repository<NotificationCategory>,
   ) {
     super(repo.target, repo.manager, repo.queryRunner)
   }
 
-  async findByInIds(ids: string[]): Promise<EntNotificationCategory[]> {
+  async findByInIds(ids: string[]): Promise<NotificationCategory[]> {
     return await this.findBy({ id: In(ids) })
   }
 }

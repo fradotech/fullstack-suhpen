@@ -4,11 +4,11 @@ import { IsUUID } from 'class-validator'
 import { NotificationCategoryDefaultKeyEnum } from '../../notification-category/common/notification-category.enum'
 import { INotificationCategory } from '../../notification-category/infrastructure/notification-category.interface'
 import { INotificationTemplate } from '../../notification-template/infrastructure/notification-template.interface'
-import { EntNotificationPush } from '../infrastructure/notification-push.entity'
+import { NotificationPush } from '../infrastructure/notification-push.entity'
 import { INotificationPush } from '../infrastructure/notification-push.interface'
 
 export class NotificationPushRequest
-  extends EntNotificationPush
+  extends NotificationPush
   implements INotificationPush
 {
   @IsUUID()
@@ -25,7 +25,7 @@ export class NotificationPushCreateRequest extends PartialType(
   NotificationPushRequest,
 ) {
   static dto(data: NotificationPushCreateRequest): INotificationPush {
-    return Object.assign(new EntNotificationPush(), data)
+    return Object.assign(new NotificationPush(), data)
   }
 
   static dtoNotificationTemplate(
@@ -33,7 +33,7 @@ export class NotificationPushCreateRequest extends PartialType(
     category: INotificationCategory,
     user: IUser,
   ): INotificationPush {
-    const res = new EntNotificationPush()
+    const res = new NotificationPush()
 
     res.title = template.title
     res.message = template.message
