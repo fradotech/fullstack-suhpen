@@ -23,7 +23,7 @@ export class NotificationTemplateIndexApp extends BaseIndexApp {
   async fetch(
     req: NotificationTemplateIndexRequest,
   ): Promise<IPaginateResponse<INotificationTemplate>> {
-    const name = 'notificationTemplates'
+    const name = 'notificationTemplate'
     const columns = ['variables', 'message', 'createdAt']
     const relations: IIndexAppRelation[] = [
       { name: 'category', columns: ['name'] },

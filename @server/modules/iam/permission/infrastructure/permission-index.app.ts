@@ -23,7 +23,7 @@ export class PermissionIndexApp extends BaseIndexApp {
   async fetch(
     req: PermissionIndexRequest,
   ): Promise<IPaginateResponse<IPermission>> {
-    const name = 'permissions'
+    const name = 'permission'
     const columns = [
       'name',
       'module',

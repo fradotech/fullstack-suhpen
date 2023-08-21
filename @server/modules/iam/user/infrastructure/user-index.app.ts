@@ -21,7 +21,7 @@ export class UserIndexApp extends BaseIndexApp {
   }
 
   async fetch(req: UserIndexRequest): Promise<IPaginateResponse<IUser>> {
-    const name = 'users'
+    const name = 'user'
     const columns = ['name', 'email', 'phoneNumber', 'createdAt']
     const relations: IIndexAppRelation[] = [
       {

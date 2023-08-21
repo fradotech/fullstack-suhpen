@@ -21,7 +21,7 @@ export class RoleIndexApp extends BaseIndexApp {
   }
 
   async fetch(req: RoleIndexRequest): Promise<IPaginateResponse<IRole>> {
-    const name = 'roles'
+    const name = 'role'
     const columns = ['name', 'key', 'isActive', 'createdAt']
     const relations: IIndexAppRelation[] = []
     const query = this.createQueryIndex(

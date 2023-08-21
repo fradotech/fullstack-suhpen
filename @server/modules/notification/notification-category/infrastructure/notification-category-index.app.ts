@@ -23,7 +23,7 @@ export class NotificationCategoryIndexApp extends BaseIndexApp {
   async fetch(
     req: NotificationCategoryIndexRequest,
   ): Promise<IPaginateResponse<INotificationCategory>> {
-    const name = 'notificationCategories'
+    const name = 'notificationCategory'
     const columns = ['name', 'key', 'isActive', 'createdAt']
     const relations: IIndexAppRelation[] = []
     const query = this.createQueryIndex(

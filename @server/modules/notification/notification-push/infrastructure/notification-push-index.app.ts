@@ -29,7 +29,7 @@ export class NotificationPushIndexApp extends BaseIndexApp {
     isNotFilterColumnUser?: boolean,
   ): Promise<IPaginateResponse<INotificationPush>> {
     const user = this.request.user as IUser
-    const name = 'notificationPushs'
+    const name = 'notificationPush'
     const columns = ['title', 'message', 'isBroadcast', 'createdAt']
     const relations: IIndexAppRelation[] = [
       {
@@ -62,7 +62,7 @@ export class NotificationPushIndexApp extends BaseIndexApp {
 
     const filterNotificationRead = () => {
       query.andWhere(
-        '(user.id = :userId OR (user.id is null AND notificationPushs.isBroadcast = true))',
+        '(user.id = :userId OR (user.id is null AND notificationPush.isBroadcast = true))',
         {
           userId: user.id,
         },
