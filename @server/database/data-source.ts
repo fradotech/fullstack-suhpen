@@ -1,6 +1,6 @@
 import { config } from '@server/config'
 import { DataSource, DataSourceOptions } from 'typeorm'
-import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
+import snakeNamingStrategy from './common/snake-naming.strategy'
 
 const isRunning = process.argv[2]
 
@@ -11,7 +11,7 @@ export const dataSourceOptions: DataSourceOptions = {
   username: config.database.username,
   password: config.database.password,
   database: config.database.database,
-  namingStrategy: new SnakeNamingStrategy(),
+  namingStrategy: snakeNamingStrategy,
   logging: config.server.nodeEnv === 'local',
   entities: isRunning ? ['@server/**/*.entity.ts'] : ['dist/**/*.entity.js'],
   migrations: isRunning
