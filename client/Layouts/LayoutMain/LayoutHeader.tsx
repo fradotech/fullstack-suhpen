@@ -32,7 +32,11 @@ const LayoutHeader: React.FC<IProps> = ({
     >
       <Row className={styles.headerContainer}>
         <a onClick={handleSidebarCollapse}>
-          {isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          {isCollapsed ? (
+            <MenuUnfoldOutlined className={styles.menuFold} />
+          ) : (
+            <MenuFoldOutlined className={styles.menuFold} />
+          )}
         </a>
 
         <Row>
