@@ -7,7 +7,7 @@ import {
 } from 'typeorm'
 import { IBaseEntity } from './base-entity.interface'
 
-export class BaseEntity implements IBaseEntity {
+export abstract class BaseEntity implements IBaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string
 

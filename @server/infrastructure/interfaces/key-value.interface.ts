@@ -1,4 +1,4 @@
-export interface IKeyValue {
+export type IKeyValue = {
   key: string
   value: string
 }

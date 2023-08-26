@@ -6,7 +6,7 @@ import {
   IndexSortOderEnum,
 } from './index.interface'
 
-export class IndexRequest implements ISortRequest, IPaginateRequest {
+export abstract class IndexRequest implements ISortRequest, IPaginateRequest {
   isExport?: boolean
 
   @IsOptional()
