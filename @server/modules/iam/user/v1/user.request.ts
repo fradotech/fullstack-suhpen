@@ -11,9 +11,9 @@ import {
 import { RoleDefaultKeyEnum } from '../../role/common/role.enum'
 import { REGEX_PASSWORD } from '../common/character.constant'
 import { IamUser } from '../infrastructure/user.entity'
-import { IUser } from '../infrastructure/user.interface'
+import { IIamUser } from '../infrastructure/user.interface'
 
-export class UserRequest extends IamUser implements IUser {
+export class UserRequest extends IamUser implements IIamUser {
   @IsNotEmpty()
   @MinLength(6)
   @Matches(REGEX_PASSWORD, {
@@ -84,7 +84,7 @@ export class UserUpdateRequest extends OmitType(UserRequest, [
   'isVerified',
   'token',
 ]) {
-  static dto(res: IUser, data: UserUpdateRequest): IUser {
+  static dto(res: IIamUser, data: UserUpdateRequest): IIamUser {
     res.name = data.name
     res.gender = data.gender
     res.phoneNumber = data.phoneNumber

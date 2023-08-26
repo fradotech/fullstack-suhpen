@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { In, Repository } from 'typeorm'
 import { NotificationPush } from './notification-push.entity'
 class NotificationPushRepo extends Repository<NotificationPush> {
@@ -28,7 +28,7 @@ class NotificationPushRepo extends Repository<NotificationPush> {
 export class NotificationPushService extends NotificationPushRepo {
   async updateReadAtNow(
     ids: string[],
-    user?: IUser,
+    user?: IIamUser,
   ): Promise<NotificationPush[]> {
     const data = await this.findByInIdsWithUserRead(ids)
 

@@ -5,7 +5,7 @@ import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { Modules } from '@server/modules/modules'
 import { LoggedInGuard } from '../../auth/common/logged-in.guard'
 import { UserLogged } from '../../user/common/get-user-logged.decorator'
-import { IUser } from '../../user/infrastructure/user.interface'
+import { IIamUser } from '../../user/infrastructure/user.interface'
 import { AccountResponse } from '../infrastructure/account.response'
 import { AccountUpdateRequest } from './account.request'
 import { AccountApp } from './user-account.app'
@@ -21,7 +21,7 @@ export class AccountController {
 
   @Get()
   async userLogged(
-    @UserLogged() user: IUser,
+    @UserLogged() user: IIamUser,
   ): Promise<IApiRes<AccountResponse>> {
     const data = await this.accountApp.findOneWithRoles(user.id)
     return ApiRes.dto(AccountResponse.dto(data))
@@ -29,7 +29,7 @@ export class AccountController {
 
   @Put()
   async update(
-    @UserLogged() user: IUser,
+    @UserLogged() user: IIamUser,
     @Body() req: AccountUpdateRequest,
   ): Promise<IApiRes<AccountResponse>> {
     const data = await this.accountApp.update(user.id, req)

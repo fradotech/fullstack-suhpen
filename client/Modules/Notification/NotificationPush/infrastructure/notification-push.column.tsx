@@ -1,6 +1,6 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
-import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { INotificationCategory } from '@server/modules/notification/notification-category/infrastructure/notification-category.interface'
 import { NotificationCategoryResponse } from '@server/modules/notification/notification-category/infrastructure/notification-category.response'
 import { NotificationPushResponse } from '@server/modules/notification/notification-push/infrastructure/notification-push.response'
@@ -29,7 +29,7 @@ export const notificationPushColumns = (
     { dataIndex: 'title' },
     {
       dataIndex: 'user',
-      render: (data: IUser) => {
+      render: (data: IIamUser) => {
         return data && <Link to={Path.user.id(data.id)}>{data.name}</Link>
       },
     },

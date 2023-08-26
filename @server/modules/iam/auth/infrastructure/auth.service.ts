@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { Exception } from '@server/common/exceptions/index.exception'
 import { MailService } from '@server/modules/notification/mail/infrastructure/mail.service'
 import * as bcrypt from 'bcrypt'
-import { IUser } from '../../user/infrastructure/user.interface'
+import { IIamUser } from '../../user/infrastructure/user.interface'
 import { authMessages } from '../common/auth.message'
 import { MailTemplatePasswordResetLink } from '../templates/password-reset-link.template'
 import { MailTemplatePasswordResetSuccess } from '../templates/password-reset-succes.template'
@@ -11,7 +11,10 @@ import { MailTemplatePasswordResetSuccess } from '../templates/password-reset-su
 export class AuthService {
   constructor(private readonly mailService: MailService) {}
 
-  async validateLogin(user: IUser | null, password: string): Promise<boolean> {
+  async validateLogin(
+    user: IIamUser | null,
+    password: string,
+  ): Promise<boolean> {
     !user && Exception.unauthorized(authMessages.wrongCredential)
     const isValid = await bcrypt.compare(password, user?.password || '')
     !isValid && Exception.unauthorized(authMessages.wrongCredential)
@@ -20,7 +23,7 @@ export class AuthService {
     return true
   }
 
-  async passwordResetLink(user: IUser, link: string): Promise<boolean> {
+  async passwordResetLink(user: IIamUser, link: string): Promise<boolean> {
     this.mailService.send({
       to: user.email,
       subject: `Password Reset ${user.name} Link`,
@@ -30,7 +33,7 @@ export class AuthService {
     return true
   }
 
-  async passwordResetSuccess(user: IUser): Promise<boolean> {
+  async passwordResetSuccess(user: IIamUser): Promise<boolean> {
     this.mailService.send({
       to: user.email,
       subject: `Password Reset ${user.name} Success`,

@@ -6,7 +6,7 @@ import { Exception } from '../../../../common/exceptions/index.exception'
 import { RoleDefaultKeyEnum } from '../../role/common/role.enum'
 import { RoleService } from '../../role/infrastructure/role.service'
 import { IamUser } from '../../user/infrastructure/user.entity'
-import { IUser } from '../../user/infrastructure/user.interface'
+import { IIamUser } from '../../user/infrastructure/user.interface'
 import { UserService } from '../../user/infrastructure/user.service'
 import { authMessages } from '../common/auth.message'
 import { AuthNotificationService } from '../infrastructure/auth-notification.service'
@@ -28,7 +28,7 @@ export class AuthApp {
     private readonly authNotificationService: AuthNotificationService,
   ) {}
 
-  async register(req: AuthRegisterRequest): Promise<IUser> {
+  async register(req: AuthRegisterRequest): Promise<IIamUser> {
     const roleCustomer = await this.roleService.findOneByOrFail({
       key: RoleDefaultKeyEnum.Customer,
     })
@@ -42,7 +42,7 @@ export class AuthApp {
     return await this.login(userLogin)
   }
 
-  async login(req: AuthLoginRequest): Promise<IUser> {
+  async login(req: AuthLoginRequest): Promise<IIamUser> {
     const { email, password } = req
     const user = await this.userService.findOneByEmailRelationRoles(email)
     await this.authService.validateLogin(user, password)
@@ -67,7 +67,7 @@ export class AuthApp {
     return link
   }
 
-  async passwordGetLink(token: string): Promise<IUser | string> {
+  async passwordGetLink(token: string): Promise<IIamUser | string> {
     const user = await this.userService.findOneBy({ token })
     if (!user) return authMessages.tokenInvalid
     return user
@@ -75,7 +75,7 @@ export class AuthApp {
 
   async passwordChange(
     req: AuthPasswordChangeRequest,
-  ): Promise<IUser | string> {
+  ): Promise<IIamUser | string> {
     const { token } = req
     const user = await this.userService.findOneBy({ token })
     if (!user) return authMessages.tokenInvalid

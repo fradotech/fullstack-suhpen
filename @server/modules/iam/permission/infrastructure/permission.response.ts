@@ -1,15 +1,15 @@
 import { IamPermission } from './permission.entity'
-import { IPermission } from './permission.interface'
+import { IIamPermission } from './permission.interface'
 
 export class PermissionResponse extends IamPermission {
-  static dto(data: IPermission): PermissionResponse {
+  static dto(data: IIamPermission): PermissionResponse {
     const res = new PermissionResponse()
     Object.assign(res, data)
 
     return res
   }
 
-  static dtos(data: IPermission[]): PermissionResponse[] {
+  static dtos(data: IIamPermission[]): PermissionResponse[] {
     return data.map((data) => this.dto(data))
   }
 }

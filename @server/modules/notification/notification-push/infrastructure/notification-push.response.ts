@@ -1,4 +1,4 @@
-import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { NotificationPush } from './notification-push.entity'
 import { INotificationPush } from './notification-push.interface'
 
@@ -7,7 +7,7 @@ export class NotificationPushResponse extends NotificationPush {
 
   static dto(
     data: INotificationPush,
-    userLogged?: IUser,
+    userLogged?: IIamUser,
   ): NotificationPushResponse {
     const res = new NotificationPushResponse()
     Object.assign(res, data)
@@ -26,7 +26,7 @@ export class NotificationPushResponse extends NotificationPush {
 
   static dtos(
     data: INotificationPush[],
-    userLogged?: IUser,
+    userLogged?: IIamUser,
   ): NotificationPushResponse[] {
     return data.map((data) => this.dto(data, userLogged))
   }

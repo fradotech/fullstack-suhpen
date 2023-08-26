@@ -1,11 +1,11 @@
-import { IUser } from '../infrastructure/user.interface'
+import { IIamUser } from '../infrastructure/user.interface'
 import { IamUser } from './user.entity'
 
-export class UserResponse extends IamUser implements IUser {
+export class UserResponse extends IamUser implements IIamUser {
   _accessToken?: string
   roleIds?: string[]
 
-  static dto(data: IUser): UserResponse {
+  static dto(data: IIamUser): UserResponse {
     const res = new UserResponse()
     Object.assign(res, data)
 
@@ -18,13 +18,13 @@ export class UserResponse extends IamUser implements IUser {
     return res
   }
 
-  static dtos(data: IUser[]): UserResponse[] {
+  static dtos(data: IIamUser[]): UserResponse[] {
     return data.map((data) => this.dto(data))
   }
 }
 
 export class UserStrictResponse extends UserResponse {
-  static dto(data: IUser): UserStrictResponse {
+  static dto(data: IIamUser): UserStrictResponse {
     const res = new UserStrictResponse()
     Object.assign(res, data)
 
@@ -37,7 +37,7 @@ export class UserStrictResponse extends UserResponse {
     return res
   }
 
-  static dtos(data: IUser[]): UserStrictResponse[] {
+  static dtos(data: IIamUser[]): UserStrictResponse[] {
     return data.map((data) => this.dto(data))
   }
 }

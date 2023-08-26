@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { config } from '@server/config'
 import { In, Repository } from 'typeorm'
-import { IUser } from '../../user/infrastructure/user.interface'
+import { IIamUser } from '../../user/infrastructure/user.interface'
 import { IamRole } from './role.entity'
 
 class RoleRepo extends Repository<IamRole> {
@@ -28,7 +28,7 @@ class RoleRepo extends Repository<IamRole> {
 @Injectable()
 export class RoleService extends RoleRepo {
   static validatePermission(
-    user: IUser,
+    user: IIamUser,
     method: string,
     path: string,
   ): boolean {

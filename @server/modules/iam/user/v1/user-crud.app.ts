@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { RoleService } from '../../role/infrastructure/role.service'
-import { IUser } from '../infrastructure/user.interface'
+import { IIamUser } from '../infrastructure/user.interface'
 import { UserService } from '../infrastructure/user.service'
 import { UserCreateRequest, UserUpdateRequest } from './user.request'
 
@@ -11,11 +11,11 @@ export class UserCrudApp {
     private readonly roleService: RoleService,
   ) {}
 
-  async find(): Promise<IUser[]> {
+  async find(): Promise<IIamUser[]> {
     return await this.userService.find()
   }
 
-  async create(req: UserCreateRequest): Promise<IUser> {
+  async create(req: UserCreateRequest): Promise<IIamUser> {
     const data = UserCreateRequest.dto(req)
 
     if (req.roleIds) {
@@ -25,11 +25,11 @@ export class UserCrudApp {
     return await this.userService.save(data)
   }
 
-  async findOneOrFail(id: string): Promise<IUser> {
+  async findOneOrFail(id: string): Promise<IIamUser> {
     return await this.userService.findOneOrFailRelationRoles(id)
   }
 
-  async update(id: string, req: UserUpdateRequest): Promise<IUser> {
+  async update(id: string, req: UserUpdateRequest): Promise<IIamUser> {
     const data = await this.userService.findOneByOrFail({ id })
     const dataUpdate = UserUpdateRequest.dto(data, req)
 
@@ -40,7 +40,7 @@ export class UserCrudApp {
     return await this.userService.save(dataUpdate)
   }
 
-  async delete(id: string): Promise<IUser> {
+  async delete(id: string): Promise<IIamUser> {
     const data = await this.userService.findOneByOrFail({ id })
     await this.userService.delete(id)
     return data

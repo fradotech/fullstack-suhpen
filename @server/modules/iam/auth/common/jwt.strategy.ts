@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport'
 import { Exception } from '@server/common/exceptions/index.exception'
 import { config } from '@server/config'
 import { ExtractJwt, Strategy } from 'passport-jwt'
-import { IUser } from '../../user/infrastructure/user.interface'
+import { IIamUser } from '../../user/infrastructure/user.interface'
 import { UserService } from '../../user/infrastructure/user.service'
 
 interface IJwtPayload {
@@ -19,7 +19,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     })
   }
 
-  async validate(payload: IJwtPayload): Promise<IUser | null> {
+  async validate(payload: IJwtPayload): Promise<IIamUser | null> {
     const user = await this.userService.findOneRelationRoles(payload.id)
     !user && Exception.unauthorized()
     return user

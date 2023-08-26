@@ -1,5 +1,5 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
-import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Button, Layout, Row } from 'antd'
 import React from 'react'
 import { FaMoon, FaSun } from 'react-icons/fa'
@@ -14,7 +14,7 @@ type IProps = {
   isCollapsed: boolean
   isDarkMode: boolean | undefined
   handleSwitchTheme: ((boolean: boolean) => void) | undefined
-  user: IUser
+  user: IIamUser
 }
 
 const LayoutHeader: React.FC<IProps> = ({

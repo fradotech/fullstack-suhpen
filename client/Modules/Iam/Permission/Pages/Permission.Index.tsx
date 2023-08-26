@@ -1,5 +1,5 @@
 import { PermissionIndexRequest } from '@server/modules/iam/permission/infrastructure/permission-index.request'
-import { IPermission } from '@server/modules/iam/permission/infrastructure/permission.interface'
+import { IIamPermission } from '@server/modules/iam/permission/infrastructure/permission.interface'
 import { TableRowSelection } from 'antd/es/table/interface'
 import React from 'react'
 import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
@@ -13,7 +13,7 @@ import { permissionColumns } from '../infrastructure/permission.column'
 
 interface IProps {
   roleId?: string
-  rowSelection?: TableRowSelection<IPermission>
+  rowSelection?: TableRowSelection<IIamPermission>
 }
 
 const PermissionIndex: React.FC<IProps> = (props: IProps) => {

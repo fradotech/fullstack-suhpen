@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PermissionService } from '../../permission/infrastructure/permission.service'
-import { IRole } from '../infrastructure/role.interface'
+import { IIamRole } from '../infrastructure/role.interface'
 import { RoleService } from '../infrastructure/role.service'
 import { RoleCreateRequest, RoleUpdateRequest } from './role.request'
 
@@ -11,11 +11,11 @@ export class RoleCrudApp {
     private readonly permissionService: PermissionService,
   ) {}
 
-  async find(): Promise<IRole[]> {
+  async find(): Promise<IIamRole[]> {
     return await this.roleService.find()
   }
 
-  async create(req: RoleCreateRequest): Promise<IRole> {
+  async create(req: RoleCreateRequest): Promise<IIamRole> {
     const data = RoleCreateRequest.dto(req)
 
     if (req.permissionIds) {
@@ -27,11 +27,11 @@ export class RoleCrudApp {
     return await this.roleService.save(data)
   }
 
-  async findOneOrFail(id: string): Promise<IRole> {
+  async findOneOrFail(id: string): Promise<IIamRole> {
     return await this.roleService.findOneRelationPermissions(id)
   }
 
-  async update(id: string, req: RoleUpdateRequest): Promise<IRole> {
+  async update(id: string, req: RoleUpdateRequest): Promise<IIamRole> {
     const data = await this.roleService.findOneByOrFail({ id })
     const dataUpdate = RoleUpdateRequest.dto(data, req)
 
@@ -44,7 +44,7 @@ export class RoleCrudApp {
     return await this.roleService.save(dataUpdate)
   }
 
-  async delete(id: string): Promise<IRole> {
+  async delete(id: string): Promise<IIamRole> {
     const data = await this.roleService.findOneByOrFail({ id })
     await this.roleService.delete(id)
     return data

@@ -1,6 +1,6 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
-import { IRole } from '@server/modules/iam/role/infrastructure/role.interface'
+import { IIamRole } from '@server/modules/iam/role/infrastructure/role.interface'
 import { RoleResponse } from '@server/modules/iam/role/infrastructure/role.response'
 import { Tag } from 'antd'
 import { ColumnsType } from 'antd/es/table'
@@ -22,7 +22,7 @@ export const roleColumns = (
   return [
     {
       title: 'Name',
-      render: (data: IRole) => {
+      render: (data: IIamRole) => {
         return <Tag color={data.labelColor}>{data.name}</Tag>
       },
     },

@@ -1,5 +1,5 @@
 import { DownOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons'
-import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Avatar, Dropdown, Space, Typography } from 'antd'
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
@@ -9,7 +9,7 @@ import { ThemeContext } from '../ThemeProvider/ThemeProvider'
 import { themeColorsDark, themeColorsLight } from '../ThemeProvider/theme'
 
 type IProps = {
-  user: IUser
+  user: IIamUser
 }
 
 const LayoutAccount: React.FC<IProps> = (props: IProps) => {

@@ -2,9 +2,9 @@ import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger'
 import { IsArray, IsOptional, IsUUID } from 'class-validator'
 import { IamPermission } from '../../permission/infrastructure/permission.entity'
 import { IamRole } from '../infrastructure/role.entity'
-import { IRole } from '../infrastructure/role.interface'
+import { IIamRole } from '../infrastructure/role.interface'
 
-export class RoleRequest extends IamRole implements IRole {
+export class RoleRequest extends IamRole implements IIamRole {
   @IsOptional()
   @IsArray()
   @IsUUID(4, { each: true })
@@ -13,19 +13,19 @@ export class RoleRequest extends IamRole implements IRole {
 }
 
 export class RoleCreateRequest extends PartialType(RoleRequest) {
-  static dto(data: RoleCreateRequest): IRole {
+  static dto(data: RoleCreateRequest): IIamRole {
     return Object.assign(new IamRole(), data)
   }
 }
 
 export class RoleUpdateRequest extends OmitType(RoleRequest, ['id']) {
-  static dto(res: IRole, data: RoleUpdateRequest): IRole {
+  static dto(res: IIamRole, data: RoleUpdateRequest): IIamRole {
     return Object.assign(res, data)
   }
 }
 
 export class RoleSyncRequest extends PartialType(RoleRequest) {
-  static dto(data: RoleCreateRequest, permissions: IamPermission[]): IRole {
+  static dto(data: RoleCreateRequest, permissions: IamPermission[]): IIamRole {
     const res = RoleCreateRequest.dto(data)
     res.permissions = permissions
     return res

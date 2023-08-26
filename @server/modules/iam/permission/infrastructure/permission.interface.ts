@@ -2,7 +2,7 @@ import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-ma
 import { IamRole } from '../../role/infrastructure/role.entity'
 import { PermissionMethodEnum } from '../common/permission.enum'
 
-export interface IPermission extends IBaseMasterData {
+export interface IIamPermission extends IBaseMasterData {
   roles: IamRole[]
   module: string
   path: string

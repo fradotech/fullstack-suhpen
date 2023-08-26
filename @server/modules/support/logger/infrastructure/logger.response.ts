@@ -1,4 +1,4 @@
-import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
 
 export class LoggerResponse {
   createdAt: number
@@ -7,7 +7,7 @@ export class LoggerResponse {
   url: string
   headers: Headers
   remoteAddress: string
-  user: IUser
+  user: IIamUser
   body: ReadableStream<Uint8Array> | null
 
   static dto(executeTime: number, request: Request): LoggerResponse {

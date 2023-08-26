@@ -16,10 +16,10 @@ import dayjs from 'dayjs'
 import { BeforeInsert, Column, Entity, JoinTable, ManyToMany } from 'typeorm'
 import { IamRole } from '../../role/infrastructure/role.entity'
 import { REGEX_PASSWORD } from '../common/character.constant'
-import { IUser } from '../infrastructure/user.interface'
+import { IIamUser } from '../infrastructure/user.interface'
 
 @Entity()
-export class IamUser extends BaseEntity implements IUser {
+export class IamUser extends BaseEntity implements IIamUser {
   @ApiProperty({ example: 'Frado' })
   @Column()
   name: string

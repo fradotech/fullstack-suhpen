@@ -1,13 +1,13 @@
 import { IBaseEntity } from '@server/infrastructure/base/base-entity.interface'
 import { UserGenderEnum } from '@server/modules/iam/user/common/user.enum'
 import dayjs from 'dayjs'
-import { IRole } from '../../role/infrastructure/role.interface'
+import { IIamRole } from '../../role/infrastructure/role.interface'
 
-export interface IUser extends IBaseEntity {
+export interface IIamUser extends IBaseEntity {
   name: string
   email: string
   password: string | undefined
-  roles: IRole[]
+  roles: IIamRole[]
   gender?: UserGenderEnum
   phoneNumber?: string
   address?: string

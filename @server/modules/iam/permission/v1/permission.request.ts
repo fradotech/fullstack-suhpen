@@ -4,12 +4,14 @@ import { config } from '@server/config'
 import { Modules } from '@server/modules/modules'
 import { PermissionMethodValue } from '../common/permission.enum'
 import { IamPermission } from '../infrastructure/permission.entity'
-import { IPermission } from '../infrastructure/permission.interface'
+import { IIamPermission } from '../infrastructure/permission.interface'
 
-export class PermissionRequest extends IamPermission implements IPermission {}
+export class PermissionRequest
+  extends IamPermission
+  implements IIamPermission {}
 
 export class PermissionCreateRequest extends PartialType(PermissionRequest) {
-  static dto(req: PermissionCreateRequest): IPermission {
+  static dto(req: PermissionCreateRequest): IIamPermission {
     const data = new IamPermission()
     return Object.assign(data, req)
   }
@@ -18,7 +20,10 @@ export class PermissionCreateRequest extends PartialType(PermissionRequest) {
 export class PermissionUpdateRequest extends OmitType(PermissionRequest, [
   'id',
 ]) {
-  static dto(res: IPermission, data: PermissionUpdateRequest): IPermission {
+  static dto(
+    res: IIamPermission,
+    data: PermissionUpdateRequest,
+  ): IIamPermission {
     res.thumbnail = data.thumbnail
     res.description = data.description
 
@@ -27,7 +32,7 @@ export class PermissionUpdateRequest extends OmitType(PermissionRequest, [
 }
 
 export class PermissionSyncRequest extends PartialType(PermissionRequest) {
-  static dto(layer: any): IPermission {
+  static dto(layer: any): IIamPermission {
     const res = new IamPermission()
 
     res.key = layer.route.path.replace(

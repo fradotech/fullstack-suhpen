@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { BaseEntity } from '@server/infrastructure/base/base.entity'
 import { IamUser } from '@server/modules/iam/user/infrastructure/user.entity'
-import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import {
   Column,
   Entity,
@@ -40,7 +40,7 @@ export class NotificationPush extends BaseEntity implements INotificationPush {
   readAt?: Date
 
   @ManyToOne(() => IamUser)
-  user?: IUser
+  user?: IIamUser
 
   @Column({ default: null })
   pushAt?: Date

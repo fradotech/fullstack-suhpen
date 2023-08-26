@@ -1,8 +1,8 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common'
-import { IUser } from '../infrastructure/user.interface'
+import { IIamUser } from '../infrastructure/user.interface'
 
 export const UserLogged = createParamDecorator(
-  async (data, ctx: ExecutionContext): Promise<IUser> => {
+  async (data, ctx: ExecutionContext): Promise<IIamUser> => {
     return await ctx.switchToHttp().getRequest().user
   },
 )

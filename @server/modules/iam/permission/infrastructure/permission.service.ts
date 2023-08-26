@@ -5,7 +5,7 @@ import { Router } from 'express'
 import { In, Repository } from 'typeorm'
 import { PermissionSyncRequest } from '../v1/permission.request'
 import { IamPermission } from './permission.entity'
-import { IPermission } from './permission.interface'
+import { IIamPermission } from './permission.interface'
 
 class PermissionRepo extends Repository<IamPermission> {
   constructor(
@@ -27,7 +27,7 @@ export class PermissionService extends PermissionRepo {
     const router: Router = server._events.request._router
 
     const routes = router.stack
-      .map((layer): IPermission => {
+      .map((layer): IIamPermission => {
         return layer.route && PermissionSyncRequest.dto(layer)
       })
       .filter((item) => item)

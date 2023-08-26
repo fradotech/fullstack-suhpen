@@ -1,6 +1,6 @@
 import { IBaseMasterData } from '@server/infrastructure/base/master-data/base-master-data.interface'
-import { IPermission } from '../../permission/infrastructure/permission.interface'
+import { IIamPermission } from '../../permission/infrastructure/permission.interface'
 
-export interface IRole extends IBaseMasterData {
-  permissions: IPermission[] | undefined
+export interface IIamRole extends IBaseMasterData {
+  permissions: IIamPermission[] | undefined
 }

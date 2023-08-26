@@ -1,4 +1,4 @@
-import { IPermission } from '@server/modules/iam/permission/infrastructure/permission.interface'
+import { IIamPermission } from '@server/modules/iam/permission/infrastructure/permission.interface'
 import { PermissionResponse } from '@server/modules/iam/permission/infrastructure/permission.response'
 import { Tag } from 'antd'
 import { ColumnsType } from 'antd/es/table'
@@ -13,7 +13,7 @@ export const permissionColumns = (): ColumnsType<PermissionResponse> => {
   return [
     {
       title: 'Name',
-      render: (data: IPermission) => {
+      render: (data: IIamPermission) => {
         return <Tag color={data.labelColor}>{data.name}</Tag>
       },
     },

@@ -3,10 +3,10 @@ import { EntBaseMasterData } from '@server/infrastructure/base/master-data/base-
 import { Column, Entity, JoinTable, ManyToMany } from 'typeorm'
 import { IamRole } from '../../role/infrastructure/role.entity'
 import { PermissionMethodEnum } from '../common/permission.enum'
-import { IPermission } from './permission.interface'
+import { IIamPermission } from './permission.interface'
 
 @Entity()
-export class IamPermission extends EntBaseMasterData implements IPermission {
+export class IamPermission extends EntBaseMasterData implements IIamPermission {
   @ManyToMany(() => IamRole)
   @JoinTable({ name: 'iam_role_permissions' })
   roles: IamRole[]

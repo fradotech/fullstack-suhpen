@@ -1,5 +1,5 @@
 import { IBaseEntity } from '@server/infrastructure/base/base-entity.interface'
-import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { INotificationCategory } from '../../notification-category/infrastructure/notification-category.interface'
 
 export interface INotificationPush extends IBaseEntity {
@@ -9,7 +9,7 @@ export interface INotificationPush extends IBaseEntity {
   category: INotificationCategory
   message: string
   readAt?: Date
-  user?: IUser
+  user?: IIamUser
   pushAt?: Date
-  users?: IUser[]
+  users?: IIamUser[]
 }

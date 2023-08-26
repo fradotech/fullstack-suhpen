@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common'
 import { REQUEST } from '@nestjs/core'
 import { config } from '@server/config'
 import { RoleService } from '@server/modules/iam/role/infrastructure/role.service'
-import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Modules } from '@server/modules/modules'
 import { Request } from 'express'
 import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
@@ -28,7 +28,7 @@ export class NotificationPushIndexApp extends BaseIndexApp {
     req: NotificationPushIndexRequest,
     isNotFilterColumnUser?: boolean,
   ): Promise<IPaginateResponse<INotificationPush>> {
-    const user = this.request.user as IUser
+    const user = this.request.user as IIamUser
     const name = 'notificationPush'
     const columns = ['title', 'message', 'isBroadcast', 'createdAt']
     const relations: IIndexAppRelation[] = [

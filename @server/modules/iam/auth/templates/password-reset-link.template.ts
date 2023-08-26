@@ -1,8 +1,8 @@
-import { IUser } from '../../user/infrastructure/user.interface'
+import { IIamUser } from '../../user/infrastructure/user.interface'
 
 // TODO: Create template with html or hbs file
 export const MailTemplatePasswordResetLink = (
-  user: IUser,
+  user: IIamUser,
   link: string,
 ): string => {
   return `
