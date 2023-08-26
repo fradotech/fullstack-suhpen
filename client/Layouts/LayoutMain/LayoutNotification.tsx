@@ -67,7 +67,7 @@ const LayoutNotification: React.FC = () => {
       menu={{
         items: [
           {
-            key: 'Mark Read All',
+            key: 'Mark as Read All',
             type: 'group',
             label: (
               <Row style={{ marginTop: 10, justifyContent: 'space-between' }}>
@@ -76,7 +76,7 @@ const LayoutNotification: React.FC = () => {
                 </Typography.Title>
                 <a onClick={() => handleReadAll(notificationPushs?.data)}>
                   <VscCheckAll style={{ marginRight: 6 }} />
-                  Mark Read All
+                  Mark as Read All
                 </a>
               </Row>
             ),
