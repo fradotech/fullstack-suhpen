@@ -9,7 +9,8 @@ import {
   UseGuards,
 } from '@nestjs/common'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
-import { BaseCrudController } from '@server/infrastructure/base/base-crud.controller'
+import { IBaseCrudController } from '@server/infrastructure/base/base-crud-controller.interface'
+import { Exactly } from '@server/infrastructure/base/base.util'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { Modules } from '@server/modules/modules'
@@ -29,7 +30,9 @@ const THIS_MODULE = Modules.Permission
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
 @UseGuards(LoggedInGuard)
-export class PermissionCrudController implements BaseCrudController {
+export class PermissionCrudController
+  implements Exactly<IBaseCrudController, PermissionCrudController>
+{
   constructor(
     private readonly permissionIndexApp: PermissionIndexApp,
     private readonly permissionCrudApp: PermissionCrudApp,

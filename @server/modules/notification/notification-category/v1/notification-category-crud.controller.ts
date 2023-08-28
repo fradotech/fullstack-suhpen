@@ -10,7 +10,8 @@ import {
   UseGuards,
 } from '@nestjs/common'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
-import { BaseCrudController } from '@server/infrastructure/base/base-crud.controller'
+import { IBaseCrudController } from '@server/infrastructure/base/base-crud-controller.interface'
+import { Exactly } from '@server/infrastructure/base/base.util'
 import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
@@ -30,7 +31,9 @@ const THIS_MODULE = Modules.NotificationCategory
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
 @UseGuards(LoggedInGuard)
-export class NotificationCategoryCrudController implements BaseCrudController {
+export class NotificationCategoryCrudController
+  implements Exactly<IBaseCrudController, NotificationCategoryCrudController>
+{
   constructor(
     private readonly notificationCategoryIndexApp: NotificationCategoryIndexApp,
     private readonly notificationCategoryCrudApp: NotificationCategoryCrudApp,
