@@ -5,6 +5,7 @@
 /public/uploads
 
 # compiled output
+/documentation
 /dist
 /node_modules
 

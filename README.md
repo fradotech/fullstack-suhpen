@@ -10,6 +10,12 @@ $ yarn
 
 ## Run
 
+- Run document compodoc
+
+```bash
+$ yarn server:compodoc
+```
+
 - Run server
 
 ```bash
