@@ -13,6 +13,7 @@ import { DatabaseModule } from './database/database.module'
 import { DashboardModule } from './modules/dashboard/dashboard.module'
 import { IamModule } from './modules/iam/iam.module'
 import { NotificationModule } from './modules/notification/notification.module'
+import { SettingModule } from './modules/setting/setting.module'
 import { SentryModule } from './modules/support/sentry/sentry.module'
 import { SupportModule } from './modules/support/support.module'
 
@@ -24,6 +25,7 @@ import { SupportModule } from './modules/support/support.module'
 
     DatabaseModule,
     SupportModule,
+    SettingModule,
 
     DashboardModule,
     IamModule,
