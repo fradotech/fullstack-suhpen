@@ -21,7 +21,11 @@ export abstract class BaseIndexApp extends BaseIndexService {
     request: Request,
     isNotFilterColumnUser?: boolean,
   ): SelectQueryBuilder<T> {
-    if (req.sortField && !columns.includes(req.sortField)) {
+    if (
+      req.sortField &&
+      req.sortField !== 'undefined' &&
+      !columns.includes(req.sortField)
+    ) {
       Exception.badRequest(`Field ${req.sortField} doesn't exist for sort`)
     }
 

@@ -10,6 +10,7 @@ import AuthModule from './Modules/Iam/Auth/Auth.Module'
 import { AuthAction } from './Modules/Iam/Auth/infrastructure/auth.action'
 import IamModule from './Modules/Iam/Iam.Module'
 import NotificationModule from './Modules/Notification/Notification.Module'
+import SettingModule from './Modules/Setting/Setting.Module'
 import { Path as ERoute } from './common/Path'
 
 const LayoutMain = React.lazy(() => import('./Layouts/LayoutMain/LayoutMain'))
@@ -46,6 +47,7 @@ const BrowserRouter: React.FC = () => (
               {DashboardModule.routes}
               {IamModule.routes}
               {NotificationModule.routes}
+              {SettingModule.routes}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </LayoutMain>

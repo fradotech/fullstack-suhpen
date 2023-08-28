@@ -1,32 +1,13 @@
-import { IIamPermission } from '@server/modules/iam/permission/infrastructure/permission.interface'
-import { PermissionResponse } from '@server/modules/iam/permission/infrastructure/permission.response'
-import { Tag } from 'antd'
 import { ColumnsType } from 'antd/es/table'
+import { LogActivityResponse } from '../../../../../@server/modules/setting/logger/infrastructure/log-activity.response'
 
 import { PermissionMethodEnum } from '../../../../../@server/modules/iam/permission/common/permission.enum'
-import { Modules } from '../../../../../@server/modules/modules'
 import { RowActionButtons } from '../../../../Components/Molecules/RowActionButtons/RowActionButtons'
 import { Path } from '../../../../common/Path'
 import { Util } from '../../../../common/utils/util'
 
-export const permissionColumns = (): ColumnsType<PermissionResponse> => {
+export const logActivityColumns = (): ColumnsType<LogActivityResponse> => {
   return [
-    {
-      title: 'Name',
-      render: (data: IIamPermission) => {
-        return <Tag color={data.labelColor}>{data.name}</Tag>
-      },
-    },
-    { dataIndex: 'key' },
-    {
-      dataIndex: 'module',
-      filters: Object.values(Modules).map((modules) => {
-        return {
-          text: modules,
-          value: modules,
-        }
-      }),
-    },
     {
       dataIndex: 'method',
       filters: Object.values(PermissionMethodEnum).map((data) => {
@@ -36,7 +17,16 @@ export const permissionColumns = (): ColumnsType<PermissionResponse> => {
         }
       }),
     },
-    { dataIndex: 'path' },
+    {
+      dataIndex: 'path',
+    },
+    {
+      title: 'Time (ms)',
+      dataIndex: 'executeTimeInMs',
+    },
+    {
+      dataIndex: 'remoteAddress',
+    },
     {
       dataIndex: 'createdAt',
       render: (data: Date) => Util.formatDate(data),
@@ -44,12 +34,12 @@ export const permissionColumns = (): ColumnsType<PermissionResponse> => {
     {
       title: 'Actions',
       width: '40px',
-      render: (data: PermissionResponse) => (
+      render: (data: LogActivityResponse) => (
         <RowActionButtons
           actions={[
             {
               type: 'view',
-              href: Path.permission.id(data.id),
+              href: Path.logActivity.id(data.id),
             },
           ]}
         />

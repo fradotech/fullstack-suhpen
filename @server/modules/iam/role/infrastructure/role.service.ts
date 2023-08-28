@@ -33,7 +33,7 @@ export class RoleService extends RoleRepo {
     path: string,
   ): boolean {
     const key = path.replace(config.app.prefix, method.toLowerCase())
-    return user.roles.some((role) => {
+    return user.roles?.some((role) => {
       return role.permissions?.some((permission) => {
         return key === permission.key
       })

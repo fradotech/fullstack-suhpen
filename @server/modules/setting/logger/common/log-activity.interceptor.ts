@@ -6,8 +6,8 @@ import {
 } from '@nestjs/common'
 import { Observable } from 'rxjs'
 import { tap } from 'rxjs/operators'
-import { LogActivityResponse } from './log-activity.response'
-import { LogActivityService } from './log-activity.service'
+import { LogActivityService } from '../infrastructure/log-activity.service'
+import { LogActivityCreateRequest } from '../v1/log-activity.request'
 
 @Injectable()
 export class LogActivityInterceptor implements NestInterceptor {
@@ -20,12 +20,12 @@ export class LogActivityInterceptor implements NestInterceptor {
     const request = context.switchToHttp().getRequest<Request>()
     const dateNow = Date.now()
 
-    const logRes = LogActivityResponse.dto(Date.now() - dateNow, request)
-    this.loggerService.save(logRes)
-
     return next.handle().pipe(
       tap(() => {
-        const logRes = LogActivityResponse.dto(Date.now() - dateNow, request)
+        const logRes = LogActivityCreateRequest.dto(
+          Date.now() - dateNow,
+          request,
+        )
         this.loggerService.save(logRes)
       }),
     )

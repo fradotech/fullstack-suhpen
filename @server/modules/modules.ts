@@ -1,6 +1,7 @@
 export enum Modules {
   Doc = 'docs',
   Log = 'logs',
+  LogSheet = 'logs/sheet',
   Attachment = 'attachments',
 
   // --- Dashboard --- \\

@@ -6,5 +6,5 @@ export class LogActivityIndexRequest extends IndexRequest {
     example: 'createdAt',
     description: 'Sort entity by field name',
   })
-  sortField = 'createdAt'
+  sortField?: string
 }

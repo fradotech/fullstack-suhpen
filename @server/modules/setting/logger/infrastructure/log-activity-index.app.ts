@@ -6,9 +6,9 @@ import {
   IIndexAppRelation,
   IPaginateResponse,
 } from '../../../../infrastructure/index/index.interface'
-import { LogActivityIndexRequest } from '../infrastructure/log-activity-index.request'
-import { ILogActivity } from '../infrastructure/log-activity.interface'
-import { LogActivityService } from '../infrastructure/log-activity.service'
+import { LogActivityIndexRequest } from '../v1/log-activity-index.request'
+import { ILogActivity } from './log-activity.interface'
+import { LogActivityService } from './log-activity.service'
 
 @Injectable()
 export class LogActivityIndexApp extends BaseIndexApp {
@@ -23,6 +23,10 @@ export class LogActivityIndexApp extends BaseIndexApp {
   async fetch(
     req: LogActivityIndexRequest,
   ): Promise<IPaginateResponse<ILogActivity>> {
+    if (!req.sortField || req.sortField === 'undefined') {
+      req.sortField = 'createdAt'
+    }
+
     const name = 'logActivity'
     const columns = [
       'executeTime',
