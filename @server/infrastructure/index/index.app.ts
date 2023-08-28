@@ -1,3 +1,4 @@
+import { Exception } from '@server/common/exceptions/index.exception'
 import { RoleDefaultKeyEnum } from '@server/modules/iam/role/common/role.enum'
 import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Request } from 'express'
@@ -20,6 +21,10 @@ export abstract class BaseIndexApp extends BaseIndexService {
     request: Request,
     isNotFilterColumnUser?: boolean,
   ): SelectQueryBuilder<T> {
+    if (req.sortField && !columns.includes(req.sortField)) {
+      Exception.badRequest(`Field ${req.sortField} doesn't exist for sort`)
+    }
+
     const query = repo.createQueryBuilder(name)
 
     const leftJoin = (tableName: string, relations: IIndexAppRelation[]) => {

@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common'
 import { AttachmentModule } from './attachment/attachment.module'
 import { AppCacheModule } from './cache/cache.module'
-import { LoggerModule } from './logger/logger.module'
+import { LogActivityModule } from './logger/log-activity.module'
 
 @Module({
-  imports: [LoggerModule, AttachmentModule, AppCacheModule],
+  imports: [LogActivityModule, AttachmentModule, AppCacheModule],
   controllers: [],
   providers: [AppCacheModule],
 })

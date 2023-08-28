@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class Milestone11692757464192 implements MigrationInterface {
-    name = 'Milestone11692757464192'
+export class Milestone11693227759091 implements MigrationInterface {
+    name = 'Milestone11693227759091'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "iam_roles" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "created_by_id" uuid, "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_by_id" uuid, "deleted_at" TIMESTAMP, "deleted_by_id" uuid, "name" character varying NOT NULL, "key" character varying, "is_active" boolean NOT NULL DEFAULT true, "description" text, "thumbnail" character varying, "label_color" character varying NOT NULL DEFAULT '#007fd0', CONSTRAINT "UQ_7a9e866f17d3e3af13d12be7622" UNIQUE ("key"), CONSTRAINT "PK_aa79b0099c20eed09191e9d4159" PRIMARY KEY ("id"))`);
@@ -16,6 +16,7 @@ export class Milestone11692757464192 implements MigrationInterface {
         await queryRunner.query(`CREATE TABLE "notification_templates" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "created_by_id" uuid, "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_by_id" uuid, "deleted_at" TIMESTAMP, "deleted_by_id" uuid, "title" character varying NOT NULL, "key" character varying, "message" text NOT NULL, "thumbnail" character varying, "category_id" uuid, CONSTRAINT "UQ_8984071929794bfee03a46d2035" UNIQUE ("key"), CONSTRAINT "PK_76f0fc48b8d057d2ae7f3a2848a" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE INDEX "IDX_fe9f56dbb30bd0b5f7936524a1" ON "notification_templates" ("title") `);
         await queryRunner.query(`CREATE TABLE "attachments" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "created_by_id" uuid, "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_by_id" uuid, "deleted_at" TIMESTAMP, "deleted_by_id" uuid, "file_url" character varying NOT NULL, "module" character varying, CONSTRAINT "PK_5e1f050bcff31e3084a1d662412" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "log_activities" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "execute_time_in_ms" integer NOT NULL, "method" character varying NOT NULL, "path" character varying NOT NULL, "remote_address" character varying NOT NULL, "headers" jsonb NOT NULL, "user" jsonb, "body" jsonb, CONSTRAINT "PK_0d8ca6664b12f45d2c86f734c5e" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "iam_role_permissions" ("iam_roles_id" uuid NOT NULL, "iam_permissions_id" uuid NOT NULL, CONSTRAINT "PK_2b18c3e99a65f5b6484734cf522" PRIMARY KEY ("iam_roles_id", "iam_permissions_id"))`);
         await queryRunner.query(`CREATE INDEX "IDX_f61b4ac4eac7446f466a838b7a" ON "iam_role_permissions" ("iam_roles_id") `);
         await queryRunner.query(`CREATE INDEX "IDX_2afc6d3f0deb0f8dab2beface5" ON "iam_role_permissions" ("iam_permissions_id") `);
@@ -57,6 +58,7 @@ export class Milestone11692757464192 implements MigrationInterface {
         await queryRunner.query(`DROP INDEX "public"."IDX_2afc6d3f0deb0f8dab2beface5"`);
         await queryRunner.query(`DROP INDEX "public"."IDX_f61b4ac4eac7446f466a838b7a"`);
         await queryRunner.query(`DROP TABLE "iam_role_permissions"`);
+        await queryRunner.query(`DROP TABLE "log_activities"`);
         await queryRunner.query(`DROP TABLE "attachments"`);
         await queryRunner.query(`DROP INDEX "public"."IDX_fe9f56dbb30bd0b5f7936524a1"`);
         await queryRunner.query(`DROP TABLE "notification_templates"`);
