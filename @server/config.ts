@@ -23,6 +23,7 @@ export const config = {
     }`}${process.env.APP_PREFIX || '/api/v1'}`,
 
     hostClient: process.env.HOST_CLIENT || `${localhost}:8080`,
+    rateLimiter: { ttl: 60, limit: 100 },
   },
 
   app: APP_CONFIG,

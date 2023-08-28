@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common'
-import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler'
 import { RavenInterceptor, RavenModule } from 'nest-raven'
 import {
   EntityNotFoundExceptionFilter,
@@ -18,6 +19,7 @@ import { SupportModule } from './modules/support/support.module'
 @Module({
   imports: [
     SentryModule.forRoot(config.sentry),
+    ThrottlerModule.forRoot(config.server.rateLimiter),
     RavenModule,
 
     DatabaseModule,
@@ -48,6 +50,10 @@ import { SupportModule } from './modules/support/support.module'
     {
       provide: APP_PIPE,
       useClass: ValidationPipe,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
     },
   ],
 })
