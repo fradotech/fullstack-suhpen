@@ -29,7 +29,7 @@ export const logActivityColumns = (): ColumnsType<LogActivityResponse> => {
     },
     {
       dataIndex: 'createdAt',
-      render: (data: Date) => Util.formatDate(data),
+      render: (data: Date) => Util.formatDatetime(data),
     },
     {
       title: 'Actions',

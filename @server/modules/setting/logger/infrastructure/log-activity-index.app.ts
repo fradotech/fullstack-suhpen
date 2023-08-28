@@ -28,13 +28,7 @@ export class LogActivityIndexApp extends BaseIndexApp {
     }
 
     const name = 'logActivity'
-    const columns = [
-      'executeTime',
-      'method',
-      'url',
-      'remoteAddress',
-      'createdAt',
-    ]
+    const columns = ['method', 'remoteAddress', 'createdAt']
     const relations: IIndexAppRelation[] = []
     const query = this.createQueryIndex(
       req,
