@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { REQUEST } from '@nestjs/core'
 import { IndexSortOderEnum } from '@server/infrastructure/index/index.interface'
-import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Request } from 'express'
 import { NotificationPushIndexApp } from '../../infrastructure/notification-push-index.app'
 import { NotificationPushIndexRequest } from '../../infrastructure/notification-push-index.request'
@@ -31,7 +31,7 @@ export class NotificationPushReadApp {
   async readOne(id: string): Promise<INotificationPush> {
     const data = await this.notificationPushService.updateReadAtNow(
       [id],
-      this.request.user as IIamUser,
+      this.request.user as IUser,
     )
     return data[0]
   }
@@ -39,7 +39,7 @@ export class NotificationPushReadApp {
   async readMany(ids: string[]): Promise<INotificationPush[]> {
     return await this.notificationPushService.updateReadAtNow(
       ids,
-      this.request.user as IIamUser,
+      this.request.user as IUser,
     )
   }
 }

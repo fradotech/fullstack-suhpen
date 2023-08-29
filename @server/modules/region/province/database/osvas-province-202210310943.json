@@ -1,0 +1,120 @@
+{
+  "data": [
+    {
+      "oid": 1,
+      "name": "Aceh (NAD)"
+    },
+    {
+      "oid": 2,
+      "name": "Bali"
+    },
+    {
+      "oid": 3,
+      "name": "Banten"
+    },
+    {
+      "oid": 4,
+      "name": "Bengkulu"
+    },
+    {
+      "oid": 5,
+      "name": "DI Yogyakarta"
+    },
+    {
+      "oid": 6,
+      "name": "DKI Jakarta"
+    },
+    {
+      "oid": 8,
+      "name": "Jambi"
+    },
+    {
+      "oid": 9,
+      "name": "Jawa Barat"
+    },
+    {
+      "oid": 10,
+      "name": "Jawa Tengah"
+    },
+    {
+      "oid": 11,
+      "name": "Jawa Timur"
+    },
+    {
+      "oid": 12,
+      "name": "Kalimantan Barat"
+    },
+    {
+      "oid": 13,
+      "name": "Kalimantan Selatan"
+    },
+    {
+      "oid": 14,
+      "name": "Kalimantan Tengah"
+    },
+    {
+      "oid": 15,
+      "name": "Kalimantan Timur"
+    },
+    {
+      "oid": 16,
+      "name": "Kalimantan Utara"
+    },
+    {
+      "oid": 17,
+      "name": "Kepulauan Bangka Belitung"
+    },
+    {
+      "oid": 18,
+      "name": "Kepulauan Riau"
+    },
+    {
+      "oid": 19,
+      "name": "Lampung"
+    },
+    {
+      "oid": 20,
+      "name": "Maluku"
+    },
+    {
+      "oid": 21,
+      "name": "Maluku Utara"
+    },
+    {
+      "oid": 22,
+      "name": "Nusa Tenggara Barat (NTB)"
+    },
+    {
+      "oid": 23,
+      "name": "Nusa Tenggara Timur (NTT)"
+    },
+    {
+      "oid": 24,
+      "name": "Papua"
+    },
+    {
+      "oid": 25,
+      "name": "Papua Barat"
+    },
+    {
+      "oid": 26,
+      "name": "Riau"
+    },
+    {
+      "oid": 32,
+      "name": "Sumatera Barat"
+    },
+    {
+      "oid": 33,
+      "name": "Sumatera Selatan"
+    },
+    {
+      "oid": 34,
+      "name": "Sumatera Utara"
+    },
+    {
+      "oid": 35,
+      "name": "Qabul"
+    }
+  ]
+}

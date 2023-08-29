@@ -1,4 +1,4 @@
-import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import {
   Column,
   CreateDateColumn,
@@ -31,7 +31,7 @@ export class LogActivity implements ILogActivity {
   headers: Headers
 
   @Column({ type: 'jsonb', default: null })
-  user: IIamUser
+  user: IUser
 
   @Column({ type: 'jsonb', default: null })
   body: ReadableStream<Uint8Array> | null

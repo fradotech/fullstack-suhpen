@@ -4,7 +4,7 @@ import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interfa
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { UserLogged } from '@server/modules/iam/user/common/get-user-logged.decorator'
-import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Modules } from '@server/modules/modules'
 import { NotificationPushResponse } from '../../infrastructure/notification-push.response'
 import { NotificationPushCrudApp } from '../notification-push-crud.app'
@@ -28,7 +28,7 @@ export class NotificationPushReadController {
 
   @Get()
   async fetch(
-    @UserLogged() userLogged: IIamUser,
+    @UserLogged() userLogged: IUser,
   ): Promise<IApiRes<NotificationPushResponse[]>> {
     const data = await this.notificationPushReadApp.fetch()
     return ApiRes.dto(NotificationPushResponse.dtos(data, userLogged))

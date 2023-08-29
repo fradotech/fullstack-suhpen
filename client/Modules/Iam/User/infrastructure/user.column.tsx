@@ -1,5 +1,5 @@
 import { IPaginateResponse } from '@server/infrastructure/index/index.interface'
-import { IIamRole } from '@server/modules/iam/role/infrastructure/role.interface'
+import { IRole } from '@server/modules/iam/role/infrastructure/role.interface'
 import { RoleResponse } from '@server/modules/iam/role/infrastructure/role.response'
 import { UserResponse } from '@server/modules/iam/user/infrastructure/user.response'
 import { Tag } from 'antd'
@@ -29,7 +29,7 @@ export const userColumns = (
     },
     {
       dataIndex: 'roles',
-      render: (data: IIamRole[]) => {
+      render: (data: IRole[]) => {
         return data?.map((data) => {
           return (
             <Tag key={data.id} color={data.labelColor}>

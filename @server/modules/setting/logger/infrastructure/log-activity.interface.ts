@@ -1,4 +1,4 @@
-import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 
 export interface ILogActivity {
   id: string
@@ -8,6 +8,6 @@ export interface ILogActivity {
   path: string
   headers: Headers
   remoteAddress: string
-  user: IIamUser
+  user: IUser
   body: ReadableStream<Uint8Array> | null
 }

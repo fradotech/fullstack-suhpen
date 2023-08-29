@@ -6,7 +6,7 @@ import {
   RoleCreateRequest,
   RoleUpdateRequest,
 } from '@server/modules/iam/role/v1/role.request'
-import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { notification } from 'antd'
 import { UseQueryOptions, UseQueryResult, useQuery } from 'react-query'
 import { getAttachment } from '../../../../Components/Molecules/Attachment/attachment.util'
@@ -63,7 +63,7 @@ export class RoleAction {
 
   // --- Utils --- \\
 
-  static validatePermission(user: IIamUser, key: string): boolean {
+  static validatePermission(user: IUser, key: string): boolean {
     return user.roles?.some((role) => {
       return role.permissions?.some((permission) => {
         return key === permission.key

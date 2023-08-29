@@ -7,7 +7,7 @@ import {
   IPaginateResponse,
 } from '../../../../infrastructure/index/index.interface'
 import { PermissionIndexRequest } from './permission-index.request'
-import { IIamPermission } from './permission.interface'
+import { IPermission } from './permission.interface'
 import { PermissionService } from './permission.service'
 
 @Injectable()
@@ -22,7 +22,7 @@ export class PermissionIndexApp extends BaseIndexApp {
 
   async fetch(
     req: PermissionIndexRequest,
-  ): Promise<IPaginateResponse<IIamPermission>> {
+  ): Promise<IPaginateResponse<IPermission>> {
     const name = 'permission'
     const columns = [
       'name',

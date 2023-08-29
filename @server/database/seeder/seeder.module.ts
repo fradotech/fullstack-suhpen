@@ -6,6 +6,7 @@ import { roleSyncGeneralPermissionsSeeder } from '@server/modules/iam/role/datab
 import { notificationCategoryCreateSeeder } from '@server/modules/notification/notification-category/database/notification-category-create.seeder'
 import { notificationPushCreateSeeder } from '@server/modules/notification/notification-push/database/notification-push-create.seeder'
 import { notificationTemplateCreateSeeder } from '@server/modules/notification/notification-template/database/notification-template-create.seeder'
+import { provinceCreateSeeder } from '@server/modules/region/province/database/province-create.seeder'
 import { EntityManager } from 'typeorm'
 import { userCreateSeeder } from '../../modules/iam/user/database/user-create.seeder'
 import dataSource from '../data-source'
@@ -20,6 +21,10 @@ export class SeederMoodule {
       .catch((error) => Logger.error(error))
 
     const entityManager = new EntityManager(dataSource)
+
+    // --- Region --- \\
+
+    await provinceCreateSeeder(entityManager)
 
     // --- Iam --- \\
 

@@ -7,7 +7,7 @@ import {
   IPaginateResponse,
 } from '../../../../infrastructure/index/index.interface'
 import { RoleIndexRequest } from './role-index.request'
-import { IIamRole } from './role.interface'
+import { IRole } from './role.interface'
 import { RoleService } from './role.service'
 
 @Injectable()
@@ -20,7 +20,7 @@ export class RoleIndexApp extends BaseIndexApp {
     super()
   }
 
-  async fetch(req: RoleIndexRequest): Promise<IPaginateResponse<IIamRole>> {
+  async fetch(req: RoleIndexRequest): Promise<IPaginateResponse<IRole>> {
     const name = 'role'
     const columns = ['name', 'key', 'isActive', 'createdAt']
     const relations: IIndexAppRelation[] = []

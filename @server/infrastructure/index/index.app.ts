@@ -1,6 +1,6 @@
 import { Exception } from '@server/common/exceptions/index.exception'
 import { RoleDefaultKeyEnum } from '@server/modules/iam/role/common/role.enum'
-import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Request } from 'express'
 import { ObjectLiteral, Repository, SelectQueryBuilder } from 'typeorm'
 import { IIndexAppRelation } from './index.interface'
@@ -84,7 +84,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
     }
 
     const isUser = repo.metadata.propertiesMap['user']
-    const user = request['user'] as IIamUser
+    const user = request['user'] as IUser
     const userId = user?.id
     const isUserRelation = relations
       .map((data) => data.name)

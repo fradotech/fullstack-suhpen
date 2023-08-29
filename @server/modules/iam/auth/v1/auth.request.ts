@@ -1,9 +1,9 @@
 import { ApiProperty, PickType } from '@nestjs/swagger'
 import { IsNotEmpty } from 'class-validator'
 import { IsMatch } from '../../../../infrastructure/swagger/decorators/is-match.decorator'
-import { IIamRole } from '../../role/infrastructure/role.interface'
+import { IRole } from '../../role/infrastructure/role.interface'
 import { IamUser } from '../../user/infrastructure/user.entity'
-import { IIamUser } from '../../user/infrastructure/user.interface'
+import { IUser } from '../../user/infrastructure/user.interface'
 import { UserRequest } from '../../user/v1/user.request'
 
 export class AuthRegisterRequest extends PickType(UserRequest, [
@@ -15,7 +15,7 @@ export class AuthRegisterRequest extends PickType(UserRequest, [
   @IsMatch('password')
   passwordConfirmation!: string
 
-  static dto(data: AuthRegisterRequest, roleCustomer: IIamRole): IIamUser {
+  static dto(data: AuthRegisterRequest, roleCustomer: IRole): IUser {
     const res = new IamUser()
 
     res.name = data.name

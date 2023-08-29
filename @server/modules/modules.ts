@@ -9,6 +9,17 @@ export enum Modules {
   Dashboard = 'dashboard',
   DashboardUser = `dashboard/users`,
 
+  // --- Region --- \\
+
+  Province = 'provinces',
+  ProvinceSheet = 'provinces/sheet',
+
+  Regency = 'regencies',
+  RegencySheet = 'regencies/sheet',
+
+  District = 'districts',
+  DistrictSheet = 'districts/sheet',
+
   // --- Iam --- \\
 
   Auth = 'auth',

@@ -5,7 +5,7 @@ import { NotificationCategoryService } from '@server/modules/notification/notifi
 import { NotificationPushService } from '@server/modules/notification/notification-push/infrastructure/notification-push.service'
 import { NotificationPushCreateRequest } from '@server/modules/notification/notification-push/v1/notification-push.request'
 import { NotificationTemplateService } from '@server/modules/notification/notification-template/infrastructure/notification-template.service'
-import { IIamUser } from '../../user/infrastructure/user.interface'
+import { IUser } from '../../user/infrastructure/user.interface'
 import { AuthNotificationKeyEnum } from '../common/auth.enum'
 
 @Injectable()
@@ -16,7 +16,7 @@ export class AuthNotificationService {
     private readonly notificationCategoryService: NotificationCategoryService,
   ) {}
 
-  async sendRegister(user: IIamUser): Promise<void> {
+  async sendRegister(user: IUser): Promise<void> {
     const templateFound =
       await this.notificationTemplateService.findOneByOrFail({
         key: AuthNotificationKeyEnum.Register,

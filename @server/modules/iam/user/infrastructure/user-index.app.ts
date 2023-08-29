@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { REQUEST } from '@nestjs/core'
-import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Request } from 'express'
 import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
 import {
@@ -20,7 +20,7 @@ export class UserIndexApp extends BaseIndexApp {
     super()
   }
 
-  async fetch(req: UserIndexRequest): Promise<IPaginateResponse<IIamUser>> {
+  async fetch(req: UserIndexRequest): Promise<IPaginateResponse<IUser>> {
     const name = 'user'
     const columns = ['name', 'email', 'phoneNumber', 'createdAt']
     const relations: IIndexAppRelation[] = [

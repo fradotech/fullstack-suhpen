@@ -1,10 +1,10 @@
 import { IamRole } from './role.entity'
-import { IIamRole } from './role.interface'
+import { IRole } from './role.interface'
 
 export class RoleResponse extends IamRole {
   permissionIds: string[]
 
-  static dto(data: IIamRole): RoleResponse {
+  static dto(data: IRole): RoleResponse {
     const res = new RoleResponse()
     Object.assign(res, data)
 
@@ -13,7 +13,7 @@ export class RoleResponse extends IamRole {
     return res
   }
 
-  static dtos(data: IIamRole[]): RoleResponse[] {
+  static dtos(data: IRole[]): RoleResponse[] {
     return data.map((data) => this.dto(data))
   }
 }

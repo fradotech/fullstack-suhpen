@@ -1,5 +1,5 @@
 import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger'
-import { IIamUser } from '@server/modules/iam/user/infrastructure/user.interface'
+import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { IsUUID } from 'class-validator'
 import { NotificationCategoryDefaultKeyEnum } from '../../notification-category/common/notification-category.enum'
 import { INotificationCategory } from '../../notification-category/infrastructure/notification-category.interface'
@@ -31,7 +31,7 @@ export class NotificationPushCreateRequest extends PartialType(
   static dtoNotificationTemplate(
     template: INotificationTemplate,
     category: INotificationCategory,
-    user: IIamUser,
+    user: IUser,
   ): INotificationPush {
     const res = new NotificationPush()
 
