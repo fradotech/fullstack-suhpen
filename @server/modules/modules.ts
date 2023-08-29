@@ -14,8 +14,8 @@ export enum Modules {
   Province = 'provinces',
   ProvinceSheet = 'provinces/sheet',
 
-  Regency = 'regencies',
-  RegencySheet = 'regencies/sheet',
+  City = 'cities',
+  CitySheet = 'cities/sheet',
 
   District = 'districts',
   DistrictSheet = 'districts/sheet',
