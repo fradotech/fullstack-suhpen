@@ -6,39 +6,40 @@ import {
   IIndexAppRelation,
   IPaginateResponse,
 } from '../../../../infrastructure/index/index.interface'
-import { CityIndexRequest } from './city-index.request'
-import { ICity } from './city.interface'
-import { CityService } from './city.service'
+import { DistrictIndexRequest } from './district-index.request'
+import { IDistrict } from './district.interface'
+import { DistrictService } from './district.service'
 
 @Injectable()
-export class CityIndexApp extends BaseIndexApp {
+export class DistrictIndexApp extends BaseIndexApp {
   constructor(
     @Inject(REQUEST)
     private readonly request: Request,
-    private readonly cityService: CityService,
+    private readonly districtService: DistrictService,
   ) {
     super()
   }
 
-  async fetch(req: CityIndexRequest): Promise<IPaginateResponse<ICity>> {
-    const name = 'city'
+  async fetch(
+    req: DistrictIndexRequest,
+  ): Promise<IPaginateResponse<IDistrict>> {
+    const name = 'district'
     const columns = ['name', 'oid', 'updatedAt', 'createdAt']
-    const relations: IIndexAppRelation[] = [{ name: 'province' }]
+    const relations: IIndexAppRelation[] = [{ name: 'city' }]
     const query = this.createQueryIndex(
       req,
       name,
       columns,
       relations,
-      this.cityService,
+      this.districtService,
       this.request,
     )
 
-    if (req.provinceId) {
-      query.andWhere(`province.id = :provinceId`, {
-        provinceId: req.provinceId,
+    if (req.cityId) {
+      query.andWhere(`city.id = :cityId`, {
+        cityId: req.cityId,
       })
     }
-
     const [data, count] = await this.getData(query, req.isExport)
     const meta = this.mapMeta(count, req)
 

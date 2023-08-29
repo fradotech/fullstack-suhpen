@@ -41,7 +41,7 @@ export abstract class BaseIndexService {
 
   protected querySearch(relations: IIndexAppRelation[]): string {
     // CONTINUE: add more nonLowerStrings
-    const nonLowerStrings = ['At', 'isActive', 'Price', 'stock']
+    const nonLowerStrings = ['id', 'At', 'isActive', 'Price', 'stock']
     const nonLowerColumns: string[] = []
 
     let querySearch = `CONCAT_WS(''`

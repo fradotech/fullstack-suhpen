@@ -18,7 +18,7 @@ export const provinceCreateSeeder = async (
   const dataCreate = entityManager.create(RegionProvince, data)
   await entityManager.save(dataCreate)
 
-  Logger.log('Province', 'AutomaticSeeder')
+  Logger.log('Provinces', 'AutomaticSeeder')
 
   return true
 }

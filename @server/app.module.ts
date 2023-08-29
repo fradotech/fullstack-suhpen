@@ -27,10 +27,10 @@ import { SupportModule } from './modules/support/support.module'
     DatabaseModule,
     SupportModule,
     SettingModule,
-    RegionModule,
 
     DashboardModule,
     IamModule,
+    RegionModule,
     NotificationModule,
   ],
   controllers: [],

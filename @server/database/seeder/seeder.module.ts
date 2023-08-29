@@ -7,6 +7,7 @@ import { notificationCategoryCreateSeeder } from '@server/modules/notification/n
 import { notificationPushCreateSeeder } from '@server/modules/notification/notification-push/database/notification-push-create.seeder'
 import { notificationTemplateCreateSeeder } from '@server/modules/notification/notification-template/database/notification-template-create.seeder'
 import { cityCreateSeeder } from '@server/modules/region/city/database/city-create.seeder'
+import { districtCreateSeeder } from '@server/modules/region/district/database/district-create.seeder'
 import { provinceCreateSeeder } from '@server/modules/region/province/database/province-create.seeder'
 import { EntityManager } from 'typeorm'
 import { userCreateSeeder } from '../../modules/iam/user/database/user-create.seeder'
@@ -27,6 +28,7 @@ export class SeederMoodule {
 
     await provinceCreateSeeder(entityManager)
     await cityCreateSeeder(entityManager)
+    await districtCreateSeeder(entityManager)
 
     // --- Iam --- \\
 

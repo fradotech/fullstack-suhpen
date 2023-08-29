@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Post,
   Put,
   Query,
   UseGuards,
@@ -17,7 +18,7 @@ import { CityIndexApp } from '../infrastructure/city-index.app'
 import { CityIndexRequest } from '../infrastructure/city-index.request'
 import { CityResponse } from '../infrastructure/city.response'
 import { CityCrudApp } from './city-crud.app'
-import { CityUpdateRequest } from './city.request'
+import { CityCreateRequest, CityUpdateRequest } from './city.request'
 
 const THIS_MODULE = Modules.City
 
@@ -37,6 +38,12 @@ export class CityCrudController {
   ): Promise<IApiRes<CityResponse[]>> {
     const res = await this.cityIndexApp.fetch(req)
     return ApiRes.dto(CityResponse.dtos(res.data), res.meta)
+  }
+
+  @Post()
+  async create(@Body() req: CityCreateRequest): Promise<IApiRes<CityResponse>> {
+    const data = await this.cityCrudApp.create(req)
+    return ApiRes.dto(CityResponse.dto(data))
   }
 
   @Get(':id')

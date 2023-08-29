@@ -2,15 +2,15 @@ import { ApiProperty } from '@nestjs/swagger'
 import { IndexRequest } from '@server/infrastructure/index/index.request'
 import { Type } from 'class-transformer'
 import { ValidateNested } from 'class-validator'
-import { RegionCity } from './city.entity'
+import { RegionDistrict } from './district.entity'
 
-export class CityIndexFilterRequest extends RegionCity {}
+export class DistrictIndexFilterRequest extends RegionDistrict {}
 
-export class CityIndexRequest extends IndexRequest {
+export class DistrictIndexRequest extends IndexRequest {
   @ValidateNested({ each: true })
-  @Type(() => CityIndexFilterRequest)
-  filters?: CityIndexFilterRequest
+  @Type(() => DistrictIndexFilterRequest)
+  filters?: DistrictIndexFilterRequest
 
   @ApiProperty({ required: false })
-  provinceId: string
+  cityId: string
 }

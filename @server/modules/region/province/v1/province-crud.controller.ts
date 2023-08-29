@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Post,
   Put,
   Query,
   UseGuards,
@@ -17,7 +18,10 @@ import { ProvinceIndexApp } from '../infrastructure/province-index.app'
 import { ProvinceIndexRequest } from '../infrastructure/province-index.request'
 import { ProvinceResponse } from '../infrastructure/province.response'
 import { ProvinceCrudApp } from './province-crud.app'
-import { ProvinceUpdateRequest } from './province.request'
+import {
+  ProvinceCreateRequest,
+  ProvinceUpdateRequest,
+} from './province.request'
 
 const THIS_MODULE = Modules.Province
 
@@ -37,6 +41,14 @@ export class ProvinceCrudController {
   ): Promise<IApiRes<ProvinceResponse[]>> {
     const res = await this.provinceIndexApp.fetch(req)
     return ApiRes.dto(ProvinceResponse.dtos(res.data), res.meta)
+  }
+
+  @Post()
+  async create(
+    @Body() req: ProvinceCreateRequest,
+  ): Promise<IApiRes<ProvinceResponse>> {
+    const data = await this.provinceCrudApp.create(req)
+    return ApiRes.dto(ProvinceResponse.dto(data))
   }
 
   @Get(':id')
