@@ -1,5 +1,5 @@
 import { Logger } from '@nestjs/common'
-import { NestExpressApplication } from '@nestjs/platform-express'
+import { NestApplication } from '@nestjs/core'
 import { permissionSyncSeeder } from '@server/modules/iam/permission/database/permission-sync.seeder'
 import { roleCreateSeeder } from '@server/modules/iam/role/database/role-create.seeder'
 import { roleSyncGeneralPermissionsSeeder } from '@server/modules/iam/role/database/role-sync-general-permissions.seeder'
@@ -14,7 +14,7 @@ import { userCreateSeeder } from '../../modules/iam/user/database/user-create.se
 import dataSource from '../data-source'
 
 export class SeederMoodule {
-  static async forRoot(app: NestExpressApplication) {
+  static async forRoot(app: NestApplication) {
     await dataSource
       .initialize()
       .then(async () => {

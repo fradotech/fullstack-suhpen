@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { NestExpressApplication } from '@nestjs/platform-express'
+import { NestApplication } from '@nestjs/core'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Router } from 'express'
 import { In, Repository } from 'typeorm'
@@ -22,7 +22,7 @@ class PermissionRepo extends Repository<IamPermission> {
 
 @Injectable()
 export class PermissionService extends PermissionRepo {
-  static findFromApp(app: NestExpressApplication): IamPermission[] {
+  static findFromApp(app: NestApplication): IamPermission[] {
     const server = app.getHttpServer()
     const router: Router = server._events.request._router
 

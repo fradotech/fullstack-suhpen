@@ -1,6 +1,5 @@
 import { Logger } from '@nestjs/common'
-import { NestFactory } from '@nestjs/core'
-import { NestExpressApplication } from '@nestjs/platform-express'
+import { NestApplication, NestFactory } from '@nestjs/core'
 import { SwaggerModule } from '@nestjs/swagger'
 import helmet from 'helmet'
 import * as path from 'path'
@@ -18,7 +17,7 @@ async function bootstrap() {
   initializeTransactionalContext()
   patchTypeORMRepositoryWithBaseRepository()
 
-  const app = await NestFactory.create<NestExpressApplication>(AppModule)
+  const app = await NestFactory.create<NestApplication>(AppModule)
 
   const publicPath = path.resolve('./') + config.attachment.public
   const host = config.server.host

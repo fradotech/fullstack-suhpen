@@ -1,8 +1,8 @@
 import { Logger } from '@nestjs/common'
-import { NestExpressApplication } from '@nestjs/platform-express'
+import { NestApplication } from '@nestjs/core'
 
 export const serverStartAtPort = async (
-  app: NestExpressApplication,
+  app: NestApplication,
   port: number,
 ): Promise<number> => {
   try {
