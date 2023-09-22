@@ -16,7 +16,7 @@ export type TThemeColor = {
 
 export const themeColorsLight: TThemeColor = {
   solid: '#ffffff',
-  background: '#fafafa',
+  background: '#f0f3f7',
   primary: '#007fd0',
   primaryOpacity: '#daf1ff',
   secondary: '',
@@ -28,7 +28,7 @@ export const themeColorsLight: TThemeColor = {
 
 export const themeColorsDark: TThemeColor = {
   solid: '#141414',
-  background: '#1d1d1d',
+  background: '#212329',
   primary: '#007fd0',
   primaryOpacity: '#0b2740',
   secondary: '',
