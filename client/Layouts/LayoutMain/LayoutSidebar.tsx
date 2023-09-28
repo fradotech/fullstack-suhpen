@@ -19,7 +19,7 @@ const LayoutSidebar: React.FC<IProps> = (props: IProps) => {
         const openedMenuItem = item.children?.find((chil) => {
           return chil.key === activeMenuKey
         })
-        return openedMenuItem !== undefined
+        return !!openedMenuItem
       }
       return null
     })?.key as string
