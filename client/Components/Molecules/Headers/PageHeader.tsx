@@ -5,7 +5,7 @@ import { Util } from '../../../common/utils/util'
 import Loading from '../Loading/Loading'
 import styles from './PageHeader.module.css'
 
-interface IProps {
+type IProps = {
   title?: string
   isLoading?: boolean
 }

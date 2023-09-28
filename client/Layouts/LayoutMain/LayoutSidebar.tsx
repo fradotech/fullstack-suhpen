@@ -4,7 +4,7 @@ import { sidebarThemeConfig } from '../ThemeProvider/theme'
 import { layoutItems } from './LayoutItems'
 import styles from './LayoutMain.module.css'
 
-interface IProps {
+type IProps = {
   isDarkMode: boolean
 }
 

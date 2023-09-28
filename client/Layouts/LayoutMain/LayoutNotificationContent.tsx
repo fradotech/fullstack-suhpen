@@ -15,7 +15,7 @@ import { Path } from '../../common/Path'
 import { Util } from '../../common/utils/util'
 import { ThemeContext } from '../ThemeProvider/ThemeProvider'
 
-interface IProps {
+type IProps = {
   notificationPushs: INotificationPush[] | undefined
   refetch: <TPageData>(
     options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined,

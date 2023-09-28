@@ -16,7 +16,7 @@ import React from 'react'
 import { Util } from '../../../common/utils/util'
 import Attachment from '../../Molecules/Attachment/Attachment'
 
-interface IProps {
+type IProps = {
   name: string
   form?: FormInstance
   label?: string

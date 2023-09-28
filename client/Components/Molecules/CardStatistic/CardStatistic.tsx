@@ -1,7 +1,7 @@
-import { Card, Statistic, StatisticProps } from 'antd'
+import { Card, Statistic } from 'antd'
 import React from 'react'
 
-interface IProps extends StatisticProps {
+type IProps = extends StatisticProps {
   children?: React.ReactNode
 }
 
