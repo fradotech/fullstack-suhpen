@@ -4,7 +4,7 @@ import React from 'react'
 import { IPermission } from '../../../../../@server/modules/iam/permission/infrastructure/permission.interface'
 import PermissionIndex from '../../Permission/Pages/Permission.Index'
 
-type IProps = {
+interface IProps {
   form: FormInstance
 }
 

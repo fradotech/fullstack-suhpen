@@ -4,7 +4,7 @@ import { Section } from '../../../../Components/Molecules/Section/Section'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
 import { rule } from '../../../../common/utils/form.rules'
 
-type IProps = {
+interface IProps {
   form: FormInstance
 }
 

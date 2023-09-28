@@ -1,7 +1,7 @@
 import { Card } from 'antd'
 import React from 'react'
 
-type IProps = extends React.PropsWithChildren {
+interface IProps extends React.PropsWithChildren {
   marginTop?: boolean
   marginLeft?: boolean
   marginRight?: boolean

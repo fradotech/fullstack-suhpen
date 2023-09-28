@@ -1,7 +1,7 @@
 import { Image } from 'antd'
 import React from 'react'
 
-type IProps = {
+interface IProps {
   style?: React.CSSProperties
   className?: string
 }

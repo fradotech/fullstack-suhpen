@@ -11,7 +11,7 @@ import { Path } from '../../../../common/Path'
 import { PermissionAction } from '../infrastructure/permission.action'
 import { permissionColumns } from '../infrastructure/permission.column'
 
-type IProps = {
+interface IProps {
   roleId?: string
   rowSelection?: TableRowSelection<IPermission>
 }

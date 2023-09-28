@@ -2,7 +2,7 @@ import { Spin, SpinProps } from 'antd'
 import React from 'react'
 import styles from './Loading.module.css'
 
-type IProps = {
+interface IProps {
   isLoading: boolean | SpinProps | undefined
 }
 

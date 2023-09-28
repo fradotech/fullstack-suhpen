@@ -7,7 +7,7 @@ import { Path } from '../../../common/Path'
 import { HOST_API } from '../../../infrastructure/api.service'
 import { getBase64 } from './attachment.util'
 
-type IProps = {
+interface IProps {
   form: FormInstance | undefined
   total?: number
   name: string
