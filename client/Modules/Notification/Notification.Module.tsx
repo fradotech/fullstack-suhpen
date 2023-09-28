@@ -9,8 +9,8 @@ import NotificationTemplateModule from './NotificationTemplate/NotificationTempl
 export class NotificationModule {
   static menuItems: MenuItem[] = [
     {
-      key: 'NOTIFICATION',
-      label: 'NOTIFICATION',
+      key: 'Notification',
+      label: <strong>Notification</strong>,
       icon: <NotificationFilled />,
       permissions: [Path.user.index],
       children: [

@@ -1,6 +1,6 @@
-import { Col, Layout } from 'antd'
+import { Col, Divider, Layout } from 'antd'
 import React, { useContext } from 'react'
-import CompanyLogo from '../../Components/Molecules/CompanyLogo/CompanyLogo'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import useAuthGuard from '../../Modules/Iam/Auth/Components/useAuthGuard'
 import { ThemeContext } from '../ThemeProvider/ThemeProvider'
 import LayoutHeader from './LayoutHeader'
@@ -27,45 +27,53 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
     useContext(ThemeContext)
 
   return (
-    <Layout style={{ height: '100vh' }}>
-      <Layout.Sider
-        trigger={null}
-        collapsible
-        collapsed={isCollapsed}
-        className={styles.sider}
-        style={{ background: themeColors?.solid }}
-      >
-        <Col style={{ padding: 8, textAlign: 'center' }}>
-          <CompanyLogo />
-        </Col>
-        <Col
-          className={styles.sidebarContainer}
+    <>
+      <LayoutHeader
+        bgLayoutColor={themeColors?.solid}
+        isDarkMode={isDarkMode}
+        handleSwitchTheme={handleSwitchTheme}
+        user={user}
+      />
+      <Layout style={{ height: '100vh' }}>
+        <Layout.Sider
+          trigger={null}
+          collapsible
+          collapsed={isCollapsed}
+          className={styles.sider}
           style={{ background: themeColors?.solid }}
         >
-          <LayoutSidebar isDarkMode={isDarkMode ?? false} />
-        </Col>
-      </Layout.Sider>
-      <Layout>
-        <Layout.Content className={styles.contentContainer}>
-          <LayoutHeader
-            bgLayoutColor={themeColors?.solid}
-            handleSidebarCollapse={handleSidebarCollapse}
-            isCollapsed={isCollapsed}
-            isDarkMode={isDarkMode}
-            handleSwitchTheme={handleSwitchTheme}
-            user={user}
-          />
           <Col
-            className={styles.content}
-            style={{
-              background: themeColors?.background,
-            }}
+            className={styles.sidebarContainer}
+            style={{ background: themeColors?.solid }}
           >
-            {children}
+            <LayoutSidebar isDarkMode={isDarkMode ?? false} />
+            <Divider />
+            <a
+              onClick={handleSidebarCollapse}
+              className={styles.sidebarCollapse}
+            >
+              {isCollapsed ? (
+                <FaChevronRight className={styles.menuFold} />
+              ) : (
+                <FaChevronLeft className={styles.menuFold} />
+              )}
+            </a>
           </Col>
-        </Layout.Content>
+        </Layout.Sider>
+        <Layout>
+          <Layout.Content className={styles.contentContainer}>
+            <Col
+              className={styles.content}
+              style={{
+                background: themeColors?.background,
+              }}
+            >
+              {children}
+            </Col>
+          </Layout.Content>
+        </Layout>
       </Layout>
-    </Layout>
+    </>
   )
 }
 

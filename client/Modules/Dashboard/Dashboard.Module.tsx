@@ -10,8 +10,13 @@ class DashboardModule {
   static menuItems: MenuItem[] = [
     {
       key: path.index,
-      label: <Link to={path.index}>DASHBOARD</Link>,
+      label: <Link to={path.index}>Dashboard</Link>,
       icon: <DashboardOutlined />,
+      permissions: [path.index],
+    },
+    {
+      label: <Link to={path.index}>Dashboard</Link>,
+      type: 'divider',
       permissions: [path.index],
     },
   ]

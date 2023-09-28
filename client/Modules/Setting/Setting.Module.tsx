@@ -7,8 +7,8 @@ import LogActivityModule from './NotificationCategory/LogActivity.Module'
 export class SettingModule {
   static menuItems: MenuItem[] = [
     {
-      key: 'SETTING',
-      label: 'SETTING',
+      key: 'Setting',
+      label: <strong>Setting</strong>,
       icon: <SettingFilled />,
       permissions: [Path.user.index],
       children: [...LogActivityModule.menuItems].filter((item) =>

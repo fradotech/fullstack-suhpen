@@ -10,8 +10,8 @@ import UserModule from './User/User.Module'
 class IamModule {
   static menuItems: MenuItem[] = [
     {
-      key: 'IAM',
-      label: 'IAM',
+      key: 'Iam',
+      label: <strong>Iam</strong>,
       icon: <FaIdCard />,
       permissions: [Path.user.index, Path.role.index, Path.permission.index],
       children: [

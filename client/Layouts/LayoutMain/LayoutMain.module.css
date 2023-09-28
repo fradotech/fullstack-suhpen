@@ -1,10 +1,10 @@
+.headerButton {
+  margin: 3px 0px 0px 0px;
+}
+
 .headerContainer {
   display: flex;
   justify-content: space-between;
-}
-
-.header {
-  padding-left: 10px !important;
 }
 
 .headerButton {
@@ -17,6 +17,7 @@
 }
 
 .sidebarContainer {
+  margin-top: 6px;
   display: flex;
   overflow-y: scroll;
   flex-direction: column;
@@ -40,5 +41,6 @@
 }
 
 .menuFold {
-  font-size: 18px;
+  float: right;
+  margin-right: 6px;
 }

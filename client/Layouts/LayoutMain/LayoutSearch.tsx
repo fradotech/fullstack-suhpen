@@ -24,7 +24,7 @@ const LayoutSearch: React.FC = () => {
 
   const items: ItemType[] = React.useMemo(() => {
     const items = itemsAll.filter((data) => {
-      const label = data.label?.['props'].children.toLowerCase()
+      const label = data.label?.['props']?.children.toLowerCase()
       return label.includes(value?.toLocaleLowerCase())
     })
 
