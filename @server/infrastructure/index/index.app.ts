@@ -24,7 +24,9 @@ export abstract class BaseIndexApp extends BaseIndexService {
     if (
       req.sortField &&
       req.sortField !== 'undefined' &&
-      !columns.includes(req.sortField)
+      ![...columns, ...relations.map((data) => data.name)].includes(
+        req.sortField,
+      )
     ) {
       Exception.badRequest(`Field ${req.sortField} doesn't exist for sort`)
     }

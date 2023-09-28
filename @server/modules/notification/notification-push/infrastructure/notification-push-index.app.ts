@@ -30,7 +30,14 @@ export class NotificationPushIndexApp extends BaseIndexApp {
   ): Promise<IPaginateResponse<INotificationPush>> {
     const user = this.request.user as IUser
     const name = 'notificationPush'
-    const columns = ['title', 'message', 'isBroadcast', 'createdAt']
+    const columns = [
+      'title',
+      'message',
+      'isBroadcast',
+      'pushAt',
+      'readAt',
+      'createdAt',
+    ]
     const relations: IIndexAppRelation[] = [
       {
         name: 'user',
@@ -39,9 +46,6 @@ export class NotificationPushIndexApp extends BaseIndexApp {
       {
         name: 'category',
         columns: ['name'],
-      },
-      {
-        name: 'users',
       },
     ]
     const query = this.createQueryIndex(
