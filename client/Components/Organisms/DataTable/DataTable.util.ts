@@ -18,7 +18,7 @@ export const formatColumns = <T>(columns: ColumnsType<T> | undefined) => {
   return columns?.map((data) => {
     return {
       ...data,
-      key: data['dataIndex'] || data.title,
+      key: data.key || data['dataIndex'] || data.title,
       title: data.title || Util.titleCase(data['dataIndex'] || ''),
       sorter: data.title != 'Actions' && (() => 0),
       sortDirections: ['ascend', 'descend'] as SortOrder[],

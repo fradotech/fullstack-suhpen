@@ -12,6 +12,7 @@ import { Util } from '../../../../common/utils/util'
 export const permissionColumns = (): ColumnsType<PermissionResponse> => {
   return [
     {
+      key: 'name',
       title: 'Name',
       render: (data: IPermission) => {
         return <Tag color={data.labelColor}>{data.name}</Tag>

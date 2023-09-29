@@ -55,7 +55,7 @@ const DataTable: React.FC<IDataTableProps<IBaseEntity>> = <
     sorter: TOnSort<T>,
     dateRangeColumn: string | undefined,
   ) => {
-    const sortField = String(sorter.field)
+    const sortField = String(sorter.field || sorter.columnKey)
     const sortOrder = sorter.order
 
     const newQuery: IndexRequest = {

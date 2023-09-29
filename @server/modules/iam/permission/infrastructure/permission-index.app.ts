@@ -26,6 +26,7 @@ export class PermissionIndexApp extends BaseIndexApp {
     const name = 'permission'
     const columns = [
       'name',
+      'key',
       'module',
       'path',
       'method',

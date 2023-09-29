@@ -26,6 +26,7 @@ export const notificationCategoryColumns = (
 ): ColumnsType<NotificationCategoryResponse> => {
   return [
     {
+      key: 'name',
       title: 'Name',
       render: (data: INotificationCategory) => {
         return <Tag color={data.labelColor}>{data.name}</Tag>
