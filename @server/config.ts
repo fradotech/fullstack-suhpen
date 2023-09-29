@@ -10,7 +10,7 @@ import { SENTRY_CONFIG } from './modules/support/sentry/common/sentry.config'
 dotenv.config()
 
 export const fradotech = 'fradotech'
-const localhost = 'http://localhost'
+const localhost = 'http://localhost:3000'
 
 export const config = {
   server: {
@@ -18,9 +18,9 @@ export const config = {
     port: process.env.PORT || 3000,
     host: process.env.HOST || localhost,
     hostPort: `${process.env.HOST || localhost}:${process.env.PORT || 3000}`,
-    hostApi: `${`${process.env.HOST || localhost}:${
-      process.env.PORT || 3000
-    }`}${process.env.APP_PREFIX || '/api/v1'}`,
+    hostApi: `${process.env.HOST || localhost}${
+      process.env.APP_PREFIX || '/api/v1'
+    }`,
 
     hostClient: process.env.HOST_CLIENT || `${localhost}:8080`,
     rateLimiter: { ttl: 60, limit: 100 },

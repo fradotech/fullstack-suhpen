@@ -31,12 +31,12 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerConfig)
   SwaggerModule.setup(docs, app, document)
 
-  const [port] = await Promise.all([
+  await Promise.all([
     serverStartAtPort(app, +config.server.port),
     SeederMoodule.forRoot(app),
   ])
 
-  Logger.verbose(`🚀 App running at ${host}:${port}`, 'NestApplication')
-  Logger.verbose(`🚀 API Docs Swagger at ${host}:${port}/${docs}`, 'Swagger UI')
+  Logger.verbose(`🚀 App running at ${host}`, 'NestApplication')
+  Logger.verbose(`🚀 API Docs Swagger at ${host}/${docs}`, 'Swagger UI')
 }
 bootstrap()

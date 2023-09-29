@@ -1,16 +1,16 @@
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { notification } from 'antd'
-import axios, { AxiosError } from 'axios'
+import axios, { AxiosError, AxiosHeaders, RawAxiosRequestHeaders } from 'axios'
 
-const hostLocal = 'http://localhost:3000'
-const hostOnline = 'https://fradotech.up.railway.app'
+export const HOST = `${process.env.HOST}`
+export const HOST_API = HOST + process.env.APP_PREFIX
 
-export const HOST = location.href.includes('localhost') ? hostLocal : hostOnline
-export const HOST_API = HOST + '/api/v1'
-
-const headers = {
+const headers: RawAxiosRequestHeaders | AxiosHeaders = {
   Authorization: `Bearer ${localStorage.getItem('_accessToken')}`,
+  backofficeToken: process.env.BACKOFFICE_TOKEN,
 }
+
+const axiosInstance = axios.create({ headers })
 
 const notificationError = (e: AxiosError<IApiExportRes<unknown>>) => {
   if (e.response?.data?.message === 'Unauthorized') {
@@ -25,8 +25,7 @@ const notificationError = (e: AxiosError<IApiExportRes<unknown>>) => {
 export const API = {
   get: async (endpoint: string, params?: any): Promise<any> => {
     try {
-      const { data } = await axios.get(`${HOST_API}${endpoint}`, {
-        headers,
+      const { data } = await axiosInstance.get(`${HOST_API}${endpoint}`, {
         params,
       })
 
@@ -45,10 +44,13 @@ export const API = {
     params?: any,
   ): Promise<any> => {
     try {
-      const { data } = await axios.post(`${HOST_API}${endpoint}`, dataPost, {
-        headers,
-        params,
-      })
+      const { data } = await axiosInstance.post(
+        `${HOST_API}${endpoint}`,
+        dataPost,
+        {
+          params,
+        },
+      )
 
       API.catch(data)
 
@@ -61,9 +63,10 @@ export const API = {
 
   put: async (endpoint: string, dataPost?: any): Promise<any> => {
     try {
-      const { data } = await axios.put(`${HOST_API}${endpoint}`, dataPost, {
-        headers,
-      })
+      const { data } = await axiosInstance.put(
+        `${HOST_API}${endpoint}`,
+        dataPost,
+      )
 
       API.catch(data)
 
@@ -76,9 +79,10 @@ export const API = {
 
   patch: async (endpoint: string, dataPost?: any): Promise<any> => {
     try {
-      const { data } = await axios.patch(`${HOST_API}${endpoint}`, dataPost, {
-        headers,
-      })
+      const { data } = await axiosInstance.patch(
+        `${HOST_API}${endpoint}`,
+        dataPost,
+      )
 
       API.catch(data)
 
@@ -91,9 +95,7 @@ export const API = {
 
   delete: async (endpoint: string | undefined): Promise<any> => {
     try {
-      const { data } = await axios.delete(`${HOST_API}${endpoint}`, {
-        headers,
-      })
+      const { data } = await axiosInstance.delete(`${HOST_API}${endpoint}`)
 
       API.catch(data)
 

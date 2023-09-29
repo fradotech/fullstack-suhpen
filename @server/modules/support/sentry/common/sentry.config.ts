@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export const SENTRY_CONFIG = {
-  dsn: process.env.SENTRY_DSN,
+  dsn: process.env.SENTRY_DSN_SERVER,
   tracesSampleRate: 1.0,
   attachStacktrace: true,
   debug: false,
