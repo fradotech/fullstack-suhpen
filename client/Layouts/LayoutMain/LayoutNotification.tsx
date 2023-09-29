@@ -101,7 +101,7 @@ const LayoutNotification: React.FC = () => {
         offset={[-12, 6]}
         size="small"
       >
-        <Button type="ghost" shape="circle" size="large" icon={<FaBell />} />
+        <Button type="text" shape="circle" size="large" icon={<FaBell />} />
       </Badge>
     </Dropdown>
   )

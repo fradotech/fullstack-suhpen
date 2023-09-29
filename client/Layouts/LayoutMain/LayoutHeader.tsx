@@ -36,7 +36,7 @@ const LayoutHeader: React.FC<IProps> = ({
 
             <div className={styles.headerButton}>
               <Button
-                type="ghost"
+                type="text"
                 shape="circle"
                 size="large"
                 icon={isDarkMode ? <FaSun /> : <FaMoon />}
