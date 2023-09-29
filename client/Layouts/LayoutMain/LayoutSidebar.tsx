@@ -26,7 +26,7 @@ const LayoutSidebar: React.FC<IProps> = (props: IProps) => {
   }, [layoutItems, activeMenuKey])
 
   return (
-    <ConfigProvider theme={sidebarThemeConfig(props.isDarkMode)}>
+    <ConfigProvider theme={sidebarThemeConfig()}>
       <Col className={styles.sidebar}>
         <Menu
           theme={props.isDarkMode ? 'dark' : 'light'}

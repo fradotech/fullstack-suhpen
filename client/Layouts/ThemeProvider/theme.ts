@@ -42,30 +42,30 @@ export const iconActionTableStyle: CSSProperties = {
   color: themeColorsLight.primary,
 }
 
-export const sidebarThemeConfig = (isDarkMode: boolean): ThemeConfig => {
+export const sidebarThemeConfig = (): ThemeConfig => {
   return {
     components: {
       Menu: {
         colorItemText: '#777777',
-        colorItemTextSelected: isDarkMode
-          ? themeColorsLight.primary
-          : themeColorsDark.primary,
-        colorItemBgSelected: isDarkMode
-          ? themeColorsDark.primaryOpacity
-          : themeColorsLight.primaryOpacity,
-        colorItemTextHover: isDarkMode
-          ? themeColorsLight.primary
-          : themeColorsLight.primary,
-        colorItemBgHover: isDarkMode
-          ? themeColorsDark.primaryOpacity
-          : themeColorsLight.primaryOpacity,
         fontSize: 14,
-        colorItemBg: isDarkMode
-          ? themeColorsDark.solid
-          : themeColorsLight.solid,
-        colorSubItemBg: isDarkMode
-          ? themeColorsDark.solid
-          : themeColorsLight.solid,
+
+        colorItemTextSelected: themeColorsLight.primary,
+        darkItemSelectedColor: themeColorsDark.primary,
+
+        colorItemBgSelected: themeColorsLight.primaryOpacity,
+        darkItemSelectedBg: themeColorsDark.primaryOpacity,
+
+        colorItemTextHover: themeColorsLight.primary,
+        darkItemHoverColor: themeColorsDark.primary,
+
+        colorItemBgHover: themeColorsLight.primaryOpacity,
+        darkItemHoverBg: themeColorsDark.primaryOpacity,
+
+        colorItemBg: themeColorsLight.solid,
+        darkItemBg: themeColorsDark.solid,
+
+        colorSubItemBg: themeColorsLight.solid,
+        darkSubMenuItemBg: themeColorsDark.solid,
       },
     },
   }
