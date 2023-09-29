@@ -12,7 +12,6 @@ export const dataSourceOptions: DataSourceOptions = {
   password: config.database.password,
   database: config.database.database,
   namingStrategy: snakeNamingStrategy,
-  logging: config.server.nodeEnv === 'local',
   entities: isRunning ? ['@server/**/*.entity.ts'] : ['dist/**/*.entity.js'],
   migrations: isRunning
     ? ['@server/database/migrations/*.ts']
