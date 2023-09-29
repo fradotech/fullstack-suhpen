@@ -71,13 +71,20 @@ const NotificationTemplateForm: React.FC = () => {
             </Col>
             <Col sm={24} md={18}>
               <FormItem name="title" rules={[rule.required]} />
-              <FormItem
-                label="Category"
-                name="categoryId"
-                input="select"
-                form={form}
-                options={notificationCategories?.data}
-              />
+              <Row gutter={12}>
+                <Col sm={24} md={12}>
+                  <FormItem name="key" rules={[rule.required]} disabled />
+                </Col>
+                <Col sm={24} md={12}>
+                  <FormItem
+                    label="Category"
+                    name="categoryId"
+                    input="select"
+                    form={form}
+                    options={notificationCategories?.data}
+                  />
+                </Col>
+              </Row>
             </Col>
           </Row>
           <FormItem name="message" input="textArea" rules={[rule.required]} />

@@ -28,6 +28,9 @@ export const notificationTemplateColumns = (
       dataIndex: 'title',
     },
     {
+      dataIndex: 'key',
+    },
+    {
       dataIndex: 'category',
       render: (data: INotificationCategory) =>
         data && (
