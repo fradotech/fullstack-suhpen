@@ -8,18 +8,25 @@ import { Request } from 'express'
 @Injectable()
 export class SentryService {
   constructor(@Inject(REQUEST) private request?: Request) {
-    const { method, headers, url } = this.request
-      ? this.request
-      : { method: undefined, headers: undefined, url: 'undefined' }
+    const clientFrom = request?.headers.backofficetoken
+      ? 'BACKOFFICE '
+      : 'MOBILE '
+
+    const name =
+      clientFrom + this.request?.route?.path || this.request?.url || 'Error'
 
     const transaction = Sentry.startTransaction({
-      name: url,
+      name,
       op: 'transaction',
     })
 
     Sentry.getCurrentHub().configureScope((scope) => {
       scope.setSpan(transaction)
-      scope.setContext('http', { method, url, headers })
+      scope.setContext('http', {
+        method: this.request?.method,
+        url: this.request?.url,
+        headers: this.request?.headers,
+      })
     })
   }
 
