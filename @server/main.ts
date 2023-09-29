@@ -1,7 +1,6 @@
 import { Logger } from '@nestjs/common'
 import { NestApplication, NestFactory } from '@nestjs/core'
 import { SwaggerModule } from '@nestjs/swagger'
-import helmet from 'helmet'
 import * as path from 'path'
 import {
   initializeTransactionalContext,
@@ -24,7 +23,6 @@ async function bootstrap() {
   const docs = 'docs'
 
   app.enableCors()
-  app.use(helmet())
   app.useStaticAssets(publicPath)
   app.setGlobalPrefix(config.app.prefix)
 
