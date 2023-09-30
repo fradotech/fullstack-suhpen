@@ -5,6 +5,7 @@ dotenv.config()
 const redis = {
   host: process.env.CACHE_REDIS_HOST,
   port: process.env.CACHE_REDIS_PORT,
+  password: process.env.CACHE_REDIS_PASSWORD,
 }
 
 export const CACHE_CONFIG = {
