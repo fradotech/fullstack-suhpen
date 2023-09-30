@@ -9,7 +9,6 @@ export default defineConfig({
 
   define: {
     'process.env.HOST': JSON.stringify(process.env.HOST),
-    'process.env.PORT': JSON.stringify(process.env.PORT),
     'process.env.APP_PREFIX': JSON.stringify(process.env.APP_PREFIX),
     'process.env.BACKOFFICE_TOKEN': JSON.stringify(
       process.env.BACKOFFICE_TOKEN,
