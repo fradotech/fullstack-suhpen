@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { IBaseCrudApp } from '@server/infrastructure/base/base-crud-app.interface'
+import { IBaseCrudUsecase } from '@server/infrastructure/base/base-crud-app.interface'
 import { Exactly } from '@server/infrastructure/base/base.util'
 import { IProvince } from '../infrastructure/province.interface'
 import { ProvinceService } from '../infrastructure/province.service'
@@ -9,7 +9,9 @@ import {
 } from './province.request'
 
 @Injectable()
-export class ProvinceCrudApp implements Exactly<IBaseCrudApp, ProvinceCrudApp> {
+export class ProvinceCrudUsecase
+  implements Exactly<IBaseCrudUsecase, ProvinceCrudUsecase>
+{
   constructor(private readonly provinceService: ProvinceService) {}
 
   async find(): Promise<IProvince[]> {

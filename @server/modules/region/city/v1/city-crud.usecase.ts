@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common'
-import { IBaseCrudApp } from '@server/infrastructure/base/base-crud-app.interface'
+import { IBaseCrudUsecase } from '@server/infrastructure/base/base-crud-app.interface'
 import { Exactly } from '@server/infrastructure/base/base.util'
 import { ICity } from '../infrastructure/city.interface'
 import { CityService } from '../infrastructure/city.service'
 import { CityCreateRequest, CityUpdateRequest } from './city.request'
 
 @Injectable()
-export class CityCrudApp implements Exactly<IBaseCrudApp, CityCrudApp> {
+export class CityCrudUsecase
+  implements Exactly<IBaseCrudUsecase, CityCrudUsecase>
+{
   constructor(private readonly cityService: CityService) {}
 
   async find(): Promise<ICity[]> {

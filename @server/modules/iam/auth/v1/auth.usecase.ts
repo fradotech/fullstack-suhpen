@@ -19,7 +19,7 @@ import {
 } from './auth.request'
 
 @Injectable()
-export class AuthApp {
+export class AuthUsecase {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,

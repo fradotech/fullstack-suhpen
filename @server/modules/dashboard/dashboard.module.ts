@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { IamUser } from '../iam/user/infrastructure/user.entity'
-import { DashboardUserApp } from './v1/dashboard-user/dashboard-user.app'
 import { DashboardUserController } from './v1/dashboard-user/dashboard-user.controller'
+import { DashboardUserUsecase } from './v1/dashboard-user/dashboard-user.usecase'
 
 @Module({
   imports: [TypeOrmModule.forFeature([IamUser])],
   controllers: [DashboardUserController],
-  providers: [DashboardUserApp],
+  providers: [DashboardUserUsecase],
   exports: [],
 })
 export class DashboardModule {}

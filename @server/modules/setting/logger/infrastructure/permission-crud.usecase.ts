@@ -3,7 +3,7 @@ import { ILogActivity } from './log-activity.interface'
 import { LogActivityService } from './log-activity.service'
 
 @Injectable()
-export class LogActivityCrudApp {
+export class LogActivityCrudUsecase {
   constructor(private readonly permissionService: LogActivityService) {}
 
   async findOneOrFail(id: string): Promise<ILogActivity> {

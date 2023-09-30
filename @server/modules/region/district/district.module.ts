@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { DistrictIndexApp } from './infrastructure/district-index.app'
+import { DistrictIndexUsecase } from './infrastructure/district-index.usecase'
 import { RegionDistrict } from './infrastructure/district.entity'
 import { DistrictService } from './infrastructure/district.service'
-import { DistrictCrudApp } from './v1/district-crud.app'
 import { DistrictCrudController } from './v1/district-crud.controller'
+import { DistrictCrudUsecase } from './v1/district-crud.usecase'
 import { DistrictSheetController } from './v1/sheet/district-sheet.controller'
 
 @Module({
   imports: [TypeOrmModule.forFeature([RegionDistrict])],
   controllers: [DistrictSheetController, DistrictCrudController],
-  providers: [DistrictService, DistrictCrudApp, DistrictIndexApp],
+  providers: [DistrictService, DistrictCrudUsecase, DistrictIndexUsecase],
   exports: [DistrictService],
 })
 export class DistrictModule {}

@@ -3,11 +3,11 @@ import { RoleDefaultKeyEnum } from '@server/modules/iam/role/common/role.enum'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Request } from 'express'
 import { ObjectLiteral, Repository, SelectQueryBuilder } from 'typeorm'
-import { IIndexAppRelation } from './index.interface'
+import { IIndexUsecaseRelation } from './index.interface'
 import { IndexRequest } from './index.request'
 import { BaseIndexService } from './index.service'
 
-export abstract class BaseIndexApp extends BaseIndexService {
+export abstract class BaseIndexUsecase extends BaseIndexService {
   constructor() {
     super()
   }
@@ -16,7 +16,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
     req: IndexRequest,
     name: string,
     columns: string[],
-    relations: IIndexAppRelation[],
+    relations: IIndexUsecaseRelation[],
     repo: Repository<T>,
     request: Request,
     isNotFilterColumnUser?: boolean,
@@ -33,7 +33,10 @@ export abstract class BaseIndexApp extends BaseIndexService {
 
     const query = repo.createQueryBuilder(name)
 
-    const leftJoin = (tableName: string, relations: IIndexAppRelation[]) => {
+    const leftJoin = (
+      tableName: string,
+      relations: IIndexUsecaseRelation[],
+    ) => {
       relations.forEach((relation) => {
         query.leftJoinAndSelect(`${tableName}.${relation.name}`, relation.name)
         relation.relations && leftJoin(relation.name, relation.relations)
@@ -43,7 +46,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
     leftJoin(name, relations)
 
     if (req.search) {
-      const thisTable: IIndexAppRelation = { name, columns }
+      const thisTable: IIndexUsecaseRelation = { name, columns }
       query.andWhere(this.querySearch([thisTable, ...relations]), {
         search: `%${req.search.toLowerCase()}%`,
       })
@@ -66,7 +69,7 @@ export abstract class BaseIndexApp extends BaseIndexService {
               value: req.filters?.[column],
             })
           } else {
-            const filterRelation = (relations: IIndexAppRelation[]) => {
+            const filterRelation = (relations: IIndexUsecaseRelation[]) => {
               relations.forEach((relation) => {
                 relation.columns?.forEach((key) => {
                   if (relation.name.includes(column)) {

@@ -5,7 +5,7 @@ import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { IAggreate } from '@server/modules/dashboard/infrastructure/dashboard.interface'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
-import { DashboardUserApp } from './dashboard-user.app'
+import { DashboardUserUsecase } from './dashboard-user.usecase'
 
 const THIS_MODULE = Modules.DashboardUser
 
@@ -14,12 +14,12 @@ const THIS_MODULE = Modules.DashboardUser
 @ApiBearerAuth()
 @UseGuards(LoggedInGuard)
 export class DashboardUserController {
-  constructor(private readonly dashboardUserApp: DashboardUserApp) {}
+  constructor(private readonly dashboardUserUsecase: DashboardUserUsecase) {}
 
   @Get('aggregate/:field')
   async aggregate(@Param('field') field: string): Promise<IApiRes<IAggreate>> {
     // TODO: Add validation field
-    const res = await this.dashboardUserApp.aggregate(field)
+    const res = await this.dashboardUserUsecase.aggregate(field)
     return ApiRes.dto(res)
   }
 }

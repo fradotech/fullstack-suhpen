@@ -5,8 +5,8 @@ import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.respo
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { Modules } from '@server/modules/modules'
 import { LoggedInGuard } from '../../../auth/common/logged-in.guard'
-import { UserIndexApp } from '../../infrastructure/user-index.app'
 import { UserIndexRequest } from '../../infrastructure/user-index.request'
+import { UserIndexUsecase } from '../../infrastructure/user-index.usecase'
 import { UserStrictResponse } from '../../infrastructure/user.response'
 
 const THIS_MODULE = Modules.UserSheet
@@ -16,7 +16,7 @@ const THIS_MODULE = Modules.UserSheet
 @ApiBearerAuth()
 @UseGuards(LoggedInGuard)
 export class UserSheetController {
-  constructor(private readonly userIndexApp: UserIndexApp) {}
+  constructor(private readonly userIndexUsecase: UserIndexUsecase) {}
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
@@ -28,7 +28,7 @@ export class UserSheetController {
     @Query() req: UserIndexRequest,
   ): Promise<IApiExportRes<UserStrictResponse[]>> {
     req.isExport = true
-    const response = await this.userIndexApp.fetch(req)
+    const response = await this.userIndexUsecase.fetch(req)
 
     const data = UserStrictResponse.dtos(response.data)
     const parser = new Parser()

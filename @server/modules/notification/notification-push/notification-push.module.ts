@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { NotificationCategoryModule } from '../notification-category/notification-category.module'
-import { NotificationPushIndexApp } from './infrastructure/notification-push-index.app'
+import { NotificationPushIndexUsecase } from './infrastructure/notification-push-index.usecase'
 import { NotificationPush } from './infrastructure/notification-push.entity'
 import { NotificationPushService } from './infrastructure/notification-push.service'
-import { NotificationPushCrudApp } from './v1/notification-push-crud.app'
 import { NotificationPushCrudController } from './v1/notification-push-crud.controller'
-import { NotificationPushReadApp } from './v1/read/notification-push-read.app'
+import { NotificationPushCrudUsecase } from './v1/notification-push-crud.usecase'
 import { NotificationPushReadController } from './v1/read/notification-push-read.controller'
+import { NotificationPushReadUsecase } from './v1/read/notification-push-read.usecase'
 import { NotificationPushSheetController } from './v1/sheet/notification-push-sheet.controller'
 
 @Module({
@@ -22,9 +22,9 @@ import { NotificationPushSheetController } from './v1/sheet/notification-push-sh
   ],
   providers: [
     NotificationPushService,
-    NotificationPushCrudApp,
-    NotificationPushIndexApp,
-    NotificationPushReadApp,
+    NotificationPushCrudUsecase,
+    NotificationPushIndexUsecase,
+    NotificationPushReadUsecase,
   ],
   exports: [NotificationPushService],
 })

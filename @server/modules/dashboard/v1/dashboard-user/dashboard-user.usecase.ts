@@ -6,7 +6,7 @@ import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Repository } from 'typeorm'
 
 @Injectable()
-export class DashboardUserApp {
+export class DashboardUserUsecase {
   constructor(
     @InjectRepository(IamUser)
     private readonly userRepo: Repository<IUser>,

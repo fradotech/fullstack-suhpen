@@ -1,13 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { REQUEST } from '@nestjs/core'
 import { config } from '@server/config'
+import { BaseIndexUsecase } from '@server/infrastructure/index/index.usecase'
 import { RoleService } from '@server/modules/iam/role/infrastructure/role.service'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Modules } from '@server/modules/modules'
 import { Request } from 'express'
-import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
 import {
-  IIndexAppRelation,
+  IIndexUsecaseRelation,
   IPaginateResponse,
 } from '../../../../infrastructure/index/index.interface'
 import { NotificationPushIndexRequest } from './notification-push-index.request'
@@ -15,7 +15,7 @@ import { INotificationPush } from './notification-push.interface'
 import { NotificationPushService } from './notification-push.service'
 
 @Injectable()
-export class NotificationPushIndexApp extends BaseIndexApp {
+export class NotificationPushIndexUsecase extends BaseIndexUsecase {
   constructor(
     @Inject(REQUEST)
     private readonly request: Request,
@@ -38,7 +38,7 @@ export class NotificationPushIndexApp extends BaseIndexApp {
       'readAt',
       'createdAt',
     ]
-    const relations: IIndexAppRelation[] = [
+    const relations: IIndexUsecaseRelation[] = [
       {
         name: 'user',
         columns: ['name'],

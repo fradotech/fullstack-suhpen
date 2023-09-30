@@ -5,8 +5,8 @@ import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.respo
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
-import { DistrictIndexApp } from '../../infrastructure/district-index.app'
 import { DistrictIndexRequest } from '../../infrastructure/district-index.request'
+import { DistrictIndexUsecase } from '../../infrastructure/district-index.usecase'
 import { DistrictResponse } from '../../infrastructure/district.response'
 
 const THIS_MODULE = Modules.DistrictSheet
@@ -16,7 +16,7 @@ const THIS_MODULE = Modules.DistrictSheet
 @ApiBearerAuth()
 @UseGuards(LoggedInGuard)
 export class DistrictSheetController {
-  constructor(private readonly districtIndexApp: DistrictIndexApp) {}
+  constructor(private readonly districtIndexUsecase: DistrictIndexUsecase) {}
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
@@ -28,7 +28,7 @@ export class DistrictSheetController {
     @Query() req: DistrictIndexRequest,
   ): Promise<IApiExportRes<DistrictResponse[]>> {
     req.isExport = true
-    const response = await this.districtIndexApp.fetch(req)
+    const response = await this.districtIndexUsecase.fetch(req)
 
     const data = DistrictResponse.dtos(response.data)
     const parser = new Parser()

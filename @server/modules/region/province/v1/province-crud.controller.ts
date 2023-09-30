@@ -14,10 +14,10 @@ import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interfa
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
-import { ProvinceIndexApp } from '../infrastructure/province-index.app'
 import { ProvinceIndexRequest } from '../infrastructure/province-index.request'
+import { ProvinceIndexUsecase } from '../infrastructure/province-index.usecase'
 import { ProvinceResponse } from '../infrastructure/province.response'
-import { ProvinceCrudApp } from './province-crud.app'
+import { ProvinceCrudUsecase } from './province-crud.usecase'
 import {
   ProvinceCreateRequest,
   ProvinceUpdateRequest,
@@ -31,15 +31,15 @@ const THIS_MODULE = Modules.Province
 @UseGuards(LoggedInGuard)
 export class ProvinceCrudController {
   constructor(
-    private readonly provinceIndexApp: ProvinceIndexApp,
-    private readonly provinceCrudApp: ProvinceCrudApp,
+    private readonly provinceIndexUsecase: ProvinceIndexUsecase,
+    private readonly provinceCrudUsecase: ProvinceCrudUsecase,
   ) {}
 
   @Get()
   async fetch(
     @Query() req: ProvinceIndexRequest,
   ): Promise<IApiRes<ProvinceResponse[]>> {
-    const res = await this.provinceIndexApp.fetch(req)
+    const res = await this.provinceIndexUsecase.fetch(req)
     return ApiRes.dto(ProvinceResponse.dtos(res.data), res.meta)
   }
 
@@ -47,7 +47,7 @@ export class ProvinceCrudController {
   async create(
     @Body() req: ProvinceCreateRequest,
   ): Promise<IApiRes<ProvinceResponse>> {
-    const data = await this.provinceCrudApp.create(req)
+    const data = await this.provinceCrudUsecase.create(req)
     return ApiRes.dto(ProvinceResponse.dto(data))
   }
 
@@ -55,7 +55,7 @@ export class ProvinceCrudController {
   async findOneOrFail(
     @Param('id') id: string,
   ): Promise<IApiRes<ProvinceResponse>> {
-    const data = await this.provinceCrudApp.findOneOrFail(id)
+    const data = await this.provinceCrudUsecase.findOneOrFail(id)
     return ApiRes.dto(ProvinceResponse.dto(data))
   }
 
@@ -64,13 +64,13 @@ export class ProvinceCrudController {
     @Param('id') id: string,
     @Body() req: ProvinceUpdateRequest,
   ): Promise<IApiRes<ProvinceResponse>> {
-    const data = await this.provinceCrudApp.update(id, req)
+    const data = await this.provinceCrudUsecase.update(id, req)
     return ApiRes.dto(ProvinceResponse.dto(data))
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<ProvinceResponse>> {
-    const data = await this.provinceCrudApp.delete(id)
+    const data = await this.provinceCrudUsecase.delete(id)
     return ApiRes.dto(ProvinceResponse.dto(data))
   }
 }

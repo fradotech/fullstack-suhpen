@@ -14,10 +14,10 @@ import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interfa
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
-import { CityIndexApp } from '../infrastructure/city-index.app'
 import { CityIndexRequest } from '../infrastructure/city-index.request'
+import { CityIndexUsecase } from '../infrastructure/city-index.usecase'
 import { CityResponse } from '../infrastructure/city.response'
-import { CityCrudApp } from './city-crud.app'
+import { CityCrudUsecase } from './city-crud.usecase'
 import { CityCreateRequest, CityUpdateRequest } from './city.request'
 
 const THIS_MODULE = Modules.City
@@ -28,27 +28,27 @@ const THIS_MODULE = Modules.City
 @UseGuards(LoggedInGuard)
 export class CityCrudController {
   constructor(
-    private readonly cityIndexApp: CityIndexApp,
-    private readonly cityCrudApp: CityCrudApp,
+    private readonly cityIndexUsecase: CityIndexUsecase,
+    private readonly cityCrudUsecase: CityCrudUsecase,
   ) {}
 
   @Get()
   async fetch(
     @Query() req: CityIndexRequest,
   ): Promise<IApiRes<CityResponse[]>> {
-    const res = await this.cityIndexApp.fetch(req)
+    const res = await this.cityIndexUsecase.fetch(req)
     return ApiRes.dto(CityResponse.dtos(res.data), res.meta)
   }
 
   @Post()
   async create(@Body() req: CityCreateRequest): Promise<IApiRes<CityResponse>> {
-    const data = await this.cityCrudApp.create(req)
+    const data = await this.cityCrudUsecase.create(req)
     return ApiRes.dto(CityResponse.dto(data))
   }
 
   @Get(':id')
   async findOneOrFail(@Param('id') id: string): Promise<IApiRes<CityResponse>> {
-    const data = await this.cityCrudApp.findOneOrFail(id)
+    const data = await this.cityCrudUsecase.findOneOrFail(id)
     return ApiRes.dto(CityResponse.dto(data))
   }
 
@@ -57,13 +57,13 @@ export class CityCrudController {
     @Param('id') id: string,
     @Body() req: CityUpdateRequest,
   ): Promise<IApiRes<CityResponse>> {
-    const data = await this.cityCrudApp.update(id, req)
+    const data = await this.cityCrudUsecase.update(id, req)
     return ApiRes.dto(CityResponse.dto(data))
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<CityResponse>> {
-    const data = await this.cityCrudApp.delete(id)
+    const data = await this.cityCrudUsecase.delete(id)
     return ApiRes.dto(CityResponse.dto(data))
   }
 }

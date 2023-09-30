@@ -4,7 +4,7 @@ import { UserService } from '../../user/infrastructure/user.service'
 import { AccountUpdateRequest } from './account.request'
 
 @Injectable()
-export class AccountApp {
+export class AccountUsecase {
   constructor(private readonly userService: UserService) {}
 
   async findOneWithRoles(id: string): Promise<IUser> {

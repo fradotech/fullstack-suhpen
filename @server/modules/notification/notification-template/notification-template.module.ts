@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { NotificationCategoryModule } from '../notification-category/notification-category.module'
-import { NotificationTemplateIndexApp } from './infrastructure/notification-template-index.app'
+import { NotificationTemplateIndexUsecase } from './infrastructure/notification-template-index.usecase'
 import { NotificationTemplate } from './infrastructure/notification-template.entity'
 import { NotificationTemplateService } from './infrastructure/notification-template.service'
-import { NotificationTemplateCrudApp } from './v1/notification-template-crud.app'
 import { NotificationTemplateCrudController } from './v1/notification-template-crud.controller'
+import { NotificationTemplateCrudUsecase } from './v1/notification-template-crud.usecase'
 import { NotificationTemplateSheetController } from './v1/sheet/notification-template-sheet.controller'
 
 @Module({
@@ -19,8 +19,8 @@ import { NotificationTemplateSheetController } from './v1/sheet/notification-tem
   ],
   providers: [
     NotificationTemplateService,
-    NotificationTemplateCrudApp,
-    NotificationTemplateIndexApp,
+    NotificationTemplateCrudUsecase,
+    NotificationTemplateIndexUsecase,
   ],
   exports: [NotificationTemplateService],
 })

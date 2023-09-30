@@ -16,10 +16,10 @@ import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interfa
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
-import { NotificationPushIndexApp } from '../infrastructure/notification-push-index.app'
 import { NotificationPushIndexRequest } from '../infrastructure/notification-push-index.request'
+import { NotificationPushIndexUsecase } from '../infrastructure/notification-push-index.usecase'
 import { NotificationPushResponse } from '../infrastructure/notification-push.response'
-import { NotificationPushCrudApp } from './notification-push-crud.app'
+import { NotificationPushCrudUsecase } from './notification-push-crud.usecase'
 import {
   NotificationPushCreateRequest,
   NotificationPushUpdateRequest,
@@ -35,15 +35,15 @@ export class NotificationPushCrudController
   implements Exactly<IBaseCrudController, NotificationPushCrudController>
 {
   constructor(
-    private readonly notificationPushIndexApp: NotificationPushIndexApp,
-    private readonly notificationPushCrudApp: NotificationPushCrudApp,
+    private readonly notificationPushIndexUsecase: NotificationPushIndexUsecase,
+    private readonly notificationPushCrudUsecase: NotificationPushCrudUsecase,
   ) {}
 
   @Get()
   async fetch(
     @Query() req: NotificationPushIndexRequest,
   ): Promise<IApiRes<NotificationPushResponse[]>> {
-    const res = await this.notificationPushIndexApp.fetch(req)
+    const res = await this.notificationPushIndexUsecase.fetch(req)
     return ApiRes.dto(NotificationPushResponse.dtos(res.data), res.meta)
   }
 
@@ -51,7 +51,7 @@ export class NotificationPushCrudController
   async create(
     @Body() req: NotificationPushCreateRequest,
   ): Promise<IApiRes<NotificationPushResponse>> {
-    const data = await this.notificationPushCrudApp.create(req)
+    const data = await this.notificationPushCrudUsecase.create(req)
     return ApiRes.dto(NotificationPushResponse.dto(data))
   }
 
@@ -59,7 +59,7 @@ export class NotificationPushCrudController
   async findOneOrFail(
     @Param('id') id: string,
   ): Promise<IApiRes<NotificationPushResponse>> {
-    const data = await this.notificationPushCrudApp.findOneOrFail(id)
+    const data = await this.notificationPushCrudUsecase.findOneOrFail(id)
     return ApiRes.dto(NotificationPushResponse.dto(data))
   }
 
@@ -68,7 +68,7 @@ export class NotificationPushCrudController
     @Param('id') id: string,
     @Body() req: NotificationPushUpdateRequest,
   ): Promise<IApiRes<NotificationPushResponse>> {
-    const data = await this.notificationPushCrudApp.update(id, req)
+    const data = await this.notificationPushCrudUsecase.update(id, req)
     return ApiRes.dto(NotificationPushResponse.dto(data))
   }
 
@@ -76,7 +76,7 @@ export class NotificationPushCrudController
   async delete(
     @Param('id') id: string,
   ): Promise<IApiRes<NotificationPushResponse>> {
-    const data = await this.notificationPushCrudApp.delete(id)
+    const data = await this.notificationPushCrudUsecase.delete(id)
     return ApiRes.dto(NotificationPushResponse.dto(data))
   }
 }

@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { REQUEST } from '@nestjs/core'
+import { BaseIndexUsecase } from '@server/infrastructure/index/index.usecase'
 import { Request } from 'express'
-import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
 import {
-  IIndexAppRelation,
+  IIndexUsecaseRelation,
   IPaginateResponse,
 } from '../../../../infrastructure/index/index.interface'
 import { RoleIndexRequest } from './role-index.request'
@@ -11,7 +11,7 @@ import { IRole } from './role.interface'
 import { RoleService } from './role.service'
 
 @Injectable()
-export class RoleIndexApp extends BaseIndexApp {
+export class RoleIndexUsecase extends BaseIndexUsecase {
   constructor(
     @Inject(REQUEST)
     private readonly request: Request,
@@ -23,7 +23,7 @@ export class RoleIndexApp extends BaseIndexApp {
   async fetch(req: RoleIndexRequest): Promise<IPaginateResponse<IRole>> {
     const name = 'role'
     const columns = ['name', 'key', 'isActive', 'createdAt']
-    const relations: IIndexAppRelation[] = []
+    const relations: IIndexUsecaseRelation[] = []
     const query = this.createQueryIndex(
       req,
       name,

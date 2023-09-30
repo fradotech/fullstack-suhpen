@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { IBaseCrudApp } from '@server/infrastructure/base/base-crud-app.interface'
+import { IBaseCrudUsecase } from '@server/infrastructure/base/base-crud-app.interface'
 import { Exactly } from '@server/infrastructure/base/base.util'
 import { NotificationCategoryService } from '../../notification-category/infrastructure/notification-category.service'
 import { INotificationPush } from '../infrastructure/notification-push.interface'
@@ -10,8 +10,8 @@ import {
 } from './notification-push.request'
 
 @Injectable()
-export class NotificationPushCrudApp
-  implements Exactly<IBaseCrudApp, NotificationPushCrudApp>
+export class NotificationPushCrudUsecase
+  implements Exactly<IBaseCrudUsecase, NotificationPushCrudUsecase>
 {
   constructor(
     private readonly notificationPushService: NotificationPushService,

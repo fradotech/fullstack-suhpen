@@ -5,8 +5,8 @@ import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.respo
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
-import { NotificationCategoryIndexApp } from '../../infrastructure/notification-category-index.app'
 import { NotificationCategoryIndexRequest } from '../../infrastructure/notification-category-index.request'
+import { NotificationCategoryIndexUsecase } from '../../infrastructure/notification-category-index.usecase'
 import { NotificationCategoryResponse } from '../../infrastructure/notification-category.response'
 
 const THIS_MODULE = Modules.NotificationCategorySheet
@@ -17,7 +17,7 @@ const THIS_MODULE = Modules.NotificationCategorySheet
 @UseGuards(LoggedInGuard)
 export class NotificationCategorySheetController {
   constructor(
-    private readonly notificationCategoryIndexApp: NotificationCategoryIndexApp,
+    private readonly notificationCategoryIndexUsecase: NotificationCategoryIndexUsecase,
   ) {}
 
   @Post('import')
@@ -30,7 +30,7 @@ export class NotificationCategorySheetController {
     @Query() req: NotificationCategoryIndexRequest,
   ): Promise<IApiExportRes<NotificationCategoryResponse[]>> {
     req.isExport = true
-    const response = await this.notificationCategoryIndexApp.fetch(req)
+    const response = await this.notificationCategoryIndexUsecase.fetch(req)
 
     const data = NotificationCategoryResponse.dtos(response.data)
     const parser = new Parser()

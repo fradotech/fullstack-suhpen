@@ -5,8 +5,8 @@ import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.respo
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { Modules } from '@server/modules/modules'
 import { LoggedInGuard } from '../../../auth/common/logged-in.guard'
-import { RoleIndexApp } from '../../infrastructure/role-index.app'
 import { RoleIndexRequest } from '../../infrastructure/role-index.request'
+import { RoleIndexUsecase } from '../../infrastructure/role-index.usecase'
 import { RoleResponse } from '../../infrastructure/role.response'
 
 const THIS_MODULE = Modules.RoleSheet
@@ -16,7 +16,7 @@ const THIS_MODULE = Modules.RoleSheet
 @ApiBearerAuth()
 @UseGuards(LoggedInGuard)
 export class RoleSheetController {
-  constructor(private readonly roleIndexApp: RoleIndexApp) {}
+  constructor(private readonly roleIndexUsecase: RoleIndexUsecase) {}
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
@@ -28,7 +28,7 @@ export class RoleSheetController {
     @Query() req: RoleIndexRequest,
   ): Promise<IApiExportRes<RoleResponse[]>> {
     req.isExport = true
-    const response = await this.roleIndexApp.fetch(req)
+    const response = await this.roleIndexUsecase.fetch(req)
 
     const data = RoleResponse.dtos(response.data)
     const parser = new Parser()

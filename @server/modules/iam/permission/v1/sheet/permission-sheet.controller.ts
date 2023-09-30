@@ -5,8 +5,8 @@ import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.respo
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { Modules } from '@server/modules/modules'
 import { LoggedInGuard } from '../../../auth/common/logged-in.guard'
-import { PermissionIndexApp } from '../../infrastructure/permission-index.app'
 import { PermissionIndexRequest } from '../../infrastructure/permission-index.request'
+import { PermissionIndexUsecase } from '../../infrastructure/permission-index.usecase'
 import { PermissionResponse } from '../../infrastructure/permission.response'
 
 const THIS_MODULE = Modules.PermissionSheet
@@ -16,7 +16,9 @@ const THIS_MODULE = Modules.PermissionSheet
 @ApiBearerAuth()
 @UseGuards(LoggedInGuard)
 export class PermissionSheetController {
-  constructor(private readonly permissionIndexApp: PermissionIndexApp) {}
+  constructor(
+    private readonly permissionIndexUsecase: PermissionIndexUsecase,
+  ) {}
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
@@ -28,7 +30,7 @@ export class PermissionSheetController {
     @Query() req: PermissionIndexRequest,
   ): Promise<IApiExportRes<PermissionResponse[]>> {
     req.isExport = true
-    const response = await this.permissionIndexApp.fetch(req)
+    const response = await this.permissionIndexUsecase.fetch(req)
 
     const data = PermissionResponse.dtos(response.data)
     const parser = new Parser()

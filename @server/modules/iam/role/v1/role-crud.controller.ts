@@ -16,10 +16,10 @@ import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interfa
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { Modules } from '@server/modules/modules'
 import { LoggedInGuard } from '../../auth/common/logged-in.guard'
-import { RoleIndexApp } from '../infrastructure/role-index.app'
 import { RoleIndexRequest } from '../infrastructure/role-index.request'
+import { RoleIndexUsecase } from '../infrastructure/role-index.usecase'
 import { RoleResponse } from '../infrastructure/role.response'
-import { RoleCrudApp } from './role-crud.app'
+import { RoleCrudUsecase } from './role-crud.usecase'
 import { RoleCreateRequest, RoleUpdateRequest } from './role.request'
 
 const THIS_MODULE = Modules.Role
@@ -32,27 +32,27 @@ export class RoleCrudController
   implements Exactly<IBaseCrudController, RoleCrudController>
 {
   constructor(
-    private readonly roleIndexApp: RoleIndexApp,
-    private readonly roleCrudApp: RoleCrudApp,
+    private readonly roleIndexUsecase: RoleIndexUsecase,
+    private readonly roleCrudUsecase: RoleCrudUsecase,
   ) {}
 
   @Get()
   async fetch(
     @Query() req: RoleIndexRequest,
   ): Promise<IApiRes<RoleResponse[]>> {
-    const res = await this.roleIndexApp.fetch(req)
+    const res = await this.roleIndexUsecase.fetch(req)
     return ApiRes.dto(RoleResponse.dtos(res.data), res.meta)
   }
 
   @Post()
   async create(@Body() req: RoleCreateRequest): Promise<IApiRes<RoleResponse>> {
-    const data = await this.roleCrudApp.create(req)
+    const data = await this.roleCrudUsecase.create(req)
     return ApiRes.dto(RoleResponse.dto(data))
   }
 
   @Get(':id')
   async findOneOrFail(@Param('id') id: string): Promise<IApiRes<RoleResponse>> {
-    const data = await this.roleCrudApp.findOneOrFail(id)
+    const data = await this.roleCrudUsecase.findOneOrFail(id)
     return ApiRes.dto(RoleResponse.dto(data))
   }
 
@@ -61,13 +61,13 @@ export class RoleCrudController
     @Param('id') id: string,
     @Body() req: RoleUpdateRequest,
   ): Promise<IApiRes<RoleResponse>> {
-    const data = await this.roleCrudApp.update(id, req)
+    const data = await this.roleCrudUsecase.update(id, req)
     return ApiRes.dto(RoleResponse.dto(data))
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<RoleResponse>> {
-    const data = await this.roleCrudApp.delete(id)
+    const data = await this.roleCrudUsecase.delete(id)
     return ApiRes.dto(RoleResponse.dto(data))
   }
 }

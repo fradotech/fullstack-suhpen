@@ -8,7 +8,7 @@ import { UserLogged } from '../../user/common/get-user-logged.decorator'
 import { IUser } from '../../user/infrastructure/user.interface'
 import { AccountResponse } from '../infrastructure/account.response'
 import { AccountUpdateRequest } from './account.request'
-import { AccountApp } from './user-account.app'
+import { AccountUsecase } from './user-account.usecase'
 
 const THIS_MODULE = Modules.Account
 
@@ -17,7 +17,7 @@ const THIS_MODULE = Modules.Account
 @ApiBearerAuth()
 @UseGuards(LoggedInGuard)
 export class AccountController {
-  constructor(private readonly accountApp: AccountApp) {}
+  constructor(private readonly accountApp: AccountUsecase) {}
 
   @Get()
   async userLogged(

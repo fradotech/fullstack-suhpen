@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { REQUEST } from '@nestjs/core'
+import { BaseIndexUsecase } from '@server/infrastructure/index/index.usecase'
 import { Request } from 'express'
-import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
 import {
-  IIndexAppRelation,
+  IIndexUsecaseRelation,
   IPaginateResponse,
 } from '../../../../infrastructure/index/index.interface'
 import { LogActivityIndexRequest } from '../v1/log-activity-index.request'
@@ -11,7 +11,7 @@ import { ILogActivity } from './log-activity.interface'
 import { LogActivityService } from './log-activity.service'
 
 @Injectable()
-export class LogActivityIndexApp extends BaseIndexApp {
+export class LogActivityIndexUsecase extends BaseIndexUsecase {
   constructor(
     @Inject(REQUEST)
     private readonly request: Request,
@@ -29,7 +29,7 @@ export class LogActivityIndexApp extends BaseIndexApp {
 
     const name = 'logActivity'
     const columns = ['method', 'remoteAddress', 'createdAt']
-    const relations: IIndexAppRelation[] = []
+    const relations: IIndexUsecaseRelation[] = []
     const query = this.createQueryIndex(
       req,
       name,

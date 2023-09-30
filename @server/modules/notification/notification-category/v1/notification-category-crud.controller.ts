@@ -16,10 +16,10 @@ import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interfa
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
-import { NotificationCategoryIndexApp } from '../infrastructure/notification-category-index.app'
 import { NotificationCategoryIndexRequest } from '../infrastructure/notification-category-index.request'
+import { NotificationCategoryIndexUsecase } from '../infrastructure/notification-category-index.usecase'
 import { NotificationCategoryResponse } from '../infrastructure/notification-category.response'
-import { NotificationCategoryCrudApp } from './notification-category-crud.app'
+import { NotificationCategoryCrudUsecase } from './notification-category-crud.usecase'
 import {
   NotificationCategoryCreateRequest,
   NotificationCategoryUpdateRequest,
@@ -35,15 +35,15 @@ export class NotificationCategoryCrudController
   implements Exactly<IBaseCrudController, NotificationCategoryCrudController>
 {
   constructor(
-    private readonly notificationCategoryIndexApp: NotificationCategoryIndexApp,
-    private readonly notificationCategoryCrudApp: NotificationCategoryCrudApp,
+    private readonly notificationCategoryIndexUsecase: NotificationCategoryIndexUsecase,
+    private readonly notificationCategoryCrudUsecase: NotificationCategoryCrudUsecase,
   ) {}
 
   @Get()
   async fetch(
     @Query() req: NotificationCategoryIndexRequest,
   ): Promise<IApiRes<NotificationCategoryResponse[]>> {
-    const res = await this.notificationCategoryIndexApp.fetch(req)
+    const res = await this.notificationCategoryIndexUsecase.fetch(req)
     return ApiRes.dto(NotificationCategoryResponse.dtos(res.data), res.meta)
   }
 
@@ -51,7 +51,7 @@ export class NotificationCategoryCrudController
   async create(
     @Body() req: NotificationCategoryCreateRequest,
   ): Promise<IApiRes<NotificationCategoryResponse>> {
-    const data = await this.notificationCategoryCrudApp.create(req)
+    const data = await this.notificationCategoryCrudUsecase.create(req)
     return ApiRes.dto(NotificationCategoryResponse.dto(data))
   }
 
@@ -59,7 +59,7 @@ export class NotificationCategoryCrudController
   async findOneOrFail(
     @Param('id') id: string,
   ): Promise<IApiRes<NotificationCategoryResponse>> {
-    const data = await this.notificationCategoryCrudApp.findOneOrFail(id)
+    const data = await this.notificationCategoryCrudUsecase.findOneOrFail(id)
     return ApiRes.dto(NotificationCategoryResponse.dto(data))
   }
 
@@ -68,7 +68,7 @@ export class NotificationCategoryCrudController
     @Param('id') id: string,
     @Body() req: NotificationCategoryUpdateRequest,
   ): Promise<IApiRes<NotificationCategoryResponse>> {
-    const data = await this.notificationCategoryCrudApp.update(id, req)
+    const data = await this.notificationCategoryCrudUsecase.update(id, req)
     return ApiRes.dto(NotificationCategoryResponse.dto(data))
   }
 
@@ -76,7 +76,7 @@ export class NotificationCategoryCrudController
   async delete(
     @Param('id') id: string,
   ): Promise<IApiRes<NotificationCategoryResponse>> {
-    const data = await this.notificationCategoryCrudApp.delete(id)
+    const data = await this.notificationCategoryCrudUsecase.delete(id)
     return ApiRes.dto(NotificationCategoryResponse.dto(data))
   }
 }

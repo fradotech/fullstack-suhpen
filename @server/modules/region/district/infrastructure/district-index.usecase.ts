@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { REQUEST } from '@nestjs/core'
+import { BaseIndexUsecase } from '@server/infrastructure/index/index.usecase'
 import { Request } from 'express'
-import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
 import {
-  IIndexAppRelation,
+  IIndexUsecaseRelation,
   IPaginateResponse,
 } from '../../../../infrastructure/index/index.interface'
 import { DistrictIndexRequest } from './district-index.request'
@@ -11,7 +11,7 @@ import { IDistrict } from './district.interface'
 import { DistrictService } from './district.service'
 
 @Injectable()
-export class DistrictIndexApp extends BaseIndexApp {
+export class DistrictIndexUsecase extends BaseIndexUsecase {
   constructor(
     @Inject(REQUEST)
     private readonly request: Request,
@@ -25,7 +25,7 @@ export class DistrictIndexApp extends BaseIndexApp {
   ): Promise<IPaginateResponse<IDistrict>> {
     const name = 'district'
     const columns = ['name', 'oid', 'updatedAt', 'createdAt']
-    const relations: IIndexAppRelation[] = [{ name: 'city' }]
+    const relations: IIndexUsecaseRelation[] = [{ name: 'city' }]
     const query = this.createQueryIndex(
       req,
       name,

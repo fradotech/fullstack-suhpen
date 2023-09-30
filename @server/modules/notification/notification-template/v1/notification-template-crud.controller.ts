@@ -16,10 +16,10 @@ import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interfa
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
-import { NotificationTemplateIndexApp } from '../infrastructure/notification-template-index.app'
 import { NotificationTemplateIndexRequest } from '../infrastructure/notification-template-index.request'
+import { NotificationTemplateIndexUsecase } from '../infrastructure/notification-template-index.usecase'
 import { NotificationTemplateResponse } from '../infrastructure/notification-template.response'
-import { NotificationTemplateCrudApp } from './notification-template-crud.app'
+import { NotificationTemplateCrudUsecase } from './notification-template-crud.usecase'
 import {
   NotificationTemplateCreateRequest,
   NotificationTemplateUpdateRequest,
@@ -35,15 +35,15 @@ export class NotificationTemplateCrudController
   implements Exactly<IBaseCrudController, NotificationTemplateCrudController>
 {
   constructor(
-    private readonly notificationTemplateIndexApp: NotificationTemplateIndexApp,
-    private readonly notificationTemplateCrudApp: NotificationTemplateCrudApp,
+    private readonly notificationTemplateIndexUsecase: NotificationTemplateIndexUsecase,
+    private readonly notificationTemplateCrudUsecase: NotificationTemplateCrudUsecase,
   ) {}
 
   @Get()
   async fetch(
     @Query() req: NotificationTemplateIndexRequest,
   ): Promise<IApiRes<NotificationTemplateResponse[]>> {
-    const res = await this.notificationTemplateIndexApp.fetch(req)
+    const res = await this.notificationTemplateIndexUsecase.fetch(req)
     return ApiRes.dto(NotificationTemplateResponse.dtos(res.data), res.meta)
   }
 
@@ -51,7 +51,7 @@ export class NotificationTemplateCrudController
   async create(
     @Body() req: NotificationTemplateCreateRequest,
   ): Promise<IApiRes<NotificationTemplateResponse>> {
-    const data = await this.notificationTemplateCrudApp.create(req)
+    const data = await this.notificationTemplateCrudUsecase.create(req)
     return ApiRes.dto(NotificationTemplateResponse.dto(data))
   }
 
@@ -59,7 +59,7 @@ export class NotificationTemplateCrudController
   async findOneOrFail(
     @Param('id') id: string,
   ): Promise<IApiRes<NotificationTemplateResponse>> {
-    const data = await this.notificationTemplateCrudApp.findOneOrFail(id)
+    const data = await this.notificationTemplateCrudUsecase.findOneOrFail(id)
     return ApiRes.dto(NotificationTemplateResponse.dto(data))
   }
 
@@ -68,7 +68,7 @@ export class NotificationTemplateCrudController
     @Param('id') id: string,
     @Body() req: NotificationTemplateUpdateRequest,
   ): Promise<IApiRes<NotificationTemplateResponse>> {
-    const data = await this.notificationTemplateCrudApp.update(id, req)
+    const data = await this.notificationTemplateCrudUsecase.update(id, req)
     return ApiRes.dto(NotificationTemplateResponse.dto(data))
   }
 
@@ -76,7 +76,7 @@ export class NotificationTemplateCrudController
   async delete(
     @Param('id') id: string,
   ): Promise<IApiRes<NotificationTemplateResponse>> {
-    const data = await this.notificationTemplateCrudApp.delete(id)
+    const data = await this.notificationTemplateCrudUsecase.delete(id)
     return ApiRes.dto(NotificationTemplateResponse.dto(data))
   }
 }

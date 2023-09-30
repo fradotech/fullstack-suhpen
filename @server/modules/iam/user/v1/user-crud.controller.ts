@@ -16,10 +16,10 @@ import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interfa
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { Modules } from '@server/modules/modules'
 import { LoggedInGuard } from '../../auth/common/logged-in.guard'
-import { UserIndexApp } from '../infrastructure/user-index.app'
 import { UserIndexRequest } from '../infrastructure/user-index.request'
+import { UserIndexUsecase } from '../infrastructure/user-index.usecase'
 import { UserStrictResponse } from '../infrastructure/user.response'
-import { UserCrudApp } from './user-crud.app'
+import { UserCrudUsecase } from './user-crud.usecase'
 import { UserCreateRequest, UserUpdateRequest } from './user.request'
 
 const THIS_MODULE = Modules.User
@@ -32,15 +32,15 @@ export class UserCrudController
   implements Exactly<IBaseCrudController, UserCrudController>
 {
   constructor(
-    private readonly userIndexApp: UserIndexApp,
-    private readonly userCrudApp: UserCrudApp,
+    private readonly userIndexUsecase: UserIndexUsecase,
+    private readonly userCrudUsecase: UserCrudUsecase,
   ) {}
 
   @Get()
   async fetch(
     @Query() req: UserIndexRequest,
   ): Promise<IApiRes<UserStrictResponse[]>> {
-    const res = await this.userIndexApp.fetch(req)
+    const res = await this.userIndexUsecase.fetch(req)
     return ApiRes.dto(UserStrictResponse.dtos(res.data), res.meta)
   }
 
@@ -48,7 +48,7 @@ export class UserCrudController
   async create(
     @Body() req: UserCreateRequest,
   ): Promise<IApiRes<UserStrictResponse>> {
-    const data = await this.userCrudApp.create(req)
+    const data = await this.userCrudUsecase.create(req)
     return ApiRes.dto(UserStrictResponse.dto(data))
   }
 
@@ -56,7 +56,7 @@ export class UserCrudController
   async findOneOrFail(
     @Param('id') id: string,
   ): Promise<IApiRes<UserStrictResponse>> {
-    const data = await this.userCrudApp.findOneOrFail(id)
+    const data = await this.userCrudUsecase.findOneOrFail(id)
     return ApiRes.dto(UserStrictResponse.dto(data))
   }
 
@@ -65,13 +65,13 @@ export class UserCrudController
     @Param('id') id: string,
     @Body() req: UserUpdateRequest,
   ): Promise<IApiRes<UserStrictResponse>> {
-    const data = await this.userCrudApp.update(id, req)
+    const data = await this.userCrudUsecase.update(id, req)
     return ApiRes.dto(UserStrictResponse.dto(data))
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<UserStrictResponse>> {
-    const data = await this.userCrudApp.delete(id)
+    const data = await this.userCrudUsecase.delete(id)
     return ApiRes.dto(UserStrictResponse.dto(data))
   }
 }

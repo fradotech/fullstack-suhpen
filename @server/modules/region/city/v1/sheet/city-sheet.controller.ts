@@ -5,8 +5,8 @@ import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.respo
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
-import { CityIndexApp } from '../../infrastructure/city-index.app'
 import { CityIndexRequest } from '../../infrastructure/city-index.request'
+import { CityIndexUsecase } from '../../infrastructure/city-index.usecase'
 import { CityResponse } from '../../infrastructure/city.response'
 
 const THIS_MODULE = Modules.CitySheet
@@ -16,7 +16,7 @@ const THIS_MODULE = Modules.CitySheet
 @ApiBearerAuth()
 @UseGuards(LoggedInGuard)
 export class CitySheetController {
-  constructor(private readonly cityIndexApp: CityIndexApp) {}
+  constructor(private readonly cityIndexUsecase: CityIndexUsecase) {}
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
@@ -28,7 +28,7 @@ export class CitySheetController {
     @Query() req: CityIndexRequest,
   ): Promise<IApiExportRes<CityResponse[]>> {
     req.isExport = true
-    const response = await this.cityIndexApp.fetch(req)
+    const response = await this.cityIndexUsecase.fetch(req)
 
     const data = CityResponse.dtos(response.data)
     const parser = new Parser()

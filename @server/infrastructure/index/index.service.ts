@@ -1,7 +1,7 @@
 import { ObjectLiteral, SelectQueryBuilder } from 'typeorm'
 import { IBaseEntity } from '../base/base-entity.interface'
 import {
-  IIndexAppRelation,
+  IIndexUsecaseRelation,
   IPaginateRequest,
   IPaginateResponse,
   IPaginationMeta,
@@ -39,14 +39,14 @@ export abstract class BaseIndexService {
       : `${table}.updatedAt`
   }
 
-  protected querySearch(relations: IIndexAppRelation[]): string {
+  protected querySearch(relations: IIndexUsecaseRelation[]): string {
     // CONTINUE: add more nonLowerStrings
     const nonLowerStrings = ['id', 'At', 'isActive', 'Price', 'stock']
     const nonLowerColumns: string[] = []
 
     let querySearch = `CONCAT_WS(''`
 
-    const nestedRelation = (relations: IIndexAppRelation[]) => {
+    const nestedRelation = (relations: IIndexUsecaseRelation[]) => {
       for (const relation of relations) {
         if (relation.columns) {
           for (const key of relation.columns) {

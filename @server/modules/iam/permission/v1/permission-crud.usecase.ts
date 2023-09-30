@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { IBaseCrudApp } from '@server/infrastructure/base/base-crud-app.interface'
+import { IBaseCrudUsecase } from '@server/infrastructure/base/base-crud-app.interface'
 import { Exactly } from '@server/infrastructure/base/base.util'
 import { IPermission } from '../infrastructure/permission.interface'
 import { PermissionService } from '../infrastructure/permission.service'
@@ -9,8 +9,8 @@ import {
 } from './permission.request'
 
 @Injectable()
-export class PermissionCrudApp
-  implements Exactly<IBaseCrudApp, PermissionCrudApp>
+export class PermissionCrudUsecase
+  implements Exactly<IBaseCrudUsecase, PermissionCrudUsecase>
 {
   constructor(private readonly permissionService: PermissionService) {}
 

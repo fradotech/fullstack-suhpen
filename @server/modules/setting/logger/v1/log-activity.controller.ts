@@ -4,9 +4,9 @@ import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interfa
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
-import { LogActivityIndexApp } from '../infrastructure/log-activity-index.app'
+import { LogActivityIndexUsecase } from '../infrastructure/log-activity-index.usecase'
 import { LogActivityResponse } from '../infrastructure/log-activity.response'
-import { LogActivityCrudApp } from '../infrastructure/permission-crud.app'
+import { LogActivityCrudUsecase } from '../infrastructure/permission-crud.usecase'
 import { LogActivityIndexRequest } from './log-activity-index.request'
 
 const THIS_MODULE = Modules.Log
@@ -17,15 +17,15 @@ const THIS_MODULE = Modules.Log
 @UseGuards(LoggedInGuard)
 export class LogActivityController {
   constructor(
-    private readonly logActivityIndexApp: LogActivityIndexApp,
-    private readonly logActivityCrudApp: LogActivityCrudApp,
+    private readonly logActivityIndexUsecase: LogActivityIndexUsecase,
+    private readonly logActivityCrudUsecase: LogActivityCrudUsecase,
   ) {}
 
   @Get()
   async fetch(
     @Query() req: LogActivityIndexRequest,
   ): Promise<IApiRes<LogActivityResponse[]>> {
-    const res = await this.logActivityIndexApp.fetch(req)
+    const res = await this.logActivityIndexUsecase.fetch(req)
     return ApiRes.dto(LogActivityResponse.dtos(res.data), res.meta)
   }
 
@@ -33,7 +33,7 @@ export class LogActivityController {
   async findOneOrFail(
     @Param('id') id: string,
   ): Promise<IApiRes<LogActivityResponse>> {
-    const data = await this.logActivityCrudApp.findOneOrFail(id)
+    const data = await this.logActivityCrudUsecase.findOneOrFail(id)
     return ApiRes.dto(LogActivityResponse.dto(data))
   }
 }

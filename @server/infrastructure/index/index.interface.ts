@@ -25,8 +25,8 @@ export interface IPaginateResponse<T> {
   data: Array<T>
 }
 
-export interface IIndexAppRelation {
+export interface IIndexUsecaseRelation {
   name: string
   columns?: string[]
-  relations?: IIndexAppRelation[]
+  relations?: IIndexUsecaseRelation[]
 }

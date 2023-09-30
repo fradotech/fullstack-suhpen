@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { NotificationCategoryIndexApp } from './infrastructure/notification-category-index.app'
+import { NotificationCategoryIndexUsecase } from './infrastructure/notification-category-index.usecase'
 import { NotificationCategory } from './infrastructure/notification-category.entity'
 import { NotificationCategoryService } from './infrastructure/notification-category.service'
-import { NotificationCategoryCrudApp } from './v1/notification-category-crud.app'
 import { NotificationCategoryCrudController } from './v1/notification-category-crud.controller'
+import { NotificationCategoryCrudUsecase } from './v1/notification-category-crud.usecase'
 import { NotificationCategorySheetController } from './v1/sheet/notification-category-sheet.controller'
 
 @Module({
@@ -15,8 +15,8 @@ import { NotificationCategorySheetController } from './v1/sheet/notification-cat
   ],
   providers: [
     NotificationCategoryService,
-    NotificationCategoryCrudApp,
-    NotificationCategoryIndexApp,
+    NotificationCategoryCrudUsecase,
+    NotificationCategoryIndexUsecase,
   ],
   exports: [NotificationCategoryService],
 })

@@ -5,8 +5,8 @@ import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.respo
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
-import { ProvinceIndexApp } from '../../infrastructure/province-index.app'
 import { ProvinceIndexRequest } from '../../infrastructure/province-index.request'
+import { ProvinceIndexUsecase } from '../../infrastructure/province-index.usecase'
 import { ProvinceResponse } from '../../infrastructure/province.response'
 
 const THIS_MODULE = Modules.ProvinceSheet
@@ -16,7 +16,7 @@ const THIS_MODULE = Modules.ProvinceSheet
 @ApiBearerAuth()
 @UseGuards(LoggedInGuard)
 export class ProvinceSheetController {
-  constructor(private readonly provinceIndexApp: ProvinceIndexApp) {}
+  constructor(private readonly provinceIndexUsecase: ProvinceIndexUsecase) {}
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
@@ -28,7 +28,7 @@ export class ProvinceSheetController {
     @Query() req: ProvinceIndexRequest,
   ): Promise<IApiExportRes<ProvinceResponse[]>> {
     req.isExport = true
-    const response = await this.provinceIndexApp.fetch(req)
+    const response = await this.provinceIndexUsecase.fetch(req)
 
     const data = ProvinceResponse.dtos(response.data)
     const parser = new Parser()

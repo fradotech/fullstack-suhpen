@@ -5,7 +5,7 @@ import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.respo
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
-import { LogActivityIndexApp } from '../../infrastructure/log-activity-index.app'
+import { LogActivityIndexUsecase } from '../../infrastructure/log-activity-index.usecase'
 import { LogActivityResponse } from '../../infrastructure/log-activity.response'
 import { LogActivityIndexRequest } from '../log-activity-index.request'
 
@@ -16,7 +16,9 @@ const THIS_MODULE = Modules.LogSheet
 @ApiBearerAuth()
 @UseGuards(LoggedInGuard)
 export class LogActivitySheetController {
-  constructor(private readonly logActivityIndexApp: LogActivityIndexApp) {}
+  constructor(
+    private readonly logActivityIndexUsecase: LogActivityIndexUsecase,
+  ) {}
 
   @Post('import')
   async import(): Promise<IApiExportRes<boolean>> {
@@ -28,7 +30,7 @@ export class LogActivitySheetController {
     @Query() req: LogActivityIndexRequest,
   ): Promise<IApiExportRes<LogActivityResponse[]>> {
     req.isExport = true
-    const response = await this.logActivityIndexApp.fetch(req)
+    const response = await this.logActivityIndexUsecase.fetch(req)
 
     const data = LogActivityResponse.dtos(response.data)
     const parser = new Parser()

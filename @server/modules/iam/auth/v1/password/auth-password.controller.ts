@@ -4,11 +4,11 @@ import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interfa
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { Modules } from '@server/modules/modules'
 import { UserResponse } from '../../../user/infrastructure/user.response'
-import { AuthApp } from '../auth.app'
 import {
   AuthPasswordChangeRequest,
   AuthPasswordSendRequest,
 } from '../auth.request'
+import { AuthUsecase } from '../auth.usecase'
 
 const THIS_MODULE = Modules.Auth + '/password'
 
@@ -16,7 +16,7 @@ const THIS_MODULE = Modules.Auth + '/password'
 @ApiTags(THIS_MODULE)
 @ApiBearerAuth()
 export class AuthPasswordController {
-  constructor(private readonly authApp: AuthApp) {}
+  constructor(private readonly authApp: AuthUsecase) {}
 
   @Post('send')
   async send(

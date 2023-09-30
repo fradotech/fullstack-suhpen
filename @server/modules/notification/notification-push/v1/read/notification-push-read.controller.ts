@@ -7,12 +7,12 @@ import { UserLogged } from '@server/modules/iam/user/common/get-user-logged.deco
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Modules } from '@server/modules/modules'
 import { NotificationPushResponse } from '../../infrastructure/notification-push.response'
-import { NotificationPushCrudApp } from '../notification-push-crud.app'
-import { NotificationPushReadApp } from './notification-push-read.app'
+import { NotificationPushCrudUsecase } from '../notification-push-crud.usecase'
 import {
   NotificationPushReadManyRequest,
   NotificationPushReadOneRequest,
 } from './notification-push-read.request'
+import { NotificationPushReadUsecase } from './notification-push-read.usecase'
 
 const THIS_MODULE = Modules.NotificationPushRead
 
@@ -22,15 +22,15 @@ const THIS_MODULE = Modules.NotificationPushRead
 @UseGuards(LoggedInGuard)
 export class NotificationPushReadController {
   constructor(
-    private readonly notificationPushReadApp: NotificationPushReadApp,
-    private readonly notificationPushCrudApp: NotificationPushCrudApp,
+    private readonly notificationPushReadUsecase: NotificationPushReadUsecase,
+    private readonly notificationPushCrudUsecase: NotificationPushCrudUsecase,
   ) {}
 
   @Get()
   async fetch(
     @UserLogged() userLogged: IUser,
   ): Promise<IApiRes<NotificationPushResponse[]>> {
-    const data = await this.notificationPushReadApp.fetch()
+    const data = await this.notificationPushReadUsecase.fetch()
     return ApiRes.dto(NotificationPushResponse.dtos(data, userLogged))
   }
 
@@ -38,7 +38,7 @@ export class NotificationPushReadController {
   async findOneOrFail(
     @Param('id') id: string,
   ): Promise<IApiRes<NotificationPushResponse>> {
-    const data = await this.notificationPushCrudApp.findOneOrFail(id)
+    const data = await this.notificationPushCrudUsecase.findOneOrFail(id)
     return ApiRes.dto(NotificationPushResponse.dto(data))
   }
 
@@ -46,7 +46,7 @@ export class NotificationPushReadController {
   async readOne(
     @Body() req: NotificationPushReadOneRequest,
   ): Promise<IApiRes<NotificationPushResponse>> {
-    const data = await this.notificationPushReadApp.readOne(req.id)
+    const data = await this.notificationPushReadUsecase.readOne(req.id)
     return ApiRes.dto(NotificationPushResponse.dto(data))
   }
 
@@ -54,7 +54,7 @@ export class NotificationPushReadController {
   async readMany(
     @Body() req: NotificationPushReadManyRequest,
   ): Promise<IApiRes<NotificationPushResponse>> {
-    const data = await this.notificationPushReadApp.readMany(req.ids)
+    const data = await this.notificationPushReadUsecase.readMany(req.ids)
     return ApiRes.dto(NotificationPushResponse.dtos(data))
   }
 }

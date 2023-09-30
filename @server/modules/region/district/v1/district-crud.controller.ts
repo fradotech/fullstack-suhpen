@@ -14,10 +14,10 @@ import { IApiRes } from '@server/infrastructure/interfaces/api-responses.interfa
 import { ApiRes } from '@server/infrastructure/interfaces/api.response'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
-import { DistrictIndexApp } from '../infrastructure/district-index.app'
 import { DistrictIndexRequest } from '../infrastructure/district-index.request'
+import { DistrictIndexUsecase } from '../infrastructure/district-index.usecase'
 import { DistrictResponse } from '../infrastructure/district.response'
-import { DistrictCrudApp } from './district-crud.app'
+import { DistrictCrudUsecase } from './district-crud.usecase'
 import {
   DistrictCreateRequest,
   DistrictUpdateRequest,
@@ -31,15 +31,15 @@ const THIS_MODULE = Modules.District
 @UseGuards(LoggedInGuard)
 export class DistrictCrudController {
   constructor(
-    private readonly districtIndexApp: DistrictIndexApp,
-    private readonly districtCrudApp: DistrictCrudApp,
+    private readonly districtIndexUsecase: DistrictIndexUsecase,
+    private readonly districtCrudUsecase: DistrictCrudUsecase,
   ) {}
 
   @Get()
   async fetch(
     @Query() req: DistrictIndexRequest,
   ): Promise<IApiRes<DistrictResponse[]>> {
-    const res = await this.districtIndexApp.fetch(req)
+    const res = await this.districtIndexUsecase.fetch(req)
     return ApiRes.dto(DistrictResponse.dtos(res.data), res.meta)
   }
 
@@ -47,7 +47,7 @@ export class DistrictCrudController {
   async create(
     @Body() req: DistrictCreateRequest,
   ): Promise<IApiRes<DistrictResponse>> {
-    const data = await this.districtCrudApp.create(req)
+    const data = await this.districtCrudUsecase.create(req)
     return ApiRes.dto(DistrictResponse.dto(data))
   }
 
@@ -55,7 +55,7 @@ export class DistrictCrudController {
   async findOneOrFail(
     @Param('id') id: string,
   ): Promise<IApiRes<DistrictResponse>> {
-    const data = await this.districtCrudApp.findOneOrFail(id)
+    const data = await this.districtCrudUsecase.findOneOrFail(id)
     return ApiRes.dto(DistrictResponse.dto(data))
   }
 
@@ -64,13 +64,13 @@ export class DistrictCrudController {
     @Param('id') id: string,
     @Body() req: DistrictUpdateRequest,
   ): Promise<IApiRes<DistrictResponse>> {
-    const data = await this.districtCrudApp.update(id, req)
+    const data = await this.districtCrudUsecase.update(id, req)
     return ApiRes.dto(DistrictResponse.dto(data))
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<IApiRes<DistrictResponse>> {
-    const data = await this.districtCrudApp.delete(id)
+    const data = await this.districtCrudUsecase.delete(id)
     return ApiRes.dto(DistrictResponse.dto(data))
   }
 }

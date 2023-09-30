@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { ProvinceIndexApp } from './infrastructure/province-index.app'
+import { ProvinceIndexUsecase } from './infrastructure/province-index.usecase'
 import { RegionProvince } from './infrastructure/province.entity'
 import { ProvinceService } from './infrastructure/province.service'
-import { ProvinceCrudApp } from './v1/province-crud.app'
 import { ProvinceCrudController } from './v1/province-crud.controller'
+import { ProvinceCrudUsecase } from './v1/province-crud.usecase'
 import { ProvinceSheetController } from './v1/sheet/province-sheet.controller'
 
 @Module({
   imports: [TypeOrmModule.forFeature([RegionProvince])],
   controllers: [ProvinceSheetController, ProvinceCrudController],
-  providers: [ProvinceService, ProvinceCrudApp, ProvinceIndexApp],
+  providers: [ProvinceService, ProvinceCrudUsecase, ProvinceIndexUsecase],
   exports: [ProvinceService],
 })
 export class ProvinceModule {}

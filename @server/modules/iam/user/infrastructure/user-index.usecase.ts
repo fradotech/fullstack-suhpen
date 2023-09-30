@@ -1,17 +1,17 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { REQUEST } from '@nestjs/core'
+import { BaseIndexUsecase } from '@server/infrastructure/index/index.usecase'
 import { IUser } from '@server/modules/iam/user/infrastructure/user.interface'
 import { Request } from 'express'
-import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
 import {
-  IIndexAppRelation,
+  IIndexUsecaseRelation,
   IPaginateResponse,
 } from '../../../../infrastructure/index/index.interface'
 import { UserIndexRequest } from './user-index.request'
 import { UserService } from './user.service'
 
 @Injectable()
-export class UserIndexApp extends BaseIndexApp {
+export class UserIndexUsecase extends BaseIndexUsecase {
   constructor(
     @Inject(REQUEST)
     private readonly request: Request,
@@ -23,7 +23,7 @@ export class UserIndexApp extends BaseIndexApp {
   async fetch(req: UserIndexRequest): Promise<IPaginateResponse<IUser>> {
     const name = 'user'
     const columns = ['name', 'email', 'phoneNumber', 'createdAt']
-    const relations: IIndexAppRelation[] = [
+    const relations: IIndexUsecaseRelation[] = [
       {
         name: 'roles',
         columns: ['name'],

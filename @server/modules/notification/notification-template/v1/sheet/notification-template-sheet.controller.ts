@@ -5,8 +5,8 @@ import { ApiExportRes } from '@server/infrastructure/interfaces/api-export.respo
 import { IApiExportRes } from '@server/infrastructure/interfaces/api-responses.interface'
 import { LoggedInGuard } from '@server/modules/iam/auth/common/logged-in.guard'
 import { Modules } from '@server/modules/modules'
-import { NotificationTemplateIndexApp } from '../../infrastructure/notification-template-index.app'
 import { NotificationTemplateIndexRequest } from '../../infrastructure/notification-template-index.request'
+import { NotificationTemplateIndexUsecase } from '../../infrastructure/notification-template-index.usecase'
 import { NotificationTemplateResponse } from '../../infrastructure/notification-template.response'
 
 const THIS_MODULE = Modules.NotificationTemplateSheet
@@ -17,7 +17,7 @@ const THIS_MODULE = Modules.NotificationTemplateSheet
 @UseGuards(LoggedInGuard)
 export class NotificationTemplateSheetController {
   constructor(
-    private readonly notificationTemplateIndexApp: NotificationTemplateIndexApp,
+    private readonly notificationTemplateIndexUsecase: NotificationTemplateIndexUsecase,
   ) {}
 
   @Post('import')
@@ -30,7 +30,7 @@ export class NotificationTemplateSheetController {
     @Query() req: NotificationTemplateIndexRequest,
   ): Promise<IApiExportRes<NotificationTemplateResponse[]>> {
     req.isExport = true
-    const response = await this.notificationTemplateIndexApp.fetch(req)
+    const response = await this.notificationTemplateIndexUsecase.fetch(req)
 
     const data = NotificationTemplateResponse.dtos(response.data)
     const parser = new Parser()

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { IBaseCrudApp } from '@server/infrastructure/base/base-crud-app.interface'
+import { IBaseCrudUsecase } from '@server/infrastructure/base/base-crud-app.interface'
 import { Exactly } from '@server/infrastructure/base/base.util'
 import { RoleService } from '../../role/infrastructure/role.service'
 import { IUser } from '../infrastructure/user.interface'
@@ -7,7 +7,9 @@ import { UserService } from '../infrastructure/user.service'
 import { UserCreateRequest, UserUpdateRequest } from './user.request'
 
 @Injectable()
-export class UserCrudApp implements Exactly<IBaseCrudApp, UserCrudApp> {
+export class UserCrudUsecase
+  implements Exactly<IBaseCrudUsecase, UserCrudUsecase>
+{
   constructor(
     private readonly userService: UserService,
     private readonly roleService: RoleService,

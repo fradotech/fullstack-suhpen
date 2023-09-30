@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { REQUEST } from '@nestjs/core'
+import { BaseIndexUsecase } from '@server/infrastructure/index/index.usecase'
 import { Request } from 'express'
-import { BaseIndexApp } from '../../../../infrastructure/index/index.app'
 import {
-  IIndexAppRelation,
+  IIndexUsecaseRelation,
   IPaginateResponse,
 } from '../../../../infrastructure/index/index.interface'
 import { PermissionIndexRequest } from './permission-index.request'
@@ -11,7 +11,7 @@ import { IPermission } from './permission.interface'
 import { PermissionService } from './permission.service'
 
 @Injectable()
-export class PermissionIndexApp extends BaseIndexApp {
+export class PermissionIndexUsecase extends BaseIndexUsecase {
   constructor(
     @Inject(REQUEST)
     private readonly request: Request,
@@ -33,7 +33,7 @@ export class PermissionIndexApp extends BaseIndexApp {
       'isActive',
       'createdAt',
     ]
-    const relations: IIndexAppRelation[] = []
+    const relations: IIndexUsecaseRelation[] = []
 
     if (req.roleId) {
       relations.push({
