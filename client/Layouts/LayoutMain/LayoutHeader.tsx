@@ -5,7 +5,6 @@ import { FaMoon, FaSun } from 'react-icons/fa'
 import CompanyLogo from '../../../client/Components/Molecules/CompanyLogo/CompanyLogo'
 import LayoutAccount from './LayoutAccount'
 import styles from './LayoutMain.module.css'
-import LayoutNotification from './LayoutNotification'
 import LayoutSearch from './LayoutSearch'
 
 type IProps = {
@@ -46,9 +45,10 @@ const LayoutHeader: React.FC<IProps> = ({
               />
             </div>
 
-            <div className={styles.headerButton}>
+            {/* // TODO: Uncomment this when notification is ready */}
+            {/* <div className={styles.headerButton}>
               <LayoutNotification />
-            </div>
+            </div> */}
           </Row>
           <LayoutAccount user={user} />
         </Row>

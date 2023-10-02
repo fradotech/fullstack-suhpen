@@ -9,9 +9,7 @@ import { PageHeader } from '../../../../Components/Molecules/Headers/PageHeader'
 import { Section } from '../../../../Components/Molecules/Section/Section'
 import FormContainer from '../../../../Components/Organisms/Form/FormContainer'
 import FormItem from '../../../../Components/Organisms/Form/FormItem'
-import { Path } from '../../../../common/Path'
 import { rule } from '../../../../common/utils/form.rules'
-import { RoleAction } from '../../Role/infrastructure/role.action'
 import { AccountAction } from '../infrastructure/account.action'
 
 const AccountForm: React.FC = () => {
@@ -19,7 +17,7 @@ const AccountForm: React.FC = () => {
   const navigate = useNavigate()
   const [form] = Form.useForm<AccountUpdateRequest>()
 
-  const { isLoading: isLoadingRoles, data: roles } = RoleAction.useIndex()
+  // const { isLoading: isLoadingRoles, data: roles } = RoleAction.useIndex()
 
   useQuery(
     [AccountForm.name],
@@ -35,14 +33,14 @@ const AccountForm: React.FC = () => {
   const onFinish = async () => {
     setIsLoading(true)
     const data = form.getFieldsValue()
-    const res = await AccountAction.update(data)
+    // const res = await AccountAction.update(data)
     setIsLoading(false)
-    res.data && navigate(Path.account.index)
+    // res.data && navigate(Path.account.index)
   }
 
   return (
     <>
-      <PageHeader title="Account" isLoading={isLoading || isLoadingRoles} />
+      <PageHeader title="Account" isLoading={isLoading} />
       <Section>
         <FormContainer
           onFinish={onFinish}
@@ -86,7 +84,7 @@ const AccountForm: React.FC = () => {
           <Divider />
 
           <Row gutter={12}>
-            <Col sm={24} md={12}>
+            {/* <Col sm={24} md={12}>
               <FormItem
                 name="roleIds"
                 label="Roles"
@@ -95,7 +93,7 @@ const AccountForm: React.FC = () => {
                 form={form}
                 disabled
               />
-            </Col>
+            </Col> */}
             <Col sm={24} md={12}>
               <FormItem
                 name="gender"

@@ -1,4 +1,4 @@
-import { Col, Divider, Layout } from 'antd'
+import { Col, Layout } from 'antd'
 import React, { useContext } from 'react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import useAuthGuard from '../../Modules/Iam/Auth/Components/useAuthGuard'
@@ -47,7 +47,7 @@ const LayoutMain: React.FC<IProps> = ({ children }: IProps) => {
             style={{ background: themeColors?.solid }}
           >
             <LayoutSidebar isDarkMode={isDarkMode ?? false} />
-            <Divider />
+            {/* <Divider /> */}
             <a
               onClick={handleSidebarCollapse}
               className={styles.sidebarCollapse}

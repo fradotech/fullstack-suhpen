@@ -1,10 +1,10 @@
 import React from 'react'
-import DashboardUser from '../Components/DashboardUser.section'
+import DashboardTemperature from '../Components/DashboardTemperature'
 
 const Dashboard: React.FC = () => {
   return (
     <>
-      <DashboardUser />
+      <DashboardTemperature />
     </>
   )
 }

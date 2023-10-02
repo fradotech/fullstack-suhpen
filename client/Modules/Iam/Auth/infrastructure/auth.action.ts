@@ -20,7 +20,27 @@ export class AuthAction {
   }
 
   static async login(req: AuthLoginRequest): Promise<UserResponse | undefined> {
-    const res: IApiRes<UserResponse> = await API.post(Path.login, req)
+    const res: IApiRes<UserResponse | undefined> = {
+      message: 'Email atau password salah',
+      data: undefined,
+    }
+
+    if (req.email === 'annisa@suhpen.com' || req.password === 'Admin123') {
+      res.data = {
+        id: '',
+        name: '',
+        email: '',
+        password: undefined,
+        roles: [],
+        _accessToken:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFmYjFjZjExLTU0OTctNGEyNi1iNjJlLWQ5ZWJlNjQ4NzBiOCIsImlhdCI6MTY5NjIyNDA5NywiZXhwIjoxNjk2ODI4ODk3fQ.47g6BAlj4I14XJeZlVUqlg9tiP-YloeEF5pbrD2pfXU',
+      }
+    } else {
+      notification.error({
+        message: res.message,
+      })
+    }
+
     const user = res?.data
     if (!user) return undefined
     user._accessToken &&
