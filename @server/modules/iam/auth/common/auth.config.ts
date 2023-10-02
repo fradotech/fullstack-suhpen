@@ -1,11 +1,11 @@
-import { fradotech } from '@server/config'
+import { defaultHost } from '@server/config'
 import dotenv from 'dotenv'
 
 dotenv.config()
 
 export const AUTH_CONFIG = {
   jwt: {
-    secretKey: process.env.JWT_SECRET_KEY || fradotech,
+    secretKey: process.env.JWT_SECRET_KEY || defaultHost,
     expiredInseconds: process.env.JWT_EXPIRED_IN_SECONDS || 604800,
   },
   google: {

@@ -9,7 +9,7 @@ import { SENTRY_CONFIG } from './modules/support/sentry/common/sentry.config'
 
 dotenv.config()
 
-export const fradotech = 'fradotech'
+export const defaultHost = 'fradotech'
 const localhost = 'http://localhost:3000'
 
 export const config = {

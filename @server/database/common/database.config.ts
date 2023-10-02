@@ -1,4 +1,4 @@
-import { fradotech } from '@server/config'
+import { defaultHost } from '@server/config'
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -9,5 +9,5 @@ export const DATABASE_CONFIG = {
   port: process.env.DB_PORT || 5432,
   username: process.env.DB_USERNAME || 'postgres',
   password: process.env.DB_PASSWORD || 'frado201',
-  database: process.env.DB_DATABASE || fradotech,
+  database: process.env.DB_DATABASE || defaultHost,
 }
